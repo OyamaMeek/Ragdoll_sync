@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "显示 Codex、Claude 和 DeepSeek 图标",
-  "updated" : 1794924086501,
+  "updated" : 1794924165983,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -139,6 +139,42 @@
       "model" : "gpt-6.1-sol",
       "output" : 363,
       "time" : 1794924076675
+    },
+    {
+      "cacheRead" : 107264,
+      "cacheWrite" : 0,
+      "id" : "resp_0fad53dcc66048d0016afc5e32eea887d0ba2397e05529afb8",
+      "input" : 599,
+      "model" : "gpt-6.1-sol",
+      "output" : 291,
+      "time" : 1794924090248
+    },
+    {
+      "cacheRead" : 108032,
+      "cacheWrite" : 0,
+      "id" : "resp_0fad53dcc66048d0016afc5e42041c87d0a70edb2252f9bc94",
+      "input" : 2534,
+      "model" : "gpt-6.1-sol",
+      "output" : 415,
+      "time" : 1794924114149
+    },
+    {
+      "cacheRead" : 110848,
+      "cacheWrite" : 0,
+      "id" : "resp_0fad53dcc66048d0016afc5e536dd887d08f6cc7da95660fa1",
+      "input" : 916,
+      "model" : "gpt-6.1-sol",
+      "output" : 942,
+      "time" : 1794924149250
+    },
+    {
+      "cacheRead" : 112512,
+      "cacheWrite" : 0,
+      "id" : "resp_0fad53dcc66048d0016afc5e76bfec87d0b2ccd9a35f49b53d",
+      "input" : 836,
+      "model" : "gpt-6.1-sol",
+      "output" : 614,
+      "time" : 1794924165983
     }
   ],
   "warnings" : [
