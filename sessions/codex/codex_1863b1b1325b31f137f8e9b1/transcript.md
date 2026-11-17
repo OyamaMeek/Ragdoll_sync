@@ -1768,3 +1768,67 @@ Output:
 
 {"chunk_id":"935c0c","wall_time_seconds":1.00196325,"session_id":40609,"original_token_count":76,"output":"[main 7e60a35] feat(startup): require git setup and restore archive before scanning\n 19 files changed, 418 insertions(+), 32 deletions(-)\n create mode 100644 Tests/RagdollCoreTests/ArchiveReadTests.swift\n create mode 100644 Tests/RagdollTests/StartupTests.swift\n7e60a35a8e7c9c939333b6ab65199a050999d5bd\n"}
 {"chunk_id":"ffeab7","wall_time_seconds":1.002520917,"session_id":33302,"original_token_count":11,"output":"d50a492be1a5a677b5f8286d618d49cfaf24d7cc\n"}
+
+## tool · 2026-11-17T08:21:17Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"cf771e","wall_time_seconds":0.000006791,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   29df720..7e60a35  main -> main\n"}
+{"chunk_id":"235c31","wall_time_seconds":0.000006666,"exit_code":0,"original_token_count":31,"output":"37e65e908cb524855d2865b404adc42febf713bf\trefs/heads/main\n/Users/oyamahappa/Library/Application Support/Ragdoll/sync-pending\n"}
+{"chunk_id":"18f871","wall_time_seconds":0.000008958,"exit_code":0,"original_token_count":867,"output":"  - GUI 和后台先从仓库恢复历史，再扫描本机新增内容并自动归档；共享 Store 拒绝较旧记录覆盖较新历史，保留尚未归档的本机数据。\n  - 所有会话写入完整 events.json；旧 JSONL/gzip 复用原生日志解析，其他旧归档完整保留 Markdown 并提示消息结构限制。保留手工修改保护及既有自动推送。\n  - 完整快照和旧源覆盖回归先失败、修复后通过；全部 40 项 Swift 测试通过，Node 22 项通过、6 项跳过，TypeScript 检查通过。release 打包、Apple Development 深度签名及助手自检通过。\n  - 隔离应用实际读取所选仓库并自动保存，归档树核对有 787 份完整 events.json；验证实例结束后，已用原有正式数据目录和远端设置重新启动新版应用。未运行 Claude、截图或视觉检查。\n- **涉及文件**：`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/RootView.swift`、`Sources/Ragdoll/SettingsView.swift`、`Sources/RagdollCore/Archive.swift`、`Sources/RagdollCore/Store.swift`、`Sources/RagdollCore/BackgroundService.swift`、`runtime/src/main.ts`、`runtime/src/logs.ts`、`Tests/RagdollCoreTests/ArchiveReadTests.swift`、`Tests/RagdollCoreTests/StoreArchiveTests.swift`、`Tests/RagdollCoreTests/BackgroundServiceTests.swift`、`Tests/RagdollTests/StartupTests.swift`、`README.md`、`docs/VALIDATION.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`。\n- **Git 提交**：待提交。\n\n---\n# 实施进度\n\n## 首次设置与仓库优先启动（2026-11-17）\n\n- [x] 确认 GUI 启动读取本机索引后直接扫描，选择仓库立即写入；后台也没有恢复仓库入口。\n- [x] 完整快照回归先因有源文件时没有 events.json 失败；新增启动/恢复接口回归先因入口缺失失败；旧日志覆盖较新历史回归先出现两个失败断言。\n- [x] 实现完整快照、旧原始 JSONL/gzip 读取及安全恢复；保留完整旧 Markdown，验证身份、消息和用量，以及较新的本机记录不被覆盖。\n- [x] 接入首次设置页、启动/切换门槛和后台读取顺序；真实 AppModel 设置和独立后台进程验证未设置不扫描、坏仓库不写入、历史与新增会话同时保留。\n- [x] 全部 40 项 Swift 测试通过；允许的 Node 测试 22 项通过、6 项跳过，TypeScript 检查通过。\n- [x] release 打包、Apple Development 深度签名及内置助手自检通过；隔离启动后实际读取所选仓库，核对 787 份完整会话快照。已结束验证实例，并以原正式数据目录重新启动新版应用。\n- [ ] 开发记录已更新，等待提交并普通推送。\n\n## 图片独立归档与实际推送（2026-11-17）\n- AppModel 使用隔离数据目录验证首次未设置不启动扫描、选择仓库后恢复、损坏仓库阻止扫描和写入；独立后台进程验证相同门槛，以及仓库历史和本机新增记录共同保存。\n- 全部 40 项 Swift 测试通过；允许的 Node 测试 22 项通过、6 项跳过，TypeScript 检查通过。未运行 Claude 接入、截图或视觉检查。\n- release 打包、Apple Development 深度签名和内置助手自检通过。隔离应用实际读取所选仓库并自动保存，归档树核对有 787 份完整 events.json；验证实例结束后，已以原有正式数据目录和远端设置重新启动新版应用。未自动操作窗口或检查视觉效果。\n"}
+
+## tool · 2026-11-17T08:21:49Z
+
+
+Script completed
+Wall time 3.4 seconds
+Output:
+
+{"chunk_id":"861b47","wall_time_seconds":0.00000975,"exit_code":0,"original_token_count":1345,"output":"import Foundation\nimport Darwin\n\npublic enum ArchiveSync {\n    public static func preview(root: URL, remote: String, branch: String) throws -> String {\n        try validate(remote: remote, branch: branch)\n        _ = try run(root, [\"check-ref-format\", \"refs/heads/\\(branch)\"], timeout: 10)\n        let destination = try redacted(pushDestination(root: root, remote: remote, timeout: 10))\n        let files = try run(root, [\"ls-tree\", \"-r\", \"--name-only\", \"HEAD\"], timeout: 10).split(separator: \"\\n\").count\n        return \"目标：\\(destination)\\n分支：\\(branch)\\n将上传当前分支的完整历史，最新提交包含 \\(files) 个文件。\"\n    }\n    @discardableResult public static func push(root: URL, remote: String, branch: String, timeout: Double = 90) throws -> String {\n        try validate(remote: remote, branch: branch)\n        guard timeout > 0 else { throw failure(\"Git 超时时间无效\") }\n        _ = try run(root, [\"check-ref-format\", \"refs/heads/\\(branch)\"], timeout: timeout)\n        let destination = try pushDestination(root: root, remote: remote, timeout: timeout)\n        let temporaryRemote = \"ragdoll-\" + UUID().uuidString.lowercased()\n        // shortcut: 固定单一 URL，需支持远端专属 pushOption/receivepack 时扩展。\n        return try redacted(run(root, [\"--config-env=remote.\\(temporaryRemote).url=RAGDOLL_ARCHIVE_PUSH_URL\", \"push\", \"--porcelain\", temporaryRemote, \"HEAD:refs/heads/\\(branch)\"], timeout: timeout, environment: [\"RAGDOLL_ARCHIVE_PUSH_URL\": destination]))\n    }\n    private static func pushDestination(root: URL, remote: String, timeout: Double) throws -> String {\n        let destinations = try run(root, [\"remote\", \"get-url\", \"--push\", \"--all\", remote], timeout: timeout).split(separator: \"\\n\")\n        guard destinations.count == 1, let destination = destinations.first else { throw failure(\"远端必须只有一个推送地址；请为归档配置专用远端后重新检查\") }\n        return String(destination)\n    }\n    private static func validate(remote: String, branch: String) throws {\n        guard remote.range(of: \"^[A-Za-z0-9][A-Za-z0-9._-]*$\", options: .regularExpression) != nil,\n              !branch.isEmpty, !branch.hasPrefix(\"-\"), !branch.contains(\":\"), !branch.contains(\"\\0\") else { throw failure(\"请指定有效的 Git 远端名称和分支\") }\n    }\n    private static func run(_ root: URL, _ args: [String], timeout: Double, environment: [String: String] = [:]) throws -> String {\n        let directory = root.appendingPathComponent(\".ragdoll-process-\\(UUID().uuidString)\")\n        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: false, attributes: [.posixPermissions: 0o700])\n        defer { try? FileManager.default.removeItem(at: directory) }\n        let output = directory.appendingPathComponent(\"output\")\n        guard FileManager.default.createFile(atPath: output.path, contents: nil, attributes: [.posixPermissions: 0o600]) else { throw failure(\"无法创建 Git 输出文件\") }\n        let handle = try FileHandle(forWritingTo: output); defer { try? handle.close() }\n        let process = Process(); process.executableURL = URL(fileURLWithPath: \"/usr/bin/git\"); process.arguments = [\"-C\", root.path] + args\n        process.standardInput = FileHandle.nullDevice; process.standardOutput = handle; process.standardError = handle\n        process.environment = ProcessInfo.processInfo.environment.merging([\"GIT_TERMINAL_PROMPT\": \"0\", \"GCM_INTERACTIVE\": \"never\", \"SSH_ASKPASS_REQUIRE\": \"never\", \"SSH_ASKPASS\": \"/usr/bin/false\", \"GIT_ASKPASS\": \"/usr/bin/false\"]) { _, new in new }.merging(environment) { _, new in new }\n        let ended = DispatchSemaphore(value: 0)\n        process.terminationHandler = { _ in ended.signal() }\n        try process.run()\n        if ended.wait(timeout: .now() + timeout) == .timedOut {\n            let pid = process.processIdentifier\n            let target = getpgid(pid) == pid ? -pid : pid\n            kill(target, SIGTERM)\n            if ended.wait(timeout: .now() + 1) == .timedOut { kill(target, SIGKILL); process.waitUntilExit() }\n            throw failure(\"远端推送超时；本地归档已保留，可重试\")\n        }\n        let text = String(decoding: try Data(contentsOf: output), as: UTF8.self).trimmingCharacters(in: .whitespacesAndNewlines)\n        guard process.terminationStatus == 0 else { throw failure(\"本地归档已保留，Git 操作失败：\\(try redacted(text))\") }\n        return text\n    }\n    private static func redacted(_ value: String) throws -> String {\n        var text = value\n        let pattern = try NSRegularExpression(pattern: \"(?:https?|ssh)://[^\\\\s'\\\"<>]+\")\n        for match in pattern.matches(in: text, range: NSRange(text.startIndex..., in: text)).reversed() {\n            guard let range = Range(match.range, in: text) else { continue }\n            var url = URLComponents(string: String(text[range]))\n            url?.user = nil; url?.password = nil; url?.query = nil; url?.fragment = nil\n            text.replaceSubrange(range, with: url?.string ?? \"<远端地址>\")\n        }\n        return text\n    }\n    private static func failure(_ text: String) -> NSError { NSError(domain: \"Ragdoll.ArchiveSync\", code: 1, userInfo: [NSLocalizedDescriptionKey: text]) }\n}\n12663     1   03:14 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/MacOS/Ragdoll\n"}
+
+## tool · 2026-11-17T08:22:36Z
+
+
+Script completed
+Wall time 5.1 seconds
+Output:
+
+{"chunk_id":"e09b2e","wall_time_seconds":1.002442583,"session_id":17262,"original_token_count":0,"output":""}
+{"chunk_id":"fa4dc1","wall_time_seconds":0.00001275,"exit_code":0,"original_token_count":522,"output":"  - 隔离应用实际读取所选仓库并自动保存，归档树核对有 787 份完整 events.json；验证实例结束后，已用原有正式数据目录和远端设置重新启动新版应用。未运行 Claude、截图或视觉检查。\n- **涉及文件**：`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/RootView.swift`、`Sources/Ragdoll/SettingsView.swift`、`Sources/RagdollCore/Archive.swift`、`Sources/RagdollCore/Store.swift`、`Sources/RagdollCore/BackgroundService.swift`、`runtime/src/main.ts`、`runtime/src/logs.ts`、`Tests/RagdollCoreTests/ArchiveReadTests.swift`、`Tests/RagdollCoreTests/StoreArchiveTests.swift`、`Tests/RagdollCoreTests/BackgroundServiceTests.swift`、`Tests/RagdollTests/StartupTests.swift`、`README.md`、`docs/VALIDATION.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`。\n- **Git 提交**：待提交。\n\n---\n# 实施进度\n\n## 首次设置与仓库优先启动（2026-11-17）\n\n- [x] 确认 GUI 启动读取本机索引后直接扫描，选择仓库立即写入；后台也没有恢复仓库入口。\n- [x] 完整快照回归先因有源文件时没有 events.json 失败；新增启动/恢复接口回归先因入口缺失失败；旧日志覆盖较新历史回归先出现两个失败断言。\n- [x] 实现完整快照、旧原始 JSONL/gzip 读取及安全恢复；保留完整旧 Markdown，验证身份、消息和用量，以及较新的本机记录不被覆盖。\n- [x] 接入首次设置页、启动/切换门槛和后台读取顺序；真实 AppModel 设置和独立后台进程验证未设置不扫描、坏仓库不写入、历史与新增会话同时保留。\n- [x] 全部 40 项 Swift 测试通过；允许的 Node 测试 22 项通过、6 项跳过，TypeScript 检查通过。\n- [x] release 打包、Apple Development 深度签名及内置助手自检通过；隔离启动后实际读取所选仓库，核对 787 份完整会话快照。已结束验证实例，并以原正式数据目录重新启动新版应用。\n- [ ] 开发记录已更新，等待提交并普通推送。\n\n"}
+{}
+{"chunk_id":"e77aae","wall_time_seconds":0.000008667,"exit_code":0,"original_token_count":620,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\nindex 6a33791..967781a 100644\n--- a/docs/CHANGELOG.md\n+++ b/docs/CHANGELOG.md\n@@ -196,6 +196,6 @@\n   - 完整快照和旧源覆盖回归先失败、修复后通过；全部 40 项 Swift 测试通过，Node 22 项通过、6 项跳过，TypeScript 检查通过。release 打包、Apple Development 深度签名及助手自检通过。\n   - 隔离应用实际读取所选仓库并自动保存，归档树核对有 787 份完整 events.json；验证实例结束后，已用原有正式数据目录和远端设置重新启动新版应用。未运行 Claude、截图或视觉检查。\n - **涉及文件**：`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/RootView.swift`、`Sources/Ragdoll/SettingsView.swift`、`Sources/RagdollCore/Archive.swift`、`Sources/RagdollCore/Store.swift`、`Sources/RagdollCore/BackgroundService.swift`、`runtime/src/main.ts`、`runtime/src/logs.ts`、`Tests/RagdollCoreTests/ArchiveReadTests.swift`、`Tests/RagdollCoreTests/StoreArchiveTests.swift`、`Tests/RagdollCoreTests/BackgroundServiceTests.swift`、`Tests/RagdollTests/StartupTests.swift`、`README.md`、`docs/VALIDATION.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`。\n-- **Git 提交**：待提交。\n+- **Git 提交**：`7e60a35 feat(startup): require git setup and restore archive before scanning`，已普通推送至 `origin/main`；本条由后续文档提交补记。\n \n ---\ndiff --git a/memory/progress.md b/memory/progress.md\nindex a0a7cf4..d4e539d 100644\n--- a/memory/progress.md\n+++ b/memory/progress.md\n@@ -8,7 +8,7 @@\n - [x] 接入首次设置页、启动/切换门槛和后台读取顺序；真实 AppModel 设置和独立后台进程验证未设置不扫描、坏仓库不写入、历史与新增会话同时保留。\n - [x] 全部 40 项 Swift 测试通过；允许的 Node 测试 22 项通过、6 项跳过，TypeScript 检查通过。\n - [x] release 打包、Apple Development 深度签名及内置助手自检通过；隔离启动后实际读取所选仓库，核对 787 份完整会话快照。已结束验证实例，并以原正式数据目录重新启动新版应用。\n-- [ ] 开发记录已更新，等待提交并普通推送。\n+- [x] 功能提交 `7e60a35 feat(startup): require git setup and restore archive before scanning` 已普通推送至源码 `origin/main`；实际哈希随本次文档补记保存。\n \n ## 图片独立归档与实际推送（2026-11-17）\n \n"}
+
+## tool · 2026-11-17T08:22:47Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"29ae1f","wall_time_seconds":0.00001125,"exit_code":0,"original_token_count":23,"output":"To https://github.com/OyamaMeek/Ragdoll_sync.git\n=\tHEAD:refs/heads/main\t[up to date]\nDone\n"}
+{"chunk_id":"9b1cef","wall_time_seconds":1.002469833,"session_id":73303,"original_token_count":30,"output":"[main c6f30d9] docs(startup): record verified archive-first startup\n 2 files changed, 2 insertions(+), 2 deletions(-)\n"}
+
+## tool · 2026-11-17T08:22:59Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"a36905","wall_time_seconds":0.00001425,"exit_code":0,"original_token_count":54,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   7e60a35..c6f30d9  main -> main\nc6f30d9 docs(startup): record verified archive-first startup\n7e60a35 feat(startup): require git setup and restore archive before scanning\n"}
+{"chunk_id":"de46c8","wall_time_seconds":0.000009667,"exit_code":0,"original_token_count":21,"output":"c6f30d9a417e72724f4e7103578397a5c6ff5eec\nc6f30d9a417e72724f4e7103578397a5c6ff5eec\n"}
+
+## assistant · 2026-11-17T08:23:07Z
+
+已完成并启动新版：
+
+- 首次打开必须选择或创建 Git 仓库。
+- 后续先读取仓库历史，再扫描新增数据并自动归档提交。
+- 较旧的本机数据不会覆盖较新的仓库历史。
+
+40 项 Swift 测试、TypeScript 检查及签名打包通过，源码已推送。
+
+未做视觉验证或 Claude 实测；部分旧归档会以完整 Markdown 展示。
