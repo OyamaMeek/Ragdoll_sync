@@ -1,0 +1,39 @@
+{
+  "created" : 1794922484276.8054,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/17/rollout-2026-11-17T21-34-43-01a1e9b7-8f2c-7842-b6a1-e8ac7a64838a.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:a1278996b61ea058c00e6b10",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1e9b7-8f2c-7842-b6a1-e8ac7a64838a",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "Add system prompt option",
+  "updated" : 1794922508110,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3eb6bdd517ec63016afc57fd4a9487d08b4ecdae349a3064",
+      "input" : 33732,
+      "model" : "gpt-6.1-sol",
+      "output" : 219,
+      "time" : 1794922500854
+    },
+    {
+      "cacheRead" : 46848,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3eb6bdd517ec63016afc58062fb487d0bee9aaadc73dcd67",
+      "input" : 1554,
+      "model" : "gpt-6.1-sol",
+      "output" : 210,
+      "time" : 1794922508109
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
