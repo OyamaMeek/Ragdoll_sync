@@ -12,7 +12,7 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "Guardian review",
-  "updated" : 1794929212261,
+  "updated" : 1794929244451,
   "usage" : [
     {
       "cacheRead" : 0,
@@ -49,6 +49,24 @@
       "model" : "codex-auto-review",
       "output" : 92,
       "time" : 1794929212257
+    },
+    {
+      "cacheRead" : 42112,
+      "cacheWrite" : 0,
+      "id" : "resp_0d36900ffcdf7a93016afc724ebf8887d08d984d8badb2498d",
+      "input" : 1690,
+      "model" : "codex-auto-review",
+      "output" : 76,
+      "time" : 1794929233332
+    },
+    {
+      "cacheRead" : 43648,
+      "cacheWrite" : 0,
+      "id" : "resp_0d36900ffcdf7a93016afc725934d087d0a8b5c3c5ec688963",
+      "input" : 1015,
+      "model" : "codex-auto-review",
+      "output" : 142,
+      "time" : 1794929244446
     }
   ],
   "warnings" : [
