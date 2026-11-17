@@ -1780,10 +1780,98 @@ Output:
 48 项 Swift 测试和 release 编译均已通过。打包检查发现，SwiftPM 默认会从构建目录查找资源；我会让应用优先读取包内的资源，确保移到其他电脑后也能显示图标。
 
 
-## tool · 2026-11-17T14:02:45Z
+## tool · 2026-11-17T14:02:50Z
 
-exec
-text(await tools.apply_patch("*** Begin Patch\n*** Update File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/Sources/Ragdoll/ConversationView.swift\n@@\n import RagdollCore\n \n+let assistantIconBundle = Bundle.main.url(forResource: \"Ragdoll_Ragdoll\", withExtension: \"bundle\").flatMap { Bundle(url: $0) } ?? .module\n+\n@@\n-                    Image(assistantIconName, bundle: .module)\n+                    Image(assistantIconName, bundle: assistantIconBundle)\n*** Update File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/Tests/RagdollTests/ConversationTests.swift\n@@\n-        let url = try #require(Bundle.module.url(forResource: name, withExtension: \"png\"))\n+        let url = try #require(assistantIconBundle.url(forResource: name, withExtension: \"png\"))\n*** Update File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/memory/progress.md\n@@\n-- [ ] 来源映射失败回归、实现与资源加载测试。\n+- [x] 来源映射先因缺少 assistantIconName 编译失败；实现后全部 48 项 Swift 测试通过（21.115 秒），三张资源可解码，release 编译通过。\n+- [x] 检查生成的 SwiftPM 资源访问器，补充从应用 Contents/Resources 优先加载、开发运行使用 .module 的路径，避免依赖原构建目录。\n*** End Patch"));
-text(await tools.exec_command({cmd:"head -6 Sources/Ragdoll/ConversationView.swift && head -11 Tests/RagdollTests/ConversationTests.swift && git diff --check","max_output_tokens":400}));
-text(await tools.exec_command({cmd:"swift test --cache-path .cache/swift --config-path .cache/swift-config --security-path .cache/swift-security --disable-sandbox --no-parallel > .agent/assistant-icons-tests.txt 2>&1 && tail -3 .agent/assistant-icons-tests.txt && swift build -c release --cache-path .cache/swift --config-path .cache/swift-config --security-path .cache/swift-security --disable-sandbox","yield_time_ms":1000,"max_output_tokens":600,"sandbox_permissions":"require_escalated","justification":"验证最终的应用包资源读取路径，并重新构建 release 预览。"}));
 
+Script completed
+Wall time 5.4 seconds
+Output:
+
+{}
+{"chunk_id":"fd6ff9","wall_time_seconds":0.000009333,"exit_code":0,"original_token_count":155,"output":"import SwiftUI\nimport RagdollCore\n\nlet assistantIconBundle = Bundle.main.url(forResource: \"Ragdoll_Ragdoll\", withExtension: \"bundle\").flatMap { Bundle(url: $0) } ?? .module\n\nstruct ConversationView: View {\nimport AppKit\nimport RagdollCore\nimport Testing\n@testable import Ragdoll\n\n@Test func assistantIconResourcesDecodeFromAppBundle() throws {\n    for name in [\"codex\", \"claude\", \"deepseek\"] {\n        let url = try #require(assistantIconBundle.url(forResource: name, withExtension: \"png\"))\n        let image = try #require(NSImage(contentsOf: url))\n        #expect(image.size.width > 0 && image.size.height > 0)\n    }\n"}
+{"chunk_id":"df4e22","wall_time_seconds":1.002383958,"session_id":44687,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T14:03:17Z
+
+
+Script completed
+Wall time 5.1 seconds
+Output:
+
+{"chunk_id":"0fa245","wall_time_seconds":0.000011083,"exit_code":0,"original_token_count":414,"output":"Ragdoll-macos-arm64.zip\nRagdoll-macos-arm64.zip.sha256\nRagdoll.app\nRagdoll.preview.app\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\"><dict>\n  <key>CFBundleExecutable</key><string>Ragdoll</string>\n  <key>CFBundleIdentifier</key><string>com.oyamameek.ragdoll</string>\n  <key>CFBundleName</key><string>Ragdoll</string>\n  <key>CFBundleDisplayName</key><string>Ragdoll</string>\n  <key>CFBundleIconFile</key><string>Ragdoll.icns</string>\n  <key>CFBundlePackageType</key><string>APPL</string>\n  <key>CFBundleShortVersionString</key><string>0.1.0</string>\n  <key>CFBundleVersion</key><string>1</string>\n  <key>LSMinimumSystemVersion</key><string>15.0</string>\n  <key>NSHighResolutionCapable</key><true/>\n  <key>NSPrincipalClass</key><string>NSApplication</string>\n</dict></plist>\n◇ Passing 1 argument kind → \"missing\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"history\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"corrupt\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n✔ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) passed after 0.882 seconds.\n◇ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() started.\n✔ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingIt1\t1\tPackage.swift\n24\t4\tSources/Ragdoll/ConversationView.swift\n22\t0\tTests/RagdollTests/ConversationTests.swift\n2\t2\tmemory/agents.md\n7\t0\tmemory/plan.md\n8\t0\tmemory/progress.md\n7\t0\tmemory/verify.md\n"}
+{"chunk_id":"ec9f10","wall_time_seconds":5.002247208,"session_id":44687,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T14:03:45Z
+
+
+Script completed
+Wall time 8.8 seconds
+Output:
+
+{"chunk_id":"dea168","wall_time_seconds":5.0019195,"session_id":44687,"original_token_count":105,"output":"◇ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() started.\n✔ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() passed after 0.489 seconds.\n✔ Test run with 48 tests passed after 21.379 seconds.\n[0/1] Planning build\nBuilding for production...\n[0/4] Write sources\n[1/4] Write swift-version--58304C5D6DBC2206.txt\n[3/4] Compiling Ragdoll AgentOptionsView.swift\n[3/5] Write Objects.LinkFileList\n"}
+{"chunk_id":"44a806","wall_time_seconds":0.000046291,"exit_code":0,"original_token_count":24,"output":"64318 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.preview.app/Contents/MacOS/Ragdoll\n"}
+
+## tool · 2026-11-17T14:04:00Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"3d6d81","wall_time_seconds":0.000137334,"exit_code":0,"original_token_count":12,"output":"[4/5] Linking Ragdoll\nBuild complete! (19.86s)\n"}
+{"chunk_id":"b35fce","wall_time_seconds":1.002561625,"session_id":79349,"original_token_count":0,"output":""}
+
+## assistant · 2026-11-17T14:04:10Z
+
+最终资源读取路径已通过验证，48 项 Swift 测试再次全部通过。预览包正在做签名、内置助手和资源完整性检查，随后会替换并重启当前预览应用。
+
+本次没有执行截图或视觉检查。
+
+
+## tool · 2026-11-17T14:04:12Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"505993","wall_time_seconds":0.000048291,"exit_code":0,"original_token_count":124,"output":".agent/assistant-icons-preview.app: replacing existing signature\n{\"status\":\"ok\",\"version\":\"0.1.0\",\"node\":\"v26.13.0\",\"agents\":[{\"id\":\"native-codex\",\"name\":\"Codex\",\"kind\":\"codex\",\"command\":\"codex\",\"args\":[],\"env\":{}},{\"id\":\"native-claude\",\"name\":\"Claude Code\",\"kind\":\"claude\",\"command\":\"claude\",\"args\":[],\"env\":{}},{\"id\":\"native-dsh\",\"name\":\"DeepSeek Harness\",\"kind\":\"dsh\",\"command\":\"/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh\",\"args\":[\"--profile\",\"sdk\"],\"env\":{}}]}\n"}
+{"chunk_id":"22a601","wall_time_seconds":0.000008792,"exit_code":0,"original_token_count":528,"output":"◇ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() started.\n✔ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() passed after 0.489 seconds.\n✔ Test run with 48 tests passed after 21.379 seconds.\n# 实施进度\n\n## 助手品牌头像（2026-11-17）\n\n- [x] 确认助手头像共用 sparkles；会话已有 source/nativeSource，ACP 原生来源可直接复用。没有项目测试技能目录。\n- [x] 找到 Lobe Icons 静态 PNG 与 MIT 许可，确定本地资源和共用视图传递范围。\n- [x] 来源映射先因缺少 assistantIconName 编译失败；实现后全部 48 项 Swift 测试通过（21.115 秒），三张资源可解码，release 编译通过。\n- [x] 检查生成的 SwiftPM 资源访问器，补充从应用 Contents/Resources 优先加载、开发运行使用 .module 的路径，避免依赖原构建目录。\n- [ ] Swift 测试、release 构建、预览包检查及运行；记录限制并提交推送。\n\n## 台前调度图标（2026-11-17）\n\n# 验证标准\n\n## 助手品牌头像\n\n- 原生 Codex/Claude/dsh、Claude 官方聊天导入及带 nativeSource 的 ACP 使用对应品牌；未知 ACP/未知来源不误标品牌。\n- 三张 PNG 可由应用资源 Bundle 解码、尺寸非零；Codex 作为模板使用主文字色，Claude/DeepSeek 保留品牌色。\n- 所有 MessageView 调用传递品牌资源，用户头像和系统折叠保持现状。\n- 运行 Swift 测试、release 构建、资源打包、预览包签名及内置助手自检；不截图、不运行 Claude 接入测试，保留原正式包。\n\n## 台前调度图标\n\n- 图标资源与应用包内字节一致；LaunchServices 登记指向实际 ICNS；NSRunningApplication 图标与包内资源在相同尺寸下摘要一致。\n- **涉及文件**：`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：`efdd80e docs(macos): record Stage Manager icon diagnostics`，已普通推送至 origin/main，远端 SHA 与本地一致；本条由后续文档提交补记。\n\n---\n2026-11-17 22:04\n"}
+
+## tool · 2026-11-17T14:04:24Z
+
+
+Script completed
+Wall time 6.6 seconds
+Output:
+
+{"chunk_id":"2a4c58","wall_time_seconds":0.027786125,"exit_code":0,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T14:04:38Z
+
+
+Script completed
+Wall time 6.2 seconds
+Output:
+
+{"chunk_id":"a1246c","wall_time_seconds":1.002053875,"session_id":21225,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T14:04:51Z
+
+
+Script completed
+Wall time 3.6 seconds
+Output:
+
+{"chunk_id":"0801b8","wall_time_seconds":0.000015833,"exit_code":0,"original_token_count":27,"output":"09b51c63f9ed1325805085fe1dbda8b30cc0105f34583be141c15f878303550e  dist/Ragdoll.app/Contents/MacOS/Ragdoll\n"}
+{"chunk_id":"6811da","wall_time_seconds":0.000009667,"exit_code":0,"original_token_count":24,"output":"69738 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.preview.app/Contents/MacOS/Ragdoll\n"}
+
+## tool · 2026-11-17T14:05:13Z
+
+
+Script completed
+Wall time 0.4 seconds
+Output:
+
+{}
+{"chunk_id":"65b4af","wall_time_seconds":0.000019959,"exit_code":0,"original_token_count":923,"output":"- **涉及文件**：`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：`efdd80e docs(macos): record Stage Manager icon diagnostics`，已普通推送至 origin/main，远端 SHA 与本地一致；本条由后续文档提交补记。\n\n---\n\n## [2026-11-17 22:04] 按会话来源显示助手品牌头像\n\n- **需求/问题描述**：\n  > 助手头像显示对应的 Codex、Claude 或 DeepSeek 图标，并自行查找图标资源。\n- **实际实现的功能与改动**：\n  - 原生 Codex、Claude Code、Claude 聊天导入及 DeepSeek Harness 使用对应品牌头像；带 nativeSource 的 ACP 复用原生品牌，未知来源保留通用头像。\n  - Lobe Icons 三张 PNG 与 MIT 许可随应用本地打包；Codex 模板随文字颜色变化，Claude/DeepSeek 保留品牌色。应用优先读取 Contents/Resources 中的资源 Bundle，开发运行使用 SwiftPM Bundle。\n  - 来源映射回归先因缺少实现编译失败；最终全部 48 项 Swift 测试通过（21.379 秒），release 构建及 Git diff 检查通过，包内三张图标与源文件逐字节一致。\n  - 更新并重启 `dist/Ragdoll.preview.app`，临时签名完整性和内置助手自检通过；原正式包 SHA-256 不变且签名完整性通过。未截图或验证实际窗口显示，未运行 Claude 接入测试；预览包不用于独立后台服务。\n- **涉及文件**：`Package.swift`、`Sources/Ragdoll/ConversationView.swift`、`Sources/Ragdoll/Resources/AssistantIcons/`、`Tests/RagdollTests/ConversationTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：待提交。\n\n---\n# 实施进度\n\n## 助手品牌头像（2026-11-17）\n\n- [x] 确认助手头像共用 sparkles；会话已有 source/nativeSource，ACP 原生来源可直接复用。没有项目测试技能目录。\n- [x] 找到 Lobe Icons 静态 PNG 与 MIT 许可，确定本地资源和共用视图传递范围。\n- [x] 来源映射先因缺少 assistantIconName 编译失败；实现后全部 48 项 Swift 测试通过（21.115 秒），三张资源可解码，release 编译通过。\n- [x] 检查生成的 SwiftPM 资源访问器，补充从应用 Contents/Resources 优先加载、开发运行使用 .module 的路径，避免依赖原构建目录。\n- [x] 最终全部 48 项 Swift 测试通过（21.379 秒），release 构建通过；包内三张图标与源文件逐字节一致，临时签名完整性及内置助手自检通过。\n- [x] 正常退出旧预览并启动新预览（PID 69738）；原正式包 SHA-256 不变且签名完整性通过。未截图或验证窗口实际显示，未运行 Claude 接入测试；预览包不用于独立后台服务。\n- [ ] 提交并普通推送至 origin/main。\n\n## 台前调度图标（2026-11-17）\n\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Sources/Ragdoll/Resources/\n Package.swift                              |  2 +-\n Sources/Ragdoll/ConversationView.swift     | 28 ++++++++++++++++++++++++----\n Tests/RagdollTests/ConversationTests.swift | 22 ++++++++++++++++++++++\n docs/CHANGELOG.md                          | 14 ++++++++++++++\n memory/agents.md                           |  4 ++--\n memory/plan.md                             |  7 +++++++\n memory/progress.md                         | 10 ++++++++++\n memory/verify.md                           |  8 ++++++++\n 8 files changed, 88 insertions(+), 7 deletions(-)\n"}
