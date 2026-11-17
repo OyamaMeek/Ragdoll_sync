@@ -3226,3 +3226,400 @@ Wall time 0.0 seconds
 Output:
 
 {"chunk_id":"6a0298","wall_time_seconds":0.000016,"exit_code":0,"original_token_count":310,"output":"[{\"id\":134040768754,\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\",\"started_at\":\"2026-11-17T12:30:48Z\",\"completed_at\":\"2026-11-17T12:30:49Z\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\",\"started_at\":\"2026-11-17T12:30:49Z\",\"completed_at\":\"2026-11-17T12:30:51Z\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\",\"started_at\":\"2026-11-17T12:30:51Z\",\"completed_at\":\"2026-11-17T12:30:57Z\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\",\"started_at\":\"2026-11-17T12:30:57Z\",\"completed_at\":\"2026-11-17T12:30:57Z\"},{\"name\":\"Install Codex for migration tests\",\"status\":\"completed\",\"conclusion\":\"success\",\"started_at\":\"2026-11-17T12:30:57Z\",\"completed_at\":\"2026-11-17T12:31:03Z\"},{\"name\":\"Build application\",\"status\":\"completed\",\"conclusion\":\"success\",\"started_at\":\"2026-11-17T12:31:03Z\",\"completed_at\":\"2026-11-17T12:33:28Z\"},{\"name\":\"Check runtime\",\"status\":\"completed\",\"conclusion\":\"success\",\"started_at\":\"2026-11-17T12:33:28Z\",\"completed_at\":\"2026-11-17T12:33:33Z\"},{\"name\":\"Test Swift\",\"status\":\"in_progress\",\"conclusion\":null,\"started_at\":\"2026-11-17T12:33:33Z\",\"completed_at\":null}]}]\n"}
+
+## tool · 2026-11-17T12:41:17Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"cb851e","wall_time_seconds":0.000048167,"exit_code":0,"original_token_count":4630,"output":"import Foundation\n\npublic enum JSONValue: Codable, Sendable, Equatable {\n    case object([String: JSONValue]), array([JSONValue]), string(String), number(Double), bool(Bool), null\n    public init(from decoder: Decoder) throws {\n        let c = try decoder.singleValueContainer()\n        if c.decodeNil() { self = .null }\n        else if let v = try? c.decode(Bool.self) { self = .bool(v) }\n        else if let v = try? c.decode(Double.self) { self = .number(v) }\n        else if let v = try? c.decode(String.self) { self = .string(v) }\n        else if let v = try? c.decode([JSONValue].self) { self = .array(v) }\n        else { self = .object(try c.decode([String: JSONValue].self)) }\n    }\n    public func encode(to encoder: Encoder) throws {\n        var c = encoder.singleValueContainer()\n        switch self {\n        case .object(let v): try c.encode(v)\n        case .array(let v): try c.encode(v)\n        case .string(let v): try c.encode(v)\n        case .number(let v): try c.encode(v)\n        case .bool(let v): try c.encode(v)\n        case .null: try c.encodeNil()\n        }\n    }\n    public subscript(_ key: String) -> JSONValue { if case .object(let v) = self { return v[key] ?? .null }; return .null }\n    public var string: String { if case .string(let v) = self { return v }; return \"\" }\n    public var array: [JSONValue] { if case .array(let v) = self { return v }; return [] }\n    public var dictionary: [String: JSONValue] { if case .object(let v) = self { return v }; return [:] }\n    public var text: String {\n        if case .string(let v) = self { return v }\n        let encoder = JSONEncoder(); encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]\n        return (try? encoder.encode(self)).map { String(decoding: $0, as: UTF8.self) } ?? \"\"\n    }\n    public static func encode<T: Encodable>(_ value: T) throws -> JSONValue { try JSONDecoder().decode(JSONValue.self, from: JSONEncoder().encode(value)) }\n    public func decode<T: Decodable>(_ type: T.Type) throws -> T { try JSONDecoder().decode(type, from: JSONEncoder().encode(self)) }\n}\n\npublic actor RuntimeBridge {\n    private var process: Process?\n    private var input: FileHandle?\n    private var serial = 0\n    private var pending: [String: CheckedContinuation<JSONValue, any Error>] = [:]\n    private var handler: (@Sendable (String, JSONValue) async -> Void)?\n    private var stderr = \"\"\n    public init() {}\n    public func setHandler(_ handler: @escaping @Sendable (String, JSONValue) async -> Void) { self.handler = handler }\n\n    public func start(dataDirectory: URL) throws {\n        guard process == nil else { return }\n        let resources = Bundle.main.resourceURL ?? URL(fileURLWithPath: FileManager.default.currentDirectoryPath)\n        let repo = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()\n        let bundled = resources.appendingPathComponent(\"runtime\")\n        let isBundled = FileManager.default.fileExists(atPath: bundled.appendingPathComponent(\"app/dist/main.mjs\").path)\n        let script = isBundled ? bundled.appendingPathComponent(\"app/dist/main.mjs\") : repo.appendingPathComponent(\"runtime/dist/main.mjs\")\n        let node = isBundled ? bundled.appendingPathComponent(\"node/bin/node\") : URL(fileURLWithPath: \"/opt/homebrew/bin/node\")\n        guard FileManager.default.fileExists(atPath: script.path), FileManager.default.isExecutableFile(atPath: node.path) else { throw failure(\"缺少 SDK 助手，请先运行构建脚本。\") }\n        let p = Process(); p.executableURL = node; p.arguments = [script.path, \"--data-dir\", dataDirectory.path]\n        var environment = ProcessInfo.processInfo.environment\n        environment[\"PATH\"] = node.deletingLastPathComponent().path + \":/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:\" + (environment[\"PATH\"] ?? \"\")\n        p.environment = environment\n        let stdin = Pipe(), stdout = Pipe(), errors = Pipe()\n        p.standardInput = stdin; p.standardOutput = stdout; p.standardError = errors\n        p.terminationHandler = { [weak self] p in Task { await self?.terminated(p.terminationStatus) } }\n        try p.run(); process = p; input = stdin.fileHandleForWriting\n        let reader = stdout.fileHandleForReading\n        Task.detached { [weak self] in\n            var pending = Data()\n            while true {\n                let chunk = reader.availableData\n                if chunk.isEmpty { break }\n                var start = chunk.startIndex\n                while let index = chunk[start...].firstIndex(of: 10) {\n                    pending.append(chunk[start..<index])\n                    await self?.receive(pending)\n                    pending = Data()\n                    start = chunk.index(after: index)\n                }\n                pending.append(chunk[start...])\n            }\n        }\n        let errorReader = errors.fileHandleForReading\n        Task.detached { [weak self] in\n            while true { let data = errorReader.availableData; if data.isEmpty { break }; await self?.errorOutput(String(decoding: data, as: UTF8.self)) }\n        }\n    }\n    public func request(_ method: String, _ params: [String: JSONValue] = [:], timeout: Double = 120) async throws -> JSONValue {\n        guard let input else { throw failure(\"SDK 助手尚未启动\") }\n        serial += 1; let id = String(serial)\n        let message = try JSONEncoder().encode(JSONValue.object([\"id\": .string(id), \"method\": .string(method), \"params\": .object(params)])) + Data([10])\n        return try await withCheckedThrowingContinuation { continuation in\n            pending[id] = continuation\n            do { try input.write(contentsOf: message) }\n            catch { pending.removeValue(forKey: id)?.resume(throwing: error) }\n            if timeout > 0 { Task { try? await Task.sleep(for: .seconds(timeout)); timedOut(id, method) } }\n        }\n    }\n    private func timedOut(_ id: String, _ method: String) { pending.removeValue(forKey: id)?.resume(throwing: failure(\"助手请求超时：\\(method)。运行中的操作不会自动重试。\")) }\n    private func receive(_ data: Data) async {\n        do {\n            let message = try JSONDecoder().decode(JSONValue.self, from: data)\n            if !message[\"event\"].string.isEmpty { await handler?(message[\"event\"].string, message[\"data\"]); return }\n            let id = message[\"id\"].string\n            guard let continuation = pending.removeValue(forKey: id) else { return }\n            if message[\"error\"] != .null { continuation.resume(throwing: failure(message[\"error\"][\"message\"].string)) }\n            else { continuation.resume(returning: message[\"result\"]) }\n        } catch { await handler?(\"warning\", .string(\"助手返回无效数据：\\(error.localizedDescription)\")) }\n    }\n    private func errorOutput(_ text: String) { stderr = String((stderr + text).suffix(4000)) }\n    private func terminated(_ code: Int32) async {\n        process = nil; input = nil\n        let error = failure(\"SDK 助手已退出（\\(code)）：\\(stderr)\")\n        for continuation in pending.values { continuation.resume(throwing: error) }; pending.removeAll()\n        await handler?(\"disconnected\", .string(error.localizedDescription))\n    }\n    public func close() async {\n        _ = try? await request(\"shutdown\", timeout: 5)\n        try? input?.close(); process?.terminate()\n    }\n    private func failure(_ message: String) -> NSError { NSError(domain: \"Ragdoll.Runtime\", code: 1, userInfo: [NSLocalizedDescriptionKey: message]) }\n}\nimport Foundation\nimport Testing\nimport RagdollCore\n@testable import Ragdoll\n\n@Test @MainActor func configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() async throws {\n    let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent(\".agent/tests/\\(UUID().uuidString)\")\n    try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)\n    defer { try? FileManager.default.removeItem(at: root) }\n    let store = try Store(path: root.appendingPathComponent(\"index.sqlite\").path)\n    var settings = Settings(); settings.archivePath = root.appendingPathComponent(\"missing-repo\").path\n    try store.saveSettings(settings)\n    let cached = Session(id: \"cached\", source: \"codex\", title: \"Cached history\")\n    try store.save(cached)\n    let model = AppModel(root: root)\n    #expect(!model.needsArchiveSetup)\n    #expect(model.sessions.map(\\.id) == [\"cached\"])\n    model.loadingArchive = true\n    #expect(!model.needsArchiveSetup)\n    model.loadingArchive = false\n    await model.launch()\n    #expect(!model.needsArchiveSetup)\n    #expect(model.sessions.map(\\.id) == [\"cached\"])\n    #expect(!model.ready)\n    #expect(!model.archiveLoaded)\n    #expect(model.error != nil)\n    await model.refresh(); await model.archiveNow()\n    #expect(!FileManager.default.fileExists(atPath: settings.archivePath))\n    await model.bridge.close()\n}\n\n@Test @MainActor func firstLaunchRequiresRepositoryBeforeScanningOrImporting() async throws {\n    let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent(\".agent/tests/\\(UUID().uuidString)\")\n    defer { try? FileManager.default.removeItem(at: root) }\n    let model = AppModel(root: root)\n    await model.launch()\n    #expect(model.needsArchiveSetup)\n    #expect(!model.ready)\n    #expect(!model.scanning)\n    #expect(model.settings.locations.isEmpty)\n    #expect(model.sessions.isEmpty)\n    #expect(!FileManager.default.fileExists(atPath: root.appendingPathComponent(\"conversations\").path))\n    await model.refresh()\n    #expect(!model.scanning)\n    await model.bridge.close()\n}\n\n@Test @MainActor func startupRestoresRepositoryBeforeScanningAndFailsClosed() async throws {\n    let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent(\".agent/tests/\\(UUID().uuidString)\")\n    defer { try? FileManager.default.removeItem(at: root) }\n    let repo = root.appendingPathComponent(\"repo\")\n    try Archive.prepare(repo)\n    let config = Process(); config.executableURL = URL(fileURLWithPath: \"/usr/bin/git\"); config.arguments = [\"-C\", repo.path, \"config\", \"user.name\", \"Startup\"]\n    try config.run(); config.waitUntilExit()\n    let email = Process(); email.executableURL = URL(fileURLWithPath: \"/usr/bin/git\"); email.arguments = [\"-C\", repo.path, \"config\", \"user.email\", \"startup@localhost\"]; try email.run(); email.waitUntilExit()\n    let archived = Session(id: \"only-in-git\", source: \"codex\", title: \"Git history\", messages: [Message(role: \"user\", text: \"GIT_FIRST_1729\")])\n    _ = try Archive.save([archived], to: repo)\n    let model = AppModel(root: root)\n    model.settings.locations = [Location(source: \"codex\", path: root.appendingPathComponent(\"empty-source\").path)]\n    model.persistSettings()\n    await model.launch()\n    #expect(model.needsArchiveSetup)\n    await model.configureArchive(repo)\n    #expect(model.ready)\n    #expect(!model.needsArchiveSetup)\n    #expect(model.sessions.map(\\.id) == [\"only-in-git\"])\n    model.select(\"only-in-git\")\n    #expect(model.selected?.messages == archived.messages)\n    await model.archiveNow()\n    #expect(!model.archiving)\n    await model.bridge.close()\n    try Data(\"broken\".utf8).write(to: repo.appendingPathComponent(\".ragdoll-manifest.json\"))\n    let failed = AppModel(root: root)\n    await failed.launch()\n    #expect(!failed.ready)\n    #expect(!failed.needsArchiveSetup)\n    #expect(failed.error != nil)\n    await failed.refresh(); await failed.archiveNow()\n    #expect(try String(contentsOf: repo.appendingPathComponent(\".ragdoll-manifest.json\"), encoding: .utf8) == \"broken\")\n    await failed.bridge.close()\n}\nimport Foundation\nimport Testing\n@testable import RagdollCore\n\nfunc testDirectory() throws -> URL {\n    let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent(\".agent/tests/\\(UUID().uuidString)\")\n    try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)\n    return root\n}\n\n@discardableResult func git(_ root: URL, _ args: [String]) throws -> String {\n    let process = Process(); process.executableURL = URL(fileURLWithPath: \"/usr/bin/git\"); process.arguments = [\"-C\", root.path] + args\n    let pipe = Pipe(); process.standardOutput = pipe; process.standardError = pipe\n    try process.run(); let data = pipe.fileHandleForReading.readDataToEndOfFile(); process.waitUntilExit()\n    guard process.terminationStatus == 0 else { throw NSError(domain: String(decoding: data, as: UTF8.self), code: Int(process.terminationStatus)) }\n    return String(decoding: data, as: UTF8.self).trimmingCharacters(in: .whitespacesAndNewlines)\n}\n\n@Test func storePersistsAndSearchesActualMessages() throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    let store = try Store(path: root.appendingPathComponent(\"index.sqlite\").path)\n    let session = Session(id: \"one\", source: \"claude\", title: \"Build\", messages: [Message(role: \"user\", text: \"unique searchable text\")])\n    #expect(try store.save(session))\n    #expect(try !store.save(session))\n    #expect(try store.list(query: \"searchable\").count == 1)\n    #expect(try store.list(query: \"%\").isEmpty)\n    #expect(try store.session(\"one\")?.messages.first?.text == \"unique searchable text\")\n}\n\n@Test func olderSourceDataCannotReplaceNewerRepositoryHistory() throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    let store = try Store(path: root.appendingPathComponent(\"index.sqlite\").path)\n    let archived = Session(id: \"one\", source: \"codex\", title: \"Newer in Git\", updated: 20, messages: [Message(role: \"user\", text: \"NEWER_GIT_HISTORY\")])\n    try store.save(archived)\n    let stale = Session(id: \"one\", source: \"codex\", title: \"Old source\", updated: 10)\n    #expect(try !store.save(stale))\n    #expect(try store.session(\"one\") == archived)\n    var fresh = archived; fresh.updated = 30; fresh.messages.append(Message(role: \"assistant\", text: \"NEW_LOCAL_DATA\"))\n    #expect(try store.save(fresh))\n    #expect(try store.session(\"one\") == fresh)\n}\n\n@Test func weeklyBudgetVisibilityDefaultsOffAndPersistsWithoutClearingAmount() throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    let path = root.appendingPathComponent(\"index.sqlite\").path\n    #expect(try JSONValue.encode(Store(path: path).settings())[\"showWeeklyBudget\"] != .bool(true))\n    var record = try JSONValue.encode(Settings()).dictionary\n    record.removeValue(forKey: \"showWeeklyBudget\")\n    record[\"weeklyBudget\"] = .number(100)\n    let legacy = try JSONValue.object(record).decode(Settings.self)\n    #expect(try JSONValue.encode(legacy)[\"showWeeklyBudget\"] != .bool(true))\n    for enabled in [true, false] {\n        record[\"showWeeklyBudget\"] = .bool(enabled)\n        try Store(path: path).saveSettings(JSONValue.object(record).decode(Settings.self))\n        let restored = try Store(path: path).settings()\nTests/RagdollCoreTests/StoreArchiveTests.swift:14:    try process.run(); let data = pipe.fileHandleForReading.readDataToEndOfFile(); process.waitUntilExit()\nTests/RagdollCoreTests/ArchiveReadTests.swift:74:        try process.run(); let data = output.fileHandleForReading.readDataToEndOfFile(); process.waitUntilExit()\nTests/RagdollCoreTests/ArchiveSyncTests.swift:42:    #expect(throws: (any Error).self) { try ArchiveSync.push(root: local, remote: \"origin\", branch: \"archive\", timeout: 0.2) }\nTests/RagdollCoreTests/ArchiveImagesTests.swift:66:    try process.run(); let restored = output.fileHandleForReading.readDataToEndOfFile(); process.waitUntilExit()\nTests/RagdollCoreTests/BackgroundServiceTests.swift:24:    try process.run(); defer { if process.isRunning { process.terminate(); process.waitUntilExit() } }\nTests/RagdollCoreTests/BackgroundServiceTests.swift:26:    while process.isRunning && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\nTests/RagdollCoreTests/BackgroundServiceTests.swift:82:    while process.isRunning && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\nTests/RagdollCoreTests/BackgroundServiceTests.swift:99:    while retry.isRunning && Date() < retryDeadline { try await Task.sleep(for: .milliseconds(50)) }\nTests/RagdollCoreTests/BackgroundServiceTests.swift:119:    try process.run(); defer { if process.isRunning { process.terminate(); process.waitUntilExit() } }\nTests/RagdollCoreTests/BackgroundServiceTests.swift:121:    while try BackgroundService.status(root: root) == nil && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\nTests/RagdollCoreTests/BackgroundServiceTests.swift:125:        try children.run(); let data = output.fileHandleForReading.readDataToEndOfFile(); children.waitUntilExit()\nTests/RagdollCoreTests/BackgroundServiceTests.swift:130:        try sqlite.run(); sqlite.waitUntilExit(); #expect(sqlite.terminationStatus == 0)\nTests/RagdollCoreTests/BackgroundServiceTests.swift:134:    while process.isRunning && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\nTests/RagdollCoreTests/BackgroundServiceTests.swift:151:    try process.run(); defer { if process.isRunning { process.terminate(); process.waitUntilExit() } }\nTests/RagdollCoreTests/BackgroundServiceTests.swift:153:    while (try BackgroundService.status(root: root)?.lastArchive) == nil && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\nTests/RagdollCoreTests/BackgroundServiceTests.swift:157:    while try store.list(query: \"AFTER_LAUNCH_1729\").isEmpty && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\nTests/RagdollCoreTests/BackgroundServiceTests.swift:160:    while !FileManager.default.fileExists(atPath: newRecord.path) && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\nTests/RagdollCoreTests/RuntimeBridgeTests.swift:28:        let result = try await bridge.request(\"scan\", [\"locations\": .array([.object([\"source\": .string(\"codex\"), \"path\": .string(home.path)])])], timeout: 8)\nTests/RagdollCoreTests/RuntimeBridgeTests.swift:34:        let next = try await bridge.request(\"scan\", [\"locations\": .array([])], timeout: 2)\nTests/RagdollTests/StartupTests.swift:54:    try config.run(); config.waitUntilExit()\nTests/RagdollTests/StartupTests.swift:55:    let email = Process(); email.executableURL = URL(fileURLWithPath: \"/usr/bin/git\"); email.arguments = [\"-C\", repo.path, \"config\", \"user.email\", \"startup@localhost\"]; try email.run(); email.waitUntilExit()\n"}
+
+## assistant · 2026-11-17T12:41:53Z
+
+Swift 步骤运行时间已明显超过本机基线。我会取消这次验证，读取取消后开放的日志，确认它停在编译还是测试执行阶段，再处理具体原因。
+
+
+## tool · 2026-11-17T12:41:55Z
+
+
+Script completed
+Wall time 1.3 seconds
+Output:
+
+{"chunk_id":"422fab","wall_time_seconds":1.002205084,"session_id":49076,"original_token_count":358,"output":"102-                          Enable or disable indexing-while-building feature\n103-                          (default: --auto-index-store)\n104-  --enable-parseable-module-interfaces\n105:  -j, --jobs <jobs>       The number of jobs to spawn in parallel during the\n106-                          build process\n107-  --use-integrated-swift-driver\n108-  --explicit-target-dependency-import-check <explicit-target-dependency-import-check>\n109-                          A flag that indicates this build should check whether\n110-                          targets only import their explicitly-declared\n--\n124-  --skip-build            Skip building the test target\n125-  --enable-xctest/--disable-xctest\n126-                          Enable support for XCTest\n127:  --enable-swift-testing/--disable-swift-testing\n128-                          Enable support for Swift Testing\n129:  --parallel/--no-parallel\n130:                          Run the tests in parallel. (default: --no-parallel)\n131-  --num-workers <num-workers>\n132:                          Number of tests to execute in parallel.\n133-  -l, --list-tests        Lists test methods in specifier format\n134-  --show-codecov-path, --show-code-coverage-path, --show-coverage-path\n135-                          Print the path of the exported code coverage JSON file\n136-  -s, --specifier <specifier>\n137-  --filter <filter>       Run test cases matching regular expression, Format:\n"}
+
+## tool · 2026-11-17T12:42:08Z
+
+
+Script completed
+Wall time 5.1 seconds
+Output:
+
+swift-package-manager/Sources/PackageManagerDocs/Documentation.docc/SwiftTest.md at main · swiftlang/swift-package-manager · GitHub (https://github.com/swiftlang/swift-package-manager/blob/main/Sources/PackageManagerDocs/Documentation.docc/SwiftTest.md)
+citeturn3search0 [wordlim: 200] Crawled: last month;     `test list [--package-path=<package-path>] [--cache-path=<cache-path>] [--config-path=<config-path>] [--security-path=<security-path>] [--scratch-path=<scratch-path>]     [--swift-sdks-path=<swift-sdks-path>] [--toolset=<toolset>...] [--pkg-config-path=<pkg-config-path>...]   [--enable-dependency-cache|disable-dependency-cache]  [--enable-build-manifest-caching|disable-build-manifest-caching] [--manifest-cache=<manifest-cache>] [--enable-experimental-prebuilts|disable-experimental-prebuilts] [--verbose] [--very-verbose|vv] [--quiet] [--color-diagnostics|no-color-diagnostics] [--disable-sandbox] [--netrc] [--enable-netrc|disable-netrc] [--netrc-file=<netrc-file>] [--enable-keychain|disable-keychain] [--resolver-fingerprint-checking=<resolver-fingerprint-checking>] [--resolver-signing-entity-checking=<resolver-signing-entity-checking>] [--enable-signature-validation|disable-signature-validation] [--enable-prefetching|disable-prefetching] [--force-resolved-versions|disable-automatic-resolution|only-use-versions-from-resolved-file] [--skip-update] [--disable-scm-to-registry-transformation] [--use-registry-identity-for-scm] [--replace-scm-with-registry]  [--default-registry-url=<default-registry-url>] [--configuration=<configuration>] [--=<Xcc>...]
+      [--resolver-fingerprint-checking=<resolver-fingerprint-checking>]
+      [--resolver-signing-entity-checking=<resolver-signing-entity-checking>]
+      [--enable-signature-validation|disable-signature-validation]
+      [--enable-prefetching|disable-prefetching]
+      [--force-resolved-versions|disable-automatic-resolution|only-use-versions-from-resolved-file]
+      [--skip-update] [--disable-scm-to-registry-transformation]
+      [--use-registry-identity-for-scm]
+      [--replace-scm-with-registry]
+      [--default-registry-url=<default-registry-url>]
+      [--configuration=<configuration>] [--=<Xcc>...]
+      [--=<Xswiftc>...] [--=<Xlinker>...] [--=<Xcxx>...]
+      [--triple=<triple>] [--sdk=<sdk>]
+      [--toolchain=<toolchain>] [--swift-sdk=<swift-sdk>]
+      [--sanitize=<sanitize>...]
+      [--auto-index-store|enable-index-store|disable-index-store]
+      [--enable-parseable-module-interfaces] [--jobs=<jobs>]
+      [--use-integrated-swift-driver]
+      [--explicit-target-dependency-import-check=<explicit-target-dependency-import-check>]
+      [--build-system=<build-system>] [--=<debug-info-format>]
+      [--enable-dead-strip|disable-dead-strip]
+      [--disable-local-rpath] [--skip-build]
+      [--enable-xctest|disable-xctest]
+      [--enable-swift-testing|disable-swift-testing]
+      [--attachments-path=<attachments-path>]
+      [--parallel|no-parallel] [--num-workers=<num-workers>]
+      [--list-tests]
+      [--show-coverage-path=[<mode>]]
+      [--show-codecov-path|show-code-coverage-path]
+      [--specifier=<specifier>] [--filter=<filter>...]
+      [--skip=<skip>...] [--xunit-output=<xunit-output>]
+      [--enable-testable-imports|disable-testable-imports]
+      [--enable-coverage|disable-coverage]
+      [--enable-code-coverage|disable-code-coverage]
+      [--coverage-format=<format>...]
+      [-Xcov=<Xcov>...]
+      [--debugger]
+      [--traits=<traits>] [--enable-all-traits]
+      [--disable-default-traits] [--version] [--help]
+    `
+
+A flag that indicates this build should check whether targets only import their explicitly-declared dependencies.
+
+  * term --build-system=<build-system>:
+
+  * term --=<debug-info-format>:
+
+The Debug Information Format to use.
+
+  * term --enable-dead-strip|disable-dead-strip:
+
+Disable/enable dead code stripping by the linker.
+
+  * term --disable-local-rpath:
+
+Disable adding $ORIGIN/@loader_path to the rpath by default.
+
+  * term --skip-build:
+
+Skip building the test target.
+
+  * term --enable-xctest|disable-xctest:
+
+Enable support for XCTest.
+
+  * term --enable-swift-testing|disable-swift-testing:
+
+Enable support for Swift Testing.
+
+  * term --attachments-path=<attachments-path>:
+
+Path where attachments should be written (Swift Testing only). This path must be an existing directory the current user can write to. If not specified, any attachments created during testing are discarded.
+
+  * term --parallel|no-parallel:
+
+Run the tests in parallel.
+
+  * term --num-workers=<num-workers>:
+
+Number of tests to execute in parallel.
+--------------------------------------------------------------------------------
+Misleading CLI help for `swift test --parallel` · Issue #8174 · swiftlang/swift-package-manager · GitHub (https://github.com/swiftlang/swift-package-manager/issues/8174)
+citeturn3search1 [wordlim: 200] Published: 1.9 years ago; Crawled: 3 months ago; # Misleading CLI help for `swift test --parallel` #8174 ... Don't say `default: --no-parallel`, instead say something like `default: --no-parallel for XCTest, --parallel for swift-testing`. ... ### Swift Package Manager version/commit hash
+--------------------------------------------------------------------------------
+swiftlang/swift-package-manager swift-6.0-RELEASE on GitHub (https://newreleases.io/project/github/swiftlang/swift-package-manager/release/swift-6.0-RELEASE)
+citeturn3search2 [wordlim: 200] Crawled: last month;   * Allow specifying testing libraries for `swift package init` by @grynspan in #7186 ...   * Add `swift test --no-parallel` by @grynspan in #7231 ...   * [6.0] Fix a memory leak in `DownloadTaskManager` and `DataTaskManager` by @ahoppen in #7416
+--------------------------------------------------------------------------------
+Make it easier to run large number of serial tests · Issue #683 · swiftlang/swift-testing · GitHub (https://github.com/swiftlang/swift-testing/issues/683)
+citeturn3search3 [wordlim: 200] Published: 2.2 years ago; Crawled: 2 months ago; Currently, with Swift Testing you only have two options to accommodate this, both of which have drawbacks:
+
+  * run test tests with the `--no-parallel` - this is problematic if you have different tests you want to run as well that can be run in parallel
+--------------------------------------------------------------------------------
+Running tests serially or in parallel - Swift Testing - Swift Forums (https://forums.swift.org/t/running-tests-serially-or-in-parallel/72935)
+citeturn3search4 [wordlim: 200] Published: 2.4 years ago; Crawled: last month; #### swiftlang/swift-package-manager/blob/swift-DEVELOPMENT-SNAPSHOT-2024-07-09-a/Sources/Commands/SwiftTestCommand.swift#L94-L98 ...       96.       inversion: .prefixedNo, ... @Dennis would you know if there was any kind of potential plan to support the ability for a `testTarget` (from a `package`) to support opting-out of parallel testing across the target?
+--------------------------------------------------------------------------------
+"Migrating a test from XCTest" does not mention parallel-by-default · Issue #863 · swiftlang/swift-testing · GitHub (https://github.com/swiftlang/swift-testing/issues/863)
+citeturn3search5 [wordlim: 200] Published: 1.9 years ago; Crawled: 2 months ago; "Migrating a test from XCTest" does not mention parallel-by-default, which catches users off-guard when migrating from XCTest to swift-testing. ... so they had to figure out the `--no-parallel` CLI command and use that to run the tests sequentially.
+--------------------------------------------------------------------------------
+swift-testing/Sources/Testing/Traits/ParallelizationTrait.swift at main · swiftlang/swift-testing · GitHub (https://github.com/swiftlang/swift-testing/blob/main/Sources/Testing/Traits/ParallelizationTrait.swift)
+citeturn3search6 [wordlim: 200] Crawled: 2 months ago; swiftlang / swift-testing Public ... /// parallelization globally (for example, by passing `--no-parallel` to the ... /// `swift test` command.)
+--------------------------------------------------------------------------------
+pgorzelany/swift-llama-cpp — Apple Developer Docs (https://apple-docs.everest.mt/docs/packages/pgorzelany/swift-llama-cpp/)
+citeturn3search7 [wordlim: 200] Crawled: today;     swift test --no-parallel`
+--------------------------------------------------------------------------------
+swiftlang/swift-package-manager swift-6.3-RELEASE on GitHub (https://newreleases.io/project/github/swiftlang/swift-package-manager/release/swift-6.3-RELEASE)
+citeturn3search8 [wordlim: 200] Crawled: last month;   * Test: Convert more tests to Swift Testing by @bkhouri in #8100 ...   * [Commands] `swift package migrate` command by @xedin in #8613 ...   * Fix plugin incorrect dependencies test known issue by @cmcgee1024 in #8839
+--------------------------------------------------------------------------------
+Make SwiftPM run XCTest and Testing tests in parallel by default? - Swift Testing - Swift Forums (https://forums.swift.org/t/make-swiftpm-run-xctest-and-testing-tests-in-parallel-by-default/78348)
+citeturn3search9 [wordlim: 200] Published: 1.7 years ago; Crawled: last month; Telling those expert users to stick `--no-parallel` in their CI config is no big deal. ... See also things like Revert "Remove previously deprecated `--enable-test-discovery`" by bnbarham · Pull Request #7395 · swiftlang/swift-package-manager · GitHub
+--------------------------------------------------------------------------------
+Test Impact Analysis for Swift (https://docs.datadoghq.com/tests/test_impact_analysis/setup/swift/?tab=xctest)
+citeturn3search10 [wordlim: 200] Crawled: last month;   * When running with the Swift Package Manager, pass the `--no-parallel` flag:
+    
+    `swift test --no-parallel
+--------------------------------------------------------------------------------
+Swift Package Manager Project - Browse /swift-6.3-RELEASE at SourceForge.net (https://sourceforge.net/projects/swift-package-manager.mirror/files/swift-6.3-RELEASE/)
+citeturn3search11 [wordlim: 200] Published: 9 months ago; Crawled: 2 months ago;   * Fix libraryEvolutionLinuxXCFramework test on arm by @vsarunas in https://github.com/swiftlang/swift-package-manager/pull/9376
+--------------------------------------------------------------------------------
+Swift: a modern highly parallel gravity and smoothed particle hydrodynamics solver for astrophysical and cosmological applications (https://watermark02.silverchair.com/stae922.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAA1YwggNSBgkqhkiG9w0BBwagggNDMIIDPwIBADCCAzgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMMijYm--7XQvzKbGMAgEQgIIDCVuZlGRrbyxObZOFZwuNtYPZq7Th3qO3DIZy09ZHTYEQDxl21GCSfQQz-zHXkQIfIERUilXYXABnlnUiz8-nLy9Dfl1nKDtfcak8YwjghRWSBilmC_0kW1l8fIzDGqqMupTzoSS8vTUtOn7PY59vc1-uDb2xeLoHL2DEOa4cHA9L1a1RmuPsSfkQPZwyHZqzUL19_kU0DujxrxH15mV5tmEZC4-M6izNBFxIVF9MzUZIFRWFRcJw6sgjFEfk98nMXq2yLyH0azt2NlKNJ-oAC2BDwnP0nCEpI4AEKwmWSQq1KRj2iGsXvRsulnSG3j3UwyJHMhYdzBsq1napyJDndmHYUlggPojCd6a4B3XXsAow5Nl1avgKh2DiEKnwaxBhM5761rrKc1vIP-pzr6gP9TnKfE1ANjqWXrhhTiTzNjzdCiGlrAUAbS8QzX2Cc01HnLxFzGRQh_y1lR9koj9oCejAdO2Jl2rwVb0NcOpdfnIRZFlw4cDFuc4YQPDNuwL2qUmBBX7IhJ-mvqB80j-YpFbfU9CsnKqHxcUbttNrFNf6Cyn6tlFmOM0IiXY2REiRqY5XQ3Q8hJZ9WIG-dziw4adgnmsAGLDaC4T_NCD4ByKyRMOrr469srRyyXiY_DoVHA2nTmMA6aLRItQqGQkv06JARkop1Ub3Ip1L2wl7lp71sMSdX1SlRkoL8RcosVRwoCXISkqgtF8OXhd9VFIHxJZe-tf2FETl0YxExZMSGdaWodRC7UD5ZZl3VgMpNFvpjJ79C7emHQZ7gfqgUef6hNVIh-k4DGWEU5_Nxeluo0ykxK0Sq0vLIsOszPCtWP0yfhECjauAs8oAAtqJiBiNswVycmAp87caZf_iXn0ID8CTHZ6NNC3d4_1FeHYN1ump3cZcTZsmqplIMaxmZkGbI4Mpafo00vmTv2VjVIMaaiR_aO9yNw2kb35FTcJ9ySip-9F_qSd-cjIIVsCC0evLi6ONP2SBIIVE8Rx-1v3K8m0jnxve3_17PPN7OJw4iHxTUL7ZSA79XuR-KA)
+citeturn3search12 [wordlim: 200] Published: 2.6 years ago; Crawled: last year; The modern astrophysics code SWIFT 2383 ... In other words, the load balancing is near-perfect with no parallel performance loss.
+--------------------------------------------------------------------------------
+Anhang: Muster für das Titelblatt der Dissertation (https://fis-db.dshs-koeln.de/ws/portalfiles/portal/6938166/M_ller_F._Dissertation_2022_Final.pdf)
+citeturn3search13 [wordlim: 200] Published: 4.3 years ago; Crawled: last year; participants were asked to refrain from communication with one another, and no parallel testing was conducted. ... <td>▶ Perform the skill as swift as possible</td> ... Thus, an initial baseline test was not possible without any explanatory information (see above).
+--------------------------------------------------------------------------------
+Swift: a modern highly parallel gravity and smoothed particle hydrodynamics solver for astrophysical and cosmological applications (https://www.research-collection.ethz.ch/server/api/core/bitstreams/5585bad2-c191-470e-ac0b-f758c95ef917/content)
+citeturn3search14 [wordlim: 200] Published: 2.5 years ago; Crawled: last week; The modern astrophysics code SWIFT — 2383 ... In other words, the load balancing is near-perfect with no parallel performance loss.
+
+{"chunk_id":"039310","wall_time_seconds":0.000021667,"exit_code":0,"original_token_count":7,"output":"{\"status\":202,\"body\":{}}\n"}
+
+## tool · 2026-11-17T12:42:17Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"ccf3be","wall_time_seconds":1.0021335,"session_id":9852,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:42:23Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"30237c","wall_time_seconds":0.000007916,"exit_code":0,"original_token_count":17,"output":"[{\"id\":134040768754,\"status\":\"completed\",\"conclusion\":\"cancelled\"}]\n"}
+
+## tool · 2026-11-17T12:42:38Z
+
+
+Script completed
+Wall time 10.0 seconds
+Output:
+
+7T12:33:48.9242920Z [50/94] Compiling GRDB DatabaseReader.swift
+2026-11-17T12:33:48.9344700Z [51/94] Compiling GRDB DatabaseRegion.swift
+2026-11-17T12:33:48.9447260Z [52/94] Compiling GRDB DatabaseRegionObservation.swift
+2026-11-17T12:33:48.9549860Z [53/94] Compiling GRDB DatabaseSchemaCache.swift
+2026-11-17T12:33:48.9653070Z [54/94] Compiling GRDB DatabaseSnapshot.swift
+2026-11-17T12:33:48.9756070Z [55/94] Compiling GRDB DatabaseSnapshotPool.swift
+2026-11-17T12:33:48.9861880Z [56/94] Compiling GRDB DatabaseValue.swift
+2026-11-17T12:33:48.9966120Z [57/94] Compiling GRDB DatabaseValueConvertible.swift
+2026-11-17T12:33:49.0069920Z [58/94] Compiling GRDB DatabaseWriter.swift
+2026-11-17T12:33:49.0172860Z [59/94] Compiling GRDB DispatchQueueActor.swift
+2026-11-17T12:33:49.0277490Z [60/94] Compiling GRDB FetchRequest.swift
+2026-11-17T12:33:49.0382830Z [61/94] Compiling GRDB Row.swift
+2026-11-17T12:33:49.0486520Z [62/94] Emitting module GRDB
+2026-11-17T12:33:51.0257320Z [63/142] Compiling GRDB DatabaseValueConvertible+Encodable.swift
+2026-11-17T12:33:51.0399520Z [64/142] Compiling GRDB DatabaseValueConvertible+RawRepresentable.swift
+2026-11-17T12:33:51.0495030Z [65/142] Compiling GRDB JSONRequiredEncoder.swift
+2026-11-17T12:33:51.0495850Z [66/142] Compiling GRDB Optional.swift
+2026-11-17T12:33:51.0496470Z [67/142] Compiling GRDB StandardLibrary.swift
+2026-11-17T12:33:51.0497050Z [68/142] Compiling GRDB TransactionClock.swift
+2026-11-17T12:33:51.0497550Z [69/142] Compiling GRDB TransactionObserver.swift
+2026-11-17T12:33:51.0498170Z [70/142] Compiling GRDB WALSnapshot.swift
+2026-11-17T12:33:51.0498840Z [71/142] Compiling GRDB WALSnapshotTransaction.swift
+2026-11-17T12:33:51.0499470Z [72/142] Compiling GRDB Database+Dump.swift
+2026-11-17T12:33:51.0499990Z [73/142] Compiling GRDB DatabaseReader+dump.swift
+2026-11-17T12:33:51.0500470Z [74/142] Compiling GRDB DumpFormat.swift
+2026-11-17T12:33:51.0501080Z [75/142] Compiling GRDB DebugDumpFormat.swift
+2026-11-17T12:33:51.0501560Z [76/142] Compiling GRDB JSONDumpFormat.swift
+2026-11-17T12:33:51.0502110Z [77/142] Compiling GRDB LineDumpFormat.swift
+2026-11-17T12:33:51.0502650Z [78/142] Compiling GRDB ListDumpFormat.swift
+2026-11-17T12:33:51.0503130Z [79/142] Compiling GRDB QuoteDumpFormat.swift
+2026-11-17T12:33:51.0503620Z [80/142] Compiling GRDB FTS3.swift
+2026-11-17T12:33:51.0504090Z [81/142] Compiling GRDB FTS3Pattern.swift
+2026-11-17T12:33:51.0504630Z [82/142] Compiling GRDB FTS3TokenizerDescriptor.swift
+2026-11-17T12:33:51.0505320Z [83/142] Compiling GRDB FTS4.swift
+2026-11-17T12:33:51.0505760Z [84/142] Compiling GRDB FTS5.swift
+2026-11-17T12:33:51.0506270Z [85/142] Compiling GRDB FTS5CustomTokenizer.swift
+2026-11-17T12:33:51.0506730Z [86/142] Compiling GRDB FTS5Pattern.swift
+2026-11-17T12:33:52.2694790Z [87/165] Compiling GRDB DatabasePromise.swift
+2026-11-17T12:33:52.2818190Z [88/165] Compiling GRDB SQLAssociation.swift
+2026-11-17T12:33:52.2937720Z [89/165] Compiling GRDB SQLCollection.swift
+2026-11-17T12:33:52.3037650Z [90/165] Compiling GRDB SQLExpression.swift
+2026-11-17T12:33:52.3139070Z [91/165] Compiling GRDB SQLForeignKeyRequest.swift
+2026-11-17T12:33:52.3240450Z [92/165] Compiling GRDB SQLFunctions.swift
+2026-11-17T12:33:52.3281610Z [93/165] Compiling GRDB SQLOperators.swift
+2026-11-17T12:33:52.3282220Z [94/165] Compiling GRDB SQLOrdering.swift
+2026-11-17T12:33:52.3282750Z [95/165] Compiling GRDB SQLRelation.swift
+2026-11-17T12:33:52.3283370Z [96/165] Compiling GRDB SQLSelection.swift
+2026-11-17T12:33:52.3284130Z [97/165] Compiling GRDB SQLSubquery.swift
+2026-11-17T12:33:52.3284640Z [98/165] Compiling GRDB Table.swift
+2026-11-17T12:33:52.3285090Z [99/165] Compiling GRDB SQLColumnGenerator.swift
+2026-11-17T12:33:52.3285690Z [100/165] Compiling GRDB SQLGenerationContext.swift
+2026-11-17T12:33:52.3286250Z [101/165] Compiling GRDB SQLIndexGenerator.swift
+2026-11-17T12:33:52.3286780Z [102/165] Compiling GRDB SQLQueryGenerator.swift
+2026-11-17T12:33:52.3287310Z [103/165] Compiling GRDB SQLTableAlterationGenerator.swift
+2026-11-17T12:33:52.3288280Z [104/165] Compiling GRDB SQLTableGenerator.swift
+2026-11-17T12:33:52.3288800Z [105/165] Compiling GRDB TableAlias.swift
+2026-11-17T12:33:52.3289320Z [106/165] Compiling GRDB SQLInterpolation+QueryInterface.swift
+2026-11-17T12:33:52.3289900Z [107/165] Compiling GRDB ColumnDefinition.swift
+2026-11-17T12:33:52.3290400Z [108/165] Compiling GRDB Database+SchemaDefinition.swift
+2026-11-17T12:33:52.3291000Z [109/165] Compiling GRDB ForeignKeyDefinition.swift
+2026-11-17T12:33:52.3291550Z [110/165] Compiling GRDB IndexDefinition.swift
+2026-11-17T12:33:52.3292220Z [111/165] Compiling GRDB FTS5Tokenizer.swift
+2026-11-17T12:33:52.3292810Z [112/165] Compiling GRDB FTS5TokenizerDescriptor.swift
+2026-11-17T12:33:52.3293340Z [113/165] Compiling GRDB FTS5WrapperTokenizer.swift
+2026-11-17T12:33:52.3293940Z [114/165] Compiling GRDB Fixits.swift
+2026-11-17T12:33:52.3294460Z [115/165] Compiling GRDB JSONColumn.swift
+2026-11-17T12:33:52.3294930Z [116/165] Compiling GRDB SQLJSONExpressible.swift
+2026-11-17T12:33:52.3295480Z [117/165] Compiling GRDB SQLJSONFunctions.swift
+2026-11-17T12:33:52.3295970Z [118/165] Compiling GRDB DatabaseMigrator.swift
+2026-11-17T12:33:52.3296530Z [119/165] Compiling GRDB Migration.swift
+2026-11-17T12:33:52.3297040Z [120/165] Compiling GRDB FTS3+QueryInterface.swift
+2026-11-17T12:33:52.3297550Z [121/165] Compiling GRDB FTS5+QueryInterface.swift
+2026-11-17T12:33:52.3298250Z [122/165] Compiling GRDB ForeignKey.swift
+2026-11-17T12:33:52.3299060Z [123/165] Compiling GRDB Association.swift
+2026-11-17T12:33:52.3299650Z [124/165] Compiling GRDB AssociationAggregate.swift
+2026-11-17T12:33:52.3300250Z [125/165] Compiling GRDB BelongsToAssociation.swift
+2026-11-17T12:33:52.3300770Z [126/165] Compiling GRDB HasManyAssociation.swift
+2026-11-17T12:33:52.3301360Z [127/165] Compiling GRDB HasManyThroughAssociation.swift
+2026-11-17T12:33:52.3302020Z [128/165] Compiling GRDB HasOneAssociation.swift
+2026-11-17T12:33:52.3302620Z [129/165] Compiling GRDB HasOneThroughAssociation.swift
+2026-11-17T12:33:52.3303180Z [130/165] Compiling GRDB JoinAssociation.swift
+2026-11-17T12:33:52.3303690Z [131/165] Compiling GRDB CommonTableExpression.swift
+2026-11-17T12:33:52.3304340Z [132/165] Compiling GRDB QueryInterfaceRequest.swift
+2026-11-17T12:33:52.3304900Z [133/165] Compiling GRDB RequestProtocols.swift
+2026-11-17T12:33:52.3305430Z [134/165] Compiling GRDB Column.swift
+2026-11-17T12:33:53.1433070Z [135/188] Compiling GRDB TableAlteration.swift
+2026-11-17T12:33:53.1440140Z [136/188] Compiling GRDB TableDefinition.swift
+2026-11-17T12:33:53.1441590Z [137/188] Compiling GRDB VirtualTableModule.swift
+2026-11-17T12:33:53.1443090Z [138/188] Compiling GRDB TableRecord+Association.swift
+2026-11-17T12:33:53.1443760Z [139/188] Compiling GRDB TableRecord+QueryInterfaceRequest.swift
+2026-11-17T12:33:53.1444250Z [140/188] Compiling GRDB EncodableRecord+Encodable.swift
+2026-11-17T12:33:53.1445080Z [141/188] Compiling GRDB EncodableRecord.swift
+2026-11-17T12:33:53.1447080Z [142/188] Compiling GRDB FetchableRecord+Decodable.swift
+2026-11-17T12:33:53.1448060Z [143/188] Compiling GRDB FetchableRecord+TableRecord.swift
+2026-11-17T12:33:53.1448500Z [144/188] Compiling GRDB FetchableRecord.swift
+2026-11-17T12:33:53.1449550Z [145/188] Compiling GRDB MutablePersistableRecord+DAO.swift
+2026-11-17T12:33:53.1450130Z [146/188] Compiling GRDB MutablePersistableRecord+Delete.swift
+2026-11-17T12:33:53.1450740Z [147/188] Compiling GRDB MutablePersistableRecord+Insert.swift
+2026-11-17T12:33:53.1451260Z [148/188] Compiling GRDB MutablePersistableRecord+Save.swift
+2026-11-17T12:33:53.1451890Z [149/188] Compiling GRDB MutablePersistableRecord+Update.swift
+2026-11-17T12:33:53.1452660Z [150/188] Compiling GRDB MutablePersistableRecord+Upsert.swift
+2026-11-17T12:33:53.1453240Z [151/188] Compiling GRDB MutablePersistableRecord.swift
+2026-11-17T12:33:53.1453700Z [152/188] Compiling GRDB PersistableRecord+Insert.swift
+2026-11-17T12:33:53.1454230Z [153/188] Compiling GRDB PersistableRecord+Save.swift
+2026-11-17T12:33:53.1454670Z [154/188] Compiling GRDB PersistableRecord+Upsert.swift
+2026-11-17T12:33:53.1456150Z [155/188] Compiling GRDB PersistableRecord.swift
+2026-11-17T12:33:53.1457380Z [156/188] Compiling GRDB Record.swift
+2026-11-17T12:33:53.1457840Z [157/188] Compiling GRDB TableRecord.swift
+2026-11-17T12:33:54.0148110Z [158/188] Compiling GRDB CaseInsensitiveIdentifier.swift
+2026-11-17T12:33:54.0149170Z [159/188] Compiling GRDB Inflections+English.swift
+2026-11-17T12:33:54.0149880Z [160/188] Compiling GRDB Inflections.swift
+2026-11-17T12:33:54.0150570Z [161/188] Compiling GRDB Mutex.swift
+2026-11-17T12:33:54.0151560Z [162/188] Compiling GRDB OnDemandFuture.swift
+2026-11-17T12:33:54.0152150Z [163/188] Compiling GRDB OrderedDictionary.swift
+2026-11-17T12:33:54.0152530Z [164/188] Compiling GRDB Pool.swift
+2026-11-17T12:33:54.0153040Z [165/188] Compiling GRDB ReadWriteLock.swift
+2026-11-17T12:33:54.0153500Z [166/188] Compiling GRDB ReceiveValuesOn.swift
+2026-11-17T12:33:54.0153870Z [167/188] Compiling GRDB Refinable.swift
+2026-11-17T12:33:54.0181280Z [168/188] Compiling GRDB Utils.swift
+2026-11-17T12:33:54.0181750Z [169/188] Compiling GRDB DatabaseCancellable.swift
+2026-11-17T12:33:54.0182210Z [170/188] Compiling GRDB ValueConcurrentObserver.swift
+2026-11-17T12:33:54.0182630Z [171/188] Compiling GRDB ValueWriteOnlyObserver.swift
+2026-11-17T12:33:54.0183120Z [172/188] Compiling GRDB Fetch.swift
+2026-11-17T12:33:54.0183530Z [173/188] Compiling GRDB Map.swift
+2026-11-17T12:33:54.0183950Z [174/188] Compiling GRDB RemoveDuplicates.swift
+2026-11-17T12:33:54.0184290Z [175/188] Compiling GRDB Trace.swift
+2026-11-17T12:33:54.0184690Z [176/188] Compiling GRDB ValueReducer.swift
+2026-11-17T12:33:54.0185220Z [177/188] Compiling GRDB SharedValueObservation.swift
+2026-11-17T12:33:54.0185670Z [178/188] Compiling GRDB ValueObservation.swift
+2026-11-17T12:33:54.0186210Z [179/188] Compiling GRDB ValueObservationScheduler.swift
+2026-11-17T12:33:54.0186670Z [180/188] Compiling GRDB resource_bundle_accessor.swift
+2026-11-17T12:33:58.4224960Z [181/195] Compiling RagdollCore BackgroundService.swift
+2026-11-17T12:33:58.4298300Z [182/195] Compiling RagdollCore Models.swift
+2026-11-17T12:33:58.4403030Z [183/195] Compiling RagdollCore RuntimeBridge.swift
+2026-11-17T12:33:58.4811180Z [184/197] Compiling RagdollCore Analytics.swift
+2026-11-17T12:33:58.4812160Z [185/197] Compiling RagdollCore Archive.swift
+2026-11-17T12:33:58.4812810Z [186/197] Compiling RagdollCore ArchiveSync.swift
+2026-11-17T12:33:58.4813210Z [187/197] Emitting module RagdollCore
+2026-11-17T12:33:58.8916030Z [188/197] Compiling RagdollCore Secrets.swift
+2026-11-17T12:33:58.8916410Z [189/197] Compiling RagdollCore Store.swift
+2026-11-17T12:33:59.8125970Z [190/212] Emitting module RagdollService
+2026-11-17T12:33:59.8230250Z [191/212] Compiling RagdollService ServiceMain.swift
+2026-11-17T12:33:59.8509270Z [191/212] Write Objects.LinkFileList
+2026-11-17T12:34:01.1139940Z [192/212] Linking RagdollService
+2026-11-17T12:34:01.1715380Z [193/212] Applying RagdollService
+2026-11-17T12:34:03.5051630Z [195/212] Compiling Ragdoll DashboardView.swift
+2026-11-17T12:34:03.5154980Z [196/212] Compiling Ragdoll MigrationView.swift
+2026-11-17T12:34:04.7685820Z [197/214] Emitting module Ragdoll
+2026-11-17T12:34:05.6811900Z [198/216] Emitting module RagdollCoreTests
+2026-11-17T12:34:05.6912480Z [199/216] Compiling Ragdoll AgentOptionsView.swift
+2026-11-17T12:34:05.7015270Z [200/216] Compiling Ragdoll AppModel.swift
+2026-11-17T12:34:05.7115520Z [201/216] Compiling Ragdoll ConversationView.swift
+2026-11-17T12:34:05.8459250Z [202/216] Compiling RagdollCoreTests RuntimeBridgeTests.swift
+2026-11-17T12:34:05.8559610Z [203/216] Compiling Ragdoll RootView.swift
+2026-11-17T12:34:12.5025420Z [205/216] Compiling Ragdoll SettingsView.swift
+2026-11-17T12:34:16.3129340Z [211/216] Write Objects.LinkFileList
+2026-11-17T12:34:17.9956710Z [212/216] Linking Ragdoll
+2026-11-17T12:34:18.0858370Z [213/216] Applying Ragdoll
+2026-11-17T12:34:19.7244520Z [215/219] Compiling RagdollTests StartupTests.swift
+2026-11-17T12:34:19.7246200Z [216/219] Compiling RagdollTests DashboardTests.swift
+2026-11-17T12:34:19.7257320Z [217/219] Emitting module RagdollTests
+2026-11-17T12:34:21.7915520Z [218/221] Compiling RagdollPackageTests runner.swift
+2026-11-17T12:34:21.8454280Z [219/221] Emitting module RagdollPackageTests
+2026-11-17T12:34:21.8520730Z [219/221] Write Objects.LinkFileList
+2026-11-17T12:34:23.5985820Z [220/221] Linking RagdollPackageTests
+2026-11-17T12:34:23.6047220Z Build complete! (48.21s)
+2026-11-17T12:42:11.0697470Z ##[error]The operation was canceled.
+2026-11-17T12:42:11.1268720Z Post job cleanup.
+2026-11-17T12:42:11.5966220Z [command]/opt/homebrew/bin/git version
+2026-11-17T12:42:11.6203710Z git version 2.56.1
+2026-11-17T12:42:11.6226720Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/b2695a6c-3cf5-4e3f-a9f8-9b52163c08fb/.gitconfig'
+2026-11-17T12:42:11.6237110Z Temporarily overriding HOME='/Users/runner/work/_temp/b2695a6c-3cf5-4e3f-a9f8-9b52163c08fb' before making global git config changes
+2026-11-17T12:42:11.6238220Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-17T12:42:11.6242390Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/Ragdoll/Ragdoll
+2026-11-17T12:42:11.9101410Z Removing SSH command configuration
+2026-11-17T12:42:11.9103200Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-17T12:42:11.9104750Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-17T12:42:11.9105740Z Removing HTTP extra header
+2026-11-17T12:42:11.9106320Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-17T12:42:11.9107910Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-17T12:42:11.9109140Z Removing includeIf entries pointing to credentials config files
+2026-11-17T12:42:11.9109720Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-17T12:42:11.9110820Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-17T12:42:11.9203710Z Cleaning up orphan processes
+2026-11-17T12:42:13.0528690Z Terminate orphan process: pid (5087) (node)
+2026-11-17T12:42:13.0816720Z Terminate orphan process: pid (5083) (RagdollService)
+2026-11-17T12:42:13.1394640Z Terminate orphan process: pid (4786) (node)
+2026-11-17T12:42:13.1753290Z Terminate orphan process: pid (4784) (RagdollService)
+2026-11-17T12:42:13.2333050Z Terminate orphan process: pid (4780) (node)
+2026-11-17T12:42:13.2800290Z Terminate orphan process: pid (4778) (RagdollService)
+2026-11-17T12:42:13.3203270Z Terminate orphan process: pid (4756) (node)
+2026-11-17T12:42:13.4061270Z Terminate orphan process: pid (4613) (node)
+2026-11-17T12:42:13.4486910Z Terminate orphan process: pid (4602) (node)
+2026-11-17T12:42:13.5092260Z Terminate orphan process: pid (4561) (swiftpm-testing)
+
+
+## assistant · 2026-11-17T12:42:59Z
+
+日志确认测试程序已在约 48 秒内编译完成，随后挂在执行阶段；取消时仍有多个测试启动的后台 helper 存活。并行执行可能是原因，我会先让 CI 显式串行运行全部 Swift 测试，再验证结果。
+
+
+## tool · 2026-11-17T12:43:11Z
+
+
+Script completed
+Wall time 9.5 seconds
+Output:
+
+{"chunk_id":"74d10b","wall_time_seconds":0.000009375,"exit_code":0,"original_token_count":1715,"output":"      - name: Check runtime\n        run: |\n          npm --prefix runtime run typecheck\n          node --test --test-skip-pattern='[Cc]laude' runtime/test/{acp-state,integration,logs,migration,registry}.test.ts\n\n      - name: Test Swift\n        run: swift test --disable-sandbox\n\n      - name: Package and verify\n        run: |\n          ditto -c -k --sequesterRsrc --keepParent dist/Ragdoll.app dist/Ragdoll-macos-arm64.zip\n          mkdir -p .agent/release-check\n          ditto -x -k dist/Ragdoll-macos-arm64.zip .agent/release-check\n# 实施进度\n\n## GitHub Actions 自动发布（2026-11-17）\n\n- [x] 确认现有 ARM64 打包脚本、Node 26.13.0、macOS 15 最低版本，以及 main 跟踪 origin/main；仓库没有既有 workflow 或版本标签。\n- [x] 添加标签发布与手动构建 workflow，补充版本号、下载校验、签名限制和手动运行说明。\n- [x] actionlint 与全部 workflow shell 语法检查通过；实际执行版本准备步骤，验证有效标签、分支、无效标签和注入文本四种情况。\n- [x] 本机 TypeScript 检查通过、默认 Node 测试 21 项通过/8 项跳过、Swift 41 项通过；本机显式开启 DeepSeek Harness 的附件二次迁移与恢复测试共 3 项通过（含父测试）。临时签名 release 打包、ZIP 解压后的权限/架构/深度签名/内置助手检查及 SHA-256 校验通过。\n- [x] 配置提交 `87fcafa chore(release): build macOS app and publish tagged releases` 已普通推送至 origin/main；GitHub 已识别 workflow，并通过 API 触发手动构建。\n- [x] 首次云端运行 `44080690086` 在 Node 校验步骤因缺少 rg 退出（127）；改用系统 grep 后，官方 Node 下载包的 SHA-256 校验通过。修正提交 `695e547 fix(build): use system grep for Node checksum verification` 已普通推送。\n- [x] 本机专属 DeepSeek Harness 测试沿用现有 RAGDOLL_MIGRATION_LIVE 开关，默认跳过，显式开启的真实恢复与缺少凭据断言仍通过。\n- [x] 测试环境约束提交 `d6b1dbc test(migration): gate local dsh restore behind integration flag` 已普通推送；云端运行 `44081815064` 的应用打包通过，迁移测试因缺少 codex 命令失败。\n- [x] `127cf11 fix(release): install Codex for real migration tests` 已普通推送；云端运行 `44082707141` 的工具安装、打包和 Codex 断言通过，附件测试中的 dsh 二次迁移因 runner 未安装该应用失败。\n- [x] 完整复查测试入口，将附件测试中的 dsh 二次迁移独立为受现有开关控制的子测试，保留云端附件、符号链接及缺失文件断言；本机默认与显式开启两种测试均通过。\n- [ ] 提交、推送并完成最终云端构建验证。不创建版本标签。\n\n## 启动时立即显示主界面（2026-11-17）\n\n# 验证标准\n\n## GitHub Actions 自动发布\n\n- `vX.Y.Z` 标签触发构建与 Release；普通分支推送不发布，手动分支运行仅上传 artifact；版本写入打包的 Info.plist。\n- workflow 语法检查通过，打包前确认 ARM64；TypeScript、允许的 Node 测试、Swift 测试失败时不执行发布。\n- ZIP 解压后 GUI、helper 与内置 Node 可执行，深度签名验证和内置助手自检通过；SHA-256 校验通过。\n- 仅使用 GITHUB_TOKEN 的 contents: write 权限，发布验证远端标签存在；ZIP 与校验文件同时上传，不覆盖已有 Release。\n- 提交后普通推送，尽可能实际触发远端手动构建并核对结果。未触发的标签发布不得记为已实测；不运行 Claude 测试、视觉检查、证书导入或 Apple 公证。\n- 本机已通过：actionlint、全部 workflow shell 语法、四种版本准备场景、TypeScript、默认 Node 测试 21 项（另 8 项跳过）、显式开启的真实 DeepSeek Harness 附件二次迁移与恢复 3 项（含父测试）、Swift 41 项、临时签名 release 打包，以及 ZIP 解压后的权限/架构/签名/内置助手和 SHA-256 校验。改用系统 grep 后，官方 Node 下载包的 SHA-256 校验通过。远端运行结果待推送后补记。\n\n## 启动时立即显示主界面\n\n- 已配置仓库时，初始化及 loadingArchive 期间均显示主界面，已有会话摘要立即可用；无仓库时继续要求设置。\n- **涉及文件**：`Sources/Ragdoll/DashboardView.swift`、`Tests/RagdollTests/DashboardTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：`0fe88f7 fix(dashboard): show calendar labels for session dates`，已普通推送至 `origin/main`；本条由后续文档提交补记。\n\n---\n\n## [2026-11-17 20:09] GitHub Actions 自动编译发布\n\n- **需求/问题描述**：\n  > 设置一个 action 自动编译发布到 GitHub Release。\n- **实际实现的功能与改动**：\n  - 推送 `vX.Y.Z` 标签后，在 macOS 15 ARM64 runner 复用现有脚本生成应用，写入版本与构建编号，通过检查后发布 ZIP 和 SHA-256 校验文件。\n  - 手动分支运行只保存 Actions artifact，手动标签运行发布 Release；使用内置 GITHUB_TOKEN，不覆盖已有 Release，无需新增密钥。\n  - README 和发布说明明确 macOS 15+、Apple Silicon、临时签名、未公证及独立后台服务的有效签名要求。Node 校验使用系统 grep，避免依赖 CI 未安装的 rg。\n  - 本机 actionlint、workflow shell 语法与四种版本准备场景通过；TypeScript 检查通过，默认 Node 21 项通过/8 项跳过，Swift 41 项通过；release 打包、ZIP 解压后的权限/架构/深度签名/内置助手及 SHA-256 校验通过。改用 grep 后官方 Node 下载包校验通过。\n  - 需要本机 DeepSeek Harness 的迁移恢复与附件二次迁移测试沿用 RAGDOLL_MIGRATION_LIVE=dsh 开关，二次迁移独立为子测试，保留其他附件断言。云端默认跳过，本机显式开启后真实测试 3 项通过（含父测试）。\n  - CI 单独安装固定版本 Codex 0.147.0，供迁移测试调用真实 app-server，不加入发布包。\n  - 未运行 Claude 测试、截图或 Apple 公证。远端手动构建结果将在推送后补记；未创建版本标签或发布新版本。\n- **涉及文件**：`.github/workflows/release.yml`、`scripts/build.sh`、`runtime/test/migration.test.ts`、`README.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：`87fcafa chore(release): build macOS app and publish tagged releases`、`695e547 fix(build): use system grep for Node checksum verification`、`d6b1dbc test(migration): gate local dsh restore behind integration flag`、`127cf11 fix(release): install Codex for real migration tests`，已普通推送至 `origin/main`；附件集成子测试约束待提交。\n\n---\n"}
+{}
+{"chunk_id":"7229e1","wall_time_seconds":1.0020725,"session_id":78891,"original_token_count":0,"output":""}

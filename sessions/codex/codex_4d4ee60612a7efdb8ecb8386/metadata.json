@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794919257769,
+  "updated" : 1794919391978,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -985,6 +985,69 @@
       "model" : "gpt-6.1-sol",
       "output" : 40,
       "time" : 1794919257766
+    },
+    {
+      "cacheRead" : 200576,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4b5ad5dc87d0ab8ffa63ead8993a",
+      "input" : 604,
+      "model" : "gpt-6.1-sol",
+      "output" : 475,
+      "time" : 1794919277798
+    },
+    {
+      "cacheRead" : 201472,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4b6f145c87d098bc0fbf8c9de647",
+      "input" : 5054,
+      "model" : "gpt-6.1-sol",
+      "output" : 1106,
+      "time" : 1794919315651
+    },
+    {
+      "cacheRead" : 207488,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4b94c7f487d0a52444496fe3d6ae",
+      "input" : 518,
+      "model" : "gpt-6.1-sol",
+      "output" : 198,
+      "time" : 1794919323449
+    },
+    {
+      "cacheRead" : 208000,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4ba1820887d0b1ac55dbfd249d55",
+      "input" : 4033,
+      "model" : "gpt-6.1-sol",
+      "output" : 126,
+      "time" : 1794919337035
+    },
+    {
+      "cacheRead" : 211968,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4baac54087d083891af47033e7bc",
+      "input" : 249,
+      "model" : "gpt-6.1-sol",
+      "output" : 53,
+      "time" : 1794919343300
+    },
+    {
+      "cacheRead" : 212096,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4bb050d087d08e85905211ccf6b0",
+      "input" : 251,
+      "model" : "gpt-6.1-sol",
+      "output" : 75,
+      "time" : 1794919349285
+    },
+    {
+      "cacheRead" : 212224,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4bbf607087d0b5cd30422df9226d",
+      "input" : 6386,
+      "model" : "gpt-6.1-sol",
+      "output" : 814,
+      "time" : 1794919384176
     }
   ],
   "warnings" : [
