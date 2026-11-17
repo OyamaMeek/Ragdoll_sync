@@ -1,0 +1,75 @@
+{
+  "created" : 1794903881813.88,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/17/rollout-2026-11-17T16-24-41-01a1e89b-b584-7983-b47a-31f0dce9d113.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ad8d3204c91305bb1ae45c76",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1e89b-b584-7983-b47a-31f0dce9d113",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "确认删除对话后统计数据是否保留",
+  "updated" : 1794903981952,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_01f0000d4a413159016afc0f4fe80487d0a38c3bf3ae96a3d1",
+      "input" : 27628,
+      "model" : "gpt-6.1-sol",
+      "output" : 146,
+      "time" : 1794903893603
+    },
+    {
+      "cacheRead" : 40704,
+      "cacheWrite" : 0,
+      "id" : "resp_01f0000d4a413159016afc0f5662ac87d0a1e111850a77b152",
+      "input" : 4750,
+      "model" : "gpt-6.1-sol",
+      "output" : 157,
+      "time" : 1794903900834
+    },
+    {
+      "cacheRead" : 45440,
+      "cacheWrite" : 0,
+      "id" : "resp_01f0000d4a413159016afc0f5d8b7887d0bcbaed9020d46f3a",
+      "input" : 6421,
+      "model" : "gpt-6.1-sol",
+      "output" : 102,
+      "time" : 1794903906316
+    },
+    {
+      "cacheRead" : 51840,
+      "cacheWrite" : 0,
+      "id" : "resp_01f0000d4a413159016afc0f62f41887d08d7f9c2660b70d7f",
+      "input" : 6199,
+      "model" : "gpt-6.1-sol",
+      "output" : 153,
+      "time" : 1794903917072
+    },
+    {
+      "cacheRead" : 57984,
+      "cacheWrite" : 0,
+      "id" : "resp_01f0000d4a413159016afc0f9ec53087d0a766f4ff6560c343",
+      "input" : 281,
+      "model" : "gpt-6.1-sol",
+      "output" : 128,
+      "time" : 1794903974300
+    },
+    {
+      "cacheRead" : 58240,
+      "cacheWrite" : 0,
+      "id" : "resp_01f0000d4a413159016afc0fa707fc87d095eff77344181363",
+      "input" : 526,
+      "model" : "gpt-6.1-sol",
+      "output" : 77,
+      "time" : 1794903981916
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
