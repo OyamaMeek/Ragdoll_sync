@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "Add system prompt option",
-  "updated" : 1794922508110,
+  "updated" : 1794922606563,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -31,6 +31,60 @@
       "model" : "gpt-6.1-sol",
       "output" : 210,
       "time" : 1794922508109
+    },
+    {
+      "cacheRead" : 48512,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3eb6bdd517ec63016afc580d7e4c87d09fdea89e4ed3d421",
+      "input" : 10537,
+      "model" : "gpt-6.1-sol",
+      "output" : 163,
+      "time" : 1794922516160
+    },
+    {
+      "cacheRead" : 59008,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3eb6bdd517ec63016afc5815be6c87d0878e6f90312d7778",
+      "input" : 6804,
+      "model" : "gpt-6.1-sol",
+      "output" : 223,
+      "time" : 1794922530198
+    },
+    {
+      "cacheRead" : 65920,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3eb6bdd517ec63016afc58236d4087d0952f6f0a4a685dd6",
+      "input" : 7800,
+      "model" : "gpt-6.1-sol",
+      "output" : 650,
+      "time" : 1794922557761
+    },
+    {
+      "cacheRead" : 74240,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3eb6bdd517ec63016afc583f033087d0b1fe750077613f74",
+      "input" : 1741,
+      "model" : "gpt-6.1-sol",
+      "output" : 1556,
+      "time" : 1794922593012
+    },
+    {
+      "cacheRead" : 77440,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3eb6bdd517ec63016afc5863393887d099bbac3b92168188",
+      "input" : 1807,
+      "model" : "gpt-6.1-sol",
+      "output" : 60,
+      "time" : 1794922598375
+    },
+    {
+      "cacheRead" : 79104,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3eb6bdd517ec63016afc5867ab1887d0ae0ae066a5fd2222",
+      "input" : 460,
+      "model" : "gpt-6.1-sol",
+      "output" : 173,
+      "time" : 1794922606563
     }
   ],
   "warnings" : [
