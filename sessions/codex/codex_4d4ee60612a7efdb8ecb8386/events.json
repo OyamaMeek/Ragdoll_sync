@@ -523,13 +523,48 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 1.3 seconds\nOutput:\n\n{}\n{\"chunk_id\":\"8a9599\",\"wall_time_seconds\":1.001656333,\"session_id\":53728,\"original_token_count\":0,\"output\":\"\"}",
       "time" : 1794918102565
+    },
+    {
+      "id" : "call_758ffed6cd774e8193647716470c48da",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 5.1 seconds\nOutput:\n\n{\"chunk_id\":\"e3f985\",\"wall_time_seconds\":5.003020292,\"session_id\":53728,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"017ec3\",\"wall_time_seconds\":0.00000875,\"exit_code\":0,\"original_token_count\":1917,\"output\":\"# 实施进度\\n\\n## GitHub Actions 自动发布（2026-11-17）\\n\\n- [x] 确认现有 ARM64 打包脚本、Node 26.13.0、macOS 15 最低版本，以及 main 跟踪 origin/main；仓库没有既有 workflow 或版本标签。\\n- [x] 添加标签发布与手动构建 workflow，补充版本号、下载校验、签名限制和手动运行说明。\\n- [x] actionlint 与全部 workflow shell 语法检查通过；实际执行版本准备步骤，验证有效标签、分支、无效标签和注入文本四种情况。\\n- [x] 本机 TypeScript 检查通过、默认 Node 测试 21 项通过/7 项跳过、Swift 41 项通过；本机显式开启 DeepSeek Harness 的迁移恢复测试单独 1 项通过。临时签名 release 打包、ZIP 解压后的权限/架构/深度签名/内置助手检查及 SHA-256 校验通过。\\n- [x] 配置提交 `87fcafa chore(release): build macOS app and publish tagged releases` 已普通推送至 origin/main；GitHub 已识别 workflow，并通过 API 触发手动构建。\\n- [x] 首次云端运行 `44080690086` 在 Node 校验步骤因缺少 rg 退出（127）；改用系统 grep 后，官方 Node 下载包的 SHA-256 校验通过。修正提交 `695e547 fix(build): use system grep for Node checksum verification` 已普通推送。\\n- [x] 本机专属 DeepSeek Harness 测试沿用现有 RAGDOLL_MIGRATION_LIVE 开关，默认跳过，显式开启的真实恢复与缺少凭据断言仍通过。\\n- [ ] 提交测试环境约束、普通推送并完成最终云端构建验证。不创建版本标签。\\n\\n## 启动时立即显示主界面（2026-11-17）\\n\\n# 验证标准\\n\\n## GitHub Actions 自动发布\\n\\n- `vX.Y.Z` 标签触发构建与 Release；普通分支推送不发布，手动分支运行仅上传 artifact；版本写入打包的 Info.plist。\\n- workflow 语法检查通过，打包前确认 ARM64；TypeScript、允许的 Node 测试、Swift 测试失败时不执行发布。\\n- ZIP 解压后 GUI、helper 与内置 Node 可执行，深度签名验证和内置助手自检通过；SHA-256 校验通过。\\n- 仅使用 GITHUB_TOKEN 的 contents: write 权限，发布验证远端标签存在；ZIP 与校验文件同时上传，不覆盖已有 Release。\\n- 提交后普通推送，尽可能实际触发远端手动构建并核对结果。未触发的标签发布不得记为已实测；不运行 Claude 测试、视觉检查、证书导入或 Apple 公证。\\n- 本机已通过：actionlint、全部 workflow shell 语法、四种版本准备场景、TypeScript、默认 Node 测试 21 项（另 7 项跳过）、显式开启的真实 DeepSeek Harness 迁移恢复 1 项、Swift 41 项、临时签名 release 打包，以及 ZIP 解压后的权限/架构/签名/内置助手和 SHA-256 校验。改用系统 grep 后，官方 Node 下载包的 SHA-256 校验通过。远端运行结果待推送后补记。\\n\\n## 启动时立即显示主界面\\n\\n- 已配置仓库时，初始化及 loadingArchive 期间均显示主界面，已有会话摘要立即可用；无仓库时继续要求设置。\\n# Ragdoll 实施计划\\n\\n## GitHub Actions 自动发布\\n\\n- 推送 `v主版本.次版本.修订版本` 标签后，在 macOS 15 ARM64 runner 复用 `scripts/build.sh` 编译 `.app`，写入标签版本与构建编号，检查后上传 ZIP 和 SHA-256 到 GitHub Release。\\n- 手动运行分支时仅构建并保存 Actions artifact；手动选择版本标签时执行发布。使用内置 GITHUB_TOKEN，不增加应用依赖、证书配置或 Intel 构建。\\n- 范围：新增 `.github/workflows/release.yml`、README 发布说明及任务记录；`scripts/build.sh` 使用系统自带 grep 筛选官方 Node 校验值，避免依赖 runner 未安装的 rg。构建调用方、运行时、测试、fixtures、导出接口及应用配置格式保持原样。\\n- 运行 TypeScript 检查、允许的 Node 测试、Swift 测试、release 打包，解压后验证可执行权限、签名及内置助手。检查 workflow 语法，提交并普通推送；尽可能实际手动触发远端构建。不创建版本标签或立即发布新版本。\\n- CI 沿用临时签名、未公证；明确提示 Gatekeeper 与独立后台服务的有效签名限制。\\n- 需要本机 DeepSeek Harness 的迁移恢复测试沿用已有 `RAGDOLL_MIGRATION_LIVE=dsh` 开关；云端无该应用时跳过，本机显式开启并执行真实测试。不安装第三方客户端或伪造成功结果。\\n\\n## 启动时立即显示主界面\\n\\n- **涉及文件**：`Sources/Ragdoll/DashboardView.swift`、`Tests/RagdollTests/DashboardTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：`0fe88f7 fix(dashboard): show calendar labels for session dates`，已普通推送至 `origin/main`；本条由后续文档提交补记。\\n\\n---\\n\\n## [2026-11-17 20:09] GitHub Actions 自动编译发布\\n\\n- **需求/问题描述**：\\n  > 设置一个 action 自动编译发布到 GitHub Release。\\n- **实际实现的功能与改动**：\\n  - 推送 `vX.Y.Z` 标签后，在 macOS 15 ARM64 runner 复用现有脚本生成应用，写入版本与构建编号，通过检查后发布 ZIP 和 SHA-256 校验文件。\\n  - 手动分支运行只保存 Actions artifact，手动标签运行发布 Release；使用内置 GITHUB_TOKEN，不覆盖已有 Release，无需新增密钥。\\n  - README 和发布说明明确 macOS 15+、Apple Silicon、临时签名、未公证及独立后台服务的有效签名要求。Node 校验使用系统 grep，避免依赖 CI 未安装的 rg。\\n  - 本机 actionlint、workflow shell 语法与四种版本准备场景通过；TypeScript 检查通过，默认 Node 21 项通过/7 项跳过，Swift 41 项通过；release 打包、ZIP 解压后的权限/架构/深度签名/内置助手及 SHA-256 校验通过。改用 grep 后官方 Node 下载包校验通过。\\n  - 需要本机 DeepSeek Harness 的迁移恢复测试沿用 RAGDOLL_MIGRATION_LIVE=dsh 开关；云端默认跳过，本机显式开启后真实测试 1 项通过。\\n  - 未运行 Claude 测试、截图或 Apple 公证。远端手动构建结果将在推送后补记；未创建版本标签或发布新版本。\\n- **涉及文件**：`.github/workflows/release.yml`、`scripts/build.sh`、`runtime/test/migration.test.ts`、`README.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：`87fcafa chore(release): build macOS app and publish tagged releases`、`695e547 fix(build): use system grep for Node checksum verification`，已普通推送至 `origin/main`；测试环境约束待提交。\\n\\n---\\n﹣ Codex history becomes a dsh native conversation that the installed tool can resume (0.066459ms) # SKIP\\n✔ archive paths cannot escape installation root (1.045ms)\\n✔ registry packages require an exact version (0.695417ms)\\n✔ registry rejects invalid metadata before any installation (0.659208ms)\\nℹ tests 28\\nℹ suites 0\\nℹ pass 21\\nℹ fail 0\\nℹ cancelled 0\\nℹ skipped 7\\nℹ todo 0\\nℹ duration_ms 3380.627083\\n            fi\\n            /usr/libexec/PlistBuddy -c \\\"Set :CFBundleShortVersionString ${GITHUB_REF_NAME#v}\\\" packaging/Info.plist\\n          fi\\n          /usr/libexec/PlistBuddy -c \\\"Set :CFBundleVersion $GITHUB_RUN_NUMBER\\\" packaging/Info.plist\\n\\n      - name: Install Codex for migration tests\\n        run: |\\n          npm install --global @openai/codex@0.147.0 --ignore-scripts\\n          codex --version\\n\\n      - name: Build application\\n        run: bash scripts/build.sh\\n\\n      - name: Check runtime\\n        run: |\\n          npm --prefix runtime run typecheck\\n M .github/workflows/release.yml\\n\"}",
+      "time" : 1794918116747
+    },
+    {
+      "id" : "call_85578c6cbaf64a8b955ad1d095323c84",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 5.1 seconds\nOutput:\n\n{\"chunk_id\":\"a2c9b5\",\"wall_time_seconds\":5.001772417,\"session_id\":53728,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"188a37\",\"wall_time_seconds\":0.000009875,\"exit_code\":0,\"original_token_count\":150,\"output\":\"ls: .agent/ci-codex/node_modules/.bin/codex: No such file or directory\\n-rw-r--r--  1 oyamahappa  staff  1082 Nov 17 20:21 .agent/ci-codex/node_modules/@openai/codex/package.json\\n﹣ Codex history becomes a dsh native conversation that the installed tool can resume (0.066459ms) # SKIP\\n✔ archive paths cannot escape installation root (1.045ms)\\n✔ registry packages require an exact version (0.695417ms)\\n✔ registry rejects invalid metadata before any installation (0.659208ms)\\nℹ tests 28\\nℹ suites 0\\nℹ pass 21\\nℹ fail 0\\nℹ cancelled 0\\nℹ skipped 7\\nℹ todo 0\\nℹ duration_ms 3380.627083\\n\"}",
+      "time" : 1794918137105
+    },
+    {
+      "id" : "call_b8a692e2e8684ad995cb4f33b1058aa1",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"3008ff\",\"wall_time_seconds\":0,\"exit_code\":1,\"original_token_count\":45,\"output\":\"2026-11-17T12_21_41_092Z-debug-0.log\\n2026-11-17T12_21_18_961Z-debug-0.log\\n2026-11-17T12_08_30_323Z-debug-0.log\\n 16M\\t.agent/ci-codex/node_modules\\nzsh:1: operation not permitted: ps\\n\"}",
+      "time" : 1794918150822
+    },
+    {
+      "id" : "call_9263b9cc4a054b1bb5e751bcf21bd84c",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"c748ef\",\"wall_time_seconds\":0.000010209,\"exit_code\":0,\"original_token_count\":937,\"output\":\"33 http cache https://registry.npmjs.org/@openai%2fcodex 22ms (cache hit)\\n34 silly packumentCache full:https://registry.npmjs.org/@openai%2fcodex set size:19419417 disposed:false\\n35 http cache https://registry.npmjs.org/@openai%2fcodex 70ms (cache hit)\\n36 silly packumentCache full:https://registry.npmjs.org/@openai%2fcodex set size:19419417 disposed:false\\n37 http cache https://registry.npmjs.org/@openai%2fcodex 117ms (cache hit)\\n38 silly packumentCache full:https://registry.npmjs.org/@openai%2fcodex set size:19419417 disposed:false\\n39 http cache https://registry.npmjs.org/@openai%2fcodex 166ms (cache hit)\\n40 silly packumentCache full:https://registry.npmjs.org/@openai%2fcodex set size:19419417 disposed:false\\n41 http cache https://registry.npmjs.org/@openai%2fcodex 213ms (cache hit)\\n42 silly packumentCache full:https://registry.npmjs.org/@openai%2fcodex set size:19419417 disposed:false\\n43 http cache https://registry.npmjs.org/@openai%2fcodex 260ms (cache hit)\\n44 silly packumentCache full:https://registry.npmjs.org/@openai%2fcodex set size:19419417 disposed:false\\n45 silly placeDep ROOT @openai/codex-darwin-arm64@0.147.0-darwin-arm64 OK for: @openai/codex@0.147.0 want: npm:@openai/codex@0.147.0-darwin-arm64\\n46 silly placeDep ROOT @openai/codex-darwin-x64@0.147.0-darwin-x64 OK for: @openai/codex@0.147.0 want: npm:@openai/codex@0.147.0-darwin-x64\\n47 silly placeDep ROOT @openai/codex-linux-arm64@0.147.0-linux-arm64 OK for: @openai/codex@0.147.0 want: npm:@openai/codex@0.147.0-linux-arm64\\n48 silly placeDep ROOT @openai/codex-linux-x64@0.147.0-linux-x64 OK for: @openai/codex@0.147.0 want: npm:@openai/codex@0.147.0-linux-x64\\n49 silly placeDep ROOT @openai/codex-win32-arm64@0.147.0-win32-arm64 OK for: @openai/codex@0.147.0 want: npm:@openai/codex@0.147.0-win32-arm64\\n50 silly placeDep ROOT @openai/codex-win32-x64@0.147.0-win32-x64 OK for: @openai/codex@0.147.0 want: npm:@openai/codex@0.147.0-win32-x64\\n51 silly reify moves {}\\n52 http cache @openai/codex-darwin-arm64@https://registry.npmjs.org/@openai/codex/-/codex-0.147.0-darwin-arm64.tgz 0ms (cache hit)\\n53 http cache @openai/codex@https://registry.npmjs.org/@openai/codex/-/codex-0.147.0.tgz 0ms (cache hit)\\n54 silly tarball no local data for @openai/codex@https://registry.npmjs.org/@openai/codex/-/codex-0.147.0.tgz. Extracting by manifest.\\n55 silly tarball no local data for @openai/codex-darwin-arm64@https://registry.npmjs.org/@openai/codex/-/codex-0.147.0-darwin-arm64.tgz. Extracting by manifest.\\n56 http fetch GET 200 https://registry.npmjs.org/@openai/codex/-/codex-0.147.0.tgz 2625ms (cache miss)\\n0 verbose cli /opt/homebrew/Cellar/node/26.13.0_2/bin/node /opt/homebrew/bin/npm\\n1 info using npm@11.20.0\\n2 info using node@v26.13.0\\n3 silly config load:file:/opt/homebrew/lib/node_modules/npm/npmrc\\n4 silly config load:file:/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.npmrc\\n5 silly config load:file:/Users/oyamahappa/.npmrc\\n6 silly config load:file:/opt/homebrew/etc/npmrc\\n7 verbose title npm view @openai/codex@0.147.0 version scripts bin optionalDependencies\\n8 verbose argv \\\"--cache\\\" \\\".cache/npm\\\" \\\"view\\\" \\\"@openai/codex@0.147.0\\\" \\\"version\\\" \\\"scripts\\\" \\\"bin\\\" \\\"optionalDependencies\\\" \\\"--json\\\"\\n9 verbose logfile logs-max:10 dir:/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.cache/npm/_logs/2026-11-17T12_21_18_961Z-\\n10 verbose logfile /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.cache/npm/_logs/2026-11-17T12_21_18_961Z-debug-0.log\\n11 silly logfile start cleaning logs, removing 1 files\\n12 silly logfile done cleaning log files\\n13 http fetch GET 200 https://registry.npmjs.org/@openai%2fcodex 4043ms (cache miss)\\n14 verbose cwd /Volumes/SamsungSSD990PRO/GitHub/Ragdoll\\n15 verbose os Darwin 24.6.0\\n16 verbose node v26.13.0\\n17 verbose npm  v11.20.0\\n18 verbose exit 0\\n19 info ok\\n\"}",
+      "time" : 1794918158561
+    },
+    {
+      "id" : "call_a741b65ab510468ca387b8877b1dc1d7",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "exec\ntext(await tools.apply_patch(\"*** Begin Patch\\n*** Update File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/memory/plan.md\\n@@\\n-- 需要本机 DeepSeek Harness 的迁移恢复测试沿用已有 `RAGDOLL_MIGRATION_LIVE=dsh` 开关；云端无该应用时跳过，本机显式开启并执行真实测试。不安装第三方客户端或伪造成功结果。\\n+- 迁移测试调用真实 Codex app-server，CI 单独安装固定版本 `@openai/codex@0.147.0`，不加入发布包。需要本机 DeepSeek Harness 的恢复测试沿用已有 `RAGDOLL_MIGRATION_LIVE=dsh` 开关；云端无该应用时跳过，本机显式开启并执行真实测试。\\n*** Update File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/memory/progress.md\\n@@\\n-- [ ] 提交测试环境约束、普通推送并完成最终云端构建验证。不创建版本标签。\\n+- [x] 测试环境约束提交 `d6b1dbc test(migration): gate local dsh restore behind integration flag` 已普通推送；云端运行 `44081815064` 的应用打包通过，迁移测试因缺少 codex 命令失败。\\n+- [ ] CI 安装固定版本 Codex app-server 后，提交、推送并完成最终云端构建验证。不创建版本标签。\\n*** Update File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/docs/CHANGELOG.md\\n@@\\n   - 需要本机 DeepSeek Harness 的迁移恢复测试沿用 RAGDOLL_MIGRATION_LIVE=dsh 开关；云端默认跳过，本机显式开启后真实测试 1 项通过。\\n+  - CI 单独安装固定版本 Codex 0.147.0，供迁移测试调用真实 app-server，不加入发布包。\\n@@\\n-- **Git 提交**：`87fcafa chore(release): build macOS app and publish tagged releases`、`695e547 fix(build): use system grep for Node checksum verification`，已普通推送至 `origin/main`；测试环境约束待提交。\\n+- **Git 提交**：`87fcafa chore(release): build macOS app and publish tagged releases`、`695e547 fix(build): use system grep for Node checksum verification`、`d6b1dbc test(migration): gate local dsh restore behind integration flag`，已普通推送至 `origin/main`；CI 测试工具安装待提交。\\n*** End Patch\"));\ntext(await tools.write_stdin({session_id:53728,chars:\"\",\"yield_time_ms\":1000,\"max_output_tokens\":1400}));\ntext(await tools.exec_command({cmd:\"tail -4 .cache/npm/_logs/2026-11-17T12_21_41_092Z-debug-0.log; du -sh .agent/ci-codex/node_modules\",\"max_output_tokens\":700}));\n",
+      "time" : 1794918185396
     }
   ],
   "nativeID" : "01a1e964-1dc6-70e0-a088-c1aba2d19636",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794918102567,
+  "updated" : 1794918185808,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -1025,6 +1060,51 @@
       "model" : "gpt-6.1-sol",
       "output" : 650,
       "time" : 1794918102561
+    },
+    {
+      "cacheRead" : 163840,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc46d7ad3087d0b114e1f7ad697d07",
+      "input" : 277,
+      "model" : "gpt-6.1-sol",
+      "output" : 244,
+      "time" : 1794918112334
+    },
+    {
+      "cacheRead" : 164224,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc46e5bda487d0bc1db66d163f2c14",
+      "input" : 2380,
+      "model" : "gpt-6.1-sol",
+      "output" : 461,
+      "time" : 1794918132961
+    },
+    {
+      "cacheRead" : 166912,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc46fa250c87d0861ea05722f1e982",
+      "input" : 437,
+      "model" : "gpt-6.1-sol",
+      "output" : 162,
+      "time" : 1794918150820
+    },
+    {
+      "cacheRead" : 167296,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4707ec8c87d095d4cb1c95699d75",
+      "input" : 350,
+      "model" : "gpt-6.1-sol",
+      "output" : 93,
+      "time" : 1794918158560
+    },
+    {
+      "cacheRead" : 167552,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc470f8ddc87d0940724d2f336259b",
+      "input" : 1567,
+      "model" : "gpt-6.1-sol",
+      "output" : 921,
+      "time" : 1794918185808
     }
   ],
   "warnings" : [
