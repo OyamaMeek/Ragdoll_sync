@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794917382559,
+  "updated" : 1794917465953,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -148,6 +148,78 @@
       "model" : "gpt-6.1-sol",
       "output" : 1173,
       "time" : 1794917382557
+    },
+    {
+      "cacheRead" : 107776,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc440822cc87d08c4d5e08195fee99",
+      "input" : 4366,
+      "model" : "gpt-6.1-sol",
+      "output" : 196,
+      "time" : 1794917393248
+    },
+    {
+      "cacheRead" : 112128,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc441779d087d088aa755a8ae4e608",
+      "input" : 428,
+      "model" : "gpt-6.1-sol",
+      "output" : 80,
+      "time" : 1794917404163
+    },
+    {
+      "cacheRead" : 112512,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc442bf3d887d089104ac97411a2f5",
+      "input" : 181,
+      "model" : "gpt-6.1-sol",
+      "output" : 106,
+      "time" : 1794917424873
+    },
+    {
+      "cacheRead" : 112640,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4433332487d092143ec86c5c48c4",
+      "input" : 278,
+      "model" : "gpt-6.1-sol",
+      "output" : 237,
+      "time" : 1794917436537
+    },
+    {
+      "cacheRead" : 113024,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc443dd47487d0b4d3f21268e9afee",
+      "input" : 401,
+      "model" : "gpt-6.1-sol",
+      "output" : 107,
+      "time" : 1794917443078
+    },
+    {
+      "cacheRead" : 113408,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc44451b5887d0afdd1995c90b288e",
+      "input" : 222,
+      "model" : "gpt-6.1-sol",
+      "output" : 170,
+      "time" : 1794917451333
+    },
+    {
+      "cacheRead" : 113664,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc444c855487d0b2ec47094e28e38f",
+      "input" : 306,
+      "model" : "gpt-6.1-sol",
+      "output" : 111,
+      "time" : 1794917457510
+    },
+    {
+      "cacheRead" : 113920,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4453248087d0865f79f351bfcc72",
+      "input" : 219,
+      "model" : "gpt-6.1-sol",
+      "output" : 167,
+      "time" : 1794917465948
     }
   ],
   "warnings" : [

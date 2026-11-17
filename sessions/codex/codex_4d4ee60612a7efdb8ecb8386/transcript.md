@@ -2160,3 +2160,87 @@ Output:
 {"chunk_id":"e86596","wall_time_seconds":0.000008416,"exit_code":0,"original_token_count":2376,"output":"# 实施进度\n\n## GitHub Actions 自动发布（2026-11-17）\n\n- [x] 确认现有 ARM64 打包脚本、Node 26.13.0、macOS 15 最低版本，以及 main 跟踪 origin/main；仓库没有既有 workflow 或版本标签。\n- [ ] 添加标签发布与手动构建 workflow，补充使用说明。\n- [ ] 完成 workflow 语法、现有检查、release 打包和解压自检。\n- [ ] 提交并普通推送，验证远端 workflow 状态并记录实际结果；不创建版本标签。\n\n## 启动时立即显示主界面（2026-11-17）\n\n- [x] 确认设置页使用 !archiveLoaded 判定，导致已配置仓库仍被全屏读取页遮挡；侧栏已经有状态小字。\n- [x] 新回归先出现五个失败断言，覆盖首帧、加载期、失败后的页面判定和缓存保留。\n- [x] 仅未配置时显示设置页，复用侧栏小字及错误重试；保持读取优先与失败后禁止扫描/写入。全部 41 项 Swift 测试通过。\n- [x] release 打包、Apple Development 深度签名及助手自检通过；已在原数据目录重新启动新版。未新增截图、窗口交互或视觉检查。\n- [x] 功能提交 `8f9280c fix(startup): show cached interface while reading archive` 已普通推送至 `origin/main`；实际哈希由本次文档提交补记。\n\n# 验证标准\n\n## GitHub Actions 自动发布\n\n- `vX.Y.Z` 标签触发构建与 Release；普通分支推送不发布，手动分支运行仅上传 artifact；版本写入打包的 Info.plist。\n- workflow 语法检查通过，打包前确认 ARM64；TypeScript、允许的 Node 测试、Swift 测试失败时不执行发布。\n- ZIP 解压后 GUI、helper 与内置 Node 可执行，深度签名验证和内置助手自检通过；SHA-256 校验通过。\n- 仅使用 GITHUB_TOKEN 的 contents: write 权限，发布验证远端标签存在；ZIP 与校验文件同时上传，不覆盖已有 Release。\n- 提交后普通推送，尽可能实际触发远端手动构建并核对结果。未触发的标签发布不得记为已实测；不运行 Claude 测试、视觉检查、证书导入或 Apple 公证。\n\n## 启动时立即显示主界面\n\n- 已配置仓库时，初始化及 loadingArchive 期间均显示主界面，已有会话摘要立即可用；无仓库时继续要求设置。\n- 失败时保留缓存与主界面，错误可重试，ready 和 archiveLoaded 仍为 false；refresh 和 archiveNow 不写入坏仓库。\n- 运行 Swift 测试、release 打包、签名及助手自检；不运行 Claude 或新增视觉检查。\n- 已验证：新增启动回归先出现五个失败断言，修改后全部 41 项 Swift 测试通过，首次设置和坏仓库禁止扫描/写入回归继续通过。\n- **实际实现的功能与改动**：\n  - 按本地自然日、周、月依次显示日期文字；更早记录显示具体日期，省略时间。\n  - 右上角为“全部”导航，保留最近六条、来源和项目筛选以及点击详情。\n  - 两项回归先出现 11 个失败断言，修复后全部 41 项 Swift 测试通过，覆盖午夜、跨年周、夏令时及更早日期。\n  - release 打包、Apple Development 深度签名及助手自检通过，已启动新版并确认进程；未新增截图或视觉检查。\n- **涉及文件**：`Sources/Ragdoll/DashboardView.swift`、`Tests/RagdollTests/DashboardTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：`0fe88f7 fix(dashboard): show calendar labels for session dates`，已普通推送至 `origin/main`；本条由后续文档提交补记。\n\n---\n M README.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? .github/\ndiff --git a/README.md b/README.md\nindex d2a508b..35c122d 100644\n--- a/README.md\n+++ b/README.md\n@@ -15,6 +15,21 @@ open dist/Ragdoll.app\n \n 开发运行：先在 `runtime` 执行 `npm ci`，再运行 `bash scripts/dev.sh`。\n \n+## 发布\n+\n+推送 `vX.Y.Z` 版本标签后，[Release macOS workflow](https://github.com/OyamaMeek/Ragdoll/actions/workflows/release.yml) 自动编译、检查并发布到 [GitHub Releases](https://github.com/OyamaMeek/Ragdoll/releases)。例如：\n+\n+```sh\n+git tag v0.1.0\n+git push origin v0.1.0\n+```\n+\n+每个版本附带 `Ragdoll-macos-arm64.zip` 和 `.zip.sha256` 校验文件，应用版本与标签一致。下载后在同一目录运行 `shasum -a 256 -c Ragdoll-macos-arm64.zip.sha256`，解压并将 `Ragdoll.app` 移入“应用程序”。只支持 macOS 15+、Apple Silicon。\n+\n+在 Actions 中选择 **Release macOS → Run workflow** 可手动验证；选择分支时只保存构建产物，选择 `vX.Y.Z` 标签时发布 Release。已有 Release 不会被覆盖。发布使用自动提供的 `GITHUB_TOKEN`，无需新增仓库密钥。\n+\n+CI 构建使用临时签名，未经 Apple 公证，首次打开可能受到 Gatekeeper 限制；独立后台服务需要有效 Apple 签名。TypeScript 检查、允许的 Node 测试、Swift 测试、解压后的签名校验及内置助手自检全部通过后才发布，Claude 测试继续按项目约定排除。\n+\n ## 使用\n \n - **首页**：最近 7 个本地自然日的小时热力图、项目用量、估算成本及滚动 168 小时预算。\ndiff --git a/memory/agents.md b/memory/agents.md\nindex 0bc22dc..43d17f9 100644\n--- a/memory/agents.md\n+++ b/memory/agents.md\n@@ -1,6 +1,6 @@\n # 开发环境\n \n-- 当前代理：Codex；本轮调整最近会话右侧日期文字，详见 `memory/progress.md`。\n+- 当前代理：Codex；本轮添加 GitHub Actions 编译与 Release 发布，详见 `memory/progress.md`。\n - Swift 6.1、SwiftUI、macOS 15+、GRDB；TypeScript 助手使用 Node。\n-- 工具：命令行、apply_patch；本轮使用 Ponytail 和 TDD 回归验证。不新增依赖、截图或子代理。\n+- 工具：命令行、apply_patch、GitHub 官方文档；本轮使用 Ponytail 和 verification-before-completion，验证 workflow、实际打包及压缩包自检。不新增应用依赖、截图或子代理。\n - 参考目录仅供读取，不纳入应用提交。\ndiff --git a/memory/plan.md b/memory/plan.md\nindex 68ba5b3..c843ed1 100644\n--- a/memory/plan.md\n+++ b/memory/plan.md\n@@ -1,5 +1,13 @@\n # Ragdoll 实施计划\n \n+## GitHub Actions 自动发布\n+\n+- 推送 `v主版本.次版本.修订版本` 标签后，在 macOS 15 ARM64 runner 复用 `scripts/build.sh` 编译 `.app`，写入标签版本与构建编号，检查后上传 ZIP 和 SHA-256 到 GitHub Release。\n+- 手动运行分支时仅构建并保存 Actions artifact；手动选择版本标签时执行发布。使用内置 GITHUB_TOKEN，不增加应用依赖、证书配置或 Intel 构建。\n+- 范围：新增 `.github/workflows/release.yml`、README 发布说明及任务记录；构建调用方、运行时、测试、fixtures、导出接口及应用配置格式保持原样。\n+- 运行 TypeScript 检查、允许的 Node 测试、Swift 测试、release 打包，解压后验证可执行权限、签名及内置助手。检查 workflow 语法，提交并普通推送；尽可能实际手动触发远端构建。不创建版本标签或立即发布新版本。\n+- CI 沿用临时签名、未公证；明确提示 Gatekeeper 与独立后台服务的有效签名限制。\n+\n ## 启动时立即显示主界面\n \n - 已配置仓库时立即显示主界面和已有 SQLite 摘要，读取状态复用侧栏底部小字；首次未配置仓库时保留必需设置页。\ndiff --git a/memory/progress.md b/memory/progress.md\nindex 62aa8af..494bf23 100644\n--- a/memory/progress.md\n+++ b/memory/progress.md\n@@ -1,5 +1,12 @@\n # 实施进度\n \n+## GitHub Actions 自动发布（2026-11-17）\n+\n+- [x] 确认现有 ARM64 打包脚本、Node 26.13.0、macOS 15 最低版本，以及 main 跟踪 origin/main；仓库没有既有 workflow 或版本标签。\n+- [ ] 添加标签发布与手动构建 workflow，补充使用说明。\n+- [ ] 完成 workflow 语法、现有检查、release 打包和解压自检。\n+- [ ] 提交并普通推送，验证远端 workflow 状态并记录实际结果；不创建版本标签。\n+\n ## 启动时立即显示主界面（2026-11-17）\n \n - [x] 确认设置页使用 !archiveLoaded 判定，导致已配置仓库仍被全屏读取页遮挡；侧栏已经有状态小字。\ndiff --git a/memory/verify.md b/memory/verify.md\nindex 157c332..548a85c 100644\n--- a/memory/verify.md\n+++ b/memory/verify.md\n@@ -1,5 +1,13 @@\n # 验证标准\n \n+## GitHub Actions 自动发布\n+\n+- `vX.Y.Z` 标签触发构建与 Release；普通分支推送不发布，手动分支运行仅上传 artifact；版本写入打包的 Info.plist。\n+- workflow 语法检查通过，打包前确认 ARM64；TypeScript、允许的 Node 测试、Swift 测试失败时不执行发布。\n+- ZIP 解压后 GUI、helper 与内置 Node 可执行，深度签名验证和内置助手自检通过；SHA-256 校验通过。\n+- 仅使用 GITHUB_TOKEN 的 contents: write 权限，发布验证远端标签存在；ZIP 与校验文件同时上传，不覆盖已有 Release。\n+- 提交后普通推送，尽可能实际触发远端手动构建并核对结果。未触发的标签发布不得记为已实测；不运行 Claude 测试、视觉检查、证书导入或 Apple 公证。\n+\n ## 启动时立即显示主界面\n \n - 已配置仓库时，初始化及 loadingArchive 期间均显示主界面，已有会话摘要立即可用；无仓库时继续要求设置。\n      88 .github/workflows/release.yml\n"}
 {}
 {"chunk_id":"93b70c","wall_time_seconds":0,"exit_code":128,"original_token_count":1126,"output":"# 实施进度\n\n## GitHub Actions 自动发布（2026-11-17）\n\n- [x] 确认现有 ARM64 打包脚本、Node 26.13.0、macOS 15 最低版本，以及 main 跟踪 origin/main；仓库没有既有 workflow 或版本标签。\n- [x] 添加标签发布与手动构建 workflow，补充版本号、下载校验、签名限制和手动运行说明。\n- [x] actionlint 与全部 workflow shell 语法检查通过；实际执行版本准备步骤，验证有效标签、分支、无效标签和注入文本四种情况。\n- [x] 本机 TypeScript 检查通过、允许的 Node 测试 22 项通过/6 项跳过、Swift 41 项通过；临时签名 release 打包、ZIP 解压后的权限/架构/深度签名/内置助手检查及 SHA-256 校验通过。\n- [ ] 提交并普通推送，验证远端 workflow 状态并记录实际结果；不创建版本标签。\n\n## 启动时立即显示主界面（2026-11-17）\n\n- [x] 确认设置页使用 !archiveLoaded 判定，导致已配置仓库仍被全屏读取页遮挡；侧栏已经有状态小字。\n# 验证标准\n\n## GitHub Actions 自动发布\n\n- `vX.Y.Z` 标签触发构建与 Release；普通分支推送不发布，手动分支运行仅上传 artifact；版本写入打包的 Info.plist。\n- workflow 语法检查通过，打包前确认 ARM64；TypeScript、允许的 Node 测试、Swift 测试失败时不执行发布。\n- ZIP 解压后 GUI、helper 与内置 Node 可执行，深度签名验证和内置助手自检通过；SHA-256 校验通过。\n- 仅使用 GITHUB_TOKEN 的 contents: write 权限，发布验证远端标签存在；ZIP 与校验文件同时上传，不覆盖已有 Release。\n- 提交后普通推送，尽可能实际触发远端手动构建并核对结果。未触发的标签发布不得记为已实测；不运行 Claude 测试、视觉检查、证书导入或 Apple 公证。\n- 本机已通过：actionlint、全部 workflow shell 语法、四种版本准备场景、TypeScript、允许的 Node 测试 22 项（另 6 项跳过）、Swift 41 项、临时签名 release 打包，以及 ZIP 解压后的权限/架构/签名/内置助手和 SHA-256 校验。远端运行结果待推送后补记。\n\n## 启动时立即显示主界面\n\n  - 按本地自然日、周、月依次显示日期文字；更早记录显示具体日期，省略时间。\n  - 右上角为“全部”导航，保留最近六条、来源和项目筛选以及点击详情。\n  - 两项回归先出现 11 个失败断言，修复后全部 41 项 Swift 测试通过，覆盖午夜、跨年周、夏令时及更早日期。\n  - release 打包、Apple Development 深度签名及助手自检通过，已启动新版并确认进程；未新增截图或视觉检查。\n- **涉及文件**：`Sources/Ragdoll/DashboardView.swift`、`Tests/RagdollTests/DashboardTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：`0fe88f7 fix(dashboard): show calendar labels for session dates`，已普通推送至 `origin/main`；本条由后续文档提交补记。\n\n---\n\n## [2026-11-17 20:09] GitHub Actions 自动编译发布\n\n- **需求/问题描述**：\n  > 设置一个 action 自动编译发布到 GitHub Release。\n- **实际实现的功能与改动**：\n  - 推送 `vX.Y.Z` 标签后，在 macOS 15 ARM64 runner 复用现有脚本生成应用，写入版本与构建编号，通过检查后发布 ZIP 和 SHA-256 校验文件。\n  - 手动分支运行只保存 Actions artifact，手动标签运行发布 Release；使用内置 GITHUB_TOKEN，不覆盖已有 Release，无需新增密钥。\n  - README 和发布说明明确 macOS 15+、Apple Silicon、临时签名、未公证及独立后台服务的有效签名要求。\n  - 本机 actionlint、workflow shell 语法与四种版本准备场景通过；TypeScript 检查通过，Node 22 项通过/6 项跳过，Swift 41 项通过；release 打包、ZIP 解压后的权限/架构/深度签名/内置助手及 SHA-256 校验通过。\n  - 未运行 Claude 测试、截图或 Apple 公证。远端手动构建结果将在推送后补记；未创建版本标签或发布新版本。\n- **涉及文件**：`.github/workflows/release.yml`、`README.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：待提交；本机验证已通过。\n\n---\nfatal: Unable to create '/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.git/index.lock': Operation not permitted\n"}
+
+## tool · 2026-11-17T12:09:57Z
+
+
+Script completed
+Wall time 4.8 seconds
+Output:
+
+{"chunk_id":"9d9ec7","wall_time_seconds":0.000009083,"exit_code":0,"original_token_count":141,"output":" .github/workflows/release.yml | 88 +++++++++++++++++++++++++++++++++++++++++++\n README.md                     | 15 ++++++++\n docs/CHANGELOG.md             | 15 ++++++++\n memory/agents.md              |  4 +-\n memory/plan.md                |  8 ++++\n memory/progress.md            |  8 ++++\n memory/verify.md              |  9 +++++\n 7 files changed, 145 insertions(+), 2 deletions(-)\n[main 87fcafa] chore(release): build macOS app and publish tagged releases\n 7 files changed, 145 insertions(+), 2 deletions(-)\n create mode 100644 .github/workflows/release.yml\n"}
+
+## tool · 2026-11-17T12:10:18Z
+
+
+Script completed
+Wall time 15.5 seconds
+Output:
+
+{"chunk_id":"6627ed","wall_time_seconds":1.002171458,"session_id":16075,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:10:26Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"16e252","wall_time_seconds":0.000008292,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   3fa97fa..87fcafa  main -> main\n"}
+{"chunk_id":"594e33","wall_time_seconds":1.002675875,"session_id":99391,"original_token_count":0,"output":""}
+
+## assistant · 2026-11-17T12:10:33Z
+
+本机验证全部通过：Swift 41 项测试、Node 22 项测试及 TypeScript 检查通过，ZIP 解压后的签名和 SHA-256 校验也通过。配置已提交并推送到 `origin/main`。
+
+GitHub 连接器没有触发 workflow 的接口，我会通过 GitHub API 手动运行一次分支构建，验证云端流程。
+
+
+## tool · 2026-11-17T12:10:36Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"701300","wall_time_seconds":0.000017375,"exit_code":0,"original_token_count":133,"output":"{\"status\":200,\"body\":{\"total_count\":1,\"workflows\":[{\"id\":421291920,\"node_id\":\"W_kwDOVwcvN84ZHGeQ\",\"name\":\"Release macOS\",\"path\":\".github/workflows/release.yml\",\"state\":\"active\",\"created_at\":\"2026-11-17T20:10:23.000+08:00\",\"updated_at\":\"2026-11-17T20:10:23.000+08:00\",\"url\":\"https://api.github.com/repos/OyamaMeek/Ragdoll/actions/workflows/421291920\",\"html_url\":\"https://github.com/OyamaMeek/Ragdoll/blob/main/.github/workflows/release.yml\",\"badge_url\":\"https://github.com/OyamaMeek/Ragdoll/workflows/Release%20macOS/badge.svg\"}]}}\n"}
+{"chunk_id":"5003c1","wall_time_seconds":1.002211667,"session_id":12449,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:10:43Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"5110bd","wall_time_seconds":0.000010083,"exit_code":0,"original_token_count":7,"output":"{\"status\":204,\"body\":null}\n"}
+{"chunk_id":"610041","wall_time_seconds":1.001735834,"session_id":35561,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:10:51Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"88e487","wall_time_seconds":0.000017416,"exit_code":0,"original_token_count":0,"output":""}
+{"chunk_id":"2ba664","wall_time_seconds":0.000007667,"exit_code":0,"original_token_count":54,"output":"{\"status\":200,\"runs\":[{\"id\":44080690086,\"status\":\"in_progress\",\"conclusion\":null,\"html_url\":\"https://github.com/OyamaMeek/Ragdoll/actions/runs/44080690086\",\"head_sha\":\"87fcafaebc61f65830de0e1cc2e7fb63c71e75e2\"}]}\n"}
+
+## tool · 2026-11-17T12:10:57Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"d93c45","wall_time_seconds":1.002223833,"session_id":22317,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:11:05Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"bb0017","wall_time_seconds":0.000010542,"exit_code":0,"original_token_count":0,"output":""}
+{"chunk_id":"aa496a","wall_time_seconds":0.000008084,"exit_code":0,"original_token_count":248,"output":"{\"status\":200,\"jobs\":[{\"id\":134030176807,\"status\":\"in_progress\",\"conclusion\":null,\"runner_name\":\"GitHub Actions 1000000350\",\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build application\",\"status\":\"in_progress\",\"conclusion\":null},{\"name\":\"Check runtime\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Test Swift\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Package and verify\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Run actions/upload-artifact@v7\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Publish release\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Post Run actions/setup-node@v7\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Post Run actions/checkout@v7\",\"status\":\"pending\",\"conclusion\":null}]}]}\n"}
