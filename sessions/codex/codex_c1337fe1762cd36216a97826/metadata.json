@@ -12,7 +12,7 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "分批推送 remote-question-bank",
-  "updated" : 1794930469548,
+  "updated" : 1794930593760,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -148,6 +148,60 @@
       "model" : "gpt-6.1-sol",
       "output" : 309,
       "time" : 1794930460523
+    },
+    {
+      "cacheRead" : 55808,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc771def6087d0ab04e711ffe4ba85",
+      "input" : 1073,
+      "model" : "gpt-6.1-sol",
+      "output" : 515,
+      "time" : 1794930477212
+    },
+    {
+      "cacheRead" : 56320,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc772fa2a087d08405a61329c11f44",
+      "input" : 2357,
+      "model" : "gpt-6.1-sol",
+      "output" : 2130,
+      "time" : 1794930538369
+    },
+    {
+      "cacheRead" : 58368,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc776baf9487d08c89ce98f16a5f96",
+      "input" : 2463,
+      "model" : "gpt-6.1-sol",
+      "output" : 374,
+      "time" : 1794930551109
+    },
+    {
+      "cacheRead" : 60672,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc77784c6087d0b7633456ba48cef8",
+      "input" : 791,
+      "model" : "gpt-6.1-sol",
+      "output" : 133,
+      "time" : 1794930556625
+    },
+    {
+      "cacheRead" : 61184,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc778a592487d0aeb5e0270ae94aa1",
+      "input" : 470,
+      "model" : "gpt-6.1-sol",
+      "output" : 134,
+      "time" : 1794930575597
+    },
+    {
+      "cacheRead" : 56576,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc7795674487d0bec5884cbae307ca",
+      "input" : 5277,
+      "model" : "gpt-6.1-sol",
+      "output" : 369,
+      "time" : 1794930592284
     }
   ],
   "warnings" : [
