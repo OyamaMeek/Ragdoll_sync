@@ -13,7 +13,7 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "修复问题",
-  "updated" : 1794928774032,
+  "updated" : 1794928840707,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -653,6 +653,42 @@
       "model" : "gpt-6.1-sol",
       "output" : 1976,
       "time" : 1794928773264
+    },
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0d36900ffcdf7a93016afc7087bf9887d080a01943dfc7bafe",
+      "input" : 49977,
+      "model" : "gpt-6.1-sol",
+      "output" : 211,
+      "time" : 1794928784071
+    },
+    {
+      "cacheRead" : 62976,
+      "cacheWrite" : 0,
+      "id" : "resp_0d36900ffcdf7a93016afc7091684487d0b15cfe6e35b8164f",
+      "input" : 13236,
+      "model" : "gpt-6.1-sol",
+      "output" : 415,
+      "time" : 1794928796853
+    },
+    {
+      "cacheRead" : 76032,
+      "cacheWrite" : 0,
+      "id" : "resp_0d36900ffcdf7a93016afc70a5c99887d0813ecde124cb9aa9",
+      "input" : 5056,
+      "model" : "gpt-6.1-sol",
+      "output" : 375,
+      "time" : 1794928817755
+    },
+    {
+      "cacheRead" : 80896,
+      "cacheWrite" : 0,
+      "id" : "resp_0d36900ffcdf7a93016afc70b7cae087d0ac297eab701c3dbb",
+      "input" : 6952,
+      "model" : "gpt-6.1-sol",
+      "output" : 619,
+      "time" : 1794928840706
     }
   ],
   "warnings" : [
