@@ -1,0 +1,30 @@
+{
+  "created" : 1794904274919.9773,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/17/rollout-2026-11-17T16-31-14-01a1e8a1-b788-7bb1-9cd3-099501357c1d.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:089a78b45ff1200a93cd853f",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1e8a1-b788-7bb1-9cd3-099501357c1d",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794904282151,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_02c357e10815fc99016afc10d64d5087d0af5e85534447bcbe",
+      "input" : 10012,
+      "model" : "codex-auto-review",
+      "output" : 145,
+      "time" : 1794904282142
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

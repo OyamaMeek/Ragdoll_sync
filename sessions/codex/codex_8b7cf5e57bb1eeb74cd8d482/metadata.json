@@ -12,7 +12,7 @@
   "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
   "source" : "codex",
   "title" : "是否应该填写 key",
-  "updated" : 1794904224551,
+  "updated" : 1794904282297,
   "usage" : [
     {
       "cacheRead" : 13440,
@@ -40,6 +40,33 @@
       "model" : "gpt-6.1-sol",
       "output" : 251,
       "time" : 1794904146683
+    },
+    {
+      "cacheRead" : 33408,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc10acf8a887d0ad2cf8ce43e024d7",
+      "input" : 179,
+      "model" : "gpt-6.1-sol",
+      "output" : 219,
+      "time" : 1794904243595
+    },
+    {
+      "cacheRead" : 33664,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc10b5e05087d0bbb701ccecf46593",
+      "input" : 9298,
+      "model" : "gpt-6.1-sol",
+      "output" : 262,
+      "time" : 1794904256027
+    },
+    {
+      "cacheRead" : 43008,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc10c0d91c87d0afe8538de7ca9a64",
+      "input" : 3655,
+      "model" : "gpt-6.1-sol",
+      "output" : 280,
+      "time" : 1794904274743
     }
   ],
   "warnings" : [

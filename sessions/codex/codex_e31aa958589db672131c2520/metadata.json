@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "改为显示今天、昨日、本周和本月",
-  "updated" : 1794904216843,
+  "updated" : 1794904272045,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -283,6 +283,15 @@
       "model" : "gpt-6.1-sol",
       "output" : 192,
       "time" : 1794904216837
+    },
+    {
+      "cacheRead" : 106752,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc1099a8ac87d0a241f1a49cceac9c",
+      "input" : 8550,
+      "model" : "gpt-6.1-sol",
+      "output" : 650,
+      "time" : 1794904247060
     }
   ],
   "warnings" : [
