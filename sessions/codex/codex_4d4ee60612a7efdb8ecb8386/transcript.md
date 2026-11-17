@@ -3749,7 +3749,36 @@ Output:
 本机验证已结束，`dist/Ragdoll.app` 已恢复为原先的证书签名版本，并通过签名校验。CI 临时签名产物单独保留；云端仍在构建中。
 
 
-## tool · 2026-11-17T12:47:05Z
+## tool · 2026-11-17T12:47:50Z
+
+
+Wall time: 45.0062 seconds
+Sleep completed.
+
+## tool · 2026-11-17T12:47:58Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"b3d908","wall_time_seconds":1.001536125,"session_id":79736,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:48:06Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"1b74cb","wall_time_seconds":0.000010916,"exit_code":0,"original_token_count":166,"output":"[{\"id\":134048379223,\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Install Codex for migration tests\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build application\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Check runtime\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Test Swift\",\"status\":\"in_progress\",\"conclusion\":null}]}]\n"}
+
+## assistant · 2026-11-17T12:48:13Z
+
+云端应用构建、TypeScript 和 Node 检查已通过，正在按串行配置运行 Swift 测试。通过后会继续检查压缩包并上传。
+
+
+## tool · 2026-11-17T12:48:13Z
 
 sleep
 {"duration_ms":45000}
