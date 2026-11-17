@@ -1,0 +1,39 @@
+{
+  "created" : 1794922943015.864,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/17/rollout-2026-11-17T21-42-23-01a1e9be-920a-7591-94a5-ee4a4a9057eb.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:72ce1df26c6589173c78f607",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1e9be-920a-7591-94a5-ee4a4a9057eb",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794923002182,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0e1d36bb8707d9c4016afc59c32efc87d09c873e0e04930c4b",
+      "input" : 16825,
+      "model" : "codex-auto-review",
+      "output" : 119,
+      "time" : 1794922949542
+    },
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0e1d36bb8707d9c4016afc59f6d66087d0bf1b7dc8e1c83349",
+      "input" : 20438,
+      "model" : "codex-auto-review",
+      "output" : 156,
+      "time" : 1794923002179
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
