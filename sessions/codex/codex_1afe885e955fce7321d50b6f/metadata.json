@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "修复台前调度图标不显示",
-  "updated" : 1794923421034,
+  "updated" : 1794923550029,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -256,6 +256,51 @@
       "model" : "gpt-6.1-sol",
       "output" : 1358,
       "time" : 1794923417413
+    },
+    {
+      "cacheRead" : 126336,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5b9e242c87d0aa49fd86503e35e6",
+      "input" : 572,
+      "model" : "gpt-6.1-sol",
+      "output" : 55,
+      "time" : 1794923426102
+    },
+    {
+      "cacheRead" : 126848,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5ba35a8c87d0bf8098730c99249d",
+      "input" : 388,
+      "model" : "gpt-6.1-sol",
+      "output" : 2128,
+      "time" : 1794923472433
+    },
+    {
+      "cacheRead" : 129280,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5bd7cce087d098f419c6a8416ce7",
+      "input" : 2361,
+      "model" : "gpt-6.1-sol",
+      "output" : 249,
+      "time" : 1794923487366
+    },
+    {
+      "cacheRead" : 131840,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5be9765c87d0b766fe02725d5c93",
+      "input" : 1295,
+      "model" : "gpt-6.1-sol",
+      "output" : 616,
+      "time" : 1794923513870
+    },
+    {
+      "cacheRead" : 133632,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c0665b087d0a13ea4f91bbfe7fc",
+      "input" : 1241,
+      "model" : "gpt-6.1-sol",
+      "output" : 180,
+      "time" : 1794923531635
     }
   ],
   "warnings" : [
