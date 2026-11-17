@@ -1,0 +1,66 @@
+{
+  "created" : 1794921612003.1484,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/17/rollout-2026-11-17T21-20-11-01a1e9aa-2f1b-73d2-9d35-78fc7421f019.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:982a18b9a300604497e6794b",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1e9aa-2f1b-73d2-9d35-78fc7421f019",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "调整对话界面折叠与工具调用展示",
+  "updated" : 1794921663680,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc549542dc87d09ad3f1a3d6caec91",
+      "input" : 46352,
+      "model" : "gpt-6.1-sol",
+      "output" : 255,
+      "time" : 1794921630151
+    },
+    {
+      "cacheRead" : 59520,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc54a01e9487d09fe8a916d16ab33a",
+      "input" : 1240,
+      "model" : "gpt-6.1-sol",
+      "output" : 154,
+      "time" : 1794921636989
+    },
+    {
+      "cacheRead" : 60800,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc54a6310887d0841522368e3868d2",
+      "input" : 10567,
+      "model" : "gpt-6.1-sol",
+      "output" : 368,
+      "time" : 1794921647579
+    },
+    {
+      "cacheRead" : 71552,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc54b0c51c87d0957bc75a1bf4dccf",
+      "input" : 11107,
+      "model" : "gpt-6.1-sol",
+      "output" : 160,
+      "time" : 1794921653697
+    },
+    {
+      "cacheRead" : 82688,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc54b7144487d0803a73aa31e2caf7",
+      "input" : 7397,
+      "model" : "gpt-6.1-sol",
+      "output" : 249,
+      "time" : 1794921663671
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
