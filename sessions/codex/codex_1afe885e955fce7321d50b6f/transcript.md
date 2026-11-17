@@ -1551,3 +1551,540 @@ Wall time 5.8 seconds
 Output:
 
 {"chunk_id":"72d85d","wall_time_seconds":0.8674285,"exit_code":0,"original_token_count":182,"output":"registered: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app\nrunning: 61077 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.preview.app finished: true\nrunning icon: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: a2b687a30c03bacb77e50acb4f5aa82d36023dd22a66922ed18f8d107f846337\ndist/Ragdoll.app: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: a2b687a30c03bacb77e50acb4f5aa82d36023dd22a66922ed18f8d107f846337\ndist/Ragdoll.preview.app: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: a2b687a30c03bacb77e50acb4f5aa82d36023dd22a66922ed18f8d107f846337\ngeneric application: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: ce69abfb9600908ed2d2a2dcd2e41653d73f5b37afcf541d5276b69d28367423\n"}
+
+## assistant · 2026-11-17T13:43:35Z
+
+当前运行的是预览包；正式包和预览包都已包含图标文件，Info.plist 配置也存在。我在继续检查 macOS 为运行中应用返回的图标，以及应用注册信息是否指向正确路径。
+
+
+## tool · 2026-11-17T13:43:50Z
+
+
+Script completed
+Wall time 11.6 seconds
+Output:
+
+{"chunk_id":"e1d217","wall_time_seconds":6.561597542,"exit_code":0,"original_token_count":4908,"output":"228424-mount state:                mounted\n228425-Mach-O UUIDs:               D3B6FEBE-294D-395D-86AF-5D47EDCECADE\n228426-sequenceNum:                91072\n228427-path:                       /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.previous.app (0x3edc4)\n228428-directory:                  Other (255)\n228429-name:                       Ragdoll\n228430-displayName:                Ragdoll\n228431-localizedNames:             \"LSDefaultLocalizedValue\" = \"Ragdoll\"\n228432-localizedShortNames:        \"LSDefaultLocalizedValue\" = \"Ragdoll\"\n228433-teamID:                     456LQ85CZH\n228434:identifier:                 com.oyamameek.ragdoll\n228435-version:                    1.0 ({length = 32, bytes = 0x01000000 00000000 00000000 00000000 ... 00000000 00000000 })\n228436-versionString:              1\n228437-displayVersion:             0.1.0\n228438-mod date:                   2026-11-17 16:33 (POSIX 1794904426, 𝛥 5小时10分钟)\n228439-exec mod date:              2026-11-17 16:33 (POSIX 1794904431, 𝛥 5小时9分钟55秒)\n228440-reg date:                   2026-11-17 20:08 (POSIX 1794917325, 𝛥 1小时35分钟1秒)\n228441-rec mod date:               2026-11-17 20:08 (POSIX 1794917325, 𝛥 1小时35分钟1秒)\n228442-type code:                  'APPL' (4150504c)\n228443-creator code:               (00000000)\n228444-bundle flags:               has-display-name  launch-disabled (0000000000000082)\n228445-slices:                     arm64 (0000000000000080)\n228446-item flags:                 package  application  container  native-app  extension-hidden (000000000010008e)\n228447-App Nap:                    capable (0000000000000001)\n228448-eGPU:                       capable  can-change (0000000000000005)\n228449-safeAperture system fullscreen: capable  can-change (0000000000000005)\n228450-safeAperture app fullscreen: capable  can-change (0000000000000005)\n228451-safeAperture windowed:      capable  can-change (0000000000000005)\n228452-Game Mode:                  capable  can-change (0000000000000005)\n228453-Identified Game:            capable  can-change (0000000000000005)\n228454-platform:                   native\n228455-iconDict:                   1 values (549096 (0x860e8))\n228456-                            {\n228457-                                CFBundlePrimaryIcon =     {\n228458-                                };\n228459-                            }\n228460-executable:                 Contents/MacOS/Ragdoll\n228461-inode:                      5573389\n228462-exec inode:                 5588584\n228463-min version:                15.0 ({length = 32, bytes = 0x0f000000 00000000 00000000 00000000 ... 00000000 00000000 })\n228464-min version platform:       native\n228465-execSDK ver:                15.5 ({length = 32, bytes = 0x0f000000 00000000 05000000 00000000 ... 00000000 00000000 })\n228466-mach min ver:               15.0 ({length = 32, bytes = 0x0f000000 00000000 00000000 00000000 ... 00000000 00000000 })\n228467-infoDictionary:             10 values (549100 (0x860ec))\n228468-                            {\n228469-                                CFBundleDisplayName = Ragdoll;\n228470-                                CFBundleExecutable = Ragdoll;\n228471:                                CFBundleIdentifier = \"com.oyamameek.ragdoll\";\n228472-                                CFBundleName = Ragdoll;\n228473-                                CFBundleNumericVersion = 16809984;\n228474-                                CFBundlePackageType = APPL;\n228475-                                CFBundleShortVersionString = \"0.1.0\";\n228476-                                CFBundleVersion = 1;\n228477-                                NSHighResolutionCapable = 1;\n228478-                                NSPrincipalClass = NSApplication;\n228479-                            }\n228480-library:                    Contents/Library/\n228481:library items:              LaunchAgents/com.oyamameek.ragdoll.service.plist\n228482:activityTypes:              pv-fba173a13ef267, NOTIFICATION#456LQ85CZH:com.oyamameek.ragdoll\n228483-trustedCodeSignatures:      d5dbd05ec371f7e2cde395e8f5aa32ff523f14c0\n228484-Intents:                    0 values (549104 (0x860f0))\n228485-                            {\n228486-                            }\n228487-\n228488---------------------------------------------------------------------------------\n228489-bundle id:                  Adobe Crash Processor (0xff08)\n228490-class:                      kLSBundleClassApplication (0x2)\n228491-container:                  / (0x4)\n228492-mount state:                mounted\n228493-Mach-O UUIDs:               EDF1C7A2-26D2-34BA-8DE1-ECED96C18B7D, 8ACE5830-C4DA-39CB-BC80-0C5F800AD4A5\n228494-sequenceNum:                65288\n228495-path:                       /Applications/Utilities/Adobe Sync/CoreSync/Core Sync.app/Contents/Frameworks/AdobeCrashReporter.framework/Versions/A/Adobe Crash Processor.app (0x2a5f0)\n228496-directory:                  /Applications\n228497-name:                       Adobe Crash Processor\n228498-localizedShortNames:        \"English\" = ?, \"LSDefaultLocalizedValue\" = \"Adobe Crash Processor\"\n228499-teamID:                     JQ525L2MZD\n228500-identifier:                 com.adobe.AdobeCRDaemon\n228501-canonical id:               com.adobe.adobecrdaemon\n228502-version:                    2026.10 ({length = 32, bytes = 0xea070000 00000000 0a000000 00000000 ... 00000000 00000000 })\n228503-versionString:              2026.10.0.815351d\n228504-displayVersion:             2026.10.0\n228505-mod date:                   2026-10-18 22:09 (POSIX 1792332596, 𝛥 4周1天23小时33分钟50秒)\n228506-exec mod date:              2026-10-18 22:09 (POSIX 1792332596, 𝛥 4周1天23小时33分钟50秒)\n228507-reg date:                   2026-10-18 22:09 (POSIX 1792332599, 𝛥 4周1天23小时33分钟47秒)\n228508-rec mod date:               2026-10-18 22:09 (POSIX 1792332599, 𝛥 4周1天23小时33分钟47秒)\n228509-type code:                  'APPL' (4150504c)\n228510-creator code:               '????' (3f3f3f3f)\n228511-bundle flags:               ui-element  bg-only (000000000000000c)\n228512-icon flags:                 relative-icon-path (0000000000000001)\n228513-slices:                     x86_64  arm64 (0000000000000088)\n228514-item flags:                 package  application  container  native-app  extension-hidden (000000000010008e)\n228515-App Nap:                    capable (0000000000000001)\n228516-eGPU:                       capable  can-change (0000000000000005)\n228517-safeAperture system fullscreen: capable  can-change (0000000000000005)\n228518-safeAperture app fullscreen: capable  can-change (0000000000000005)\n228519-safeAperture windowed:      capable  can-change (0000000000000005)\n228520-Game Mode:                  capable  can-change (0000000000000005)\n228521-Identified Game:            capable  can-change (0000000000000005)\n228522-platform:                   native\n228523-iconDict:                   1 values (381600 (0x5d2a0))\n228524-                            {\n228525-                                CFBundlePrimaryIcon =     {\n228526-                                    CFBundleIconFile = \"AI_AdobeSystems\";\n228527-                                };\n--\n230423-                            {\n230424-                            }\n230425-\n230426---------------------------------------------------------------------------------\n230427-bundle id:                  Ragdoll (0x16408)\n230428-class:                      kLSBundleClassApplication (0x2)\n230429-container:                  /Volumes/SamsungSSD990PRO (0xc)\n230430-mount state:                mounted\n230431-Mach-O UUIDs:               D3B6FEBE-294D-395D-86AF-5D47EDCECADE\n230432-sequenceNum:                91144\n230433:path:                       /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app (0x3ee20)\n230434-directory:                  Other (255)\n230435-name:                       Ragdoll\n230436-displayName:                Ragdoll\n230437-localizedNames:             \"LSDefaultLocalizedValue\" = \"Ragdoll\"\n230438-localizedShortNames:        \"LSDefaultLocalizedValue\" = \"Ragdoll\"\n230439-teamID:                     456LQ85CZH\n230440:identifier:                 com.oyamameek.ragdoll\n230441-version:                    1.0 ({length = 32, bytes = 0x01000000 00000000 00000000 00000000 ... 00000000 00000000 })\n230442-versionString:              1\n230443-displayVersion:             0.1.0\n230444-mod date:                   2026-11-17 21:10 (POSIX 1794921035, 𝛥 33分钟11秒)\n230445-exec mod date:              2026-11-17 21:10 (POSIX 1794921042, 𝛥 33分钟4秒)\n230446-reg date:                   2026-11-17 21:31 (POSIX 1794922286, 𝛥 12分钟20秒)\n230447-rec mod date:               2026-11-17 21:31 (POSIX 1794922286, 𝛥 12分钟20秒)\n230448-type code:                  'APPL' (4150504c)\n230449-creator code:               (00000000)\n230450-bundle flags:               has-display-name (0000000000000002)\n230451-icon flags:                 relative-icon-path (0000000000000001)\n230452-slices:                     arm64 (0000000000000080)\n230453-item flags:                 package  application  container  native-app  extension-hidden (000000000010008e)\n230454-App Nap:                    capable (0000000000000001)\n230455-eGPU:                       capable  can-change (0000000000000005)\n230456-safeAperture system fullscreen: capable  can-change (0000000000000005)\n230457-safeAperture app fullscreen: capable  can-change (0000000000000005)\n230458-safeAperture windowed:      capable  can-change (0000000000000005)\n230459-Game Mode:                  capable  can-change (0000000000000005)\n230460-Identified Game:            capable  can-change (0000000000000005)\n230461-platform:                   native\n230462-iconDict:                   1 values (549340 (0x861dc))\n230463-                            {\n230464-                                CFBundlePrimaryIcon =     {\n230465-                                    CFBundleIconFile = \"Ragdoll.icns\";\n230466-                                };\n230467-                            }\n230468-icons:                      Contents/Resources/Ragdoll.icns\n230469-executable:                 Contents/MacOS/Ragdoll\n230470-inode:                      5709947\n230471-exec inode:                 5725181\n230472-min version:                15.0 ({length = 32, bytes = 0x0f000000 00000000 00000000 00000000 ... 00000000 00000000 })\n230473-min version platform:       native\n230474-execSDK ver:                15.5 ({length = 32, bytes = 0x0f000000 00000000 05000000 00000000 ... 00000000 00000000 })\n230475-mach min ver:               15.0 ({length = 32, bytes = 0x0f000000 00000000 00000000 00000000 ... 00000000 00000000 })\n230476-infoDictionary:             11 values (549344 (0x861e0))\n230477-                            {\n230478-                                CFBundleDisplayName = Ragdoll;\n230479-                                CFBundleExecutable = Ragdoll;\n230480-                                CFBundleIconFile = \"Ragdoll.icns\";\n230481:                                CFBundleIdentifier = \"com.oyamameek.ragdoll\";\n230482-                                CFBundleName = Ragdoll;\n230483-                                CFBundleNumericVersion = 16809984;\n230484-                                CFBundlePackageType = APPL;\n230485-                                CFBundleShortVersionString = \"0.1.0\";\n230486-                                CFBundleVersion = 1;\n230487-                                NSHighResolutionCapable = 1;\n230488-                                NSPrincipalClass = NSApplication;\n230489-                            }\n230490-library:                    Contents/Library/\n230491:library items:              LaunchAgents/com.oyamameek.ragdoll.service.plist\n230492:activityTypes:              pv-fba173a13ef267, NOTIFICATION#456LQ85CZH:com.oyamameek.ragdoll\n230493-trustedCodeSignatures:      935f76909c3cc3700bb823a9c6fee3799708992f\n230494-Intents:                    0 values (549348 (0x861e4))\n230495-                            {\n230496-                            }\n230497-\n230498---------------------------------------------------------------------------------\n230499-bundle id:                  Ragdoll (0x16418)\n230500-class:                      kLSBundleClassApplication (0x2)\n230501-container:                  /Volumes/SamsungSSD990PRO (0xc)\n230502-mount state:                mounted\n230503-Mach-O UUIDs:               2CD906D2-CBE4-3FFA-9F0F-80616A0866D2\n230504-sequenceNum:                91160\n230505:path:                       /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.preview.app (0x3ee38)\n230506-directory:                  Other (255)\n230507-name:                       Ragdoll\n230508-displayName:                Ragdoll\n230509-localizedNames:             \"LSDefaultLocalizedValue\" = \"Ragdoll\"\n230510-localizedShortNames:        \"LSDefaultLocalizedValue\" = \"Ragdoll\"\n230511:identifier:                 com.oyamameek.ragdoll\n230512-version:                    1.0 ({length = 32, bytes = 0x01000000 00000000 00000000 00000000 ... 00000000 00000000 })\n230513-versionString:              1\n230514-displayVersion:             0.1.0\n230515-mod date:                   2026-11-17 21:27 (POSIX 1794922037, 𝛥 16分钟29秒)\n230516-exec mod date:              2026-11-17 21:38 (POSIX 1794922721, 𝛥 5分钟5秒)\n230517-reg date:                   2026-11-17 21:40 (POSIX 1794922825, 𝛥 3分钟21秒)\n230518-rec mod date:               2026-11-17 21:40 (POSIX 1794922825, 𝛥 3分钟21秒)\n230519-type code:                  'APPL' (4150504c)\n230520-creator code:               (00000000)\n230521-bundle flags:               has-display-name (0000000000000002)\n230522-icon flags:                 relative-icon-path (0000000000000001)\n230523-slices:                     arm64 (0000000000000080)\n230524-item flags:                 package  application  container  native-app  extension-hidden (000000000010008e)\n230525-App Nap:                    capable (0000000000000001)\n230526-eGPU:                       capable  can-change (0000000000000005)\n230527-safeAperture system fullscreen: capable  can-change (0000000000000005)\n230528-safeAperture app fullscreen: capable  can-change (0000000000000005)\n230529-safeAperture windowed:      capable  can-change (0000000000000005)\n230530-Game Mode:                  capable  can-change (0000000000000005)\n230531-Identified Game:            capable  can-change (0000000000000005)\n230532-platform:                   native\n230533-iconDict:                   1 values (549396 (0x86214))\n230534-                            {\n230535-                                CFBundlePrimaryIcon =     {\n230536-                                    CFBundleIconFile = \"Ragdoll.icns\";\n230537-                                };\n230538-                            }\n230539-icons:                      Contents/Resources/Ragdoll.icns\n230540-executable:                 Contents/MacOS/Ragdoll\n230541-inode:                      5790389\n230542-exec inode:                 5832488\n230543-min version:                15.0 ({length = 32, bytes = 0x0f000000 00000000 00000000 00000000 ... 00000000 00000000 })\n230544-min version platform:       native\n230545-execSDK ver:                15.5 ({length = 32, bytes = 0x0f000000 00000000 05000000 00000000 ... 00000000 00000000 })\n230546-mach min ver:               15.0 ({length = 32, bytes = 0x0f000000 00000000 00000000 00000000 ... 00000000 00000000 })\n230547-infoDictionary:             11 values (549400 (0x86218))\n230548-                            {\n230549-                                CFBundleDisplayName = Ragdoll;\n230550-                                CFBundleExecutable = Ragdoll;\n230551-                                CFBundleIconFile = \"Ragdoll.icns\";\n230552:                                CFBundleIdentifier = \"com.oyamameek.ragdoll\";\n230553-                                CFBundleName = Ragdoll;\n230554-                                CFBundleNumericVersion = 16809984;\n230555-                                CFBundlePackageType = APPL;\n230556-                                CFBundleShortVersionString = \"0.1.0\";\n230557-                                CFBundleVersion = 1;\n230558-                                NSHighResolutionCapable = 1;\n230559-                                NSPrincipalClass = NSApplication;\n230560-                            }\n230561-library:                    Contents/Library/\n230562:library items:              LaunchAgents/com.oyamameek.ragdoll.service.plist\n230563:activityTypes:              pv-f79b909daa143b, NOTIFICATION#:com.oyamameek.ragdoll\n230564-trustedCodeSignatures:      0c2273b3dbb43e9ad2f61a0ae718b6e72eb9aa86\n230565-Intents:                    0 values (549404 (0x8621c))\n230566-                            {\n230567-                            }\n230568-\n230569---------------------------------------------------------------------------------\n230570-bundle id:                  JetBrains Daemon Helper (0xddcc)\n230571-class:                      kLSBundleClassApplication (0x2)\n230572-container:                  / (0x4)\n230573-mount state:                mounted\n230574-Mach-O UUIDs:               4C4C4430-5555-3144-A174-0AABA69C64FD\n230575-sequenceNum:                56780\n230576-path:                       /Users/oyamahappa/Library/Application Support/JetBrains/Daemon/bundles/current/jetbrainsd.app/Contents/Helpers/JetBrains.app (0x23c9c)\n230577-directory:                  ~/Library\n230578-name:                       JetBrains Daemon Helper\n230579-displayName:                JetBrains Daemon Helper\n230580-localizedNames:             \"LSDefaultLocalizedValue\" = \"JetBrains Daemon Helper\"\n230581-localizedShortNames:        \"LSDefaultLocalizedValue\" = \"JetBrains Daemon Helper\"\n230582-teamID:                     2ZEFAR8TH3\n230583-identifier:                 com.jetbrains.app.daemon.helper\n230584-mod date:                   2026-09-19 21:35 (POSIX 1789824949, 𝛥 2个月7分钟57秒)\n230585-exec mod date:              2026-09-19 21:35 (POSIX 1789824949, 𝛥 2个月7分钟57秒)\n230586-reg date:                   2026-10-08 11:44 (POSIX 1791431051, 𝛥 1个月1周2天9小时59分钟35秒)\n230587-rec mod date:               2026-10-08 11:44 (POSIX 1791431051, 𝛥 1个月1周2天9小时59分钟35秒)\n230588-type code:                  'APPL' (4150504c)\n230589-creator code:               (00000000)\n230590-bundle flags:               has-display-name  ui-element (0000000000000006)\n230591-plist flags:                has-custom-bindings (0000000000010000)\n230592-slices:                     arm64 (0000000000000080)\n230593-item flags:                 package  application  container  native-app  extension-hidden (000000000010008e)\n230594-App Nap:                    capable (0000000000000001)\n230595-eGPU:                       capable  can-change (0000000000000005)\n230596-safeAperture system fullscreen: capable  can-change (0000000000000005)\n230597-safeAperture app fullscreen: capable  can-change (0000000000000005)\n230598-safeAperture windowed:      capable  can-change (0000000000000005)\n230599-Game Mode:                  capable  can-change (0000000000000005)\n230600-Identified Game:            capable  can-change (0000000000000005)\n230601-platform:                   native\n230602-iconDict:                   1 values (329920 (0x508c0))\n230603-                            {\n230604-                                CFBundlePrimaryIcon =     {\n230605-                                };\n230606-                            }\n230607-executable:                 Contents/MacOS/jetbrainsd-helper\n230608-inode:                      15570222\n"}
+{"chunk_id":"6ee88c","wall_time_seconds":0.000009041,"exit_code":0,"original_token_count":2492,"output":"-rw-r--r--  1 oyamahappa  staff  149203 Nov 17 21:27 dist/Ragdoll.preview.app/Contents/Resources/Ragdoll.icns\nf417a30ad9be55062fed36db25bb2c615e6c783458afddc94b4192a5ece53d2a  packaging/Ragdoll.icns\nf417a30ad9be55062fed36db25bb2c615e6c783458afddc94b4192a5ece53d2a  dist/Ragdoll.preview.app/Contents/Resources/Ragdoll.icns\nProductName:\t\tmacOS\nProductVersion:\t\t15.7.7\nBuildVersion:\t\t24G720\n---\nname: test-driven-development\ndescription: Use when implementing any feature or bugfix, before writing implementation code\n---\n\n# Test-Driven Development (TDD)\n\n## Overview\n\nWrite the test first. Watch it fail. Write minimal code to pass.\n\n**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.\n\n**Violating the letter of the rules is violating the spirit of the rules.**\n\n## When to Use\n\n**Always:**\n- New features\n- Bug fixes\n- Refactoring\n- Behavior changes\n\n**Exceptions (ask your human partner):**\n- Throwaway prototypes\n- Generated code\n- Configuration files\n\nThinking \"skip TDD just this once\"? Stop. That's rationalization.\n\n## The Iron Law\n\n```\nNO PRODUCTION CODE WITHOUT A FAILING TEST FIRST\n```\n\nWrite code before the test? Delete it. Start over.\n\n**No exceptions:**\n- Don't keep it as \"reference\"\n- Don't \"adapt\" it while writing tests\n- Don't look at it\n- Delete means delete\n\nImplement fresh from tests. Period.\n\n## Red-Green-Refactor\n\n```dot\ndigraph tdd_cycle {\n    rankdir=LR;\n    red [label=\"RED\\nWrite failing test\", shape=box, style=filled, fillcolor=\"#ffcccc\"];\n    verify_red [label=\"Verify fails\\ncorrectly\", shape=diamond];\n    green [label=\"GREEN\\nMinimal code\", shape=box, style=filled, fillcolor=\"#ccffcc\"];\n    verify_green [label=\"Verify passes\\nAll green\", shape=diamond];\n    refactor [label=\"REFACTOR\\nClean up\", shape=box, style=filled, fillcolor=\"#ccccff\"];\n    next [label=\"Next\", shape=ellipse];\n\n    red -> verify_red;\n    verify_red -> green [label=\"yes\"];\n    verify_red -> red [label=\"wrong\\nfailure\"];\n    green -> verify_green;\n    verify_green -> refactor [label=\"yes\"];\n    verify_green -> green [label=\"no\"];\n    refactor -> verify_green [label=\"stay\\ngreen\"];\n    verify_green -> next;\n    next -> red;\n}\n```\n\n### RED - Write Failing Test\n\nWrite one minimal test showing what should happen.\n\n<Good>\n```typescript\ntest('retries failed operations 3 times', async () => {\n  let attempts = 0;\n  const operation = () => {\n    attempts++;\n    if (attempts < 3) throw new Error('fail');\n    return 'success';\n  };\n\n  const result = await retryOperation(operation);\n\n  expect(result).toBe('success');\n  expect(attempts).toBe(3);\n});\n```\nClear name, tests real behavior, one thing\n</Good>\n\n<Bad>\n```typescript\ntest('retry works', async () => {\n  const mock = jest.fn()\n    .mockRejectedValueOnce(new Error())\n    .mockRejectedValueOnce(new Error())\n    .mockResolvedValueOnce('success');\n  await retryOperation(mock);\n  expect(mock).toHaveBeenCalledTimes(3);\n});\n```\nVague name, tests mock not code\n</Bad>\n\n**Requirements:**\n- One behavior\n- Clear name\n- Real code (no mocks unless unavoidable)\n\n### Verify RED - Watch It Fail\n\n**MANDATORY. Never skip.**\n\n```bash\nnpm test path/to/test.test.ts\n```\n\nConfirm:\n- Test fails (not errors)\n- Failure message is expected\n- Fails because feature missing (not typos)\n\n**Test passes?** You're testing existing behavior. Fix test.\n\n**Test errors?** Fix error, re-run until it fails correctly.\n\n### GREEN - Minimal Code\n\nWrite simplest code to pass the test.\n\n<Good>\n```typescript\nasync function retryOperation<T>(fn: () => Promise<T>): Promise<T> {\n  for (let i = 0; i < 3; i++) {\n    try {\n      return await fn();\n    } catch (e) {\n      if (i === 2) throw e;\n    }\n  }\n  throw new Error('unreachable');\n}\n```\nJust enough to pass\n</Good>\n\n<Bad>\n```typescript\nasync function retryOperation<T>(\n  fn: () => Promise<T>,\n  options?: {\n    maxRetries?: number;\n    backoff?: 'linear' | 'exponential';\n    onRetry?: (attempt: number) => void;\n  }\n): Promise<T> {\n  // YAGNI\n}\n```\nOver-engineered\n</Bad>\n\nDon't add features, refactor other code, or \"improve\" beyond the test.\n\n### Verify GREEN - Watch It Pass\n\n**MANDATORY.**\n\n```bash\nnpm test path/to/test.test.ts\n```\n\nConfirm:\n- Test passes\n- Other tests still pass\n- Output pristine (no errors, warnings)\n\n**Test fails?** Fix code, not test.\n\n**Other tests fail?** Fix now.\n\n**\"Other tests\" means the project's suite, not just your file.** A\ngreen run of the test you wrote is not a green suite. Before you call\nthe change done, run the project's test command (bare `pytest`,\n`npm test`, `cargo test` — whatever the repo uses) even when your task\nnamed only one test file. A scope statement in your task bounds the\ndeliverable, not your verification. Any failure that run shows —\nincluding one you didn't cause — goes in your report by name; a red\ntest you watched scroll past and didn't mention is a report falsified\nby omission.\n\n### REFACTOR - Clean Up\n\nAfter green only:\n- Remove duplication\n- Improve names\n- Extract helpers\n\nKeep tests green. Don't add behavior.\n\n### Repeat\n\nNext failing test for next feature.\n\n## Good Tests\n\n| Quality | Good | Bad |\n|---------|------|-----|\n| **Minimal** | One thing. \"and\" in name? Split it. | `test('validates email and domain and whitespace')` |\n| **Clear** | Name describes behavior | `test('test1')` |\n| **Shows intent** | Demonstrates desired API | Obscures what code should do |\n\nWhen writing or changing any test, read [writing-good-tests.md](writing-good-tests.md) for the rules that keep tests honest:\n- Name the production change that would make the test fail — before writing it\n- Assert on real behavior, never on mock behavior\n- Keep test-only code in test utilities, out of production classes\n- Understand a dependency's side effects before mocking it\n\n## Common Rationalizations\n\n| Excuse | Reality |\n|--------|---------|\n| \"Too simple to test\" | Simple code breaks. Test takes 30 seconds. |\n| \"I'll test after\" | Tests written after pass immediately — which proves nothing. They may test the wrong thing, test the implementation instead of the behavior, or miss the edge case you forgot. You never watched it fail, so you never proved it can catch the bug. Test-first forces that failure. |\n| \"Tests after achieve same goals (spirit not ritual)\" | Tests-after answer \"what does this do?\"; tests-first answer \"what should this do?\" Tests written after are biased by the code you already wrote — you verify the cases you remembered, not the ones you'd have discovered. Coverage without proof the tests work. |\n| \"Already manually tested\" | Manual testing is ad-hoc: no record of what you covered, no way to re-run it when the code changes, easy to forget cases under pressure. \"Worked when I tried it\" ≠ comprehensive. Automated tests run the same way every time. |\n| \"Deleting X hours is wasteful\" | Sunk cost fallacy — that time is already spent either way. The real choice: rewrite with TDD (high confidence) vs. keep it and bolt tests on after (low confidence, likely bugs). Keeping code you can't trust is the waste. |\n| \"Keep as reference, write tests first\" | You'll adapt it. That's testing after. Delete means delete. |\n| \"Need to explore first\" | Fine. Throw away exploration, start with TDD. |\n| \"Test hard = design unclear\" | Listen to test. Hard to test = hard to use. |\n| \"TDD will slow me down\" | TDD IS the pragmatic path: catches bugs before commit, prevents regressions, lets you refactor without fear. \"Pragmatic\" shortcuts mean debugging in production — slower, not faster. |\n| \"Manual test faster\" | Manual doesn't prove edge cases. You'll re-test every change. |\n| \"Existing code has no tests\" | You're improving it. Add tests for existing code. |\n\n## Red Flags - STOP and Start Over\n\n- Code before test\n- Test after implementation\n- Test passes immediately\n- Can't explain why test failed\n- Tests added \"later\"\n- Rationalizing \"just this once\"\n- \"I already manually tested it\"\n- \"Tests after achieve the same purpose\"\n- \"It's about spirit not ritual\"\n- \"Keep as reference\" or \"adapt existing code\"\n- \"Already spent X hours, deleting is wasteful\"\n- \"TDD is dogmatic, I'm being pragmatic\"\n- \"This is different because...\"\n\n**All of these mean: Delete code. Start over with TDD.**\n\n## Example: Bug Fix\n\n**Bug:** Empty email accepted\n\n**RED**\n```typescript\ntest('rejects empty email', async () => {\n  const result = await submitForm({ email: '' });\n  expect(result.error).toBe('Email required');\n});\n```\n\n**Verify RED**\n```bash\n$ npm test\nFAIL: expected 'Email required', got undefined\n```\n\n**GREEN**\n```typescript\nfunction submitForm(data: FormData) {\n  if (!data.email?.trim()) {\n    return { error: 'Email required' };\n  }\n  // ...\n}\n```\n\n**Verify GREEN**\n```bash\n$ npm test\nPASS\n```\n\n**REFACTOR**\nExtract validation for multiple fields if needed.\n\n## Verification Checklist\n\nBefore marking work complete:\n\n- [ ] Every new function/method has a test\n- [ ] Watched each test fail before implementing\n- [ ] Each test failed for expected reason (feature missing, not typo)\n- [ ] Wrote minimal code to pass each test\n- [ ] All tests pass\n- [ ] Output pristine (no errors, warnings)\n- [ ] Tests use real code (mocks only if unavoidable)\n- [ ] Edge cases and errors covered\n\nCan't check all boxes? You skipped TDD. Start over.\n\n## When Stuck\n\n| Problem | Solution |\n|---------|----------|\n| Don't know how to test | Write wished-for API. Write assertion first. Ask your human partner. |\n| Test too complicated | Design too complicated. Simplify interface. |\n| Must mock everything | Code too coupled. Use dependency injection. |\n| Test setup huge | Extract helpers. Still complex? Simplify design. |\n\n## Debugging Integration\n\nBug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix and prevents regression.\n\nNever fix bugs without a test.\n\n## Final Rule\n\n```\nProduction code → test exists and failed first\nOtherwise → not TDD\n```\n\nNo exceptions without your human partner's permission.\n"}
+
+## tool · 2026-11-17T13:44:09Z
+
+
+Script completed
+Wall time 7.8 seconds
+Output:
+
+{"chunk_id":"a5026f","wall_time_seconds":0.000010541,"exit_code":0,"original_token_count":13566,"output":"Warning: truncated output (original token count: 13566)\nTotal output lines: 128\n\nimport AppKit\nimport Foundation\n\nlet source = URL(fileURLWithPath: \"docs/assets/ragdoll.svg\")\nguard let image = NSImage(contentsOf: source) else {\n    fatalError(\"无法读取 SVG\")\n}\nlet directory = URL(fileURLWithPath: \".agent/Ragdoll.iconset\")\ntry FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)\nfor points in [16, 32, 128, 256, 512] {\n    for scale in [1, 2] {\n        let pixels = points * scale\n        let bitmap = NSBitmapImageRep(\n            bitmapDataPlanes: nil, pixelsWide: pixels, pixelsHigh: pixels,\n            bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,\n            isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0\n        )!\n        let context = NSGraphicsContext(bitmapImageRep: bitmap)!\n        NSGraphicsContext.saveGraphicsState()\n        NSGraphicsContext.current = context\n        context.imageInterpolation = .high\n        image.draw(in: NSRect(x: 0, y: 0, width: pixels, height: pixels))\n        NSGraphicsContext.restoreGraphicsState()\n        guard let data = bitmap.representation(using: .png, properties: [:]) else {\n            fatalError(\"无法生成 PNG\")\n        }\n        let suffix = scale == 2 ? \"@2x\" : \"\"\n        try data.write(to: directory.appendingPathComponent(\"icon_\\(points)x\\(points)\\(suffix).png\"))\n    }\n}\nprint(\"已生成 10 个图标尺寸\")\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"256\" height=\"256\" viewBox=\"0 0 256 256\" role=\"img\" aria-labelledby=\"title\">\n  <title id=\"title\">Ragdoll 猫咪标识</title>\n  <rect width=\"256\" height=\"256\" rx=\"56\" fill=\"#f3efe7\"/>\n  <path d=\"M58 116V58l48 28a91 91 0 0 1 44 0l48-28v58c13 17 18 35 14 54-7 35-42 56-84 56s-77-21-84-56c-4-19 1-37 14-54Z\" fill=\"#54515b\"/>\n  <path d=\"m70 78 25 15-25 14Zm116 0-25 15 25 14Z\" fill=\"#c5b7ac\"/>\n  <path d=\"M128 101c-5 30-18 52-37 71 4 25 18 41 37 41s33-16 37-41c-19-19-32-41-37-71Z\" fill=\"#f3efe7\"/>\n  <ellipse cx=\"91\" cy=\"148\" rx=\"13\" ry=\"10\" fill=\"#91c9e8\"/>\n  <ellipse cx=\"165\" cy=\"148\" rx=\"13\" ry=\"10\" fill=\"#91c9e8\"/>\n  <path d=\"m119 175 9 8 9-8Z\" fill=\"#a47d7a\"/>\n  <path d=\"M128 183v7m0 0c-4 6-11 7-16 3m16-3c4 6 11 7 16 3\" fill=\"none\" stroke=\"#54515b\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n</svg>\n.agent/release-runs.json:1:{\"status\":200,\"body\":{\"total_count\":6,\"workflow_runs\":[{\"id\":44085972714,\"name\":\"Release macOS\",\"node_id\":\"WFR_kwLOVwcvN88AAAAKQ7qO6g\",\"head_branch\":\"main\",\"head_sha\":\"2aa2f07fb74a853ac8f74df2e73001db1bc00c8c\",\"path\":\".github/workflows/release.yml\",\"display_title\":\"Release macOS\",\"run_number\":6,\"event\":\"workflow_dispatch\",\"status\":\"in_progress\",\"conclusion\":null,\"workflow_id\":421291920,\"check_suite_id\":119340968106,\"check_suite_node_id\":\"CS_kwDOVwcvN88AAAAbyUaoqg\",\"url\":\"https://api.github.com/repos/OyamaMeek/Ragdoll/actions/runs/44085972714\",\"html_url\":\"https://github.com/OyamaMeek/Ragdoll/actions/runs/44085972714\",\"pull_requests\":[],\"created_at\":\"2026-11-17T12:44:29Z\",\"updated_at\":\"2026-11-17T12:44:34Z\",\"actor\":{\"login\":\"OyamaMeek\",\"id\":308713674,\"node_id\":\"U_kgDOEmaYyg\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/308713674?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/OyamaMeek\",\"html_url\":\"https://github.com/OyamaMeek\",\"followers_url\":\"https://api.github.com/users/OyamaMeek/followers\",\"following_url\":\"https://api.github.com/users/OyamaMeek/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/OyamaMeek/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/OyamaMeek/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/OyamaMeek/subscriptions\",\"organizations_url\":\"https://api.github.com/users/OyamaMeek/orgs\",\"repos_url\":\"https://api.github.com/users/OyamaMeek/repos\",\"events_url\":\"https://api.github.com/users/OyamaMeek/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/OyamaMeek/received_events\",\"type\":\"User\",\"user_view_type\":\"public\",\"site_admin\":false},\"run_attempt\":1,\"referenced_workflows\":[],\"run_started_at\":\"2026-11-17T12:44:29Z\",\"triggering_actor\":{\"login\":\"OyamaMeek\",\"id\":308713674,\"node_id\":\"U_kgDOEmaYyg\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/308713674?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/OyamaMeek\",\"html_url\":\"https://github.com/OyamaMeek\",\"followers_url\":\"https://api.github.com/users/OyamaMeek/followers\",\"following_url\":\"https://api.github.com/users/OyamaMeek/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/OyamaMeek/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/OyamaMeek/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/OyamaMeek/subscriptions\",\"organizations_url\":\"https://api.github.com/users/OyamaMeek/orgs\",\"repos_url\":\"https://api.github.com/users/OyamaMeek/repos\",\"events_url\":\"https://api.github.com/users/OyamaMeek/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/OyamaMeek/received_events\",\"type\":\"User\",\"user_view_type\":\"public\",\"site_admin\":false},\"jobs_url\":\"https://api.github.com/repos/OyamaMee…11066 tokens truncated…Service\\n\\t\\t--data-dir\\n\\t\\t\\/Volumes\\/SamsungSSD990PRO\\/GitHub\\/Ragdoll\\/.agent\\/background-registration\\/data\\n\\t}\\n\\n\\tinherited environment = {\\n\\t\\tSSH_AUTH_SOCK => \\/private\\/tmp\\/com.apple.launchd.tqc0VkbPRM\\/Listeners\\n\\t}\\n\\n\\tdefault environment = {\\n\\t\\tPATH => \\/usr\\/bin:\\/bin:\\/usr\\/sbin:\\/sbin\\n\\t}\\n\\n\\tenvironment = {\\n\\t\\tXPC_SERVICE_NAME => com.oyamameek.ragdoll.signedcheck.service\\n\\t}\\n\\n\\tdomain = gui\\/501 [100003]\\n\\tasid = 100003\\n\\tminimum runtime = 10\\n\\texit timeout = 5\\n\\truns = 1\\n\\tpid = 70104\\n\\timmediate reason = speculative\\n\\tforks = 0\\n\\texecs = 1\\n\\tinitialized = 1\\n\\ttrampolined = 1\\n\\tstarted suspended = 0\\n\\tproxy started suspended = 0\\n\\tlast exit code = (never exited)\\n\\n\\tsemaphores = {\\n\\t\\tsuccessful exit => 0\\n\\t}\\n\\n\\tspawn type = background (5)\\n\\tjetsam priority = 40\\n\\tjetsam memory limit (active) = (unlimited)\\n\\tjetsam memory limit (inactive) = (unlimited)\\n\\tjetsamproperties category = daemon\\n\\tsubmitted job. ignore execute allowed\\n\\tjetsam thread limit = 32\\n\\tcpumon = default\\n\\tjob state = running\\n\\tprobabilistic guard malloc policy = {\\n\\t\\tactivation rate = 1\\/1000\\n\\t\\tsample rate = 1\\/0\\n\\t}\\n\\n\\tproperties = partial import | runatload | resolve program | has LWCR\\n}\",\"launchServicesRegistered\":true,\"registration\":\"enabled\",\"registrationError\":\"服务未完成实际扫描、归档及推送\"}\n.agent/background-registration/data/archive/sessions/codex/codex_72aa1f339f47c67a9eb6de2f/metadata.json:4:    \"/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/background-registration/data/source/sessions/service-check.jsonl\"\n.agent/background-registration/data/archive/sessions/codex/codex_72aa1f339f47c67a9eb6de2f/metadata.json:6:  \"home\" : \"/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/background-registration/data/source\",\n.agent/background-registration/data/archive/sessions/codex/codex_72aa1f339f47c67a9eb6de2f/metadata.json:12:  \"project\" : \"/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/background-registration/data\",\n.agent/background-registration/data/archive/sessions/codex/codex_72aa1f339f47c67a9eb6de2f/transcript.md:5:项目：/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/background-registration/data\n.agent/background-registration/result-startup-window.json:1:{\"bundledRuntime\":true,\"cleanupStatus\":0,\"launchctl\":\"gui\\/501\\/com.oyamameek.ragdoll.signedcheck.service = {\\n\\tactive count = 1\\n\\tpath = (submitted by smd.68608)\\n\\ttype = Submitted\\n\\tmanaged_by = com.apple.xpc.ServiceManagement\\n\\tstate = running\\n\\n\\tprogram identifier = Contents\\/MacOS\\/RagdollService (mode: 2)\\n\\tparent bundle identifier = com.oyamameek.ragdoll.signedcheck\\n\\tparent bundle version = 1\\n\\tBTM uuid = 006A43C3-2C54-4FD9-9999-E9BC9CBA743A\\n\\targuments = {\\n\\t\\tRagdollService\\n\\t\\t--data-dir\\n\\t\\t\\/Volumes\\/SamsungSSD990PRO\\/GitHub\\/Ragdoll\\/.agent\\/background-registration\\/data\\n\\t}\\n\\n\\tinherited environment = {\\n\\t\\tSSH_AUTH_SOCK => \\/private\\/tmp\\/com.apple.launchd.tqc0VkbPRM\\/Listeners\\n\\t}\\n\\n\\tdefault environment = {\\n\\t\\tPATH => \\/usr\\/bin:\\/bin:\\/usr\\/sbin:\\/sbin\\n\\t}\\n\\n\\tenvironment = {\\n\\t\\tXPC_SERVICE_NAME => com.oyamameek.ragdoll.signedcheck.service\\n\\t}\\n\\n\\tdomain = gui\\/501 [100003]\\n\\tasid = 100003\\n\\tminimum runtime = 10\\n\\texit timeout = 5\\n\\truns = 1\\n\\tpid = 70381\\n\\timmediate reason = speculative\\n\\tforks = 0\\n\\texecs = 1\\n\\tinitialized = 1\\n\\ttrampolined = 1\\n\\tstarted suspended = 0\\n\\tproxy started suspended = 0\\n\\tlast exit code = (never exited)\\n\\n\\tsemaphores = {\\n\\t\\tsuccessful exit => 0\\n\\t}\\n\\n\\tspawn type = background (5)\\n\\tjetsam priority = 40\\n\\tjetsam memory limit (active) = (unlimited)\\n\\tjetsam memory limit (inactive) = (unlimited)\\n\\tjetsamproperties category = daemon\\n\\tsubmitted job. ignore execute allowed\\n\\tjetsam thread limit = 32\\n\\tcpumon = default\\n\\tjob state = running\\n\\tprobabilistic guard malloc policy = {\\n\\t\\tactivation rate = 1\\/1000\\n\\t\\tsample rate = 1\\/0\\n\\t}\\n\\n\\tproperties = partial import | runatload | resolve program | has LWCR\\n}\",\"launchServicesRegistered\":true,\"registration\":\"enabled\",\"registrationError\":\"服务未完成实际扫描、归档及推送\"}\n.agent/release-check/Ragdoll.app/Contents/Resources/runtime/node/CHANGELOG.md:2277:Silicon and Intel-based Macs for as long as practical.\n.agent/background-registration/ServiceCheck.app/Contents/Resources/runtime/app/package-lock.json:808:        \"iconv-lite\": \"^0.7.3\",\n.agent/background-registration/ServiceCheck.app/Contents/Resources/runtime/app/package-lock.json:1418:    \"node_modules/iconv-lite\": {\n.agent/background-registration/ServiceCheck.app/Contents/Resources/runtime/app/package-lock.json:1420:      \"resolved\": \"https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.7.3.tgz\",\n.agent/background-registration/ServiceCheck.app/Contents/Resources/runtime/app/package-lock.json:1786:        \"iconv-lite\": \"~0.7.0\",\n.agent/background-registration/ServiceCheck.app/Contents/Resources/runtime/node/CHANGELOG.md:2277:Silicon and Intel-based Macs for as long as practical.\n"}
+NSDockTile | Apple Developer Documentation (https://developer.apple.com/documentation/appkit/nsdocktile?changes=__6)
+citeturn2search0 [wordlim: 200] Crawled: 2 months ago; An application Dock tile defaults to display the application’s `applicationIconImage`. ... Whether using the default or custom view, the application Dock tile may be badged with a short custom string.
+
+  * AppKit
+  * NSDockTile
+
+Class
+
+# NSDockTile
+
+The visual representation of your app’s miniaturized windows and app icon as they appear in the Dock.
+    
+    `class NSDockTile`
+
+## Overview
+
+You do not create Dock tile objects explicitly in your app. Instead, you retrieve the Dock tile for an existing window or for the app by calling that object’s `dockTile` method. Also, you do not subclass the `NSDockTile` class; instead, you use the methods of the class to make the following customizations:
+
+  * Badge the tile with a custom string.
+
+  * Remove or show the application icon badge.
+
+  * Draw the tile content yourself.
+
+If you decide to draw the tile content yourself, you must provide a custom content view to handle the drawing.
+
+### Application Dock Tiles
+
+An application Dock tile defaults to display the application’s `applicationIconImage`.
+
+The application Dock tile never shows a smaller application icon badge.
+
+Whether using the default or custom view, the application Dock tile may be badged with a short custom string.
+--------------------------------------------------------------------------------
+NSDockTile | Apple Developer Documentation (https://developer.apple.com/documentation/appkit/nsdocktile?changes=lat_3__8&language=objc)
+citeturn2search1 [wordlim: 200] Crawled: yesterday; An application Dock tile defaults to display the application’s `applicationIconImage`. ... Whether using the default or custom view, the application Dock tile may be badged with a short custom string.
+
+  * AppKit
+  * NSDockTile
+
+Class
+
+# NSDockTile
+
+The visual representation of your app’s miniaturized windows and app icon as they appear in the Dock.
+    
+    `@interface NSDockTile : `NSObject``
+
+## Overview
+
+You do not create Dock tile objects explicitly in your app. Instead, you retrieve the Dock tile for an existing window or for the app by calling that object’s `dockTile` method. Also, you do not subclass the `NSDockTile` class; instead, you use the methods of the class to make the following customizations:
+
+  * Badge the tile with a custom string.
+
+  * Remove or show the application icon badge.
+
+  * Draw the tile content yourself.
+
+If you decide to draw the tile content yourself, you must provide a custom content view to handle the drawing.
+
+### Application Dock Tiles
+
+An application Dock tile defaults to display the application’s `applicationIconImage`.
+
+The application Dock tile never shows a smaller application icon badge.
+
+Whether using the default or custom view, the application Dock tile may be badged with a short custom string.
+
+### Window Dock Tiles
+
+A window Dock tile defaults to display a miniaturized version of the windows contents with a badge derived from the application Dock icon, including any customized application Dock icon. The default window Dock tile image may not be badged with a custom string.
+
+A window Dock tile can use a custom view to draw the Dock icon. If a custom view is used, no application badge will be added, but the text label will be overlaid on top of the icon.
+
+## Topics
+
+### Drawing the Tile’s Content
+
+`contentView`
+
+The view to use for drawing the dock tile contents.
+
+### Getting the Tile Information
+
+`size`
+
+The size of the tile.
+
+`owner`
+
+The object represented by the dock tile.
+
+### Applying Badge Icons to the Tile
+
+`showsApplicationBadge`
+
+A Boolean showing whether the tile is badged with the application’s icon
+
+`badgeLabel`
+
+The string to be displayed in the tile’s badging area.
+
+### Updating the Dock Tile
+
+`- display`
+
+Redraws the dock tile’s content.
+
+### Constants
+
+Dock Tile Plug-In Support Version
+
+The version of the AppKit framework containing support for dock tile plug-ins.
+
+## Relationships
+
+### Inherits From
+
+  * `NSObject`
+
+## See also
+
+### The Dock
+
+`NSDockTilePlugIn`
+
+A set of methods implemented by plug-ins that allow an app’s Dock tile to be customized while the app is not running.--------------------------------------------------------------------------------
+NSApplication | Apple Developer Documentation (https://developer.apple.com/documentation/AppKit/NSApplication?changes=l__2_4_1&language=objc)
+citeturn2search2 [wordlim: 200] Crawled: today; For more information on how events are handled and how you can modify the default behavior, including information on working with Apple events in scriptable apps, see How Cocoa Applications Handle Apple Events in Cocoa Scripting Guide. ... Activates the app, opens any files specified by the `NSOpen` user default, and unhighlights the app’s icon. ... You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so. ... `applicationIconImage`
+`NSApplication` installs Apple event handlers to handle these events by sending a message to the appropriate object. You can also use the `NSAppleEventManager` class to register your own Apple event handlers. The `applicationWillFinishLaunching:` method is generally the best place to do so. For more information on how events are handled and how you can modify the default behavior, including information on working with Apple events in scriptable apps, see How Cocoa Applications Handle Apple Events in Cocoa Scripting Guide.
+
+The `NSApplication` class sets up `@autorelease` block during initialization and inside the event loop—specifically, within its initialization (or `sharedApplication`) and `run` methods. Similarly, the methods AppKit adds to `NSBundle` employ `@autorelease` blocks during the loading of nib files. These `@autorelease` blocks aren’t accessible outside the scope of the respective `NSApplication` and `NSBundle` methods. Typically, an app creates objects either while the event loop is running or by loading objects from nib files, so this lack of access usually isn’t a problem. However, if you do need to use Cocoa classes within the `main()` function itself (other than to load nib files or to instantiate `NSApplication`), you should create an `@autorelease` block to contain the code using the classes.
+
+
+### Managing windows, panels, and menus
+
+App Windows
+
+Show, hide, minimize, arrange, and update your app’s windows.
+
+Modal Windows and Panels
+
+Display a modal window or show one of the standard app panels, such as the app’s About panel.
+
+Menus
+
+Access the app’s main menu items and update the window and services menus.
+
+### User interface layout direction
+
+`userInterfaceLayoutDirection`
+
+The layout direction of the user interface.
+
+`NSUserInterfaceLayoutDirection`
+
+Specifies the directional flow of the user interface.
+
+### Accessing the dock tile
+
+`dockTile`
+
+The app’s Dock tile.
+
+`applicationIconImage`
+
+The image used for the app’s icon.
+
+### Customizing the Touch Bar
+
+`- toggleTouchBarCustomizationPalette:`
+
+Show or hides the interface for customizing the Touch Bar.
+
+### Managing user attention requests
+
+`- requestUserAttention:`
+
+Starts a user attention request.
+
+`NSRequestUserAttentionType`
+
+These constants specify the level of severity of a user attention request and are used by `cancelUserAttentionRequest:` and `requestUserAttention:`.
+
+`- cancelUserAttentionRequest:`
+
+Cancels a previous user attention request.
+
+`- replyToOpenOrPrint:`
+
+Handles errors that might occur when the user attempts to open or print files.
+
+`NSApplicationDelegateReply`
+
+Constants that indicate whether a copy or print operation was successful, was canceled, or failed.
+--------------------------------------------------------------------------------
+NSApplication | Apple Developer Documentation (https://developer.apple.com/documentation/appkit/nsapplication?changes=_2)
+citeturn2search3 [wordlim: 200] Crawled: 2 months ago; `NSApplication` also posts notifications to the app’s default notification center. ... `var applicationIconImage: NSImage! ... The image used for the app’s icon.
+### Managing windows, panels, and menus
+
+App Windows
+
+Show, hide, minimize, arrange, and update your app’s windows.
+
+Modal Windows and Panels
+
+Display a modal window or show one of the standard app panels, such as the app’s About panel.
+
+Menus
+
+Access the app’s main menu items and update the window and services menus.
+
+### User interface layout direction
+
+`var userInterfaceLayoutDirection: NSUserInterfaceLayoutDirection`
+
+The layout direction of the user interface.
+
+`enum NSUserInterfaceLayoutDirection`
+
+Specifies the directional flow of the user interface.
+
+### Accessing the dock tile
+
+`var dockTile: NSDockTile`
+
+The app’s Dock tile.
+
+`var applicationIconImage: NSImage!`
+
+The image used for the app’s icon.
+
+### Customizing the Touch Bar
+
+`func toggleTouchBarCustomizationPalette(Any?)`
+
+Show or hides the interface for customizing the Touch Bar.
+
+### Managing user attention requests
+--------------------------------------------------------------------------------
+NSApplication | Apple Developer Documentation (https://developer.apple.com/documentation/appkit/nsapplication?language=objc)
+citeturn2search4 [wordlim: 200] Crawled: 2 months ago; `NSApplication` also posts notifications to the app’s default notification center. ... Activates the app, opens any files specified by the `NSOpen` user default, and unhighlights the app’s icon. ... `applicationIconImage`
+#### Methods to override
+
+Generally, you subclass `NSApplication` to provide your own special responses to messages that are routinely sent to the global app object (`NSApp`). `NSApplication` doesn’t have primitive methods in the sense of methods that you must override in your subclass. Here are four methods that are possible candidates for overriding:
+
+  * Override `run` if you want the app to manage the main event loop differently than it does by default. (This a critical and complex task, however, that you should only attempt with good reason).
+
+  * Override `sendEvent:` if you want to change how events are dispatched or perform some special event processing.
+
+  * Override `requestUserAttention:` if you want to modify how your app attracts the attention of the user (for example, offering an alternative to the bouncing app icon in the Dock).
+
+  * Override `targetForAction:` to substitute another object for the target of an action message.
+
+#### Special considerations
+
+The global app object uses `@autorelease` blocks in its `run` method; if you override this method, you’ll need to create your own `@autorelease` blocks.
+
+Do not override `sharedApplication`. The default implementation, which is essential to app behavior, is too complex to duplicate on your own.
+
+#### Alternatives to subclassing
+
+`NSApplication` defines numerous Delegation methods that offer opportunities for modifying specific aspects of app behavior. Instead of making a custom subclass of `NSApplication`, your app delegate may be able to implement one or more of these methods to accomplish your design goals. In general, a better design than subclassing `NSApplication` is to put the code that expresses your app’s special behavior into one or more custom objects called controllers. Methods defined in your controllers can be invoked from a small dispatcher object without being closely tied to the global app object.
+
+### Managing windows, panels, and menus
+
+App Windows
+
+Show, hide, minimize, arrange, and update your app’s windows.
+
+Modal Windows and Panels
+
+Display a modal window or show one of the standard app panels, such as the app’s About panel.
+
+Menus
+
+Access the app’s main menu items and update the window and services menus.
+
+### User interface layout direction
+
+`userInterfaceLayoutDirection`
+
+The layout direction of the user interface.
+
+`NSUserInterfaceLayoutDirection`
+
+Specifies the directional flow of the user interface.
+
+### Accessing the dock tile
+
+`dockTile`
+
+The app’s Dock tile.
+
+`applicationIconImage`
+
+The image used for the app’s icon.
+
+### Customizing the Touch Bar
+
+`- toggleTouchBarCustomizationPalette:`
+
+Show or hides the interface for customizing the Touch Bar.
+
+### Managing user attention requests
+
+`- requestUserAttention:`
+
+Starts a user attention request.
+--------------------------------------------------------------------------------
+NSApplication | Apple Developer Documentation (https://developer.apple.com/documentation/appkit/nsapplication?language=ob_4)
+citeturn2search5 [wordlim: 200] Crawled: today; You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so. ... `var applicationIconImage: NSImage! ... The image used for the app’s icon.
+### Managing windows, panels, and menus
+
+App Windows
+
+Show, hide, minimize, arrange, and update your app’s windows.
+
+Modal Windows and Panels
+
+Display a modal window or show one of the standard app panels, such as the app’s About panel.
+
+Menus
+
+Access the app’s main menu items and update the window and services menus.
+
+### User interface layout direction
+
+`var userInterfaceLayoutDirection: NSUserInterfaceLayoutDirection`
+
+The layout direction of the user interface.
+
+`enum NSUserInterfaceLayoutDirection`
+
+Specifies the directional flow of the user interface.
+
+### Accessing the dock tile
+
+`var dockTile: NSDockTile`
+
+The app’s Dock tile.
+
+`var applicationIconImage: NSImage!`
+
+The image used for the app’s icon.
+
+### Customizing the Touch Bar
+
+`func toggleTouchBarCustomizationPalette(Any?)`
+
+Show or hides the interface for customizing the Touch Bar.
+
+### Managing user attention requests
+--------------------------------------------------------------------------------
+NSApplication | Apple Developer Documentation (https://developer.apple.com/documentation/AppKit/NSApplication?changes=_6&language=objc)
+citeturn2search6 [wordlim: 200] Crawled: 2 months ago; `NSApplication` also posts notifications to the app’s default notification center. ... `applicationIconImage`
+
+The image used for the app’s icon.
+### Managing windows, panels, and menus
+
+App Windows
+
+Show, hide, minimize, arrange, and update your app’s windows.
+
+Modal Windows and Panels
+
+Display a modal window or show one of the standard app panels, such as the app’s About panel.
+
+Menus
+
+Access the app’s main menu items and update the window and services menus.
+
+### User interface layout direction
+
+`userInterfaceLayoutDirection`
+
+The layout direction of the user interface.
+
+`NSUserInterfaceLayoutDirection`
+
+Specifies the directional flow of the user interface.
+
+### Accessing the dock tile
+
+`dockTile`
+
+The app’s Dock tile.
+
+`applicationIconImage`
+
+The image used for the app’s icon.
+
+### Customizing the Touch Bar
+
+`- toggleTouchBarCustomizationPalette:`
+
+Show or hides the interface for customizing the Touch Bar.
+
+### Managing user attention requests
+
+`- requestUserAttention:`
+
+Starts a user attention request.
+--------------------------------------------------------------------------------
+NSApplication | Apple Developer Documentation (https://developer.apple.com/documentation/AppKit/NSApplication)
+citeturn2search7 [wordlim: 200] Crawled: 2 months ago; `var NSApp: NSApplication! ... Activates the app, opens any files specified by the `NSOpen` user default, and unhighlights the app’s icon.
+`】
+
+The last event object that the app retrieved from the event queue.
+
+`var isRunning: Bool`
+
+A Boolean value indicating whether the main event loop is running.
+
+`func run()`
+
+Starts the main event loop.
+
+`func finishLaunching()`
+
+Activates the app, opens any files specified by the `NSOpen` user default, and unhighlights the app’s icon.
+
+`func stop(Any?)`
+
+Stops the main event loop.
+
+`func sendEvent(NSEvent)`
+
+Dispatches an event to other objects.
+
+`func postEvent(NSEvent, atStart: Bool)`
+
+Adds a given event to the receiver’s event queue.
+
+### Posting actions
+
+`func tryToPerform(Selector, with: Any?) -> Bool`
+
+Dispatches an action message to the specified target.
+
+`func sendAction(Selector, to: Any?, from: Any?) -> Bool`
+
+Sends the given action message to the given target.
+
+`func target(forAction: Selector) -> Any?`
+
+Returns the object that receives the action message specified by the given selector.
+
+`func target(forAction: Selector, to: Any?, from: Any?) -> Any?`
+
+Searches for an object that can receive the message specified by the given selector.
+
+--------------------------------------------------------------------------------
+NSApplication | Apple Developer Documentation (https://developer.apple.com/documentation/appkit/nsapplication?changes=la_2_2)
+citeturn2search8 [wordlim: 200] Crawled: 2 months ago; `NSApplication` also posts notifications to the app’s default notification center.
+--------------------------------------------------------------------------------
+NSApplication | Apple Developer Documentation (https://developer.apple.com/documentation/appkit/nsapplication?changes=_11_2%2C_11_2)
+citeturn2search9 [wordlim: 200] Crawled: today; Activates the app, opens any files specified by the `NSOpen` user default, and unhighlights the app’s icon. ... You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
+--------------------------------------------------------------------------------
+NSApplication | Apple Developer Documentation (https://developer.apple.com/documentation/appkit/nsapplication?changes=lat_1)
+citeturn2search10 [wordlim: 200] Crawled: 4 weeks ago; Built-in AppKit components such as NSImageView will automatically behave correctly with HDR content. You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
+--------------------------------------------------------------------------------
+NSApplication | Apple Developer Documentation (https://developer.apple.com/documentation/appkit/nsapplication?changes=_9_1)
+citeturn2search11 [wordlim: 200] Crawled: 2 months ago; Built-in AppKit components such as NSImageView will automatically behave correctly with HDR content. You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
+
+
+## tool · 2026-11-17T13:44:40Z
+
+
+Script completed
+Wall time 5.6 seconds
+Output:
+
+{"chunk_id":"0c5444","wall_time_seconds":0.000009209,"exit_code":0,"original_token_count":968,"output":"import AppKit\nimport CryptoKit\nimport UniformTypeIdentifiers\n\nfunc describe(_ label: String, _ image: NSImage?) {\n    guard let image, let data = image.tiffRepresentation else {\n        print(\"\\(label): missing\")\n        return\n    }\n    print(\"\\(label): size=\\(image.size) bytes=\\(data.count) sha256=\\(SHA256.hash(data: data))\")\n}\n\nprint(\"registered:\", NSWorkspace.shared.urlForApplication(withBundleIdentifier: \"com.oyamameek.ragdoll\")?.path ?? \"missing\")\nfor app in NSWorkspace.shared.runningApplications where app.bundleIdentifier == \"com.oyamameek.ragdoll\" {\n    print(\"running:\", app.processIdentifier, app.bundleURL?.path ?? \"missing\", \"finished:\", app.isFinishedLaunching)\n    describe(\"running icon\", app.icon)\n}\nfor path in [\"dist/Ragdoll.app\", \"dist/Ragdoll.preview.app\"] {\n    let url = URL(fileURLWithPath: path)\n    describe(path, NSWorkspace.shared.icon(forFile: url.path))\n}\ndescribe(\"generic application\", NSWorkspace.shared.icon(for: .applicationBundle))\n# 开发环境\n\n- 当前代理：Codex；本轮添加 `system prompt` 总折叠项，详见 `memory/progress.md`。\n- Swift 6.1、SwiftUI、macOS 15+、GRDB；TypeScript 助手使用 Node。\n- 工具：命令行、apply_patch、Swift Testing、SwiftUI、codesign；采用 Ponytail，验证提示词分组、分页、Swift 测试与 release 预览包。不新增依赖、截图或子代理。\n- 参考目录仅供读取，不纳入应用提交。\n# Ragdoll 实施计划\n\n## system prompt 总折叠项\n\n- 连续的系统提示词合并为默认收起的 `system prompt`，展开后保留逐条折叠；用户与助手之间的提示词按原位置独立成组。\n- 工具过滤后先分组再分页，每页 100 项，确保同一组提示词不会被截断。历史会话和对话复用实现。\n- 范围：ConversationView、ConversationTests、使用指南与任务记录；存储、调用方、fixtures、配置、公开导出与依赖不变。\n- 先验证分组及分页回归失败，再实施、运行 Swift 全部测试和 release 构建，更新临时签名预览包并检查签名和助手；保留原正式包。不截图或执行 Claude 测试，提交并普通推送。\n# 实施进度\n\n## system prompt 总折叠项（2026-11-17）\n\n- [x] 确认共用 ConversationView 当前逐条折叠；调用和测试均在该视图与 ConversationTests，没有项目测试技能目录。\n- [x] 记录连续分组、总折叠项与先分组后分页的范围和验证标准。\n- [x] 新增两项回归先因 conversationGroups 缺失编译失败；接入默认收起的 system prompt，保留内部逐条折叠，过滤工具后先分组再分页。\n- [x] 全部 46 项 Swift 测试通过（21.670 秒），release 构建通过；更新 dist/Ragdoll.preview.app，临时签名完整性及内置助手自检通过。原正式包签名完整性通过且可执行文件 SHA-256 不变。未验证实际点击或视觉效果，未运行 Claude 测试。\n# 验证标准\n\n## system prompt 总折叠项\n\n- 连续 system/developer 和已识别注入消息显示为单个 `system prompt`，默认收起；展开保留原逐条折叠及全文选择。\n- 用户、助手保持原顺序；隐藏工具不打断提示词分组，空会话无分组。先分组后按 100 项分页，组内提示词完整保留，原始消息不变。\n- 分组和分页回归先失败，再运行全部 Swift 测试、release 构建、临时签名预览完整性与助手自检、Git diff 检查；不执行截图或 Claude 测试。提交后普通推送并核对远端 SHA。\n- 已验证：两项新回归先因分组入口缺失编译失败，实现后全部 46 项 Swift 测试通过（21.670 秒）；release 构建、更新预览包的临时签名完整性及内置助手自检、Git diff 检查通过。原正式包 SHA-256 不变、签名完整性通过；未验证实际点击或视觉效果，未运行 Claude 测试。\n"}
+{}
+{"chunk_id":"730283","wall_time_seconds":1.281648833,"exit_code":0,"original_token_count":354,"output":"registered: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app\nrunning: 61077 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.preview.app finished: true\nrunning icon: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: a2b687a30c03bacb77e50acb4f5aa82d36023dd22a66922ed18f8d107f846337\nrunning icon: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\ndist/Ragdoll.app: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: a2b687a30c03bacb77e50acb4f5aa82d36023dd22a66922ed18f8d107f846337\ndist/Ragdoll.app: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\ndist/Ragdoll.preview.app: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: a2b687a30c03bacb77e50acb4f5aa82d36023dd22a66922ed18f8d107f846337\ndist/Ragdoll.preview.app: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\ngeneric application: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: ce69abfb9600908ed2d2a2dcd2e41653d73f5b37afcf541d5276b69d28367423\ngeneric application: normalized=SHA256 digest: e08e590543b644afe3504dac24a9e80861594d9e7d1fbb0b317c2c5188092728\nsource resource: size=(512.0, 512.0) bytes=6941084 sha256=SHA256 digest: 0ae3027c16c43a205e843fdba9d7b4bb683fddf568de6026ae81e8289d428d87\nsource resource: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\n"}
+
+## tool · 2026-11-17T13:45:09Z
+
+
+Script completed
+Wall time 5.2 seconds
+Output:
+
+{}
+{"chunk_id":"72219f","wall_time_seconds":1.002472208,"session_id":90454,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T13:45:14Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"bcb47a","wall_time_seconds":0.000019333,"exit_code":1,"original_token_count":203,"output":".agent/probe-app-icon.swift:26:16: error: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context\n11 | }\n12 | \n13 | @MainActor final class Delegate: NSObject, NSApplicationDelegate {\n   |                                                                  `- note: calls to initializer 'init()' from outside of its actor context are implicitly asynchronous\n14 |     func applicationDidFinishLaunching(_ notification: Notification) {\n15 |         let resource = NSImage(contentsOf: Bundle.main.url(forResource: \"Ragdoll\", withExtension: \"icns\")!)!\n   :\n24 | \n25 | let app = NSApplication.shared\n26 | let delegate = Delegate()\n   |                `- error: call to main actor-isolated initializer 'init()' in a synchronous nonisolated context\n27 | app.delegate = delegate\n28 | app.run()\n"}
+
+## tool · 2026-11-17T13:45:25Z
+
+
+Script completed
+Wall time 4.8 seconds
+Output:
+
+{"chunk_id":"d2ebd9","wall_time_seconds":1.00224875,"session_id":66314,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T13:45:29Z
+
+
+Script completed
+Wall time 1.0 seconds
+Output:
+
+{"chunk_id":"0de224","wall_time_seconds":0.954263042,"exit_code":0,"original_token_count":52,"output":"applicationIconImage: SHA256 digest: b47162ac8533ddd6f14d959f95ae06bc4c537f78cdf0052fd514bf85d1e07384\nresource: SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\nmatches: false\n"}
