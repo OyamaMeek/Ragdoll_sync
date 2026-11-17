@@ -264,13 +264,48 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"bb0017\",\"wall_time_seconds\":0.000010542,\"exit_code\":0,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"aa496a\",\"wall_time_seconds\":0.000008084,\"exit_code\":0,\"original_token_count\":248,\"output\":\"{\\\"status\\\":200,\\\"jobs\\\":[{\\\"id\\\":134030176807,\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null,\\\"runner_name\\\":\\\"GitHub Actions 1000000350\\\",\\\"steps\\\":[{\\\"name\\\":\\\"Set up job\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Run actions/checkout@v7\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Run actions/setup-node@v7\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Prepare version\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Build application\\\",\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null},{\\\"name\\\":\\\"Check runtime\\\",\\\"status\\\":\\\"pending\\\",\\\"conclusion\\\":null},{\\\"name\\\":\\\"Test Swift\\\",\\\"status\\\":\\\"pending\\\",\\\"conclusion\\\":null},{\\\"name\\\":\\\"Package and verify\\\",\\\"status\\\":\\\"pending\\\",\\\"conclusion\\\":null},{\\\"name\\\":\\\"Run actions/upload-artifact@v7\\\",\\\"status\\\":\\\"pending\\\",\\\"conclusion\\\":null},{\\\"name\\\":\\\"Publish release\\\",\\\"status\\\":\\\"pending\\\",\\\"conclusion\\\":null},{\\\"name\\\":\\\"Post Run actions/setup-node@v7\\\",\\\"status\\\":\\\"pending\\\",\\\"conclusion\\\":null},{\\\"name\\\":\\\"Post Run actions/checkout@v7\\\",\\\"status\\\":\\\"pending\\\",\\\"conclusion\\\":null}]}]}\\n\"}",
       "time" : 1794917465951
+    },
+    {
+      "id" : "call_a4549f9ca21c43f88b5efc82b130e9b3",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nWall time: 40.0177 seconds\nSleep completed.",
+      "time" : 1794917520874
+    },
+    {
+      "id" : "call_69613e29a73b4641ba18e829746a345e",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"f2cd42\",\"wall_time_seconds\":1.0014135,\"session_id\":60019,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794917527759
+    },
+    {
+      "id" : "call_ff3b76dc67224057a5a626540f0d4fed",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"50bd5a\",\"wall_time_seconds\":0.000007834,\"exit_code\":0,\"original_token_count\":106,\"output\":\"[{\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null,\\\"steps\\\":[{\\\"name\\\":\\\"Set up job\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Run actions/checkout@v7\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Run actions/setup-node@v7\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Prepare version\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Build application\\\",\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null}]}]\\n\"}\n{\"chunk_id\":\"720559\",\"wall_time_seconds\":0.000007709,\"exit_code\":0,\"original_token_count\":38,\"output\":\"87fcafa chore(release): build macOS app and publish tagged releases\\n-rw-r--r--  1 oyamahappa  staff    79M Nov 17 20:08 dist/Ragdoll-macos-arm64.zip\\n\"}",
+      "time" : 1794917535542
+    },
+    {
+      "id" : "227",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "云端已完成源码检出、Node 安装和版本准备，正在首次编译。这次使用 `main` 分支验证，只生成 Actions 构建产物；正式 Release 由 `vX.Y.Z` 标签触发。\n",
+      "time" : 1794917546615
+    },
+    {
+      "id" : "call_b42e79950f8a44ebb0b9ff795988cc60",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "sleep\n{\"duration_ms\":45000}",
+      "time" : 1794917546676
     }
   ],
   "nativeID" : "01a1e964-1dc6-70e0-a088-c1aba2d19636",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794917465953,
+  "updated" : 1794917547278,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -478,6 +513,42 @@
       "model" : "gpt-6.1-sol",
       "output" : 167,
       "time" : 1794917465948
+    },
+    {
+      "cacheRead" : 114176,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc445b272087d08c24ab94746a15ca",
+      "input" : 478,
+      "model" : "gpt-6.1-sol",
+      "output" : 371,
+      "time" : 1794917481354
+    },
+    {
+      "cacheRead" : 114816,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc44921a9487d08a2ff561770a5e18",
+      "input" : 232,
+      "model" : "gpt-6.1-sol",
+      "output" : 142,
+      "time" : 1794917527757
+    },
+    {
+      "cacheRead" : 115072,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4498f40487d0a40081af16572cd8",
+      "input" : 176,
+      "model" : "gpt-6.1-sol",
+      "output" : 179,
+      "time" : 1794917535541
+    },
+    {
+      "cacheRead" : 115200,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc44a0b70c87d0b7a1712c334f0c9c",
+      "input" : 474,
+      "model" : "gpt-6.1-sol",
+      "output" : 239,
+      "time" : 1794917547278
     }
   ],
   "warnings" : [

@@ -2244,3 +2244,38 @@ Output:
 
 {"chunk_id":"bb0017","wall_time_seconds":0.000010542,"exit_code":0,"original_token_count":0,"output":""}
 {"chunk_id":"aa496a","wall_time_seconds":0.000008084,"exit_code":0,"original_token_count":248,"output":"{\"status\":200,\"jobs\":[{\"id\":134030176807,\"status\":\"in_progress\",\"conclusion\":null,\"runner_name\":\"GitHub Actions 1000000350\",\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build application\",\"status\":\"in_progress\",\"conclusion\":null},{\"name\":\"Check runtime\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Test Swift\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Package and verify\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Run actions/upload-artifact@v7\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Publish release\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Post Run actions/setup-node@v7\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Post Run actions/checkout@v7\",\"status\":\"pending\",\"conclusion\":null}]}]}\n"}
+
+## tool · 2026-11-17T12:12:00Z
+
+
+Wall time: 40.0177 seconds
+Sleep completed.
+
+## tool · 2026-11-17T12:12:07Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"f2cd42","wall_time_seconds":1.0014135,"session_id":60019,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:12:15Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"50bd5a","wall_time_seconds":0.000007834,"exit_code":0,"original_token_count":106,"output":"[{\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build application\",\"status\":\"in_progress\",\"conclusion\":null}]}]\n"}
+{"chunk_id":"720559","wall_time_seconds":0.000007709,"exit_code":0,"original_token_count":38,"output":"87fcafa chore(release): build macOS app and publish tagged releases\n-rw-r--r--  1 oyamahappa  staff    79M Nov 17 20:08 dist/Ragdoll-macos-arm64.zip\n"}
+
+## assistant · 2026-11-17T12:12:26Z
+
+云端已完成源码检出、Node 安装和版本准备，正在首次编译。这次使用 `main` 分支验证，只生成 Actions 构建产物；正式 Release 由 `vX.Y.Z` 标签触发。
+
+
+## tool · 2026-11-17T12:12:26Z
+
+sleep
+{"duration_ms":45000}
