@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "修复台前调度图标不显示",
-  "updated" : 1794923241425,
+  "updated" : 1794923421034,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -175,6 +175,87 @@
       "model" : "gpt-6.1-sol",
       "output" : 972,
       "time" : 1794923241342
+    },
+    {
+      "cacheRead" : 106880,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5af084ac87d0b7886c95329355b7",
+      "input" : 694,
+      "model" : "gpt-6.1-sol",
+      "output" : 150,
+      "time" : 1794923253597
+    },
+    {
+      "cacheRead" : 107648,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5af89a0c87d081daf6c71166bb18",
+      "input" : 249,
+      "model" : "gpt-6.1-sol",
+      "output" : 582,
+      "time" : 1794923276565
+    },
+    {
+      "cacheRead" : 108416,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5b13616887d0ab520abf0451ee03",
+      "input" : 670,
+      "model" : "gpt-6.1-sol",
+      "output" : 51,
+      "time" : 1794923286645
+    },
+    {
+      "cacheRead" : 109056,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5b17eb2c87d092208ae274d0a625",
+      "input" : 616,
+      "model" : "gpt-6.1-sol",
+      "output" : 981,
+      "time" : 1794923310026
+    },
+    {
+      "cacheRead" : 110592,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5b3c4fec87d0884304e6dff96cf3",
+      "input" : 1412,
+      "model" : "gpt-6.1-sol",
+      "output" : 68,
+      "time" : 1794923327602
+    },
+    {
+      "cacheRead" : 112000,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5b458be887d085d08e9046ccf2b3",
+      "input" : 382,
+      "model" : "gpt-6.1-sol",
+      "output" : 207,
+      "time" : 1794923341230
+    },
+    {
+      "cacheRead" : 112512,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5b52da8887d0bdd71d2c56c5461b",
+      "input" : 8665,
+      "model" : "gpt-6.1-sol",
+      "output" : 776,
+      "time" : 1794923368517
+    },
+    {
+      "cacheRead" : 121856,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5b6de75c87d0a4206ad07545534b",
+      "input" : 3000,
+      "model" : "gpt-6.1-sol",
+      "output" : 39,
+      "time" : 1794923378768
+    },
+    {
+      "cacheRead" : 124800,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5b742a1c87d08d75bf26d8a81fe9",
+      "input" : 311,
+      "model" : "gpt-6.1-sol",
+      "output" : 1358,
+      "time" : 1794923417413
     }
   ],
   "warnings" : [

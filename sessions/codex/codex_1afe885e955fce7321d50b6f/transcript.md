@@ -2124,9 +2124,985 @@ Output:
 {"chunk_id":"1258be","wall_time_seconds":0.000017125,"exit_code":1,"original_token_count":52,"output":"applicationIconImage: SHA256 digest: b47162ac8533ddd6f14d959f95ae06bc4c537f78cdf0052fd514bf85d1e07384\nresource: SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\nmatches: false\n"}
 {"chunk_id":"f843d3","wall_time_seconds":0.000009,"exit_code":0,"original_token_count":205,"output":"import SwiftUI\nimport AppKit\nimport RagdollCore\n\n@main\nstruct RagdollApp: App {\n    @StateObject private var model = AppModel()\n    var body: some Scene {\n        WindowGroup {\n            RootView().environmentObject(model).frame(minWidth: 1050, minHeight: 720).task { await model.launch() }\n        }\n        .defaultSize(width: 1380, height: 900)\n        .commands {\n            CommandGroup(after: .newItem) {\n                Button(\"导入 Claude 导出包…\") { model.importDesktop() }.keyboardShortcut(\"i\", modifiers: [.command, .shift])\n                Button(\"刷新会话\") { Task { await model.refresh() } }.keyboardShortcut(\"r\")\n                Button(\"立即归档\") { Task { await model.archiveNow() } }.keyboardShortcut(\"s\", modifiers: [.command, .shift])\n            }\n        }\n    }\n}\nbuild.sh\ndev.sh\n"}
 
-## tool · 2026-11-17T13:47:21Z
+## tool · 2026-11-17T13:47:27Z
 
-exec
-text(await tools.apply_patch("*** Begin Patch\n*** Add File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/Sources/Ragdoll/AppDelegate.swift\n+import AppKit\n+\n+@MainActor\n+final class AppDelegate: NSObject, NSApplicationDelegate {\n+    func applicationWillFinishLaunching(_ notification: Notification) {\n+        NSApplication.shared.applicationIconImage = NSImage(named: \"Ragdoll\")\n+    }\n+}\n*** Update File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/Sources/Ragdoll/RagdollApp.swift\n@@\n struct RagdollApp: App {\n+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate\n     @StateObject private var model = AppModel()\n*** Add File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/scripts/check-app-icon.swift\n+import AppKit\n+import CryptoKit\n+\n+@main\n+@MainActor\n+final class ApplicationIconCheck: NSObject, NSApplicationDelegate {\n+    private let appDelegate = AppDelegate()\n+\n+    static func main() {\n+        let app = NSApplication.shared\n+        let check = ApplicationIconCheck()\n+        app.delegate = check\n+        app.run()\n+    }\n+\n+    func applicationWillFinishLaunching(_ notification: Notification) {\n+        appDelegate.applicationWillFinishLaunching(notification)\n+    }\n+\n+    func applicationDidFinishLaunching(_ notification: Notification) {\n+        guard let url = Bundle.main.url(forResource: \"Ragdoll\", withExtension: \"icns\"),\n+              let expected = NSImage(contentsOf: url),\n+              let actual = NSApplication.shared.applicationIconImage else {\n+            fatalError(\"应用图标或包内资源缺失\")\n+        }\n+        guard digest(actual) == digest(expected) else {\n+            print(\"FAIL: 启动后的应用图标与包内资源不一致\")\n+            exit(1)\n+        }\n+        print(\"PASS: 启动后的应用图标与包内 Ragdoll.icns 一致\")\n+        NSApplication.shared.terminate(nil)\n+    }\n+\n+    private func digest(_ image: NSImage) -> SHA256.Digest {\n+        let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64,\n+                                      bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,\n+                                      isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 256, bitsPerPixel: 32)!\n+        NSGraphicsContext.saveGraphicsState()\n+        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)\n+        image.draw(in: NSRect(x: 0, y: 0, width: 64, height: 64))\n+        NSGraphicsContext.restoreGraphicsState()\n+        return SHA256.hash(data: Data(bytes: bitmap.bitmapData!, count: 64 * 256))\n+    }\n+}\n*** End Patch"));
-text(await tools.exec_command({cmd:"cat Sources/Ragdoll/AppDelegate.swift scripts/check-app-icon.swift && head -12 Sources/Ragdoll/RagdollApp.swift && swiftc -swift-version 6 -module-cache-path .cache/swift-modules Sources/Ragdoll/AppDelegate.swift scripts/check-app-icon.swift -o .agent/IconProbe.app/Contents/MacOS/Ragdoll && .agent/IconProbe.app/Contents/MacOS/Ragdoll","sandbox_permissions":"require_escalated","justification":"在隔离应用中执行真实 AppDelegate 启动回调，验证 applicationIconImage 已与包内猫咪图标一致。","yield_time_ms":1000,"max_output_tokens":2500}));
 
+Script completed
+Wall time 5.9 seconds
+Output:
+
+{}
+{"chunk_id":"bd5c90","wall_time_seconds":1.002896625,"session_id":64564,"original_token_count":609,"output":"import AppKit\n\n@MainActor\nfinal class AppDelegate: NSObject, NSApplicationDelegate {\n    func applicationWillFinishLaunching(_ notification: Notification) {\n        NSApplication.shared.applicationIconImage = NSImage(named: \"Ragdoll\")\n    }\n}\nimport AppKit\nimport CryptoKit\n\n@main\n@MainActor\nfinal class ApplicationIconCheck: NSObject, NSApplicationDelegate {\n    private let appDelegate = AppDelegate()\n\n    static func main() {\n        let app = NSApplication.shared\n        let check = ApplicationIconCheck()\n        app.delegate = check\n        app.run()\n    }\n\n    func applicationWillFinishLaunching(_ notification: Notification) {\n        appDelegate.applicationWillFinishLaunching(notification)\n    }\n\n    func applicationDidFinishLaunching(_ notification: Notification) {\n        guard let url = Bundle.main.url(forResource: \"Ragdoll\", withExtension: \"icns\"),\n              let expected = NSImage(contentsOf: url),\n              let actual = NSApplication.shared.applicationIconImage else {\n            fatalError(\"应用图标或包内资源缺失\")\n        }\n        guard digest(actual) == digest(expected) else {\n            print(\"FAIL: 启动后的应用图标与包内资源不一致\")\n            exit(1)\n        }\n        print(\"PASS: 启动后的应用图标与包内 Ragdoll.icns 一致\")\n        NSApplication.shared.terminate(nil)\n    }\n\n    private func digest(_ image: NSImage) -> SHA256.Digest {\n        let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64,\n                                      bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,\n                                      isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 256, bitsPerPixel: 32)!\n        NSGraphicsContext.saveGraphicsState()\n        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)\n        image.draw(in: NSRect(x: 0, y: 0, width: 64, height: 64))\n        NSGraphicsContext.restoreGraphicsState()\n        return SHA256.hash(data: Data(bytes: bitmap.bitmapData!, count: 64 * 256))\n    }\n}\nimport SwiftUI\nimport AppKit\nimport RagdollCore\n\n@main\nstruct RagdollApp: App {\n    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate\n    @StateObject private var model = AppModel()\n    var body: some Scene {\n        WindowGroup {\n            RootView().environmentObject(model).frame(minWidth: 1050, minHeight: 720).task { await model.launch() }\n        }\n"}
+
+## tool · 2026-11-17T13:47:35Z
+
+
+Script completed
+Wall time 2.3 seconds
+Output:
+
+{"chunk_id":"0623f8","wall_time_seconds":0.000010166,"exit_code":1,"original_token_count":14,"output":"FAIL: 启动后的应用图标与包内资源不一致\n"}
+{"chunk_id":"2936be","wall_time_seconds":1.000462209,"session_id":96321,"original_token_count":0,"output":""}
+{"chunk_id":"67bcd6","wall_time_seconds":1.001991584,"session_id":28487,"original_token_count":39,"output":"Another instance of SwiftPM is already running using '/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.build', waiting until that process has finished execution..."}
+
+## tool · 2026-11-17T13:48:02Z
+
+
+Script completed
+Wall time 6.8 seconds
+Output:
+
+{"chunk_id":"af7341","wall_time_seconds":0.000007416,"exit_code":0,"original_token_count":514,"output":"import AppKit\nimport CryptoKit\n\n@main\n@MainActor\nfinal class ApplicationIconCheck: NSObject, NSApplicationDelegate {\n    private let appDelegate = AppDelegate()\n\n    static func main() {\n        let app = NSApplication.shared\n        let check = ApplicationIconCheck()\n        app.delegate = check\n        app.run()\n    }\n\n    func applicationWillFinishLaunching(_ notification: Notification) {\n        appDelegate.applicationWillFinishLaunching(notification)\n    }\n\n    func applicationDidFinishLaunching(_ notification: Notification) {\n        guard let url = Bundle.main.url(forResource: \"Ragdoll\", withExtension: \"icns\"),\n              let expected = NSImage(contentsOf: url),\n              let actual = NSApplication.shared.applicationIconImage else {\n            fatalError(\"应用图标或包内资源缺失\")\n        }\n        guard digest(actual) == digest(expected) else {\n            print(\"FAIL: 启动后的应用图标与包内资源不一致\")\n            exit(1)\n        }\n        print(\"PASS: 启动后的应用图标与包内 Ragdoll.icns 一致\")\n        NSApplication.shared.terminate(nil)\n    }\n\n    private func digest(_ image: NSImage) -> SHA256.Digest {\n        let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64,\n                                      bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,\n                                      isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 256, bitsPerPixel: 32)!\n        NSGraphicsContext.saveGraphicsState()\n        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)\n        image.draw(in: NSRect(x: 0, y: 0, width: 64, height: 64))\n        NSGraphicsContext.restoreGraphicsState()\n        return SHA256.hash(data: Data(bytes: bitmap.bitmapData!, count: 64 * 256))\n    }\n}\nimport AppKit\n\n@MainActor\nfinal class AppDelegate: NSObject, NSApplicationDelegate {\n    func applicationWillFinishLaunching(_ notification: Notification) {\n        NSApplication.shared.applicationIconImage = NSImage(named: \"Ragdoll\")\n    }\n}\n"}
+{}
+{"chunk_id":"6ea2ec","wall_time_seconds":1.003058875,"session_id":66797,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T13:48:06Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"5abd68","wall_time_seconds":0.000007083,"exit_code":1,"original_token_count":65,"output":"will named: Optional(SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf)\nwill actual: Optional(SHA256 digest: b47162ac8533ddd6f14d959f95ae06bc4c537f78cdf0052fd514bf85d1e07384)\nFAIL: 启动后的应用图标与包内资源不一致\n"}
+{"chunk_id":"302c40","wall_time_seconds":0.000005875,"exit_code":1,"original_token_count":141,"output":"error: Error Domain=NSCocoaErrorDomain Code=513 \"You don’t have permission to save the file “output-file-map.json” in the folder “RagdollCore.build”.\" UserInfo={NSUserStringVariant=Folder, NSUnderlyingError=0x13da30a70 {Error Domain=NSPOSIXErrorDomain Code=1 \"Operation not permitted\"}, NSURL=file:///Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.build/arm64-apple-macosx/debug/RagdollCore.build/output-file-map.json}\n[0/1] Planning build\nerror: You don’t have permission to save the file “output-file-map.json” in the folder “RagdollCore.build”.\n"}
+{"chunk_id":"c1b223","wall_time_seconds":0.000005917,"exit_code":1,"original_token_count":141,"output":"error: Error Domain=NSCocoaErrorDomain Code=513 \"You don’t have permission to save the file “output-file-map.json” in the folder “RagdollCore.build”.\" UserInfo={NSUserStringVariant=Folder, NSUnderlyingError=0x128905690 {Error Domain=NSPOSIXErrorDomain Code=1 \"Operation not permitted\"}, NSURL=file:///Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.build/arm64-apple-macosx/release/RagdollCore.build/output-file-map.json}\n[0/1] Planning build\nerror: You don’t have permission to save the file “output-file-map.json” in the folder “RagdollCore.build”.\n"}
+
+## assistant · 2026-11-17T13:48:22Z
+
+启动自检发现，在 `applicationWillFinishLaunching` 中赋值后，应用仍返回旧图标。我会改在 `applicationDidFinishLaunching` 中设置，并重新验证。Swift 检查还遇到了现有 `.build` 目录的写入权限限制，需要在沙盒外运行。
+
+
+## tool · 2026-11-17T13:48:43Z
+
+
+Script completed
+Wall time 13.8 seconds
+Output:
+
+{"chunk_id":"1dc4e0","wall_time_seconds":0.000013542,"exit_code":0,"original_token_count":1180,"output":"import AppKit\n\n@MainActor\nfinal class AppDelegate: NSObject, NSApplicationDelegate {\n    func applicationWillFinishLaunching(_ notification: Notification) {\n        NSApplication.shared.applicationIconImage = NSImage(named: \"Ragdoll\")\n    }\n}\nimport SwiftUI\nimport AppKit\nimport RagdollCore\n\n@main\nstruct RagdollApp: App {\n    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate\n    @StateObject private var model = AppModel()\n    var body: some Scene {\n        WindowGroup {\n            RootView().environmentObject(model).frame(minWidth: 1050, minHeight: 720).task { await model.launch() }\n        }\n        .defaultSize(width: 1380, height: 900)\n        .commands {\n            CommandGroup(after: .newItem) {\n                Button(\"导入 Claude 导出包…\") { model.importDesktop() }.keyboardShortcut(\"i\", modifiers: [.command, .shift])\n                Button(\"刷新会话\") { Task { await model.refresh() } }.keyboardShortcut(\"r\")\n                Button(\"立即归档\") { Task { await model.archiveNow() } }.keyboardShortcut(\"s\", modifiers: [.command, .shift])\n            }\n        }\n    }\n}\nimport AppKit\nimport CryptoKit\n\n@main\n@MainActor\nfinal class ApplicationIconCheck: NSObject, NSApplicationDelegate {\n    private let appDelegate = AppDelegate()\n\n    static func main() {\n        let app = NSApplication.shared\n        let check = ApplicationIconCheck()\n        app.delegate = check\n        app.run()\n    }\n\n    func applicationWillFinishLaunching(_ notification: Notification) {\n        appDelegate.applicationWillFinishLaunching(notification)\n        print(\"will named:\", NSImage(named: \"Ragdoll\").map(digest) as Any)\n        print(\"will actual:\", NSApplication.shared.applicationIconImage.map(digest) as Any)\n    }\n\n    func applicationDidFinishLaunching(_ notification: Notification) {\n        guard let url = Bundle.main.url(forResource: \"Ragdoll\", withExtension: \"icns\"),\n              let expected = NSImage(contentsOf: url),\n              let actual = NSApplication.shared.applicationIconImage else {\n            fatalError(\"应用图标或包内资源缺失\")\n        }\n        guard digest(actual) == digest(expected) else {\n            print(\"FAIL: 启动后的应用图标与包内资源不一致\")\n            exit(1)\n        }\n        print(\"PASS: 启动后的应用图标与包内 Ragdoll.icns 一致\")\n        NSApplication.shared.terminate(nil)\n    }\n\n    private func digest(_ image: NSImage) -> SHA256.Digest {\n        let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64,\n                                      bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,\n                                      isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 256, bitsPerPixel: 32)!\n        NSGraphicsContext.saveGraphicsState()\n        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)\n        image.draw(in: NSRect(x: 0, y: 0, width: 64, height: 64))\n        NSGraphicsContext.restoreGraphicsState()\n        return SHA256.hash(data: Data(bytes: bitmap.bitmapData!, count: 64 * 256))\n    }\n}\n# Ragdoll 实施计划\n\n## 台前调度图标\n\n- Info.plist、ICNS 和 LaunchServices 登记均正确；隔离 AppKit 应用复现进程内 applicationIconImage 与包内图标不一致。\n- 通过 SwiftUI 的 NSApplicationDelegateAdaptor 在 applicationWillFinishLaunching 设置包内 Ragdoll 图标，复用现有资源和系统 API。\n- 范围：应用入口、AppDelegate、隔离启动自检与任务记录；调用方、fixtures、配置、导出和依赖不变。开发裸可执行文件没有图标资源时沿用系统行为。\n- 自检先验证失败，再接入真实 delegate 验证通过；运行 Swift 全部测试、release 构建，更新并重启临时签名预览包，保留原证书签名正式包。提交并普通推送。不截图或运行 Claude 测试。\n\n## system prompt 总折叠项\n\n- 连续的系统提示词合并为默认收起的 `system prompt`，展开后保留逐条折叠；用户与助手之间的提示词按原位置独立成组。\n# 验证标准\n\n## 台前调度图标\n\n- 隔离应用使用真实 Info.plist 和 ICNS，正常 AppKit 启动后 applicationIconImage 与包内图标在固定尺寸下的数据摘要一致；接入生产 AppDelegate 前确认断言失败，接入后通过。\n- SwiftUI 入口通过 NSApplicationDelegateAdaptor 调用生产 delegate；运行全部 Swift 测试、release 编译，更新临时签名预览包并检查签名和助手，保留原正式包。\n- 不执行截图或人工视觉检查，不运行 Claude 测试；台前调度实际显示仍需明确标记未验证。普通推送后核对远端 SHA。\n\n## system prompt 总折叠项\n\n"}
+{}
+{"chunk_id":"fc0a25","wall_time_seconds":1.002444917,"session_id":94450,"original_token_count":0,"output":""}
+{"chunk_id":"7dc30e","wall_time_seconds":1.002216792,"session_id":6080,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T13:48:52Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"d45ecf","wall_time_seconds":0.000011125,"exit_code":1,"original_token_count":14,"output":"FAIL: 启动后的应用图标与包内资源不一致\n"}
+{"chunk_id":"1725dc","wall_time_seconds":5.00117725,"session_id":6080,"original_token_count":150,"output":"[0/1] Planning build\nBuilding for debugging...\n[0/9] Write sources\n[1/9] Write swift-version--58304C5D6DBC2206.txt\n[3/10] Emitting module Ragdoll\n[4/10] Compiling Ragdoll AppDelegate.swift\n[5/10] Compiling Ragdoll RagdollApp.swift\n[5/10] Write Objects.LinkFileList\n[6/10] Linking Ragdoll\n[7/10] Applying Ragdoll\n[9/14] Compiling RagdollTests StartupTests.swift\n[10/14] Compiling RagdollTests ConversationTests.swift\n[11/14] Compiling RagdollTests DashboardTests.swift\n[12/14] Emitting module RagdollTests\n[12/14] Write Objects.LinkFileList\n[13/14] Linking RagdollPackageTests\nBuild complete! (3.68s)\n"}
+
+## tool · 2026-11-17T13:49:05Z
+
+
+Script completed
+Wall time 6.7 seconds
+Output:
+
+jdk/src/macosx/native/sun/osxapp/NSApplicationAWT.m - edge/openjdk - Git at Google (https://code.googlesource.com/edge/openjdk/%2B/21f54a5772d782df428c99dbf0c6516060b51b55/jdk/src/macosx/native/sun/osxapp/NSApplicationAWT.m)
+citeturn3search0 [wordlim: 200] Crawled: 2 weeks ago;  | [optionsDictionary setValue:[NSApp applicationIconImage] forKey:@"ApplicationIcon"];
+ | return sUsingDefaultNIB;
+ | }
+ | - (void)orderFrontStandardAboutPanelWithOptions:(NSDictionary *)optionsDictionary {
+ | if (!optionsDictionary) {
+ | optionsDictionary = [NSMutableDictionary dictionaryWithCapacity:2];
+ | [optionsDictionary setValue:[[[[[NSApp mainMenu] itemAtIndex:0] submenu] itemAtIndex:0] title] forKey:@"ApplicationName"];
+ | if (![NSImage imageNamed:@"NSApplicationIcon"]) {
+ | [optionsDictionary setValue:[NSApp applicationIconImage] forKey:@"ApplicationIcon"];
+ | }
+ | }
+ | 
+ | [super orderFrontStandardAboutPanelWithOptions:optionsDictionary];
+ | }
+ | #define DRAGMASK (NSMouseMovedMask | NSLeftMouseDraggedMask | NSRightMouseDownMask | NSRightMouseDraggedMask | NSLeftMouseUpMask | NSRightMouseUpMask | NSFlagsChangedMask | NSKeyDownMask)
+ | 
+ | - (NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag {
+ | if (mask == DRAGMASK && [((NSString *)kCFRunLoopDefaultMode) isEqual:mode]) {
+ | postEventDuringEventSynthesis = YES;
+ | }
+ | 
+ | NSEvent *event = [super nextEventMatchingMask:mask untilDate:expiration inMode:mode dequeue: deqFlag];
+ | postEventDuringEventSynthesis = NO;
+ | 
+ | return event;
+ | }
+ | 
+ | // NSTimeInterval has microseconds precision
+ | #define TS_EQUAL(ts1, ts2) (fabs((ts1) - (ts2)) < 1e-6)
+ | 
+ | - (void)sendEvent:(NSEvent *)event
+ | {
+ | if ([event type] == NSApplicationDefined && TS_EQUAL([event timestamp], dummyEventTimestamp) && [event subtype] == 0) {
+ | [seenDummyEventLock lockWhenCondition:NO];
+ | [seenDummyEventLock unlockWithCondition:YES];
+ | } else if ([event type] == NSApplicationDefined && [event subtype] == 777) {
+ | void (^block)() = (void (^)()) [event data1];
+ | block();
+ | [block release];
+ | } else if ([event type] == NSKeyUp && ([event modifierFlags] & NSCommandKeyMask)) {
+ | // Cocoa won't send us key up event when releasing a key while Cmd is down,
+--------------------------------------------------------------------------------
+jdk/src/java.desktop/macosx/native/libosxapp/NSApplicationAWT.m at master · openjdk/jdk · GitHub (https://github.com/openjdk/jdk/blob/master/src/java.desktop/macosx/native/libosxapp/NSApplicationAWT.m)
+citeturn3search1 [wordlim: 200] Crawled: last month; [NSApp setApplicationIconImage:iconImage];
+return;
+
+}
+
+// HACK BEGIN
+
+// The following is necessary to make the java process behave like a
+
+// proper foreground application...
+
+[ThreadUtilities performOnMainThreadWaiting:NO block:^(){
+
+ProcessSerialNumber psn;
+
+GetCurrentProcess(&psn);
+
+TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+
+[NSApp activateIgnoringOtherApps:YES];
+
+[NSApp run];
+
+}];
+
+// HACK END
+
+}
+
+- (void) setDockIconWithEnv:(JNIEnv *)env {
+
+NSString *theIconPath = nil;
+
+// The following environment variable is set in java.c. It is probably UTF8.
+
+char envVar[80];
+
+snprintf(envVar, sizeof(envVar), "APP_ICON_%d", getpid());
+
+char *appIcon = getenv(envVar);
+
+if (appIcon != NULL) {
+
+theIconPath = [NSString stringWithUTF8String:appIcon];
+
+unsetenv(envVar);
+
+}
+
+if (theIconPath == nil) {
+
+theIconPath = [PropertiesUtilities javaSystemPropertyForKey:@"apple.awt.application.icon" withEnv:env];
+
+}
+
+// Use the path specified to get the icon image
+
+NSImage* iconImage = nil;
+
+if (theIconPath != nil) {
+
+iconImage = [[NSImage alloc] initWithContentsOfFile:theIconPath];
+
+}
+
+// If no icon file was specified or we failed to get the icon image
+
+// and there is no bundle's icon, then use the default icon
+
+if (iconImage == nil) {
+
+NSString* bundleIcon = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIconFile"];
+
+if (bundleIcon == nil) {
+
+NSData* iconData;
+
+iconData = [[NSData alloc] initWithBytesNoCopy: sAWTIconData length: sizeof(sAWTIconData) freeWhenDone: NO];
+
+iconImage = [[NSImage alloc] initWithData: iconData];
+
+[iconData release];
+
+}
+
+}
+
+// Set up the dock icon if we have an icon image.
+
+if (iconImage != nil) {
+
+[NSApp setApplicationIconImage:iconImage];
+
+[iconImage release];
+
+}
+
+}
+
++ (void) runAWTLoopWithApp:(NSApplication*)app {
+
+NSAutoreleasePool *pool = [NSAutoreleasePool new];
+
+// Make sure that when we run in javaRunLoopMode we don't exit randomly
+
+[[NSRunLoop currentRunLoop] addPort:[NSPort port] forMode:[ThreadUtilities javaRunLoopMode]];
+
+do {
+
+@try {
+
+[app run];
+
+--------------------------------------------------------------------------------
+ (https://cr.openjdk.org/~andrew/aarch64-8/u92/jdk/src/macosx/native/sun/osxapp/NSApplicationAWT.m.rhs.html)
+citeturn3search2 [wordlim: 200] Crawled: last month;      316             [optionsDictionary setValue:[NSApp applicationIconImage] forKey:@"ApplicationIcon"];
+     291     [[NSRunLoop currentRunLoop] addPort:[NSPort port] forMode:[JNFRunLoop javaRunLoopMode]];
+     292 
+     293     do {
+     294         @try {
+     295             [app run];
+     296         } @catch (NSException* e) {
+     297             NSLog(@"Apple AWT Startup Exception: %@", [e description]);
+     298             NSLog(@"Apple AWT Restarting Native Event Thread");
+     299 
+     300             [app stop:app];
+     301         }
+     302     } while (YES);
+     303 
+     304     [pool drain];
+     305 }
+     307 - (BOOL)usingDefaultNib {
+     308     return sUsingDefaultNIB;
+     309 }
+     310 
+     311 - (void)orderFrontStandardAboutPanelWithOptions:(NSDictionary *)optionsDictionary {
+     312     if (!optionsDictionary) {
+     313         optionsDictionary = [NSMutableDictionary dictionaryWithCapacity:2];
+     314         [optionsDictionary setValue:[[[[[NSApp mainMenu] itemAtIndex:0] submenu] itemAtIndex:0] title] forKey:@"ApplicationName"];
+     315         if (![NSImage imageNamed:@"NSApplicationIcon"]) {
+     316             [optionsDictionary setValue:[NSApp applicationIconImage] forKey:@"ApplicationIcon"];
+     317         }
+     318     }
+     319 
+     320     [super orderFrontStandardAboutPanelWithOptions:optionsDictionary];
+     321 }
+     323 #define DRAGMASK (NSMouseMovedMask | NSLeftMouseDraggedMask | NSRightMouseDownMask | NSRightMouseDraggedMask | NSLeftMouseUpMask | NSRightMouseUpMask | NSFlagsChangedMask | NSKeyDownMask)
+     324 
+     325 - (NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag {
+     326     if (mask == DRAGMASK && [((NSString *)kCFRunLoopDefaultMode) isEqual:mode]) {
+     327         postEventDuringEventSynthesis = YES;
+     328     }
+     329 
+     330     NSEvent *event = [super nextEventMatchingMask:mask untilDate:expiration inMode:mode dequeue: deqFlag];
+     331     postEventDuringEventSynthesis = NO;
+--------------------------------------------------------------------------------
+File: NSApplication.m | Debian Sources (https://sources.debian.org/src/gnustep-gui/0.28.0-3/Source/NSApplication.m)
+citeturn3search3 [wordlim: 200] Crawled: 3 weeks ago;           /* Set the new image to be named 'NSApplicationIcon' ... to do that we
+              return YES;
+            }
+        }
+      return NO;
+    }
+    
+    /**<p>Sets the application's icon. Any windows that use the old application
+    icon image as their mini window image will be updated to use the new
+    image.</p><p>See Also: -applicationIconImage</p>
+    */
+    - (void) setApplicationIconImage: (NSImage*)anImage
+    {
+      NSEnumerator *iterator;
+      NSWindow *current;
+      NSImage *old_app_icon = _app_icon;
+      NSSize miniWindowSize;
+      NSSize imageSize;
+      GSDisplayServer *server;
+    
+      // Ignore attempts to set nil as the icon image.
+      if (nil == anImage)
+        return;
+    
+      RETAIN(old_app_icon);
+    
+      // Use a copy as we change the name and size
+      ASSIGNCOPY(_app_icon, anImage);
+    
+      server = GSCurrentServer();
+      miniWindowSize = server != 0 ? [server iconSize] : NSZeroSize;
+      if (miniWindowSize.width <= 0 || miniWindowSize.height <= 0) 
+        {
+          miniWindowSize = NSMakeSize(48, 48);
+        }
+    
+      // restrict size when the icon is larger than the mini window.
+      imageSize = [_app_icon size];
+      if (imageSize.width > miniWindowSize.width
+        || imageSize.height > miniWindowSize.height)
+        {
+          [_app_icon setSize: miniWindowSize];
+        }
+    
+      // Let horizontal menu change icon
+      [_main_menu _organizeMenu];
+    
+      if (_app_icon_window != nil)
+        {
+          [(NSAppIconView *)[_app_icon_window contentView] setImage: _app_icon];
+        }
+    
+      // Swap the old image for the new one wherever it's used
+      iterator = [[self windows] objectEnumerator];
+      while ((current = [iterator nextObject]) != nil)
+        {
+          if ([current miniwindowImage] == old_app_icon)
+            [current setMiniwindowImage: _app_icon];
+        }
+    
+      DESTROY(old_app_icon);
+    }
+    
+    /**<p>Returns the current icon be used for the application.</p>
+       <p>See Also: -setApplicationIconImage:</p>
+     */
+    - (NSImage*) applicationIconImage
+    {
+      if (!_app_icon)
+        {
+          /* load the application icon */
+          [self _loadAppIconImage];
+        }
+      return _app_icon;
+    }
+    
+    /**
+     * Returns the actual window object being used to display the application
+     * icon (usually in the dock).
+     */
+    - (NSWindow*) iconWindow
+    {
+      return _app_icon_window;
+    }
+    
+    /*
+     * Hiding and arranging windows
+     */
+    
+    /**<p> Request this application to "hide" (unmap all windows from the screen
+     * except the icon window).  Posts 
+     * <code>NSApplicationWillHideNotification</code> and
+     * <code>NSApplicationDidHideNotification</code>.  On OS X this activates
+     * the next app that is running, however on GNUstep this is up to the window
+     * manager.</p><p>See Also: -unhide: -isHidden</p>
+     */
+    - (void) hide: (id)sender
+    {
+    #ifdef __MINGW32__
+      [self miniaturizeAll: sender];
+    #else
+      if (_app_is_hidden == NO)
+        {
+          if (![[NSUserDefaults standardUserDefaults]
+    	     boolForKey: @"GSSuppressAppIcon"])
+    	{
+    	  NSArray		*windows_list;
+    	  NSDictionary  	*info;
+       description of the application (eg, <var>"GNUstep Graphics
+       Objects Relationship Modeller"</var>).  If not available,
+       <file>Info-gnustep.plist</file> is searched for that key; if this
+       fails, no application description is shown.
+       </desc>
+    
+       <term>ApplicationIcon</term> 
+       <desc> An image to be shown near the title.
+       If not available, <file>Info-gnustep.plist</file> is searched for
+       <var>ApplicationIcon</var>; if this fails, NSApp's -applicationIconImage
+       method is used instead.  
+       </desc>
+    
+       <term>ApplicationRelease</term> 
+       <desc> A string with the name of the
+       application, release included (eg, <var>"Gorm 0.1"</var>).  If
+       not available, the value for <var>ApplicationVersion</var> is
+       used instead.  If this fails, <file>Info-gnustep.plist</file> is
+       searched for <var>ApplicationRelease</var> or
+       <var>NSAppVersion</var>, otherwise, <var>"Unknown"</var> is
+       used.
+       </desc>
+    
+       <term>FullVersionID</term> 
+    
+      infoDict = [[NSBundle mainBundle] infoDictionary];
+      appIconFile = [infoDict objectForKey: @"NSIcon"];
+      if (appIconFile && ![appIconFile isEqual: @""])
+        {
+          image = [NSImage imageNamed: appIconFile];
+        }
+    
+      // Try to look up the icon file.
+      appIconFile = [infoDict objectForKey: @"CFBundleIconFile"];
+      if (appIconFile && ![appIconFile isEqual: @""])
+        {
+          image = [NSImage imageNamed: appIconFile];
+        }
+    
+      if (image == nil)
+        {
+          image = [NSImage imageNamed: @"GNUstep"];
+        }
+      else
+        {
+          /* Set the new image to be named 'NSApplicationIcon' ... to do that we
+           * must first check that any existing image of the same name has its
+           * name removed.
+           */
+          [(NSImage*)[NSImage imageNamed: @"NSApplicationIcon"] setName: nil];
+          // We need to copy the image as we may have a proxy here
+          image = AUTORELEASE([image copy]);
+          [image setName: @"NSApplicationIcon"];
+--------------------------------------------------------------------------------
+NSApplication Class Reference (https://leopard-adc.pepas.com/documentation/Cocoa/Reference/ApplicationKit/Classes/NSApplication_Class/index.html)
+citeturn3search4 [wordlim: 200] Crawled: 3 weeks ago; `NSApplication.h` ...   * `– setApplicationIconImage:`
+
+##### Availability
+
+  * Available in Mac OS X v10.0 and later.
+
+##### See Also
+
+  * `– changeWindowsItem:title:filename:`
+  * `– setTitle:` (`NSWindow`)
+
+##### Related Sample Code
+
+  * QTAudioExtractionPanel
+
+##### Declared In
+
+`NSApplication.h`
+
+### applicationIconImage
+
+Returns the image used for the receiver’s icon.
+
+- (NSImage *)applicationIconImage
+
+##### Return Value
+
+An image containing the application’s icon.
+
+##### Availability
+
+  * Available in Mac OS X v10.0 and later.
+
+##### See Also
+
+  * `– setApplicationIconImage:`
+
+##### Declared In
+
+`NSApplication.h`
+
+### arrangeInFront:
+
+Arranges windows listed in the Window menu in front of all other windows.
+
+- (void)arrangeInFront:(id)sender
+
+##### Parameters
+
+sender
+    
+
+The object that sent the command.
+
+##### Discussion
+
+Windows associated with the application but not listed in the Window menu are not ordered to the front.
+
+##### Availability
+
+  * Available in Mac OS X v10.0 and later.
+
+--------------------------------------------------------------------------------
+jdk/src/macosx/native/sun/osxapp/NSApplicationAWT.m - edge/openjdk - Git at Google (https://code.googlesource.com/edge/openjdk/%2B/2fb02bd3b6fc8c66037e3da01a2a69ece1726846/jdk/src/macosx/native/sun/osxapp/NSApplicationAWT.m)
+citeturn3search5 [wordlim: 200] Crawled: last month;  | [NSApp setApplicationIconImage:iconImage];
+ | }
+ | 
+ | // If no icon file was specified or we failed to get the icon image
+ | // and there is no bundle's icon, then use the default icon
+ | if (iconImage == nil) {
+ | NSString* bundleIcon = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIconFile"];
+ | if (bundleIcon == nil) {
+ | NSData* iconData;
+ | iconData = [[NSData alloc] initWithBytesNoCopy: sAWTIconData length: sizeof(sAWTIconData) freeWhenDone: NO];
+ | iconImage = [[NSImage alloc] initWithData: iconData];
+ | [iconData release];
+ | }
+ | }
+ | 
+ | // Set up the dock icon if we have an icon image.
+ | if (iconImage != nil) {
+ | [NSApp setApplicationIconImage:iconImage];
+ | [iconImage release];
+ | }
+ | }
+ | + (void) runAWTLoopWithApp:(NSApplication*)app {
+ | NSAutoreleasePool *pool = [NSAutoreleasePool new];
+ | 
+ | // Make sure that when we run in AWTRunLoopMode we don't exit randomly
+ | [[NSRunLoop currentRunLoop] addPort:[NSPort port] forMode:[JNFRunLoop javaRunLoopMode]];
+ | 
+ | do {
+ | @try {
+ | [app run];
+ | } @catch (NSException* e) {
+ | NSLog(@"Apple AWT Startup Exception: %@", [e description]);
+ | NSLog(@"Apple AWT Restarting Native Event Thread");
+ | 
+ | [app stop:app];
+ | }
+ | } while (YES);
+ | 
+ | [pool drain];
+ | }
+ | - (BOOL)usingDefaultNib {
+ | return sUsingDefaultNIB;
+ | }
+ | - (void)orderFrontStandardAboutPanelWithOptions:(NSDictionary *)optionsDictionary {
+ | if (!optionsDictionary) {
+ | optionsDictionary = [NSMutableDictionary dictionaryWithCapacity:2];
+ | [optionsDictionary setValue:[[[[[NSApp mainMenu] itemAtIndex:0] submenu] itemAtIndex:0] title] forKey:@"ApplicationName"];
+ | if (![NSImage imageNamed:@"NSApplicationIcon"]) {
+ | [optionsDictionary setValue:[NSApp applicationIconImage] forKey:@"ApplicationIcon"];
+ | }
+ | }
+ | 
+ | [super orderFrontStandardAboutPanelWithOptions:optionsDictionary];
+ | }
+ | #define DRAGMASK (NSMouseMovedMask | NSLeftMouseDraggedMask | NSRightMouseDownMask | NSRightMouseDraggedMask | NSLeftMouseUpMask | NSRightMouseUpMask | NSFlagsChangedMask | NSKeyDownMask)
+--------------------------------------------------------------------------------
+MacOSX-SDKs/MacOSX10.8.sdk/System/Library/Frameworks/AppKit.framework/Versions/C/Headers/NSApplication.h at master · phracker/MacOSX-SDKs · GitHub (https://github.com/phracker/MacOSX-SDKs/blob/master/MacOSX10.8.sdk/System/Library/Frameworks/AppKit.framework/Versions/C/Headers/NSApplication.h)
+citeturn3search6 [wordlim: 200] Crawled: 4 weeks ago; - (void)setDelegate:(id <NSApplicationDelegate>)anObject; ... - (void)setApplicationIconImage:(NSImage *)image;
+*/
+
+- (void)setHelpMenu:(NSMenu *)helpMenu NS_AVAILABLE_MAC(10_6);
+
+- (NSMenu *)helpMenu NS_AVAILABLE_MAC(10_6);
+
+- (void)setApplicationIconImage:(NSImage *)image;
+
+- (NSImage *)applicationIconImage;
+
+/* Returns the activation policy of the application.
+
+*/
+
+- (NSApplicationActivationPolicy)activationPolicy NS_AVAILABLE_MAC(10_6);
+
+/* Attempts to modify the application's activation policy. Currently, NSApplicationActivationPolicyNone and NSApplicationActivationPolicyAccessory may be changed to NSApplicationActivationPolicyRegular, but other modifications are not supported. This returns YES if setting the activation policy is successful, and NO if not.
+
+*/
+
+- (BOOL)setActivationPolicy:(NSApplicationActivationPolicy)activationPolicy NS_AVAILABLE_MAC(10_6);
+
+- (NSDockTile *)dockTile NS_AVAILABLE_MAC(10_5);
+
+- (BOOL)sendAction:(SEL)theAction to:(id)theTarget from:(id)sender;
+
+- (id)targetForAction:(SEL)theAction;
+
+- (id)targetForAction:(SEL)theAction to:(id)theTarget from:(id)sender;
+
+- (BOOL)tryToPerform:(SEL)anAction with:(id)anObject;
+--------------------------------------------------------------------------------
+NSApplication Class Reference (https://leopard-adc.pepas.com/documentation/Cocoa/Reference/ApplicationKit/Classes/NSApplication_Class/Reference/Reference.html)
+citeturn3search7 [wordlim: 200] Published: 17.8 years ago; Crawled: 3 weeks ago;   * `– setApplicationIconImage:` Image ... If not specified, this method then looks for an image named “`NSApplicationIcon`”, using `[NSImage imageNamed:@"NSApplicationIcon"]`.
+
+## Tasks
+
+### Getting the Application
+
+  * `+ sharedApplication` Image
+
+### Configuring Applications
+
+  * `– applicationIconImage` Image
+  * `– setApplicationIconImage:` Image
+  * `– delegate` Image
+  * `– setDelegate:` Image
+
+### Launching Applications
+
+  * `– finishLaunching` Image
+  * `– applicationWillFinishLaunching:`  delegate method Image
+  * `– applicationDidFinishLaunching:`  delegate method Image
+
+### Terminating Applications
+
+  * `– terminate:` Image
+  * `– applicationShouldTerminate:`  delegate method Image
+  * `– applicationShouldTerminateAfterLastWindowClosed:`  delegate method Image
+  * `– replyToApplicationShouldTerminate:` Image
+  * `– applicationWillTerminate:`  delegate method Image
+##### Discussion
+
+The following strings are keys that can occur in optionsDictionary:
+
+  * `@``"Credits"`: An NSAttributedString displayed in the info area of the panel. If not specified, this method then looks for a file named “`Credits.html`”, “`Credits.rtf`”, and “`Credits.rtfd`”, in that order, in the bundle returned by the `NSBundle` class method `mainBundle`. The first file found is used. If none is found, the info area is left blank.
+
+  * `@``"ApplicationName"`: An `NSString` object displayed as the application’s name. If not specified, this method then uses the value of `CFBundleName` (localizable). If neither is found, this method uses `[[NSProcessInfo processInfo] processName]`.
+
+  * `@``"ApplicationIcon"`: An `NSImage` object displayed as the application’s icon. If not specified, this method then looks for an image named “`NSApplicationIcon`”, using `[NSImage imageNamed:@"NSApplicationIcon"]`. If neither is available, this method uses the generic application icon.
+
+  * `@``"Version"`: An `NSString` object with the build version number of the application (“58.4”), displayed as “(v58.4)”. 
+##### Availability
+
+  * Available in Mac OS X v10.0 and later.
+
+##### See Also
+
+  * `– currentEvent`
+  * `– postEvent:atStart:`
+
+##### Declared In
+
+`NSApplication.h`
+
+### servicesMenu
+
+Returns the Services menu.
+
+- (NSMenu *)servicesMenu
+
+##### Return Value
+
+The Services menu or `nil` if no Services menu has been created
+
+##### Availability
+
+  * Available in Mac OS X v10.0 and later.
+
+##### See Also
+
+  * `– setServicesMenu:`
+
+##### Declared In
+
+`NSApplication.h`
+
+### servicesProvider
+
+Returns the object that provides the services the receiver advertises in the Services menu of other applications.
+
+- (id)servicesProvider
+
+##### Return Value
+
+The application’s service provider object.
+
+##### Availability
+
+  * Available in Mac OS X v10.0 and later.
+
+##### See Also
+
+  * `– setServicesProvider:`
+
+##### Declared In
+
+`NSApplication.h`
+
+### setApplicationIconImage:
+
+Sets the receiver’s icon to the specified image.
+
+- (void)setApplicationIconImage:(NSImage *)anImage
+
+##### Parameters
+
+anImage
+    
+
+The image to use as the new application icon.
+
+##### Discussion
+
+This method sets the icon in the dock application tile. This method scales the image as necessary so that it fits in the dock tile. You can use this method to change your application icon while running. To restore your application’s original icon, you pass `nil` to this method.
+
+##### Availability
+
+  * Available in Mac OS X v10.0 and later.
+
+##### See Also
+
+  * `– applicationIconImage`
+
+##### Declared In
+
+`NSApplication.h`
+
+### setDelegate:
+
+Makes the given object the receiver’s delegate.
+
+- (void)setDelegate:(id)anObject
+
+##### Parameters
+
+anObject
+    
+
+The application delegate object.
+
+##### Discussion
+
+The messages a delegate can expect to receive are listed at the end of this specification. The delegate doesn’t need to implement all the methods.
+
+##### Availability
+
+  * Available in Mac OS X v10.0 and later.
+
+##### See Also
+
+  * `– delegate`
+
+##### Related Sample Code
+
+  * CocoaDVDPlayer
+--------------------------------------------------------------------------------
+NSApplication.rs - source (https://docs.rs/objc2-app-kit/latest/x86_64-unknown-linux-gnu/src/objc2_app_kit/generated/NSApplication.rs.html)
+citeturn3search8 [wordlim: 200] Crawled: 2 months ago;     499        pub fn setDelegate(&self, delegate: Option<&ProtocolObject<dyn NSApplicationDelegate>>); ...     735        #[unsafe(method(setApplicationIconImage:))]
+If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.
+    713        /// `NSApplication`retains its Help menu and releases it when a different menu is set.
+    714        #[unsafe(method(helpMenu))]
+    715        #[unsafe(method_family = none)]
+    716        pub fn helpMenu(&self) -> Option<Retained<NSMenu>>;
+    717
+    718        #[cfg(feature = "NSMenu")]
+    719        /// Setter for [`helpMenu`][Self::helpMenu].
+    720        #[unsafe(method(setHelpMenu:))]
+    721        #[unsafe(method_family = none)]
+    722        pub fn setHelpMenu(&self, help_menu: Option<&NSMenu>);
+    723
+    724        #[cfg(feature = "NSImage")]
+    725        #[unsafe(method(applicationIconImage))]
+    726        #[unsafe(method_family = none)]
+    727        pub fn applicationIconImage(&self) -> Option<Retained<NSImage>>;
+    728
+    729        #[cfg(feature = "NSImage")]
+    730        /// Setter for [`applicationIconImage`][Self::applicationIconImage].
+    731        ///
+    732        /// # Safety
+    733        ///
+    734        /// `application_icon_image` might not allow `None`.
+    735        #[unsafe(method(setApplicationIconImage:))]
+    736        #[unsafe(method_family = none)]
+    737        pub unsafe fn setApplicationIconImage(&self, application_icon_image: Option<&NSImage>);
+    738
+    739        #[cfg(feature = "NSRunningApplication")]
+    740        /// Returns: The activation policy of the application.
+    741        #[unsafe(method(activationPolicy))]
+    742        #[unsafe(method_family = none)]
+    743        pub fn activationPolicy(&self) -> NSApplicationActivationPolicy;
+    744
+    745        #[cfg(feature = "NSRunningApplication")]
+    746        /// Attempts to modify the application's activation policy.  In OS X 10.9, any policy may be set; prior to 10.9, the activation policy may be changed to
+    747        /// `NSApplicationActivationPolicyProhibited`or
+    748        /// `NSApplicationActivationPolicyRegular,`but may not be changed to
+    749        /// `NSApplicationActivationPolicyAccessory.`This returns
+    750        /// `YES`if setting the activation policy is successful, and
+    751        /// `NO`if not.
+    752        #[unsafe(method(setActivationPolicy:))]
+    753        #[unsafe(method_family = none)]
+    754        pub fn setActivationPolicy(&self, activation_policy: NSApplicationActivationPolicy)
+    755            -> bool;
+--------------------------------------------------------------------------------
+RTMPDemo/RTMPDemo/AppKit.framework/Versions/C/Headers/NSApplication.h at master · apozaiyidong/RTMPDemo · GitHub (https://github.com/apozaiyidong/RTMPDemo/blob/master/RTMPDemo/AppKit.framework/Versions/C/Headers/NSApplication.h)
+citeturn3search9 [wordlim: 200] Crawled: last month; @"ApplicationIcon": NSImage displayed in place of NSApplicationIcon.
+@end
+
+@interface NSApplication(NSServicesHandling)
+
+@property (nullable, strong) id servicesProvider;
+
+@end
+
+@interface NSApplication(NSStandardAboutPanel)
+
+- (void)orderFrontStandardAboutPanel:(nullable id)sender;
+
+- (void)orderFrontStandardAboutPanelWithOptions:(NSDictionary<NSString *, id> *)optionsDictionary;
+
+/* Optional keys in optionsDictionary:
+
+@"Credits": NSAttributedString displayed in the info area of the panel. If
+
+not specified, contents obtained from "Credits.rtf" in [NSBundle mainBundle];
+
+if not available, blank.
+
+@"ApplicationName": NSString displayed in place of the default app name. If
+
+not specified, uses the value of CFBundleName (localizable). Fallback is [[NSProcessInfo processInfo] processName].
+
+@"ApplicationIcon": NSImage displayed in place of NSApplicationIcon. If not
+
+specified, use [NSImage imageNamed:@"NSApplicationIcon"]; if not available, generic icon.
+
+@"Copyright": NSString containing the copyright string. If not specified,
+
+obtain from the value of NSHumanReadableCopyright (localizable) in infoDictionary; if not available, leave blank.
+--------------------------------------------------------------------------------
+Old src/macosx/native/sun/osxapp/NSApplicationAWT.m (https://cr.openjdk.org/~snazarki/u162/jdk/src/macosx/native/sun/osxapp/NSApplicationAWT.m-.html)
+citeturn3search10 [wordlim: 200] Crawled: 2 weeks ago;      315             [optionsDictionary setValue:[NSApp applicationIconImage] forKey:@"ApplicationIcon"];
+     313         [optionsDictionary setValue:[[[[[NSApp mainMenu] itemAtIndex:0] submenu] itemAtIndex:0] title] forKey:@"ApplicationName"];
+     314         if (![NSImage imageNamed:@"NSApplicationIcon"]) {
+     315             [optionsDictionary setValue:[NSApp applicationIconImage] forKey:@"ApplicationIcon"];
+     316         }
+     317     }
+     318 
+     319     [super orderFrontStandardAboutPanelWithOptions:optionsDictionary];
+     320 }
+     322 #define DRAGMASK (NSMouseMovedMask | NSLeftMouseDraggedMask | NSRightMouseDownMask | NSRightMouseDraggedMask | NSLeftMouseUpMask | NSRightMouseUpMask | NSFlagsChangedMask | NSKeyDownMask)
+     323 
+     324 - (NSEvent *)nextEventMatchingMask:(NSUInteger)mask untilDate:(NSDate *)expiration inMode:(NSString *)mode dequeue:(BOOL)deqFlag {
+     325     if (mask == DRAGMASK && [((NSString *)kCFRunLoopDefaultMode) isEqual:mode]) {
+     326         postEventDuringEventSynthesis = YES;
+     327     }
+     328 
+     329     NSEvent *event = [super nextEventMatchingMask:mask untilDate:expiration inMode:mode dequeue: deqFlag];
+--------------------------------------------------------------------------------
+cocoa - Changing NSApplicationIcon across a running application? - Stack Overflow (https://stackoverflow.com/questions/1397662/changing-nsapplicationicon-across-a-running-application)
+citeturn3search11 [wordlim: 200] Published: 17.2 years ago; Crawled: last month; Try `[myImage setName:@"NSApplicationIcon"]` (after setting it as the application icon image in NSApp).
+    
+    `- (void)doMagic:(id)sender {
+        static int i = 0;
+    
+        i = (i+1) % 2;
+    
+        if (i)
+            [[NSApplication sharedApplication] setApplicationIconImage:[NSImage imageNamed:NSImageNameBonjour]];
+        else
+            [[NSApplication sharedApplication] setApplicationIconImage:[NSImage imageNamed:NSImageNameDotMac]];
+    
+        // any pre-populated image views have to be set to nil first, otherwise their icon won't change
+        // [imageView setImage:nil];
+        // [imageView setImage:[NSImage imageNamed:NSImageNameApplicationIcon]];
+    
+        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+        [alert setMessageText:@"Shazam!"];
+        [alert runModal];
+    }
+    `
+
+A couple of caveats:
+
+  1. Any image view already created must have `setImage:` called twice, as seen above to register the image changing. Don't know why.
+  2. There may be a better way to force the initial `imageNamed:` call with `@"NSApplicationIcon"` than how I've done it.
+
+Short permalink to this answer
+
+Improve this answer
+
+Follow [Input]
+
+Follow this answer to receive notifications
+
+edited Sep 9, 2009 at 8:31
+
+answered Sep 9, 2009 at 7:03
+
+Ashley Clark
+
+8,813 3 3 gold badges 39 39 silver badges 35 35 bronze badges
+
+Noitidart Over a year ago
+
+Verified that this works in OSX10.9 and 10.10. Caveat#1 holds true, all images of NSApplicationIcon that were already drawn did not get updated by swizzle and that makes sense. So any existing image has to be programmatically targeted and changed. Using js-ctypes: gist.github.com/Noitidart/3571dbc1b75f28532bc2
+
+This answer is useful
+
+[Input]
+
+1
+
+This answer is not useful
+
+[Input]
+
+Save this answer.
+
+Loading when this answer was accepted…
+
+Show activity on this post.
+
+Try `[myImage setName:@"NSApplicationIcon"]` (after setting it as the application icon image in NSApp).
+
+Note: On 10.6 and later, you can and should use `NSImageNameApplicationIcon` instead of the string literal `@"NSApplicationIcon"`.
+
+Short permalink to this answer
+
+Improve this answer
+
+Follow [Input]
+
+Follow this answer to receive notifications
+
+answered Sep 9, 2009 at 10:48
+
+Peter Hosey
+
+96.6k 15 15 gold badges 214 214 silver badges 373 373 bronze badges
+
+## 2 Comments
+
+Add a comment
+
+Ashley Clark Over a year ago
+
+That doesn't override an already existing named image: "If the receiver is already registered under a different name, this method unregisters the other name. If a different image is registered under the name specified in aString, this method does nothing and returns NO." Unfortunately, calling setName:nil or @"" on the preexisting app icon image doesn't appear to change things either.
+
+1
+
+Reply
+
+Ashley Clark Over a year ago
+
+Also, setApplicationIconImage: doesn't replace the existing object as one might think, it modifies the representations contained within it. Ideally, there would be a notification associated with the image rep changing that NSImageViews could be observing and redraw themselves as necessary.
+{"chunk_id":"697550","wall_time_seconds":0.000014,"exit_code":0,"original_token_count":550,"output":"import AppKit\n\n@MainActor\nfinal class AppDelegate: NSObject, NSApplicationDelegate {\n    func applicationDidFinishLaunching(_ notification: Notification) {\n        NSApplication.shared.applicationIconImage = NSImage(named: \"Ragdoll\")\n    }\n}\nimport AppKit\nimport CryptoKit\n\n@main\n@MainActor\nfinal class ApplicationIconCheck: NSObject, NSApplicationDelegate {\n    private let appDelegate = AppDelegate()\n\n    static func main() {\n        let app = NSApplication.shared\n        let check = ApplicationIconCheck()\n        app.delegate = check\n        app.run()\n    }\n\n    func applicationDidFinishLaunching(_ notification: Notification) {\n        appDelegate.applicationDidFinishLaunching(notification)\n        guard let url = Bundle.main.url(forResource: \"Ragdoll\", withExtension: \"icns\"),\n              let expected = NSImage(contentsOf: url),\n              let actual = NSApplication.shared.applicationIconImage else {\n            fatalError(\"应用图标或包内资源缺失\")\n        }\n        guard digest(actual) == digest(expected) else {\n            print(\"FAIL: 启动后的应用图标与包内资源不一致\")\n            exit(1)\n        }\n        print(\"PASS: 启动后的应用图标与包内 Ragdoll.icns 一致\")\n        NSApplication.shared.terminate(nil)\n    }\n\n    private func digest(_ image: NSImage) -> SHA256.Digest {\n        let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64,\n                                      bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,\n                                      isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 256, bitsPerPixel: 32)!\n        NSGraphicsContext.saveGraphicsState()\n        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)\n        image.draw(in: NSRect(x: 0, y: 0, width: 64, height: 64))\n        NSGraphicsContext.restoreGraphicsState()\n        return SHA256.hash(data: Data(bytes: bitmap.bitmapData!, count: 64 * 256))\n    }\n}\n289:@property (null_resettable, strong) NSImage *applicationIconImage;\n550:/// NSImage displayed in place of NSApplicationIcon. If not specified, use [NSImage imageNamed:@\"NSApplicationIcon\"]; if not available, generic icon.\n"}
+
+## tool · 2026-11-17T13:49:32Z
+
+
+Script completed
+Wall time 5.3 seconds
+Output:
+
+{"chunk_id":"711152","wall_time_seconds":0.000011167,"exit_code":0,"original_token_count":761,"output":"import AppKit\nimport CryptoKit\n\n@main\n@MainActor\nfinal class ApplicationIconCheck: NSObject, NSApplicationDelegate {\n    private let appDelegate = AppDelegate()\n\n    static func main() {\n        let app = NSApplication.shared\n        let check = ApplicationIconCheck()\n        app.delegate = check\n        app.run()\n    }\n\n    func applicationDidFinishLaunching(_ notification: Notification) {\n        appDelegate.applicationDidFinishLaunching(notification)\n        guard let url = Bundle.main.url(forResource: \"Ragdoll\", withExtension: \"icns\"),\n              let expected = NSImage(contentsOf: url),\n              let actual = NSApplication.shared.applicationIconImage else {\n            fatalError(\"应用图标或包内资源缺失\")\n        }\n        guard digest(actual) == digest(expected) else {\n            print(\"FAIL: 启动后的应用图标与包内资源不一致\")\n            exit(1)\n        }\n        print(\"PASS: 启动后的应用图标与包内 Ragdoll.icns 一致\")\n        NSApplication.shared.terminate(nil)\n    }\n\n    private func digest(_ image: NSImage) -> SHA256.Digest {\n        let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64,\n                                      bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,\n                                      isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 256, bitsPerPixel: 32)!\n        NSGraphicsContext.saveGraphicsState()\n        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)\n        image.draw(in: NSRect(x: 0, y: 0, width: 64, height: 64))\n        NSGraphicsContext.restoreGraphicsState()\n        return SHA256.hash(data: Data(bytes: bitmap.bitmapData!, count: 64 * 256))\n    }\n}\nimport AppKit\nimport CryptoKit\n\n@MainActor func digest(_ image: NSImage) -> String {\n    let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 256, bitsPerPixel: 32)!\n    NSGraphicsContext.saveGraphicsState()\n    NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)\n    image.draw(in: NSRect(x: 0, y: 0, width: 64, height: 64))\n    NSGraphicsContext.restoreGraphicsState()\n    return SHA256.hash(data: Data(bytes: bitmap.bitmapData!, count: 64 * 256)).description\n}\n\n@MainActor final class Delegate: NSObject, NSApplicationDelegate {\n    func applicationDidFinishLaunching(_ notification: Notification) {\n        let resource = NSImage(contentsOf: Bundle.main.url(forResource: \"Ragdoll\", withExtension: \"icns\")!)!\n        let actual = digest(NSApplication.shared.applicationIconImage)\n        let expected = digest(resource)\n        print(\"applicationIconImage:\", actual)\n        print(\"resource:\", expected)\n        print(\"matches:\", actual == expected)\n        guard actual == expected else { exit(1) }\n        NSApplication.shared.terminate(nil)\n    }\n}\n\nlet app = NSApplication.shared\nlet delegate = Delegate()\napp.delegate = delegate\napp.run()\n"}
+{}
+{"chunk_id":"475b95","wall_time_seconds":1.002364292,"session_id":17657,"original_token_count":0,"output":""}
+{"chunk_id":"88ef9d","wall_time_seconds":0.000006167,"exit_code":0,"original_token_count":2132,"output":"Test Suite 'All tests' started at 2026-11-17 21:48:49.410.\nTest Suite 'All tests' passed at 2026-11-17 21:48:49.411.\n\t Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds\n◇ Test run started.\n↳ Testing Library Version: 124.4\n↳ Target Platform: arm64e-apple-macos14.0\n◇ Test costsAndBudgetUseKnownUsageOnly() started.\n✔ Test costsAndBudgetUseKnownUsageOnly() passed after 0.009 seconds.\n◇ Test heatmapUsesLocalCalendarAcrossDST() started.\n✔ Test heatmapUsesLocalCalendarAcrossDST() passed after 0.002 seconds.\n◇ Test heatmapWeeksCoverThePastYearWithoutFutureDays() started.\n✔ Test heatmapWeeksCoverThePastYearWithoutFutureDays() passed after 0.001 seconds.\n◇ Test historicalHeatmapIncludesLeapDayAndPadsPartialWeeks() started.\n✔ Test historicalHeatmapIncludesLeapDayAndPadsPartialWeeks() passed after 0.001 seconds.\n◇ Test inheritedProviderResponsesAreCountedOnce() started.\n✔ Test inheritedProviderResponsesAreCountedOnce() passed after 0.001 seconds.\n◇ Test archiveExtractsInlineImagesAndReusesRelativeFiles() started.\n✔ Test archiveExtractsInlineImagesAndReusesRelativeFiles() passed after 0.293 seconds.\n◇ Test archivePreservesMalformedImageExamplesAsOriginalText() started.\n✔ Test archivePreservesMalformedImageExamplesAsOriginalText() passed after 0.370 seconds.\n◇ Test archiveCompressesLargeRawFilesLosslesslyAndReplacesOnlyManagedCopies() started.\n✔ Test archiveCompressesLargeRawFilesLosslesslyAndReplacesOnlyManagedCopies() passed after 2.978 seconds.\n◇ Test archiveSavesCompleteSnapshotEvenWhenSourceFilesExist() started.\n✔ Test archiveSavesCompleteSnapshotEvenWhenSourceFilesExist() passed after 0.239 seconds.\n◇ Test archiveRestoresWithoutSourcesAndKeepsNewerLocalChanges() started.\n✔ Test archiveRestoresWithoutSourcesAndKeepsNewerLocalChanges() passed after 0.163 seconds.\n◇ Test archiveRestoreRejectsMissingRepositoryAndUnsafeManifestPaths() started.\n✔ Test archiveRestoreRejectsMissingRepositoryAndUnsafeManifestPaths() passed after 0.033 seconds.\n◇ Test archiveRestoresLegacyRawLogsIncludingGzip(_:) started.\n◇ Passing 1 argument compressed → false to archiveRestoresLegacyRawLogsIncludingGzip(_:)\n◇ Passing 1 argument compressed → true to archiveRestoresLegacyRawLogsIncludingGzip(_:)\n✔ Test archiveRestoresLegacyRawLogsIncludingGzip(_:) passed after 0.625 seconds.\n◇ Test archiveRetainsCompleteLegacyTranscriptWithoutInventingMessageBoundaries() started.\n✔ Test archiveRetainsCompleteLegacyTranscriptWithoutInventingMessageBoundaries() passed after 0.093 seconds.\n◇ Test archiveSyncRefusesMultiplePushDestinationsBeforeUploading() started.\n✔ Test archiveSyncRefusesMultiplePushDestinationsBeforeUploading() passed after 0.151 seconds.\n◇ Test archiveSyncPreviewShowsTheDestinationWithoutCredentials() started.\n✔ Test archiveSyncPreviewShowsTheDestinationWithoutCredentials() passed after 0.100 seconds.\n◇ Test archiveSyncStopsAHangingPushAndPreservesItsLocalCommit() started.\n✔ Test archiveSyncStopsAHangingPushAndPreservesItsLocalCommit() passed after 0.491 seconds.\n◇ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() started.\n✔ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() passed after 0.370 seconds.\n◇ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() started.\n✔ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() passed after 0.003 seconds.\n◇ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) started.\n◇ Passing 1 argument kind → \"missing\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"history\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"corrupt\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n✔ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) passed after 1.432 seconds.\n◇ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() started.\n✔ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() passed after 0.001 seconds.\n◇ Test backgroundServiceOwnsOneDataDirectoryAndPreservesNewRequests() started.\n✔ Test backgroundServiceOwnsOneDataDirectoryAndPreservesNewRequests() passed after 0.001 seconds.\n◇ Test backgroundServiceArchivesFromItsOwnProcess() started.\n✔ Test backgroundServiceArchivesFromItsOwnProcess() passed after 0.615 seconds.\n◇ Test backgroundServiceExitsOnFatalDependencyFailure(_:) started.\n◇ Passing 1 argument kind → \"runtime\" to backgroundServiceExitsOnFatalDependencyFailure(_:)\n◇ Passing 1 argument kind → \"index\" to backgroundServiceExitsOnFatalDependencyFailure(_:)\n✔ Test backgroundServiceExitsOnFatalDependencyFailure(_:) passed after 4.595 seconds.\n◇ Test backgroundServiceContinuesAfterItsLauncherReturns() started.\n✔ Test backgroundServiceContinuesAfterItsLauncherReturns() passed after 2.555 seconds.\n◇ Test scanDeliversLargeUnicodeMessagesWithoutStalling() started.\n✔ Test scanDeliversLargeUnicodeMessagesWithoutStalling() passed after 0.611 seconds.\n◇ Test storePersistsAndSearchesActualMessages() started.\n✔ Test storePersistsAndSearchesActualMessages() passed after 0.002 seconds.\n◇ Test olderSourceDataCannotReplaceNewerRepositoryHistory() started.\n✔ Test olderSourceDataCannotReplaceNewerRepositoryHistory() passed after 0.002 seconds.\n◇ Test weeklyBudgetVisibilityDefaultsOffAndPersistsWithoutClearingAmount() started.\n✔ Test weeklyBudgetVisibilityDefaultsOffAndPersistsWithoutClearingAmount() passed after 0.003 seconds.\n◇ Test archiveCommitsOnlyManagedChangesAndProtectsEdits() started.\n✔ Test archiveCommitsOnlyManagedChangesAndProtectsEdits() passed after 0.148 seconds.\n◇ Test archiveCannotLiveInsideSourceHome() started.\n✔ Test archiveCannotLiveInsideSourceHome() passed after 0.001 seconds.\n◇ Test provenACPAliasesCountOnceAndPreserveRawSources() started.\n✔ Test provenACPAliasesCountOnceAndPreserveRawSources() passed after 0.004 seconds.\n◇ Test archivePreservesAnExternallyStagedManagedVersion() started.\n✔ Test archivePreservesAnExternallyStagedManagedVersion() passed after 0.122 seconds.\n◇ Test archiveDoesNotStageExcludedProjects() started.\n✔ Test archiveDoesNotStageExcludedProjects() passed after 0.146 seconds.\n◇ Test archiveHandlesPathListsBeyondSystemArgumentLimits() started.\n✔ Test archiveHandlesPathListsBeyondSystemArgumentLimits() passed after 4.546 seconds.\n◇ Test conversationHidesToolsWithoutRemovingHistory() started.\n✔ Test conversationHidesToolsWithoutRemovingHistory() passed after 0.001 seconds.\n◇ Test conversationPaginatesVisibleMessagesAfterHidingTools() started.\n✔ Test conversationPaginatesVisibleMessagesAfterHidingTools() passed after 0.001 seconds.\n◇ Test conversationFoldsInstructionsAndPreservesActualRequests() started.\n✔ Test conversationFoldsInstructionsAndPreservesActualRequests() passed after 0.001 seconds.\n◇ Test conversationGroupsConsecutiveSystemPromptsInOrder() started.\n✔ Test conversationGroupsConsecutiveSystemPromptsInOrder() passed after 0.001 seconds.\n◇ Test conversationPaginationKeepsSystemPromptGroupsWhole() started.\n✔ Test conversationPaginationKeepsSystemPromptGroupsWhole() passed after 0.001 seconds.\n◇ Test recentSessionDatesShowCalendarLabelsInsteadOfElapsedTime() started.\n✔ Test recentSessionDatesShowCalendarLabelsInsteadOfElapsedTime() passed after 0.005 seconds.\n◇ Test recentSessionDateLabelsHandleCrossYearWeeksAndDaylightSaving() started.\n✔ Test recentSessionDateLabelsHandleCrossYearWeeksAndDaylightSaving() passed after 0.001 seconds.\n◇ Test activityGreensGetLighterInBothThemes() started.\n✔ Test activityGreensGetLighterInBothThemes() passed after 0.001 seconds.\n◇ Test activityTooltipUsesLocalDateAndCompactTokens() started.\n✔ Test activityTooltipUsesLocalDateAndCompactTokens() passed after 0.001 seconds.\n◇ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() started.\n✔ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() passed after 0.167 seconds.\n◇ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() started.\n✔ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() passed after 0.001 seconds.\n◇ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() started.\n✔ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() passed after 0.439 seconds.\n✔ Test run with 46 tests passed after 21.337 seconds.\n"}
+
+## tool · 2026-11-17T13:49:38Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"58c6f5","wall_time_seconds":0.000018417,"exit_code":1,"original_token_count":103,"output":"actual: (128.0, 128.0) [\"NSCGImageSnapshotRep:256x256\"]\nexpected: (512.0, 512.0) [\"NSBitmapImageRep:1024x1024\", \"NSBitmapImageRep:512x512\", \"NSBitmapImageRep:512x512\", \"NSBitmapImageRep:256x256\", \"NSBitmapImageRep:256x256\", \"NSBitmapImageRep:128x128\", \"NSBitmapImageRep:64x64\", \"NSBitmapImageRep:32x32\", \"NSBitmapImageRep:32x32\", \"NSBitmapImageRep:16x16\"]\nFAIL: 启动后的应用图标与包内资源不一致\n"}
+
+## tool · 2026-11-17T13:50:20Z
+
+
+Script completed
+Wall time 4.9 seconds
+Output:
+
+{"chunk_id":"8c89ca","wall_time_seconds":0.000012,"exit_code":0,"original_token_count":328,"output":"import AppKit\nimport CryptoKit\n\n@MainActor func digest(_ image: NSImage) -> String {\n    let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 256, bitsPerPixel: 32)!\n    NSGraphicsContext.saveGraphicsState()\n    NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)\n    image.draw(in: NSRect(x: 0, y: 0, width: 64, height: 64))\n    NSGraphicsContext.restoreGraphicsState()\n    return SHA256.hash(data: Data(bytes: bitmap.bitmapData!, count: 64 * 256)).description\n}\n\n@MainActor final class Delegate: NSObject, NSApplicationDelegate {\n    func applicationDidFinishLaunching(_ notification: Notification) {\n        let resource = NSImage(contentsOf: Bundle.main.url(forResource: \"Ragdoll\", withExtension: \"icns\")!)!\n        let actual = digest(NSApplication.shared.applicationIconImage)\n        let expected = digest(resource)\n        print(\"applicationIconImage:\", actual)\n        print(\"resource:\", expected)\n        print(\"matches:\", actual == expected)\n        guard actual == expected else { exit(1) }\n        NSApplication.shared.terminate(nil)\n    }\n}\n\nlet app = NSApplication.shared\nlet delegate = Delegate()\napp.delegate = delegate\napp.run()\n"}
+{}
+{"chunk_id":"2b0465","wall_time_seconds":1.001300167,"session_id":68334,"original_token_count":0,"output":""}
