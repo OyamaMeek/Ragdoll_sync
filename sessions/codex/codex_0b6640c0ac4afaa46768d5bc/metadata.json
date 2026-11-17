@@ -1,0 +1,48 @@
+{
+  "created" : 1794923857626.6313,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/17/rollout-2026-11-17T21-57-37-01a1e9cc-8440-78e3-a4cb-2acd0471624a.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:0b6640c0ac4afaa46768d5bc",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1e9cc-8440-78e3-a4cb-2acd0471624a",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "显示 Codex、Claude 和 DeepSeek 图标",
+  "updated" : 1794923894400,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0fad53dcc66048d0016afc5d5c06e487d09e7f379ecbedd713",
+      "input" : 33790,
+      "model" : "gpt-6.1-sol",
+      "output" : 265,
+      "time" : 1794923874758
+    },
+    {
+      "cacheRead" : 46976,
+      "cacheWrite" : 0,
+      "id" : "resp_0fad53dcc66048d0016afc5d648a8087d08ac5a2ea714b87f7",
+      "input" : 2100,
+      "model" : "gpt-6.1-sol",
+      "output" : 292,
+      "time" : 1794923884635
+    },
+    {
+      "cacheRead" : 49280,
+      "cacheWrite" : 0,
+      "id" : "resp_0fad53dcc66048d0016afc5d72150087d0a733e931a043071a",
+      "input" : 10414,
+      "model" : "gpt-6.1-sol",
+      "output" : 123,
+      "time" : 1794923894397
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

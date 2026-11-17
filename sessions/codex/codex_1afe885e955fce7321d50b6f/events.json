@@ -334,13 +334,76 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 5.1 seconds\nOutput:\n\n{\"chunk_id\":\"d3dad8\",\"wall_time_seconds\":0.000012292,\"exit_code\":0,\"original_token_count\":355,\"output\":\"registered: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/IconProbe.app\\nrunning: 64318 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.preview.app finished: true\\nrunning icon: size=(32.0, 32.0) bytes=30736856 sha256=SHA256 digest: 90d5fb06768ef31821485c3ca8444de52b7f1de446d9b5909cd7d937972819f9\\nrunning icon: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\\ndist/Ragdoll.app: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: a2b687a30c03bacb77e50acb4f5aa82d36023dd22a66922ed18f8d107f846337\\ndist/Ragdoll.app: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\\ndist/Ragdoll.preview.app: size=(32.0, 32.0) bytes=24445096 sha256=SHA256 digest: 8757bfa48d77ec78484e131c2da3e62b8fc4afdc776798ac707018854381eafb\\ndist/Ragdoll.preview.app: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\\ngeneric application: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: ce69abfb9600908ed2d2a2dcd2e41653d73f5b37afcf541d5276b69d28367423\\ngeneric application: normalized=SHA256 digest: e08e590543b644afe3504dac24a9e80861594d9e7d1fbb0b317c2c5188092728\\nsource resource: size=(512.0, 512.0) bytes=6941084 sha256=SHA256 digest: 0ae3027c16c43a205e843fdba9d7b4bb683fddf568de6026ae81e8289d428d87\\nsource resource: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\\n\"}\n{\"chunk_id\":\"eeb964\",\"wall_time_seconds\":5.001607875,\"session_id\":56053,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"dd0e0c\",\"wall_time_seconds\":0.000009041,\"exit_code\":0,\"original_token_count\":85,\"output\":\"[16/20] Emitting module RagdollTests\\n[17/20] Compiling RagdollTests ConversationTests.swift\\n[18/20] Compiling RagdollTests DashboardTests.swift\\n[18/20] Write Objects.LinkFileList\\n[19/20] Linking RagdollPackageTests\\nBuild complete! (6.74s)\\n M memory/agents.md\\n M memory/gotchas.md\\n M memory/plan.md\\n M memory/progress.md\\n M memory/verify.md\\n\"}",
       "time" : 1794923536597
+    },
+    {
+      "id" : "call_d1dcd470166e4d7b9c2af17c7052714b",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 5.3 seconds\nOutput:\n\n{\"chunk_id\":\"97e938\",\"wall_time_seconds\":1.001350416,\"session_id\":40215,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"02e998\",\"wall_time_seconds\":0.000009667,\"exit_code\":0,\"original_token_count\":1165,\"output\":\"diff --git a/memory/agents.md b/memory/agents.md\\nindex 6c57e56..4e77898 100644\\n--- a/memory/agents.md\\n+++ b/memory/agents.md\\n@@ -1,6 +1,6 @@\\n # 开发环境\\n \\n-- 当前代理：Codex；本轮添加 `system prompt` 总折叠项，详见 `memory/progress.md`。\\n+- 当前代理：Codex；本轮修复台前调度中的应用图标，详见 `memory/progress.md`。\\n - Swift 6.1、SwiftUI、macOS 15+、GRDB；TypeScript 助手使用 Node。\\n-- 工具：命令行、apply_patch、Swift Testing、SwiftUI、codesign；采用 Ponytail，验证提示词分组、分页、Swift 测试与 release 预览包。不新增依赖、截图或子代理。\\n+- 工具：命令行、apply_patch、Swift Testing、AppKit、LaunchServices；采用 Ponytail 与 systematic-debugging，核查应用图标数据并刷新运行状态。不新增依赖、截图或子代理。\\n - 参考目录仅供读取，不纳入应用提交。\\ndiff --git a/memory/gotchas.md b/memory/gotchas.md\\nindex 5d78e94..338571f 100644\\n--- a/memory/gotchas.md\\n+++ b/memory/gotchas.md\\n@@ -1,5 +1,7 @@\\n # 注意事项\\n \\n+- 比较 macOS 应用图标的数据时，先统一系统快照和 ICNS 表示的实际尺寸；不同分辨率资源的缩放结果可能不同，摘要差异不能直接证明图标缺失。\\n+\\n - 会话中系统/developer 提示词默认折叠且允许展开，工具调用隐藏；用户消息与助手回复按用户参考图分侧展示。只改变界面，不删除历史记录。\\n \\n - 最近会话的“今天 / 昨日 / 本周 / 本月”用于每条记录右侧的日期文字；保留右上角“全部”导航，不添加日期筛选或隐藏会话。\\ndiff --git a/memory/plan.md b/memory/plan.md\\nindex 393655c..d5a6902 100644\\n--- a/memory/plan.md\\n+++ b/memory/plan.md\\n@@ -1,5 +1,12 @@\\n # Ragdoll 实施计划\\n \\n+## 台前调度图标\\n+\\n+- 当前预览包的 Info.plist、ICNS 和 LaunchServices 登记正确；运行中应用与磁盘图标一致，隔离 AppKit 启动的 applicationIconImage 在 256 像素下也与包内资源一致。\\n+- 刷新现有预览包的 LaunchServices 登记并正常重启，处理旧进程和系统展示缓存的可能影响；无需修改图标、应用源码、调用方、测试、fixtures、配置、导出或依赖。\\n+- 范围仅为本机运行状态及任务记录。保留原证书签名正式包和现有预览包；不重启 Dock，不截图或运行 Claude 测试。\\n+- 核查正常启动进程及图标数据，记录实际显示尚未验证；提交文档并普通推送。\\n+\\n ## system prompt 总折叠项\\n \\n - 连续的系统提示词合并为默认收起的 `system prompt`，展开后保留逐条折叠；用户与助手之间的提示词按原位置独立成组。\\ndiff --git a/memory/progress.md b/memory/progress.md\\nindex 767cc6f..c073a6b 100644\\n--- a/memory/progress.md\\n+++ b/memory/progress.md\\n@@ -1,5 +1,12 @@\\n # 实施进度\\n \\n+## 台前调度图标（2026-11-17）\\n+\\n+- [x] 确认当前预览包的 ICNS 与源资源一致、LaunchServices 登记正确；运行中应用图标与包内资源一致。\\n+- [x] 隔离 AppKit 启动返回 256 像素快照；统一到 256 像素后，原有 applicationIconImage 与包内资源摘要完全一致，无需应用代码改动。全部 46 项 Swift 测试通过（21.337 秒）。\\n+- [ ] 刷新预览包的 LaunchServices 登记并正常重启，核对新进程与图标。\\n+- [ ] 追加开发记录，提交并普通推送，核对远端 SHA。\\n+\\n ## system prompt 总折叠项（2026-11-17）\\n \\n - [x] 确认共用 ConversationView 当前逐条折叠；调用和测试均在该视图与 ConversationTests，没有项目测试技能目录。\\ndiff --git a/memory/verify.md b/memory/verify.md\\nindex fffb7b6..cce1386 100644\\n--- a/memory/verify.md\\n+++ b/memory/verify.md\\n@@ -1,5 +1,12 @@\\n # 验证标准\\n \\n+## 台前调度图标\\n+\\n+- 图标资源与应用包内字节一致；LaunchServices 登记指向实际 ICNS；NSRunningApplication 图标与包内资源在相同尺寸下摘要一致。\\n+- 隔离 AppKit 应用正常启动后，以系统实际返回的 256 像素快照尺寸比较 applicationIconImage 和包内资源；不把不同尺寸/缩放路径的摘要差异判定为默认图标。\\n+- 刷新预览包登记并正常重启后，确认新进程运行且图标数据一致；应用源码和两个现有应用包无需修改。\\n+- 不执行截图或人工视觉检查，不运行 Claude 测试；台前调度实际显示仍需明确标记未验证。普通推送后核对远端 SHA。\\n+\\n ## system prompt 总折叠项\\n \\n - 连续 system/developer 和已识别注入消息显示为单个 `system prompt`，默认收起；展开保留原逐条折叠及全文选择。\\n\"}",
+      "time" : 1794923557353
+    },
+    {
+      "id" : "call_b5d8a5de31e5497496005cf11e850770",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"60965d\",\"wall_time_seconds\":0.000013291,\"exit_code\":0,\"original_token_count\":354,\"output\":\"registered: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app\\nrunning: 64318 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.preview.app finished: true\\nrunning icon: size=(32.0, 32.0) bytes=30736856 sha256=SHA256 digest: 90d5fb06768ef31821485c3ca8444de52b7f1de446d9b5909cd7d937972819f9\\nrunning icon: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\\ndist/Ragdoll.app: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: a2b687a30c03bacb77e50acb4f5aa82d36023dd22a66922ed18f8d107f846337\\ndist/Ragdoll.app: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\\ndist/Ragdoll.preview.app: size=(32.0, 32.0) bytes=24445096 sha256=SHA256 digest: 8757bfa48d77ec78484e131c2da3e62b8fc4afdc776798ac707018854381eafb\\ndist/Ragdoll.preview.app: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\\ngeneric application: size=(32.0, 32.0) bytes=37028776 sha256=SHA256 digest: ce69abfb9600908ed2d2a2dcd2e41653d73f5b37afcf541d5276b69d28367423\\ngeneric application: normalized=SHA256 digest: e08e590543b644afe3504dac24a9e80861594d9e7d1fbb0b317c2c5188092728\\nsource resource: size=(512.0, 512.0) bytes=6941084 sha256=SHA256 digest: 0ae3027c16c43a205e843fdba9d7b4bb683fddf568de6026ae81e8289d428d87\\nsource resource: normalized=SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\\n\"}\n{\"chunk_id\":\"259d04\",\"wall_time_seconds\":0.00001125,\"exit_code\":0,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"af5799\",\"wall_time_seconds\":0.000008833,\"exit_code\":0,\"original_token_count\":512,\"output\":\"◇ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() started.\\n✔ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() passed after 0.001 seconds.\\n◇ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() started.\\n✔ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() passed after 0.482 seconds.\\n✔ Test run with 46 tests passed after 20.269 seconds.\\n# 开发环境\\n\\n- 当前代理：Codex；本轮修复台前调度中的应用图标，详见 `memory/progress.md`。\\n- Swift 6.1、SwiftUI、macOS 15+、GRDB；TypeScript 助手使用 Node。\\n- 工具：命令行、apply_patch、Swift Testing、AppKit、LaunchServices；采用 Ponytail 与 systematic-debugging，核查应用图标数据并刷新运行状态。不新增依赖、截图或子代理。\\n- 参考目录仅供读取，不纳入应用提交。\\n# 实施进度\\n\\n## 台前调度图标（2026-11-17）\\n\\n- [x] 确认当前预览包的 ICNS 与源资源一致、LaunchServices 登记正确；运行中应用图标与包内资源一致。\\n- [x] 隔离 AppKit 启动返回 256 像素快照；统一到 256 像素后，原有 applicationIconImage 与包内资源摘要完全一致，无需应用代码改动。全部 46 项 Swift 测试通过（21.337 秒）。\\n- [ ] 刷新预览包的 LaunchServices 登记并正常重启，核对新进程与图标。\\n- [ ] 追加开发记录，提交并普通推送，核对远端 SHA。\\n\\n## system prompt 总折叠项（2026-11-17）\\n\\n- [x] 确认共用 ConversationView 当前逐条折叠；调用和测试均在该视图与 ConversationTests，没有项目测试技能目录。\\n- **涉及文件**：`Sources/Ragdoll/ConversationView.swift`、`Tests/RagdollTests/ConversationTests.swift`、`docs/USAGE.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：`c40424f feat(chat): group system prompts under a parent disclosure`，已普通推送至 `origin/main`，远端 SHA 与本地一致；本条由后续文档提交补记。\\n\\n---\\n\"}",
+      "time" : 1794923564154
+    },
+    {
+      "id" : "290",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "已刷新应用登记并重新启动预览包。新进程返回的图标数据与猫咪资源一致，46 项 Swift 测试和两个应用包的签名完整性检查也已通过。台前调度的实际显示尚未进行截图验证。\n",
+      "time" : 1794923586746
+    },
+    {
+      "id" : "call_14ee8e653c354f0e9e63afc5c9b33795",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.5 seconds\nOutput:\n\n{}\n{\"chunk_id\":\"e8af06\",\"wall_time_seconds\":0.00003775,\"exit_code\":0,\"original_token_count\":888,\"output\":\" docs/CHANGELOG.md  | 14 ++++++++++++++\\n memory/agents.md   |  4 ++--\\n memory/gotchas.md  |  2 ++\\n memory/plan.md     |  7 +++++++\\n memory/progress.md |  7 +++++++\\n memory/verify.md   |  8 ++++++++\\n 6 files changed, 40 insertions(+), 2 deletions(-)\\n- **实际实现的功能与改动**：\\n  - 连续的系统提示词归入默认收起的 `system prompt`，展开后保留各条系统提示词的独立折叠与全文选择；用户和助手消息顺序保留。\\n  - 隐藏工具后先分组、再按 100 项分页，避免截断提示词组；原始消息与存储保留，历史会话和对话共用实现。\\n  - 新增两项分组/分页回归先因缺少分组入口编译失败；实现后全部 46 项 Swift 测试通过（21.670 秒），release 构建及 Git diff 检查通过。\\n  - 更新 `dist/Ragdoll.preview.app`，临时签名完整性和内置助手自检通过；原正式包可执行文件 SHA-256 不变且签名完整性通过。预览包不用于独立后台服务；未验证实际点击或视觉效果，未执行 Claude 测试。\\n- **涉及文件**：`Sources/Ragdoll/ConversationView.swift`、`Tests/RagdollTests/ConversationTests.swift`、`docs/USAGE.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：`c40424f feat(chat): group system prompts under a parent disclosure`，已普通推送至 `origin/main`，远端 SHA 与本地一致；本条由后续文档提交补记。\\n\\n---\\n\\n## [2026-11-17 21:52] 核查台前调度图标并刷新应用登记\\n\\n- **需求/问题描述**：\\n  > 台前调度中显示默认图标，没有显示 Ragdoll 猫咪图标。\\n- **实际实现的功能与改动**：\\n  - 核查当前预览包的 Info.plist、ICNS 和 LaunchServices 登记，均已包含猫咪图标；系统返回的运行中应用图标与资源一致。\\n  - 隔离 AppKit 应用正常启动后返回 256 像素快照，在相同尺寸下与包内图标摘要一致；未发现需要修改应用代码的图标加载缺陷。\\n  - 刷新预览包登记并正常重启，新进程完成启动且图标数据与资源一致；清理隔离复现应用及其登记。\\n  - 最终源码全部 46 项 Swift 测试通过（20.269 秒），正式包与预览包深度签名完整性通过，Git diff 格式检查通过。未重新打包、运行 Claude 测试或截图；台前调度实际显示是否恢复尚未确认。\\n- **涉及文件**：`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：待提交。\\n\\n---\\n# 实施进度\\n\\n## 台前调度图标（2026-11-17）\\n\\n- [x] 确认当前预览包的 ICNS 与源资源一致、LaunchServices 登记正确；运行中应用图标与包内资源一致。\\n- [x] 隔离 AppKit 启动返回 256 像素快照；统一到 256 像素后，原有 applicationIconImage 与包内资源摘要完全一致，无需应用代码改动。最终源码全部 46 项 Swift 测试通过（20.269 秒）。\\n- [x] 刷新预览包的 LaunchServices 登记并正常重启，旧进程已退出，新进程 64318 完成启动，图标摘要与资源一致；正式包和预览包深度签名完整性通过。台前调度实际显示未截图验证，尚不能确认用户所见异常已消失。\\n- [ ] 追加开发记录，提交并普通推送，核对远端 SHA。\\n\\n## system prompt 总折叠项（2026-11-17）\\n\\n M docs/CHANGELOG.md\\n M memory/agents.md\\n M memory/gotchas.md\\n M memory/plan.md\\n M memory/progress.md\\n M memory/verify.md\\n\"}",
+      "time" : 1794923601372
+    },
+    {
+      "id" : "call_1a62e4501e664afe9103d9deb21adf93",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 7.9 seconds\nOutput:\n\n{\"chunk_id\":\"92d412\",\"wall_time_seconds\":1.002927875,\"session_id\":89523,\"original_token_count\":30,\"output\":\"[main efdd80e] docs(macos): record Stage Manager icon diagnostics\\n 6 files changed, 40 insertions(+), 2 deletions(-)\\n\"}",
+      "time" : 1794923614574
+    },
+    {
+      "id" : "call_60c4f1262cf14869b71f03aaf3a8e4e9",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"5047bf\",\"wall_time_seconds\":0.000010458,\"exit_code\":0,\"original_token_count\":20,\"output\":\"To https://github.com/OyamaMeek/Ragdoll.git\\n   69012c9..efdd80e  main -> main\\n\"}\n{\"chunk_id\":\"e0bb2b\",\"wall_time_seconds\":0.000018167,\"exit_code\":0,\"original_token_count\":330,\"output\":\"  - 最终源码全部 46 项 Swift 测试通过（20.269 秒），正式包与预览包深度签名完整性通过，Git diff 格式检查通过。未重新打包、运行 Claude 测试或截图；台前调度实际显示是否恢复尚未确认。\\n- **涉及文件**：`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：待提交。\\n\\n---\\n# 实施进度\\n\\n## 台前调度图标（2026-11-17）\\n\\n- [x] 确认当前预览包的 ICNS 与源资源一致、LaunchServices 登记正确；运行中应用图标与包内资源一致。\\n- [x] 隔离 AppKit 启动返回 256 像素快照；统一到 256 像素后，原有 applicationIconImage 与包内资源摘要完全一致，无需应用代码改动。最终源码全部 46 项 Swift 测试通过（20.269 秒）。\\n- [x] 刷新预览包的 LaunchServices 登记并正常重启，旧进程已退出，新进程 64318 完成启动，图标摘要与资源一致；正式包和预览包深度签名完整性通过。台前调度实际显示未截图验证，尚不能确认用户所见异常已消失。\\n- [ ] 追加开发记录，提交并普通推送，核对远端 SHA。\\n\\n## system prompt 总折叠项（2026-11-17）\\nefdd80e docs(macos): record Stage Manager icon diagnostics\\n\"}",
+      "time" : 1794923620117
+    },
+    {
+      "id" : "call_7c8f1554ebde4f6ea15d46d6344b5ebd",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 11.5 seconds\nOutput:\n\n{\"chunk_id\":\"b89129\",\"wall_time_seconds\":2.145639417,\"exit_code\":0,\"original_token_count\":25,\"output\":\"efdd80ef1443aba0b5eeac1af66f10468471ac12\\nefdd80ef1443aba0b5eeac1af66f10468471ac12\\trefs/heads/main\\n\"}\n{}\n{\"chunk_id\":\"e1689f\",\"wall_time_seconds\":0.00001,\"exit_code\":0,\"original_token_count\":369,\"output\":\"  - 最终源码全部 46 项 Swift 测试通过（20.269 秒），正式包与预览包深度签名完整性通过，Git diff 格式检查通过。未重新打包、运行 Claude 测试或截图；台前调度实际显示是否恢复尚未确认。\\n- **涉及文件**：`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：`efdd80e docs(macos): record Stage Manager icon diagnostics`，已普通推送至 origin/main，远端 SHA 与本地一致；本条由后续文档提交补记。\\n\\n---\\n# 实施进度\\n\\n## 台前调度图标（2026-11-17）\\n\\n- [x] 确认当前预览包的 ICNS 与源资源一致、LaunchServices 登记正确；运行中应用图标与包内资源一致。\\n- [x] 隔离 AppKit 启动返回 256 像素快照；统一到 256 像素后，原有 applicationIconImage 与包内资源摘要完全一致，无需应用代码改动。最终源码全部 46 项 Swift 测试通过（20.269 秒）。\\n- [x] 刷新预览包的 LaunchServices 登记并正常重启，旧进程已退出，新进程 64318 完成启动，图标摘要与资源一致；正式包和预览包深度签名完整性通过。台前调度实际显示未截图验证，尚不能确认用户所见异常已消失。\\n- [x] `efdd80e docs(macos): record Stage Manager icon diagnostics` 已普通推送至 origin/main，远端 SHA 与本地一致；本条和开发记录由后续文档提交补记。\\n\\n\"}\n{\"chunk_id\":\"b48ae2\",\"wall_time_seconds\":1.002269625,\"session_id\":13496,\"original_token_count\":28,\"output\":\"[main 3b71494] docs(macos): record icon diagnostics commit\\n 2 files changed, 2 insertions(+), 2 deletions(-)\\n\"}",
+      "time" : 1794923642806
+    },
+    {
+      "id" : "call_fe672ee0cae145b989b88a4e6e241437",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 6.3 seconds\nOutput:\n\n{\"chunk_id\":\"6e88e9\",\"wall_time_seconds\":0.00000925,\"exit_code\":0,\"original_token_count\":20,\"output\":\"To https://github.com/OyamaMeek/Ragdoll.git\\n   efdd80e..3b71494  main -> main\\n\"}\n{\"chunk_id\":\"18339c\",\"wall_time_seconds\":3.142519417,\"exit_code\":0,\"original_token_count\":25,\"output\":\"3b714949c81e65cd54541f3fe45f693d8c03143b\\n3b714949c81e65cd54541f3fe45f693d8c03143b\\trefs/heads/main\\n\"}",
+      "time" : 1794923656458
+    },
+    {
+      "id" : "329",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "已刷新 Ragdoll 的应用登记并重启预览包，系统返回的图标数据与猫咪图标一致。46 项测试通过，核查记录已提交并推送。\n\n未截图验证台前调度的实际显示，暂时无法确认画面中的异常已消失。",
+      "time" : 1794923661908
     }
   ],
   "nativeID" : "01a1e9bd-d1a6-7c83-aca9-b6f4bd0c5d72",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "修复台前调度图标不显示",
-  "updated" : 1794923550029,
+  "updated" : 1794923662627,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -629,6 +692,78 @@
       "model" : "gpt-6.1-sol",
       "output" : 180,
       "time" : 1794923531635
+    },
+    {
+      "cacheRead" : 135040,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c11f8ec87d09bca68dfc378d014",
+      "input" : 877,
+      "model" : "gpt-6.1-sol",
+      "output" : 472,
+      "time" : 1794923552767
+    },
+    {
+      "cacheRead" : 136320,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c26be9487d0926d52683bd4efc1",
+      "input" : 1574,
+      "model" : "gpt-6.1-sol",
+      "output" : 130,
+      "time" : 1794923564152
+    },
+    {
+      "cacheRead" : 137984,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c2d950487d09263264a050cab9d",
+      "input" : 1378,
+      "model" : "gpt-6.1-sol",
+      "output" : 1586,
+      "time" : 1794923601368
+    },
+    {
+      "cacheRead" : 140928,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c52ccac87d0b5383d055a036f7e",
+      "input" : 1164,
+      "model" : "gpt-6.1-sol",
+      "output" : 153,
+      "time" : 1794923607776
+    },
+    {
+      "cacheRead" : 142208,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c5ffc7c87d0a39d63b25cf9ea98",
+      "input" : 128,
+      "model" : "gpt-6.1-sol",
+      "output" : 96,
+      "time" : 1794923620115
+    },
+    {
+      "cacheRead" : 142336,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c65689487d0b1675a522921f7da",
+      "input" : 613,
+      "model" : "gpt-6.1-sol",
+      "output" : 412,
+      "time" : 1794923632347
+    },
+    {
+      "cacheRead" : 143232,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c7c2ef887d086f977645117e8ff",
+      "input" : 770,
+      "model" : "gpt-6.1-sol",
+      "output" : 120,
+      "time" : 1794923650174
+    },
+    {
+      "cacheRead" : 144000,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c89c06087d0b92762369f9c9f92",
+      "input" : 294,
+      "model" : "gpt-6.1-sol",
+      "output" : 69,
+      "time" : 1794923662612
     }
   ],
   "warnings" : [

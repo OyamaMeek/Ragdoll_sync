@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "修复台前调度图标不显示",
-  "updated" : 1794923550029,
+  "updated" : 1794923662627,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -301,6 +301,78 @@
       "model" : "gpt-6.1-sol",
       "output" : 180,
       "time" : 1794923531635
+    },
+    {
+      "cacheRead" : 135040,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c11f8ec87d09bca68dfc378d014",
+      "input" : 877,
+      "model" : "gpt-6.1-sol",
+      "output" : 472,
+      "time" : 1794923552767
+    },
+    {
+      "cacheRead" : 136320,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c26be9487d0926d52683bd4efc1",
+      "input" : 1574,
+      "model" : "gpt-6.1-sol",
+      "output" : 130,
+      "time" : 1794923564152
+    },
+    {
+      "cacheRead" : 137984,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c2d950487d09263264a050cab9d",
+      "input" : 1378,
+      "model" : "gpt-6.1-sol",
+      "output" : 1586,
+      "time" : 1794923601368
+    },
+    {
+      "cacheRead" : 140928,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c52ccac87d0b5383d055a036f7e",
+      "input" : 1164,
+      "model" : "gpt-6.1-sol",
+      "output" : 153,
+      "time" : 1794923607776
+    },
+    {
+      "cacheRead" : 142208,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c5ffc7c87d0a39d63b25cf9ea98",
+      "input" : 128,
+      "model" : "gpt-6.1-sol",
+      "output" : 96,
+      "time" : 1794923620115
+    },
+    {
+      "cacheRead" : 142336,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c65689487d0b1675a522921f7da",
+      "input" : 613,
+      "model" : "gpt-6.1-sol",
+      "output" : 412,
+      "time" : 1794923632347
+    },
+    {
+      "cacheRead" : 143232,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c7c2ef887d086f977645117e8ff",
+      "input" : 770,
+      "model" : "gpt-6.1-sol",
+      "output" : 120,
+      "time" : 1794923650174
+    },
+    {
+      "cacheRead" : 144000,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5c89c06087d0b92762369f9c9f92",
+      "input" : 294,
+      "model" : "gpt-6.1-sol",
+      "output" : 69,
+      "time" : 1794923662612
     }
   ],
   "warnings" : [
