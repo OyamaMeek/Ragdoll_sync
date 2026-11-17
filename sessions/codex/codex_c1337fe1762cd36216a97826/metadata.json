@@ -1,0 +1,75 @@
+{
+  "created" : 1794930191033.9648,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/17/rollout-2026-11-17T23-43-05-01a1ea2d-00db-7c11-9f4c-92a50f1dc70e.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:c1337fe1762cd36216a97826",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1ea2d-00db-7c11-9f4c-92a50f1dc70e",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "分批推送 remote-question-bank",
+  "updated" : 1794930292266,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc76173c9487d0872598431c0d453b",
+      "input" : 21682,
+      "model" : "gpt-6.1-sol",
+      "output" : 283,
+      "time" : 1794930210025
+    },
+    {
+      "cacheRead" : 34560,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc7623906487d0adb31b50805557c4",
+      "input" : 1225,
+      "model" : "gpt-6.1-sol",
+      "output" : 347,
+      "time" : 1794930221742
+    },
+    {
+      "cacheRead" : 35584,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc76348f2c87d0b66b8fbc14082007",
+      "input" : 5201,
+      "model" : "gpt-6.1-sol",
+      "output" : 636,
+      "time" : 1794930247590
+    },
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc764dba6c87d0815e570c1fde729a",
+      "input" : 32652,
+      "model" : "gpt-6.1-sol",
+      "output" : 345,
+      "time" : 1794930263442
+    },
+    {
+      "cacheRead" : 45568,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc765bc4f087d08beadad4beaf85b5",
+      "input" : 1059,
+      "model" : "gpt-6.1-sol",
+      "output" : 341,
+      "time" : 1794930277615
+    },
+    {
+      "cacheRead" : 46336,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc7666d62887d091d69726e02de43c",
+      "input" : 650,
+      "model" : "gpt-6.1-sol",
+      "output" : 430,
+      "time" : 1794930292262
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
