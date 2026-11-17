@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "首次打开设置 Git 仓库",
-  "updated" : 1794903580001,
+  "updated" : 1794903668026,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -391,6 +391,24 @@
       "model" : "gpt-6.1-sol",
       "output" : 1124,
       "time" : 1794903571583
+    },
+    {
+      "cacheRead" : 185216,
+      "cacheWrite" : 0,
+      "id" : "resp_01ad59dcb78c3842016afc0e195ee887d08e86da2682d67b88",
+      "input" : 620,
+      "model" : "gpt-6.1-sol",
+      "output" : 1218,
+      "time" : 1794903622808
+    },
+    {
+      "cacheRead" : 186880,
+      "cacheWrite" : 0,
+      "id" : "resp_01ad59dcb78c3842016afc0e4feb5087d0888980e466872a1e",
+      "input" : 599,
+      "model" : "gpt-6.1-sol",
+      "output" : 592,
+      "time" : 1794903655258
     }
   ],
   "warnings" : [

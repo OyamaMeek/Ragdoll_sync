@@ -1744,3 +1744,27 @@ Output:
 {}
 {"chunk_id":"6167d6","wall_time_seconds":0.000009,"exit_code":0,"original_token_count":310,"output":" README.md                                          |  3 +-\n Sources/Ragdoll/AppModel.swift                     | 56 +++++++++++++++-----\n Sources/Ragdoll/RootView.swift                     | 26 +++++++--\n Sources/Ragdoll/SettingsView.swift                 |  4 +-\n Sources/RagdollCore/Archive.swift                  | 61 ++++++++++++++++++++--\n Sources/RagdollCore/BackgroundService.swift        | 13 +++++\n Sources/RagdollCore/Store.swift                    |  1 +\n .../RagdollCoreTests/BackgroundServiceTests.swift  | 39 +++++++++++++-\n Tests/RagdollCoreTests/StoreArchiveTests.swift     | 13 +++++\n docs/CHANGELOG.md                                  | 15 ++++++\n docs/VALIDATION.md                                 |  9 ++++\n memory/agents.md                                   |  4 +-\n memory/plan.md                                     |  8 +++\n memory/progress.md                                 | 10 ++++\n memory/verify.md                                   |  9 ++++\n runtime/src/logs.ts                                |  8 +--\n runtime/src/main.ts                                |  9 +++-\n 17 files changed, 256 insertions(+), 32 deletions(-)\n* main 29df720 [origin/main] docs(archive): record image extraction and verified pushes\n"}
 {"chunk_id":"f8991a","wall_time_seconds":1.002116042,"session_id":57728,"original_token_count":11,"output":"49e5402571094f5d6ed564f1eb96b8a02c06152a\n"}
+
+## assistant · 2026-11-17T08:20:18Z
+
+真实应用已完成仓库读取和自动归档，归档树中有 787 份完整会话快照。新版也已切回原有正式数据目录和远端设置运行。最后正在核对归档远端状态，并提交、推送源码。
+
+## tool · 2026-11-17T08:20:31Z
+
+
+Script completed
+Wall time 9.5 seconds
+Output:
+
+{"chunk_id":"b31892","wall_time_seconds":0.000011917,"exit_code":0,"original_token_count":318,"output":" README.md                                          |   3 +-\n Sources/Ragdoll/AppModel.swift                     |  56 ++++++++---\n Sources/Ragdoll/RootView.swift                     |  26 ++++-\n Sources/Ragdoll/SettingsView.swift                 |   4 +-\n Sources/RagdollCore/Archive.swift                  |  61 +++++++++++-\n Sources/RagdollCore/BackgroundService.swift        |  13 +++\n Sources/RagdollCore/Store.swift                    |   1 +\n Tests/RagdollCoreTests/ArchiveReadTests.swift      | 107 +++++++++++++++++++++\n .../RagdollCoreTests/BackgroundServiceTests.swift  |  39 +++++++-\n Tests/RagdollCoreTests/StoreArchiveTests.swift     |  13 +++\n Tests/RagdollTests/StartupTests.swift              |  55 +++++++++++\n docs/CHANGELOG.md                                  |  15 +++\n docs/VALIDATION.md                                 |   9 ++\n memory/agents.md                                   |   4 +-\n memory/plan.md                                     |   8 ++\n memory/progress.md                                 |  10 ++\n memory/verify.md                                   |   9 ++\n runtime/src/logs.ts                                |   8 +-\n runtime/src/main.ts                                |   9 +-\n 19 files changed, 418 insertions(+), 32 deletions(-)\n"}
+{"chunk_id":"14ab75","wall_time_seconds":0.000008917,"exit_code":0,"original_token_count":15,"output":"37e65e908cb524855d2865b404adc42febf713bf\trefs/heads/main\n"}
+
+## tool · 2026-11-17T08:21:07Z
+
+
+Script completed
+Wall time 12.8 seconds
+Output:
+
+{"chunk_id":"935c0c","wall_time_seconds":1.00196325,"session_id":40609,"original_token_count":76,"output":"[main 7e60a35] feat(startup): require git setup and restore archive before scanning\n 19 files changed, 418 insertions(+), 32 deletions(-)\n create mode 100644 Tests/RagdollCoreTests/ArchiveReadTests.swift\n create mode 100644 Tests/RagdollTests/StartupTests.swift\n7e60a35a8e7c9c939333b6ab65199a050999d5bd\n"}
+{"chunk_id":"ffeab7","wall_time_seconds":1.002520917,"session_id":33302,"original_token_count":11,"output":"d50a492be1a5a677b5f8286d618d49cfaf24d7cc\n"}
