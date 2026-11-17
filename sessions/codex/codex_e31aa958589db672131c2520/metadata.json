@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "改为显示今天、昨日、本周和本月",
-  "updated" : 1794904393401,
+  "updated" : 1794904555603,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -337,6 +337,105 @@
       "model" : "gpt-6.1-sol",
       "output" : 652,
       "time" : 1794904393401
+    },
+    {
+      "cacheRead" : 130816,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc115024d887d09d75cae6ccaf6718",
+      "input" : 839,
+      "model" : "gpt-6.1-sol",
+      "output" : 266,
+      "time" : 1794904411519
+    },
+    {
+      "cacheRead" : 131712,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc1160d09c87d09071baab0f66df26",
+      "input" : 2826,
+      "model" : "gpt-6.1-sol",
+      "output" : 331,
+      "time" : 1794904429473
+    },
+    {
+      "cacheRead" : 134656,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc1172cf6c87d0a0b735830145b59d",
+      "input" : 3851,
+      "model" : "gpt-6.1-sol",
+      "output" : 936,
+      "time" : 1794904455286
+    },
+    {
+      "cacheRead" : 139264,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc118e07c087d09fec76f9045f84f8",
+      "input" : 2538,
+      "model" : "gpt-6.1-sol",
+      "output" : 143,
+      "time" : 1794904468469
+    },
+    {
+      "cacheRead" : 141824,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc1198529887d0909cab49057a9751",
+      "input" : 238,
+      "model" : "gpt-6.1-sol",
+      "output" : 505,
+      "time" : 1794904484322
+    },
+    {
+      "cacheRead" : 142336,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc11aecb9087d0b00493eebb529aaf",
+      "input" : 1463,
+      "model" : "gpt-6.1-sol",
+      "output" : 185,
+      "time" : 1794904504854
+    },
+    {
+      "cacheRead" : 143744,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc11b984e887d08b30a04f541c0740",
+      "input" : 918,
+      "model" : "gpt-6.1-sol",
+      "output" : 262,
+      "time" : 1794904516082
+    },
+    {
+      "cacheRead" : 144768,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc11ca51c887d0a7a9475a8cdbd40a",
+      "input" : 251,
+      "model" : "gpt-6.1-sol",
+      "output" : 122,
+      "time" : 1794904531731
+    },
+    {
+      "cacheRead" : 144896,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc11d4798887d0911c8dd42c43e94c",
+      "input" : 700,
+      "model" : "gpt-6.1-sol",
+      "output" : 383,
+      "time" : 1794904542838
+    },
+    {
+      "cacheRead" : 145792,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc11e49c8087d09abd349843b53a2f",
+      "input" : 833,
+      "model" : "gpt-6.1-sol",
+      "output" : 39,
+      "time" : 1794904551400
+    },
+    {
+      "cacheRead" : 146432,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc11e81b0487d08dbbf75fba9d5416",
+      "input" : 326,
+      "model" : "gpt-6.1-sol",
+      "output" : 66,
+      "time" : 1794904555561
     }
   ],
   "warnings" : [
