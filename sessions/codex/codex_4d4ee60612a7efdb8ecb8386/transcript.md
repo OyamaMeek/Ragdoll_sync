@@ -3778,7 +3778,70 @@ Output:
 云端应用构建、TypeScript 和 Node 检查已通过，正在按串行配置运行 Swift 测试。通过后会继续检查压缩包并上传。
 
 
-## tool · 2026-11-17T12:48:13Z
+## tool · 2026-11-17T12:48:58Z
 
-sleep
-{"duration_ms":45000}
+
+Wall time: 45.0218 seconds
+Sleep completed.
+
+## tool · 2026-11-17T12:49:06Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"e63cb6","wall_time_seconds":1.001658333,"session_id":65388,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:49:14Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"59f38d","wall_time_seconds":0.000014584,"exit_code":0,"original_token_count":166,"output":"[{\"id\":134048379223,\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Install Codex for migration tests\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build application\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Check runtime\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Test Swift\",\"status\":\"in_progress\",\"conclusion\":null}]}]\n"}
+
+## tool · 2026-11-17T12:49:33Z
+
+
+Wall time: 10.0081 seconds
+Sleep completed.
+
+## tool · 2026-11-17T12:49:40Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"e6eb4e","wall_time_seconds":1.001740833,"session_id":17253,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:49:47Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"697696","wall_time_seconds":0.000016,"exit_code":0,"original_token_count":185,"output":"[{\"id\":134048379223,\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Install Codex for migration tests\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build application\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Check runtime\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Test Swift\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Package and verify\",\"status\":\"in_progress\",\"conclusion\":null}]}]\n"}
+
+## assistant · 2026-11-17T12:49:53Z
+
+云端 Swift 测试已通过，串行执行完成。现在正在验证 ZIP 解压后的可执行文件、签名和内置助手，随后上传构建产物。
+
+
+## tool · 2026-11-17T12:50:03Z
+
+
+Wall time: 10.0063 seconds
+Sleep completed.
+
+## tool · 2026-11-17T12:50:12Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"31fb18","wall_time_seconds":1.002259291,"session_id":33900,"original_token_count":0,"output":""}
