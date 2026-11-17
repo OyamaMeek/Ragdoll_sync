@@ -537,13 +537,27 @@
       "role" : "assistant",
       "text" : "已将猫咪标识设为应用图标，并重新构建 [Ragdoll.app](/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app)。后续打包与发布都会使用它。\n\n构建、签名和图标资源检查通过，改动已推送。\n\n未检查 Finder/Dock 的实际显示；若仍显示旧图标，退出后重新打开新版应用。",
       "time" : 1794921308504
+    },
+    {
+      "id" : "433",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "这种README是一种规范吗\n",
+      "time" : 1794921348012
+    },
+    {
+      "id" : "438",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "**属于开源项目常见的展示惯例，没有统一的强制标准。**\n\n可以分成两个层面：\n\n- **语法**：GitHub 使用 GitHub Flavored Markdown，标题、表格、链接等有明确的语法规则，也支持部分 HTML。\n- **内容和排版**：居中图标、徽章、简介、功能表格、截图、安装步骤、许可证等，由项目维护者自行组织。\n\n这类 README 通常按照访客的阅读顺序展开：**项目做什么 → 有什么功能 → 怎么安装使用 → 如何参与开发**。图标和徽章帮助识别项目，截图展示实际效果，清楚的安装步骤降低尝试成本。\n\n你现在采用的是这种常见结构。徽章、多语言、居中标题都属于可选项；内容准确、入口清楚、说明与实际功能一致更重要。\n\n未核对特定社区的模板要求；向具体社区提交项目时，可能需要遵循其额外规定。",
+      "time" : 1794921371241
     }
   ],
   "nativeID" : "01a1e993-8d55-7912-a041-ab61d24a3896",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "分析 README 差距",
-  "updated" : 1794921309159,
+  "updated" : 1794921372779,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -1012,6 +1026,15 @@
       "model" : "gpt-6.1-sol",
       "output" : 95,
       "time" : 1794921309116
+    },
+    {
+      "cacheRead" : 168832,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc53853b2087d0af06764c91d8d6e2",
+      "input" : 88,
+      "model" : "gpt-6.1-sol",
+      "output" : 480,
+      "time" : 1794921372725
     }
   ],
   "warnings" : [
