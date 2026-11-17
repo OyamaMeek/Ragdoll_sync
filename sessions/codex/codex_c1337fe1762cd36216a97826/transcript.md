@@ -1296,3 +1296,96 @@ Output:
 {"status":"fulfilled","value":{"chunk_id":"2229e3","wall_time_seconds":0.000008958,"exit_code":0,"original_token_count":43,"output":"/Volumes/SamsungSSD990PRO/GitHub/remote-question-bank\n/Volumes/SamsungSSD990PRO/GitHub/remote-question-bank/.git\n       0\ncredential username present=1 secret present=1\n"}}
 {"status":"fulfilled","value":{"chunk_id":"34b5a2","wall_time_seconds":0.000008209,"exit_code":0,"original_token_count":1233,"output":"# 当前任务计划\n\n## 2026-11-17 CLion Codex 2.7.0 启动修复\n\n1. 从原始日志区分 ACP 2.7.0 安装误用主目录与 CLion 自带 Node 下载超时，确认两处目标缺失。\n2. 按 Node 官方校验值验证归档，核验本机同版本 ACP 包，仅恢复 CLion 的两个缺失目录；依照注册表和自定义入口各自的配置验证启动，保留已有聊天对应的标识。\n3. 验证实际注册表启动命令及自定义入口，保存协作记录。\n\n## 2026-11-16 Python 课堂笔记 OCR\n\n1. 定位 Notion「Note → Python」，按折叠章节清点原图和已有笔记，对原图运行本地 Vision OCR。\n2. 对照已有正文，补齐遗漏的课件和示例，在原章节内定点添加可搜索的文字，保留原图。\n3. 运行新增 Python 示例，核对 Notion 更新结果并保存协作记录。\n\n## 2026-11-09 CLion Codex 2.6.0 启动修复\n# 当前任务验证标准\n\n## 2026-11-17 CLion Codex 2.7.0 启动修复\n\n- 对照失败日志检查两个目标目录；核验 Node 归档校验值、Node/npm 版本及 ARM64 Codex 签名。\n- 执行 CLion 原版 npx 启动命令和自定义入口，要求 ACP 初始化和新建会话成功。区分协议层验证和 IDE 聊天验证。\n\n实际结果：空安装目录的 npm prefix 返回主目录；恢复目录内的 prefix 正确。Node 归档与官网 SHA-256 一致，Node 24.13.0/npm 11.6.2、ACP 包 SHA-512 与官方包文件比对、Codex 0.166.0 ARM64 签名均通过。CLion 自带 npx 启动 ACP 2.7.0、自定义入口启动 ACP 2.6.0，两处均返回协议 1 并成功创建 cpp-labs 会话。未验证 IDE 中发送消息或注册表后续自动安装。\n\n## 2026-11-16 Python 课堂笔记 OCR\n\n- 对照 Notion 图片引用与下载文件，检查每张课件图的 OCR 结果。记录模糊、截断或只能识别部分的内容。\n- 运行新增代码示例。检查 Notion 定点修改的目标和结果，确认与原图及既有正文共存。\n\n实际结果：40 张原图均有非空 Vision OCR。远景课件图的细小文字根据可辨认标题、表格与代码整理。Python 3.9.6 实际运行 9 个代码块，47 行输出逐行一致。提交前检查更新锚点各出现一次，预期文本含相同的 40 个原图引用，折叠标签配对。Notion 返回目标页面 ID，无警告。未检查客户端排版。\n\n## 2026-11-09 CLion Codex 2.6.0 启动修复\n\n- 修复前记录 2.6.0 目录缺失及 npm 退出 190。修复后验证官方依赖完整性、CLI 签名和版本。\n- 分别运行与 CLion 日志一致的注册表 npx 参数及自定义配置中的直接启动命令，核对 ACP 版本和初始化响应。检查本地 app-server 初始化。\n# 当前任务进度\n\n## 2026-11-17 CLion Codex 2.7.0 启动修复\n\n- [x] CLion 日志确认 ACP 2.7.0 安装上溯主目录并退出 190；之后自带 Node 24.13.0 连续两次下载超时。\n- [x] 恢复已核验的 Node 24.13.0 和 ACP 2.7.0 至 CLion 对应缓存；保留 2.6.0 自定义入口。\n- [x] 注册表入口和自定义入口均通过 ACP 初始化，并在 cpp-labs 成功创建测试会话。协作记录已更新。\n\n## 2026-11-16 Python 课堂笔记 OCR\n\n- [x] 定位「Note → Python」，清点 40 张原图。已有格式化、字符串、列表和集合的文字笔记。\n- [x] 本地识别 40 张原图。对照既有文字确认前 27 张主要内容已覆盖，补齐另外 13 张课件图的知识与案例。\n- [x] 9 个代码块和 47 行输出校验通过。Notion 4 处定点写入返回成功，保存协作记录。\n\n## 2026-11-09 CLion Codex 2.6.0 启动修复\n\n- [x] 最新日志确认 2.5.0 曾启动，升级所需 2.6.0 缺失，npm 在安装时访问主目录并因 `ENOTEMPTY` 退出 190。\n- [x] 显式 prefix 安装 25 个包并部署到两个目录。已备份自定义配置，保留 Codex 名称并改为直接执行本地 ACP 2.6.0。\n# 当前协作环境\n\n## 2026-11-17 CLion Codex 2.7.0 启动修复\n\n- 单代理。使用 CLion 原始日志、Node 官方校验表、PyCharm 中已有的 ACP 2.7.0 安装与官方 npm 包核对恢复材料。协议检查材料在本地忽略目录 `.agent/clion-acp-27/`。\n- CLion 注册表使用自带 Node 24.13.0 和 ACP 2.7.0；已有自定义 Codex 仍使用 Homebrew Node 和独立安装的 ACP 2.6.0。\n\n## 2026-11-09 CLion Codex 2.6.0 启动修复\n\n- 单代理。使用 CLion 日志、Node 24.13.0 与 npm 11.6.2 核对注册表启动，使用 Homebrew Node 检查自定义入口。\n- 本地 ACP 2.6.0 安装位于 `~/.local/share/jetbrains-codex-acp/2.6.0`，安装清单、旧配置备份及核验材料保存在已忽略的 `.agent/clion-acp-26/`。\n\n memory/gotchas.md  | 4 ++--\n memory/plan.md     | 6 ++++++\n memory/progress.md | 6 ++++++\n memory/verify.md   | 6 ++++++\n 4 files changed, 20 insertions(+), 2 deletions(-)\norigin\thttps://github.com/OyamaMeek/Codex-Work.git (fetch)\norigin\thttps://github.com/OyamaMeek/Codex-Work.git (push)\n"}}
 {"status":"fulfilled","value":{"chunk_id":"f0ef6c","wall_time_seconds":0.000009,"exit_code":0,"original_token_count":103,"output":" 71M\t302/模拟/302模拟27/模拟卷40套整理合集PDF（可高清打印）（仅数二）\n 93M\t302/模拟/302模拟27/模拟卷20套整理合集PDF（可高清打印）\n191M\t302/模拟/302模拟27/往年模拟卷选填精选\n524M\t302/模拟/302模拟27/2027模考\n191M\t302/模拟/302模拟27/模拟卷10套整理合集PDF（可高清打印）\nls: .git/hooks/pre-push: No such file or directory\n393 entries\n"}}
+
+## tool · 2026-11-17T15:45:20Z
+
+
+Script completed
+Wall time 6.2 seconds
+Output:
+
+{"status":"fulfilled","value":{"chunk_id":"5a814d","wall_time_seconds":5.987253167,"exit_code":0,"original_token_count":124,"output":"git-lfs/3.6.1 (GitHub; darwin arm64; go 1.23.3; git ea47a34b)\n/Applications/Sourcetree.app/Contents/Resources/git_local/git-lfs/git-lfs: Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit executable x86_64] [arm64]\n/Applications/Sourcetree.app/Contents/Resources/git_local/git-lfs/git-lfs (for architecture x86_64):\tMach-O 64-bit executable x86_64\n/Applications/Sourcetree.app/Contents/Resources/git_local/git-lfs/git-lfs (for architecture arm64):\tMach-O 64-bit executable arm64\n"}}
+{"status":"fulfilled","value":{"chunk_id":"497ecb","wall_time_seconds":4.875065667,"exit_code":0,"original_token_count":55,"output":"{\n  \"full_name\": \"OyamaMeek/remote-question-bank\",\n  \"visibility\": \"public\",\n  \"permissions\": {\n    \"admin\": true,\n    \"maintain\": true,\n    \"push\": true,\n    \"triage\": true,\n    \"pull\": true\n  },\n  \"message\": null\n}\n"}}
+{"status":"fulfilled","value":{"chunk_id":"777dd1","wall_time_seconds":0.000010791,"exit_code":0,"original_token_count":1021,"output":".agent/remote-question-bank/example\n# AGENTS.md\n\n本文件规定项目中的协作、开发、验证与沟通方式。执行时遵守宿主环境的更高优先级指令，并优先采用用户当前明确提出的要求。具体场景的规则优先于一般默认规则；仍有无法消解的冲突时，说明冲突及其影响。\n\n部分规则可以通过 hooks 执行，其余规则需要主动遵守。完成情况应以实际文件、测试结果、Git 状态、运行结果和验证记录为依据。只有已经配置并成功运行的检查，才能作为验证证据。\n\n## 1. 职责与判断\n\n- 在用户确定的目标与授权范围内完成工作。涉及架构、核心业务逻辑或产品方向的重要选择，不得擅自决定；用户已经授权的选择直接执行。\n- 默认优先级依次为正确性、可维护性、最小改动范围、执行速度。\n- 先检查问题是否存在错误前提、逻辑跳跃或信息缺失，独立判断，区分事实、推测和主观观点。\n- 涉及数字、人物和结论时尽量核实来源。不同意用户判断时，直接说明依据、实际风险和替代解释，并提醒与任务有关的遗漏变量、成本和偏差。\ndiff --git a/memory/plan.md b/memory/plan.md\nindex cdecec7..e0e639f 100644\n--- a/memory/plan.md\n+++ b/memory/plan.md\n@@ -255,6 +255,12 @@\n \n 完成结果：47个知识点，44个独立C程序与3个手算案例；80次实际运行检查通过。成品仅保留本地，Windows和旧版Dev-C++未实测。\n \n+## 2026-10-22 iPhone Mobile MCP 配置\n+\n+1. 检查现有设备、go-ios、Xcode签名与Mobile MCP配置；保留已有设置。\n+2. 注册固定版本Mobile MCP 1.0.12；通过用户登录后的Xcode开发签名生成描述文件，安装该版本默认使用的mobilecli真机代理；仅在需要用户手机确认或Apple账号登录时暂停依赖步骤。\n+3. 使用Codex配置中的实际启动命令验证MCP握手、设备枚举和界面读取；仅提交推送协作文档，不上传设备信息、签名资料或任务源码。\n+\n ## 2026-10-22 补齐课程随堂题\n \n 1. 复用ego TaskSpace 0当前课程详情p2，展开目录并逐门读取总题数、已答、答错，找出已答少于总题数的课程。\ndiff --git a/memory/progress.md b/memory/progress.md\nindex b97a2da..9b1eec2 100644\n--- a/memory/progress.md\n+++ b/memory/progress.md\n@@ -864,6 +864,12 @@\n - 教程目标：`docs/Vibe-Coding-从零到交付完整教程.md`。\n - 清单：`sessions/teaching/2026-10-01-ai-coding-guide-zh.md`。\n - 正文按轮次读取；尚未核验教程所述产品版本或完成全部正文阅读。\n+# 2026-10-22 iPhone Mobile MCP 配置\n+\n+- [x] 环境检查：Xcode 16.4、Node 26.5.1、go-ios 1.3.2；设备可枚举。\n+- [ ] 准备WebDriverAgent及签名条件。\n+- [ ] 启动隧道与转发，注册Codex MCP。\n+- [ ] 验证WDA与MCP实际通信，记录完成状态及阻碍。\n \n ## 2026-10-27 JetBrains Codex 重复安装\n \ndiff --git a/memory/verify.md b/memory/verify.md\nindex 06c34ea..649a6a7 100644\n--- a/memory/verify.md\n+++ b/memory/verify.md\n@@ -351,6 +351,12 @@\n \n 实际结果：47项连续编号，44个完整C程序全部严格编译通过，80次正常和边界输入运行通过，ASan/UBSan未报告异常；3个手算案例公式断言通过。19张图片全部有非空本地识别结果，原始20文件哈希核对通过。成品1305行；未实测Windows或旧版Dev-C++。工作区已有其他任务末尾空行提示保留，提交检查以本次暂存差异为准。\n \n+## 2026-10-22 iPhone Mobile MCP 配置\n+\n+- 配置前已确认go-ios 1.3.2能枚举一台设备；mobile-mcp未注册，8100端口未监听。\n+- 分别验证隧道、WDA构建签名及/status响应、Codex注册和MCP工具调用；注册成功不能代替真机控制成功。\n+- 未经授权不截图，不执行越狱或修改设备数据；设备UDID、账号及签名信息不写入远端文档。\n+\n ## 2026-10-22 补齐课程随堂题\n \n - 不以视频“学完”代替随堂题完成；每门课必须核对页面总题数与已答数。\n"}}
+
+## assistant · 2026-11-17T15:45:33Z
+
+妹妹，已清点出 375 个待上传文件，其中 5 份 PDF 超过 GitHub 的单文件限制。我会用 Git LFS 单独处理这 5 份文件，其余资料按真题、模拟题分批推送，排除 18 个 `.DS_Store`。已找到本机可用的 Git LFS，无需另装。
+
+## tool · 2026-11-17T15:46:02Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+
+## tool · 2026-11-17T15:46:14Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"67a80d","wall_time_seconds":0.000009,"exit_code":1,"original_token_count":39,"output":"## No commits yet on main\n?? .DS_Store\n?? 302/\n?? 408/\npre-push.sample\ngit: 'lfs' is not a git command. See 'git --help'.\n\nThe most similar command is\n\tlog\n"}
+
+## tool · 2026-11-17T15:46:24Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"2245e0","wall_time_seconds":0.000007833,"exit_code":0,"original_token_count":232,"output":"12:specially; to disable this behavior and treat them literally instead,\n13:use --filename or escape the character with a backslash.\n14-\n15-Options:\n16-\n17---verbose:\n18--v:\n--\n32:--filename:\n33:  Treat the arguments as literal filenames, not as patterns. Any special glob\n34-  characters in the filename will be escaped when writing the .gitattributes\n35-  file.\n36---lockable:\n37--l:\n38-  Make the paths 'lockable', meaning they should be locked to edit them, and\n--\n65:  git lfs track --filename \"project [1].psd\"\n150496845 302/模拟/27李林880/【做题本】平板版27考研李林辅导讲义（高数）.pdf\n197045739 408/王道/2027/27王道《计算机网络》高清带书签.pdf\n211591863 408/王道/2027/27王道《数据结构》高清带书签.pdf\n208734016 408/王道/2027/27王道《计算机组成原理》高清带书签.pdf\n234834921 408/王道/2027/27王道《操作系统》高清带书签.pdf\n      98\n"}
+
+## tool · 2026-11-17T15:46:32Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+{"chunk_id":"1fe607","wall_time_seconds":0.000009292,"exit_code":0,"original_token_count":16,"output":".agent/remote-question-bank/gitignore\n2026-11-17 23:46:32 CST\n"}
+
+## tool · 2026-11-17T15:47:06Z
+
+
+Script completed
+Wall time 15.8 seconds
+Output:
+
+{"chunk_id":"c6931a","wall_time_seconds":0.501142292,"exit_code":0,"original_token_count":123,"output":"Updated Git hooks.\nGit LFS initialized.\nTracking \"302/模拟/27李林880/【做题本】平板版27考研李林辅导讲义（高数）.pdf\"\nTracking \"408/王道/2027/27王道《计算机网络》高清带书签.pdf\"\nTracking \"408/王道/2027/27王道《数据结构》高清带书签.pdf\"\nTracking \"408/王道/2027/27王道《计算机组成原理》高清带书签.pdf\"\nTracking \"408/王道/2027/27王道《操作系统》高清带书签.pdf\"\n6737d6b chore: import 302 past exam materials\n"}
+
+## tool · 2026-11-17T15:47:16Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"badb25","wall_time_seconds":0.00000825,"exit_code":0,"original_token_count":166,"output":"6737d6b chore: import 302 past exam materials\n## main\n?? \"302/\\346\\250\\241\\346\\213\\237/\"\n?? 408/\n      94\n     126\n       4\n302/模拟/27李林880/【做题本】平板版27考研李林辅导讲义（高数）.pdf filter=lfs diff=lfs merge=lfs -text\n408/王道/2027/27王道《计算机网络》高清带书签.pdf filter=lfs diff=lfs merge=lfs -text\n408/王道/2027/27王道《数据结构》高清带书签.pdf filter=lfs diff=lfs merge=lfs -text\n408/王道/2027/27王道《计算机组成原理》高清带书签.pdf filter=lfs diff=lfs merge=lfs -text\n408/王道/2027/27王道《操作系统》高清带书签.pdf filter=lfs diff=lfs merge=lfs -text\n.DS_Store\n"}
+
+## user · 2026-11-17T15:47:29Z
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_39ebdcbc10064ec880461945e4817af4\",0]","question":"本地和 GitHub 仓库都还没有提交，`origin` 目前是公开仓库。分批推送会首次公开 375 个文件，其中有完整的王道教材 PDF。你希望按哪种可见性上传？","answer":"保持公开，确认上传全部文件"}]
+</send_user_message_question_reply>
+
+
+## tool · 2026-11-17T15:47:40Z
+
+codex_apps_open_page
+{"page_id":null}
+
+## tool · 2026-11-17T15:47:40Z
+
+codex_apps_selected_page_part_1_of_1
+Companion Page snapshot part 1 of 1:
+{"page_id":null,"document_view":null}
+
+## user · 2026-11-17T15:47:40Z
+
+超出的不上传
+

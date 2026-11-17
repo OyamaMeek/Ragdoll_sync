@@ -1,0 +1,30 @@
+{
+  "created" : 1794930416229.6738,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/17/rollout-2026-11-17T23-46-56-01a1ea30-9a25-7843-8ef4-77d490515028.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:9d2ad4b851c475b01b64393f",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1ea30-9a25-7843-8ef4-77d490515028",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794930426262,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_04310e698fcaaf2f016afc76f5dfb087d0897e8143e444560d",
+      "input" : 27185,
+      "model" : "gpt-6.1-sol",
+      "output" : 16,
+      "time" : 1794930426258
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
