@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "调整对话界面折叠与工具调用展示",
-  "updated" : 1794922046416,
+  "updated" : 1794922170729,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -184,6 +184,78 @@
       "model" : "gpt-6.1-sol",
       "output" : 267,
       "time" : 1794922043682
+    },
+    {
+      "cacheRead" : 135936,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc563f9e1487d0926ac4dd275d8095",
+      "input" : 1158,
+      "model" : "gpt-6.1-sol",
+      "output" : 1985,
+      "time" : 1794922089767
+    },
+    {
+      "cacheRead" : 138880,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc566b2f6487d09d09c7082610c29c",
+      "input" : 2516,
+      "model" : "gpt-6.1-sol",
+      "output" : 423,
+      "time" : 1794922104144
+    },
+    {
+      "cacheRead" : 141696,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc567ecf6487d0a3df23da92e5b8a5",
+      "input" : 373,
+      "model" : "gpt-6.1-sol",
+      "output" : 114,
+      "time" : 1794922114731
+    },
+    {
+      "cacheRead" : 142080,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc568a7c7487d089e9692965801957",
+      "input" : 161,
+      "model" : "gpt-6.1-sol",
+      "output" : 66,
+      "time" : 1794922126213
+    },
+    {
+      "cacheRead" : 142208,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc5691bccc87d08acf9f25810655b6",
+      "input" : 1010,
+      "model" : "gpt-6.1-sol",
+      "output" : 460,
+      "time" : 1794922145649
+    },
+    {
+      "cacheRead" : 143488,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc56a7acb087d0878f247d929f8995",
+      "input" : 1007,
+      "model" : "gpt-6.1-sol",
+      "output" : 54,
+      "time" : 1794922155595
+    },
+    {
+      "cacheRead" : 144384,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc56b07b4087d08373480f021037f7",
+      "input" : 276,
+      "model" : "gpt-6.1-sol",
+      "output" : 55,
+      "time" : 1794922164412
+    },
+    {
+      "cacheRead" : 144512,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc56b5e70c87d0bb5bed7f170bb1ce",
+      "input" : 287,
+      "model" : "gpt-6.1-sol",
+      "output" : 124,
+      "time" : 1794922170688
     }
   ],
   "warnings" : [
