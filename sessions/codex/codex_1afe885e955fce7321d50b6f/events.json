@@ -187,13 +187,48 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 1.0 seconds\nOutput:\n\n{\"chunk_id\":\"0de224\",\"wall_time_seconds\":0.954263042,\"exit_code\":0,\"original_token_count\":52,\"output\":\"applicationIconImage: SHA256 digest: b47162ac8533ddd6f14d959f95ae06bc4c537f78cdf0052fd514bf85d1e07384\\nresource: SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\\nmatches: false\\n\"}",
       "time" : 1794923129276
+    },
+    {
+      "id" : "135",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "已在隔离的最小应用中复现：包内猫咪图标可正常读取，但进程内的 `applicationIconImage` 与它不一致。我会在应用启动时显式设置这个图标，再用数据断言验证。\n",
+      "time" : 1794923168183
+    },
+    {
+      "id" : "call_396f05b0ea6042f88033ce8f7d950241",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.3 seconds\nOutput:\n\n{}\n{\"chunk_id\":\"0daf72\",\"wall_time_seconds\":0.000013708,\"exit_code\":0,\"original_token_count\":2382,\"output\":\"import AppKit\\nimport CryptoKit\\n\\n@MainActor func digest(_ image: NSImage) -> String {\\n    let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 256, bitsPerPixel: 32)!\\n    NSGraphicsContext.saveGraphicsState()\\n    NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)\\n    image.draw(in: NSRect(x: 0, y: 0, width: 64, height: 64))\\n    NSGraphicsContext.restoreGraphicsState()\\n    return SHA256.hash(data: Data(bytes: bitmap.bitmapData!, count: 64 * 256)).description\\n}\\n\\n@MainActor final class Delegate: NSObject, NSApplicationDelegate {\\n    func applicationDidFinishLaunching(_ notification: Notification) {\\n        let resource = NSImage(contentsOf: Bundle.main.url(forResource: \\\"Ragdoll\\\", withExtension: \\\"icns\\\")!)!\\n        let actual = digest(NSApplication.shared.applicationIconImage)\\n        let expected = digest(resource)\\n        print(\\\"applicationIconImage:\\\", actual)\\n        print(\\\"resource:\\\", expected)\\n        print(\\\"matches:\\\", actual == expected)\\n        NSApplication.shared.terminate(nil)\\n    }\\n}\\n\\nlet app = NSApplication.shared\\nlet delegate = Delegate()\\napp.delegate = delegate\\napp.run()\\n# Writing Good Tests\\n\\n**Load this reference when:** writing or changing tests, adding mocks, or\\nadding cleanup/helper methods for tests.\\n\\n## Overview\\n\\nA test exists to catch a specific break. Two principles govern everything\\nhere:\\n\\n```\\n1. Every test names the break it catches\\n2. Every test exercises the real thing\\n```\\n\\nStrict TDD produces both naturally: a test written first and watched\\nfailing against real code has already proven it can fail, and only earns\\na mock when the real dependency proves slow or external.\\n\\n## Principle 1: Name the Break\\n\\nBefore writing the test body, answer: **what production change should\\nmake this test fail — and is that change a bug or a decision?** A test\\nearns its place by catching a wrong branch, missing side effect, wrong\\nargument, boundary case, or broken contract.\\n\\n**Derive expectations independently.** Use literals and hand-checked\\nfixtures; table-driven tests with literal `want` values are the preferred\\nshape. An expectation computed by the code under test — or its helpers —\\npasses no matter what that code does:\\n\\n```typescript\\n// ❌ Mirror assertion: the same builder computes both sides — always true\\nconst expected = buildSearchQuery({ tag: 'urgent' });\\nexpect(buildSearchQuery({ tag: 'urgent' })).toBe(expected);\\n\\n// ✅ Hand-derived literal\\nexpect(buildSearchQuery({ tag: 'urgent' })).toBe('tag:\\\"urgent\\\"');\\n```\\n\\n**No change detectors.** If only intentional decisions can fail a test —\\na constant's value, exact message wording, private structure — it fires\\non redesign and sleeps through bugs. Test the behavior that depends on\\nthe decision: not `expect(MAX_RETRIES).toBe(5)` but \\\"a failing call is\\nretried 5 times and the 6th attempt never happens.\\\"\\n\\n**Behavior, not text.** Asserting that a script, skill, or config\\ncontains an exact line proves only that the source is the source. Run\\nscripts against controlled inputs and assert outputs, side effects, or\\nexit codes. Documents that instruct agents are tested by the consuming\\nagent's behavior (superpowers:writing-skills); prose for humans earns no\\ntest at all.\\n\\n**Your code, not the framework.** Test the contract your code makes at\\nits boundaries — the route you register, the query you emit, the payload\\nyou produce. Upstream mechanics are their maintainers' tests to write\\n(the classic: asserting your router invokes a registered handler — that\\nis the framework's test, not yours). When upstream behavior genuinely\\nsurprised you, write one narrow characterization test naming the\\nassumption. The same boundary applies inside your code: constructors,\\ngetters, constants, and trivial forwarding earn tests only when they\\nvalidate, normalize, default, derive, enforce, or cause side effects —\\notherwise assert the first consumer-visible result that depends on them.\\n\\n### Gate Function\\n\\n```\\nBEFORE writing the test body:\\n  Name the production change that would make this test fail.\\n\\n  Cannot name one            → redesign around an observable behavior\\n  \\\"The source text changed\\\"  → run the artifact and assert its effects\\n  Only intentional decisions → change detector; test the behavior\\n                               that depends on the decision\\n\\n  Confirm the expected value is derived without the code under test.\\n  IF it reuses the code's logic or helpers:\\n    Replace it with a literal or hand-checked fixture\\n```\\n\\n## Principle 2: Exercise the Real Thing\\n\\n**The mock earns no assertions.** A mock assertion passes when the mock\\nis present and fails when it is absent — it says nothing about the\\ncomponent. Assert the real component's behavior; if the mock is what you\\nare checking, unmock it or delete the assertion.\\n\\n```typescript\\n// ✅ Real behavior\\nexpect(screen.getByRole('navigation')).toBeInTheDocument();\\n\\n// ❌ Mock existence\\nexpect(screen.getByTestId('sidebar-mock')).toBeInTheDocument();\\n```\\n\\n**your human partner's correction:** \\\"Are we testing the behavior of a\\nmock?\\\"\\n\\n**Mock at the right level.** Learn every side effect of the real method\\nbefore replacing it; mock the slow or external operation and keep what\\nthe test depends on real. When unsure, run the test against the real\\nimplementation first and observe what actually needs to happen.\\n\\n```typescript\\n// ❌ The mock swallows the config write that duplicate detection reads\\nvi.mock('ToolCatalog', () => ({\\n  discoverAndCacheTools: vi.fn().mockResolvedValue(undefined)\\n}));\\n\\n// ✅ Mock only the slow server startup; the config write stays real\\nvi.mock('MCPServerManager');\\n```\\n\\n**Make doubles specific.** When arguments, call counts, or ordering are\\npart of the contract, assert them — a fake that accepts anything verifies\\nnothing. Give each branch (success, error, malformed) its own fixture or\\nspy, so the wrong branch cannot satisfy the expectation.\\n\\n**Mirror real data completely.** Mock the complete structure as it exists\\nin reality — all documented fields — not just the ones your test reads.\\nPartial mocks fail silently when downstream code reads an omitted field:\\nthe test passes while integration breaks.\\n\\n**Production classes carry production methods only.** Cleanup that only\\ntests need lives in test utilities, never as a `destroy()` on the\\nproduction class. Ask: is this method called only from tests? Does this\\nclass own this resource's lifecycle? Wrong answers → test utility.\\n\\n**Prefer real components over complex mocks.** When mock setup outgrows\\nthe test logic, mocks miss methods the real components have, or tests\\nbreak when the mock changes, switch to an integration test with real\\ncomponents. **your human partner's question:** \\\"Do we need to be using a\\nmock here?\\\"\\n\\n### Gate Function\\n\\n```\\nBEFORE adding a mock or test helper:\\n  List the real method's side effects; keep the ones the test\\n  depends on real — mock the slow/external level below them.\\n\\n  Mock responses mirror the complete real structure.\\n\\n  A method only tests call lives in test utilities, not production.\\n\\n  About to assert on the mock itself?\\n    Unmock it or delete the assertion.\\n```\\n\\n## Tests Ship With the Implementation\\n\\nThe TDD cycle — failing test, minimal implementation, refactor — is what\\n\\\"complete\\\" means. Ship the tests the behavior needs and only those:\\ntrivial code and human prose earn none, and a test written to satisfy\\nprocess costs maintenance forever.\\n\\n## The Mutation Check\\n\\nBefore finishing, mentally mutate the production code; at least one test\\nshould fail for each realistic mutation:\\n\\n- Wrong constant or argument\\n- Wrong branch handler\\n- Missing state change or side effect\\n- Empty or default return\\n- Missing validation for zero, empty, nil, unauthorized, or malformed input\\n\\nA mutation nothing catches marks the behavior as unprotected — or the\\ntest as tautological.\\n\\n## Quick Reference\\n\\n| When you... | Do |\\n|-------------|-----|\\n| Write any test | Name the break it catches — a bug, not a decision |\\n| Build an expected value | Derive it by hand; never with the code under test |\\n| Test a script or document | Run it / pressure-test its consumer; never grep its text |\\n| Reach for a dependency test | Test your boundary contract, not their documented mechanics |\\n| Want to assert on a mocked element | Test the real component, or unmock it |\\n| Are about to mock a method | Learn its side effects; mock the slow/external level |\\n| Build a mock response | Mirror the real structure completely |\\n| Need cleanup only tests use | Put it in test utilities |\\n| Watch mock setup balloon | Switch to an integration test with real components |\\n| Finish a test file | Run the mutation check |\\n\\n## Warning Signs\\n\\n- Setup and assertion share the same object, guaranteeing equality\\n- The test can fail only through a panic, crash, or missing selector\\n- The test fails on every intentional change, never on accidental breakage\\n- Expected values are hidden behind loops, builders, or helpers\\n- The test greps source text, or asserts a removed symbol stays removed\\n- The test would still matter if only the framework remained\\n- The test exists for coverage, checking no side effect or outcome\\n- An assertion checks a `*-mock` test ID, or fails if you remove the mock\\n- A method is called only from test files\\n- Mock setup is more than half the test, or you can't explain why the mock is needed\\n- Mocking \\\"just to be safe\\\"\\n\"}",
+      "time" : 1794923183991
+    },
+    {
+      "id" : "call_21cbbe105ca7425f917ea961acb0bf37",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 5.2 seconds\nOutput:\n\n{}\n{\"chunk_id\":\"1109fd\",\"wall_time_seconds\":1.002168083,\"session_id\":82667,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794923211708
+    },
+    {
+      "id" : "call_8d1b2bd5ab8542199b3f6600075a9950",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"1258be\",\"wall_time_seconds\":0.000017125,\"exit_code\":1,\"original_token_count\":52,\"output\":\"applicationIconImage: SHA256 digest: b47162ac8533ddd6f14d959f95ae06bc4c537f78cdf0052fd514bf85d1e07384\\nresource: SHA256 digest: d09222dcbd30c46477e7eebf646e89c8dd35d3a6e51d7d22d8791d7822dc5cdf\\nmatches: false\\n\"}\n{\"chunk_id\":\"f843d3\",\"wall_time_seconds\":0.000009,\"exit_code\":0,\"original_token_count\":205,\"output\":\"import SwiftUI\\nimport AppKit\\nimport RagdollCore\\n\\n@main\\nstruct RagdollApp: App {\\n    @StateObject private var model = AppModel()\\n    var body: some Scene {\\n        WindowGroup {\\n            RootView().environmentObject(model).frame(minWidth: 1050, minHeight: 720).task { await model.launch() }\\n        }\\n        .defaultSize(width: 1380, height: 900)\\n        .commands {\\n            CommandGroup(after: .newItem) {\\n                Button(\\\"导入 Claude 导出包…\\\") { model.importDesktop() }.keyboardShortcut(\\\"i\\\", modifiers: [.command, .shift])\\n                Button(\\\"刷新会话\\\") { Task { await model.refresh() } }.keyboardShortcut(\\\"r\\\")\\n                Button(\\\"立即归档\\\") { Task { await model.archiveNow() } }.keyboardShortcut(\\\"s\\\", modifiers: [.command, .shift])\\n            }\\n        }\\n    }\\n}\\nbuild.sh\\ndev.sh\\n\"}",
+      "time" : 1794923217565
+    },
+    {
+      "id" : "call_e0c707c8fcd9431b8596939df5267694",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "exec\ntext(await tools.apply_patch(\"*** Begin Patch\\n*** Add File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/Sources/Ragdoll/AppDelegate.swift\\n+import AppKit\\n+\\n+@MainActor\\n+final class AppDelegate: NSObject, NSApplicationDelegate {\\n+    func applicationWillFinishLaunching(_ notification: Notification) {\\n+        NSApplication.shared.applicationIconImage = NSImage(named: \\\"Ragdoll\\\")\\n+    }\\n+}\\n*** Update File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/Sources/Ragdoll/RagdollApp.swift\\n@@\\n struct RagdollApp: App {\\n+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate\\n     @StateObject private var model = AppModel()\\n*** Add File: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/scripts/check-app-icon.swift\\n+import AppKit\\n+import CryptoKit\\n+\\n+@main\\n+@MainActor\\n+final class ApplicationIconCheck: NSObject, NSApplicationDelegate {\\n+    private let appDelegate = AppDelegate()\\n+\\n+    static func main() {\\n+        let app = NSApplication.shared\\n+        let check = ApplicationIconCheck()\\n+        app.delegate = check\\n+        app.run()\\n+    }\\n+\\n+    func applicationWillFinishLaunching(_ notification: Notification) {\\n+        appDelegate.applicationWillFinishLaunching(notification)\\n+    }\\n+\\n+    func applicationDidFinishLaunching(_ notification: Notification) {\\n+        guard let url = Bundle.main.url(forResource: \\\"Ragdoll\\\", withExtension: \\\"icns\\\"),\\n+              let expected = NSImage(contentsOf: url),\\n+              let actual = NSApplication.shared.applicationIconImage else {\\n+            fatalError(\\\"应用图标或包内资源缺失\\\")\\n+        }\\n+        guard digest(actual) == digest(expected) else {\\n+            print(\\\"FAIL: 启动后的应用图标与包内资源不一致\\\")\\n+            exit(1)\\n+        }\\n+        print(\\\"PASS: 启动后的应用图标与包内 Ragdoll.icns 一致\\\")\\n+        NSApplication.shared.terminate(nil)\\n+    }\\n+\\n+    private func digest(_ image: NSImage) -> SHA256.Digest {\\n+        let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64,\\n+                                      bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,\\n+                                      isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 256, bitsPerPixel: 32)!\\n+        NSGraphicsContext.saveGraphicsState()\\n+        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)\\n+        image.draw(in: NSRect(x: 0, y: 0, width: 64, height: 64))\\n+        NSGraphicsContext.restoreGraphicsState()\\n+        return SHA256.hash(data: Data(bytes: bitmap.bitmapData!, count: 64 * 256))\\n+    }\\n+}\\n*** End Patch\"));\ntext(await tools.exec_command({cmd:\"cat Sources/Ragdoll/AppDelegate.swift scripts/check-app-icon.swift && head -12 Sources/Ragdoll/RagdollApp.swift && swiftc -swift-version 6 -module-cache-path .cache/swift-modules Sources/Ragdoll/AppDelegate.swift scripts/check-app-icon.swift -o .agent/IconProbe.app/Contents/MacOS/Ragdoll && .agent/IconProbe.app/Contents/MacOS/Ragdoll\",\"sandbox_permissions\":\"require_escalated\",\"justification\":\"在隔离应用中执行真实 AppDelegate 启动回调，验证 applicationIconImage 已与包内猫咪图标一致。\",\"yield_time_ms\":1000,\"max_output_tokens\":2500}));\n",
+      "time" : 1794923241336
     }
   ],
   "nativeID" : "01a1e9bd-d1a6-7c83-aca9-b6f4bd0c5d72",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "修复台前调度图标不显示",
-  "updated" : 1794923129278,
+  "updated" : 1794923241425,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -320,6 +355,42 @@
       "model" : "gpt-6.1-sol",
       "output" : 55,
       "time" : 1794923128529
+    },
+    {
+      "cacheRead" : 100096,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5a7a892c87d0b1a6a67d572af345",
+      "input" : 271,
+      "model" : "gpt-6.1-sol",
+      "output" : 2001,
+      "time" : 1794923183988
+    },
+    {
+      "cacheRead" : 102272,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5ab1588087d093f1f19cb09985a9",
+      "input" : 2399,
+      "model" : "gpt-6.1-sol",
+      "output" : 706,
+      "time" : 1794923208264
+    },
+    {
+      "cacheRead" : 105344,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5acd99dc87d0a7e8b066b7edff95",
+      "input" : 91,
+      "model" : "gpt-6.1-sol",
+      "output" : 90,
+      "time" : 1794923217563
+    },
+    {
+      "cacheRead" : 105472,
+      "cacheWrite" : 0,
+      "id" : "resp_073d5b4a5a9d1703016afc5ad2df3087d088a905db4f7423a1",
+      "input" : 456,
+      "model" : "gpt-6.1-sol",
+      "output" : 972,
+      "time" : 1794923241342
     }
   ],
   "warnings" : [
