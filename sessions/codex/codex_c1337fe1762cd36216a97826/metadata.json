@@ -12,7 +12,7 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "分批推送 remote-question-bank",
-  "updated" : 1794930791951,
+  "updated" : 1794930829954,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -337,6 +337,24 @@
       "model" : "gpt-6.1-sol",
       "output" : 28,
       "time" : 1794930791951
+    },
+    {
+      "cacheRead" : 68096,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc78834d1487d0a676b958b5ad20ec",
+      "input" : 316,
+      "model" : "gpt-6.1-sol",
+      "output" : 245,
+      "time" : 1794930826376
+    },
+    {
+      "cacheRead" : 68096,
+      "cacheWrite" : 0,
+      "id" : "resp_0350c5a935fa5945016afc788c069087d08e7e28a9d2aaf8d6",
+      "input" : 591,
+      "model" : "gpt-6.1-sol",
+      "output" : 28,
+      "time" : 1794930829954
     }
   ],
   "warnings" : [
