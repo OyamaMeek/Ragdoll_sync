@@ -1013,13 +1013,55 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 9.5 seconds\nOutput:\n\n{\"chunk_id\":\"74d10b\",\"wall_time_seconds\":0.000009375,\"exit_code\":0,\"original_token_count\":1715,\"output\":\"      - name: Check runtime\\n        run: |\\n          npm --prefix runtime run typecheck\\n          node --test --test-skip-pattern='[Cc]laude' runtime/test/{acp-state,integration,logs,migration,registry}.test.ts\\n\\n      - name: Test Swift\\n        run: swift test --disable-sandbox\\n\\n      - name: Package and verify\\n        run: |\\n          ditto -c -k --sequesterRsrc --keepParent dist/Ragdoll.app dist/Ragdoll-macos-arm64.zip\\n          mkdir -p .agent/release-check\\n          ditto -x -k dist/Ragdoll-macos-arm64.zip .agent/release-check\\n# 实施进度\\n\\n## GitHub Actions 自动发布（2026-11-17）\\n\\n- [x] 确认现有 ARM64 打包脚本、Node 26.13.0、macOS 15 最低版本，以及 main 跟踪 origin/main；仓库没有既有 workflow 或版本标签。\\n- [x] 添加标签发布与手动构建 workflow，补充版本号、下载校验、签名限制和手动运行说明。\\n- [x] actionlint 与全部 workflow shell 语法检查通过；实际执行版本准备步骤，验证有效标签、分支、无效标签和注入文本四种情况。\\n- [x] 本机 TypeScript 检查通过、默认 Node 测试 21 项通过/8 项跳过、Swift 41 项通过；本机显式开启 DeepSeek Harness 的附件二次迁移与恢复测试共 3 项通过（含父测试）。临时签名 release 打包、ZIP 解压后的权限/架构/深度签名/内置助手检查及 SHA-256 校验通过。\\n- [x] 配置提交 `87fcafa chore(release): build macOS app and publish tagged releases` 已普通推送至 origin/main；GitHub 已识别 workflow，并通过 API 触发手动构建。\\n- [x] 首次云端运行 `44080690086` 在 Node 校验步骤因缺少 rg 退出（127）；改用系统 grep 后，官方 Node 下载包的 SHA-256 校验通过。修正提交 `695e547 fix(build): use system grep for Node checksum verification` 已普通推送。\\n- [x] 本机专属 DeepSeek Harness 测试沿用现有 RAGDOLL_MIGRATION_LIVE 开关，默认跳过，显式开启的真实恢复与缺少凭据断言仍通过。\\n- [x] 测试环境约束提交 `d6b1dbc test(migration): gate local dsh restore behind integration flag` 已普通推送；云端运行 `44081815064` 的应用打包通过，迁移测试因缺少 codex 命令失败。\\n- [x] `127cf11 fix(release): install Codex for real migration tests` 已普通推送；云端运行 `44082707141` 的工具安装、打包和 Codex 断言通过，附件测试中的 dsh 二次迁移因 runner 未安装该应用失败。\\n- [x] 完整复查测试入口，将附件测试中的 dsh 二次迁移独立为受现有开关控制的子测试，保留云端附件、符号链接及缺失文件断言；本机默认与显式开启两种测试均通过。\\n- [ ] 提交、推送并完成最终云端构建验证。不创建版本标签。\\n\\n## 启动时立即显示主界面（2026-11-17）\\n\\n# 验证标准\\n\\n## GitHub Actions 自动发布\\n\\n- `vX.Y.Z` 标签触发构建与 Release；普通分支推送不发布，手动分支运行仅上传 artifact；版本写入打包的 Info.plist。\\n- workflow 语法检查通过，打包前确认 ARM64；TypeScript、允许的 Node 测试、Swift 测试失败时不执行发布。\\n- ZIP 解压后 GUI、helper 与内置 Node 可执行，深度签名验证和内置助手自检通过；SHA-256 校验通过。\\n- 仅使用 GITHUB_TOKEN 的 contents: write 权限，发布验证远端标签存在；ZIP 与校验文件同时上传，不覆盖已有 Release。\\n- 提交后普通推送，尽可能实际触发远端手动构建并核对结果。未触发的标签发布不得记为已实测；不运行 Claude 测试、视觉检查、证书导入或 Apple 公证。\\n- 本机已通过：actionlint、全部 workflow shell 语法、四种版本准备场景、TypeScript、默认 Node 测试 21 项（另 8 项跳过）、显式开启的真实 DeepSeek Harness 附件二次迁移与恢复 3 项（含父测试）、Swift 41 项、临时签名 release 打包，以及 ZIP 解压后的权限/架构/签名/内置助手和 SHA-256 校验。改用系统 grep 后，官方 Node 下载包的 SHA-256 校验通过。远端运行结果待推送后补记。\\n\\n## 启动时立即显示主界面\\n\\n- 已配置仓库时，初始化及 loadingArchive 期间均显示主界面，已有会话摘要立即可用；无仓库时继续要求设置。\\n- **涉及文件**：`Sources/Ragdoll/DashboardView.swift`、`Tests/RagdollTests/DashboardTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：`0fe88f7 fix(dashboard): show calendar labels for session dates`，已普通推送至 `origin/main`；本条由后续文档提交补记。\\n\\n---\\n\\n## [2026-11-17 20:09] GitHub Actions 自动编译发布\\n\\n- **需求/问题描述**：\\n  > 设置一个 action 自动编译发布到 GitHub Release。\\n- **实际实现的功能与改动**：\\n  - 推送 `vX.Y.Z` 标签后，在 macOS 15 ARM64 runner 复用现有脚本生成应用，写入版本与构建编号，通过检查后发布 ZIP 和 SHA-256 校验文件。\\n  - 手动分支运行只保存 Actions artifact，手动标签运行发布 Release；使用内置 GITHUB_TOKEN，不覆盖已有 Release，无需新增密钥。\\n  - README 和发布说明明确 macOS 15+、Apple Silicon、临时签名、未公证及独立后台服务的有效签名要求。Node 校验使用系统 grep，避免依赖 CI 未安装的 rg。\\n  - 本机 actionlint、workflow shell 语法与四种版本准备场景通过；TypeScript 检查通过，默认 Node 21 项通过/8 项跳过，Swift 41 项通过；release 打包、ZIP 解压后的权限/架构/深度签名/内置助手及 SHA-256 校验通过。改用 grep 后官方 Node 下载包校验通过。\\n  - 需要本机 DeepSeek Harness 的迁移恢复与附件二次迁移测试沿用 RAGDOLL_MIGRATION_LIVE=dsh 开关，二次迁移独立为子测试，保留其他附件断言。云端默认跳过，本机显式开启后真实测试 3 项通过（含父测试）。\\n  - CI 单独安装固定版本 Codex 0.147.0，供迁移测试调用真实 app-server，不加入发布包。\\n  - 未运行 Claude 测试、截图或 Apple 公证。远端手动构建结果将在推送后补记；未创建版本标签或发布新版本。\\n- **涉及文件**：`.github/workflows/release.yml`、`scripts/build.sh`、`runtime/test/migration.test.ts`、`README.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：`87fcafa chore(release): build macOS app and publish tagged releases`、`695e547 fix(build): use system grep for Node checksum verification`、`d6b1dbc test(migration): gate local dsh restore behind integration flag`、`127cf11 fix(release): install Codex for real migration tests`，已普通推送至 `origin/main`；附件集成子测试约束待提交。\\n\\n---\\n\"}\n{}\n{\"chunk_id\":\"7229e1\",\"wall_time_seconds\":1.0020725,\"session_id\":78891,\"original_token_count\":0,\"output\":\"\"}",
       "time" : 1794919391977
+    },
+    {
+      "id" : "call_44c7f1472a0f43b9a60adb458e956ba4",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 5.1 seconds\nOutput:\n\n{\"chunk_id\":\"ef41df\",\"wall_time_seconds\":5.001577792,\"session_id\":78891,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"87216c\",\"wall_time_seconds\":0.000010709,\"exit_code\":0,\"original_token_count\":234,\"output\":\"✔ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() passed after 0.483 seconds.\\n◇ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() started.\\n✔ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() passed after 0.003 seconds.\\n◇ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) started.\\n◇ Passing 1 argument kind → \\\"missing\\\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\\n◇ Passing 1 argument kind → \\\"history\\\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\\n◇ Passing 1 argument kind → \\\"corrupt\\\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\\n✔ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) passed after 0.938 seconds.\\n◇ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() started.\\n✔ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingIt\"}",
+      "time" : 1794919405868
+    },
+    {
+      "id" : "call_8ac935ccb2134c73bc30661928c229db",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.3 seconds\nOutput:\n\n{\"chunk_id\":\"3867f9\",\"wall_time_seconds\":0.000009791,\"exit_code\":0,\"original_token_count\":1562,\"output\":\"# Ragdoll 实施计划\\n\\n## GitHub Actions 自动发布\\n\\n- 推送 `v主版本.次版本.修订版本` 标签后，在 macOS 15 ARM64 runner 复用 `scripts/build.sh` 编译 `.app`，写入标签版本与构建编号，检查后上传 ZIP 和 SHA-256 到 GitHub Release。\\n- 手动运行分支时仅构建并保存 Actions artifact；手动选择版本标签时执行发布。使用内置 GITHUB_TOKEN，不增加应用依赖、证书配置或 Intel 构建。\\n- 范围：新增 `.github/workflows/release.yml`、README 发布说明及任务记录；`scripts/build.sh` 使用系统自带 grep 筛选官方 Node 校验值，避免依赖 runner 未安装的 rg。构建调用方、运行时、测试、fixtures、导出接口及应用配置格式保持原样。\\n- 运行 TypeScript 检查、允许的 Node 测试、Swift 测试、release 打包，解压后验证可执行权限、签名及内置助手。检查 workflow 语法，提交并普通推送；尽可能实际手动触发远端构建。不创建版本标签或立即发布新版本。\\n- CI 沿用临时签名、未公证；明确提示 Gatekeeper 与独立后台服务的有效签名限制。\\n- 迁移测试调用真实 Codex app-server，CI 单独安装固定版本 `@openai/codex@0.147.0`，不加入发布包。需要本机 DeepSeek Harness 的恢复测试沿用已有 `RAGDOLL_MIGRATION_LIVE=dsh` 开关；云端无该应用时跳过，本机显式开启并执行真实测试。\\n\\n## 启动时立即显示主界面\\n\\n- 已配置仓库时立即显示主界面和已有 SQLite 摘要，读取状态复用侧栏底部小字；首次未配置仓库时保留必需设置页。\\n# 实施进度\\n\\n## GitHub Actions 自动发布（2026-11-17）\\n\\n- [x] 确认现有 ARM64 打包脚本、Node 26.13.0、macOS 15 最低版本，以及 main 跟踪 origin/main；仓库没有既有 workflow 或版本标签。\\n- [x] 添加标签发布与手动构建 workflow，补充版本号、下载校验、签名限制和手动运行说明。\\n- [x] actionlint 与全部 workflow shell 语法检查通过；实际执行版本准备步骤，验证有效标签、分支、无效标签和注入文本四种情况。\\n- [x] 本机 TypeScript 检查通过、默认 Node 测试 21 项通过/8 项跳过、Swift 41 项通过；本机显式开启 DeepSeek Harness 的附件二次迁移与恢复测试共 3 项通过（含父测试）。临时签名 release 打包、ZIP 解压后的权限/架构/深度签名/内置助手检查及 SHA-256 校验通过。\\n- [x] 配置提交 `87fcafa chore(release): build macOS app and publish tagged releases` 已普通推送至 origin/main；GitHub 已识别 workflow，并通过 API 触发手动构建。\\n- [x] 首次云端运行 `44080690086` 在 Node 校验步骤因缺少 rg 退出（127）；改用系统 grep 后，官方 Node 下载包的 SHA-256 校验通过。修正提交 `695e547 fix(build): use system grep for Node checksum verification` 已普通推送。\\n- [x] 本机专属 DeepSeek Harness 测试沿用现有 RAGDOLL_MIGRATION_LIVE 开关，默认跳过，显式开启的真实恢复与缺少凭据断言仍通过。\\n- [x] 测试环境约束提交 `d6b1dbc test(migration): gate local dsh restore behind integration flag` 已普通推送；云端运行 `44081815064` 的应用打包通过，迁移测试因缺少 codex 命令失败。\\n- [x] `127cf11 fix(release): install Codex for real migration tests` 已普通推送；云端运行 `44082707141` 的工具安装、打包和 Codex 断言通过，附件测试中的 dsh 二次迁移因 runner 未安装该应用失败。\\n- [x] 完整复查测试入口，将附件测试中的 dsh 二次迁移独立为受现有开关控制的子测试，保留云端附件、符号链接及缺失文件断言；本机默认与显式开启两种测试均通过。\\n- [ ] 提交、推送并完成最终云端构建验证。不创建版本标签。\\n\\n## 启动时立即显示主界面（2026-11-17）\\n\\n- **Git 提交**：`0fe88f7 fix(dashboard): show calendar labels for session dates`，已普通推送至 `origin/main`；本条由后续文档提交补记。\\n\\n---\\n\\n## [2026-11-17 20:09] GitHub Actions 自动编译发布\\n\\n- **需求/问题描述**：\\n  > 设置一个 action 自动编译发布到 GitHub Release。\\n- **实际实现的功能与改动**：\\n  - 推送 `vX.Y.Z` 标签后，在 macOS 15 ARM64 runner 复用现有脚本生成应用，写入版本与构建编号，通过检查后发布 ZIP 和 SHA-256 校验文件。\\n  - 手动分支运行只保存 Actions artifact，手动标签运行发布 Release；使用内置 GITHUB_TOKEN，不覆盖已有 Release，无需新增密钥。\\n  - README 和发布说明明确 macOS 15+、Apple Silicon、临时签名、未公证及独立后台服务的有效签名要求。Node 校验使用系统 grep，避免依赖 CI 未安装的 rg。\\n  - 本机 actionlint、workflow shell 语法与四种版本准备场景通过；TypeScript 检查通过，默认 Node 21 项通过/8 项跳过，Swift 41 项通过；release 打包、ZIP 解压后的权限/架构/深度签名/内置助手及 SHA-256 校验通过。改用 grep 后官方 Node 下载包校验通过。\\n  - 需要本机 DeepSeek Harness 的迁移恢复与附件二次迁移测试沿用 RAGDOLL_MIGRATION_LIVE=dsh 开关，二次迁移独立为子测试，保留其他附件断言。云端默认跳过，本机显式开启后真实测试 3 项通过（含父测试）。\\n  - CI 单独安装固定版本 Codex 0.147.0，供迁移测试调用真实 app-server，不加入发布包。\\n  - 未运行 Claude 测试、截图或 Apple 公证。远端手动构建结果将在推送后补记；未创建版本标签或发布新版本。\\n- **涉及文件**：`.github/workflows/release.yml`、`scripts/build.sh`、`runtime/test/migration.test.ts`、`README.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：`87fcafa chore(release): build macOS app and publish tagged releases`、`695e547 fix(build): use system grep for Node checksum verification`、`d6b1dbc test(migration): gate local dsh restore behind integration flag`、`127cf11 fix(release): install Codex for real migration tests`，已普通推送至 `origin/main`；附件集成子测试约束待提交。\\n\\n---\\n\"}\n{}\n{\"chunk_id\":\"45a4a9\",\"wall_time_seconds\":0.000007083,\"exit_code\":0,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"97ac5a\",\"wall_time_seconds\":0.000009584,\"exit_code\":0,\"original_token_count\":169,\"output\":\"✔ Test activityTooltipUsesLocalDateAndCompactTokens() passed after 0.001 seconds.\\n◇ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() started.\\n✔ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() passed after 0.222 seconds.\\n◇ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() started.\\n✔ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() passed after 0.002 seconds.\\n◇ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() started.\\n✔ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() passed after 0.883 seconds.\\n✔ Test run with 41 tests passed after 20.038 seconds.\\n\"}",
+      "time" : 1794919433441
+    },
+    {
+      "id" : "call_d5d5f79545d04fc6bdeacc84489ed3b7",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 4.8 seconds\nOutput:\n\n{\"chunk_id\":\"cc03c9\",\"wall_time_seconds\":0.000008959,\"exit_code\":0,\"original_token_count\":1626,\"output\":\"# 验证标准\\n\\n## GitHub Actions 自动发布\\n\\n- `vX.Y.Z` 标签触发构建与 Release；普通分支推送不发布，手动分支运行仅上传 artifact；版本写入打包的 Info.plist。\\n- workflow 语法检查通过，打包前确认 ARM64；TypeScript、允许的 Node 测试、Swift 测试失败时不执行发布。\\n- ZIP 解压后 GUI、helper 与内置 Node 可执行，深度签名验证和内置助手自检通过；SHA-256 校验通过。\\n- 仅使用 GITHUB_TOKEN 的 contents: write 权限，发布验证远端标签存在；ZIP 与校验文件同时上传，不覆盖已有 Release。\\n- 提交后普通推送，尽可能实际触发远端手动构建并核对结果。未触发的标签发布不得记为已实测；不运行 Claude 测试、视觉检查、证书导入或 Apple 公证。\\n- 本机已通过：actionlint、全部 workflow shell 语法、四种版本准备场景、TypeScript、默认 Node 测试 21 项（另 8 项跳过）、显式开启的真实 DeepSeek Harness 附件二次迁移与恢复 3 项（含父测试）、Swift 41 项、临时签名 release 打包，以及 ZIP 解压后的权限/架构/签名/内置助手和 SHA-256 校验。改用系统 grep 后，官方 Node 下载包的 SHA-256 校验通过。远端运行结果待推送后补记。\\n\\n## 启动时立即显示主界面\\n\\n# 实施进度\\n\\n## GitHub Actions 自动发布（2026-11-17）\\n\\n- [x] 确认现有 ARM64 打包脚本、Node 26.13.0、macOS 15 最低版本，以及 main 跟踪 origin/main；仓库没有既有 workflow 或版本标签。\\n- [x] 添加标签发布与手动构建 workflow，补充版本号、下载校验、签名限制和手动运行说明。\\n- [x] actionlint 与全部 workflow shell 语法检查通过；实际执行版本准备步骤，验证有效标签、分支、无效标签和注入文本四种情况。\\n- [x] 本机 TypeScript 检查通过、默认 Node 测试 21 项通过/8 项跳过、Swift 41 项通过；本机显式开启 DeepSeek Harness 的附件二次迁移与恢复测试共 3 项通过（含父测试）。临时签名 release 打包、ZIP 解压后的权限/架构/深度签名/内置助手检查及 SHA-256 校验通过。\\n- [x] 配置提交 `87fcafa chore(release): build macOS app and publish tagged releases` 已普通推送至 origin/main；GitHub 已识别 workflow，并通过 API 触发手动构建。\\n- [x] 首次云端运行 `44080690086` 在 Node 校验步骤因缺少 rg 退出（127）；改用系统 grep 后，官方 Node 下载包的 SHA-256 校验通过。修正提交 `695e547 fix(build): use system grep for Node checksum verification` 已普通推送。\\n- [x] 本机专属 DeepSeek Harness 测试沿用现有 RAGDOLL_MIGRATION_LIVE 开关，默认跳过，显式开启的真实恢复与缺少凭据断言仍通过。\\n- [x] 测试环境约束提交 `d6b1dbc test(migration): gate local dsh restore behind integration flag` 已普通推送；云端运行 `44081815064` 的应用打包通过，迁移测试因缺少 codex 命令失败。\\n- [x] `127cf11 fix(release): install Codex for real migration tests` 已普通推送；云端运行 `44082707141` 的工具安装、打包和 Codex 断言通过，附件测试中的 dsh 二次迁移因 runner 未安装该应用失败。\\n- [x] 完整复查测试入口，将附件测试中的 dsh 二次迁移独立为受现有开关控制的子测试，保留云端附件、符号链接及缺失文件断言；本机默认与显式开启两种测试均通过。\\n- [x] `b57b930 test(migration): isolate dsh attachment integration subtest` 已普通推送；云端运行 `44083771421` 的构建与 Node 检查通过。Swift 测试编译 48 秒完成，执行阶段长时间未结束，取消后日志确认多组 helper 存活。\\n- [ ] 显式串行运行完整 Swift 测试，验证后提交、推送并完成最终云端构建。不创建版本标签。\\n\\n## 启动时立即显示主界面（2026-11-17）\\n\\n\\n---\\n\\n## [2026-11-17 20:09] GitHub Actions 自动编译发布\\n\\n- **需求/问题描述**：\\n  > 设置一个 action 自动编译发布到 GitHub Release。\\n- **实际实现的功能与改动**：\\n  - 推送 `vX.Y.Z` 标签后，在 macOS 15 ARM64 runner 复用现有脚本生成应用，写入版本与构建编号，通过检查后发布 ZIP 和 SHA-256 校验文件。\\n  - 手动分支运行只保存 Actions artifact，手动标签运行发布 Release；使用内置 GITHUB_TOKEN，不覆盖已有 Release，无需新增密钥。\\n  - README 和发布说明明确 macOS 15+、Apple Silicon、临时签名、未公证及独立后台服务的有效签名要求。Node 校验使用系统 grep，避免依赖 CI 未安装的 rg。\\n  - 本机 actionlint、workflow shell 语法与四种版本准备场景通过；TypeScript 检查通过，默认 Node 21 项通过/8 项跳过，Swift 41 项通过；release 打包、ZIP 解压后的权限/架构/深度签名/内置助手及 SHA-256 校验通过。改用 grep 后官方 Node 下载包校验通过。\\n  - 需要本机 DeepSeek Harness 的迁移恢复与附件二次迁移测试沿用 RAGDOLL_MIGRATION_LIVE=dsh 开关，二次迁移独立为子测试，保留其他附件断言。云端默认跳过，本机显式开启后真实测试 3 项通过（含父测试）。\\n  - CI 单独安装固定版本 Codex 0.147.0，供迁移测试调用真实 app-server，不加入发布包。\\n  - CI 显式串行运行全部 Swift 测试，避免在 3 核 runner 同时启动多组后台 helper。\\n  - 未运行 Claude 测试、截图或 Apple 公证。远端手动构建结果将在推送后补记；未创建版本标签或发布新版本。\\n- **涉及文件**：`.github/workflows/release.yml`、`scripts/build.sh`、`runtime/test/migration.test.ts`、`README.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：`87fcafa chore(release): build macOS app and publish tagged releases`、`695e547 fix(build): use system grep for Node checksum verification`、`d6b1dbc test(migration): gate local dsh restore behind integration flag`、`127cf11 fix(release): install Codex for real migration tests`、`b57b930 test(migration): isolate dsh attachment integration subtest`，已普通推送至 `origin/main`；CI Swift 串行设置待提交。\\n\\n---\\n          node --test --test-skip-pattern='[Cc]laude' runtime/test/{acp-state,integration,logs,migration,registry}.test.ts\\n\\n      - name: Test Swift\\n        run: swift test --disable-sandbox --no-parallel\\n\\n      - name: Package and verify\\n\"}\n{}\n{\"chunk_id\":\"058170\",\"wall_time_seconds\":1.00211925,\"session_id\":54454,\"original_token_count\":90,\"output\":\" .github/workflows/release.yml | 2 +-\\n docs/CHANGELOG.md             | 3 ++-\\n memory/plan.md                | 1 +\\n memory/progress.md            | 4 +++-\\n memory/verify.md              | 1 +\\n 5 files changed, 8 insertions(+), 3 deletions(-)\\n[main 2aa2f07] fix(release): serialize Swift tests on hosted runners\\n 5 files changed, 8 insertions(+), 3 deletions(-)\\n\"}",
+      "time" : 1794919456475
+    },
+    {
+      "id" : "call_c7507cb21f8f494f8679b38f24b7507e",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"e96fa4\",\"wall_time_seconds\":0.000010458,\"exit_code\":0,\"original_token_count\":20,\"output\":\"To https://github.com/OyamaMeek/Ragdoll.git\\n   b57b930..2aa2f07  main -> main\\n\"}\n{\"chunk_id\":\"ac069b\",\"wall_time_seconds\":1.002148417,\"session_id\":7008,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794919466939
+    },
+    {
+      "id" : "858",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "显式串行命令在本机已通过全部 41 项 Swift 测试，耗时约 20 秒。配置已推送，云端新一轮验证已触发。\n",
+      "time" : 1794919473203
+    },
+    {
+      "id" : "call_8d308d990b244d2a865e7e7ec37ad81d",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"8a5c03\",\"wall_time_seconds\":0.000007292,\"exit_code\":0,\"original_token_count\":7,\"output\":\"{\\\"status\\\":204,\\\"body\\\":null}\\n\"}\n{\"chunk_id\":\"3fb094\",\"wall_time_seconds\":1.001877375,\"session_id\":17221,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794919476361
     }
   ],
   "nativeID" : "01a1e964-1dc6-70e0-a088-c1aba2d19636",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794919391978,
+  "updated" : 1794919476950,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -2055,6 +2097,51 @@
       "model" : "gpt-6.1-sol",
       "output" : 814,
       "time" : 1794919384176
+    },
+    {
+      "cacheRead" : 219264,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4be14f6887d09a9cd7cce3f84c65",
+      "input" : 2194,
+      "model" : "gpt-6.1-sol",
+      "output" : 107,
+      "time" : 1794919402497
+    },
+    {
+      "cacheRead" : 221440,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4bef746487d08129f9c002330f2f",
+      "input" : 416,
+      "model" : "gpt-6.1-sol",
+      "output" : 845,
+      "time" : 1794919433439
+    },
+    {
+      "cacheRead" : 222464,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4c0ac50c87d08e802b42facf83d8",
+      "input" : 2268,
+      "model" : "gpt-6.1-sol",
+      "output" : 715,
+      "time" : 1794919452705
+    },
+    {
+      "cacheRead" : 225280,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4c2194c087d09a6f90b0a0b83bfe",
+      "input" : 2206,
+      "model" : "gpt-6.1-sol",
+      "output" : 196,
+      "time" : 1794919466369
+    },
+    {
+      "cacheRead" : 227456,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4c2c17dc87d0a29367127943725d",
+      "input" : 347,
+      "model" : "gpt-6.1-sol",
+      "output" : 235,
+      "time" : 1794919476354
     }
   ],
   "warnings" : [
