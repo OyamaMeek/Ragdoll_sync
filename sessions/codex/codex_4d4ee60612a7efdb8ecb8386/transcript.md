@@ -3700,3 +3700,56 @@ Wall time 1.2 seconds
 Output:
 
 {"chunk_id":"eb7b82","wall_time_seconds":1.0014545,"session_id":66655,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:45:58Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"383c5a","wall_time_seconds":0.000010167,"exit_code":0,"original_token_count":0,"output":""}
+{"chunk_id":"fead1b","wall_time_seconds":1.001741292,"session_id":30514,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:46:06Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"c6b2ee","wall_time_seconds":0.000012166,"exit_code":0,"original_token_count":133,"output":"[{\"id\":134048379223,\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Install Codex for migration tests\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build application\",\"status\":\"in_progress\",\"conclusion\":null}]}]\n"}
+
+## tool · 2026-11-17T12:46:41Z
+
+
+Wall time: 30.0616 seconds
+Sleep completed.
+
+## tool · 2026-11-17T12:46:51Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"2988cd","wall_time_seconds":1.002122125,"session_id":19719,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:46:59Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"382abb","wall_time_seconds":0.000023792,"exit_code":0,"original_token_count":133,"output":"[{\"id\":134048379223,\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Install Codex for migration tests\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build application\",\"status\":\"in_progress\",\"conclusion\":null}]}]\n"}
+
+## assistant · 2026-11-17T12:47:04Z
+
+本机验证已结束，`dist/Ragdoll.app` 已恢复为原先的证书签名版本，并通过签名校验。CI 临时签名产物单独保留；云端仍在构建中。
+
+
+## tool · 2026-11-17T12:47:05Z
+
+sleep
+{"duration_ms":45000}

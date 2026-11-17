@@ -1069,13 +1069,62 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"eb7b82\",\"wall_time_seconds\":1.0014545,\"session_id\":66655,\"original_token_count\":0,\"output\":\"\"}",
       "time" : 1794919549283
+    },
+    {
+      "id" : "call_797ca849b3b04f369d2d956d795979e7",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"383c5a\",\"wall_time_seconds\":0.000010167,\"exit_code\":0,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"fead1b\",\"wall_time_seconds\":1.001741292,\"session_id\":30514,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794919558913
+    },
+    {
+      "id" : "call_e37d6e4d6d9d4f2e917b56357b203178",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"c6b2ee\",\"wall_time_seconds\":0.000012166,\"exit_code\":0,\"original_token_count\":133,\"output\":\"[{\\\"id\\\":134048379223,\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null,\\\"steps\\\":[{\\\"name\\\":\\\"Set up job\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Run actions/checkout@v7\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Run actions/setup-node@v7\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Prepare version\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Install Codex for migration tests\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Build application\\\",\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null}]}]\\n\"}",
+      "time" : 1794919566733
+    },
+    {
+      "id" : "call_a4c700fcf48845a4bb2a828258fd2382",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nWall time: 30.0616 seconds\nSleep completed.",
+      "time" : 1794919601567
+    },
+    {
+      "id" : "call_c5e6b7b65d0b4a29af4b3fee4b029bd5",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"2988cd\",\"wall_time_seconds\":1.002122125,\"session_id\":19719,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794919611300
+    },
+    {
+      "id" : "call_5e56184fe0f24bea85d3b6b93179b220",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"382abb\",\"wall_time_seconds\":0.000023792,\"exit_code\":0,\"original_token_count\":133,\"output\":\"[{\\\"id\\\":134048379223,\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null,\\\"steps\\\":[{\\\"name\\\":\\\"Set up job\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Run actions/checkout@v7\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Run actions/setup-node@v7\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Prepare version\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Install Codex for migration tests\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Build application\\\",\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null}]}]\\n\"}",
+      "time" : 1794919619106
+    },
+    {
+      "id" : "914",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "本机验证已结束，`dist/Ragdoll.app` 已恢复为原先的证书签名版本，并通过签名校验。CI 临时签名产物单独保留；云端仍在构建中。\n",
+      "time" : 1794919624641
+    },
+    {
+      "id" : "call_d5e110367bdd4b5cb6e5dc1ef05386fe",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "sleep\n{\"duration_ms\":45000}",
+      "time" : 1794919625069
     }
   ],
   "nativeID" : "01a1e964-1dc6-70e0-a088-c1aba2d19636",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794919549283,
+  "updated" : 1794919626143,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -2174,6 +2223,60 @@
       "model" : "gpt-6.1-sol",
       "output" : 242,
       "time" : 1794919549282
+    },
+    {
+      "cacheRead" : 230016,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4c7e7dc887d092da8b501a3462d9",
+      "input" : 275,
+      "model" : "gpt-6.1-sol",
+      "output" : 269,
+      "time" : 1794919558817
+    },
+    {
+      "cacheRead" : 230400,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4c88035487d08549d61ed3f9056b",
+      "input" : 252,
+      "model" : "gpt-6.1-sol",
+      "output" : 94,
+      "time" : 1794919566730
+    },
+    {
+      "cacheRead" : 230528,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4c8fce6087d0b17e54531a740b06",
+      "input" : 411,
+      "model" : "gpt-6.1-sol",
+      "output" : 116,
+      "time" : 1794919572673
+    },
+    {
+      "cacheRead" : 230912,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4cb2be5087d0a9557e02a4c8ea0c",
+      "input" : 166,
+      "model" : "gpt-6.1-sol",
+      "output" : 144,
+      "time" : 1794919610762
+    },
+    {
+      "cacheRead" : 231040,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4cbc545887d0b84928a6aee33671",
+      "input" : 239,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1794919619103
+    },
+    {
+      "cacheRead" : 231168,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4cc43ac487d097a594b9021c3305",
+      "input" : 341,
+      "model" : "gpt-6.1-sol",
+      "output" : 118,
+      "time" : 1794919626143
     }
   ],
   "warnings" : [
