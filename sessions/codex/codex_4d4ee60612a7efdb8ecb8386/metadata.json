@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794919029732,
+  "updated" : 1794919180630,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -895,6 +895,69 @@
       "model" : "gpt-6.1-sol",
       "output" : 40,
       "time" : 1794919021943
+    },
+    {
+      "cacheRead" : 197120,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4a6ef9cc87d089bf883bdc305701",
+      "input" : 351,
+      "model" : "gpt-6.1-sol",
+      "output" : 77,
+      "time" : 1794919031779
+    },
+    {
+      "cacheRead" : 197376,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4aa61d4087d08a66210b94bbcd32",
+      "input" : 195,
+      "model" : "gpt-6.1-sol",
+      "output" : 144,
+      "time" : 1794919088186
+    },
+    {
+      "cacheRead" : 197504,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4ab179d087d0aa8c362fcb060caa",
+      "input" : 269,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1794919097999
+    },
+    {
+      "cacheRead" : 197632,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4abb0f2487d0bb239e6b804fb5d1",
+      "input" : 405,
+      "model" : "gpt-6.1-sol",
+      "output" : 474,
+      "time" : 1794919117180
+    },
+    {
+      "cacheRead" : 198272,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4ad7c32c87d0b192e69cad065090",
+      "input" : 262,
+      "model" : "gpt-6.1-sol",
+      "output" : 142,
+      "time" : 1794919139680
+    },
+    {
+      "cacheRead" : 198528,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4ae587e487d09b3e056f3e32760d",
+      "input" : 207,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1794919148894
+    },
+    {
+      "cacheRead" : 198656,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4aee0a8487d0ac9bf5f3733bf60f",
+      "input" : 334,
+      "model" : "gpt-6.1-sol",
+      "output" : 142,
+      "time" : 1794919159294
     }
   ],
   "warnings" : [
