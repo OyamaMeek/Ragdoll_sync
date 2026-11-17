@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794919815109,
+  "updated" : 1794919925316,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -1255,6 +1255,69 @@
       "model" : "gpt-6.1-sol",
       "output" : 144,
       "time" : 1794919812645
+    },
+    {
+      "cacheRead" : 233344,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4d85bae487d0a076fda4b9111060",
+      "input" : 271,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1794919819013
+    },
+    {
+      "cacheRead" : 233472,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4d8c102887d0bcc5347ff44c1435",
+      "input" : 521,
+      "model" : "gpt-6.1-sol",
+      "output" : 372,
+      "time" : 1794919833336
+    },
+    {
+      "cacheRead" : 234240,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4d9a6a6887d0a672a644074d3b17",
+      "input" : 384,
+      "model" : "gpt-6.1-sol",
+      "output" : 299,
+      "time" : 1794919844691
+    },
+    {
+      "cacheRead" : 234752,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4daa8c0887d08ed1781053c72be9",
+      "input" : 2688,
+      "model" : "gpt-6.1-sol",
+      "output" : 2194,
+      "time" : 1794919898221
+    },
+    {
+      "cacheRead" : 239488,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4ddb4a2487d08b38d6a846bfdad3",
+      "input" : 5001,
+      "model" : "gpt-6.1-sol",
+      "output" : 163,
+      "time" : 1794919905139
+    },
+    {
+      "cacheRead" : 244480,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4de67b7c87d0b93645d8c3787386",
+      "input" : 334,
+      "model" : "gpt-6.1-sol",
+      "output" : 161,
+      "time" : 1794919917061
+    },
+    {
+      "cacheRead" : 244736,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4dee5a5087d0bab5f9588e82fd13",
+      "input" : 380,
+      "model" : "gpt-6.1-sol",
+      "output" : 131,
+      "time" : 1794919925272
     }
   ],
   "warnings" : [
