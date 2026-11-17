@@ -376,13 +376,55 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 7.5 seconds\nOutput:\n\n{\"chunk_id\":\"b7d400\",\"wall_time_seconds\":0.000011416,\"exit_code\":0,\"original_token_count\":273,\"output\":\"/Users/oyamahappa/Documents/GitHub/Ragdoll_sync|\\n2026-11-17 16:15:45 2026-11-17 16:16:41 .agent/startup-smoke/index.sqlite\\n59:    init(root: URL? = nil) {\\n60:        self.root = root ?? ProcessInfo.processInfo.environment[\\\"RAGDOLL_DATA_DIR\\\"].map { URL(fileURLWithPath: $0) } ?? FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(\\\"Library/Application Support/Ragdoll\\\")\\n83:        guard !settings.archivePath.isEmpty else { status = \\\"请先设置 Git 仓库\\\"; return }\\n M README.md\\n M Sources/Ragdoll/AppModel.swift\\n M Sources/Ragdoll/RootView.swift\\n M Sources/Ragdoll/SettingsView.swift\\n M Sources/RagdollCore/Archive.swift\\n M Sources/RagdollCore/BackgroundService.swift\\n M Sources/RagdollCore/Store.swift\\n M Tests/RagdollCoreTests/BackgroundServiceTests.swift\\n M Tests/RagdollCoreTests/StoreArchiveTests.swift\\n M docs/CHANGELOG.md\\n M docs/VALIDATION.md\\n M memory/agents.md\\n M memory/plan.md\\n M memory/progress.md\\n M memory/verify.md\\n M runtime/src/logs.ts\\n M runtime/src/main.ts\\n?? Tests/RagdollCoreTests/ArchiveReadTests.swift\\n?? Tests/RagdollTests/StartupTests.swift\\n\"}\n{\"chunk_id\":\"a42352\",\"wall_time_seconds\":0.000008833,\"exit_code\":0,\"original_token_count\":40,\"output\":\"  PID  PPID STARTED                      ELAPSED COMMAND\\n12145  4969 Tue Nov 17 16:15:45 2026       01:04 dist/Ragdoll.app/Contents/MacOS/Ragdoll\\n12206 node\\n\"}",
       "time" : 1794903409869
+    },
+    {
+      "id" : "338",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "release 打包、Apple Development 签名和内置助手自检均已通过。新版应用已启动，当前实例已配置归档仓库，索引中有 785 个会话。我正在核对运行结果并完成提交推送；未进行截图或视觉检查。",
+      "time" : 1794903442717
+    },
+    {
+      "id" : "call_a82440227d9946ef9509702ee86e34b3",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 4.2 seconds\nOutput:\n\n{\"chunk_id\":\"9c2d93\",\"wall_time_seconds\":0.153515792,\"exit_code\":0,\"original_token_count\":64,\"output\":\"787\\n/Users/oyamahappa/Documents/GitHub/Ragdoll_sync\\n37e65e9 chore(archive): sync conversations\\nCOMMAND   PID       USER   FD   TYPE DEVICE SIZE/OFF    NODE NAME\\nRagdoll 12145 oyamahappa    4u   REG   1,24        5 5488891 .agent/startup-smoke/service-lock\\n\"}\n{\"chunk_id\":\"2cc2fd\",\"wall_time_seconds\":0.000042292,\"exit_code\":0,\"original_token_count\":134,\"output\":\"docs/VALIDATION.md:46:## 2026-11-17 首次 Git 设置与仓库优先启动\\ndocs/CHANGELOG.md:188:## [2026-11-17 16:14] 首次 Git 设置与仓库优先启动\\ndocs/CHANGELOG.md:196:  - 完整快照和旧源覆盖回归先失败、修复后通过；全部 40 项 Swift 测试通过，Node 22 项通过、6 项跳过，TypeScript 检查通过。release 打包验证进行中；未运行 Claude、截图或视觉检查。\\nmemory/progress.md:10:- [ ] 运行完整适用检查、release 打包，更新开发记录，提交并普通推送。\\n\"}",
+      "time" : 1794903459483
+    },
+    {
+      "id" : "call_71a70cafed8f4ef1adc03f096b610011",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 5.4 seconds\nOutput:\n\n{\"chunk_id\":\"93c772\",\"wall_time_seconds\":0.00001725,\"exit_code\":0,\"original_token_count\":23,\"output\":\"/Users/oyamahappa/Documents/GitHub/Ragdoll_sync|origin|main|\\nverification instance is idle\\n\"}",
+      "time" : 1794903491464
+    },
+    {
+      "id" : "call_ddf9fd606f5a4009af0324e0df41b828",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 16.2 seconds\nOutput:\n\n{\"chunk_id\":\"ffedf7\",\"wall_time_seconds\":0.000018083,\"exit_code\":0,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"f8ecf6\",\"wall_time_seconds\":0.000008834,\"exit_code\":143,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"809e79\",\"wall_time_seconds\":0.000007625,\"exit_code\":0,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794903516030
+    },
+    {
+      "id" : "call_e7ac5fc2677e4dfb91ca100cb5799fc1",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 3.4 seconds\nOutput:\n\n{\"chunk_id\":\"f2ddd0\",\"wall_time_seconds\":0.169532792,\"exit_code\":0,\"original_token_count\":35,\"output\":\"12663 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/MacOS/Ragdoll\\n49e5402 chore(archive): sync conversations\\n     787\\n\"}\n{\"chunk_id\":\"ba7248\",\"wall_time_seconds\":0.000010208,\"exit_code\":0,\"original_token_count\":1345,\"output\":\"# 实施进度\\n\\n## 首次设置与仓库优先启动（2026-11-17）\\n\\n- [x] 确认 GUI 启动读取本机索引后直接扫描，选择仓库立即写入；后台也没有恢复仓库入口。\\n- [x] 完整快照回归先因有源文件时没有 events.json 失败；新增启动/恢复接口回归先因入口缺失失败；旧日志覆盖较新历史回归先出现两个失败断言。\\n- [x] 实现完整快照、旧原始 JSONL/gzip 读取及安全恢复；保留完整旧 Markdown，验证身份、消息和用量，以及较新的本机记录不被覆盖。\\n- [x] 接入首次设置页、启动/切换门槛和后台读取顺序；真实 AppModel 设置和独立后台进程验证未设置不扫描、坏仓库不写入、历史与新增会话同时保留。\\n- [x] 全部 40 项 Swift 测试通过；允许的 Node 测试 22 项通过、6 项跳过，TypeScript 检查通过。\\n- [ ] 运行完整适用检查、release 打包，更新开发记录，提交并普通推送。\\n\\n## 图片独立归档与实际推送（2026-11-17）\\n# 验证标准\\n\\n## 首次设置与仓库优先启动\\n\\n- 使用真实 Git 仓库验证有源文件时仍写入完整 events.json；源文件不存在时可恢复消息、身份及用量，重复归档无空提交。\\n- 验证旧归档原始 JSONL/gzip 恢复、完整 Markdown 保留、清单损坏/路径越界/文件缺失明确失败，索引较新记录保留。\\n- GUI 未设置时不启动扫描或导入；已有仓库先恢复再扫描，读取失败保持未就绪、无仓库写入；后台同样遵守顺序。\\n- 运行 Swift 测试、TypeScript 检查、允许的 Node 测试和 release 打包、签名及助手自检；不运行 Claude 测试，不截图或检查视觉效果。\\n- 已验证：完整快照和旧源覆盖回归先失败、修复后通过；全部 40 项 Swift 测试通过，包含真实 Git、助手、AppModel 首次设置和独立后台进程。Node 22 项通过、6 项跳过，TypeScript 检查通过。\\n\\n## 图片独立归档与实际推送\\n---\\n\\n## [2026-11-17 16:14] 首次 Git 设置与仓库优先启动\\n\\n- **需求/问题描述**：\\n  > 第一次打开应用就要求设置 Git 仓库，后续打开优先读取仓库的数据，再检查新增数据并放入仓库。\\n- **实际实现的功能与改动**：\\n  - 首次必需选择或创建本地专用 Git 仓库；未设置时不扫描、导入或归档。已配置的仓库读取失败时可重选或重试，并停止扫描和归档。\\n  - GUI 和后台先从仓库恢复历史，再扫描本机新增内容并自动归档；共享 Store 拒绝较旧记录覆盖较新历史，保留尚未归档的本机数据。\\n  - 所有会话写入完整 events.json；旧 JSONL/gzip 复用原生日志解析，其他旧归档完整保留 Markdown 并提示消息结构限制。保留手工修改保护及既有自动推送。\\n  - 完整快照和旧源覆盖回归先失败、修复后通过；全部 40 项 Swift 测试通过，Node 22 项通过、6 项跳过，TypeScript 检查通过。release 打包验证进行中；未运行 Claude、截图或视觉检查。\\n- **涉及文件**：`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/RootView.swift`、`Sources/Ragdoll/SettingsView.swift`、`Sources/RagdollCore/Archive.swift`、`Sources/RagdollCore/Store.swift`、`Sources/RagdollCore/BackgroundService.swift`、`runtime/src/main.ts`、`runtime/src/logs.ts`、`Tests/RagdollCoreTests/ArchiveReadTests.swift`、`Tests/RagdollCoreTests/StoreArchiveTests.swift`、`Tests/RagdollCoreTests/BackgroundServiceTests.swift`、`Tests/RagdollTests/StartupTests.swift`、`README.md`、`docs/VALIDATION.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`。\\n- **Git 提交**：待提交。\\n\\n---\\n\\n## 2026-11-17 首次 Git 设置与仓库优先启动\\n\\n- 有源文件时缺少完整快照的回归先失败；修复后所有会话保存 events.json，源文件不可用时仍可恢复消息、身份和用量。内嵌图片继续独立保存。\\n- 旧原始 JSONL 和 gzip 归档通过真实助手解析恢复，缺少可解析原始记录时保留完整 Markdown 并标记旧格式。真实 Git/SQLite 测试覆盖重复归档、坏清单、越界路径及较新索引保留。\\n- 较旧的本机日志覆盖新历史的回归先出现两个失败断言，Store 共享保存入口添加更新时间保护后通过；后续新数据仍可保存。\\n- AppModel 使用隔离数据目录验证首次未设置不启动扫描、选择仓库后恢复、损坏仓库阻止扫描和写入；独立后台进程验证相同门槛，以及仓库历史和本机新增记录共同保存。\\n- 全部 40 项 Swift 测试通过；允许的 Node 测试 22 项通过、6 项跳过，TypeScript 检查通过。未运行 Claude 接入、截图或视觉检查。\\n M README.md\\n M Sources/Ragdoll/AppModel.swift\\n M Sources/Ragdoll/RootView.swift\\n M Sources/Ragdoll/SettingsView.swift\\n M Sources/RagdollCore/Archive.swift\\n M Sources/RagdollCore/BackgroundService.swift\\n M Sources/RagdollCore/Store.swift\\n M Tests/RagdollCoreTests/BackgroundServiceTests.swift\\n M Tests/RagdollCoreTests/StoreArchiveTests.swift\\n M docs/CHANGELOG.md\\n M docs/VALIDATION.md\\n M memory/agents.md\\n M memory/plan.md\\n M memory/progress.md\\n M memory/verify.md\\n M runtime/src/logs.ts\\n M runtime/src/main.ts\\n?? Tests/RagdollCoreTests/ArchiveReadTests.swift\\n?? Tests/RagdollTests/StartupTests.swift\\n\"}",
+      "time" : 1794903545073
+    },
+    {
+      "id" : "call_cf0a0f6fe898467ea73feedb883132b7",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 5.5 seconds\nOutput:\n\n{}\n{\"chunk_id\":\"6167d6\",\"wall_time_seconds\":0.000009,\"exit_code\":0,\"original_token_count\":310,\"output\":\" README.md                                          |  3 +-\\n Sources/Ragdoll/AppModel.swift                     | 56 +++++++++++++++-----\\n Sources/Ragdoll/RootView.swift                     | 26 +++++++--\\n Sources/Ragdoll/SettingsView.swift                 |  4 +-\\n Sources/RagdollCore/Archive.swift                  | 61 ++++++++++++++++++++--\\n Sources/RagdollCore/BackgroundService.swift        | 13 +++++\\n Sources/RagdollCore/Store.swift                    |  1 +\\n .../RagdollCoreTests/BackgroundServiceTests.swift  | 39 +++++++++++++-\\n Tests/RagdollCoreTests/StoreArchiveTests.swift     | 13 +++++\\n docs/CHANGELOG.md                                  | 15 ++++++\\n docs/VALIDATION.md                                 |  9 ++++\\n memory/agents.md                                   |  4 +-\\n memory/plan.md                                     |  8 +++\\n memory/progress.md                                 | 10 ++++\\n memory/verify.md                                   |  9 ++++\\n runtime/src/logs.ts                                |  8 +--\\n runtime/src/main.ts                                |  9 +++-\\n 17 files changed, 256 insertions(+), 32 deletions(-)\\n* main 29df720 [origin/main] docs(archive): record image extraction and verified pushes\\n\"}\n{\"chunk_id\":\"f8991a\",\"wall_time_seconds\":1.002116042,\"session_id\":57728,\"original_token_count\":11,\"output\":\"49e5402571094f5d6ed564f1eb96b8a02c06152a\\n\"}",
+      "time" : 1794903576710
     }
   ],
   "nativeID" : "01a1e885-d652-7872-bad2-b8df253fb373",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "首次打开设置 Git 仓库",
-  "updated" : 1794903409869,
+  "updated" : 1794903580001,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -716,6 +758,51 @@
       "model" : "gpt-6.1-sol",
       "output" : 467,
       "time" : 1794903402325
+    },
+    {
+      "cacheRead" : 178688,
+      "cacheWrite" : 0,
+      "id" : "resp_01ad59dcb78c3842016afc0d73249487d0801281d37e6a346c",
+      "input" : 609,
+      "model" : "gpt-6.1-sol",
+      "output" : 1158,
+      "time" : 1794903455237
+    },
+    {
+      "cacheRead" : 180224,
+      "cacheWrite" : 0,
+      "id" : "resp_01ad59dcb78c3842016afc0da45ac087d0abf650405b0869b5",
+      "input" : 568,
+      "model" : "gpt-6.1-sol",
+      "output" : 701,
+      "time" : 1794903486916
+    },
+    {
+      "cacheRead" : 181376,
+      "cacheWrite" : 0,
+      "id" : "resp_01ad59dcb78c3842016afc0dc4139c87d09a58bbe671664c06",
+      "input" : 197,
+      "model" : "gpt-6.1-sol",
+      "output" : 240,
+      "time" : 1794903499801
+    },
+    {
+      "cacheRead" : 181632,
+      "cacheWrite" : 0,
+      "id" : "resp_01ad59dcb78c3842016afc0ddc9f4487d089d28a73b0924f00",
+      "input" : 305,
+      "model" : "gpt-6.1-sol",
+      "output" : 703,
+      "time" : 1794903542790
+    },
+    {
+      "cacheRead" : 182400,
+      "cacheWrite" : 0,
+      "id" : "resp_01ad59dcb78c3842016afc0df9b8d887d0a3ffa2c192467451",
+      "input" : 1901,
+      "model" : "gpt-6.1-sol",
+      "output" : 1124,
+      "time" : 1794903571583
     }
   ],
   "warnings" : [
