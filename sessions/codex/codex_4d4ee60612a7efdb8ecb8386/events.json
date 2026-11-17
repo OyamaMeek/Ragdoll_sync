@@ -1055,13 +1055,27 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"8a5c03\",\"wall_time_seconds\":0.000007292,\"exit_code\":0,\"original_token_count\":7,\"output\":\"{\\\"status\\\":204,\\\"body\\\":null}\\n\"}\n{\"chunk_id\":\"3fb094\",\"wall_time_seconds\":1.001877375,\"session_id\":17221,\"original_token_count\":0,\"output\":\"\"}",
       "time" : 1794919476361
+    },
+    {
+      "id" : "call_e854c5b776d74a52a5ceb7654f69fb67",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.2 seconds\nOutput:\n\n{\"chunk_id\":\"0c182d\",\"wall_time_seconds\":0.000212417,\"exit_code\":0,\"original_token_count\":48,\"output\":\"[{\\\"id\\\":44085972714,\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null,\\\"head_sha\\\":\\\"2aa2f07fb74a853ac8f74df2e73001db1bc00c8c\\\",\\\"html_url\\\":\\\"https://github.com/OyamaMeek/Ragdoll/actions/runs/44085972714\\\"}]\\n\"}\n{\"chunk_id\":\"9f76f5\",\"wall_time_seconds\":0.006165792,\"exit_code\":0,\"original_token_count\":38,\"output\":\"Identifier=com.oyamameek.ragdoll\\nSignature size=4784\\nTeamIdentifier=456LQ85CZH\\nIdentifier=com.oyamameek.ragdoll\\nSignature=adhoc\\nTeamIdentifier=not set\\n\"}",
+      "time" : 1794919535347
+    },
+    {
+      "id" : "call_76c2541799b54d49b20847f7d9ae4fd3",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"eb7b82\",\"wall_time_seconds\":1.0014545,\"session_id\":66655,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794919549283
     }
   ],
   "nativeID" : "01a1e964-1dc6-70e0-a088-c1aba2d19636",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794919476950,
+  "updated" : 1794919549283,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -2142,6 +2156,24 @@
       "model" : "gpt-6.1-sol",
       "output" : 235,
       "time" : 1794919476354
+    },
+    {
+      "cacheRead" : 227840,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4c356a9087d0b7c0d9c79b51600c",
+      "input" : 299,
+      "model" : "gpt-6.1-sol",
+      "output" : 1638,
+      "time" : 1794919535345
+    },
+    {
+      "cacheRead" : 229632,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4c7088c887d0be978428ca5a22d9",
+      "input" : 359,
+      "model" : "gpt-6.1-sol",
+      "output" : 242,
+      "time" : 1794919549282
     }
   ],
   "warnings" : [
