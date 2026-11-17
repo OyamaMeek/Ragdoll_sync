@@ -2851,7 +2851,18 @@ Output:
 [本次云端验证](https://github.com/OyamaMeek/Ragdoll/actions/runs/44082707141)仍在编译步骤，尚未进入测试和上传。我会继续检查到它结束。
 
 
-## tool · 2026-11-17T12:26:44Z
+## tool · 2026-11-17T12:27:29Z
 
-sleep
-{"duration_ms":45000}
+
+Wall time: 45.0213 seconds
+Sleep completed.
+
+## tool · 2026-11-17T12:27:48Z
+
+
+Script completed
+Wall time 6.2 seconds
+Output:
+
+{"chunk_id":"e5aaec","wall_time_seconds":1.002014083,"session_id":48569,"original_token_count":0,"output":""}
+{"chunk_id":"72883e","wall_time_seconds":5.0015415,"session_id":53728,"original_token_count":0,"output":""}
