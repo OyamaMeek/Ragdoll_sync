@@ -1,0 +1,43 @@
+{
+  "created" : 1793428803120,
+  "files" : [
+    "/Users/oyamahappa/.claude/projects/-Users-oyamahappa-Documents-Agent-Claude/9890ca78-6c7d-4347-865f-4ac038b848af.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:726a5d229ec5d43006020412",
+  "messages" : [
+    {
+      "id" : "e21f9603-6988-43c0-bc49-09a7bdb641c4",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "只回复 OK",
+      "time" : 1793428803170
+    },
+    {
+      "id" : "4e4be1d4-0367-4ff5-8c0d-38882e4a86fe",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "Not logged in · Please run /login",
+      "time" : 1793428803216
+    }
+  ],
+  "nativeID" : "9890ca78-6c7d-4347-865f-4ac038b848af",
+  "project" : "/Users/oyamahappa/Documents/Agent/Claude",
+  "source" : "claude",
+  "title" : "只回复 OK",
+  "updated" : 1793428803216,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "cbb7f23e-1b0d-42c6-bf73-2e308f6d4a8b",
+      "input" : 0,
+      "model" : "<synthetic>",
+      "output" : 0,
+      "time" : 1793428803216
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

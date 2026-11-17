@@ -1,0 +1,43 @@
+{
+  "created" : 1794841559599,
+  "files" : [
+    "/Users/oyamahappa/.claude/projects/-Volumes-SamsungSSD990PRO-GitHub-Ragdoll--agent-tests-945ceb60-6d56-43c8-ae31-65fbd185402f/f6efa7d2-3a39-444a-8211-2af8d5a46edb.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:8f9262174460fa83ff1e1ecf",
+  "messages" : [
+    {
+      "id" : "7b5ab057-9fdb-4d87-8238-eebd80a23c63",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "Remember the code RAGDOLL_CHECK_1729. Reply only OK. Do not inspect files or use any tools.",
+      "time" : 1794841559650
+    },
+    {
+      "id" : "0c23c64a-eed1-44b4-ad69-f160ca85773b",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "Not logged in · Please run /login",
+      "time" : 1794841559674
+    }
+  ],
+  "nativeID" : "f6efa7d2-3a39-444a-8211-2af8d5a46edb",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/tests/945ceb60-6d56-43c8-ae31-65fbd185402f",
+  "source" : "claude",
+  "title" : "Remember the code RAGDOLL_CHECK_1729. Reply only OK. Do not inspect files or use any tools.",
+  "updated" : 1794841559674,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "59929f85-23e2-4802-9bcc-72ba0c7e4af3",
+      "input" : 0,
+      "model" : "<synthetic>",
+      "output" : 0,
+      "time" : 1794841559674
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

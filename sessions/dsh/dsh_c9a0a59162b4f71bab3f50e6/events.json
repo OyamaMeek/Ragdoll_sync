@@ -1,0 +1,35 @@
+{
+  "created" : 1792642658218,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Agent-DSH--/session-7b20f221-d5f2-4896-ad78-15d5acfcafba/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:c9a0a59162b4f71bab3f50e6",
+  "messages" : [
+    {
+      "id" : "10",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "安装这个skill:https://github.com/citrolabs/ego-lite",
+      "time" : 1792642659695
+    },
+    {
+      "id" : "40",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "安装这个skill:https://github.com/citrolabs/ego-lite",
+      "time" : 1792654452628
+    }
+  ],
+  "nativeID" : "session-7b20f221-d5f2-4896-ad78-15d5acfcafba",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "source" : "dsh",
+  "title" : "安装这个skill:https://github.com/cit",
+  "updated" : 1792654455436,
+  "usage" : [
+
+  ],
+  "warnings" : [
+
+  ]
+}

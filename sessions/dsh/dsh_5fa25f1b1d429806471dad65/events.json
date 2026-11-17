@@ -1,0 +1,35 @@
+{
+  "created" : 1790853400204,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Agent-DSH--/session-d6b0d893-2d2b-4970-81d0-4bab9b49f63e/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:5fa25f1b1d429806471dad65",
+  "messages" : [
+    {
+      "id" : "11",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "优化一下计算机网络（第8版） (谢希仁)-矢量文字版-最终.pdf",
+      "time" : 1790853412751
+    },
+    {
+      "id" : "28",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "优化一下计算机网络（第8版） (谢希仁)-矢量文字版-最终.pdf",
+      "time" : 1790853470329
+    }
+  ],
+  "nativeID" : "session-d6b0d893-2d2b-4970-81d0-4bab9b49f63e",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "source" : "dsh",
+  "title" : "优化一下计算机网络（第8版）",
+  "updated" : 1791197334602,
+  "usage" : [
+
+  ],
+  "warnings" : [
+
+  ]
+}

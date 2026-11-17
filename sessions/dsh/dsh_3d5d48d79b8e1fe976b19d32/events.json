@@ -1,0 +1,28 @@
+{
+  "created" : 1792382076530,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Agent-DSH--/session-addd2083-1286-4e9b-897b-4153fc52ee2e/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:3d5d48d79b8e1fe976b19d32",
+  "messages" : [
+    {
+      "id" : "10",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "在我的Chrome里帮我完成作业",
+      "time" : 1792382087017
+    }
+  ],
+  "nativeID" : "session-addd2083-1286-4e9b-897b-4153fc52ee2e",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "source" : "dsh",
+  "title" : "在我的Chrome里帮我完成作业",
+  "updated" : 1792382102651,
+  "usage" : [
+
+  ],
+  "warnings" : [
+
+  ]
+}

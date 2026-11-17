@@ -1,0 +1,134 @@
+{
+  "created" : 1790740415431,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Agent-DSH--/session-ade61021-1024-40c1-9432-aff01fe47500/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:ea7b6d121d96e2f0434086f9",
+  "messages" : [
+    {
+      "id" : "11",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "你好",
+      "time" : 1790740425395
+    },
+    {
+      "id" : "27",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "你好",
+      "time" : 1790761532410
+    },
+    {
+      "id" : "36",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "你好",
+      "time" : 1790761573333
+    },
+    {
+      "id" : "45",
+      "kind" : "text",
+      "role" : "user",
+      "text" : "你好",
+      "time" : 1790762102211
+    },
+    {
+      "id" : "49",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "{\n  \"type\": \"tool-call\",\n  \"id\": \"run_code-1790762110843332043-1\",\n  \"name\": \"run_code\",\n  \"arguments\": \"{\\\"description\\\":\\\"Check existing files in workspace\\\",\\\"code\\\":\\\"const globResult = await tools.glob({ pattern: \\\\\\\"*\\\\\\\" });\\\\nreturn globResult;\\\\n\\\"}\"\n}",
+      "time" : 1790762112081
+    },
+    {
+      "id" : "48",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "run_code\n{\"description\":\"Check existing files in workspace\",\"code\":\"const globResult = await tools.glob({ pattern: \\\"*\\\" });\\nreturn globResult;\\n\"}",
+      "time" : 1790762112086
+    },
+    {
+      "id" : "56",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "{\n  \"type\": \"tool-call\",\n  \"id\": \"run_code-1790762117065484888-2\",\n  \"name\": \"run_code\",\n  \"arguments\": \"{\\\"description\\\":\\\"Read memory/progress.md\\\",\\\"code\\\":\\\"const content = await tools.read({ file_path: \\\\\\\"memory/progress.md\\\\\\\" });\\\\nreturn content;\\\\n\\\"}\"\n}",
+      "time" : 1790762117284
+    },
+    {
+      "id" : "55",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "run_code\n{\"description\":\"Read memory/progress.md\",\"code\":\"const content = await tools.read({ file_path: \\\"memory/progress.md\\\" });\\nreturn content;\\n\"}",
+      "time" : 1790762117285
+    },
+    {
+      "id" : "66",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "{\n  \"type\": \"tool-call\",\n  \"id\": \"run_code-1790762120866533424-3\",\n  \"name\": \"run_code\",\n  \"arguments\": \"{\\\"description\\\":\\\"Check git status\\\",\\\"code\\\":\\\"const status = await tools.bash({ command: \\\\\\\"git status -s\\\\\\\", description: \\\\\\\"Check git status\\\\\\\" });\\\\nreturn status;\\\\n\\\"}\"\n}",
+      "time" : 1790762121186
+    },
+    {
+      "id" : "65",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "run_code\n{\"description\":\"Check git status\",\"code\":\"const status = await tools.bash({ command: \\\"git status -s\\\", description: \\\"Check git status\\\" });\\nreturn status;\\n\"}",
+      "time" : 1790762121189
+    },
+    {
+      "id" : "73",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "妹妹，你好！有什么我可以协助你的吗？",
+      "time" : 1790762126006
+    }
+  ],
+  "nativeID" : "session-ade61021-1024-40c1-9432-aff01fe47500",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "happa",
+  "source" : "dsh",
+  "title" : "你好",
+  "updated" : 1790762126007,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "47",
+      "input" : 13021,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 44,
+      "time" : 1790762112081
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "54",
+      "input" : 36426,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 51,
+      "time" : 1790762117284
+    },
+    {
+      "cacheRead" : 32714,
+      "cacheWrite" : 0,
+      "id" : "64",
+      "input" : 4375,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 52,
+      "time" : 1790762121186
+    },
+    {
+      "cacheRead" : 32705,
+      "cacheWrite" : 0,
+      "id" : "71",
+      "input" : 4631,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 10,
+      "time" : 1790762126006
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

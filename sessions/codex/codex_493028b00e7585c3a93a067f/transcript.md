@@ -4,6 +4,14 @@
 
 项目：/Volumes/SamsungSSD990PRO/GitHub/Ragdoll
 
+## assistant · 2026-11-16T23:49:48Z
+
+# # AGENTS.md instructions for /Volumes/SamsungSSD990PRO/GitHub/Ragdoll <INSTRUCTIONS> # AGENTS.md 本文件
+
+来源：codex
+
+项目：/Volumes/SamsungSSD990PRO/GitHub/Ragdoll
+
 ## developer · 2026-11-16T15:57:42Z
 
 You are Codex, an agent based on GPT-6. You and the user share one workspace, and your job is to collaborate with them until their intended goal is completely handled.
@@ -1692,3 +1700,4 @@ Output:
 - 修复提交 `98348dd` 已推送。
 
 未做视觉检查；超大会话扫描仍会短时占用较多内存。
+
