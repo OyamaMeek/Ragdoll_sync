@@ -1,0 +1,57 @@
+{
+  "created" : 1793696992386,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/03/rollout-2026-11-03T17-09-52-01a1a0ac-0c4c-7262-965f-474e7b0920e8.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ab3e29056ce2355c5b89354f",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1a0ac-0c4c-7262-965f-474e7b0920e8",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1793697272046,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_0b3deadc30027660016ae9a4e32f808191b97e417acc79fadc",
+      "input" : 10854,
+      "model" : "codex-auto-review",
+      "output" : 136,
+      "time" : 1793696997187
+    },
+    {
+      "cacheRead" : 16640,
+      "cacheWrite" : 0,
+      "id" : "resp_0b3deadc30027660016ae9a5d616d88191a916e8d00524c05a",
+      "input" : 9209,
+      "model" : "codex-auto-review",
+      "output" : 171,
+      "time" : 1793697240216
+    },
+    {
+      "cacheRead" : 25728,
+      "cacheWrite" : 0,
+      "id" : "resp_0b3deadc30027660016ae9a5e45be481919903c26332b6cb91",
+      "input" : 953,
+      "model" : "codex-auto-review",
+      "output" : 242,
+      "time" : 1793697256120
+    },
+    {
+      "cacheRead" : 26496,
+      "cacheWrite" : 0,
+      "id" : "resp_0b3deadc30027660016ae9a5f5622481918bbf0b36482bd886",
+      "input" : 1883,
+      "model" : "codex-auto-review",
+      "output" : 118,
+      "time" : 1793697272040
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

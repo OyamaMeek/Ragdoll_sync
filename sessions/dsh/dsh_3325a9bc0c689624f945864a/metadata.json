@@ -1,0 +1,94 @@
+{
+  "created" : 1793688625468,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Agent-DSH--/session-303dac3c-f98e-42a9-bf87-be214d2063e4/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:3325a9bc0c689624f945864a",
+  "messages" : [
+
+  ],
+  "nativeID" : "session-303dac3c-f98e-42a9-bf87-be214d2063e4",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "happa",
+  "source" : "dsh",
+  "title" : "改写算法时代的清醒",
+  "updated" : 1793689426669,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "19",
+      "input" : 58935,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 160,
+      "time" : 1793688662452
+    },
+    {
+      "cacheRead" : 56877,
+      "cacheWrite" : 0,
+      "id" : "28",
+      "input" : 3025,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 123,
+      "time" : 1793688668370
+    },
+    {
+      "cacheRead" : 59902,
+      "cacheWrite" : 0,
+      "id" : "37",
+      "input" : 14382,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 157,
+      "time" : 1793688679026
+    },
+    {
+      "cacheRead" : 74277,
+      "cacheWrite" : 0,
+      "id" : "46",
+      "input" : 4115,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 74,
+      "time" : 1793688684147
+    },
+    {
+      "cacheRead" : 76334,
+      "cacheWrite" : 0,
+      "id" : "53",
+      "input" : 2186,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 261,
+      "time" : 1793688712683
+    },
+    {
+      "cacheRead" : 78513,
+      "cacheWrite" : 0,
+      "id" : "60",
+      "input" : 3018,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 164,
+      "time" : 1793688718707
+    },
+    {
+      "cacheRead" : 80577,
+      "cacheWrite" : 0,
+      "id" : "70",
+      "input" : 2048,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 210,
+      "time" : 1793688806512
+    },
+    {
+      "cacheRead" : 82620,
+      "cacheWrite" : 0,
+      "id" : "104",
+      "input" : 2060,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 97,
+      "time" : 1793689297489
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

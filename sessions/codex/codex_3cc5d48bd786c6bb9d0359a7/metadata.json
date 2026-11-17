@@ -1,0 +1,60 @@
+{
+  "created" : 1794284156309,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-10T10-21-44-01a1c342-e4b5-7201-b3ff-0aeea98020e7.jsonl",
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-10T12-15-37-01a1c3ab-2afc-7090-bba6-d1c866b84a32.jsonl",
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-10T12-15-46-01a1c3ab-5113-70e1-8499-075eed502ec3.jsonl",
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-10T12-15-56-01a1c3ab-7591-75d3-9b8a-151394fab28f.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:3cc5d48bd786c6bb9d0359a7",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1c342-e4b5-7201-b3ff-0aeea98020e7",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank",
+  "source" : "codex",
+  "title" : "按章节整理302真题",
+  "updated" : 1794284182364,
+  "usage" : [
+    {
+      "cacheRead" : 318464,
+      "cacheWrite" : 0,
+      "id" : "resp_021ae128ec9436e6016af29a80f8c087d0b55684e5a31d7577",
+      "input" : 1969,
+      "model" : "gpt-6.1-sol",
+      "output" : 96,
+      "time" : 1794284166754
+    },
+    {
+      "cacheRead" : 320256,
+      "cacheWrite" : 0,
+      "id" : "resp_021ae128ec9436e6016af29a876b3087d09a2b1109ab8cd7ed",
+      "input" : 734,
+      "model" : "gpt-6.1-sol",
+      "output" : 101,
+      "time" : 1794284171263
+    },
+    {
+      "cacheRead" : 320768,
+      "cacheWrite" : 0,
+      "id" : "resp_021ae128ec9436e6016af29a8bc2d087d0918dee5d122c987e",
+      "input" : 5965,
+      "model" : "gpt-6.1-sol",
+      "output" : 91,
+      "time" : 1794284176882
+    },
+    {
+      "cacheRead" : 326400,
+      "cacheWrite" : 0,
+      "id" : "resp_021ae128ec9436e6016af29a91690087d09d50c3e270a8cb1c",
+      "input" : 2374,
+      "model" : "gpt-6.1-sol",
+      "output" : 143,
+      "time" : 1794284181875
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

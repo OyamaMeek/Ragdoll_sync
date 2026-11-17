@@ -1,0 +1,39 @@
+{
+  "created" : 1792851948928,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-10-24T22-25-41-01a16e4d-9921-7253-aea6-28459c212eb7.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:a5b3aa95d592118beedcb9aa",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a16e4d-9921-7253-aea6-28459c212eb7",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "查询俄勒冈州当前时间",
+  "updated" : 1792851976771,
+  "usage" : [
+    {
+      "cacheRead" : 23040,
+      "cacheWrite" : 0,
+      "id" : "resp_0b332be48a954832016adcbff0f0fc8191b9deaa5a951eaa0c",
+      "input" : 25047,
+      "model" : "gpt-6.1-sol",
+      "output" : 63,
+      "time" : 1792851956145
+    },
+    {
+      "cacheRead" : 48000,
+      "cacheWrite" : 0,
+      "id" : "resp_0b332be48a954832016adcbff8232081918101df3f2cea6103",
+      "input" : 253,
+      "model" : "gpt-6.1-sol",
+      "output" : 356,
+      "time" : 1792851976754
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

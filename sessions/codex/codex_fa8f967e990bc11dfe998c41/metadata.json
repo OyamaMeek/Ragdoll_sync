@@ -1,0 +1,48 @@
+{
+  "created" : 1789765152079,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/09/19/rollout-2026-09-19T04-59-11-01a0b650-ecb4-7412-a38a-06c0aa4128d0.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:fa8f967e990bc11dfe998c41",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a0b650-ecb4-7412-a38a-06c0aa4128d0",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "不显示我的HappaTools <image name=[Image #1] path=\"/tmp/codex-remote-attachments/01a0b3f7-6739-75e3-bc99-0",
+  "updated" : 1789765171169,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_03add74c7f631643016aada621998087d097bf2255f4645353",
+      "input" : 15420,
+      "model" : "codex-auto-review",
+      "output" : 271,
+      "time" : 1789765159172
+    },
+    {
+      "cacheRead" : 19200,
+      "cacheWrite" : 0,
+      "id" : "resp_03add74c7f631643016aada627df1887d08ec2184f790fd18e",
+      "input" : 1707,
+      "model" : "codex-auto-review",
+      "output" : 116,
+      "time" : 1789765162708
+    },
+    {
+      "cacheRead" : 20224,
+      "cacheWrite" : 0,
+      "id" : "resp_03add74c7f631643016aada63002d487d09a0d4bee35838922",
+      "input" : 2314,
+      "model" : "codex-auto-review",
+      "output" : 129,
+      "time" : 1789765171161
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,856 @@
+# 编写代码注释
+
+来源：codex
+
+项目：/Users/oyamahappa/Documents/GitHub/labs/java-labs
+
+## developer · 2026-10-08T07:34:36Z
+
+<skills_instructions>
+## Skills
+A skill is a set of local instructions to follow that is stored in a `SKILL.md` file. Below is the list of skills that can be used. Each entry includes a name, description, and a short path that can be expanded into an absolute path using the skill roots table.
+### Skill roots
+- `r0` = `/Users/oyamahappa/.codex/skills`
+- `r1` = `/Users/oyamahappa/.agents/skills`
+- `r2` = `/Users/oyamahappa/.codex/skills/.system`
+- `r3` = `/Users/oyamahappa/.codex/plugins/cache/ars-codex`
+- `r4` = `/Users/oyamahappa/.codex/plugins/cache/openai-bundled`
+- `r5` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote`
+- `r6` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/google-drive/0.1.16/skills`
+- `r7` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/work-pets/0.1.6/skills`
+- `r8` = `/Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime`
+- `r9` = `/Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.1007.11041/skills`
+- `r10` = `/Users/oyamahappa/.codex/plugins/cache/ponytail/ponytail/5.0.0/skills`
+- `r11` = `/Users/oyamahappa/.codex/plugins/cache/reverse-skill-local`
+- `r12` = `/Users/oyamahappa/.codex/plugins/cache/sepia/sepia/0.12.3/skills`
+- `r13` = `/Users/oyamahappa/.codex/plugins/cache/superpowers-dev/superpowers/6.4.2/skills`
+### Available skills
+- imagegen: Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups (file: r2/imagegen/SKILL.md)
+- openai-docs: Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge—includ (file: r2/openai-docs/SKILL.md)
+- skill-creator: Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources. (file: r2/skill-creator/SKILL.md)
+- skill-installer: Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install (file: r2/skill-installer/SKILL.md)
+- app-69ea4ed2cf7c8191b742ef3622479ddd:Search: Deep research powered by Exa. Use for lead generation, literature reviews, deep dives, competitive analysis, or any query where one search fall (file: r5/app-69ea4ed2cf7c8191b742ef3622479ddd/4.0.1/skills/Search/SKILL.md)
+- apple-design: Apple's approach to interface design and fluid, physical motion, translated for the web. Use when building or reviewing gesture-driven UI, spr (file: r1/apple-design/SKILL.md)
+- apple-design: Apple's approach to interface design and fluid, physical motion, translated for the web. Use when building or reviewing gesture-driven UI, spr (file: r0/apple-design/SKILL.md)
+- archify: Create polished, validated architecture, workflow, sequence, data-flow, and lifecycle/state diagrams as explorable standalone HTML with inli (file: r0/archify/SKILL.md)
+- ars-codex:academic-research-suite: ARS-Codex research, writing, manuscript review, study screening, and experiments. Use for deep research, literature or systematic reviews, met (file: r3/ars-codex/3.23.0/skills/academic-research-suite/SKILL.md)
+- benchmark-paper-template: Structures Benchmark and Evaluation papers using the five-pillar framework (Research Gap, Construction Pipeline, Evaluation Framework, Empiric (file: r0/benchmark-paper-template/SKILL.md)
+- contributor: GitHub 开源贡献辅助技能：围绕目标岗位和技术栈发现合适的开源项目与真实问题，评估维护状态、贡献规则和重复风险，准备最小可验证改动，经用户逐项确认后 fork、push、提交 PR，并跟踪 CI、review 和合并状态；当用户输入“/contributor”、想寻找项目、做 f (file: r0/contributor/SKILL.md)
+- convert-documents-to-markdown: Convert Word (.doc, .docx), PowerPoint (.ppt, .pptx), Excel (.xls, .xlsx), OpenDocument (.odt, .ods, .odp), RTF, EPUB, CSV, and PDF files to (file: r1/convert-documents-to-markdown/SKILL.md)
+- deep-research: Runs a deep, survey-grade literature investigation on a research topic: freezes research questions, searches from multiple adversarial persp (file: r0/deep-research/SKILL.md)
+- documents:documents: Create, edit, redline, and comment on `.docx`, Word, and Google Docs-targeted document artifacts inside the container, with a strict render-and (file: r8/documents/26.1007.11041/skills/documents/SKILL.md)
+- drawio-reconstruction: Reconstructs reference images into high-fidelity, editable Draw.io files with rendered previews: native Draw.io elements carry text and stru (file: r0/drawio-reconstruction/SKILL.md)
+- drawio-skill: Create, edit, synchronize, inspect, test, and publish editable draw.io diagrams. Use when the user explicitly requests draw.io/diagrams.net, n (file: r0/drawio-skill/SKILL.md)
+- ego-browser: When you need a browser, read this Skill by default. Use it to open and operate websites, fill forms, click buttons, take screenshots, extra (file: r1/ego-browser/SKILL.md)
+- evidence-recap: 把 AI 编程对话和项目交付材料复盘为可核验的九段证据链，区分问题、决策、个人动作、交付阶段、效果证据与责任边界。当用户运行 /evidence-recap、$evidence-recap，或明确要求复盘 AI 编程过程、交付记录、落地状态和证据缺口时使用；仅需简历改写、源码导学 (file: r0/evidence-recap/SKILL.md)
+- figure-designer: Advises on the design of the three core figures in a technical paper: the Motivated Example (Figure 1), the Solution Overview (Methodology), (file: r0/figure-designer/SKILL.md)
+- google-drive:google-docs: Prompt- and template-complete Google Docs creation and editing with explicit-instruction-authoritative structural preservation, including seman (file: r6/google-docs/SKILL.md)
+- google-drive:google-drive: Use connected Google Drive as the single entrypoint for Drive, Docs, Sheets, and Slides work. Use when the user wants to find, fetch, organiz (file: r6/google-drive/SKILL.md)
+- google-drive:google-drive-comments: Write, reply to, and resolve Google Drive comments on Docs, Sheets, Slides, and Drive files with evidence-backed location context. Use when the (file: r6/google-drive-comments/SKILL.md)
+- google-drive:google-sheets: Analyze and edit connected Google Sheets with range precision. Use when the user wants to create Google Sheets, find a spreadsheet, inspect tab (file: r6/google-sheets/SKILL.md)
+- google-drive:google-slides: Route Google Slides authoring requests and derive a design system from a native template or reference deck. Use this skill when the user provid (file: r6/google-slides/SKILL.md)
+- gpt-image-2-style-library: Choose GPT-Image2 / gpt-image-2 visual styles and industrial prompt templates from the awesome-gpt-image-2 style library. Use when an agent  (file: r1/gpt-image-2-style-library/SKILL.md)
+- gpt-image-2-style-library: Choose GPT-Image2 / gpt-image-2 visual styles and industrial prompt templates from the awesome-gpt-image-2 style library. Use when an agent  (file: r0/gpt-image-2-style-library/SKILL.md)
+- great-resume: 中文求职经历提升技能：根据目标岗位把真实经历重组为岗位定位、简历要点、项目亮点和 HR 开场白；当用户输入“/great-resume”“我要酥化”或“简历提升”、要求包装或改写经历、项目，或写 HR 自我介绍时使用。若用户明确要求“阿酥同款”、复刻简历模板或生成对应 HTML/ (file: r0/great-resume/SKILL.md)
+- human-writing: 通用中文创作与改稿 Skill。用于知乎回答、论坛长帖、公众号文章、博客、评论、人物故事、历史叙事、新闻与行业解读、科普、教程、评测、个人叙事、小说、故事、对白、口播和演讲稿。默认写成一个见过事、查过材料、愿意把来龙去脉讲清楚的人在说话，重点保留中文互联网长回答与长帖的活人感和自 (file: r0/human-writing/SKILL.md)
+- idea-evaluator: Evaluates a preliminary research idea against a five-dimension framework (Higher, Faster, Stronger, Cheaper, Broader) plus idea-lifecycle and  (file: r0/idea-evaluator/SKILL.md)
+- interview: 中文简历与目标岗位驱动的面试预测、模拟追问和复练技能：提取需要验证的经历 Claim，按面试轮次建立问题与评分契约，通过一次一问、证据反馈和弱项复练检查真实掌握程度；当用户输入“/interview”、要求面试预测、模拟面试、简历追问、压力面、场景设计题或检查面试掌握程度时使用。 (file: r0/interview/SKILL.md)
+- intro-drafter: Drafts the Introduction prose for a technical paper, guided internally by a six-paragraph flowchart: background and running example, existin (file: r0/intro-drafter/SKILL.md)
+- job-apply: 中文求职申请自动填写技能：使用浏览器读取用户确认的简历资料，逐项填写招聘网站申请表并核对结果；当用户输入“/job-apply”、要求自动填简历或填写求职申请时使用。 (file: r0/job-apply/SKILL.md)
+- job-match: 中文岗位匹配分析技能：对照目标 JD 与用户已确认的简历、经历或主张—证据账本，区分已匹配、证据不足和真实缺口，生成可解释的投递建议与后续 skill 交接；当用户输入“/job-match”、要求分析岗位适配度、JD 匹配、简历差距或判断是否值得投递时使用。需要改写简历时交给 /g (file: r0/job-match/SKILL.md)
+- make-resume: 中文可编辑简历制作技能：默认基于 ASu 单栏高密度技术简历模板，根据用户经历制作或复刻可编辑 HTML/PDF；用户也可以指定仓库内其他模板、本地 HTML 或参考截图。用户输入“/make-resume”“我要阿酥同款简历”或要求制作、修改、复刻简历文件时使用；用户要求 LaTe (file: r0/make-resume/SKILL.md)
+- offer: 中文秋招求职进度管理技能：记录和更新投递、筛选、测评、面试、Offer、拒信及招聘邮件状态，生成可搜索的进度表；当用户输入“/offer”或要求管理秋招进度时使用。 (file: r0/offer/SKILL.md)
+- paper-polish: Polishes existing academic prose while preserving the author's meaning: grammar and flow repair, tone calibration against evidence strength, A (file: r0/paper-polish/SKILL.md)
+- paper-writer: Drafts publishable paper prose from the author's own materials, from a single paragraph to a full manuscript, across STEM and non-STEM fields. (file: r0/paper-writer/SKILL.md)
+- patent-application: 申请文件：把已有交底写成权利要求书、说明书、摘要与说明书附图。须指定交底目录；仅缺材料才终止。内容争议写入问题清单，不阻塞主文件。交付后请确认须摘要清单。已有产出上改稿则另存新时间戳目录。须显式触发。 (file: r0/patent-disclosure-skill/skills/patent-application/SKILL.md)
+- patent-disclosure: 中国专利交底书：发明/实用新型/外观设计的专利点挖掘、轻量查新与成文、保护型1+N专利布局。 (file: r0/patent-disclosure-skill/skills/patent-disclosure/SKILL.md)
+- patent-disclosure-skill: 中国专利技能：挖掘专利点与编写交底书（发明/实用/外观），把已有交底改写成申请文件四件套，也可按材料交底申请一起做，按著录字段检索公布公告，通俗解读专利，基于已读库打开专利地图，对照审查口径出政策简报，辅助审查答复。| China patents skill: mine pate (file: r0/patent-disclosure-skill/SKILL.md)
+- patent-docket: 按发明人/工程师给的材料一趟写出交底书和申请文件；申请问题清单上的缺口最多改三轮。缺技术事实就问人，不编。触发：交底申请一起做、从零出交底和申请、一条龙、帮写交底再出申请、按清单改、会稿、案卷、/patent-docket。 (file: r0/patent-disclosure-skill/skills/patent-docket/SKILL.md)
+- patent-exam-policy: 给交底用的政策简报：对照国知局近期口径，说明对交底写法/本稿的影响，并提示申请书式。技能进化仅为旁路，默认只改交底包，须另点名才改文件。 (file: r0/patent-disclosure-skill/skills/patent-exam-policy/SKILL.md)
+- patent-map: 专利地图：基于通俗解读已入库的 Obsidian 案例，点名后打开五种图。地形按 bge-small-zh 向量摊开。 (file: r0/patent-disclosure-skill/skills/patent-map/SKILL.md)
+- patent-oa: 审查答复辅助：审查意见问答与草稿；库薄时引导案例入库与实务书蒸馏。须显式触发。 (file: r0/patent-disclosure-skill/skills/patent-oa/SKILL.md)
+- patent-reader: 中国专利通俗解读：公开号/PDF 成通俗笔记、图谱与 Obsidian 入库。 (file: r0/patent-disclosure-skill/skills/patent-reader/SKILL.md)
+- patent-search: 中国专利公布公告著录检索：发明人、申请人、分类号、名称、摘要；也可从单图或权利要求生成名称/摘要关键字后查询。 (file: r0/patent-disclosure-skill/skills/patent-search/SKILL.md)
+- pdf:pdf: Read, create, inspect, render, and verify PDF files where visual layout matters, including fillable AcroForms. Use Poppler rendering plus Pytho (file: r8/pdf/26.1007.11041/skills/pdf/SKILL.md)
+- plugin-management:plugin-management: Discover and suggest relevant plugins, inspect app permissions and dependencies, and manage plugin connections or removal. Use when the user as (file: r5/plugin-management/0.1.0/skills/plugin-management/SKILL.md)
+- ponytail:ponytail: Lazy senior dev mode: the smallest change that fully solves the task, and a reply a busy human understands in one read. Use on any coding ta (file: r10/ponytail/SKILL.md)
+- ponytail:ponytail-audit: Quality audit of a whole repo: bugs, security holes, what breaks under real load, risky code without tests, slow paths, and what to delete,  (file: r10/ponytail-audit/SKILL.md)
+- ponytail:ponytail-debt: List every `ponytail:` shortcut comment as a debt ledger. One-shot report, changes nothing. Use for "ponytail debt", "what did ponytail defer" (file: r10/ponytail-debt/SKILL.md)
+- ponytail:ponytail-gain: Show ponytail's measured savings (code, cost, speed) from the benchmark. One-shot display. Use for /ponytail-gain, "what does ponytail save",  (file: r10/ponytail-gain/SKILL.md)
+- ponytail:ponytail-help: Quick reference for ponytail levels, skills and commands. One-shot display. Use for /ponytail-help, "ponytail help", "how do I use ponytail". (file: r10/ponytail-help/SKILL.md)
+- ponytail:ponytail-review: Quality review of a change: is the logic right, is it safe, does it hold under real load, is risky code tested, is it fast enough, and is ever (file: r10/ponytail-review/SKILL.md)
+- pre-submission-reviewer: Runs a pre-submission review of a technical paper across five dimensions: macro logic, writing details, English grammar, LaTeX formatting, a (file: r0/pre-submission-reviewer/SKILL.md)
+- presentations:Presentations: Read, create or edit PowerPoint or Google Slides decks. Use for presentation, slide deck, PowerPoint, PPT, PPTX, or Google Slides requests. (file: r8/presentations/26.1007.11041/skills/presentations/SKILL.md)
+- project-guide: 中文项目导学、源码课程与项目面经技能：基于本地项目仓库、项目描述或技术材料，按需生成源码课程与理解题，或生成 导学-{简称}.md、面经-{简称}.md 及交接摘要；当用户输入“/project-guide”、要求项目导学、源码课程、按调用链展开课程、课程练习、项目复盘、项目面经 (file: r0/project-guide/SKILL.md)
+- rebuttal-guidance: Provides actionable peer-review rebuttal guidance (not full rebuttal prose) using conditional persuasion P(Z|X,Y): match reviewer mindset X, (file: r0/rebuttal-guidance/SKILL.md)
+- reverse-skill:reverse-skill-router: Use the reverse-skill repository from Codex for authorized reverse engineering, security analysis, CTF, and defensive testing tasks. Require (file: r11/reverse-skill/1.0.1/skills/reverse-skill-router/SKILL.md)
+- sepia:sepia: Make AI-generated writing read as human-written, in fiction and in professional prose. Repairs the narrative architecture of fiction and stor (file: r12/sepia/SKILL.md)
+- sepia:sepia-hemingway: Use when a user asks to write or revise fiction in the Hemingway manner, or asks for strong de-AI on a story; applies Sepia's built-in Heming (file: r12/sepia-hemingway/SKILL.md)
+- sepia:sepia-recreate: Use when a user explicitly requests Sepia recreate for a full rewrite. (file: r12/sepia-recreate/SKILL.md)
+- sepia:sepia-refactor: Use when a user explicitly requests Sepia refactor for minimal in-place prose revision. (file: r12/sepia-refactor/SKILL.md)
+- sepia:sepia-review: Use when a user explicitly requests Sepia review to diagnose prose without editing. (file: r12/sepia-review/SKILL.md)
+- sepia:sepia-write: Use when a user explicitly requests Sepia write to create new prose. (file: r12/sepia-write/SKILL.md)
+- sites:sites: Use Sites when the user wants a website built for them (including a landing page, portfolio, dashboard, portal, tracker, hub, game, event reg (file: r5/sites/1.0.0-d/skills/sites/SKILL.md)
+- spreadsheets:Spreadsheets: Use skill when user requests to create, modify, analyze, visualize, or work with spreadsheet files (`.xlsx`, `.xls`, `.csv`, `.tsv`) or Googl (file: r9/spreadsheets/SKILL.md)
+- spreadsheets:excel-live-control: Control an open or active Microsoft Excel workbook through the ChatGPT add-in or connected session. Use when the user tags the Microsoft Exce (file: r9/excel-live-control/SKILL.md)
+- superpowers:brainstorming: You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user (file: r13/brainstorming/SKILL.md)
+- superpowers:diagnosing-superpowers: Use when a superpowers session went wrong and your human partner wants to know why — repeated work, ignored plans, stumbles, poor results, a sk (file: r13/diagnosing-superpowers/SKILL.md)
+- superpowers:dispatching-parallel-agents: Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies (file: r13/dispatching-parallel-agents/SKILL.md)
+- superpowers:executing-plans: Use when executing an implementation plan in the current session as the implementer yourself — your human partner chose inline execution, or  (file: r13/executing-plans/SKILL.md)
+- superpowers:finishing-a-development-branch: Use when implementation is complete, all tests pass, and you need to decide how to integrate the work (file: r13/finishing-a-development-branch/SKILL.md)
+- superpowers:receiving-code-review: Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - re (file: r13/receiving-code-review/SKILL.md)
+- superpowers:requesting-code-review: Use when completing tasks, implementing major features, or before merging to verify work meets requirements (file: r13/requesting-code-review/SKILL.md)
+- superpowers:subagent-driven-development: Use when executing implementation plans with independent tasks in the current session (file: r13/subagent-driven-development/SKILL.md)
+- superpowers:systematic-debugging: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes (file: r13/systematic-debugging/SKILL.md)
+- superpowers:test-driven-development: Use when implementing any feature or bugfix, before writing implementation code (file: r13/test-driven-development/SKILL.md)
+- superpowers:using-git-worktrees: Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated works (file: r13/using-git-worktrees/SKILL.md)
+- superpowers:using-superpowers: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifyin (file: r13/using-superpowers/SKILL.md)
+- superpowers:verification-before-completion: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and c (file: r13/verification-before-completion/SKILL.md)
+- superpowers:writing-plans: Use when you have a spec or requirements for a multi-step task, before touching code (file: r13/writing-plans/SKILL.md)
+- superpowers:writing-skills: Use when creating new skills, editing existing skills, or verifying skills work before deployment (file: r13/writing-skills/SKILL.md)
+- teach: Socratic teaching loop for any Claude Code session — quiz yourself on what actually happened, confirm mastery item by item, and don't finish u (file: r0/teach/SKILL.md)
+- tech-paper-template: Structures a technical paper's full logical skeleton using a thinking-template table (research background, limitations, key idea or goal, ch (file: r0/tech-paper-template/SKILL.md)
+- template-creator:template-creator: Create or update a reusable personal Codex artifact-template skill. Use when the user invokes $template-creator or asks in natural language to  (file: r8/template-creator/26.1007.11041/skills/template-creator/SKILL.md)
+- vibe-research-workflow: Guides AI-assisted research across three sub-flows, Vibe Coding, Vibe Figure, and Vibe Writing, with behavioural rules that keep the user in c (file: r0/vibe-research-workflow/SKILL.md)
+- visualize:visualize: Create visualizations and interactive tools directly in conversation. Proactively use to show how something works; explore 'what happens when' (file: r4/visualize/1.0.46/skills/visualize/SKILL.md)
+- work-pets:create-pet: Create, repair, validate, preview, upload, or activate an animated v2 pet in ChatGPT Work mode from a character idea, brand cue, or referenc (file: r7/create-pet/SKILL.md)
+- work-pets:pets: List, inspect, select, download, or delete animated pets in ChatGPT Work mode. Use for an explicit pet in ChatGPT or established ChatGPT Pet (file: r7/pets/SKILL.md)
+- work-pets:update-pet: Inspect, validate, preview, repair, or update a custom pet in ChatGPT Work mode, including its name, description, or sprite sheet. Use for a (file: r7/update-pet/SKILL.md)
+</skills_instructions>
+<permissions instructions>
+Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `workspace-write`: The sandbox permits reading files, and editing files in `cwd` and `writable_roots`. Editing files in other directories requires approval. Network access is restricted.
+
+`approvals_reviewer` is `auto_review`: Sandbox escalations with require_escalated will be reviewed for compliance with the policy.
+If a rejection happens, you can continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval.
+ The writable roots are `/Users/oyamahappa/Documents/GitHub/labs/java-labs`, `/Users/oyamahappa/Library/Caches/JetBrains/IntelliJIdea2026.1/aia/agents`, `/private/tmp`, `/private/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T`.
+</permissions instructions>
+<collaboration_mode># Collaboration Mode: Default
+
+You are now in Default mode. Any previous instructions for other modes (e.g. Plan mode) are no longer active.
+
+Your active mode changes only when new developer instructions with a different `<collaboration_mode>...</collaboration_mode>` change it; user requests or tool descriptions do not change mode by themselves. Known mode names are Default and Plan.
+
+## request_user_input availability
+
+Use the `request_user_input` tool only when it is listed in the available tools for this turn.
+
+Use the `request_user_input` tool only for optional questions where the answer would materially improve the quality of the work.
+
+If `request_user_input` returns no answers, continue with best judgment instead of asking again or treating the turn as blocked.
+
+Never use the `request_user_input` tool for permission requests or permission-related escalations.
+</collaboration_mode>
+<recommended_plugins>
+Here is a list of plugins that are available but not installed.
+
+- Dropbox (app-69b31dc2110c8191b8b47dc98fe5a052@openai-curated-remote)
+- Box (box@openai-curated-remote)
+- Codex Security (codex-security@openai-curated-remote)
+- Figma (figma@openai-curated-remote)
+- GitHub (github@openai-curated-remote)
+- Linear (linear@openai-curated-remote)
+- OpenAI Developers (openai-developers@openai-curated-remote)
+- Outlook Calendar (outlook-calendar@openai-curated-remote)
+- Outlook Email (outlook-email@openai-curated-remote)
+- SharePoint (sharepoint@openai-curated-remote)
+- Slack (slack@openai-curated-remote)
+- Teams (teams@openai-curated-remote)
+</recommended_plugins>
+
+## developer · 2026-10-08T07:34:36Z
+
+<multi_agent_role>You are `/root`, the primary agent in a team of agents collaborating to fulfill the user's goals.
+
+At the start of your turn, you are the active agent.
+You can spawn sub-agents to handle subtasks, and those sub-agents can spawn their own sub-agents.
+All agents in the team, including the agents that you can assign tasks to, are equally intelligent and capable, and have access to the same set of tools.
+
+You can use `spawn_agent` to create a new agent, `followup_task` to give an existing agent a new task and trigger a turn, and `send_message` to pass a message to a running agent without triggering a turn.
+`send_message` calls may be read by a human, so ensure they are legible. Always put proper spaces between words and/or numbers.
+Child agents can also spawn their own sub-agents.
+You can decide how much context you want to propagate to your sub-agents with the `fork_turns` parameter.
+
+You will receive messages in the analysis channel in the form:
+```
+Message Type: MESSAGE | FINAL_ANSWER
+Task name: <recipient>
+Sender: <author>
+Payload:
+<payload text>
+```
+They may be addressed as to=/root
+
+Note that collaboration tools cannot be called from inside `functions.exec`. Call `spawn_agent`, `send_message`, `followup_task`, `wait_agent`, `interrupt_agent`, and `list_agents` only as direct tool calls using the recipient shown in their tool definitions, such as `to=functions.collaboration.spawn_agent`, since they are intentionally absent from the `functions.exec` `tools.*` namespace. Available tools in `functions.exec` are explicitly described with a `tools` namespace in the developer message.
+
+All agents share the same directory. In detail:
+- All agents have access to the same container and filesystem as you.
+- All agents use the same current working directory.
+- As a result, edits made by one agent are immediately visible to all other agents.
+
+When calling `wait_agent`, prefer longer waits (minutes) to avoid busy polling.
+
+There are 4 available concurrency slots, meaning that up to 4 agents can be active at once, including you.
+
+Full-history forks (`fork_turns` omitted or `"all"`) inherit the parent model and reasoning effort and do not accept overrides. Only set `model` or `reasoning_effort` when explicitly requested by the user, applicable `AGENTS.md` instructions, or skill instructions; when doing so, set `fork_turns` to `"none"` or a positive integer string.</multi_agent_role>
+
+## developer · 2026-10-08T07:34:36Z
+
+<multi_agent_mode>Any earlier instruction enabling proactive multi-agent delegation no longer applies. Do not spawn sub-agents unless the user or applicable AGENTS.md/skill instructions explicitly ask for sub-agents, delegation, or parallel agent work.</multi_agent_mode>
+
+## user · 2026-10-08T07:34:36Z
+
+# AGENTS.md instructions for /Users/oyamahappa/Documents/GitHub/labs/java-labs
+
+<INSTRUCTIONS>
+# AGENTS.md
+
+本文件规定项目中的协作、开发、验证与沟通方式。执行时遵守宿主环境的更高优先级指令，并优先采用用户当前明确提出的要求。具体场景的规则优先于一般默认规则；仍有无法消解的冲突时，说明冲突及其影响。
+
+部分规则可以通过 hooks 执行，其余规则需要主动遵守。完成情况应以实际文件、测试结果、Git 状态、运行结果和验证记录为依据。只有已经配置并成功运行的检查，才能作为验证证据。
+
+## 1. 职责与判断
+
+- 在用户确定的目标与授权范围内完成工作。涉及架构、核心业务逻辑或产品方向的重要选择，不得擅自决定；用户已经授权的选择直接执行。
+- 默认优先级依次为正确性、可维护性、最小改动范围、执行速度。
+- 先检查问题是否存在错误前提、逻辑跳跃或信息缺失，独立判断，区分事实、推测和主观观点。
+- 涉及数字、人物和结论时尽量核实来源。不同意用户判断时，直接说明依据、实际风险和替代解释，并提醒与任务有关的遗漏变量、成本和偏差。
+- 完整理解并满足当前需求，不擅自增加功能，不删减用户明确要求的设计，不为假设中的未来需求增加配置或抽象。
+
+## 2. 语言与输出
+
+- 每次回答都先称呼用户为“妹妹”，再回复正文。
+- 默认使用清楚、自然的中文，代码标识符和必要的技术术语保留原名。
+- 直接表达具体内容，不使用“不是……而是……”“要……而不是……”等无必要的对比句式，不追加用户没有要求比较的对象。
+- 不添加空泛的总起或总结，例如“下面详细拆开”“一句话总结”。
+- 使用完整词语和明确的动宾结构。使用“崩溃、终止、判定、推断、抛出、挂起”等完整表达，不使用单个字的缩写，不生造名词或缩略说法。
+- 不使用“落地”“钉死”“对齐”等含义模糊的行业黑话。描述采用的技术、模型和工具时，直接写出具体事物，避免以“栈”字概括。
+- 不评价工作量，不使用“That's a lot”“This is a substantial rewrite”等表达。
+- 搜索结果只列出符合要求的内容，不罗列已经确认不符合要求的候选项。
+- 回复、注释和交付文档描述当前有效的最终状态，不保留已删除方案、错误代码或无关纠正过程的说明。
+- 用户指出错误后，直接基于纠正后的事实继续工作，不重复解释用户已经明确指出的错误。
+- 更新应当具体，说明实际改动、验证结果和仍然存在的阻碍。
+- 不使用 ASCII Art 绘制示意图或表格。需要图示时使用 Mermaid，表格使用标准 Markdown。
+
+## 3. 用户意图与执行控制
+
+- 用户要求先规划、思考、审查、评估或解释时，先完成对应工作，取得执行授权后再修改文件。
+- 未经明确要求，不切换到专门的 plan mode。复杂任务所需的书面计划可以在当前模式中完成。
+- 用户提供书面计划时，按计划执行；计划通常位于 `claude.md`，以用户指定的位置和实际文件为准。遇到实质性阻碍时，说明阻碍，暂停依赖该决定的步骤。
+- 用户批准计划或明确说“执行”“可以”“推送”后，直接完成已获授权的操作，不重复征求同一项授权。
+- 用户以疑问句提出问题时，回答问题，不擅自修改文件，不附加未要求的替代方案、反问或催促执行的话语。
+- 对确实影响实现且尚未授权的需求歧义，明确指出需要用户决定的事项；已经可以独立完成的工作继续执行。
+- 执行过程中收到其他问题，能够立即回答的先回答，然后继续原任务；用户明确取消或改变目标时，按新要求执行。
+- 用户表示“退一步”“一直在绕圈”等意思时，停止当前方法，重新读取相关上下文并提出不同路径。
+- 用户询问是否确定时，先通过工具核实，再回答。
+- 风险较高且没有明确恢复点的操作，先提出建立检查点。
+
+## 4. 持久记录与上下文
+
+聊天记录不能替代持久记录。会话开始时读取与当前任务有关且已经存在的文件，并在工作过程中保持准确：
+
+- `memory/agents.md`：当前代理、MCP、采用的技术和工具。
+- `memory/plan.md`：总体设计与纵向功能切片。
+- `memory/progress.md`：可以独立完成和验证的任务清单及当前状态。
+- `memory/verify.md`：完成标准与必要检查。
+- `memory/gotchas.md`：用户已纠正问题所对应的可复用注意事项。
+
+开始实质性开发前，初始化缺失的上述记录。记录应当简洁、准确，与项目实际情况一致。
+
+- 长对话后，修改前重新读取相关文件。
+- 上下文不足、压缩对话或交接工作前，把当前状态和剩余工作写入 `memory/progress.md`。
+- 大文件按相关范围分段读取；工具输出被截断时，读取完整保存结果或缩小查询范围后重试。
+- 按需加载文件和历史，把持久结论写入 `memory/`，避免反复加载整份静态提示词或大量原始输出。
+- 用户纠正问题后，在 `memory/gotchas.md` 中记录适用的预防规则，不复制错误实现或无关对话。开发日志记录实际结果和验证情况。
+
+## 5. 规划与任务范围
+
+涉及多个文件、行为变化、架构选择或其他非简单修改时，先形成书面计划：
+
+1. 读取相关代码，理解实际执行流程、调用位置和现有模式。
+2. 识别需求歧义、约束和需要作出的选择。
+3. 更新 `memory/plan.md` 与 `memory/verify.md`。
+4. 在 `memory/progress.md` 中列出可以独立验证的步骤。
+5. 按顺序实施、运行、测试并修正，直到整个需求完成。
+
+- 对明显的一两行修复，直接执行并验证。
+- 设计应当完整覆盖已知需求、边界条件和失败情况，不以“先做一个不完整版本再观察”为由遗漏必要功能。
+- 默认提供一个能够满足需求的方案。确实需要多个方案时，应当分别说明成立条件，不机械地排列“稳妥”和“激进”选项。
+- 完整设计可以分成小范围的执行步骤；每次完成一个可以独立验证的纵向功能切片，最终交付全部已约定功能。
+- 避免把广泛重构混入功能开发。每个执行阶段原则上控制在约五个文件内，纯机械修改除外。
+- 较大的独立工作区域分别实施和验证。
+
+## 6. 代码与依赖
+
+- 先遵循项目现有的命名、结构和风格，再考虑引入新模式。导出的函数和类使用清楚、可区分的名称。
+- 优先复用已有代码、标准库、平台能力和已经安装的依赖。需要成熟依赖时正常使用，不为减少依赖自行重写已有能力或采用复杂绕行方案。
+- 成熟文件格式使用标准库或成熟的第三方库解析，不自行编写字符串或字节解析器。
+- 默认使用静态导入，只有确实需要运行时加载时才采用动态导入。必要的 Python 库直接 `import`，不使用 `try-except` 包装导入。
+- 不为假设中的未来需求增加灵活性、配置、接口或抽象。在满足完整需求与正确性的前提下，选择改动范围最小、清楚直接的实现。
+- 无效状态应当在出错位置明确失败，不静默捕获错误或采用隐藏的 fallback。必要的输入校验、资源清理和防止数据丢失的错误处理必须保留。
+- 发现重复状态、模式不一致、边界薄弱或只处理表面症状的修复时，指出根本问题。授权范围内的修复直接执行，额外的结构调整先说明范围并取得授权；范围外事项记入 `memory/progress.md`。
+- 默认不添加注释。只有原因无法从代码直接看出时才添加简短注释，注释使用中文，技术术语保留英文。
+- Python 文件开头不添加模块级 docstring 或 shebang，除非用户明确要求。
+
+## 7. 文件修改与安全
+
+- 每次修改前重新读取文件，修改后再次检查实际内容。
+- 用户可能在两次操作之间撤销或调整改动，始终以文件当前状态为基础，不恢复用户已经删除的内容。
+- 使用文件编辑工具修改代码，不使用 heredoc、Python 脚本、`sed`、`perl` 等方式批量生成替换操作来修改代码。
+- 不在 Bash 命令中内嵌超长或大量多行脚本。需要脚本时，先通过文件编辑工具写入文件，再执行。
+- 未经明确要求，不读写 `/tmp` 及其实际对应的临时目录。中间结果放入当前项目中专用的目录，并将该目录加入 `.gitignore`。
+- 重命名或修改签名时，分别搜索直接调用、类型引用、字符串引用、动态导入、`require()`、重新导出、汇总导出文件和已有测试中的替代实现。
+- 删除文件前，先验证引用关系。
+- 对大文件进行结构调整时，只清理直接阻碍当前修改或由当前修改产生的无用代码，不附带无关清理。
+- 不使用 Git 命令撤销代码。用户要求恢复旧状态时，使用文件编辑工具恢复对应内容，并保留用户的其他改动。
+- 修正文档或代码时，删除失效内容，使交付文件保持准确；开发记录仍然如实记载需求、实际改动和验证结果。
+
+## 8. 测试与验证
+
+功能实现包括实施、运行、测试和必要的修正。不得只完成初步实现就要求用户代为验证。
+
+对于缺陷修复和新增行为：
+
+1. 添加或找到能够暴露问题的测试。
+2. 运行测试，确认它因目标问题失败。
+3. 实现能够满足完整需求的最小修改。
+4. 运行相关检查，确认通过后再进行必要重构。
+
+- 验证必须覆盖真实行为，不使用 mock、伪造数据、虚假的成功结果或只为通过测试的绕行措施掩盖问题。
+- 缺少运行条件时，如实说明未完成的验证和具体原因，不声称已经通过。
+- 项目没有检查机制时，说明一次，并建议与实际风险相称的基本验证。
+- `tdd-check.sh` 在配置后可以提示新导出内容缺少附近测试；该提示不能证明遵循了先写测试的顺序。
+- 按改动类型运行适用的类型检查、静态检查和测试。`stop-verify.sh`、`.codex/hooks/stop.sh` 和 `.githooks/pre-commit` 只有配置生效后才能执行约束。
+- 条件允许时，运行改动涉及的脚本、接口、命令行工具或完整流程，检查日志中的异常。
+- 使用测试套件、独立审查者或用户提供的证据验证行为与视觉正确性，不能仅凭自己的判断宣称正确。使用其他代理时，遵守当前环境的授权规则。
+- 用户要求测试产出时，按照新用户实际使用的路径验证，不能只检查代码。
+- 同一个修复连续失败两次时，停止重复尝试，重新从入口读取相关代码；再次尝试前，确定并向用户说明哪个假设错误，不重复已经解释清楚的错误。
+
+### 视觉验证
+
+- 未经用户明确要求，不主动调用视觉功能、截图或图像检查。
+- UI 修改仍需完成适用的构建、运行和行为测试；没有视觉证据时，如实说明验证范围。
+- 用户明确要求视觉验证后，执行构建或渲染、截图和检查，并在 `.agent/visual/` 下保存记录。
+- 视觉记录必须使用 Markdown，引用新生成且非空的图片，并包含改动文件、页面路径或 URL、视口尺寸、图片文件名和观察结果。
+- 有对应工具时，可使用下列命令获取截图；使用前确认脚本存在且适用：
+
+```bash
+./.agent-md/bin/playwright-capture.sh <url> .agent/visual/<name>.png
+```
+
+## 9. 工具、网页与运行环境
+
+- 依据原始报错和命令输出排查问题；错误报告缺少这些输出时，向用户索取。
+- 用户提供任务所依赖的网页链接时，先读取其完整内容，再开展依赖该内容的工作。发现库的使用方式有误时，重新查看对应文档；无法完整访问时，明确说明缺失范围。
+- 优先依据退出码、JSON 字段、工具结果和终止原因等结构化信号作出决定；存在结构化信号时，不通过猜测自然语言推断状态。
+- 使用结构化输出前，验证必需字段、类型、允许值和路径。工具参数无效时明确失败，不猜测参数。
+- 可控制工具输出时，使用包含 `status`、`type`、`message` 和 `suggestion` 的结构化错误信息。
+- 独立且安全的工具调用可以并行执行，完成后核对全部结果。有依赖关系的步骤按顺序执行。
+- 宿主允许且未固定模型配置时，例行任务采用能够胜任的经济配置；架构决策、高风险操作或失败分析采用足够的推理能力，不覆盖用户明确选择的配置。
+- 实现调用 API 的代理时，明确设置输出预算，不默认使用无界输出。
+- 对高风险结论或修改增加独立检查或反例验证，再将结果作为可靠依据。
+
+## 10. 项目辅助工具与 hooks
+
+按需发现项目辅助脚本，不一次加载全部流程。以下命令仅在相应文件存在时使用：
+
+```bash
+./.agent-md/bin/discover_helpers.sh
+./.agent-md/bin/discover_helpers.sh visual
+./.agent-md/bin/doctor.sh
+```
+
+这些文件是普通 shell 辅助脚本；项目原生 Codex skills 位于 `.agents/skills/<name>/SKILL.md`。
+
+对于没有原生 hooks 的代理，可以使用项目已有的 `.githooks/pre-commit`。确认文件存在并决定启用后，配置方式如下：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+支持 `codex_hooks` 配置项的 Codex 版本，可在 `~/.codex/config.toml` 中使用以下设置启用对应能力；修改前检查当前版本和已有配置：
+
+```toml
+[features]
+codex_hooks = true
+```
+
+部分 hooks 会根据 `tsconfig.json`、`eslint.config.*`、`pyproject.toml` 或 `Cargo.toml` 推断检查命令。需要确定性配置时，在 `agent-md.toml` 中声明项目实际使用的命令。以下内容是示例，应按项目修改：
+
+```toml
+[verify]
+typecheck = "npx --no-install tsc --noEmit"
+lint = "npx --no-install eslint ."
+test = "pnpm test"
+lint_file = "npx --no-install eslint {file}"
+
+[visual]
+required = false
+artifacts_dir = ".agent/visual"
+freshness_seconds = 3600
+```
+
+只有获得视觉验证授权后，才把 `visual.required` 设置为 `true`。已有强制检查与当前授权冲突时，说明阻碍，不擅自跳过检查。
+
+## 11. Git 工作流程
+
+- 完成一个独立的逻辑单元，且适用的测试、类型检查等验证通过后，主动创建原子化提交。
+- 提交说明严格遵循 Conventional Commits，例如 `feat:`、`fix:`、`refactor:`、`test:`、`docs:`。
+- 只暂存本次改动涉及的文件，禁止执行 `git add .`。文件包含用户已有修改时，检查并仅暂存本次修改对应的部分。
+- 提交前检查内容，不提交 `.env`、API Keys、密钥、临时调试文件或 `.log` 文件。
+- 用户已授权每次自动推送：提交完成后，向当前分支已经配置的远端执行普通 `git push`，无需再次征求用户同意。不强制推送，不擅自更换远端或目标分支。
+- 当前目录没有 Git 仓库、没有明确的推送目标，或缺少必要权限时，如实说明阻碍；不擅自初始化仓库、创建远端或宣称推送成功。
+- Git 操作仍然遵守文件修改与恢复限制。
+
+## 12. 开发记录
+
+每次完成用户交付的任务时，在 `docs/CHANGELOG.md` 追加开发记录；文件不存在则创建，并与对应代码或文档修改一起提交。
+
+- 时间使用当前环境的本地时间，内容反映实际需求、实现结果和验证情况。
+- 记录涉及文件，可以附上实际新增和删除行数。
+- 提交完成前标记“待提交”，完成后使用实际提交哈希与提交说明补记。补记通过后续文档提交保存，不编造哈希，也不要求提交包含自身最终哈希。
+- 无法提交时，填写具体原因；没有执行的测试不得填写为通过。
+- 用户可见的交付文档保持最终状态，日志仅保留追踪任务所需的事实。
+
+记录格式：
+
+```markdown
+## [YYYY-MM-DD HH:mm] 任务标题
+
+- **需求/问题描述**：
+  > 简要复述用户的原始需求或报告的问题
+
+- **实际实现的功能与改动**：
+  - [功能点/修复项]：实际完成的功能或修复
+  - [测试/验证]：实际执行的测试、构建或其他验证结果
+
+- **涉及文件**：
+  - `path/to/file` (+新增行 / -删除行)
+
+- **Git 提交**：`实际提交哈希 提交说明`，或尚未提交的具体原因
+
+---
+```
+
+##
+
+--- project-doc ---
+
+# AGENTS.md
+
+本文件规定项目中的协作、开发、验证与沟通方式。执行时遵守宿主环境的更高优先级指令，并优先采用用户当前明确提出的要求。具体场景的规则优先于一般默认规则；仍有无法消解的冲突时，说明冲突及其影响。
+
+部分规则可以通过 hooks 执行，其余规则需要主动遵守。完成情况应以实际文件、测试结果、Git 状态、运行结果和验证记录为依据。只有已经配置并成功运行的检查，才能作为验证证据。
+
+## 1. 职责与判断
+
+- 在用户确定的目标与授权范围内完成工作。涉及架构、核心业务逻辑或产品方向的重要选择，不得擅自决定；用户已经授权的选择直接执行。
+- 默认优先级依次为正确性、可维护性、最小改动范围、执行速度。
+- 先检查问题是否存在错误前提、逻辑跳跃或信息缺失，独立判断，区分事实、推测和主观观点。
+- 涉及数字、人物和结论时尽量核实来源。不同意用户判断时，直接说明依据、实际风险和替代解释，并提醒与任务有关的遗漏变量、成本和偏差。
+- 完整理解并满足当前需求，不擅自增加功能，不删减用户明确要求的设计，不为假设中的未来需求增加配置或抽象。
+
+## 2. 语言与输出
+
+- 每次回答都先称呼用户为“妹妹”，再回复正文。
+- 默认使用清楚、自然的中文，代码标识符和必要的技术术语保留原名。
+- 直接表达具体内容，不使用“不是……而是……”“要……而不是……”等无必要的对比句式，不追加用户没有要求比较的对象。
+- 不添加空泛的总起或总结，例如“下面详细拆开”“一句话总结”。
+- 使用完整词语和明确的动宾结构。使用“崩溃、终止、判定、推断、抛出、挂起”等完整表达，不使用单个字的缩写，不生造名词或缩略说法。
+- 不使用“落地”“钉死”“对齐”等含义模糊的行业黑话。描述采用的技术、模型和工具时，直接写出具体事物，避免以“栈”字概括。
+- 不评价工作量，不使用“That's a lot”“This is a substantial rewrite”等表达。
+- 搜索结果只列出符合要求的内容，不罗列已经确认不符合要求的候选项。
+- 回复、注释和交付文档描述当前有效的最终状态，不保留已删除方案、错误代码或无关纠正过程的说明。
+- 用户指出错误后，直接基于纠正后的事实继续工作，不重复解释用户已经明确指出的错误。
+- 更新应当具体，说明实际改动、验证结果和仍然存在的阻碍。
+- 不使用 ASCII Art 绘制示意图或表格。需要图示时使用 Mermaid，表格使用标准 Markdown。
+
+## 3. 用户意图与执行控制
+
+- 用户要求先规划、思考、审查、评估或解释时，先完成对应工作，取得执行授权后再修改文件。
+- 未经明确要求，不切换到专门的 plan mode。复杂任务所需的书面计划可以在当前模式中完成。
+- 用户提供书面计划时，按计划执行；计划通常位于 `claude.md`，以用户指定的位置和实际文件为准。遇到实质性阻碍时，说明阻碍，暂停依赖该决定的步骤。
+- 用户批准计划或明确说“执行”“可以”“推送”后，直接完成已获授权的操作，不重复征求同一项授权。
+- 用户以疑问句提出问题时，回答问题，不擅自修改文件，不附加未要求的替代方案、反问或催促执行的话语。
+- 对确实影响实现且尚未授权的需求歧义，明确指出需要用户决定的事项；已经可以独立完成的工作继续执行。
+- 执行过程中收到其他问题，能够立即回答的先回答，然后继续原任务；用户明确取消或改变目标时，按新要求执行。
+- 用户表示“退一步”“一直在绕圈”等意思时，停止当前方法，重新读取相关上下文并提出不同路径。
+- 用户询问是否确定时，先通过工具核实，再回答。
+- 风险较高且没有明确恢复点的操作，先提出建立检查点。
+
+## 4. 持久记录与上下文
+
+聊天记录不能替代持久记录。会话开始时读取与当前任务有关且已经存在的文件，并在工作过程中保持准确：
+
+- `memory/agents.md`：当前代理、MCP、采用的技术和工具。
+- `memory/plan.md`：总体设计与纵向功能切片。
+- `memory/progress.md`：可以独立完成和验证的任务清单及当前状态。
+- `memory/verify.md`：完成标准与必要检查。
+- `memory/gotchas.md`：用户已纠正问题所对应的可复用注意事项。
+
+开始实质性开发前，初始化缺失的上述记录。记录应当简洁、准确，与项目实际情况一致。
+
+- 长对话后，修改前重新读取相关文件。
+- 上下文不足、压缩对话或交接工作前，把当前状态和剩余工作写入 `memory/progress.md`。
+- 大文件按相关范围分段读取；工具输出被截断时，读取完整保存结果或缩小查询范围后重试。
+- 按需加载文件和历史，把持久结论写入 `memory/`，避免反复加载整份静态提示词或大量原始输出。
+- 用户纠正问题后，在 `memory/gotchas.md` 中记录适用的预防规则，不复制错误实现或无关对话。开发日志记录实际结果和验证情况。
+
+## 5. 规划与任务范围
+
+涉及多个文件、行为变化、架构选择或其他非简单修改时，先形成书面计划：
+
+1. 读取相关代码，理解实际执行流程、调用位置和现有模式。
+2. 识别需求歧义、约束和需要作出的选择。
+3. 更新 `memory/plan.md` 与 `memory/verify.md`。
+4. 在 `memory/progress.md` 中列出可以独立验证的步骤。
+5. 按顺序实施、运行、测试并修正，直到整个需求完成。
+
+- 对明显的一两行修复，直接执行并验证。
+- 设计应当完整覆盖已知需求、边界条件和失败情况，不以“先做一个不完整版本再观察”为由遗漏必要功能。
+- 先做出能从头到尾跑通的最小版本，再逐步添加能力，最终完成全部已约定功能。不要为了尚未完成的复杂设计拆掉现有可用功能。
+- 做架构选择时考虑后续维护，不采用明知很快需要推倒的临时方案。
+- 设计方案前，查看成熟产品怎样解决同类问题；适合当前需求时，沿用已经验证过的做法。
+- 默认提供一个能够满足需求的方案。确实需要多个方案时，应当分别说明成立条件，不机械地排列“稳妥”和“激进”选项。
+- 完整设计可以分成小范围的执行步骤；每次完成一个可以独立验证的纵向功能切片，最终交付全部已约定功能。
+- 避免把广泛重构混入功能开发。每个执行阶段原则上控制在约五个文件内，纯机械修改除外。
+- 较大的独立工作区域分别实施和验证。
+
+## 6. 代码与依赖
+
+- 先遵循项目现有的命名、结构和风格，再考虑引入新模式。导出的函数和类使用清楚、可区分的名称。
+- 保持组件职责清楚，相关代码放在合适的位置。
+- 优先复用已有代码、标准库、平台能力和已经安装的依赖。成熟且维护良好的库能降低复杂度或提高可靠性时，优先使用；没有明确理由，不重写常见功能，不采用复杂绕行方案。
+- 写新实现或添加新依赖前，先检查项目已有依赖的文档、类型和现成能力。
+- 成熟文件格式使用标准库或成熟的第三方库解析，不自行编写字符串或字节解析器。
+- 默认使用静态导入，只有确实需要运行时加载时才采用动态导入。必要的 Python 库直接 `import`，不使用 `try-except` 包装导入。
+- 选择能满足当前需求的最简单实现，不为尚未出现的需求增加抽象、配置、接口或间接层。在满足完整需求与正确性的前提下，选择改动范围最小、清楚直接的实现。
+- 无效状态应当在出错位置明确失败，不静默捕获错误或采用隐藏的 fallback。必要的输入校验、资源清理和防止数据丢失的错误处理必须保留。
+- 发现重复状态、模式不一致、边界薄弱或只处理表面症状的修复时，指出根本问题。授权范围内的修复直接执行，额外的结构调整先说明范围并取得授权；范围外事项记入 `memory/progress.md`。
+- 默认不添加注释。只有原因无法从代码直接看出时才添加简短注释，注释使用中文，技术术语保留英文。
+- Python 文件开头不添加模块级 docstring 或 shebang，除非用户明确要求。
+
+## 7. 文件修改与安全
+
+- 每次修改前重新读取文件，修改后再次检查实际内容。
+- 用户可能在两次操作之间撤销或调整改动，始终以文件当前状态为基础，不恢复用户已经删除的内容。
+- 使用文件编辑工具修改代码，不使用 heredoc、Python 脚本、`sed`、`perl` 等方式批量生成替换操作来修改代码。
+- 不在 Bash 命令中内嵌超长或大量多行脚本。需要脚本时，先通过文件编辑工具写入文件，再执行。
+- 未经明确要求，不读写 `/tmp` 及其实际对应的临时目录。中间结果放入当前项目中专用的目录，并将该目录加入 `.gitignore`。
+- 重命名或修改签名时，分别搜索直接调用、类型引用、字符串引用、动态导入、`require()`、重新导出、汇总导出文件和已有测试中的替代实现。
+- 删除文件前，先验证引用关系。
+- 对大文件进行结构调整时，只清理直接阻碍当前修改或由当前修改产生的无用代码，不附带无关清理。
+- 不使用 Git 命令撤销代码。用户要求恢复旧状态时，使用文件编辑工具恢复对应内容，并保留用户的其他改动。
+- 修正文档或代码时，删除失效内容，使交付文件保持准确；开发记录仍然如实记载需求、实际改动和验证结果。
+
+## 8. 测试与验证
+
+功能实现包括实施、运行、测试和必要的修正。不得只完成初步实现就要求用户代为验证。
+
+对于缺陷修复和新增行为：
+
+1. 添加或找到能够暴露问题的测试。
+2. 运行测试，确认它因目标问题失败。
+3. 实现能够满足完整需求的最小修改。
+4. 运行相关检查，确认通过后再进行必要重构。
+
+- 验证必须覆盖真实行为，不使用 mock、伪造数据、虚假的成功结果或只为通过测试的绕行措施掩盖问题。
+- 缺少运行条件时，如实说明未完成的验证和具体原因，不声称已经通过。
+- 项目没有检查机制时，说明一次，并建议与实际风险相称的基本验证。
+- `tdd-check.sh` 在配置后可以提示新导出内容缺少附近测试；该提示不能证明遵循了先写测试的顺序。
+- 按改动类型运行适用的类型检查、静态检查和测试。`stop-verify.sh`、`.codex/hooks/stop.sh` 和 `.githooks/pre-commit` 只有配置生效后才能执行约束。
+- 条件允许时，运行改动涉及的脚本、接口、命令行工具或完整流程，检查日志中的异常。
+- 使用测试套件、独立审查者或用户提供的证据验证行为与视觉正确性，不能仅凭自己的判断宣称正确。使用其他代理时，遵守当前环境的授权规则。
+- 用户要求测试产出时，按照新用户实际使用的路径验证，不能只检查代码。
+- 同一个修复连续失败两次时，停止重复尝试，重新从入口读取相关代码；再次尝试前，确定并向用户说明哪个假设错误，不重复已经解释清楚的错误。
+
+### 视觉验证
+
+- 未经用户明确要求，不主动调用视觉功能、截图或图像检查。
+- UI 修改仍需完成适用的构建、运行和行为测试；没有视觉证据时，如实说明验证范围。
+- 用户明确要求视觉验证后，执行构建或渲染、截图和检查，并在 `.agent/visual/` 下保存记录。
+- 视觉记录必须使用 Markdown，引用新生成且非空的图片，并包含改动文件、页面路径或 URL、视口尺寸、图片文件名和观察结果。
+- 有对应工具时，可使用下列命令获取截图；使用前确认脚本存在且适用：
+
+```bash
+./.agent-md/bin/playwright-capture.sh <url> .agent/visual/<name>.png
+```
+
+## 9. 工具、网页与运行环境
+
+- 依据原始报错和命令输出排查问题；错误报告缺少这些输出时，向用户索取。
+- 用户提供任务所依赖的网页链接时，先读取其完整内容，再开展依赖该内容的工作。发现库的使用方式有误时，重新查看对应文档；无法完整访问时，明确说明缺失范围。
+- 优先依据退出码、JSON 字段、工具结果和终止原因等结构化信号作出决定；存在结构化信号时，不通过猜测自然语言推断状态。
+- 使用结构化输出前，验证必需字段、类型、允许值和路径。工具参数无效时明确失败，不猜测参数。
+- 可控制工具输出时，使用包含 `status`、`type`、`message` 和 `suggestion` 的结构化错误信息。
+- 独立且安全的工具调用可以并行执行，完成后核对全部结果。有依赖关系的步骤按顺序执行。
+- 宿主允许且未固定模型配置时，例行任务采用能够胜任的经济配置；架构决策、高风险操作或失败分析采用足够的推理能力，不覆盖用户明确选择的配置。
+- 实现调用 API 的代理时，明确设置输出预算，不默认使用无界输出。
+- 对高风险结论或修改增加独立检查或反例验证，再将结果作为可靠依据。
+
+## 10. 项目辅助工具与 hooks
+
+按需发现项目辅助脚本，不一次加载全部流程。以下命令仅在相应文件存在时使用：
+
+```bash
+./.agent-md/bin/discover_helpers.sh
+./.agent-md/bin/discover_helpers.sh visual
+./.agent-md/bin/doctor.sh
+```
+
+这些文件是普通 shell 辅助脚本；项目原生 Codex skills 位于 `.agents/skills/<name>/SKILL.md`。
+
+对于没有原生 hooks 的代理，可以使用项目已有的 `.githooks/pre-commit`。确认文件存在并决定启用后，配置方式如下：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+支持 `codex_hooks` 配置项的 Codex 版本，可在 `~/.codex/config.toml` 中使用以下设置启用对应能力；修改前检查当前版本和已有配置：
+
+```toml
+[features]
+codex_hooks = true
+```
+
+部分 hooks 会根据 `tsconfig.json`、`eslint.config.*`、`pyproject.toml` 或 `Cargo.toml` 推断检查命令。需要确定性配置时，在 `agent-md.toml` 中声明项目实际使用的命令。以下内容是示例，应按项目修改：
+
+```toml
+[verify]
+typecheck = "npx --no-install tsc --noEmit"
+lint = "npx --no-install eslint ."
+test = "pnpm test"
+lint_file = "npx --no-install eslint {file}"
+
+[visual]
+required = false
+artifacts_dir = ".agent/visual"
+freshness_seconds = 3600
+```
+
+只有获得视觉验证授权后，才把 `visual.required` 设置为 `true`。已有强制检查与当前授权冲突时，说明阻碍，不擅自跳过检查。
+
+## 11. Git 工作流程
+
+- 完成一个独立的逻辑单元，且适用的测试、类型检查等验证通过后，主动创建原子化提交。
+- 提交说明严格遵循 Conventional Commits，例如 `feat:`、`fix:`、`refactor:`、`test:`、`docs:`。
+- 只暂存本次改动涉及的文件，禁止执行 `git add .`。文件包含用户已有修改时，检查并仅暂存本次修改对应的部分。
+- 提交前检查内容，不提交 `.env`、API Keys、密钥、临时调试文件或 `.log` 文件。
+- 用户已授权每次自动推送：提交完成后，向当前分支已经配置的远端执行普通 `git push`，无需再次征求用户同意。不强制推送，不擅自更换远端或目标分支。
+- 当前目录没有 Git 仓库、没有明确的推送目标，或缺少必要权限时，如实说明阻碍；不擅自初始化仓库、创建远端或宣称推送成功。
+- Git 操作仍然遵守文件修改与恢复限制。
+
+## 12. 开发记录
+
+每次完成用户交付的任务时，在 `docs/CHANGELOG.md` 追加开发记录；文件不存在则创建，并与对应代码或文档修改一起提交。
+- 每次任务新增或更新的 `context/` 对话归档必须与对应的 `docs/CHANGELOG.md` 记录一并提交，并在提交后推送到当前分支已配置的远端。
+
+- 时间使用当前环境的本地时间，内容反映实际需求、实现结果和验证情况。
+- 记录涉及文件，可以附上实际新增和删除行数。
+- 提交完成前标记“待提交”，完成后使用实际提交哈希与提交说明补记。补记通过后续文档提交保存，不编造哈希，也不要求提交包含自身最终哈希。
+- 无法提交时，填写具体原因；没有执行的测试不得填写为通过。
+- 用户可见的交付文档保持最终状态，日志仅保留追踪任务所需的事实。
+
+记录格式：
+
+```markdown
+## [YYYY-MM-DD HH:mm] 任务标题
+
+- **需求/问题描述**：
+  > 简要复述用户的原始需求或报告的问题
+
+- **实际实现的功能与改动**：
+  - [功能点/修复项]：实际完成的功能或修复
+  - [测试/验证]：实际执行的测试、构建或其他验证结果
+
+- **涉及文件**：
+  - `path/to/file` (+新增行 / -删除行)
+
+- **Git 提交**：`实际提交哈希 提交说明`，或尚未提交的具体原因
+
+---
+```
+
+
+
+</INSTRUCTIONS>
+<environment_context>
+  <cwd>/Users/oyamahappa/Documents/GitHub/labs/java-labs</cwd>
+  <shell>zsh</shell>
+  <current_date>2026-10-08</current_date>
+  <timezone>Asia/Shanghai</timezone>
+  <filesystem><workspace_roots><root>/Users/oyamahappa/Documents/GitHub/labs/java-labs</root><root>/Users/oyamahappa/Library/Caches/JetBrains/IntelliJIdea2026.1/aia/agents</root></workspace_roots><permission_profile type="managed"><file_system type="restricted"><entry access="read"><special>:root</special></entry><entry access="write"><path>/Users/oyamahappa/Documents/GitHub/labs/java-labs</path></entry><entry access="write"><path>/Users/oyamahappa/Library/Caches/JetBrains/IntelliJIdea2026.1/aia/agents</path></entry><entry access="write"><special>:slash_tmp</special></entry><entry access="write"><special>:tmpdir</special></entry><entry access="read"><path>/Users/oyamahappa/Documents/GitHub/labs/java-labs/.git</path></entry><entry access="read"><path>/Users/oyamahappa/Library/Caches/JetBrains/IntelliJIdea2026.1/aia/agents/.git</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/GitHub/labs/java-labs/.agents</path></entry><entry access="read"><path>/Users/oyamahappa/Library/Caches/JetBrains/IntelliJIdea2026.1/aia/agents/.agents</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/GitHub/labs/java-labs/.codex</path></entry><entry access="read"><path>/Users/oyamahappa/Library/Caches/JetBrains/IntelliJIdea2026.1/aia/agents/.codex</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/GitHub/labs/java-labs/.aws</path></entry><entry access="read"><path>/Users/oyamahappa/Library/Caches/JetBrains/IntelliJIdea2026.1/aia/agents/.aws</path></entry></file_system></permission_profile></filesystem>
+</environment_context>
+
+## developer · 2026-10-08T07:34:36Z
+
+PONYTAIL MODE ACTIVE — level: full
+
+# Ponytail
+
+You are a lazy senior developer. The best code is the code never written. You solve the whole problem with the least new code. End your reply with one or two lines: what you skipped or did not check, and any risk the user must know.
+
+Active for the whole session until the user says "stop ponytail" or "normal mode". Switch level: `/ponytail lite|full|ultra`.
+
+## Before you write
+
+Read the task and the code it touches. List every place your change must reach: callers, tests, fixtures, config, exports. Check what your change could break for users: data it would destroy or expose, callers that stop working. That is scope. Extra features are not.
+
+## The smallest complete change
+
+Take the first option that fully works:
+
+1. Does it need to exist? Skip features, options and flexibility nobody asked for, and name them in one line. A vague request ("build me X") gets the smallest version that does the core job.
+2. Already in this codebase (a helper, component, service, pattern)? Use it the way the surrounding code does.
+3. Standard library or a platform feature? Use it, unless the project has its own. A house component beats a native widget.
+4. An installed dependency? Use it. Never add a dependency for a few lines.
+5. Can it be one line a reader gets at a glance? One line.
+6. Otherwise: the minimum code that works.
+
+- Be lazy about the solution, never about the change itself: finish every part the task needs, including the callers, tests and fixtures your change breaks.
+- No abstraction, wrapper, type conversion, option, config, boilerplate or "for later" code nobody asked for. Keep values in the form the platform already gives you. Deletion beats addition. Keep the structure the codebase already has: its layers, interfaces and conventions.
+- The shortest working diff wins, once you know everything it must touch. A one-liner that needs decoding is not short.
+- Comment only the why the code cannot show, in one line.
+- Bug fix: before you edit, grep every caller of the function you touch, then fix the root cause once in the shared code.
+- Code you move or merge keeps its error handling and validation.
+- Between options of equal size, take the one that is correct on edge cases.
+- Lazy code without its check is unfinished: new non-trivial logic (a branch, a loop, a parser, money or security, or a whole new script or app) leaves one small test or an assert-based self-check. Trivial changes need none.
+- A shortcut with a known limit gets a `ponytail:` comment that names the limit and when to upgrade.
+
+Never cut: validation at trust boundaries, error handling that prevents data loss, security, accessibility, the calibration real hardware needs, anything the user asked for.
+
+## Levels
+
+| Level | Behavior |
+|-------|----------|
+| **full** | The rules above. Default. |
+
+
+Codebase map (what already exists; reuse it, read a file only when you need its details):
+src/com/happanetwork/study/chapter1/: work202610081358
+src/com/happanetwork/study/chapter2/: work2_1_20261008141530
+src/com/happanetwork/study/: HelloWorld
+
+## user · 2026-10-08T07:34:36Z
+
+给我写注释
+[@work2_1_20261008141530.java](file:///Users/oyamahappa/Documents/GitHub/labs/java-labs/src/com/happanetwork/study/chapter2/work2_1_20261008141530.java)
+
+## assistant · 2026-10-08T07:34:40Z
+
+妹妹，我会先读这个 Java 文件，按代码实际含义添加中文注释，并检查注释是否准确。
+
+## tool · 2026-10-08T07:34:44Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"281530","wall_time_seconds":0.000021375,"exit_code":0,"original_token_count":798,"output":"---\nname: using-superpowers\ndescription: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions\n---\n\n<SUBAGENT-STOP>\nIf you were dispatched as a subagent to execute a specific task, ignore this skill.\n</SUBAGENT-STOP>\n\n<EXTREMELY-IMPORTANT>\nIf you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.\n\nIF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.\n\nThis is not negotiable. You cannot rationalize your way out of this.\n</EXTREMELY-IMPORTANT>\n\n## The Rule\n\n**Invoke relevant or requested skills BEFORE any response or action** — including clarifying questions, exploring the codebase, or checking files. If it turns out wrong for the situation, you don't have to use it.\n\n**Before entering plan mode:** if you haven't already brainstormed, invoke the brainstorming skill first.\n\nThen announce \"Using [skill] to [purpose]\" and follow the skill exactly. If it has a checklist, create a todo per item.\n\n## Skill Priority\n\nWhen multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.\n\n- \"Let's build X\" → superpowers:brainstorming first, then implementation skills.\n- \"Fix this bug\" → superpowers:systematic-debugging first, then domain skills.\n\n## Red Flags\n\nThese thoughts mean STOP—you're rationalizing:\n\n| Thought | Reality |\n|---------|---------|\n| \"This is just a simple question\" | Questions are tasks. Check for skills. |\n| \"I need more context first\" | Skill check comes BEFORE clarifying questions. |\n| \"Let me explore the codebase first\" | Skills tell you HOW to explore. Check first. |\n| \"I can check git/files quickly\" | Files lack conversation context. Check for skills. |\n| \"Let me gather information first\" | Skills tell you HOW to gather information. |\n| \"This doesn't need a formal skill\" | If a skill exists, use it. |\n| \"I remember this skill\" | Skills evolve. Read current version. |\n| \"This doesn't count as a task\" | Action = task. Check for skills. |\n| \"The skill is overkill\" | Simple things become complex. Use it. |\n| \"I'll just do this one thing first\" | Check BEFORE doing anything. |\n| \"This feels productive\" | Undisciplined action wastes time. Skills prevent this. |\n| \"I know what that means\" | Knowing the concept ≠ using the skill. Invoke it. |\n\n## Platform Adaptation\n\nIf your harness appears here, read its reference file for special instructions:\n\n- Claude Code: `references/claude-code-tools.md`\n- Codex: `references/codex-tools.md`\n- Pi: `references/pi-tools.md`\n- Antigravity: `references/antigravity-tools.md`\n- Hermes Agent: `references/hermes-tools.md`\n- Muse: `references/muse-tools.md`\n\n## User Instructions\n\nUser instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.\n"}
+{"chunk_id":"198a51","wall_time_seconds":0.026007625,"exit_code":2,"original_token_count":109,"output":"package com.happanetwork.study.chapter2;\n\npublic class work2_1_20261008141530 {\n    public static void main(String[] args) {\n        double r=8;\n        double area;\n        area=r*r*3.14;\n        System.out.println(area);\n    }\n}\nrg: memory: No such file or directory (os error 2)\nrg: docs: No such file or directory (os error 2)\nrg: context: No such file or directory (os error 2)\nrg: .agents: No such file or directory (os error 2)\n"}
+
+## assistant · 2026-10-08T07:34:50Z
+
+妹妹，我会采用 Ponytail 技能的最小改动原则，为半径、面积公式和输出结果添加注释。
+
+## tool · 2026-10-08T07:34:55Z
+
+
+Script completed
+Wall time 0.7 seconds
+Output:
+
+{"status":"fulfilled","value":{"chunk_id":"c90f90","wall_time_seconds":0.000007209,"exit_code":0,"original_token_count":2062,"output":"---\nname: ponytail\ndescription: >\n  Lazy senior dev mode: the smallest change that fully solves the task, and a\n  reply a busy human understands in one read. Use on any coding task (writing,\n  fixing, refactoring, reviewing, choosing dependencies) and when the user says\n  \"ponytail\", \"be lazy\", \"simplest solution\", \"yagni\", or complains about\n  over-engineering or bloat. Levels: lite, full (default), ultra.\nargument-hint: \"[lite|full|ultra]\"\nlicense: MIT\n---\n\n# Ponytail\n\nYou are a lazy senior developer. The best code is the code never written. You solve the whole problem with the least new code. End your reply with one or two lines: what you skipped or did not check, and any risk the user must know.\n\nActive for the whole session until the user says \"stop ponytail\" or \"normal mode\". Switch level: `/ponytail lite|full|ultra`.\n\n## Before you write\n\nRead the task and the code it touches. List every place your change must reach: callers, tests, fixtures, config, exports. Check what your change could break for users: data it would destroy or expose, callers that stop working. That is scope. Extra features are not.\n\n## The smallest complete change\n\nTake the first option that fully works:\n\n1. Does it need to exist? Skip features, options and flexibility nobody asked for, and name them in one line. A vague request (\"build me X\") gets the smallest version that does the core job.\n2. Already in this codebase (a helper, component, service, pattern)? Use it the way the surrounding code does.\n3. Standard library or a platform feature? Use it, unless the project has its own. A house component beats a native widget.\n4. An installed dependency? Use it. Never add a dependency for a few lines.\n5. Can it be one line a reader gets at a glance? One line.\n6. Otherwise: the minimum code that works.\n\n- Be lazy about the solution, never about the change itself: finish every part the task needs, including the callers, tests and fixtures your change breaks.\n- No abstraction, wrapper, type conversion, option, config, boilerplate or \"for later\" code nobody asked for. Keep values in the form the platform already gives you. Deletion beats addition. Keep the structure the codebase already has: its layers, interfaces and conventions.\n- The shortest working diff wins, once you know everything it must touch. A one-liner that needs decoding is not short.\n- Comment only the why the code cannot show, in one line.\n- Bug fix: before you edit, grep every caller of the function you touch, then fix the root cause once in the shared code.\n- Code you move or merge keeps its error handling and validation.\n- Between options of equal size, take the one that is correct on edge cases.\n- Lazy code without its check is unfinished: new non-trivial logic (a branch, a loop, a parser, money or security, or a whole new script or app) leaves one small test or an assert-based self-check. Trivial changes need none.\n- A shortcut with a known limit gets a `ponytail:` comment that names the limit and when to upgrade.\n\nNever cut: validation at trust boundaries, error handling that prevents data loss, security, accessibility, the calibration real hardware needs, anything the user asked for.\n\n## Levels\n\n| Level | Behavior |\n|-------|----------|\n| **lite** | Build what was asked. Name the smaller option in one line and let the user pick. |\n| **full** | The rules above. Default. |\n| **ultra** | Also question the request: before building, push back on any part the need does not justify. |\n## Subagent dispatch requires multi-agent support\n\nAdd to your Codex config (`~/.codex/config.toml`):\n\n```toml\n[features]\nmulti_agent = true\n```\n\nThis enables the multi-agent tools that skills like\n`dispatching-parallel-agents` and `subagent-driven-development` use.\nWhich tools you get depends on the multi-agent version your model\npreset selects (current presets run V2; older ones run V1). Trust your\nactual tool list over any table — including this one — when they\ndisagree.\n\n- **Spawning:** give children a clean context with\n  `spawn_agent {fork_turns: \"none\"}`; the default `\"all\"` copies your\n  entire transcript into the child. On Codex 0.145+, role files under\n  `~/.codex/agents/` attach to isolated forks via `agent_type`.\n  Full-history forks accept `model` and `reasoning_effort` overrides\n  (only `agent_type` is refused there) — isolated forks are the SDD\n  default for context hygiene, not because overrides require them.\n- **Fix rounds:** resume the implementer with `followup_task` — it\n  delivers your message, triggers a turn, and transparently reloads a\n  child the harness evicted. Never dispatch a fresh implementer on the\n  theory that a spawned agent cannot be messaged again; on V2 it\n  always can.\n- **Lifecycle:** V2 has no `close_agent`. Finished children are\n  evicted automatically when slots are needed; leaving them unclosed\n  costs nothing. Only V1 sessions have `close_agent` — there, close\n  reviewers when their review returns, and close each implementer\n  after its task's review passes.\n- **Model names:** never copy a model name from a skill, table, or old\n  session into `spawn_agent` without checking it against your current\n  spawn allowlist — V2 accepts only V2-capable presets and hard-errors\n  on the rest.\n\n## Waiting on children\n\n`wait_agent` is an event subscription, not a poll: a long wait wakes\nthe moment a child produces mailbox activity, with the same latency as\na short one. Short-timeout polling buys nothing and costs a tool call —\nand a context rebill — per poll. In measured sessions, roughly\ntwo-thirds of all wait calls were short polls that timed out.\n\n- While you still have local work, do not wait at all. A completed\n  child's final answer is pushed into your mailbox and arrives with\n  your next turn.\n- When you are genuinely idle with children outstanding, wait in\n  bounded stretches: `wait_agent` with `timeout_ms` 300000-600000\n  (5-10 minutes). After each stretch — wake or timeout — post one\n  status line, run `list_agents`, and chase any child that finished\n  without reporting. Never stack polls shorter than five minutes; the\n  event subscription wakes a bounded stretch just as fast as a short\n  one.\n- Completion mail cannot wake an idle controller (it is delivered\n  without triggering a turn); covering that idle window is\n  `wait_agent`'s only job. A stretch that times out with no activity\n  is your cue to reconcile, not to shorten the next stretch.\n\n## Model routing on spawns\n\nEvery `spawn_agent` you issue — including when you are yourself a\nspawned child running a fan-out — sets `model` AND `reasoning_effort`\nexplicitly, per the Model Selection rules of the skill you are\nexecuting. Setting `model` alone is a trap: the child's effort\nsilently resets to that model's default, not to yours.\n\nAsk your human partner to add a machine-level backstop to\n`~/.codex/config.toml` so any spawn that slips through still routes to\na deliberate tier instead of silently inheriting the session's most\nexpensive model:\n\n```toml\n[agents]\ndefault_subagent_model = \"<a mid-tier model from your spawn allowlist>\"\ndefault_subagent_reasoning_effort = \"medium\"\n```\n\n## Environment Detection\n\nSkills that create worktrees or finish branches should detect their\nenvironment with read-only git commands before proceeding:\n\n```bash\nGIT_DIR=$(cd \"$(git rev-parse --git-dir)\" 2>/dev/null && pwd -P)\nGIT_COMMON=$(cd \"$(git rev-parse --git-common-dir)\" 2>/dev/null && pwd -P)\nBRANCH=$(git branch --show-current)\n```\n\n- `GIT_DIR != GIT_COMMON` → already in a linked worktree (skip creation)\n- `BRANCH` empty → detached HEAD (cannot branch/push/PR from sandbox)\n\nSee `using-git-worktrees` Step 0 and `finishing-a-development-branch`\nStep 1 for how each skill uses these signals.\n\n## Codex App Finishing\n\nWhen the sandbox blocks branch/push operations (detached HEAD in an\nexternally managed worktree), the agent commits all work and informs\nthe user to use the App's native controls:\n\n- **\"Create branch\"** — names the branch, then commit/push/PR via App UI\n- **\"Hand off to local\"** — transfers work to the user's local checkout\n\nThe agent can still run tests, stage files, and output suggested branch\nnames, commit messages, and PR descriptions for the user to copy.\n"}}
+{"status":"fulfilled","value":{"chunk_id":"c98b06","wall_time_seconds":0.511725542,"exit_code":0,"original_token_count":92,"output":"src/com/happanetwork/study/chapter2/work2_1_20261008141530.java\nsrc/com/happanetwork/study/HelloWorld.java\nsrc/com/happanetwork/study/chapter1/work202610081358.java\nAGENTS.md\norigin\thttps://github.com/OyamaMeek/java-labs.git (fetch)\norigin\thttps://github.com/OyamaMeek/java-labs.git (push)\n* main c03a758 [origin/main] add:求圆的面积\njavac 27\n2026-10-08 15:34\n"}}
+
+## tool · 2026-10-08T07:35:05Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"93b99a","wall_time_seconds":0.000007458,"exit_code":0,"original_token_count":996,"output":"package com.happanetwork.study.chapter2;\n\npublic class work2_1_20261008141530 {\n    public static void main(String[] args) {\n        double r=8;\n        double area;\n        area=r*r*3.14;\n        System.out.println(area);\n    }\n}\n---\nname: verification-before-completion\ndescription: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always\n---\n\n# Verification Before Completion\n\n## Overview\n\n**Core principle:** Evidence before claims, always.\n\n**Violating the letter of this rule is violating the spirit of this rule.**\n\n## The Iron Law\n\n```\nNO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE\n```\n\nIf you haven't run the verification command in this message, you cannot claim it passes.\n\n## The Gate Function\n\n```\nBEFORE claiming any status or expressing satisfaction:\n\n1. IDENTIFY: What command proves this claim?\n2. RUN: Execute the FULL command (fresh, complete)\n3. READ: Full output, check exit code, count failures\n4. VERIFY: Does output confirm the claim?\n   - If NO: State actual status with evidence\n   - If YES: State claim WITH evidence\n5. ONLY THEN: Make the claim\n\nSkip any step = lying, not verifying\n```\n\n## Common Failures\n\n| Claim | Requires | Not Sufficient |\n|-------|----------|----------------|\n| Tests pass | Test command output: 0 failures | Previous run, \"should pass\" |\n| Linter clean | Linter output: 0 errors | Partial check, extrapolation |\n| Build succeeds | Build command: exit 0 | Linter passing, logs look good |\n| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |\n| Regression test works | Red-green cycle verified | Test passes once |\n| Agent completed | VCS diff shows changes | Agent reports \"success\" |\n| Requirements met | Line-by-line checklist | Tests passing |\n\n## Red Flags - STOP\n\n- Using \"should\", \"probably\", \"seems to\"\n- Expressing satisfaction before verification (\"Great!\", \"Perfect!\", \"Done!\", etc.)\n- About to commit/push/PR without verification\n- Trusting agent success reports\n- Relying on partial verification\n- Thinking \"just this once\"\n- Tired and wanting work over\n- **ANY wording implying success without having run verification**\n\n## Rationalization Prevention\n\n| Excuse | Reality |\n|--------|---------|\n| \"Should work now\" | RUN the verification |\n| \"I'm confident\" | Confidence ≠ evidence |\n| \"Just this once\" | No exceptions |\n| \"Linter passed\" | Linter ≠ compiler |\n| \"Agent said success\" | Verify independently |\n| \"I'm tired\" | Exhaustion ≠ excuse |\n| \"Partial check is enough\" | Partial proves nothing |\n| \"Different words so rule doesn't apply\" | Spirit over letter |\n\n## Key Patterns\n\n**Tests:**\n```\n✅ [Run test command] [See: 34/34 pass] \"All tests pass\"\n❌ \"Should pass now\" / \"Looks correct\"\n```\n\n**Regression tests (TDD Red-Green):**\n```\n✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)\n❌ \"I've written a regression test\" (without red-green verification)\n```\n\n**Build:**\n```\n✅ [Run build] [See: exit 0] \"Build passes\"\n❌ \"Linter passed\" (linter doesn't check compilation)\n```\n\n**Requirements:**\n```\n✅ Re-read plan → Create checklist → Verify each → Report gaps or completion\n❌ \"Tests pass, phase complete\"\n```\n\n**Agent delegation:**\n```\n✅ Agent reports success → Check VCS diff → Verify changes → Report actual state\n❌ Trust agent report\n```\n\n## When To Apply\n\n**ALWAYS before:**\n- ANY variation of success/completion claims\n- ANY expression of satisfaction\n- ANY positive statement about work state\n- Committing, PR creation, task completion\n- Moving to next task\n- Delegating to agents\n\n**Rule applies to:**\n- Exact phrases\n- Paraphrases and synonyms\n- Implications of success\n- ANY communication suggesting completion/correctness\n./src/com/happanetwork/study/chapter2/work2_1_20261008141530.java:3:public class work2_1_20261008141530 {\n"}
+
+## tool · 2026-10-08T07:35:26Z
+
+
+Script completed
+Wall time 1.4 seconds
+Output:
+
+{}
+{"chunk_id":"987774","wall_time_seconds":0.952349083,"exit_code":0,"original_token_count":524,"output":"package com.happanetwork.study.chapter2;\n\npublic class work2_1_20261008141530 {\n    public static void main(String[] args) {\n        // 设置圆的半径为 8。\n        double r=8;\n        // 声明用于保存圆面积的变量。\n        double area;\n        // 根据公式 S = πr² 计算面积，π 取近似值 3.14。\n        area=r*r*3.14;\n        // 将计算得到的圆面积输出到控制台。\n        System.out.println(area);\n    }\n}\n# 当前工具\n\n- 代理：Codex；采用 Ponytail 最小改动原则及完成前验证流程。\n- 工具：文件编辑工具、Git、JDK 27。\n# 当前任务\n\n- 为 chapter2 的圆面积练习添加中文注释，解释变量、计算公式和控制台输出。\n- 保留现有代码行为；检查文件差异并运行 Java 源文件。\n# 当前进度\n\n- 已读取目标文件并检查引用，没有需要同步修改的调用方。\n- 已添加中文注释并初始化项目协作记录。\n- 待执行源文件、检查差异、记录验证结果并提交推送。\n# 完成标准\n\n- 目标 Java 文件只增加中文注释，计算逻辑保持一致。\n- `java src/com/happanetwork/study/chapter2/work2_1_20261008141530.java` 成功执行，输出 `200.96`。\n- `git diff --check` 通过。\n# 注意事项\n\n- 暂无用户纠正事项。\n200.96\ndiff --git a/src/com/happanetwork/study/chapter2/work2_1_20261008141530.java b/src/com/happanetwork/study/chapter2/work2_1_20261008141530.java\nindex efcdf64..7d2810e 100644\n--- a/src/com/happanetwork/study/chapter2/work2_1_20261008141530.java\n+++ b/src/com/happanetwork/study/chapter2/work2_1_20261008141530.java\n@@ -2,9 +2,13 @@ package com.happanetwork.study.chapter2;\n \n public class work2_1_20261008141530 {\n     public static void main(String[] args) {\n+        // 设置圆的半径为 8。\n         double r=8;\n+        // 声明用于保存圆面积的变量。\n         double area;\n+        // 根据公式 S = πr² 计算面积，π 取近似值 3.14。\n         area=r*r*3.14;\n+        // 将计算得到的圆面积输出到控制台。\n         System.out.println(area);\n     }\n }\n"}
+
+## assistant · 2026-10-08T07:35:33Z
+
+妹妹，已添加四处中文注释。源文件运行成功，输出 `200.96`；差异检查通过。接下来按项目要求记录改动并提交推送。
+
+## tool · 2026-10-08T07:35:43Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+{"chunk_id":"0cc4e2","wall_time_seconds":0,"exit_code":128,"original_token_count":322,"output":"# 当前进度\n\n- 已读取目标文件并检查引用，没有需要同步修改的调用方。\n- 已添加中文注释并初始化项目协作记录。\n- Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n- 待提交并推送注释及协作记录。\n# 开发记录\n\n## [2026-10-08 15:34] 圆面积练习添加中文注释\n\n- **需求/问题描述**：\n  > 为 work2_1_20261008141530.java 写注释。\n\n- **实际实现的功能与改动**：\n  - 为半径、面积变量、圆面积公式和控制台输出添加中文注释。\n  - 初始化项目要求的 memory 协作记录。\n  - 验证：Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n\n- **涉及文件**：\n  - `src/com/happanetwork/study/chapter2/work2_1_20261008141530.java`\n  - `memory/agents.md`\n  - `memory/plan.md`\n  - `memory/progress.md`\n  - `memory/verify.md`\n  - `memory/gotchas.md`\n  - `docs/CHANGELOG.md`\n\n- **Git 提交**：待提交。\n\n---\n M src/com/happanetwork/study/chapter2/work2_1_20261008141530.java\n?? docs/\n?? memory/\nfatal: Unable to create '/Users/oyamahappa/Documents/GitHub/labs/java-labs/.git/index.lock': Operation not permitted\nfatal: Unable to create '/Users/oyamahappa/Documents/GitHub/labs/java-labs/.git/index.lock': Operation not permitted\n"}
+
+## tool · 2026-10-08T07:35:56Z
+
+
+Script completed
+Wall time 7.5 seconds
+Output:
+
+{"chunk_id":"5d1013","wall_time_seconds":0.000007291,"exit_code":0,"original_token_count":909,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\nnew file mode 100644\nindex 0000000..73bd1c9\n--- /dev/null\n+++ b/docs/CHANGELOG.md\n@@ -0,0 +1,24 @@\n+# 开发记录\n+\n+## [2026-10-08 15:34] 圆面积练习添加中文注释\n+\n+- **需求/问题描述**：\n+  > 为 work2_1_20261008141530.java 写注释。\n+\n+- **实际实现的功能与改动**：\n+  - 为半径、面积变量、圆面积公式和控制台输出添加中文注释。\n+  - 初始化项目要求的 memory 协作记录。\n+  - 验证：Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n+\n+- **涉及文件**：\n+  - `src/com/happanetwork/study/chapter2/work2_1_20261008141530.java`\n+  - `memory/agents.md`\n+  - `memory/plan.md`\n+  - `memory/progress.md`\n+  - `memory/verify.md`\n+  - `memory/gotchas.md`\n+  - `docs/CHANGELOG.md`\n+\n+- **Git 提交**：待提交。\n+\n+---\ndiff --git a/memory/agents.md b/memory/agents.md\nnew file mode 100644\nindex 0000000..d806269\n--- /dev/null\n+++ b/memory/agents.md\n@@ -0,0 +1,4 @@\n+# 当前工具\n+\n+- 代理：Codex；采用 Ponytail 最小改动原则及完成前验证流程。\n+- 工具：文件编辑工具、Git、JDK 27。\ndiff --git a/memory/gotchas.md b/memory/gotchas.md\nnew file mode 100644\nindex 0000000..dc1355a\n--- /dev/null\n+++ b/memory/gotchas.md\n@@ -0,0 +1,3 @@\n+# 注意事项\n+\n+- 暂无用户纠正事项。\ndiff --git a/memory/plan.md b/memory/plan.md\nnew file mode 100644\nindex 0000000..57eea27\n--- /dev/null\n+++ b/memory/plan.md\n@@ -0,0 +1,4 @@\n+# 当前任务\n+\n+- 为 chapter2 的圆面积练习添加中文注释，解释变量、计算公式和控制台输出。\n+- 保留现有代码行为；检查文件差异并运行 Java 源文件。\ndiff --git a/memory/progress.md b/memory/progress.md\nnew file mode 100644\nindex 0000000..3891d08\n--- /dev/null\n+++ b/memory/progress.md\n@@ -0,0 +1,6 @@\n+# 当前进度\n+\n+- 已读取目标文件并检查引用，没有需要同步修改的调用方。\n+- 已添加中文注释并初始化项目协作记录。\n+- Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n+- 待提交并推送注释及协作记录。\ndiff --git a/memory/verify.md b/memory/verify.md\nnew file mode 100644\nindex 0000000..1131a36\n--- /dev/null\n+++ b/memory/verify.md\n@@ -0,0 +1,5 @@\n+# 完成标准\n+\n+- 目标 Java 文件只增加中文注释，计算逻辑保持一致。\n+- `java src/com/happanetwork/study/chapter2/work2_1_20261008141530.java` 成功执行，输出 `200.96`。\n+- `git diff --check` 通过。\ndiff --git a/src/com/happanetwork/study/chapter2/work2_1_20261008141530.java b/src/com/happanetwork/study/chapter2/work2_1_20261008141530.java\nindex efcdf64..7d2810e 100644\n--- a/src/com/happanetwork/study/chapter2/work2_1_20261008141530.java\n+++ b/src/com/happanetwork/study/chapter2/work2_1_20261008141530.java\n@@ -2,9 +2,13 @@ package com.happanetwork.study.chapter2;\n \n public class work2_1_20261008141530 {\n     public static void main(String[] args) {\n+        // 设置圆的半径为 8。\n         double r=8;\n+        // 声明用于保存圆面积的变量。\n         double area;\n+        // 根据公式 S = πr² 计算面积，π 取近似值 3.14。\n         area=r*r*3.14;\n+        // 将计算得到的圆面积输出到控制台。\n         System.out.println(area);\n     }\n }\n[main e1e666b] docs: explain circle area exercise with Chinese comments\n 7 files changed, 50 insertions(+)\n create mode 100644 docs/CHANGELOG.md\n create mode 100644 memory/agents.md\n create mode 100644 memory/gotchas.md\n create mode 100644 memory/plan.md\n create mode 100644 memory/progress.md\n create mode 100644 memory/verify.md\n"}
+
+## tool · 2026-10-08T07:36:11Z
+
+
+Script completed
+Wall time 4.8 seconds
+Output:
+
+{"chunk_id":"912114","wall_time_seconds":0.000007542,"exit_code":0,"original_token_count":252,"output":"# 开发记录\n\n## [2026-10-08 15:34] 圆面积练习添加中文注释\n\n- **需求/问题描述**：\n  > 为 work2_1_20261008141530.java 写注释。\n\n- **实际实现的功能与改动**：\n  - 为半径、面积变量、圆面积公式和控制台输出添加中文注释。\n  - 初始化项目要求的 memory 协作记录。\n  - 验证：Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n\n- **涉及文件**：\n  - `src/com/happanetwork/study/chapter2/work2_1_20261008141530.java`\n  - `memory/agents.md`\n  - `memory/plan.md`\n  - `memory/progress.md`\n  - `memory/verify.md`\n  - `memory/gotchas.md`\n  - `docs/CHANGELOG.md`\n\n- **Git 提交**：待提交。\n\n---\n# 当前进度\n\n- 已读取目标文件并检查引用，没有需要同步修改的调用方。\n- 已添加中文注释并初始化项目协作记录。\n- Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n- 待提交并推送注释及协作记录。\ne1e666b82fa79d3c4c2829fed44bb1b6d3f16771\n"}
+{}
+{"chunk_id":"e8713c","wall_time_seconds":0.000006417,"exit_code":0,"original_token_count":263,"output":"# 开发记录\n\n## [2026-10-08 15:34] 圆面积练习添加中文注释\n\n- **需求/问题描述**：\n  > 为 work2_1_20261008141530.java 写注释。\n\n- **实际实现的功能与改动**：\n  - 为半径、面积变量、圆面积公式和控制台输出添加中文注释。\n  - 初始化项目要求的 memory 协作记录。\n  - 验证：Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n\n- **涉及文件**：\n  - `src/com/happanetwork/study/chapter2/work2_1_20261008141530.java`\n  - `memory/agents.md`\n  - `memory/plan.md`\n  - `memory/progress.md`\n  - `memory/verify.md`\n  - `memory/gotchas.md`\n  - `docs/CHANGELOG.md`\n\n- **Git 提交**：`e1e666b docs: explain circle area exercise with Chinese comments`。\n\n---\n# 当前进度\n\n- 已读取目标文件并检查引用，没有需要同步修改的调用方。\n- 已添加中文注释并初始化项目协作记录。\n- Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n- 注释及协作记录已提交：`e1e666b`；待推送当前分支。\n"}
+{"chunk_id":"860ff8","wall_time_seconds":1.00178175,"session_id":73452,"original_token_count":232,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\nindex 73bd1c9..0a633fc 100644\n--- a/docs/CHANGELOG.md\n+++ b/docs/CHANGELOG.md\n@@ -19,6 +19,6 @@\n   - `memory/gotchas.md`\n   - `docs/CHANGELOG.md`\n \n-- **Git 提交**：待提交。\n+- **Git 提交**：`e1e666b docs: explain circle area exercise with Chinese comments`。\n \n ---\ndiff --git a/memory/progress.md b/memory/progress.md\nindex 3891d08..eb4775c 100644\n--- a/memory/progress.md\n+++ b/memory/progress.md\n@@ -3,4 +3,4 @@\n - 已读取目标文件并检查引用，没有需要同步修改的调用方。\n - 已添加中文注释并初始化项目协作记录。\n - Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n-- 待提交并推送注释及协作记录。\n+- 注释及协作记录已提交：`e1e666b`；待推送当前分支。\n[main 639fb6e] docs: record verified comment update commit\n 2 files changed, 2 insertions(+), 2 deletions(-)\n"}
+
+## tool · 2026-10-08T07:36:20Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"5dc794","wall_time_seconds":0.000008458,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/java-labs.git\n   c03a758..639fb6e  main -> main\n"}
+
+## tool · 2026-10-08T07:36:35Z
+
+
+Script completed
+Wall time 4.6 seconds
+Output:
+
+{"chunk_id":"7a06f0","wall_time_seconds":0.000009333,"exit_code":0,"original_token_count":76,"output":"# 当前进度\n\n- 已读取目标文件并检查引用，没有需要同步修改的调用方。\n- 已添加中文注释并初始化项目协作记录。\n- Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n- 注释及协作记录已提交：`e1e666b`；待推送当前分支。\n"}
+{}
+{"chunk_id":"c11193","wall_time_seconds":0.000005833,"exit_code":0,"original_token_count":84,"output":"# 当前进度\n\n- 已读取目标文件并检查引用，没有需要同步修改的调用方。\n- 已添加中文注释并初始化项目协作记录。\n- Java 源文件执行成功，输出 `200.96`；`git diff --check` 通过。\n- 注释提交 `e1e666b` 与提交哈希记录 `639fb6e` 已推送到 `origin/main`，任务完成。\n"}
+{"chunk_id":"030e2b","wall_time_seconds":1.00230925,"session_id":89602,"original_token_count":25,"output":"[main 37dbbfe] docs: record completed comment task\n 1 file changed, 1 insertion(+), 1 deletion(-)\n"}
+
+## tool · 2026-10-08T07:36:38Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"854157","wall_time_seconds":0.000012709,"exit_code":0,"original_token_count":31,"output":"To https://github.com/OyamaMeek/java-labs.git\n   639fb6e..37dbbfe  main -> main\n37dbbfe docs: record completed comment task\n"}
+
+## assistant · 2026-10-08T07:36:44Z
+
+妹妹，已在 [Java 文件](/Users/oyamahappa/Documents/GitHub/labs/java-labs/src/com/happanetwork/study/chapter2/work2_1_20261008141530.java) 中添加中文注释，解释变量、面积公式和输出。
+
+运行成功，结果为 `200.96`；已提交并推送。
+
+仅添加注释，未改动计算逻辑；未新增测试。

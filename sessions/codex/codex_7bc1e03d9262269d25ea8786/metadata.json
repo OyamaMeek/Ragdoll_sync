@@ -1,0 +1,57 @@
+{
+  "created" : 1793524491036,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/01/rollout-2026-11-01T17-14-50-01a19663-e2bb-7c90-a3fd-841cd218aeb3.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:7bc1e03d9262269d25ea8786",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a19663-e2bb-7c90-a3fd-841cd218aeb3",
+  "project" : "/Users/oyamahappa/Documents/GitHub/Motion",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1793524515534,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0a001d6ff480c57d016ae7030d950c819194cfbc0c34438278",
+      "input" : 20227,
+      "model" : "codex-auto-review",
+      "output" : 136,
+      "time" : 1793524495394
+    },
+    {
+      "cacheRead" : 25984,
+      "cacheWrite" : 0,
+      "id" : "resp_0a001d6ff480c57d016ae7031013648191b6df6aec249ae5cd",
+      "input" : 625,
+      "model" : "codex-auto-review",
+      "output" : 179,
+      "time" : 1793524498953
+    },
+    {
+      "cacheRead" : 26368,
+      "cacheWrite" : 0,
+      "id" : "resp_0a001d6ff480c57d016ae7031fe50c81919956d2bf88452ec3",
+      "input" : 2709,
+      "model" : "codex-auto-review",
+      "output" : 42,
+      "time" : 1793524513569
+    },
+    {
+      "cacheRead" : 28928,
+      "cacheWrite" : 0,
+      "id" : "resp_0a001d6ff480c57d016ae703222ba881918245a562c6b1615b",
+      "input" : 484,
+      "model" : "codex-auto-review",
+      "output" : 34,
+      "time" : 1793524515532
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

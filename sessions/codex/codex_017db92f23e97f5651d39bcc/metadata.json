@@ -1,0 +1,75 @@
+{
+  "created" : 1793540613373,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/01/rollout-2026-11-01T21-43-33-01a19759-e418-7972-a244-0800502f7777.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:017db92f23e97f5651d39bcc",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a19759-e418-7972-a244-0800502f7777",
+  "project" : "/Users/oyamahappa/Documents/GitHub/Motion",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1793540938570,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0c4dbc27ff050ed0016ae742080cf08191ab14430d7dbfcc88",
+      "input" : 23184,
+      "model" : "codex-auto-review",
+      "output" : 225,
+      "time" : 1793540619742
+    },
+    {
+      "cacheRead" : 28928,
+      "cacheWrite" : 0,
+      "id" : "resp_0c4dbc27ff050ed0016ae742116d588191b42d38d07a095718",
+      "input" : 2102,
+      "model" : "codex-auto-review",
+      "output" : 305,
+      "time" : 1793540628482
+    },
+    {
+      "cacheRead" : 30848,
+      "cacheWrite" : 0,
+      "id" : "resp_0c4dbc27ff050ed0016ae7423d6f7c8191b15e03d3c710109c",
+      "input" : 4401,
+      "model" : "codex-auto-review",
+      "output" : 213,
+      "time" : 1793540672016
+    },
+    {
+      "cacheRead" : 35072,
+      "cacheWrite" : 0,
+      "id" : "resp_0c4dbc27ff050ed0016ae743246c448191b675ef8bcbbbdefd",
+      "input" : 9764,
+      "model" : "codex-auto-review",
+      "output" : 119,
+      "time" : 1793540902257
+    },
+    {
+      "cacheRead" : 44672,
+      "cacheWrite" : 0,
+      "id" : "resp_0c4dbc27ff050ed0016ae7432bda3c81919163947650e83917",
+      "input" : 1386,
+      "model" : "codex-auto-review",
+      "output" : 97,
+      "time" : 1793540909798
+    },
+    {
+      "cacheRead" : 45824,
+      "cacheWrite" : 0,
+      "id" : "resp_0c4dbc27ff050ed0016ae74347538881918015eab0f22ae800",
+      "input" : 1362,
+      "model" : "codex-auto-review",
+      "output" : 128,
+      "time" : 1793540938565
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "created" : 1794424759175,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/12/rollout-2026-11-12T03-19-19-01a1cc0c-e382-7003-818e-ba178f9b6b9a.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:90dfe68901ee666f08721ea6",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1cc0c-e382-7003-818e-ba178f9b6b9a",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794424765542,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_076566d662be04c7016af4bfb99ec087d083723741f80d2bd3",
+      "input" : 29013,
+      "model" : "codex-auto-review",
+      "output" : 198,
+      "time" : 1794424765539
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

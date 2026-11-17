@@ -1,0 +1,185 @@
+{
+  "created" : 1791197438414,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Agent-DSH--/f23f8324-8253-4710-ab37-d065073fa4b1/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:3f4268e0cc370305efa54e1c",
+  "messages" : [
+
+  ],
+  "nativeID" : "f23f8324-8253-4710-ab37-d065073fa4b1",
+  "parentID" : "session-0de88cee-855e-47e3-a7d8-5cedfd0973a3",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "deepseek-official",
+  "source" : "dsh",
+  "title" : "工作目录：/Users/oyamahappa/Documen",
+  "updated" : 1791197506614,
+  "usage" : [
+    {
+      "cacheRead" : 7168,
+      "cacheWrite" : 0,
+      "id" : "16",
+      "input" : 6316,
+      "model" : "deepseek-flash",
+      "output" : 485,
+      "time" : 1791197442121
+    },
+    {
+      "cacheRead" : 13952,
+      "cacheWrite" : 0,
+      "id" : "24",
+      "input" : 294,
+      "model" : "deepseek-flash",
+      "output" : 1231,
+      "time" : 1791197449939
+    },
+    {
+      "cacheRead" : 15360,
+      "cacheWrite" : 0,
+      "id" : "32",
+      "input" : 522,
+      "model" : "deepseek-flash",
+      "output" : 235,
+      "time" : 1791197452590
+    },
+    {
+      "cacheRead" : 16000,
+      "cacheWrite" : 0,
+      "id" : "42",
+      "input" : 6618,
+      "model" : "deepseek-flash",
+      "output" : 255,
+      "time" : 1791197455856
+    },
+    {
+      "cacheRead" : 22784,
+      "cacheWrite" : 0,
+      "id" : "52",
+      "input" : 8417,
+      "model" : "deepseek-flash",
+      "output" : 220,
+      "time" : 1791197458032
+    },
+    {
+      "cacheRead" : 31360,
+      "cacheWrite" : 0,
+      "id" : "62",
+      "input" : 7776,
+      "model" : "deepseek-flash",
+      "output" : 128,
+      "time" : 1791197459869
+    },
+    {
+      "cacheRead" : 39168,
+      "cacheWrite" : 0,
+      "id" : "70",
+      "input" : 4794,
+      "model" : "deepseek-flash",
+      "output" : 341,
+      "time" : 1791197463034
+    },
+    {
+      "cacheRead" : 44288,
+      "cacheWrite" : 0,
+      "id" : "84",
+      "input" : 6333,
+      "model" : "deepseek-flash",
+      "output" : 346,
+      "time" : 1791197466395
+    },
+    {
+      "cacheRead" : 50944,
+      "cacheWrite" : 0,
+      "id" : "92",
+      "input" : 5213,
+      "model" : "deepseek-flash",
+      "output" : 138,
+      "time" : 1791197468857
+    },
+    {
+      "cacheRead" : 56192,
+      "cacheWrite" : 0,
+      "id" : "100",
+      "input" : 2618,
+      "model" : "deepseek-flash",
+      "output" : 244,
+      "time" : 1791197471441
+    },
+    {
+      "cacheRead" : 59008,
+      "cacheWrite" : 0,
+      "id" : "110",
+      "input" : 1147,
+      "model" : "deepseek-flash",
+      "output" : 173,
+      "time" : 1791197473555
+    },
+    {
+      "cacheRead" : 60288,
+      "cacheWrite" : 0,
+      "id" : "118",
+      "input" : 1845,
+      "model" : "deepseek-flash",
+      "output" : 164,
+      "time" : 1791197475768
+    },
+    {
+      "cacheRead" : 62208,
+      "cacheWrite" : 0,
+      "id" : "126",
+      "input" : 1868,
+      "model" : "deepseek-flash",
+      "output" : 157,
+      "time" : 1791197478379
+    },
+    {
+      "cacheRead" : 64128,
+      "cacheWrite" : 0,
+      "id" : "134",
+      "input" : 2017,
+      "model" : "deepseek-flash",
+      "output" : 275,
+      "time" : 1791197481014
+    },
+    {
+      "cacheRead" : 66304,
+      "cacheWrite" : 0,
+      "id" : "144",
+      "input" : 1894,
+      "model" : "deepseek-flash",
+      "output" : 226,
+      "time" : 1791197483647
+    },
+    {
+      "cacheRead" : 68352,
+      "cacheWrite" : 0,
+      "id" : "154",
+      "input" : 1795,
+      "model" : "deepseek-flash",
+      "output" : 249,
+      "time" : 1791197486453
+    },
+    {
+      "cacheRead" : 70272,
+      "cacheWrite" : 0,
+      "id" : "164",
+      "input" : 1060,
+      "model" : "deepseek-flash",
+      "output" : 476,
+      "time" : 1791197490570
+    },
+    {
+      "cacheRead" : 71808,
+      "cacheWrite" : 0,
+      "id" : "172",
+      "input" : 196,
+      "model" : "deepseek-flash",
+      "output" : 115,
+      "time" : 1791197493379
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

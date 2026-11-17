@@ -1,0 +1,48 @@
+{
+  "created" : 1792035107323,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/10/15/rollout-2026-10-15T11-31-47-01a13d9d-b183-7973-aa36-19ff26a73a8f.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:4571f2b4a871247598143ad1",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a13d9d-b183-7973-aa36-19ff26a73a8f",
+  "project" : "/Users/oyamahappa/Documents/GitHub/local-question-bank",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1792035173785,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_066cc7bcb1175307016ad0492595808197ab650865881d3700",
+      "input" : 22651,
+      "model" : "codex-auto-review",
+      "output" : 155,
+      "time" : 1792035111164
+    },
+    {
+      "cacheRead" : 28416,
+      "cacheWrite" : 0,
+      "id" : "resp_066cc7bcb1175307016ad04951eef48197a898c33f096e6430",
+      "input" : 5456,
+      "model" : "codex-auto-review",
+      "output" : 251,
+      "time" : 1792035156626
+    },
+    {
+      "cacheRead" : 33536,
+      "cacheWrite" : 0,
+      "id" : "resp_066cc7bcb1175307016ad049640f44819790bfe23c98928ef6",
+      "input" : 2309,
+      "model" : "codex-auto-review",
+      "output" : 126,
+      "time" : 1792035173777
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

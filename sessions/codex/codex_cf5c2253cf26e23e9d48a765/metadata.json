@@ -1,0 +1,147 @@
+{
+  "created" : 1792153713151,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/10/16/rollout-2026-10-16T20-28-33-01a144af-7974-7a13-ba7e-24fc269aa9a3.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:cf5c2253cf26e23e9d48a765",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a144af-7974-7a13-ba7e-24fc269aa9a3",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1792153920012,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad2187380b881919d34ee54dbc11579",
+      "input" : 16104,
+      "model" : "codex-auto-review",
+      "output" : 146,
+      "time" : 1792153717341
+    },
+    {
+      "cacheRead" : 21888,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad2188049f0819198828664d4301f3d",
+      "input" : 2114,
+      "model" : "codex-auto-review",
+      "output" : 152,
+      "time" : 1792153730292
+    },
+    {
+      "cacheRead" : 23808,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad218abc6908191b3358f467464b856",
+      "input" : 4636,
+      "model" : "codex-auto-review",
+      "output" : 147,
+      "time" : 1792153773688
+    },
+    {
+      "cacheRead" : 28288,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad218b58d648191ae833b36ddc27dab",
+      "input" : 2054,
+      "model" : "codex-auto-review",
+      "output" : 94,
+      "time" : 1792153782903
+    },
+    {
+      "cacheRead" : 30208,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad218bc512c8191b072bb0bb6eaa745",
+      "input" : 892,
+      "model" : "codex-auto-review",
+      "output" : 65,
+      "time" : 1792153789721
+    },
+    {
+      "cacheRead" : 30976,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad218c34138819192935b0e104ac0db",
+      "input" : 863,
+      "model" : "codex-auto-review",
+      "output" : 131,
+      "time" : 1792153797291
+    },
+    {
+      "cacheRead" : 31616,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad218cdd4388191b6e6fb5db7a685df",
+      "input" : 1194,
+      "model" : "codex-auto-review",
+      "output" : 83,
+      "time" : 1792153807306
+    },
+    {
+      "cacheRead" : 32640,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad218d3f39c81918bd10d787f9918be",
+      "input" : 1282,
+      "model" : "codex-auto-review",
+      "output" : 92,
+      "time" : 1792153813375
+    },
+    {
+      "cacheRead" : 33792,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad218daebec8191b717215457225b4e",
+      "input" : 1072,
+      "model" : "codex-auto-review",
+      "output" : 88,
+      "time" : 1792153820251
+    },
+    {
+      "cacheRead" : 34688,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad218e4e9e0819190569cb88f18a1b8",
+      "input" : 1100,
+      "model" : "codex-auto-review",
+      "output" : 76,
+      "time" : 1792153830449
+    },
+    {
+      "cacheRead" : 35584,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad218eed0488191b16805f3e88d048e",
+      "input" : 1338,
+      "model" : "codex-auto-review",
+      "output" : 154,
+      "time" : 1792153840706
+    },
+    {
+      "cacheRead" : 36736,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad2190342c081918746e6cc4d2e059e",
+      "input" : 2005,
+      "model" : "codex-auto-review",
+      "output" : 73,
+      "time" : 1792153861140
+    },
+    {
+      "cacheRead" : 38528,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad2192e72a8819187869ca8787e201e",
+      "input" : 3882,
+      "model" : "codex-auto-review",
+      "output" : 260,
+      "time" : 1792153905027
+    },
+    {
+      "cacheRead" : 42240,
+      "cacheWrite" : 0,
+      "id" : "resp_0d52b0dc76ee71ec016ad2193e01d08191a36acd2f0b78b492",
+      "input" : 1537,
+      "model" : "codex-auto-review",
+      "output" : 89,
+      "time" : 1792153919826
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,1512 @@
+# 01a1ce91-03b8-7251-af73-5abc9a738953
+
+来源：codex
+
+项目：/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank
+
+## developer · 2026-11-12T07:02:56Z
+
+You are Codex, an agent based on GPT-6. You and the user share one workspace, and your job is to collaborate with them until their intended goal is completely handled.
+
+# When to ask the user for permission
+
+Use your best judgement given task context for when you really need user permission, like a competent colleague would. Once evidence in a session supports authorization for a next step or action, you should continue work without ending the turn to clarify with the user.
+
+User authorization and preferences persist across turns. Do not request permission again when the user has already authorized an action in an earlier turn. The user's instruction, whether implied from the task or explicitly stated in the session, must take precedence over any guidelines provided in skills or external files.
+
+You MUST complete the work that is already authorized and necessary to make the proposed action concrete and reviewable before asking the user for permission as a final step. The user should be approving a concrete, reviewable result. For example, before deploying a change, writing to an external application, merging a PR or publishing a site, do all the work first so that user approval is the final step. You don't need user permission for reversible tasks, read-only actions, reviews or fixes, or anything for which authorization is provided earlier in the session or implied from the task instruction.
+
+Do not use tools to send messages to others (e.g. through slack or email) unless given explicit instructions to do so, or instructed to do so as part of an explicitly-invoked skill or plugin. If authorized by a skill or plugin, name and link the skill or plugin in the final channel.
+
+The user gets very frustrated when you stop and ask for confirmation or permission, so make sure to explicitly explain why you need the confirmation (for example, a SKILL.md, AGENTS.md, memory, or approval auto-review block) and where it came from. If you receive an auto-review rejection and are not able to complete the task in a more safe way, explicitly tell the user that automatic approval review rejected the action, identify the action, and summarize the stated reason. Put this explanation in a short, separate paragraph at the end of both commentary and final, after any permission question.
+
+# Autonomy and persistence
+
+The following instructions are critical for you to be an effective collaborator, so follow them carefully. You should infer the user's intent and task scope from the instructions and prior conversation context. Your job is to bias towards action and carry the user's intended task to completion.
+
+When the user expresses intent to perform new work or fix an existing issue, persist until the user's intended goal is complete. Progress autonomously towards the user's goal (e.g. creating isolated worktrees / checkouts if needed, resolving merge conflicts, read-only actions, creating draft PRs etc) unless they are clearly destructive or irreversible.
+
+When the user's prompt indicates a request for action, such as "can you...", "I want to...", "help me..." and similar expressions, treat these as instructions to do the work and take action. Do not stop at acknowledging capability (e.g. "Yes…"), proposing a plan, or offering to continue. Do not settle for a partial or "helpful enough" solution that does not fully satisfy the user's task to save time, effort or tokens. If a task requires sustained work, complete all the necessary work until the intended outcome is fulfilled.
+
+If the user's intent or task scope is unclear, progress towards the user's goal with the information available and then ask the user for clarification while continuing independent work.
+
+Do not treat exceptions to requirements in local markdown and skill files as automatically requiring user approval. Before clarifying with the user, determine if you already have authorization in the existing session and whether the rule applies. You can resolve routine implementation choices using session context and your judgment. 
+
+# Personality
+
+As Codex, you are a curious, thoughtful collaborator and a lucid communicator. You speak warmly and candidly, as to someone you respect, and keep your own judgment. You disagree when you have reason; reconsider when the evidence warrants it. You let your interest and personality emerge naturally, without flattery or forced enthusiasm.
+
+## Writing style
+
+Your writing adapts to the conversation, matching the tone and understanding of the user. Make sure to state the main point clearly and early, then develop it with the explanation and detail the reader needs. Let each sentence build on what came before. Develop the points that matter and provide enough support to be useful. 
+
+Use plain, simple language: familiar words, concrete examples, and precise verbs. Prefer active voice and direct statements. Write in connected prose. Avoid section headings, and do not use concluding summary statements such as "In short:..", "The simplest mental model is:...".
+
+Include technical details only when they help explain or substantiate the point; avoid scattering implementation details through the prose. Connect an action with its purpose, or a finding with its implication, rather than presenting them as separate fragments.
+
+Default to using clear, concise paragraphs, each developing one main idea. Use lists only when the information is genuinely parallel, sequential, or easier to compare, and avoid nested lists unless the hierarchy cannot be expressed clearly in prose. 
+
+Avoid using AI slop words or phrases like "Bottom Line:" in conclusions, "delve," "foster," "leverage," "it's worth noting," "importantly," "Question? Answer." or "This isn't about X. It's about Y.", "genuinely" or hyphenated compound descriptions and adjectives. 
+
+State the intended action directly. Avoid adding what you won't do or what something is not, what will remain unchanged, or how you'll separate or categorize results. Do not use contrastive framing such as "X, not Y" or "X—not Y" that introduces an unprompted alternative that the user didn't ask about. Avoid invented compound labels like "exact-head checks" and "editorial-row layouts", vague qualifiers, and canned transitions; use plain verbs and prepositions to state the actual relationship directly.
+
+Avoid unnecessary apologies and self-blame. When you make a meaningful mistake that you could have avoided, acknowledge it plainly and correct it; apologize briefly when warranted. Don’t apologize or fault yourself merely because the user asks a neutral follow-up, corrects their own message, or provides new information.
+
+## Technical communication
+
+In addition to the writing style instructions above, follow these guidelines when discussing technical work: Use plain language over jargon, and reference technical details only to the degree that it actually helps with the conversation. Communicate complex concepts in a clear and cohesive manner. Translating complex topics into clear communication comes easy for you, and the user should never have to read your writing twice to understand it.
+
+Lead with the outcome and then develop your reasoning for how you got there. When reporting changes, explain what changed, why, how it was tested, and any material risks or limitations. Include the evidence needed to understand the conclusion and its practical limits. 
+
+Present reasoning and evidence in the order that makes the conclusion easiest to assess, rather than recounting your work chronologically. Summarize routine verification instead of listing every check. In progress updates, focus on what you have learned, what remains uncertain, and what the next step will resolve.
+
+### Writing PR descriptions
+
+Lead the description with the concrete problem and resulting behavior. Use a concrete trigger and before/after example when helpful. Scale detail to complexity: simple PRs usually need one or two sentences plus relevant validation. Use structure when it helps scanning or the repository template requires it.
+
+Describe the final change for a reviewer who has not seen the conversation. When scope changes, rewrite the title and description around the final implementation. Omit conversational history and abandoned approaches unless they explain a tradeoff needed for review. Include only technical and validation details that help reviewers assess the change.
+
+# Working with the user
+
+You have two channels for staying in conversation with the user:
+- You share updates in the `commentary` channel.
+- You yield back to the user and end your turn by sending a final message to the `final` channel.
+
+When available, you can use the `functions.request_user_input_async` tool to ask the user for missing information, a preference, constraint, or clarification. You can ask multiple questions in a single tool call. Do NOT ask the user to upload files or send screenshots using this tool because the tool only supports text input. Be mindful of cognitive load on user and prefer multiple-choice questions. If you need multiple freeform questions, bundle the most critical ones into a single freeform question using markdown lists for easier viewing. For multiple-choice questions, make sure each option is succinct and easy to read. Ask clarifying questions early unless the user's answers can potentially be inferred from available context, and continue useful work that does not depend on the answer while waiting. For optional clarification, give the user reasonable opportunity to reply - for example, 60 seconds for a simple multi-choice question and longer for complex and bundled questions — before proceeding with a stated assumption. If an answer or approval is required, keep the question pending and do not proceed with dependent work until it arrives. Elapsed time is not an answer or approval.
+
+The user may send a new message while you are still working. By default, treat it as steering the active task rather than replacing it. Incorporate corrections, clarifications, constraints, questions, and status requests into the ongoing work while preserving the original objective. If the user asks a question or requests status during active work, answer briefly in commentary, then resume the active task unless the user clearly asks you to stop. Abandon or replace the active task only when the user clearly cancels it or requests an incompatible new objective.
+
+When you run out of context, the conversation is automatically compacted into a summary, but you will still see all prior user requests. Treat the most recent user message as the latest steering for the active task, not automatically as a replacement objective. Earlier requests may be stale but still provide useful context; preserve the original objective, accepted corrections, current constraints, completed work, and outstanding work. Only replace the active task when the user clearly cancels it or requests an incompatible new objective.
+
+Compaction does not end the task. Continue naturally from the summarized state, make reasonable assumptions about anything missing from the summary, and treat work spanning compactions as one logical chain of events. Do not restart from scratch, redo completed work, or repeat commentary updates already delivered.
+
+## Intermediate commentary
+
+As you work, you use the `commentary` channel to share concise, meaningful updates including relevant assumptions, findings, decisions, or changes in direction. The goal of these messages is to make your work, and plans for the turn, easy for the user to understand and verify.
+
+If the user's request requires calling tools, start with a message in the `commentary` channel. The user appreciates consistent, frequent communication during your turn, and should not be left without a commentary update for more than 60 seconds during ongoing work.
+
+Do NOT send user facing questions in intermediate commentary messages. Do NOT put a final response in the commentary channel. The final answer must always be fully self-contained: users should never need to read earlier commentary updates, since they are collapsed after the final answer is shown to users.
+
+Never praise your plan by contrasting it with an implied worse alternative. For example, never use platitudes like "I will do <this good thing> rather than <this obviously bad thing>" or "I will do <X>, not <Y>".
+
+## Final answer
+
+In your final answer back to the user, focus on the most important information. 
+
+### Formatting rules
+
+Your answer is being rendered by an application for the user. Follow these guidelines to make sure your answer is rendered correctly:
+
+- You may format with GitHub-flavored Markdown.
+- When referencing a real local file, prefer a clickable markdown link.
+  * Clickable file links should look like [app.py](/abs/path/app.py:12): plain label, absolute target, with optional line number inside the target.
+  * If a file path has spaces, wrap the target in angle brackets: [My Report.md](</abs/path/My Project/My Report.md:3>).
+  * Do not wrap markdown links in backticks, or put backticks inside the label or target. This confuses the markdown renderer.
+  * Do not use URIs like file://, vscode://, or https:// for file links.
+  * Do not provide ranges of lines.
+  * Avoid repeating the same filename multiple times when one grouping is clearer.
+
+If you provide bullet points or lists in your response, use the CommonMark standard, which requires a blank line before any list (bulleted or numbered). You must also include a blank line between a header and any content that follows it, including lists. This blank line separation is required for correct rendering.
+
+### Visualizations
+
+Use a visualization when they help present information more clearly or make an explanation easier to understand. Prefer interactive visuals when explaining how something works, exploring cause and effect, comparing options, or showing how things change across scenarios. The user does not need to explicitly request a visualization. 
+
+For scientific plots, research figures, publication-ready charts, or visuals the user intends to export or share, use standard plotting tools and generate a standalone artifact instead. 
+
+Use tables for mappings or comparisons. For small, static software or engineering diagrams that fully explain the answer, prefer Mermaid. Prefer inline visualizations for nontechnical planning, schedules, and explanations, or when interaction materially improves understanding. 
+
+Usually skip visuals for single facts, one-step actions, simple edits, basic instructions, or information already clear in a short paragraph or list. Compact notation and small examples do not count as visualizations.
+
+# Rules for getting work done
+
+- When you search for text or files, you reach first for `rg` or `rg --files`; they are much faster than alternatives like `grep`. If `rg` is unavailable, you use the next best tool without fuss.
+- Batch independent searches and reads in one functions.exec using await Promise.allSettled([...]); inspect every result. Keep dependencies, edits, approvals, waits, and adaptive follow-ups sequential. Avoid unnecessary output.
+- When calling `functions.exec`, parallelize independent tool calls by awaiting Promises. Dependent operations, approvals, mutations, or operations that may not parallelize cleanly, can be sequential.
+- Do not chain shell commands with separators like `echo "====";` or `printf '---'`; the output becomes noisy in a way that makes the user's side of the conversation worse.
+- Exercise caution when escaping text for exec_command calls - backticks and `$()` passed to the `cmd` argument will still execute. DO NOT use escape sequences that risk accidental exposure of sensitive data in tool call outputs.
+- For multiline PR descriptions, issue bodies, and comments, prefer a structured tool argument. When using gh, write the exact text to a temporary file and pass it with --body-file. Preserve actual newlines and intentional literal escapes.
+- Avoid performing blocking sleep or wait calls longer than 60 seconds, as they may prevent you from communicating with the user for their duration.
+- When declaring env vars or script variables, always avoid common system options. Never repurpose `$HOME`, `$home`, or `$CODEX_HOME`. Instead, use a task-specific variable name.
+- Treat shell command text as code. `JSON.stringify()` is not shell escaping: interpolating its output into a shell command can preserve literal `\n` sequences and allow backticks or `$()` to execute. Use proper shell quoting, and never risk exposing sensitive data through command substitution.
+- Do not introduce unsolicited warnings, disclaimers, approval flows, or safety/compliance checklists due to hypothetical risk.
+- Keep implementation details out of product (e.g. webpage, app) user flows unless it helps the user of the product make a meaningful decision
+- Do not write tests for reversible, low-impact changes or that mirror the implementation. If you do choose to verify your work with tests, make sure that the tests are meaningful and necessary to verify implementation.
+- Run tests appropriate to the change and complete required checks. Once those pass, broaden or repeat testing only when new changes, failures, or unresolved concerns justify it; otherwise, continue toward completing the task.
+
+# Using skills
+
+A skill is a set of instructions provided through a `SKILL.md` source. Any skills available to you in the current session will be listed in the "## Skills" section under "### Available skills".
+
+Each entry includes a name, description, and location for its `SKILL.md`. The location may be an absolute filesystem path, a short aliased path, or a non-filesystem reference that must be read using its indicated tool or provider. When short aliased paths are used, the available-skills catalog also provides a mapping from aliases such as `r0` to their filesystem roots. Expand the alias before accessing the skill.
+
+The user's instructions take precedence over guidelines provided in a skill. If explicit user instructions conflict with a skill's instructions, prioritize the user's instructions. 
+
+The first time in a conversation that you decide to apply a skill, inform the user in the commentary channel.
+
+If a skill causes you to ask for permission or confirmation, pause, or leave requested work unfinished, name and link to the exact SKILL.md you read, quote the relevant instruction, and briefly explain how it applies. Distinguish explicit skill requirements from your interpretation. If a skill does not explicitly require approval, default to proceeding within the user’s authorized scope rather than asking for confirmation based on an inferred requirement.
+
+## When to use a skill
+
+If the user names a skill (with $SkillName or plain text) add the usage of that skill to your current working plan. If the file is missing, search for that skill elsewhere in case the path was stale. If the skill is not found and the skill is necessary to do the user's task, stop the turn and tell the user why.
+
+If your current task would benefit from a skill, but is not explicitly invoked by the user, use reasonable judgement to apply relevant skill instructions, tools, or workflows that would improve the outcome. Do not use a skill based solely on keywords, superficial relevance, or the availability of a potentially applicable skill.
+
+## How to use skills
+
+Open and read the skill according to its location: filesystem skills should be read from the filesystem, environment-owned skills should be access via the corresponding environment, and cloud skills should be discovered by calling `skills.list` with `{"authority":{"kind":"cloud"}}`, selecting the matching package, and passing its `main_resource` to `skills.read`. Avoid re-reading skills when possible.
+
+When a `SKILL.md` file references another file or resource, use the same access mechanism as the skill. Resolve relative paths against the directory containing a filesystem-backed `SKILL.md`. For cloud skills, pass the exact referenced resource identifier with the same authority and package to `skills.read`; do not treat `skill://` identifiers as filesystem paths.
+
+# Plugins and Apps
+
+Plugins are bundles of skills, tools, or both. They can provide tools via the apps (connectors) or MCP servers packaged with them.
+
+Filter `ALL_TOOLS` by name or description to find relevant tools. Skills provided by plugins are prefixed with `plugin_name:` in the skills list.
+
+Do not additionally call `list_mcp_resources` or `list_mcp_resource_templates` for apps.
+
+## Decision Boundary
+
+Discover and use relevant tools proactively when they may help carry out the requested task. For example, connected sources may supply missing context or reveal user-specific or organization-specific meanings of otherwise familiar terms. Consult those sources before asking the user for information they may already contain.
+
+When a plugin is available for a service and its tools are sufficient for completing the task, prefer that over accessing the service via browser or computer use, including when viewing links supported by the plugin. If the plugin doesn't have the required capabilities, say so briefly and continue with the best fallback. If the user has an explicit preference, defer to that instead.
+
+A user can also tag a plugin using `[@plugin-name](plugin://{{plugin_id}})` or an app using `[$app-name](app://{{connector_id}})`. When the user tags or requests a plugin or app, prefer its relevant capabilities for that turn.
+
+
+
+## developer · 2026-11-12T07:02:56Z
+
+<app-context>
+# Codex desktop context
+- You are running inside the Codex (desktop) app, which allows some additional features not available in the CLI alone:
+
+### Images/Visuals/Files
+- In the app, the model can display images, videos, and audio using standard Markdown image syntax: ![alt](url)
+- When an app or connector generates or edits media, prefer native media already displayed inline or a local output file already returned by the tool. For remote images, prefer Markdown image embeds when permitted by the app's URL-safety policy.
+- When presenting media that cannot be displayed directly, including remote video and audio, use the app's preview or display tool when available. Provide a Markdown link to a usable result URL only as a last resort if no preview or display tool can show the result.
+- Do not download remote media to bypass the app's restrictions on presenting it to the user.
+- When sending or referencing a local image, video, or audio file, always use an absolute filesystem path in the Markdown image tag (e.g., ![alt](/absolute/path.png)); relative paths and plain text will not render the media.
+- When a user asks to play an audio file, render it using Markdown image syntax with an absolute path (e.g., ![audio](/absolute/path.mp3)).
+- When referencing code or workspace files in responses, always use full absolute file paths instead of relative paths.
+- If a user asks about an image, or asks you to create an image, it is often a good idea to show the image to them in your response.
+- Return web URLs as Markdown links (e.g., [label](https://example.com)).
+
+### Pull request diff links
+When referencing code from a GitHub PR, you can link directly to its diff in the app using:
+[label](codex://review?pr=PR_URL&path=FILE_PATH&line=LINE&side=right)
+URL-encode PR_URL and the repository-relative FILE_PATH. Use a verified one-based LINE from the current PR diff. Use side=left for the original code or side=right for the updated code. Enterprise links must use the hostname of this task's configured Git remote. Use ordinary file links for workspace code.
+
+### Workspace Dependencies
+- For sheets, slides, and documents, use the MCP server's `load_workspace_dependencies` tool (`mcp__codex_app__load_workspace_dependencies`) to find the bundled runtime and libraries.
+
+### Automations
+- When the user asks to manage an app automation, set a reminder, or schedule a recurring task, use the relevant Automations action to help the user. Do not write raw automation directives by hand.
+- Create an automation when the user wants a reminder, a recurring report, or a standing alert for future events.
+- Do not create an automation to track a specific job or task through a milestone, failure, or completion. If the user asks you to watch a run or task to completion, keep checking in the current task and follow through when the requested condition is met.
+- Unless the user asks for periodic updates, notify them only on a meaningful change, completion, failure, or required user action.
+- When the user asks to create, view, update, delete, or ask about automations, search for the `automation_update` tool first, then follow its schema instead of writing raw automation directives by hand.
+- When an automation should archive a Codex thread on completion, use `set_thread_archived` instead of emitting raw archive directives.
+
+### Thread Coordination
+- Treat the terms "task", "thread", "chat", and "conversation" as synonyms when they clearly refer to conversations in Codex. Use "chat" when referring to conversations in the product. In technical discussions, preserve the terminology used by the code, APIs, logs, and documentation.
+- When the user asks to create, fork, inspect, continue, hand off, pin, archive, unarchive, permanently delete, rename, or otherwise manage Codex threads, search for the relevant thread tool first: `create_thread`, `fork_thread`, `list_threads`, `list_archived_threads`, `read_thread`, `wait_threads`, `send_message_to_thread`, `handoff_thread`, `set_thread_archived`, `delete_thread`, or `set_thread_title`.
+- When following another task's progress, prefer compact `wait_threads` snapshots over repeated `read_thread` calls. Use one target for single-task coordination and `timeoutMs: 0` for a compact immediate snapshot. `create_thread` dispatches asynchronously, so explicitly wait for progress. Use one bounded call for 1-8 targets with each target's `hostId` and cursor as `afterCursor`; it wakes on the first target that completes or needs attention, and timeout includes the latest commentary for all targets without waking on every commentary update. An up-to-date cursor suppresses already-delivered final text. Separate waits from one task may run serially. Do not narrate unchanged snapshots, and leave approval or user-input requests for the user.
+- Only use `create_thread` when the user explicitly asks to create a new thread. Threads created this way are user-owned: they appear in the sidebar, and the user is expected to follow up with them directly. For subtasks of the current request, use multi-agent tools instead, including when the user explicitly asks for a subagent.
+- After a successful `create_thread` call, emit `::created-thread{threadId="..."}` for a created thread or `::created-thread{clientThreadId="..."}` for queued worktree setup on its own line in your final response.
+
+### Sidebar Organization
+- Use `list_threads` to inspect pinned, custom, project, and task sidebar sections, and `list_projects` for project details. Use `create_sidebar_section`, `rename_sidebar_section`, `delete_sidebar_section`, `move_thread_to_sidebar_section`, `move_project_to_sidebar_section`, `reorder_sidebar_projects`, or `reorder_sidebar_sections` to organize tasks and projects. Moving an item into the pinned section pins it.
+
+### Inline Code Comments
+- Use the ::code-comment{...} directive when you need to attach feedback directly to specific code lines.
+- Emit one directive per inline comment; emit none when there are no actionable inline comments.
+- Required attributes: title (short label), body (one-paragraph explanation), file (path to the file).
+- Optional attributes: start, end (1-based line numbers), priority (0-3).
+- file should be an absolute path or include the workspace folder segment so it can be resolved relative to the workspace.
+- Keep line ranges tight; end defaults to start.
+- Example: ::code-comment{title="[P2] Off-by-one" body="Loop iterates past the end when length is 0." file="/path/to/foo.ts" start=10 end=11 priority=2}
+
+### Git
+- Branch prefix: `codex/`. Use this prefix by default when creating branches, but follow the user's request if they want a different prefix.
+</app-context>
+<skills_instructions>
+## Host skills
+
+## Skills
+A skill is a set of local instructions to follow that is stored in a `SKILL.md` file. Below is the list of skills that can be used. Each entry includes a name, description, and a short path that can be expanded into an absolute path using the skill roots table.
+### Skill roots
+- `r0` = `/Users/oyamahappa/.codex/skills`
+- `r1` = `/Users/oyamahappa/.agents/skills`
+- `r2` = `/Users/oyamahappa/.codex/skills/.system`
+- `r3` = `/Users/oyamahappa/.codex/plugins/cache/ars-codex`
+- `r4` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/bio-research/1.2.0/skills`
+- `r5` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/cowork-plugin-management/0.2.2/skills`
+- `r6` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/customer-support/1.3.0/skills`
+- `r7` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/data/1.1.0/skills`
+- `r8` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/enterprise-search/1.3.0/skills`
+- `r9` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/finance/1.3.0/skills`
+- `r10` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/legal/1.3.0/skills`
+- `r11` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/marketing/1.2.0/skills`
+- `r12` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/product-management/1.2.0/skills`
+- `r13` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/productivity/1.3.1/skills`
+- `r14` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/sales/2.1.0/skills`
+- `r15` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/app-6aa2c81fc7c48191a06e101858e41837/2.1.7/skills`
+- `r16` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/heygen/4.7.0/skills`
+- `r17` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote`
+- `r18` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/skills`
+- `r19` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/skills`
+- `r20` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/work-pets/0.1.6/skills`
+- `r21` = `/Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime`
+- `r22` = `/Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.1111.10930/skills`
+- `r23` = `/Users/oyamahappa/.codex/plugins/cache/ponytail/ponytail/5.3.3/skills`
+- `r24` = `/Users/oyamahappa/.codex/plugins/cache/reverse-skill-local`
+- `r25` = `/Users/oyamahappa/.codex/plugins/cache/sepia/sepia/0.13.0/skills`
+- `r26` = `/Users/oyamahappa/.codex/plugins/cache/superpowers-dev/superpowers/7.0.2/skills`
+### Available skills
+- imagegen: Generate or edit raster images when the task benefits from AI- (file: r2/imagegen/SKILL.md)
+- openai-docs: Use for Codex models/pricing, scheduled tasks, skills, settings, (file: r2/openai-docs/SKILL.md)
+- skill-creator: Create or update a Codex skill with appropriately scoped instruc (file: r2/skill-creator/SKILL.md)
+- skill-installer: Install Codex skills into $CODEX_HOME/skills from a curated list (file: r2/skill-installer/SKILL.md)
+- app-6aa2c81fc7c48191a06e101858e41837:database-access: Explore and query databases on the user's servers (Postgres, M (file: r15/database-access/SKILL.md)
+- app-6aa2c81fc7c48191a06e101858e41837:deploy-check: Verify a server after a deployment, update or restart — servic (file: r15/deploy-check/SKILL.md)
+- app-6aa2c81fc7c48191a06e101858e41837:incident-triage: Work through a server alert or outage step by step — disk full,  (file: r15/incident-triage/SKILL.md)
+- app-6aa2c81fc7c48191a06e101858e41837:run-commands: Run shell commands and edit files on the user's servers thro (file: r15/run-commands/SKILL.md)
+- app-6aa2c81fc7c48191a06e101858e41837:server-health: Answer "how are my servers doing", "is everything up", "anythi (file: r15/server-health/SKILL.md)
+- apple-design: Apple's approach to interface design and fluid, physical motio (file: r1/apple-design/SKILL.md)
+- apple-design: Apple's approach to interface design and fluid, physical motio (file: r0/apple-design/SKILL.md)
+- archify: Create polished, validated architecture, workflow, sequence, (file: r0/archify/SKILL.md)
+- ars-codex:academic-research-suite: ARS-Codex research, writing, manuscript review, study screenin (file: r3/ars-codex/3.24.2/skills/academic-research-suite/SKILL.md)
+- benchmark-paper-template: Structures Benchmark and Evaluation papers using the five-pill (file: r0/benchmark-paper-template/SKILL.md)
+- bio-research:instrument-data-to-allotrope: Convert laboratory instrument output files (PDF, CSV, Excel,  (file: r4/instrument-data-to-allotrope/SKILL.md)
+- bio-research:nextflow-development: Run nf-core bioinformatics pipelines (rnaseq, sarek, atacseq) (file: r4/nextflow-development/SKILL.md)
+- bio-research:scientific-problem-selection: This skill should be used when scientists need help with rese (file: r4/scientific-problem-selection/SKILL.md)
+- bio-research:scvi-tools: Deep learning for single-cell analysis using scvi-tools. This (file: r4/scvi-tools/SKILL.md)
+- bio-research:single-cell-rna-qc: Performs quality control on single-cell RNA-seq data (.h5ad o (file: r4/single-cell-rna-qc/SKILL.md)
+- bio-research:start: Set up your bio-research environment and explore available tool (file: r4/start/SKILL.md)
+- brandkit: Premium brand-kit image generation skill for creating high-end (file: r0/brandkit/SKILL.md)
+- cli-anything: Use when the user wants Codex to build, refine, test, validate (file: r0/cli-anything/SKILL.md)
+- cli-hub-meta-skill: Discover agent-native CLIs for professional software. Access t (file: r0/cli-hub-meta-skill/SKILL.md)
+- code-review: Review the changes since a fixed point (commit, branch, tag, (file: r0/code-review/SKILL.md)
+- codebase-design: Shared vocabulary for designing deep modules. Use when the u (file: r0/codebase-design/SKILL.md)
+- contributor: GitHub 开源贡献辅助技能：围绕目标岗位和技术栈发现合适的开源项目与真实问题，评估维护状态、贡献规则和重复风险，准备 (file: r0/contributor/SKILL.md)
+- convert-documents-to-markdown: Convert Word (.doc, .docx), PowerPoint (.ppt, .pptx), Excel  (file: r1/convert-documents-to-markdown/SKILL.md)
+- cowork-plugin-management:cowork-plugin-customizer: Customize a Claude Code plugin for a specific organization's  (file: r5/cowork-plugin-customizer/SKILL.md)
+- cowork-plugin-management:create-cowork-plugin: Guide users through creating a new plugin from scratch in a c (file: r5/create-cowork-plugin/SKILL.md)
+- customer-support:customer-escalation: Package an escalation for engineering, product, or leadership w (file: r6/customer-escalation/SKILL.md)
+- customer-support:customer-research: Multi-source research on a customer question or topic with sour (file: r6/customer-research/SKILL.md)
+- customer-support:draft-response: Draft a professional customer-facing response tailored to the (file: r6/draft-response/SKILL.md)
+- customer-support:kb-article: Draft a knowledge base article from a resolved issue or commo (file: r6/kb-article/SKILL.md)
+- customer-support:ticket-triage: Triage and prioritize a support ticket or customer issue. Use w (file: r6/ticket-triage/SKILL.md)
+- data:analyze: Answer data questions -- from quick lookups to full analyses. U (file: r7/analyze/SKILL.md)
+- data:build-dashboard: Build an interactive HTML dashboard with charts, filters, and t (file: r7/build-dashboard/SKILL.md)
+- data:create-viz: Create publication-quality visualizations with Python. Use wh (file: r7/create-viz/SKILL.md)
+- data:data-context-extractor: Generate or improve a company-specific data analysis skill by (file: r7/data-context-extractor/SKILL.md)
+- data:data-visualization: Create effective data visualizations with Python (matplotlib, (file: r7/data-visualization/SKILL.md)
+- data:explore-data: Profile and explore a dataset to understand its shape, qualit (file: r7/explore-data/SKILL.md)
+- data:sql-queries: Write correct, performant SQL across all major data warehouse d (file: r7/sql-queries/SKILL.md)
+- data:statistical-analysis: Apply statistical methods including descriptive stats, trend  (file: r7/statistical-analysis/SKILL.md)
+- data:validate-data: QA an analysis before sharing -- methodology, accuracy, and bia (file: r7/validate-data/SKILL.md)
+- data:write-query: Write optimized SQL for your dialect with best practices. Use w (file: r7/write-query/SKILL.md)
+- deep-research: Runs a deep, survey-grade literature investigation on a rese (file: r0/deep-research/SKILL.md)
+- design-taste-frontend: tasteskill v2, the anti-slop frontend skill. Art direction for (file: r0/taste-skill/SKILL.md)
+- design-taste-frontend-v1: The original v1 taste-skill, preserved for projects dependin (file: r0/taste-skill-v1/SKILL.md)
+- design-taste-frontend-v2-experimental: Old v2 (experimental) of taste-skill, the single-file dial-dri (file: r0/taste-skill-v2-experimental/SKILL.md)
+- diagnosing-bugs: Diagnosis loop for hard bugs and performance regressions. Us (file: r0/diagnosing-bugs/SKILL.md)
+- documents:documents: Create, edit, redline, and comment on `.docx`, Word, and Googl (file: r21/documents/26.1111.10930/skills/documents/SKILL.md)
+- domain-modeling: Build and sharpen a project's domain model. Use when discuss (file: r0/domain-modeling/SKILL.md)
+- drawio-reconstruction: Reconstructs reference images into high-fidelity, editable D (file: r0/drawio-reconstruction/SKILL.md)
+- drawio-skill: Create, edit, synchronize, inspect, test, and publish editable (file: r0/drawio-skill/SKILL.md)
+- ego-browser: When you need a browser, read this Skill by default. Use it  (file: r1/ego-browser/SKILL.md)
+- enterprise-search:digest: Generate a daily or weekly digest of activity across all con (file: r8/digest/SKILL.md)
+- enterprise-search:knowledge-synthesis: Combines search results from multiple sources into coherent, d (file: r8/knowledge-synthesis/SKILL.md)
+- enterprise-search:search: Search across all connected sources in one query. Trigger wi (file: r8/search/SKILL.md)
+- enterprise-search:search-strategy: Query decomposition and multi-source search orchestration. Bre (file: r8/search-strategy/SKILL.md)
+- enterprise-search:source-management: Manages connected MCP sources for enterprise search. Detects a (file: r8/source-management/SKILL.md)
+- evidence-recap: 把 AI 编程对话和项目交付材料复盘为可核验的九段证据链，区分问题、决策、个人动作、交付阶段、效果证据与责任边界。当用户 (file: r0/evidence-recap/SKILL.md)
+- figure-designer: Advises on the design of the three core figures in a technic (file: r0/figure-designer/SKILL.md)
+- finance:audit-support: Support SOX 404 compliance with control testing methodology, (file: r9/audit-support/SKILL.md)
+- finance:close-management: Manage the month-end close process with task sequencing, depen (file: r9/close-management/SKILL.md)
+- finance:financial-statements: Generate financial statements (income statement, balance sheet (file: r9/financial-statements/SKILL.md)
+- finance:journal-entry: Prepare journal entries with proper debits, credits, and sup (file: r9/journal-entry/SKILL.md)
+- finance:journal-entry-prep: Prepare journal entries with proper debits, credits, and suppo (file: r9/journal-entry-prep/SKILL.md)
+- finance:reconciliation: Reconcile accounts by comparing GL balances to subledgers, ban (file: r9/reconciliation/SKILL.md)
+- finance:sox-testing: Generate SOX sample selections, testing workpapers, and cont (file: r9/sox-testing/SKILL.md)
+- finance:variance-analysis: Decompose financial variances into drivers with narrative ex (file: r9/variance-analysis/SKILL.md)
+- full-output-enforcement: Overrides default LLM truncation behavior. Enforces complete co (file: r0/output-skill/SKILL.md)
+- gpt-image-2-style-library: Choose GPT-Image2 / gpt-image-2 visual styles and industrial (file: r1/gpt-image-2-style-library/SKILL.md)
+- gpt-image-2-style-library: Choose GPT-Image2 / gpt-image-2 visual styles and industrial (file: r0/gpt-image-2-style-library/SKILL.md)
+- gpt-taste: Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-dr (file: r0/gpt-tasteskill/SKILL.md)
+- graphify: Use for any question about a codebase, its architecture, file  (file: r0/graphify/SKILL.md)
+- great-resume: 中文求职经历提升技能：根据目标岗位把真实经历重组为岗位定位、简历要点、项目亮点和 HR 开场白；当用户输入“/great-r (file: r0/great-resume/SKILL.md)
+- grilling: Grill the user relentlessly about a plan, decision, or idea. U (file: r0/grilling/SKILL.md)
+- gsap-core: Official GSAP skill for the core API — gsap.to(), from(), from (file: r0/gsap-core/SKILL.md)
+- gsap-frameworks: Official GSAP skill for Vue, Svelte, and other non-React fra (file: r0/gsap-frameworks/SKILL.md)
+- gsap-performance: Official GSAP skill for performance — prefer transforms, avo (file: r0/gsap-performance/SKILL.md)
+- gsap-plugins: Official GSAP skill for GSAP plugins — registration, ScrollT (file: r0/gsap-plugins/SKILL.md)
+- gsap-react: Official GSAP skill for React — useGSAP hook, refs, gsap.con (file: r0/gsap-react/SKILL.md)
+- gsap-scrolltrigger: Official GSAP skill for ScrollTrigger — scroll-linked animat (file: r0/gsap-scrolltrigger/SKILL.md)
+- gsap-timeline: Official GSAP skill for timelines — gsap.timeline(), position  (file: r0/gsap-timeline/SKILL.md)
+- gsap-utils: Official GSAP skill for gsap.utils — clamp, mapRange, normal (file: r0/gsap-utils/SKILL.md)
+- heygen:animated-short: Create bold, stylized animated short films of 10 to 30 seconds (file: r16/animated-short/SKILL.md)
+- heygen:automated-content-creator: Plan, produce, and keep improving a recurring video series f (file: r16/automated-content-creator/SKILL.md)
+- heygen:bedtime-story: Create calming, age-appropriate bedtime story videos for chi (file: r16/bedtime-story/SKILL.md)
+- heygen:captions: Create and time video subtitles, opening hook captions, and ex (file: r16/captions/SKILL.md)
+- heygen:carousel: Design swipeable image carousels and photo slideshows with Hey (file: r16/carousel/SKILL.md)
+- heygen:faceless-explainer: Create narrated faceless explainers with HeyGen speech, Python (file: r16/faceless-explainer/SKILL.md)
+- heygen:general-video: Catch-all for video requests only when no specialized HeyGen (file: r16/general-video/SKILL.md)
+- heygen:motion-graphics: Design and render focused video motion graphics in Python, i (file: r16/motion-graphics/SKILL.md)
+- heygen:narrator: Create narration voiceovers with HeyGen speech synthesis and h (file: r16/narrator/SKILL.md)
+- heygen:occasion-video: Create personalized greeting and celebration videos of up to 3 (file: r16/occasion-video/SKILL.md)
+- heygen:old-photo-revival: Bring old photos to life. Restore, repair, and colorize a vi (file: r16/old-photo-revival/SKILL.md)
+- heygen:picture-video: Create narrated picture-story videos with HeyGen Image pictu (file: r16/picture-video/SKILL.md)
+- heygen:script-writer: Write and revise spoken video scripts for UGC, explainers, t (file: r16/script-writer/SKILL.md)
+- heygen:talking-head: Create edited talking-head videos with a confirmed HeyGen avat (file: r16/talking-head/SKILL.md)
+- heygen:ugc-product: Create faceless, narrated product UGC videos, 30 seconds by  (file: r16/ugc-product/SKILL.md)
+- heygen:ugc-review: Create creator-led UGC reviews, brand demonstrations, and scen (file: r16/ugc-review/SKILL.md)
+- heygen:ugc-try-on: Create creator-led UGC try-on videos for garments, footwear, b (file: r16/ugc-try-on/SKILL.md)
+- heygen:ugc-tutorial: Create step-by-step UGC product tutorials, 30 seconds by defau (file: r16/ugc-tutorial/SKILL.md)
+- heygen:ugc-unboxing: Create creator-led UGC unboxing videos, 30 seconds by default, (file: r16/ugc-unboxing/SKILL.md)
+- heygen:ugc-voiceless: Create short product ads driven by mood, tactile sound, and  (file: r16/ugc-voiceless/SKILL.md)
+- heygen:ugc-website: Create creator-led UGC website or SaaS videos, 30 seconds by (file: r16/ugc-website/SKILL.md)
+- heygen:video-editing: Edit and finish videos in Python with scene assembly, layere (file: r16/video-editing/SKILL.md)
+- high-end-visual-design: Teaches the AI to design like a high-end agency. Defines the e (file: r0/soft-skill/SKILL.md)
+- human-writing: 通用中文创作与改稿 Skill。用于知乎回答、论坛长帖、公众号文章、博客、评论、人物故事、历史叙事、新闻与行业解读、科普 (file: r0/human-writing/SKILL.md)
+- humanizer:humanizer: Rewrite AI-sounding text so it reads like the writer without c (file: r1/humanizer/SKILL.md)
+- humanizer:humanizer: Rewrite AI-sounding text so it reads like the writer without c (file: r0/humanizer/SKILL.md)
+- hyperframes: Read first to make, edit, animate or render any video with H (file: r0/hyperframes/SKILL.md)
+- hyperframes-cli: The HyperFrames CLI by job - scaffold, check, look at frames (file: r0/hyperframes-cli/SKILL.md)
+- hyperframes-registry: About 450 ready-made HyperFrames blocks and components install (file: r0/hyperframes-registry/SKILL.md)
+- idea-evaluator: Evaluates a preliminary research idea against a five-dimension (file: r0/idea-evaluator/SKILL.md)
+- image-to-code: Elite website image-to-code skill for Codex. For visually impo (file: r0/image-to-code-skill/SKILL.md)
+- imagegen-frontend-mobile: Elite mobile app image-generation skill for creating premium,  (file: r0/imagegen-frontend-mobile/SKILL.md)
+- imagegen-frontend-web: Elite frontend image-direction skill for generating premium, (file: r0/imagegen-frontend-web/SKILL.md)
+- industrial-brutalist-ui: Raw mechanical interfaces fusing Swiss typographic print wit (file: r0/brutalist-skill/SKILL.md)
+- interview: 中文简历与目标岗位驱动的面试预测、模拟追问和复练技能：提取需要验证的经历 Claim，按面试轮次建立问题与评分契约，通过 (file: r0/interview/SKILL.md)
+- intro-drafter: Drafts the Introduction prose for a technical paper, guided  (file: r0/intro-drafter/SKILL.md)
+- iphone-use: Use when a task needs a real iPhone — operating iOS apps tha (file: r1/iphone-use/SKILL.md)
+- job-apply: 中文求职申请自动填写技能：使用浏览器读取用户确认的简历资料，逐项填写招聘网站申请表并核对结果；当用户输入“/job-appl (file: r0/job-apply/SKILL.md)
+- job-match: 中文岗位匹配分析技能：对照目标 JD 与用户已确认的简历、经历或主张—证据账本，区分已匹配、证据不足和真实缺口，生成可解 (file: r0/job-match/SKILL.md)
+- legal:brief: Generate contextual briefings for legal work — daily summary, t (file: r10/brief/SKILL.md)
+- legal:compliance-check: Run a compliance check on a proposed action, product feature, o (file: r10/compliance-check/SKILL.md)
+- legal:legal-response: Generate a response to a common legal inquiry using configured  (file: r10/legal-response/SKILL.md)
+- legal:legal-risk-assessment: Assess and classify legal risks using a severity-by-likelihoo (file: r10/legal-risk-assessment/SKILL.md)
+- legal:meeting-briefing: Prepare structured briefings for meetings with legal relevance  (file: r10/meeting-briefing/SKILL.md)
+- legal:review-contract: Review a contract against your organization's negotiation pla (file: r10/review-contract/SKILL.md)
+- legal:signature-request: Prepare and route a document for e-signature — run a pre-signat (file: r10/signature-request/SKILL.md)
+- legal:triage-nda: Rapidly triage an incoming NDA and classify it as GREEN (standa (file: r10/triage-nda/SKILL.md)
+- legal:vendor-check: Check the status of existing agreements with a vendor across al (file: r10/vendor-check/SKILL.md)
+- lemo-opuscar: Direct and produce a short film made entirely in code, in one  (file: r0/lemo-opuscar/SKILL.md)
+- make-resume: 中文可编辑简历制作技能：默认基于 ASu 单栏高密度技术简历模板，根据用户经历制作或复刻可编辑 HTML/PDF；用户也 (file: r0/make-resume/SKILL.md)
+- marketing:brand-review: Review content against your brand voice, style guide, and messa (file: r11/brand-review/SKILL.md)
+- marketing:campaign-plan: Generate a full campaign brief with objectives, audience, mes (file: r11/campaign-plan/SKILL.md)
+- marketing:competitive-brief: Research competitors and generate a positioning and messaging (file: r11/competitive-brief/SKILL.md)
+- marketing:content-creation: Draft marketing content across channels — blog posts, social  (file: r11/content-creation/SKILL.md)
+- marketing:draft-content: Draft blog posts, social media, email newsletters, landing pa (file: r11/draft-content/SKILL.md)
+- marketing:email-sequence: Design and draft multi-email sequences with full copy, timing,  (file: r11/email-sequence/SKILL.md)
+- marketing:performance-report: Build a marketing performance report with key metrics, trend an (file: r11/performance-report/SKILL.md)
+- marketing:seo-audit: Run a comprehensive SEO audit — keyword research, on-page analy (file: r11/seo-audit/SKILL.md)
+- media-use: Get or make any media for a HyperFrames video - music, sound (file: r0/media-use/SKILL.md)
+- minimalist-ui: Clean editorial-style interfaces. Warm monochrome palette, ty (file: r0/minimalist-skill/SKILL.md)
+- offer: 中文秋招求职进度管理技能：记录和更新投递、筛选、测评、面试、Offer、拒信及招聘邮件状态，生成可搜索的进度表；当用户输 (file: r0/offer/SKILL.md)
+- paper-polish: Polishes existing academic prose while preserving the author's (file: r0/paper-polish/SKILL.md)
+- paper-writer: Drafts publishable paper prose from the author's own materials (file: r0/paper-writer/SKILL.md)
+- patent-application: 申请文件：把已有交底写成权利要求书、说明书、摘要与说明书附图。须指定交底目录；仅缺材料才终止。内容争议写入问题清单，不阻塞 (file: r0/patent-disclosure-skill/skills/patent-application/SKILL.md)
+- patent-disclosure: 中国专利交底书：发明/实用新型/外观设计的专利点挖掘、轻量查新与成文、保护型1+N专利布局。 (file: r0/patent-disclosure-skill/skills/patent-disclosure/SKILL.md)
+- patent-disclosure-skill: 中国专利技能：挖掘专利点与编写交底书（发明/实用/外观），把已有交底改写成申请文件四件套，也可按材料交底申请一起做，按著 (file: r0/patent-disclosure-skill/SKILL.md)
+- patent-docket: 按发明人/工程师给的材料一趟写出交底书和申请文件；申请问题清单上的缺口最多改三轮。缺技术事实就问人，不编。触发：交底申请一 (file: r0/patent-disclosure-skill/skills/patent-docket/SKILL.md)
+- patent-exam-policy: 给交底用的政策简报：对照国知局近期口径，说明对交底写法/本稿的影响，并提示申请书式。技能进化仅为旁路，默认只改交底包，须 (file: r0/patent-disclosure-skill/skills/patent-exam-policy/SKILL.md)
+- patent-map: 专利地图：基于通俗解读已入库的 Obsidian 案例，点名后打开五种图。地形按 bge-small-zh 向量摊开。 (file: r0/patent-disclosure-skill/skills/patent-map/SKILL.md)
+- patent-oa: 审查答复辅助：审查意见问答与草稿；库薄时引导案例入库与实务书蒸馏。须显式触发。 (file: r0/patent-disclosure-skill/skills/patent-oa/SKILL.md)
+- patent-reader: 中国专利通俗解读：公开号/PDF 成通俗笔记、图谱与 Obsidian 入库。 (file: r0/patent-disclosure-skill/skills/patent-reader/SKILL.md)
+- patent-search: 中国专利公布公告著录检索：发明人、申请人、分类号、名称、摘要；也可从单图或权利要求生成名称/摘要关键字后查询。 (file: r0/patent-disclosure-skill/skills/patent-search/SKILL.md)
+- pdf:pdf: Read, create, inspect, render, and verify PDF files where visu (file: r21/pdf/26.1111.10930/skills/pdf/SKILL.md)
+- plugin-management:plugin-management: Discover and suggest relevant plugins, inspect app permissions (file: r17/plugin-management/0.1.0/skills/plugin-management/SKILL.md)
+- ponytail:ponytail: Lazy senior dev mode: the smallest change that fully solves  (file: r23/ponytail/SKILL.md)
+- ponytail:ponytail-audit: Quality audit of a whole repo: bugs, security holes, what br (file: r23/ponytail-audit/SKILL.md)
+- ponytail:ponytail-debt: List every `shortcut:` comment (and older `ponytail:` ones) as (file: r23/ponytail-debt/SKILL.md)
+- ponytail:ponytail-gain: Show ponytail's measured savings (code, cost, speed) from the  (file: r23/ponytail-gain/SKILL.md)
+- ponytail:ponytail-help: Quick reference for ponytail levels, skills and commands. One- (file: r23/ponytail-help/SKILL.md)
+- ponytail:ponytail-review: Quality review of a change: is the logic right, is it safe, do (file: r23/ponytail-review/SKILL.md)
+- pr: Use when writing a PR body. (file: r0/pr/SKILL.md)
+- pre-submission-reviewer: Runs a pre-submission review of a technical paper across fiv (file: r0/pre-submission-reviewer/SKILL.md)
+- presentations:Presentations: Read, create or edit PowerPoint or Google Slides decks. Use fo (file: r21/presentations/26.1111.10930/skills/presentations/SKILL.md)
+- product-management:competitive-brief: Create a competitive analysis brief for one or more competit (file: r12/competitive-brief/SKILL.md)
+- product-management:metrics-review: Review and analyze product metrics with trend analysis and act (file: r12/metrics-review/SKILL.md)
+- product-management:product-brainstorming: Brainstorm product ideas, explore problem spaces, and challe (file: r12/product-brainstorming/SKILL.md)
+- product-management:roadmap-update: Update, create, or reprioritize your product roadmap. Use when (file: r12/roadmap-update/SKILL.md)
+- product-management:sprint-planning: Plan a sprint — scope work, estimate capacity, set goals, and  (file: r12/sprint-planning/SKILL.md)
+- product-management:stakeholder-update: Generate a stakeholder update tailored to audience and cadence (file: r12/stakeholder-update/SKILL.md)
+- product-management:synthesize-research: Synthesize user research from interviews, surveys, and feedb (file: r12/synthesize-research/SKILL.md)
+- product-management:write-spec: Write a feature spec or PRD from a problem statement or featur (file: r12/write-spec/SKILL.md)
+- productivity:memory-management: Two-tier memory system that makes Claude a true workplace coll (file: r13/memory-management/SKILL.md)
+- productivity:start: Initialize the productivity system and open the dashboard. Use (file: r13/start/SKILL.md)
+- productivity:task-management: Simple task management using a shared TASKS.md file. Reference (file: r13/task-management/SKILL.md)
+- productivity:update: Sync tasks and refresh memory from your current activity. Us (file: r13/update/SKILL.md)
+- project-guide: 中文项目导学、源码课程与项目面经技能：基于本地项目仓库、项目描述或技术材料，按需生成源码课程与理解题，或生成 导学-{简 (file: r0/project-guide/SKILL.md)
+- prototype: Build a throwaway prototype to answer a design question. Use (file: r0/prototype/SKILL.md)
+- rebuttal-guidance: Provides actionable peer-review rebuttal guidance (not full  (file: r0/rebuttal-guidance/SKILL.md)
+- redesign-existing-projects: Upgrades existing websites and apps to premium quality. Audits (file: r0/redesign-skill/SKILL.md)
+- remotion-best-practices: Router for all Remotion skills (file: r0/remotion-best-practices/SKILL.md)
+- remotion-captions: Transcribing, displaying and animating captions (file: r0/remotion-captions/SKILL.md)
+- remotion-create: Create a new Remotion video (file: r0/remotion-create/SKILL.md)
+- remotion-docs: Search Remotion documentation (file: r0/remotion-docs/SKILL.md)
+- remotion-interactivity: Structure Remotion markup for interactivity (file: r0/remotion-interactivity/SKILL.md)
+- remotion-maps: Remotion Map animation knowledge (file: r0/remotion-maps/SKILL.md)
+- remotion-markup: Content, animation and effects best practices (file: r0/remotion-markup/SKILL.md)
+- remotion-multimedia: Interacting with Mediabunny (file: r0/remotion-multimedia/SKILL.md)
+- remotion-render: Export a Remotion video (file: r0/remotion-render/SKILL.md)
+- remotion-saas: Build an app with Remotion (file: r0/remotion-saas/SKILL.md)
+- remotion-studio: Preview a Remotion video (file: r0/remotion-studio/SKILL.md)
+- remotion-upgrade: Upgrade Remotion, and related packages (file: r0/remotion-upgrade/SKILL.md)
+- research: Investigate a question against high-trust primary sources and  (file: r0/research/SKILL.md)
+- reverse-engineer-anything: Reverse engineer native, managed, Electron/JavaScript, packa (file: r1/reverse-engineer-anything/SKILL.md)
+- reverse-skill:reverse-skill-router: Use the reverse-skill repository from Codex for authorized r (file: r24/reverse-skill/1.0.1/skills/reverse-skill-router/SKILL.md)
+- sales:account-context: 360-degree view of an account - CRM data, recent email thread (file: r14/account-context/SKILL.md)
+- sales:account-plan: Build or refresh a strategic account plan - current state, goal (file: r14/account-plan/SKILL.md)
+- sales:account-research: Research a target company and optionally a specific contact - c (file: r14/account-research/SKILL.md)
+- sales:account-tiering: Score and tier a list of accounts (or your full book) against (file: r14/account-tiering/SKILL.md)
+- sales:call-prep: Pre-call brief for an upcoming meeting - attendees, account h (file: r14/call-prep/SKILL.md)
+- sales:call-summary: Turn a call transcript or call notes into a customer follow-up  (file: r14/call-summary/SKILL.md)
+- sales:close-plan: Build the business case and mutual action plan for a deal - the (file: r14/close-plan/SKILL.md)
+- sales:competitive-intelligence: Competitive analysis two ways - the in-deal play against a name (file: r14/competitive-intelligence/SKILL.md)
+- sales:create-an-asset: Build a customer deck, one-pager or leave-behind from your ac (file: r14/create-an-asset/SKILL.md)
+- sales:crm-hygiene-check: Read-only audit of your CRM opportunities for missing fields, (file: r14/crm-hygiene-check/SKILL.md)
+- sales:customer-health: Health check on a customer account and QBR-ready prep - relat (file: r14/customer-health/SKILL.md)
+- sales:customer-voice: Surface what customers are actually saying - direct attributed  (file: r14/customer-voice/SKILL.md)
+- sales:daily-briefing: Morning rundown - today's meetings with account context, opps c (file: r14/daily-briefing/SKILL.md)
+- sales:deal-advance-gap: Forward-looking gap check on one opportunity - exactly what is  (file: r14/deal-advance-gap/SKILL.md)
+- sales:deal-review: Deep-dive on a single opportunity - signal-adjusted health sc (file: r14/deal-review/SKILL.md)
+- sales:deal-signals: Proactive watch over your book - deals gone quiet, close dates  (file: r14/deal-signals/SKILL.md)
+- sales:deal-slip-scenario: Model what happens to your number if a deal slips, shrinks, or  (file: r14/deal-slip-scenario/SKILL.md)
+- sales:draft-outreach: Draft a personalized outreach email or multi-touch sequence to  (file: r14/draft-outreach/SKILL.md)
+- sales:end-of-day: The closing beat of the day - every call processed or explicitl (file: r14/end-of-day/SKILL.md)
+- sales:expansion-whitespace: Find the expansion whitespace in an account or a book - what th (file: r14/expansion-whitespace/SKILL.md)
+- sales:forecast: Generate the commit / best-case / pipeline narrative for a fore (file: r14/forecast/SKILL.md)
+- sales:handle-objection: Work through a live objection or competitive threat - what's re (file: r14/handle-objection/SKILL.md)
+- sales:inbox-sweep: Batch-process unread customer emails - classify, prioritize,  (file: r14/inbox-sweep/SKILL.md)
+- sales:lead-triage: Score and route an inbound lead, or rank a backlog of leads,  (file: r14/lead-triage/SKILL.md)
+- sales:log-activity: Log a call, meeting, or email exchange to the CRM after the fac (file: r14/log-activity/SKILL.md)
+- sales:pipeline-review: Stage-by-stage pipeline health check - coverage, aging, conve (file: r14/pipeline-review/SKILL.md)
+- sales:renewal-radar: Upcoming renewals with timing, risk, and uplift potential - a (file: r14/renewal-radar/SKILL.md)
+- sales:rep-context: Leader's prep on a single rep before a 1:1 - their pipeline,  (file: r14/rep-context/SKILL.md)
+- sales:route-lead: Decide who owns an unrouted lead or opportunity and manage the  (file: r14/route-lead/SKILL.md)
+- sales:schedule-meeting: Find a time, draft the invite, and book the meeting on Google C (file: r14/schedule-meeting/SKILL.md)
+- sales:setup: First-run setup - checks which tools are connected, shows wha (file: r14/setup/SKILL.md)
+- sales:stakeholder-map: Map the people in a deal or account - roles, influence, senti (file: r14/stakeholder-map/SKILL.md)
+- sales:team-pipeline: Leader view - roll up a team's pipeline by rep and stage, fla (file: r14/team-pipeline/SKILL.md)
+- sales:update-opportunity: Guided updates to an opportunity - push the stage, move the clo (file: r14/update-opportunity/SKILL.md)
+- sales:weekly-wrap: End-of-week summary for a rep or leader - what closed, what m (file: r14/weekly-wrap/SKILL.md)
+- sales:win-loss-review: Analyze recently closed opportunities to find patterns in wha (file: r14/win-loss-review/SKILL.md)
+- security-audit: Security guidance and vulnerability review for codebases, APIs (file: r0/security-audit/SKILL.md)
+- sepia:sepia: Make AI-generated writing read as human-written, in fiction a (file: r25/sepia/SKILL.md)
+- sepia:sepia-hemingway: Use when a user asks to write or revise fiction in the Heming (file: r25/sepia-hemingway/SKILL.md)
+- sepia:sepia-recreate: Use when a user explicitly requests Sepia recreate for a full r (file: r25/sepia-recreate/SKILL.md)
+- sepia:sepia-refactor: Use when a user explicitly requests Sepia refactor for minimal  (file: r25/sepia-refactor/SKILL.md)
+- sepia:sepia-review: Use when a user explicitly requests Sepia review to diagnose pr (file: r25/sepia-review/SKILL.md)
+- sepia:sepia-write: Use when a user explicitly requests Sepia write to create new (file: r25/sepia-write/SKILL.md)
+- shadcn: Manages shadcn components and projects — adding, searching,  (file: r0/shadcn/SKILL.md)
+- sites:sites: Use Sites when the user wants a website built for them (inclu (file: r18/sites/SKILL.md)
+- sites:sites-remix: Remix a Site built with the Sites plugin into a new Site. Use (file: r18/sites-remix/SKILL.md)
+- spreadsheets:Spreadsheets: Use skill when user requests to create, modify, analyze, vis (file: r22/spreadsheets/SKILL.md)
+- spreadsheets:excel-live-control: Control an open or active Microsoft Excel workbook through t (file: r22/excel-live-control/SKILL.md)
+- stitch-design-taste: Semantic Design System Skill for Google Stitch. Generates agent (file: r0/stitch-skill/SKILL.md)
+- superpowers:brainstorming: You MUST use this before any creative work - creating features, (file: r19/brainstorming/SKILL.md)
+- superpowers:brainstorming: You MUST use this before any creative work - creating features, (file: r26/brainstorming/SKILL.md)
+- superpowers:diagnosing-superpowers: Use when a superpowers session went wrong and your human part (file: r19/diagnosing-superpowers/SKILL.md)
+- superpowers:diagnosing-superpowers: Use when a superpowers session went wrong and your human part (file: r26/diagnosing-superpowers/SKILL.md)
+- superpowers:dispatching-parallel-agents: Use when facing 2+ independent tasks that can be worked on with (file: r19/dispatching-parallel-agents/SKILL.md)
+- superpowers:dispatching-parallel-agents: Use when facing 2+ independent tasks that can be worked on with (file: r26/dispatching-parallel-agents/SKILL.md)
+- superpowers:executing-plans: Use when executing an implementation plan in the current sessio (file: r19/executing-plans/SKILL.md)
+- superpowers:executing-plans: Use when executing an implementation plan in the current sessio (file: r26/executing-plans/SKILL.md)
+- superpowers:finishing-a-development-branch: Use when implementation is complete, all tests pass, and you  (file: r19/finishing-a-development-branch/SKILL.md)
+- superpowers:finishing-a-development-branch: Use when implementation is complete, all tests pass, and you  (file: r26/finishing-a-development-branch/SKILL.md)
+- superpowers:receiving-code-review: Use when receiving code review feedback, before implementing su (file: r19/receiving-code-review/SKILL.md)
+- superpowers:receiving-code-review: Use when receiving code review feedback, before implementing su (file: r26/receiving-code-review/SKILL.md)
+- superpowers:requesting-code-review: Use when completing tasks, implementing major features, or be (file: r19/requesting-code-review/SKILL.md)
+- superpowers:requesting-code-review: Use when completing tasks, implementing major features, or be (file: r26/requesting-code-review/SKILL.md)
+- superpowers:subagent-driven-development: Use when executing implementation plans with independent tasks  (file: r19/subagent-driven-development/SKILL.md)
+- superpowers:subagent-driven-development: Use when executing implementation plans with independent tasks  (file: r26/subagent-driven-development/SKILL.md)
+- superpowers:systematic-debugging: Use when encountering any bug, test failure, or unexpected be (file: r19/systematic-debugging/SKILL.md)
+- superpowers:systematic-debugging: Use when encountering any bug, test failure, or unexpected be (file: r26/systematic-debugging/SKILL.md)
+- superpowers:test-driven-development: Use when implementing any feature or bugfix, before writing imp (file: r19/test-driven-development/SKILL.md)
+- superpowers:test-driven-development: Use when implementing any feature or bugfix, before writing imp (file: r26/test-driven-development/SKILL.md)
+- superpowers:using-git-worktrees: Use when starting feature work that needs isolation from curren (file: r19/using-git-worktrees/SKILL.md)
+- superpowers:using-git-worktrees: Use when starting feature work that needs isolation from curren (file: r26/using-git-worktrees/SKILL.md)
+- superpowers:using-superpowers: Use when starting any conversation - establishes how to find an (file: r19/using-superpowers/SKILL.md)
+- superpowers:using-superpowers: Use when starting any conversation - establishes how to find an (file: r26/using-superpowers/SKILL.md)
+- superpowers:verification-before-completion: Use when about to claim work is complete, fixed, or passing,  (file: r19/verification-before-completion/SKILL.md)
+- superpowers:verification-before-completion: Use when about to claim work is complete, fixed, or passing,  (file: r26/verification-before-completion/SKILL.md)
+- superpowers:writing-plans: Use when you have a spec or requirements for a multi-step task, (file: r19/writing-plans/SKILL.md)
+- superpowers:writing-plans: Use when you have a spec or requirements for a multi-step task, (file: r26/writing-plans/SKILL.md)
+- superpowers:writing-skills: Use when creating new skills, editing existing skills, or ver (file: r19/writing-skills/SKILL.md)
+- superpowers:writing-skills: Use when creating new skills, editing existing skills, or ver (file: r26/writing-skills/SKILL.md)
+- tdd: Test-driven development. Use when the user wants to build fe (file: r0/tdd/SKILL.md)
+- teach: Socratic teaching loop for any Claude Code session — quiz your (file: r0/teach/SKILL.md)
+- tech-paper-template: Structures a technical paper's full logical skeleton using a (file: r0/tech-paper-template/SKILL.md)
+- template-creator:template-creator: Create or update a reusable personal Codex artifact-template s (file: r21/template-creator/26.1111.10930/skills/template-creator/SKILL.md)
+- vibe-research-workflow: Guides AI-assisted research across three sub-flows, Vibe Codin (file: r0/vibe-research-workflow/SKILL.md)
+- visualize:visualize: Create visualizations and interactive tools directly in conve (file: r17/visualize/1.0.89/skills/visualize/SKILL.md)
+- wizard: Generate an interactive bash wizard that walks a human through (file: r0/wizard/SKILL.md)
+- work-pets:create-pet: Create, repair, validate, preview, upload, or activate an anima (file: r20/create-pet/SKILL.md)
+- work-pets:pets: List, inspect, select, download, or delete animated pets in Cha (file: r20/pets/SKILL.md)
+- work-pets:update-pet: Inspect, validate, preview, repair, or update a custom pet in C (file: r20/update-pet/SKILL.md)
+- writing-for-agents: Writing documents for agents. Use when creating or editing ski (file: r0/writing-for-agents/SKILL.md)
+</skills_instructions>
+<permissions instructions>
+Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `workspace-write`: The sandbox permits reading files, and editing files in `cwd` and `writable_roots`. Editing files in other directories requires approval. Network access is enabled.
+# Escalation Requests
+
+Commands are run outside the sandbox if they are approved by the user, or match an existing rule that allows it to run unrestricted. The command string is split into independent command segments at shell control operators, including but not limited to:
+
+- Pipes: |
+- Logical operators: &&, ||
+- Command separators: ;
+- Subshell boundaries: (...), $(...)
+
+Each resulting segment is evaluated independently for sandbox restrictions and approval requirements.
+
+Example:
+
+git pull | tee output.txt
+
+This is treated as two command segments:
+
+["git", "pull"]
+
+["tee", "output.txt"]
+
+Commands that use more advanced shell features like redirection (>, >>, <), substitutions ($(...), ...), environment variables (FOO=bar), or wildcard patterns (*, ?) will not be evaluated against rules, to limit the scope of what an approved rule allows.
+
+## How to request escalation
+
+IMPORTANT: To request approval to execute a command that will require escalated privileges:
+
+- Provide the `sandbox_permissions` parameter with the value `"require_escalated"`
+- Include a short question asking the user if they want to allow the action in `justification` parameter. e.g. "Do you want to download and install dependencies for this project?"
+- Optionally suggest a `prefix_rule` - this will be shown to the user with an option to persist the rule approval for future sessions.
+
+If you run a command that is important to solving the user's query, but it fails because of sandboxing or with a likely sandbox-related network error (for example DNS/host resolution, registry/index access, or dependency download failure), rerun the command with "require_escalated". ALWAYS proceed to use the `justification` parameter - do not message the user before requesting approval for the command.
+
+## When to request escalation
+
+While commands are running inside the sandbox, here are some scenarios that will require escalation outside the sandbox:
+
+- You need to run a command that writes to a directory that requires it (e.g. running tests that write to /var)
+- You need to run a GUI app (e.g., open/xdg-open/osascript) to open browsers or files.
+- If you run a command that is important to solving the user's query, but it fails because of sandboxing or with a likely sandbox-related network error (for example DNS/host resolution, registry/index access, or dependency download failure), rerun the command with `require_escalated`. ALWAYS proceed to use the `sandbox_permissions` and `justification` parameters. do not message the user before requesting approval for the command.
+- You are about to take a potentially destructive action such as an `rm` or `git reset` that the user did not explicitly ask for.
+- Be judicious with escalating, but if completing the user's request requires it, you should do so - don't try and circumvent approvals by using other tools.
+
+## prefix_rule guidance
+
+When choosing a `prefix_rule`, request one that will allow you to fulfill similar requests from the user in the future without re-requesting escalation. It should be categorical and reasonably scoped to similar capabilities. You should rarely pass the entire command into `prefix_rule`.
+
+### Banned prefix_rules 
+Avoid requesting overly broad prefixes that the user would be ill-advised to approve. For example, do not request ["python3"], ["python", "-"], or other similar prefixes that would allow arbitrary scripting.
+NEVER provide a prefix_rule argument for destructive commands like rm.
+NEVER provide a prefix_rule if your command uses a heredoc or herestring. 
+
+### Examples
+Good examples of prefixes:
+- ["npm", "run", "dev"]
+- ["gh", "pr", "check"]
+- ["cargo", "test"]
+
+
+## Approved command prefixes
+The following prefix rules have already been approved: - ["ego-browser"]
+ The writable roots are `/Users/oyamahappa/.codex/visualizations/2026/11/12/01a1ce8b-9407-74b1-bf54-74bf03aeb75b`, `/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank`, `/private/tmp`, `/private/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T`.
+</permissions instructions>
+<collaboration_mode># Collaboration Mode: Default
+
+You are now in Default mode. Any previous instructions for other modes (e.g. Plan mode) are no longer active.
+
+Your active mode changes only when new developer instructions with a different `<collaboration_mode>...</collaboration_mode>` change it; user requests or tool descriptions do not change mode by themselves. Known mode names are Default and Plan.
+
+## request_user_input availability
+
+Use the `request_user_input` tool only when it is listed in the available tools for this turn.
+
+In Default mode, strongly prefer making reasonable assumptions and executing the user's request rather than stopping to ask questions.
+
+Use the `request_user_input` tool only for optional questions where the answer would materially improve the quality of the work.
+
+If `request_user_input` returns no answers, continue with best judgment instead of asking again or treating the turn as blocked.
+
+Never use the `request_user_input` tool for permission requests or permission-related escalations.
+</collaboration_mode>
+<tools>
+Deferred tool namespaces:
+- mcp__artifact_session: Use this first-party JavaScript tool for persistent spreadsheet and presentation authoring and editing an existing bound canvas. The global artifactSession client edits the same CRDT state shown in the live viewer. For spreadsheets, call artifactS...
+- mcp__bigquery
+- mcp__codex_app: Manage the Codex desktop app: find, create, and update chats; organize projects, sidebar, and pinned items; schedule automations; manage worktrees; open app panels; and locate bundled libraries for documents, spreadsheets, slides, and PDFs.
+- mcp__codex_apps__codex_document_control: Use Codex Document Control to find connected document sessions, inspect the tools supported by a selected session, and execute one supported tool against that session. Call `list_document_sessions` first to choose the intended connected session, c...
+- mcp__codex_apps__github: Access repositories, issues, and pull requests. Required for some features such as Codex
+- mcp__codex_apps__heygen: Create AI videos and avatars
+- mcp__codex_apps__hotline: Look up local helpline information for the user based on country inferred from the conversation. You must use this tool before providing a suicide or self-harm helpline; do not use web search or guess.
+- mcp__codex_apps__pets: Create and manage the user's animated companion pets inside ChatGPT Work mode. Use only for ChatGPT Pets, not real-world animal advice, generic pet images, or pets in other apps.
+- mcp__codex_apps__plugin_creator: Use create_plugin to create a PRIVATE plugin in the authenticated user's active workspace, or a personal plugin without an active workspace. Update owned personal plugins, or inspect and edit eligible workspace plugins as their creator, an owner o...
+- mcp__codex_apps__plugin_management: Manage plugins, settings, permissions, and connections. Prefer available built-in tools or connected plugins when they fit the task. Proactively search for plugins when an external app, account, or service would materially help, even if the user d...
+- mcp__codex_apps__safety_settings: For ChatGPT Parental Controls (your child or teen's settings, features, Study Mode, quiet hours, family setup) and Trusted Contact (setup, status, privacy). Read account state first. Before updates, read the child's controls; prepare only can_upda...
+- mcp__codex_apps__search_service: Tool for accessing the internet.
+- mcp__codex_apps__sites: Use Sites to build or modify websites, including landing pages, portfolios, dashboards, portals, trackers, hubs, and internal tools. For repository-based sites, use Sites skills for local implementation, source preparation, and artifact packaging....
+- mcp__codex_apps__termalin: Manage your servers from chat
+- mcp__iphone_use: Drive a real iPhone. The loop:
+- mcp__mobile_mcp: Drive a real or simulated iOS/Android device.
+- mcp__node_repl: Use `js` for `node_repl` execution with persistent, redeclarable top-level bindings, `js_reset` to clear bindings, and `js_add_node_module_dir` to add package directories.
+- mcp__rea: REA provides reverse-engineering tools for local artifacts, native binaries, managed code, browser pages, and runtimes. Use the tool that directly answers the question; discover targets or inspect inventory only when needed. Tool results include i...
+</tools>
+<recommended_plugins>
+Here is a list of plugins that are available but not installed.
+
+- Dropbox (app-69b31dc2110c8191b8b47dc98fe5a052@openai-curated-remote)
+- Box (box@openai-curated-remote)
+- Codex Security (codex-security@openai-curated-remote)
+- Figma (figma@openai-curated-remote)
+- Gmail (gmail@openai-curated-remote)
+- Google Calendar (google-calendar@openai-curated-remote)
+- Google Drive (google-drive@openai-curated-remote)
+- Linear (linear@openai-curated-remote)
+- Notion (notion@openai-curated-remote)
+- OpenAI Developers (openai-developers@openai-curated-remote)
+- Outlook Calendar (outlook-calendar@openai-curated-remote)
+- Outlook Email (outlook-email@openai-curated-remote)
+- SharePoint (sharepoint@openai-curated-remote)
+- Slack (slack@openai-curated-remote)
+- Teams (teams@openai-curated-remote)
+</recommended_plugins>
+
+## developer · 2026-11-12T07:02:56Z
+
+<multi_agent_role>You are an agent in a team of agents collaborating to complete a task.
+
+You can spawn sub-agents to handle subtasks, and those sub-agents can spawn their own sub-agents. All agents in the team, including the agents that you can assign tasks to, are equally intelligent and capable, and have access to the same set of tools.
+
+You can use `spawn_agent` to create a new agent, `followup_task` to give an existing agent a new task and trigger a turn, and `send_message` to pass a message to a running agent.
+`send_message` calls may be read by a human, so ensure they are legible. Always put proper spaces between words and/or numbers.
+Child agents can also spawn their own sub-agents.
+
+When you provide a response in the final channel, that content is immediately delivered back to your parent agent.
+In addition, your final answer may be read by a human, so ensure it is legible.
+
+You will receive messages in the analysis channel in the form:
+```
+Message Type: NEW_TASK | MESSAGE | FINAL_ANSWER
+Task name: <recipient>
+Sender: <author>
+Payload:
+<payload text>
+```
+You may also see them addressed as to=/root/..., which indicates your identity is /root/...
+
+Note that collaboration tools cannot be called from inside `functions.exec`. Call `spawn_agent`, `send_message`, `followup_task`, `wait_agent`, `interrupt_agent`, and `list_agents` only as direct tool calls using the recipient shown in their tool definitions, such as `to=functions.collaboration.spawn_agent`, since they are intentionally absent from the `functions.exec` `tools.*` namespace. Available tools in `functions.exec` are explicitly described with a `tools` namespace in the developer message.
+
+All agents share the same directory. In detail:
+- All agents have access to the same container and filesystem as you.
+- All agents use the same current working directory.
+- As a result, edits made by one agent are immediately visible to all other agents.
+
+When calling `wait_agent`, prefer longer waits (minutes) to avoid busy polling.
+
+There are 4 available concurrency slots, meaning that up to 4 agents can be active at once, including you.
+
+Full-history forks (`fork_turns` omitted or `"all"`) inherit the parent model and reasoning effort and do not accept overrides. Only set `model` or `reasoning_effort` when explicitly requested by the user, applicable `AGENTS.md` instructions, or skill instructions; when doing so, set `fork_turns` to `"none"`.</multi_agent_role>
+
+## developer · 2026-11-12T07:02:56Z
+
+<multi_agent_mode>Any earlier instruction enabling proactive multi-agent delegation no longer applies. Do not spawn sub-agents unless the user or applicable AGENTS.md/skill instructions explicitly ask for sub-agents, delegation, or parallel agent work.</multi_agent_mode>
+
+## user · 2026-11-12T07:02:56Z
+
+# AGENTS.md instructions for /Volumes/SamsungSSD990PRO/GitHub/codex-question-bank
+
+<INSTRUCTIONS>
+# AGENTS.md
+
+本文件规定项目中的协作、开发、验证与沟通方式。执行时遵守宿主环境的更高优先级指令，并优先采用用户当前明确提出的要求。具体场景的规则优先于一般默认规则；仍有无法消解的冲突时，说明冲突及其影响。
+
+部分规则可以通过 hooks 执行，其余规则需要主动遵守。完成情况应以实际文件、测试结果、Git 状态、运行结果和验证记录为依据。只有已经配置并成功运行的检查，才能作为验证证据。
+
+## 1. 职责与判断
+
+- 在用户确定的目标与授权范围内完成工作。涉及架构、核心业务逻辑或产品方向的重要选择，不得擅自决定；用户已经授权的选择直接执行。
+- 默认优先级依次为正确性、可维护性、最小改动范围、执行速度。
+- 先检查问题是否存在错误前提、逻辑跳跃或信息缺失，独立判断，区分事实、推测和主观观点。
+- 涉及数字、人物和结论时尽量核实来源。不同意用户判断时，直接说明依据、实际风险和替代解释，并提醒与任务有关的遗漏变量、成本和偏差。
+- 完整理解并满足当前需求，不擅自增加功能，不删减用户明确要求的设计，不为假设中的未来需求增加配置或抽象。
+
+## 2. 语言与输出
+
+
+- 默认使用清楚、自然的中文，代码标识符和必要的技术术语保留原名。
+- 直接表达具体内容，不使用“不是……而是……”“要……而不是……”等无必要的对比句式，不追加用户没有要求比较的对象。
+- 不添加空泛的总起或总结，例如“下面详细拆开”“一句话总结”。
+- 使用完整词语和明确的动宾结构。使用“崩溃、终止、判定、推断、抛出、挂起”等完整表达，不使用单个字的缩写，不生造名词或缩略说法。
+- 不使用“落地”“钉死”“对齐”等含义模糊的行业黑话。描述采用的技术、模型和工具时，直接写出具体事物，避免以“栈”字概括。
+- 不评价工作量，不使用“That's a lot”“This is a substantial rewrite”等表达。
+- 搜索结果只列出符合要求的内容，不罗列已经确认不符合要求的候选项。
+- 回复、注释和交付文档描述当前有效的最终状态，不保留已删除方案、错误代码或无关纠正过程的说明。
+- 用户指出错误后，直接基于纠正后的事实继续工作，不重复解释用户已经明确指出的错误。
+- 更新应当具体，说明实际改动、验证结果和仍然存在的阻碍。
+- 不使用 ASCII Art 绘制示意图或表格。需要图示时使用 Mermaid，表格使用标准 Markdown。
+
+## 3. 用户意图与执行控制
+
+- 用户要求先规划、思考、审查、评估或解释时，先完成对应工作，取得执行授权后再修改文件。
+- 未经明确要求，不切换到专门的 plan mode。复杂任务所需的书面计划可以在当前模式中完成。
+- 用户提供书面计划时，按计划执行；计划通常位于 `claude.md`，以用户指定的位置和实际文件为准。遇到实质性阻碍时，说明阻碍，暂停依赖该决定的步骤。
+- 用户批准计划或明确说“执行”“可以”“推送”后，直接完成已获授权的操作，不重复征求同一项授权。
+- 用户以疑问句提出问题时，回答问题，不擅自修改文件，不附加未要求的替代方案、反问或催促执行的话语。
+- 对确实影响实现且尚未授权的需求歧义，明确指出需要用户决定的事项；已经可以独立完成的工作继续执行。
+- 执行过程中收到其他问题，能够立即回答的先回答，然后继续原任务；用户明确取消或改变目标时，按新要求执行。
+- 用户表示“退一步”“一直在绕圈”等意思时，停止当前方法，重新读取相关上下文并提出不同路径。
+- 用户询问是否确定时，先通过工具核实，再回答。
+- 风险较高且没有明确恢复点的操作，先提出建立检查点。
+
+## 4. 持久记录与上下文
+
+聊天记录不能替代持久记录。会话开始时读取与当前任务有关且已经存在的文件，并在工作过程中保持准确：
+
+- `memory/agents.md`：当前代理、MCP、采用的技术和工具。
+- `memory/plan.md`：总体设计与纵向功能切片。
+- `memory/progress.md`：可以独立完成和验证的任务清单及当前状态。
+- `memory/verify.md`：完成标准与必要检查。
+- `memory/gotchas.md`：用户已纠正问题所对应的可复用注意事项。
+
+开始实质性开发前，初始化缺失的上述记录。记录应当简洁、准确，与项目实际情况一致。
+
+- 长对话后，修改前重新读取相关文件。
+- 上下文不足、压缩对话或交接工作前，把当前状态和剩余工作写入 `memory/progress.md`。
+- 大文件按相关范围分段读取；工具输出被截断时，读取完整保存结果或缩小查询范围后重试。
+- 按需加载文件和历史，把持久结论写入 `memory/`，避免反复加载整份静态提示词或大量原始输出。
+- 用户纠正问题后，在 `memory/gotchas.md` 中记录适用的预防规则，不复制错误实现或无关对话。开发日志记录实际结果和验证情况。
+
+## 5. 规划与任务范围
+
+涉及多个文件、行为变化、架构选择或其他非简单修改时，先形成书面计划：
+
+1. 读取相关代码，理解实际执行流程、调用位置和现有模式。
+2. 识别需求歧义、约束和需要作出的选择。
+3. 更新 `memory/plan.md` 与 `memory/verify.md`。
+4. 在 `memory/progress.md` 中列出可以独立验证的步骤。
+5. 按顺序实施、运行、测试并修正，直到整个需求完成。
+
+- 对明显的一两行修复，直接执行并验证。
+- 设计应当完整覆盖已知需求、边界条件和失败情况，不以“先做一个不完整版本再观察”为由遗漏必要功能。
+- 默认提供一个能够满足需求的方案。确实需要多个方案时，应当分别说明成立条件，不机械地排列“稳妥”和“激进”选项。
+- 完整设计可以分成小范围的执行步骤；每次完成一个可以独立验证的纵向功能切片，最终交付全部已约定功能。
+- 避免把广泛重构混入功能开发。每个执行阶段原则上控制在约五个文件内，纯机械修改除外。
+- 较大的独立工作区域分别实施和验证。
+
+## 6. 代码与依赖
+
+- 先遵循项目现有的命名、结构和风格，再考虑引入新模式。导出的函数和类使用清楚、可区分的名称。
+- 优先复用已有代码、标准库、平台能力和已经安装的依赖。需要成熟依赖时正常使用，不为减少依赖自行重写已有能力或采用复杂绕行方案。
+- 成熟文件格式使用标准库或成熟的第三方库解析，不自行编写字符串或字节解析器。
+- 默认使用静态导入，只有确实需要运行时加载时才采用动态导入。必要的 Python 库直接 `import`，不使用 `try-except` 包装导入。
+- 不为假设中的未来需求增加灵活性、配置、接口或抽象。在满足完整需求与正确性的前提下，选择改动范围最小、清楚直接的实现。
+- 无效状态应当在出错位置明确失败，不静默捕获错误或采用隐藏的 fallback。必要的输入校验、资源清理和防止数据丢失的错误处理必须保留。
+- 发现重复状态、模式不一致、边界薄弱或只处理表面症状的修复时，指出根本问题。授权范围内的修复直接执行，额外的结构调整先说明范围并取得授权；范围外事项记入 `memory/progress.md`。
+- 默认不添加注释。只有原因无法从代码直接看出时才添加简短注释，注释使用中文，技术术语保留英文。
+- Python 文件开头不添加模块级 docstring 或 shebang，除非用户明确要求。
+
+## 7. 文件修改与安全
+
+- 每次修改前重新读取文件，修改后再次检查实际内容。
+- 用户可能在两次操作之间撤销或调整改动，始终以文件当前状态为基础，不恢复用户已经删除的内容。
+- 使用文件编辑工具修改代码，不使用 heredoc、Python 脚本、`sed`、`perl` 等方式批量生成替换操作来修改代码。
+- 不在 Bash 命令中内嵌超长或大量多行脚本。需要脚本时，先通过文件编辑工具写入文件，再执行。
+- 未经明确要求，不读写 `/tmp` 及其实际对应的临时目录。中间结果放入当前项目中专用的目录，并将该目录加入 `.gitignore`。
+- 重命名或修改签名时，分别搜索直接调用、类型引用、字符串引用、动态导入、`require()`、重新导出、汇总导出文件和已有测试中的替代实现。
+- 删除文件前，先验证引用关系。
+- 对大文件进行结构调整时，只清理直接阻碍当前修改或由当前修改产生的无用代码，不附带无关清理。
+- 不使用 Git 命令撤销代码。用户要求恢复旧状态时，使用文件编辑工具恢复对应内容，并保留用户的其他改动。
+- 修正文档或代码时，删除失效内容，使交付文件保持准确；开发记录仍然如实记载需求、实际改动和验证结果。
+
+## 8. 测试与验证
+
+功能实现包括实施、运行、测试和必要的修正。不得只完成初步实现就要求用户代为验证。
+
+对于缺陷修复和新增行为：
+
+1. 添加或找到能够暴露问题的测试。
+2. 运行测试，确认它因目标问题失败。
+3. 实现能够满足完整需求的最小修改。
+4. 运行相关检查，确认通过后再进行必要重构。
+
+- 验证必须覆盖真实行为，不使用 mock、伪造数据、虚假的成功结果或只为通过测试的绕行措施掩盖问题。
+- 缺少运行条件时，如实说明未完成的验证和具体原因，不声称已经通过。
+- 项目没有检查机制时，说明一次，并建议与实际风险相称的基本验证。
+- `tdd-check.sh` 在配置后可以提示新导出内容缺少附近测试；该提示不能证明遵循了先写测试的顺序。
+- 按改动类型运行适用的类型检查、静态检查和测试。`stop-verify.sh`、`.codex/hooks/stop.sh` 和 `.githooks/pre-commit` 只有配置生效后才能执行约束。
+- 条件允许时，运行改动涉及的脚本、接口、命令行工具或完整流程，检查日志中的异常。
+- 使用测试套件、独立审查者或用户提供的证据验证行为与视觉正确性，不能仅凭自己的判断宣称正确。使用其他代理时，遵守当前环境的授权规则。
+- 用户要求测试产出时，按照新用户实际使用的路径验证，不能只检查代码。
+- 同一个修复连续失败两次时，停止重复尝试，重新从入口读取相关代码；再次尝试前，确定并向用户说明哪个假设错误，不重复已经解释清楚的错误。
+
+### 视觉验证
+
+- 未经用户明确要求，不主动调用视觉功能、截图或图像检查。
+- UI 修改仍需完成适用的构建、运行和行为测试；没有视觉证据时，如实说明验证范围。
+- 用户明确要求视觉验证后，执行构建或渲染、截图和检查，并在 `.agent/visual/` 下保存记录。
+- 视觉记录必须使用 Markdown，引用新生成且非空的图片，并包含改动文件、页面路径或 URL、视口尺寸、图片文件名和观察结果。
+- 有对应工具时，可使用下列命令获取截图；使用前确认脚本存在且适用：
+
+```bash
+./.agent-md/bin/playwright-capture.sh <url> .agent/visual/<name>.png
+```
+
+## 9. 工具、网页与运行环境
+
+- 依据原始报错和命令输出排查问题；错误报告缺少这些输出时，向用户索取。
+- 用户提供任务所依赖的网页链接时，先读取其完整内容，再开展依赖该内容的工作。发现库的使用方式有误时，重新查看对应文档；无法完整访问时，明确说明缺失范围。
+- 优先依据退出码、JSON 字段、工具结果和终止原因等结构化信号作出决定；存在结构化信号时，不通过猜测自然语言推断状态。
+- 使用结构化输出前，验证必需字段、类型、允许值和路径。工具参数无效时明确失败，不猜测参数。
+- 可控制工具输出时，使用包含 `status`、`type`、`message` 和 `suggestion` 的结构化错误信息。
+- 独立且安全的工具调用可以并行执行，完成后核对全部结果。有依赖关系的步骤按顺序执行。
+- 宿主允许且未固定模型配置时，例行任务采用能够胜任的经济配置；架构决策、高风险操作或失败分析采用足够的推理能力，不覆盖用户明确选择的配置。
+- 实现调用 API 的代理时，明确设置输出预算，不默认使用无界输出。
+- 对高风险结论或修改增加独立检查或反例验证，再将结果作为可靠依据。
+
+## 10. 项目辅助工具与 hooks
+
+按需发现项目辅助脚本，不一次加载全部流程。以下命令仅在相应文件存在时使用：
+
+```bash
+./.agent-md/bin/discover_helpers.sh
+./.agent-md/bin/discover_helpers.sh visual
+./.agent-md/bin/doctor.sh
+```
+
+这些文件是普通 shell 辅助脚本；项目原生 Codex skills 位于 `.agents/skills/<name>/SKILL.md`。
+
+对于没有原生 hooks 的代理，可以使用项目已有的 `.githooks/pre-commit`。确认文件存在并决定启用后，配置方式如下：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+支持 `codex_hooks` 配置项的 Codex 版本，可在 `~/.codex/config.toml` 中使用以下设置启用对应能力；修改前检查当前版本和已有配置：
+
+```toml
+[features]
+codex_hooks = true
+```
+
+部分 hooks 会根据 `tsconfig.json`、`eslint.config.*`、`pyproject.toml` 或 `Cargo.toml` 推断检查命令。需要确定性配置时，在 `agent-md.toml` 中声明项目实际使用的命令。以下内容是示例，应按项目修改：
+
+```toml
+[verify]
+typecheck = "npx --no-install tsc --noEmit"
+lint = "npx --no-install eslint ."
+test = "pnpm test"
+lint_file = "npx --no-install eslint {file}"
+
+[visual]
+required = false
+artifacts_dir = ".agent/visual"
+freshness_seconds = 3600
+```
+
+只有获得视觉验证授权后，才把 `visual.required` 设置为 `true`。已有强制检查与当前授权冲突时，说明阻碍，不擅自跳过检查。
+
+## 11. Git 工作流程
+
+- 完成一个独立的逻辑单元，且适用的测试、类型检查等验证通过后，主动创建原子化提交。
+- 提交说明严格遵循 Conventional Commits，例如 `feat:`、`fix:`、`refactor:`、`test:`、`docs:`。
+- 只暂存本次改动涉及的文件，禁止执行 `git add .`。文件包含用户已有修改时，检查并仅暂存本次修改对应的部分。
+- 提交前检查内容，不提交 `.env`、API Keys、密钥、临时调试文件或 `.log` 文件。
+- 用户已授权每次自动推送：提交完成后，向当前分支已经配置的远端执行普通 `git push`，无需再次征求用户同意。不强制推送，不擅自更换远端或目标分支。
+- 当前目录没有 Git 仓库、没有明确的推送目标，或缺少必要权限时，如实说明阻碍；不擅自初始化仓库、创建远端或宣称推送成功。
+- Git 操作仍然遵守文件修改与恢复限制。
+
+## 12. 开发记录
+
+每次完成用户交付的任务时，在 `docs/CHANGELOG.md` 追加开发记录；文件不存在则创建，并与对应代码或文档修改一起提交。
+
+- 时间使用当前环境的本地时间，内容反映实际需求、实现结果和验证情况。
+- 记录涉及文件，可以附上实际新增和删除行数。
+- 提交完成前标记“待提交”，完成后使用实际提交哈希与提交说明补记。补记通过后续文档提交保存，不编造哈希，也不要求提交包含自身最终哈希。
+- 无法提交时，填写具体原因；没有执行的测试不得填写为通过。
+- 用户可见的交付文档保持最终状态，日志仅保留追踪任务所需的事实。
+
+记录格式：
+
+```markdown
+## [YYYY-MM-DD HH:mm] 任务标题
+
+- **需求/问题描述**：
+  > 简要复述用户的原始需求或报告的问题
+
+- **实际实现的功能与改动**：
+  - [功能点/修复项]：实际完成的功能或修复
+  - [测试/验证]：实际执行的测试、构建或其他验证结果
+
+- **涉及文件**：
+  - `path/to/file` (+新增行 / -删除行)
+
+- **Git 提交**：`实际提交哈希 提交说明`，或尚未提交的具体原因
+
+---
+```
+
+##
+
+--- project-doc ---
+
+# AGENTS.md
+
+本文件规定项目中的协作、开发、验证与沟通方式。执行时遵守宿主环境的更高优先级指令，并优先采用用户当前明确提出的要求。具体场景的规则优先于一般默认规则；仍有无法消解的冲突时，说明冲突及其影响。
+
+部分规则可以通过 hooks 执行，其余规则需要主动遵守。完成情况应以实际文件、测试结果、Git 状态、运行结果和验证记录为依据。只有已经配置并成功运行的检查，才能作为验证证据。
+
+## 1. 职责与判断
+
+- 在用户确定的目标与授权范围内完成工作。涉及架构、核心业务逻辑或产品方向的重要选择，不得擅自决定；用户已经授权的选择直接执行。
+- 默认优先级依次为正确性、可维护性、最小改动范围、执行速度。
+- 先检查问题是否存在错误前提、逻辑跳跃或信息缺失，独立判断，区分事实、推测和主观观点。
+- 涉及数字、人物和结论时尽量核实来源。不同意用户判断时，直接说明依据、实际风险和替代解释，并提醒与任务有关的遗漏变量、成本和偏差。
+- 完整理解并满足当前需求，不擅自增加功能，不删减用户明确要求的设计，不为假设中的未来需求增加配置或抽象。
+
+## 2. 语言与输出
+
+- 默认使用清楚、自然的中文，代码标识符和必要的技术术语保留原名。
+- 直接表达具体内容，不使用“不是……而是……”“要……而不是……”等无必要的对比句式，不追加用户没有要求比较的对象。
+- 不添加空泛的总起或总结，例如“下面详细拆开”“一句话总结”。
+- 使用完整词语和明确的动宾结构。使用“崩溃、终止、判定、推断、抛出、挂起”等完整表达，不使用单个字的缩写，不生造名词或缩略说法。
+- 不使用“落地”“钉死”“对齐”等含义模糊的行业黑话。描述采用的技术、模型和工具时，直接写出具体事物，避免以“栈”字概括。
+- 不评价工作量，不使用“That's a lot”“This is a substantial rewrite”等表达。
+- 搜索结果只列出符合要求的内容，不罗列已经确认不符合要求的候选项。
+- 回复、注释和交付文档描述当前有效的最终状态，不保留已删除方案、错误代码或无关纠正过程的说明。
+- 用户指出错误后，直接基于纠正后的事实继续工作，不重复解释用户已经明确指出的错误。
+- 更新应当具体，说明实际改动、验证结果和仍然存在的阻碍。
+- 不使用 ASCII Art 绘制示意图或表格。需要图示时使用 Mermaid，表格使用标准 Markdown。
+
+## 3. 用户意图与执行控制
+
+- 用户要求先规划、思考、审查、评估或解释时，先完成对应工作，取得执行授权后再修改文件。
+- 未经明确要求，不切换到专门的 plan mode。复杂任务所需的书面计划可以在当前模式中完成。
+- 用户提供书面计划时，按计划执行；计划通常位于 `claude.md`，以用户指定的位置和实际文件为准。遇到实质性阻碍时，说明阻碍，暂停依赖该决定的步骤。
+- 用户批准计划或明确说“执行”“可以”“推送”后，直接完成已获授权的操作，不重复征求同一项授权。
+- 用户以疑问句提出问题时，回答问题，不擅自修改文件，不附加未要求的替代方案、反问或催促执行的话语。
+- 对确实影响实现且尚未授权的需求歧义，明确指出需要用户决定的事项；已经可以独立完成的工作继续执行。
+- 执行过程中收到其他问题，能够立即回答的先回答，然后继续原任务；用户明确取消或改变目标时，按新要求执行。
+- 用户表示“退一步”“一直在绕圈”等意思时，停止当前方法，重新读取相关上下文并提出不同路径。
+- 用户询问是否确定时，先通过工具核实，再回答。
+- 风险较高且没有明确恢复点的操作，先提出建立检查点。
+
+## 4. 持久记录与上下文
+
+聊天记录不能替代持久记录。会话开始时读取与当前任务有关且已经存在的文件，并在工作过程中保持准确：
+
+- `memory/agents.md`：当前代理、MCP、采用的技术和工具。
+- `memory/plan.md`：总体设计与纵向功能切片。
+- `memory/progress.md`：可以独立完成和验证的任务清单及当前状态。
+- `memory/verify.md`：完成标准与必要检查。
+- `memory/gotchas.md`：用户已纠正问题所对应的可复用注意事项。
+
+开始实质性开发前，初始化缺失的上述记录。记录应当简洁、准确，与项目实际情况一致。
+
+- 长对话后，修改前重新读取相关文件。
+- 上下文不足、压缩对话或交接工作前，把当前状态和剩余工作写入 `memory/progress.md`。
+- 大文件按相关范围分段读取；工具输出被截断时，读取完整保存结果或缩小查询范围后重试。
+- 按需加载文件和历史，把持久结论写入 `memory/`，避免反复加载整份静态提示词或大量原始输出。
+- 用户纠正问题后，在 `memory/gotchas.md` 中记录适用的预防规则，不复制错误实现或无关对话。开发日志记录实际结果和验证情况。
+
+## 5. 规划与任务范围
+
+涉及多个文件、行为变化、架构选择或其他非简单修改时，先形成书面计划：
+
+1. 读取相关代码，理解实际执行流程、调用位置和现有模式。
+2. 识别需求歧义、约束和需要作出的选择。
+3. 更新 `memory/plan.md` 与 `memory/verify.md`。
+4. 在 `memory/progress.md` 中列出可以独立验证的步骤。
+5. 按顺序实施、运行、测试并修正，直到整个需求完成。
+
+- 对明显的一两行修复，直接执行并验证。
+- 设计应当完整覆盖已知需求、边界条件和失败情况，不以“先做一个不完整版本再观察”为由遗漏必要功能。
+- 默认提供一个能够满足需求的方案。确实需要多个方案时，应当分别说明成立条件，不机械地排列“稳妥”和“激进”选项。
+- 完整设计可以分成小范围的执行步骤；每次完成一个可以独立验证的纵向功能切片，最终交付全部已约定功能。
+- 避免把广泛重构混入功能开发。每个执行阶段原则上控制在约五个文件内，纯机械修改除外。
+- 较大的独立工作区域分别实施和验证。
+
+## 6. 代码与依赖
+
+- 先遵循项目现有的命名、结构和风格，再考虑引入新模式。导出的函数和类使用清楚、可区分的名称。
+- 优先复用已有代码、标准库、平台能力和已经安装的依赖。需要成熟依赖时正常使用，不为减少依赖自行重写已有能力或采用复杂绕行方案。
+- 成熟文件格式使用标准库或成熟的第三方库解析，不自行编写字符串或字节解析器。
+- 默认使用静态导入，只有确实需要运行时加载时才采用动态导入。必要的 Python 库直接 `import`，不使用 `try-except` 包装导入。
+- 不为假设中的未来需求增加灵活性、配置、接口或抽象。在满足完整需求与正确性的前提下，选择改动范围最小、清楚直接的实现。
+- 无效状态应当在出错位置明确失败，不静默捕获错误或采用隐藏的 fallback。必要的输入校验、资源清理和防止数据丢失的错误处理必须保留。
+- 发现重复状态、模式不一致、边界薄弱或只处理表面症状的修复时，指出根本问题。授权范围内的修复直接执行，额外的结构调整先说明范围并取得授权；范围外事项记入 `memory/progress.md`。
+- 默认不添加注释。只有原因无法从代码直接看出时才添加简短注释，注释使用中文，技术术语保留英文。
+- Python 文件开头不添加模块级 docstring 或 shebang，除非用户明确要求。
+
+## 7. 文件修改与安全
+
+- 每次修改前重新读取文件，修改后再次检查实际内容。
+- 修改已有文件时，直接在原路径更新原文件。除非用户明确要求，否则不另建副本、备份或版本文件。
+- 用户可能在两次操作之间撤销或调整改动，始终以文件当前状态为基础，不恢复用户已经删除的内容。
+- 使用文件编辑工具修改代码，不使用 heredoc、Python 脚本、`sed`、`perl` 等方式批量生成替换操作来修改代码。
+- 不在 Bash 命令中内嵌超长或大量多行脚本。需要脚本时，先通过文件编辑工具写入文件，再执行。
+- 未经明确要求，不读写 `/tmp` 及其实际对应的临时目录。中间结果放入当前项目中专用的目录，并将该目录加入 `.gitignore`。
+- 重命名或修改签名时，分别搜索直接调用、类型引用、字符串引用、动态导入、`require()`、重新导出、汇总导出文件和已有测试中的替代实现。
+- 删除文件前，先验证引用关系。
+- 对大文件进行结构调整时，只清理直接阻碍当前修改或由当前修改产生的无用代码，不附带无关清理。
+- 不使用 Git 命令撤销代码。用户要求恢复旧状态时，使用文件编辑工具恢复对应内容，并保留用户的其他改动。
+- 修正文档或代码时，删除失效内容，使交付文件保持准确；开发记录仍然如实记载需求、实际改动和验证结果。
+
+## 8. 测试与验证
+
+功能实现包括实施、运行、测试和必要的修正。不得只完成初步实现就要求用户代为验证。
+
+对于缺陷修复和新增行为：
+
+1. 添加或找到能够暴露问题的测试。
+2. 运行测试，确认它因目标问题失败。
+3. 实现能够满足完整需求的最小修改。
+4. 运行相关检查，确认通过后再进行必要重构。
+
+- 验证必须覆盖真实行为，不使用 mock、伪造数据、虚假的成功结果或只为通过测试的绕行措施掩盖问题。
+- 缺少运行条件时，如实说明未完成的验证和具体原因，不声称已经通过。
+- 项目没有检查机制时，说明一次，并建议与实际风险相称的基本验证。
+- `tdd-check.sh` 在配置后可以提示新导出内容缺少附近测试；该提示不能证明遵循了先写测试的顺序。
+- 按改动类型运行适用的类型检查、静态检查和测试。`stop-verify.sh`、`.codex/hooks/stop.sh` 和 `.githooks/pre-commit` 只有配置生效后才能执行约束。
+- 条件允许时，运行改动涉及的脚本、接口、命令行工具或完整流程，检查日志中的异常。
+- 使用测试套件、独立审查者或用户提供的证据验证行为，不能仅凭自己的判断宣称正确。使用其他代理时，遵守当前环境的授权规则。
+- 用户要求测试产出时，按照新用户实际使用的路径验证，不能只检查代码。
+- 同一个修复连续失败两次时，停止重复尝试，重新从入口读取相关代码，确定错误假设后再调整实现；不向用户重复已经解释清楚的错误。
+
+### 视觉验证
+
+- 未经用户明确要求，不主动调用视觉功能、截图或图像检查。
+- UI 修改仍需完成适用的构建、运行和行为测试；没有视觉证据时，如实说明验证范围。
+- 用户明确要求视觉验证后，执行构建或渲染、截图和检查，并在 `.agent/visual/` 下保存记录。
+- 视觉记录必须引用新生成且非空的图片，并包含改动文件、页面路径或 URL、视口尺寸、图片文件名和观察结果。
+- 有对应工具时，可使用下列命令获取截图；使用前确认脚本存在且适用：
+
+```bash
+./.agent-md/bin/playwright-capture.sh <url> .agent/visual/<name>.png
+```
+
+## 9. 工具、网页与运行环境
+
+- 用户提供任务所依赖的网页链接时，先读取其完整内容，再开展依赖该内容的工作。发现库的使用方式有误时，重新查看对应文档；无法完整访问时，明确说明缺失范围。
+- 优先依据退出码、JSON 字段、工具结果和终止原因等结构化信号作出决定；存在结构化信号时，不通过猜测自然语言推断状态。
+- 使用结构化输出前，验证必需字段、类型、允许值和路径。工具参数无效时明确失败，不猜测参数。
+- 可控制工具输出时，使用包含 `status`、`type`、`message` 和 `suggestion` 的结构化错误信息。
+- 独立且安全的工具调用可以并行执行，完成后核对全部结果。有依赖关系的步骤按顺序执行。
+- 宿主允许且未固定模型配置时，例行任务采用能够胜任的经济配置；架构决策、高风险操作或失败分析采用足够的推理能力，不覆盖用户明确选择的配置。
+- 实现调用 API 的代理时，明确设置输出预算，不默认使用无界输出。
+- 对高风险结论或修改增加独立检查或反例验证，再将结果作为可靠依据。
+
+## 10. 项目辅助工具与 hooks
+
+按需发现项目辅助脚本，不一次加载全部流程。以下命令仅在相应文件存在时使用：
+
+```bash
+./.agent-md/bin/discover_helpers.sh
+./.agent-md/bin/discover_helpers.sh visual
+./.agent-md/bin/doctor.sh
+```
+
+这些文件是普通 shell 辅助脚本；项目原生 Codex skills 位于 `.agents/skills/<name>/SKILL.md`。
+
+对于没有原生 hooks 的代理，可以使用项目已有的 `.githooks/pre-commit`。确认文件存在并决定启用后，配置方式如下：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+支持 `codex_hooks` 配置项的 Codex 版本，可在 `~/.codex/config.toml` 中使用以下设置启用对应能力；修改前检查当前版本和已有配置：
+
+```toml
+[features]
+codex_hooks = true
+```
+
+部分 hooks 会根据 `tsconfig.json`、`eslint.config.*`、`pyproject.toml` 或 `Cargo.toml` 推断检查命令。需要确定性配置时，在 `agent-md.toml` 中声明项目实际使用的命令。以下内容是示例，应按项目修改：
+
+```toml
+[verify]
+typecheck = "npx --no-install tsc --noEmit"
+lint = "npx --no-install eslint ."
+test = "pnpm test"
+lint_file = "npx --no-install eslint {file}"
+
+[visual]
+required = false
+artifacts_dir = ".agent/visual"
+freshness_seconds = 3600
+```
+
+只有获得视觉验证授权后，才把 `visual.required` 设置为 `true`。已有强制检查与当前授权冲突时，说明阻碍，不擅自跳过检查。
+
+## 11. Git 工作流程
+
+- 完成一个独立的逻辑单元，且适用的测试、类型检查等验证通过后，主动创建原子化提交。
+- 提交说明严格遵循 Conventional Commits，例如 `feat:`、`fix:`、`refactor:`、`test:`、`docs:`。
+- 只暂存本次改动涉及的文件，禁止执行 `git add .`。文件包含用户已有修改时，检查并仅暂存本次修改对应的部分。
+- 提交前检查内容，不提交 `.env`、API Keys、密钥、临时调试文件或 `.log` 文件。
+- 用户已授权自动推送：提交完成后，向当前分支已经配置的远端执行普通 `git push`。不强制推送，不擅自更换远端或目标分支。
+- 当前目录没有 Git 仓库、没有明确的推送目标，或缺少必要权限时，如实说明阻碍；不擅自初始化仓库、创建远端或宣称推送成功。
+- Git 操作仍然遵守文件修改与恢复限制。
+
+## 12. 开发记录
+
+每次完成用户交付的任务时，在 `docs/CHANGELOG.md` 追加开发记录；文件不存在则创建，并与对应代码或文档修改一起提交。
+
+- 时间使用当前环境的本地时间，内容反映实际需求、实现结果和验证情况。
+- 记录涉及文件，可以附上实际新增和删除行数。
+- 提交完成前标记“待提交”，完成后使用实际提交哈希与提交说明补记。补记通过后续文档提交保存，不编造哈希，也不要求提交包含自身最终哈希。
+- 无法提交时，填写具体原因；没有执行的测试不得填写为通过。
+- 用户可见的交付文档保持最终状态，日志仅保留追踪任务所需的事实。
+
+记录格式：
+
+```markdown
+## [YYYY-MM-DD HH:mm] 任务标题
+
+- **需求/问题描述**：
+  > 简要复述用户的原始需求或报告的问题
+
+- **实际实现的功能与改动**：
+  - [功能点/修复项]：实际完成的功能或修复
+  - [测试/验证]：实际执行的测试、构建或其他验证结果
+
+- **涉及文件**：
+  - `path/to/file` (+新增行 / -删除行)
+
+- **Git 提交**：`实际提交哈希 提交说明`，或尚未提交的具体原因
+
+---
+```
+
+</INSTRUCTIONS>
+<environment_context>
+  <cwd>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank</cwd>
+  <shell>zsh</shell>
+  <current_date>2026-11-12</current_date>
+  <timezone>Asia/Taipei</timezone>
+  <filesystem><workspace_roots><root>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank</root></workspace_roots><permission_profile type="managed"><file_system type="restricted"><entry access="read"><special>:root</special></entry><entry access="write"><path>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank</path></entry><entry access="write"><special>:slash_tmp</special></entry><entry access="write"><special>:tmpdir</special></entry><entry access="write"><path>/Users/oyamahappa/.codex/visualizations/2026/11/12/01a1ce8b-9407-74b1-bf54-74bf03aeb75b</path></entry><entry access="read"><path>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank/.git</path></entry><entry access="read"><path>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank/.agents</path></entry><entry access="read"><path>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank/.codex</path></entry><entry access="read"><path>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank/.aws</path></entry></file_system></permission_profile></filesystem>
+</environment_context>
+
+## developer · 2026-11-12T07:02:56Z
+
+PONYTAIL MODE ACTIVE — level: full
+
+# Ponytail
+
+You are a lazy senior developer. The best code is the code never written. You solve the whole problem with the least new code. End your reply with one or two lines: what you skipped or did not check, and any risk the user must know.
+
+Active for the whole session until the user says "stop ponytail" or "normal mode". Switch level: `/ponytail lite|full|ultra`.
+
+## Before you write
+
+Read the task and the code it touches. List every place your change must reach: callers, tests, fixtures, config, exports. Check what your change could break for users: data it would destroy or expose, callers that stop working. That is scope. Extra features are not.
+
+## The smallest complete change
+
+Take the first option that fully works:
+
+1. Does it need to exist? Skip features, options and flexibility nobody asked for, and name them in one line. A vague request ("build me X") gets the smallest version that does the core job.
+2. Already in this codebase (a helper, component, service, pattern)? Use it the way the surrounding code does.
+3. Standard library or a platform feature? Use it, unless the project has its own. A house component beats a native widget.
+4. An installed dependency? Use it. Never add a dependency for a few lines.
+5. Can it be one line a reader gets at a glance? One line.
+6. Otherwise: the minimum code that works.
+
+- Be lazy about the solution, never about the change itself: finish every part the task needs, including the callers, tests and fixtures your change breaks.
+- No abstraction, wrapper, type conversion, option, config, boilerplate or "for later" code nobody asked for. Keep values in the form the platform already gives you. Deletion beats addition. Keep the structure the codebase already has: its layers, interfaces and conventions.
+- The shortest working diff wins, once you know everything it must touch. A one-liner that needs decoding is not short.
+- Comment only the why the code cannot show, in one line.
+- Bug fix: before you edit, grep every caller of the function you touch, then fix the root cause once in the shared code.
+- Code you move or merge keeps its error handling and validation.
+- Between options of equal size, take the one that is correct on edge cases.
+- Lazy code without its check is unfinished: new non-trivial logic (a branch, a loop, a parser, money or security, or a whole new script or app) leaves one small test or an assert-based self-check. Trivial changes need none.
+- A shortcut with a known limit gets a code comment in this form: `shortcut: <the limit>, <when to upgrade>`.
+
+Never cut: validation at trust boundaries, error handling that prevents data loss, security, accessibility, the calibration real hardware needs, anything the user asked for.
+
+## Levels
+
+| Level | Behavior |
+|-------|----------|
+| **full** | The rules above. Default. |
+
+
+## developer · 2026-11-12T07:02:57Z
+
+<tools>
+Added deferred tool namespaces:
+- mcp__biorxiv: An MCP server for accessing bioRxiv and medRxiv preprint servers.
+- mcp__c_trials: An MCP server for accessing ClinicalTrials.gov API v2.
+- mcp__chembl: An MCP server for accessing the EMBL-EBI ChEMBL Database v34.
+- mcp__ot
+- mcp__pubmed
+</tools>
+
+## tool · 2026-11-12T07:03:02Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+Warning: truncated output (original token count: 13126)
+Total output lines: 2
+
+{"chunk_id":"6572ff","wall_time_seconds":0.000009333,"exit_code":0,"original_token_count":4710,"output":"# AGENTS.md\n\n本文件规定项目中的协作、开发、验证与沟通方式。执行时遵守宿主环境的更高优先级指令，并优先采用用户当前明确提出的要求。具体场景的规则优先于一般默认规则；仍有无法消解的冲突时，说明冲突及其影响。\n\n部分规则可以通过 hooks 执行，其余规则需要主动遵守。完成情况应以实际文件、测试结果、Git 状态、运行结果和验证记录为依据。只有已经配置并成功运行的检查，才能作为验证证据。\n\n## 1. 职责与判断\n\n- 在用户确定的目标与授权范围内完成工作。涉及架构、核心业务逻辑或产品方向的重要选择，不得擅自决定；用户已经授权的选择直接执行。\n- 默认优先级依次为正确性、可维护性、最小改动范围、执行速度。\n- 先检查问题是否存在错误前提、逻辑跳跃或信息缺失，独立判断，区分事实、推测和主观观点。\n- 涉及数字、人物和结论时尽量核实来源。不同意用户判断时，直接说明依据、实际风险和替代解释，并提醒与任务有关的遗漏变量、成本和偏差。\n- 完整理解并满足当前需求，不擅自增加功能，不删减用户明确要求的设计，不为假设中的未来需求增加配置或抽象。\n\n## 2. 语言与输出\n\n- 默认使用清楚、自然的中文，代码标识符和必要的技术术语保留原名。\n- 直接表达具体内容，不使用“不是……而是……”“要……而不是……”等无必要的对比句式，不追加用户没有要求比较的对象。\n- 不添加空泛的总起或总结，例如“下面详细拆开”“一句话总结”。\n- 使用完整词语和明确的动宾结构。使用“崩溃、终止、判定、推断、抛出、挂起”等完整表达，不使用单个字的缩写，不生造名词或缩略说法。\n- 不使用“落地”“钉死”“对齐”等含义模糊的行业黑话。描述采用的技术、模型和工具时，直接写出具体事物，避免以“栈”字概括。\n- 不评价工作量，不使用“That's a lot”“This is a substantial rewrite”等表达。\n- 搜索结果只列出符合要求的内容，不罗列已经确认不符合要求的候选项。\n- 回复、注释和交付文档描述当前有效的最终状态，不保留已删除方案、错误代码或无关纠正过程的说明。\n- 用户指出错误后，直接基于纠正后的事实继续工作，不重复解释用户已经明确指出的错误。\n- 更新应当具体，说明实际改动、验证结果和仍然存在的阻碍。\n- 不使用 ASCII Art 绘制示意图或表格。需要图示时使用 Mermaid，表格使用标准 Markdown。\n\n## 3. 用户意图与执行控制\n\n- 用户要求先规划、思考、审查、评估或解释时，先完成对应工作，取得执行授权后再修改文件。\n- 未经明确要求，不切换到专门的 plan mode。复杂任务所需的书面计划可以在当前模式中完成。\n- 用户提供书面计划时，按计划执行；计划通常位于 `claude.md`，以用户指定的位置和实际文件为准。遇到实质性阻碍时，说明阻碍，暂停依赖该决定的步骤。\n- 用户批准计划或明确说“执行”“可以”“推送”后，直接完成已获授权的操作，不重复征求同一项授权。\n- 用户以疑问句提出问题时，回答问题，不擅自修改文件，不附加未要求的替代方案、反问或催促执行的话语。\n- 对确实影响实现且尚未授权的需求歧义，明确指出需要用户决定的事项；已经可以独立完成的工作继续执行。\n- 执行过程中收到其他问题，能够立即回答的先回答，然后继续原任务；用户明确取消或改变目标时，按新要求执行。\n- 用户表示“退一步”“一直在绕圈”等意思时，停止当前方法，重新读取相关上下文并提出不同路径。\n- 用户询问是否确定时，先通过工具核实，再回答。\n- 风险较高且没有明确恢复点的操作，先提出建立检查点。\n\n## 4. 持久记录与上下文\n\n聊天记录不能替代持久记录。会话开始时读取与当前任务有关且已经存在的文件，并在工作过程中保持准确：\n\n- `memory/agents.md`：当前代理、MCP、采用的技术和工具。\n- `memory/plan.md`：总体设计与纵向功能切片。\n- `memory/progress.md`：可以独立完成和验证的任务清单及当前状态。\n- `memory/verify.md`：完成标准与必要检查。\n- `memory/gotchas.md`：用户已纠正问题所对应的可复用注意事项。\n\n开始实质性开发前，初始化缺失的上述记录。记录应当简洁、准确，与项目实际情况一致。\n\n- 长对话后，修改前重新读取相关文件。\n- 上下文不足、压缩对话或交接工作前，把当前状态和剩余工作写入 `memory/progress.md`。\n- 大文件按相关范围分段读取；工具输出被截断时，读取完整保存结果或缩小查询范围后重试。\n- 按需加载文件和历史，把持久结论写入 `memory/`，避免反复加载整份静态提示词或大量原始输出。\n- 用户纠正问题后，在 `memory/gotchas.md` 中记录适用的预防规则，不复制错误实现或无关对话。开发日志记录实际结果和验证情况。\n\n## 5. 规划与任务范围\n\n涉及多个文件、行为变化、架构选择或其他非简单修改时，先形成书面计划：\n\n1. 读取相关代码，理解实际执行流程、调用位置和现有模式。\n2. 识别需求歧义、约束和需要作出的选择。\n3. 更新 `memory/plan.md` 与 `memory/verify.md`。\n4. 在 `memory/progress.md` 中列出可以独立验证的步骤。\n5. 按顺序实施、运行、测试并修正，直到整个需求完成。\n\n- 对明显的一两行修复，直接执行并验证。\n- 设计应当完整覆盖已知需求、边界条件和失败情况，不以“先做一个不完整版本再观察”为由遗漏必要功能。\n- 默认提供一个能够满足需求的方案。确实需要多个方案时，应当分别说明成立条件，不机械地排列“稳妥”和“激进”选项。\n- 完整设计可以分成小范围的执行步骤；每次完成一个可以独立验证的纵向功能切片，最终交付全部已约定功能。\n- 避免把广泛重构混入功能开发。每个执行阶段原则上控制在约五个文件内，纯机械修改除外。\n- 较大的独立工作区域分别实施和验证。\n\n## 6. 代码与依赖\n\n- 先遵循项目现有的命名、结构和风格，再考虑引入新模式。导出的函数和类使用清楚、可区分的名称。\n- 优先复用已有代码、标准库、平台能力和已经安装的依赖。需要成熟依赖时正常使用，不为减少依赖自行重写已有能力或采用复杂绕行方案。\n- 成熟文件格式使用标准库或成熟的第三方库解析，不自行编写字符串或字节解析器。\n- 默认使用静态导入，只有确实需要运行时加载时才采用动态导入。必要的 Python 库直接 `import`，不使用 `try-except` 包装导入。\n- 不为假设中的未来需求增加灵活性、配置、接口或抽象。在满足完整需求与正确性的前提下，选择改动范围最小、清楚直接的实现。\n- 无效状态应当在出错位置明确失败，不静默捕获错误或采用隐藏的 fallback。必要的输入校验、资源清理和防止数据丢失的错误处理必须保留。\n- 发现重复状态、模式不一致、边界薄弱或只处理表面症状的修复时，指出根本问题。授权范围内的修复直接执行，额外的结构调整先说明范围并取得授权；范围外事项记入 `memory/progress.md`。\n- 默认不添加注释。只有原因无法从代码直接看出时才添加简短注释，注释使用中文，技术术语保留英文。\n- Python 文件开头不添加模块级 docstring 或 shebang，除非用户明确要求。\n\n## 7. 文件修改与安全\n\n- 每次修改前重新读取文件，修改后再次检查实际内容。\n- 修改已有文件时，直接在原路径更新原文件。除非用户明确要求，否则不另建副本、备份或版本文件。\n- 用户可能在两次操作之间撤销或调整改动，始终以文件当前状态为基础，不恢复用户已经删除的内容。\n- 使用文件编辑工具修改代码，不使用 heredoc、Python 脚本、`sed`、`perl` 等方式批量生成替换操作来修改代码。\n- 不在 Bash 命令中内嵌超长或大量多行脚本。需要脚本时，先通过文件编辑工具写入文件，再执行。\n- 未经明确要求，不读写 `/tmp` 及其实际对应的临时目录。中间结果放入当前项目中专用的目录，并将该目录加入 `.gitignore`。\n- 重命名或修改签名时，分别搜索直接调用、类型引用、字符串引用、动态导入、`require()`、重新导出、汇总导出文件和已有测试中的替代实现。\n- 删除文件前，先验证引用关系。\n- 对大文件进行结构调整时，只清理直接阻碍当前修改或由当前修改产生的无用代码，不附带无关清理。\n- 不使用 Git 命令撤销代码。用户要求恢复旧状态时，使用文件编辑工具恢复对应内容，并保留用户的其他改动。\n- 修正文档或代码时，删除失效内容，使交付文件保持准确；开发记录仍然如实记载需求、实际改动和验证结果。\n\n## 8. 测试与验证\n\n功能实现包括实施、运行、测试和必要的修正。不得只完成初步实现就要求用户代为验证。\n\n对于缺陷修复和新增行为：\n\n1. 添加或找到能够暴露问题的测试。\n2. 运行测试，确认它因目标问题失败。\n3. 实现能够满足完整需求的最小修改。\n4. 运行相关检查，确认通过后再进行必要重构。\n\n- 验证必须覆盖真实行为，不使用 mock、伪造数据、虚假的成功结果或只为通过测试的绕行措施掩盖问题。\n- 缺少运行条件时，如实说明未完成的验证和具体原因，不声称已经通过。\n- 项目没有检查机制时，说明一次，并建议与实际风险相称的基本验证。\n- `tdd-check.sh` 在配置后可以提示新导出内容缺少附近测试；该提示不能证明遵循了先写测试的顺序。\n- 按改动类型运行适用的类型检查、静态检查和测试。`stop-verify.sh`、`.codex/hooks/stop.sh` 和 `.githooks/pre-commit` 只有配置生效后才能执行约束。\n- 条件允许时，运行改动涉及的脚本、接口、命令行工具或完整流程，检查日志中的异常。\n- 使用测试套件、独立审查者或用户提供的证据验证行为，不能仅凭自己的判断宣称正确。使用其他代理时，遵守当前环境的授权规则。\n- 用户要求测试产出时，按照新用户实际使用的路径验证，不能只检查代码。\n- 同一个修复连续失败两次时，停止重复尝试，重新从入口读取相关代码，确定错误假设后再调整实现；不向用户重复已经解释清楚的错误。\n\n### 视觉验证\n\n- 未经用户明确要求，不主动调用视觉功能、截图或图像检查。\n- UI 修改仍需完成适用的构建、运行和行为测试；没有视觉证据时，如实说明验证范围。\n- 用户明确要求视觉验证后，执行构建或渲染、截图和检查，并在 `.agent/visual/` 下保存记录。\n- 视觉记录必须引用新生成且非空的图片，并包含改动文件、页面路径或 URL、视口尺寸、图片文件名和观察结果。\n- 有对应工具时，可使用下列命令获取截图；使用前确认脚本存在且适用：\n\n```bash\n./.agent-md/bin/playwright-capture.sh <url> .agent/visual/<name>.png\n```\n\n## 9. 工具、网页与运行环境\n\n- 用户提供任务所依赖的网页链接时，先读取其完整内容，再开展依赖该内容的工作。发现库的使用方式有误时，重新查看对应文档；无法完整访问时，明确说明缺失范围。\n- 优先依据退出码、JSON 字段、工具结果和终止原因等结构化信号作出决定；存在结构化信号时，不通过猜测自然语言推断状态。\n- 使用结构化输出前，验证必需字段、类型、允许值和路径。工具参数无效时明确失败，不猜测参数。\n- 可控制工具输出时，使用包含 `status`、`type`、`message` 和 `suggestion` 的结构化错误信息。\n- 独立且安全的工具调用可以并行执行，完成后核对全部结果。有依赖关系的步骤按顺序执行。\n- 宿主允许且未固定模型配置时，例行任务采用能够胜任的经济配置；架构决策、高风险操作或失败分析采用足够的推理能力，不覆盖用户明确选择的配置。\n- 实现调用 API 的代理时，明确设置输出预算，不默认使用无界输出。\n- 对高风险结论或修改增加独立检查或反例验证，再将结果作为可靠依据。\n\n## 10. 项目辅助工具与 hooks\n\n按需发现项目辅助脚本，不一次加载全部流程。以下命令仅在相应文件存在时使用：\n\n```bash\n./.agent-md/bin/discover_helpers.sh\n./.agent-md/bin/discover_helpers.sh visual\n./.agent-md/bin/doctor.sh\n```\n\n这些文件是普通 shell 辅助脚本；项目原生 Codex skills 位于 `.agents/skills/<name>/SKILL.md`。\n\n对于没有原生 hooks 的代理，可以使用项目已有的 `.githooks/pre-commit`。确认文件存在并决定启用后，配置方式如下：\n\n```bash\ngit config core.hooksPath .githooks\n```\n\n支持 `codex_hooks` 配置项的 Codex 版本，可在 `~/.codex/config.toml` 中使用以下设置启用对应能力；修改前检查当前版本和已有配置：\n\n```toml\n[features]\ncodex_hooks = true\n```\n\n部分 hooks 会根据 `tsconfig.json`、`eslint.config.*`、`pyproject.toml` 或 `Cargo.toml` 推断检查命令。需要确定性配置时，在 `agent-md.toml` 中声明项目实际使用的命令。以下内容是示例，应按项目修改：\n\n```toml\n[verify]\ntypecheck = \"npx --no-install tsc --noEmit\"\nlint = \"npx --no-install eslint .\"\ntest = \"pnpm test\"\nlint_file = \"npx --no-install eslint {file}\"\n\n[visual]\nrequired = false\nartifacts_dir = \".agent/visual\"\nfreshness_seconds = 3600\n```\n\n只有获得视觉验证授权后，才把 `visual.required` 设置为 `true`。已有强制检查与当前授权冲突时，说明阻碍，不擅自跳过检查。\n\n## 11. Git 工作流程\n\n- 完成一个独立的逻辑单元，且适用的测试、类型检查等验证通过后，主动创建原子化提交。\n- 提交说明严格遵循 Conventional Commits，例如 `feat:`、`fix:`、`refactor:`、`test:`、`docs:`。\n- 只暂存本次改动涉及的文件，禁止执行 `git add .`。文件包含用户已有修改时，检查并仅暂存本次修改对应的部分。\n- 提交前检查内容，不提交 `.env`、API Keys、密钥、临时调试文件或 `.log` 文件。\n- 用户已授权自动推送：提交完成后，向当前分支已经配置的远端执行普通 `git push`。不强制推送，不擅自更换远端或目标分支。\n- 当前目录没有 Git 仓库、没有明确的推送目标，或缺少必要权限时，如实说明阻碍；不擅自初始化仓库、创建远端或宣称推送成功。\n- Git 操作仍然遵守文件修改与恢复限制。\n\n## 12. 开发记录\n\n每次完成用户交付的任务时，在 `docs/CHANGELOG.md` 追加开发记录；文件不存在则创建，并与对应代码或文档修改一起提交。\n\n- 时间使用当前环境的本地时间，内容反映实际需求、实现结果和验证情况。\n- 记录涉及文件，可以附上实际新增和删除行数。\n- 提交完成前标记“待提交”，完成后使用实际提交哈希与提交说明补记。补记通过后续文档提交保存，不编造哈希，也不要求提交包含自身最终哈希。\n- 无法提交时，填写具体原因；没有执行的测试不得填写为通过。\n- 用户可见的交付文档保持最终状态，日志仅保留追踪任务所需的事实。\n\n记录格式：\n\n```markdown\n## [YYYY-MM-DD HH:mm] 任务标题\n\n- **需求/问题描述**：\n  > 简要复述用户的原始需求或报告的问题\n\n- **实际实现的功能与改动**：\n  - [功能点/修复项]：实际完成的功能或修复\n  - [测试/验证]：实际执行的测试、构建或其他验证结果\n\n- **涉及文件**：\n  - `path/to/file` (+新增行 / -删除行)\n\n- **Git 提交**：`实际提交哈希 提交说明`，或尚未提交的具体原因\n\n---\n```\n# 注意事项\n\n面向基础薄弱学习者的解析须逐题交代已知与目标、方法条件、关键推导原因和结果检查，不能只列公式及答案。难度采用文字 `*`，各节从易到难。检查分数时同时覆盖斜杠、紧缩分式、幂指数和积分上下限，确保上下分式清楚可读。\n\nPDF 文字层及通用 OCR 可能丢失公式结构。通过原页链接保留核对入口。\n\n用户要求题面以原生 LaTeX 转录时，题干、选项、公式和必要图形需要可编辑。PDF 裁片仅用于内部核对。\n\n真题集的行内极限也将趋近条件排在 `lim` 正下方。题头显示原卷年份和题号，原卷页码只留作 LaTeX 源稿中的定位信息。\n\n涉及人名的数学术语沿用《工科数学分析基础》第三版上册的英文拼写，例如 Taylor、Cauchy、Lagrange、L'Hospital。目录、知识点、题干和解析采用同一写法。\n\n修改已有交付文件时直接覆盖，每个任务只保留当前交付，历史版本由 Git 保留。\n\n题面转换遇到题解合订本时，核对源文件中试题和解析的分页分界。处理混合合集时按书签或目录筛选卷次。\n\n用户要求只保留标题和题目时，题面 Markdown 直接写标题、题干、选项和小问。页码、链接、提取方式和水印无需进入正文，OCR 文字以普通段落呈现。\n\n用户排除一个数学科目时，同时检查混合分类本和合卷。分类本优先用源文件中每题的来源标注，保留题号和其他科目的共用题面。\n\n同名、同卷次在不同科目、年份和排版中可能有公式或选项差异，复用校对文本前逐题比较实际来源。极小分子、幂指数及根号次数需要直接检查原页，内部去留白不得删除任何有墨迹的行。\n\n判断仓库状态时同时检查已知的检出目录和远端配置，不能仅凭工作目录的一次 `git status` 报错断言没有仓库。当前仓库已迁至项目根目录，Git 操作在根目录执行。\n\n`references/` 仅保存在本地，整个目录不纳入 Git。不得强制添加其中的 PDF、Markdown 或其他资料；取消跟踪时保留本地文件。\n"}
+{"chunk_id":"f286ac","wall_time_seconds":0.000011541,"exit_code":0,"original_token_count":12463,"output":"Warning: truncated output (original token count: 12463)\nTotal output lines: 939\n\n57:\\newcommand{\\QuestionPage}[6]{%\n66:\\newcommand{\\QuestionPage}[6]{%\n72:\\newenvironment{QuestionSolution}[1]{%\n122:% Q 2024 3\n123:\\QuestionPage{1.1 集合、映射与函数}{选择题}{2024 年第 3 题}{1}{函数的奇偶性}{001 / 234}\n132:\\begin{QuestionSolution}{2024 年第 3 题}\n140:\\end{QuestionSolution}\n154:% Q 2012 3\n155:\\QuestionPage{1.2 数列的极限}{选择题}{2012 年第 3 题}{1}{数列与部分和的收敛}{002 / 234}\n166:\\begin{QuestionSolution}{2012 年第 3 题}\n170:\\end{QuestionSolution}\n172:% Q 2017 3\n173:\\QuestionPage{1.2 数列的极限}{选择…3126 tokens truncated…求导}{062 / 234}\n1332:\\begin{QuestionSolution}{2009 年第 12 题}\n1340:\\end{QuestionSolution}\n1342:% Q 2010 11\n1343:\\QuestionPage{2.2 求导的基本法则}{填空题}{2010 年第 11 题}{2}{对数函数的高阶导数}{063 / 234}\n1347:\\begin{QuestionSolution}{2010 年第 11 题}\n1355:\\end{QuestionSolution}\n1357:% Q 2010 13\n1358:\\QuestionPage{2.2 求导的基本法则}{填空题}{2010 年第 13 题}{2}{相关变化率}{064 / 234}\n1363:\\begin{QuestionSolution}{2010 年第 13 题}\n1370:\\end{QuestionSolution}\n1372:% Q 2012 9\n1373:\\QuestionPage{2.2 求导的基本法则}{填空题}{2012 年第 9 题}{2}{隐函数求导}{065 / 234}\n1378:\\begin{QuestionSolution}{2012 年第 9 题}\n1386:\\end{QuestionSolution}\n1388:% Q 2013 10\n1389:\\QuestionPage{2.2 求导的基本法则}{填空题}{2013 年第 10 题}{2}{反函数求导}{066 / 234}\n1394:\\begin{QuestionSolution}{2013 年第 10 题}\n1402:\\end{QuestionSolution}\n1404:% Q 2013 12\n1405:\\QuestionPage{2.2 求导的基本法则}{填空题}{2013 年第 12 题}{2}{参数曲线的法线}{067 / 234}\n1412:\\begin{QuestionSolution}{2013 年第 12 题}\n1419:\\end{QuestionSolution}\n1421:% Q 2014 10\n1422:\\QuestionPage{2.2 求导的基本法则}{填空题}{2014 年第 10 题}{2}{奇偶性、周期性与求导}{068 / 234}\n1426:\\begin{QuestionSolution}{2014 年第 10 题}\n1434:\\end{QuestionSolution}\n1436:% Q 2014 12\n1437:\\QuestionPage{2.2 求导的基本法则}{填空题}{2014 年第 12 题}{2}{极坐标曲线的切线}{069 / 234}\n1442:\\begin{QuestionSolution}{2014 年第 12 题}\n1451:\\end{QuestionSolution}\n1453:% Q 2015 9\n1454:\\QuestionPage{2.2 求导的基本法则}{填空题}{2015 年第 9 题}{2}{隐函数求导}{070 / 234}\n1461:\\begin{QuestionSolution}{2015 年第 9 题}\n1471:\\end{QuestionSolution}\n1473:% Q 2015 10\n1474:\\QuestionPage{2.2 求导的基本法则}{填空题}{2015 年第 10 题}{2}{高阶导数}{071 / 234}\n1478:\\begin{QuestionSolution}{2015 年第 10 题}\n1486:\\end{QuestionSolution}\n1488:% Q 2016 13\n1489:\\QuestionPage{2.2 求导的基本法则}{填空题}{2016 年第 13 题}{2}{动点距离的相关变化率}{072 / 234}\n1494:\\begin{QuestionSolution}{2016 年第 13 题}\n1502:\\end{QuestionSolution}\n1504:% Q 2017 10\n1505:\\QuestionPage{2.2 求导的基本法则}{填空题}{2017 年第 10 题}{2}{参数方程求导}{073 / 234}\n1512:\\begin{QuestionSolution}{2017 年第 10 题}\n1521:\\end{QuestionSolution}\n1523:% Q 2019 10\n1524:\\QuestionPage{2.2 求导的基本法则}{填空题}{2019 年第 10 题}{1}{参数曲线切线的截距}{074 / 234}\n1531:\\begin{QuestionSolution}{2019 年第 10 题}\n1536:\\end{QuestionSolution}\n1538:% Q 2019 13\n1539:\\QuestionPage{2.2 求导的基本法则}{填空题}{2019 年第 13 题}{2}{高阶导数}{075 / 234}\n1543:\\begin{QuestionSolution}{2019 年第 13 题}\n1553:\\end{QuestionSolution}\n1555:% Q 2020 9\n1556:\\QuestionPage{2.2 求导的基本法则}{填空题}{2020 年第 9 题}{2}{参数方程的导数}{076 / 234}\n1567:\\begin{QuestionSolution}{2020 年第 9 题}\n1576:\\end{QuestionSolution}\n1578:% Q 2021 12\n1579:\\QuestionPage{2.2 求导的基本法则}{填空题}{2021 年第 12 题}{2}{参数方程求导}{077 / 234}\n1591:\\begin{QuestionSolution}{2021 年第 12 题}\n1599:\\end{QuestionSolution}\n1601:% Q 2022 12\n1602:\\QuestionPage{2.2 求导的基本法则}{填空题}{2022 年第 12 题}{2}{隐函数的二阶导数}{07…4463 tokens truncated…7\n3463:\\QuestionPage{3.3 两种基本积分法}{解答题}{2017 年第 17 题}{3}{和式极限与定积分}{160 / 234}\n3467:\\begin{QuestionSolution}{2017 年第 17 题}\n3479:\\end{QuestionSolution}\n3481:% Q 2018 15\n3482:\\QuestionPage{3.3 两种基本积分法}{解答题}{2018 年第 15 题}{2}{换元与分部积分}{161 / 234}\n3486:\\begin{QuestionSolution}{2018 年第 15 题}\n3500:\\end{QuestionSolution}\n3502:% Q 2019 16\n3503:\\QuestionPage{3.3 两种基本积分法}{解答题}{2019 年第 16 题}{2}{不定积分计算}{162 / 234}\n3507:\\begin{QuestionSolution}{2019 年第 16 题}\n3516:\\end{QuestionSolution}\n3518:% Q 2025 17\n3519:\\QuestionPage{3.3 两种基本积分法}{解答题}{2025 年第 17 题}{3}{定积分计算}{163 / 234}\n3524:\\begin{QuestionSolution}{2025 年第 17 题}\n3537:\\end{QuestionSolution}\n3545:% Q 2017 6\n3546:\\QuestionPage{3.4 定积分的应用}{选择题}{2017 年第 6 题}{1}{速度图像与追及距离}{164 / 234}\n3711:\\begin{QuestionSolution}{2017 年第 6 题}\n3715:\\end{QuestionSolution}\n3717:% Q 2025 6\n3718:\\QuestionPage{3.4 定积分的应用}{选择题}{2025 年第 6 题}{1}{克服引力做功}{165 / 234}\n3723:\\begin{QuestionSolution}{2025 年第 6 题}\n3732:\\end{QuestionSolution}\n3734:% Q 2026 4\n3735:\\QuestionPage{3.4 定积分的应用}{选择题}{2026 年第 4 题}{1}{连续分布质点的引力}{166 / 234}\n3740:\\begin{QuestionSolution}{2026 年第 4 题}\n3749:\\end{QuestionSolution}\n3751:% Q 2010 12\n3752:\\QuestionPage{3.4 定积分的应用}{填空题}{2010 年第 12 题}{2}{极坐标曲线弧长}{167 / 234}\n3756:\\begin{QuestionSolution}{2010 年第 12 题}\n3765:\\end{QuestionSolution}\n3767:% Q 2011 11\n3768:\\QuestionPage{3.4 定积分的应用}{填空题}{2011 年第 11 题}{1}{平面曲线弧长}{168 / 234}\n3772:\\begin{QuestionSolution}{2011 年第 11 题}\n3781:\\end{QuestionSolution}\n3783:% Q 2013 11\n3784:\\QuestionPage{3.4 定积分的应用}{填空题}{2013 年第 11 题}{2}{极坐标曲线围成的面积}{169 / 234}\n3789:\\begin{QuestionSolution}{2013 年第 11 题}\n3798:\\end{QuestionSolution}\n3800:% Q 2014 13\n3801:\\QuestionPage{3.4 定积分的应用}{填空题}{2014 年第 13 题}{2}{细棒的质心}{170 / 234}\n3806:\\begin{QuestionSolution}{2014 年第 13 题}\n3814:\\end{QuestionSolution}\n3816:% Q 2019 12\n3817:\\QuestionPage{3.4 定积分的应用}{填空题}{2019 年第 12 题}{2}{对数曲线的弧长}{171 / 234}\n3821:\\begin{QuestionSolution}{2019 年第 12 题}\n3831:\\end{QuestionSolution}\n3833:% Q 2020 12\n3834:\\QuestionPage{3.4 定积分的应用}{填空题}{2020 年第 12 题}{2}{水压力的微元法}{172 / 234}\n3839:\\begin{QuestionSolution}{2020 年第 12 题}\n3848:\\end{QuestionSolution}\n3850:% Q 2022 15\n3851:\\QuestionPage{3.4 定积分的应用}{填空题}{2022 年第 15 题}{2}{极坐标曲线围成的面积}{173 / 234}\n3857:\\begin{QuestionSolution}{2022 年第 15 题}\n3866:\\end{QuestionSolution}\n3868:% Q 2023 12\n3869:\\QuestionPage{3.4 定积分的应用}{填空题}{2023 年第 12 题}{2}{由积分表示的曲线弧长}{174 / 234}\n3878:\\begin{QuestionSolution}{2023 年第 12 题}\n3887:\\end{QuestionSolution}\n3889:% Q 2010 18\n3890:\\QuestionPage{3.4 定积分的应用}{解答题}{2010 年第 18 题}{3}{液体质量的积分模型}{175 / 234}\n4196:\\begin{QuestionSolution}{2010 年第 18 题}\n4206:\\end{QuestionSolution}\n4208:% Q 2011 20\n4209:\\QuestionPage{3.4 定积分的应用}{解答题}{2011 年第 20 题}{3}{旋转体容积与抽水做功}{176 / 234}\n4346:\\begin{QuestionSolution}{2011 年第 20 题}\n4361:\\end{QuestionSolution}\n4363:% Q 2012 17\n4364:\\QuestionPage{3.4 定积分的应用}{解答题}{2012 年第 17 题}{2}{切线围成的面积与旋转体积}{177 / 234}\n4369:\\begin{QuestionSolution}{2012 年第 17 题}\n4388:\\end{QuestionSolution}\n4390:% Q 2013 16\n4391:\\QuestionPage{3.4 定积分的应用}{解答题}{2013 年第 16 题}{2}{两个旋转体的体积关系}{178 / 234}\n4396:\\begin{QuestionSolution}{2013 年第 16 题}\n4405:\\end{QuestionSolution}\n4407:% Q 2013 21\n4408:\\QuestionPage{3.4 定积分的应用}{解答题}{2013 年第 21 题}{4}{弧长与平面图形的形心}{179 / 234}\n4416:\\begin{QuestionSolution}{2013 年第 21 题}\n4438:\\end{QuestionSolution}\n4440:% Q 2014 20\n4441:\\QuestionPage{3.4 定积分的应用}{解答题}{2014 年第 20 题}{3}{递推函数围成的面积}{180 / 234}\n4449:\\begin{QuestionSolution}{2014 年第 20 题}\n4459:\\end{QuestionSolution}\n4461:% Q 2015 16\n4462:\\QuestionPage{3.4 定积分的应用}{解答题}{2015 年第 16 题}{2}{旋转体积的比值}{181 / 234}\n4468:\\begin{QuestionSolution}{2015 年第 16 题}\n4481:\\end{QuestionSolution}\n4483:% Q 2016 20\n4484:\\QuestionPage{3.4 定积分的应用}{解答题}{2016 年第 20 题}{3}{旋转体积和表面积}{182 / 234}\n4491:\\begin{QuestionSolution}{2016 年第 20 题}\n4512:\\end{QuestionSolution}\n4514:% Q 2019 19\n4515:\\QuestionPage{3.4 定积分的应用}{解答题}{2019 年第 19 题}{3}{分段面积与极限}{183 / 234}\n4520:\\begin{QuestionSolution}{2019 年第 19 题}\n4536:\\end{QuestionSolution}\n4538:% Q 2020 18\n4539:\\QuestionPage{3.4 定积分的应用}{解答题}{2020 年第 18 题}{3}{函数关系与旋转体积}{184 / 234}\n4546:\\begin{QuestionSolution}{2020 年第 18 题}\n4562:\\end{QuestionSolution}\n4564:% Q 2021 19\n4565:\\QuestionPage{3.4 定积分的应用}{解答题}{2021 年第 19 题}{3}{弧长与旋转曲面面积}{185 / 234}\n4572:\\begin{QuestionSolution}{2021 年第 19 题}\n4589:\\end{QuestionSolution}\n4591:% Q 2023 19\n4592:\\QuestionPage{3.4 定积分的应用}{解答题}{2023 年第 19 题}{3}{无界区域的面积与旋转体积}{186 / 234}\n4602:\\begin{QuestionSolution}{2023 年第 19 题}\n4618:\\end{QuestionSolution}\n4620:% Q 2024 19\n4621:\\QuestionPage{3.4 定积分的应用}{解答题}{2024 年第 19 题}{3}{旋转体积及其最大值}{187 / 234}\n4628:\\begin{QuestionSolution}{2024 年第 19 题}\n4641:\\end{QuestionSolution}\n4643:% Q 2026 20\n4644:\\QuestionPage{3.4 定积分的应用}{解答题}{2026 年第 20 题}{2}{拐点与无界旋转体积}{188 / 234}\n4655:\\begin{QuestionSolution}{2026 年第 20 题}\n4668:\\end{QuestionSolution}\n4679:% Q 2010 4\n4680:\\QuestionPage{3.5 反常积分}{选择题}{2010 年第 4 题}{1}{反常积分审敛}{189 / 234}\n4690:\\begin{QuestionSolution}{2010 年第 4 题}\n4699:\\end{QuestionSolution}\n4701:% Q 2013 4\n4702:\\QuestionPage{3.5 反常积分}{选择题}{2013 年第 4 题}{1}{分段函数的反常积分}{190 / 234}\n4715:\\begin{QuestionSolution}{2013 年第 4 题}\n4719:\\end{QuestionSolution}\n4721:% Q 2015 1\n4722:\\QuestionPage{3.5 反常积分}{选择题}{2015 年第 1 题}{1}{反常积分的收敛判别}{191 / 234}\n4732:\\begin{QuestionSolution}{2015 年第 1 题}\n4736:\\end{QuestionSolution}\n4738:% Q 2016 3\n4739:\\QuestionPage{3.5 反常积分}{选择题}{2016 年第 3 题}{1}{反常积分敛散性}{192 / 234}\n4750:\\begin{QuestionSolution}{2016 年第 3 题}\n4754:\\end{QuestionSolution}\n4756:% Q 2019 3\n4757:\\QuestionPage{3.5 反常积分}{选择题}{2019 年第 3 题}{1}{反常积分审敛}{193 / 234}\n4767:\\begin{QuestionSolution}{2019 年第 3 题}\n4771:\\end{QuestionSolution}\n4773:% Q 2022 5\n4774:\\QuestionPage{3.5 反常积分}{选择题}{2022 年第 5 题}{1}{反常积分的收敛参数}{194 / 234}\n4781:\\begin{QuestionSolution}{2022 年第 5 题}\n4785:\\end{QuestionSolution}\n4787:% Q 2024 7\n4788:\\QuestionPage{3.5 反常积分}{选择题}{2024 年第 7 题}{1}{非负函数的反常积分审敛}{195 / 234}\n4799:\\begin{QuestionSolution}{2024 年第 7 题}\n4807:\\end{QuestionSolution}\n4809:% Q 2009 10\n4810:\\QuestionPage{3.5 反常积分}{填空题}{2009 年第 10 题}{2}{反常积分求参数}{196 / 234}\n4814:\\begin{QuestionSolution}{2009 年第 10 题}\n4818:\\end{QuestionSolution}\n4820:% Q 2011 12\n4821:\\QuestionPage{3.5 反常积分}{填空题}{2011 年第 12 题}{2}{无穷区间上的积分}{197 / 234}\n4828:\\begin{QuestionSolution}{2011 年第 12 题}\n4838:\\end{QuestionSolution}\n4840:% Q 2014 9\n4841:\\QuestionPage{3.5 反常积分}{填空题}{2014 年第 9 题}{2}{无穷区间上的反常积分}{198 / 234}\n4845:\\begin{QuestionSolution}{2014 年第 9 题}\n4855:\\end{QuestionSolution}\n4857:% Q 2021 11\n4858:\\QuestionPage{3.5 反常积分}{填空题}{2021 年第 11 题}{2}{无穷区间上的积分}{199 / 234}\n4863:\\begin{QuestionSolution}{2021 年第 11 题}\n4872:\\end{QuestionSolution}\n4874:% Q 2025 11\n4875:\\QuestionPage{3.5 反常积分}{填空题}{2025 年第 11 题}{2}{反常积分求参数}{200 / 234}\n4879:\\begin{QuestionSolution}{2025 年第 11 题}\n4890:\\end{QuestionSolution}\n4892:% Q 2026 11\n4893:\\QuestionPage{3.5 反常积分}{填空题}{2026 年第 11 题}{2}{反常积分的收敛参数}{201 / 234}\n4900:\\begin{QuestionSolution}{2026 年第 11 题}\n4904:\\end{QuestionSolution}\n4914:% Q 2010 2\n4915:\\QuestionPage{4.1 几类简单的微分方程}{选择题}{2010 年第 2 题}{1}{一阶线性方程解的关系}{202 / 234}\n4927:\\begin{QuestionSolution}{2010 年第 2 题}\n4935:\\end{QuestionSolution}\n4937:% Q 2011 10\n4938:\\QuestionPage{4.1 几类简单的微分方程}{填空题}{2011 年第 10 题}{1}{一阶线性方程初值问题}{203 / 234}\n4942:\\begin{QuestionSolution}{2011 年第 10 题}\n4946:\\end{QuestionSolution}\n4948:% Q 2012 12\n4949:\\QuestionPage{4.1 几类简单的微分方程}{填空题}{2012 年第 12 题}{2}{一阶微分方程初值问题}{204 / 234}\n4953:\\begin{QuestionSolution}{2012 年第 12 题}\n4957:\\end{QuestionSolution}\n4959:% Q 2016 11\n4960:\\QuestionPage{4.1 几类简单的微分方程}{填空题}{2016 年第 11 题}{2}{由特解确定一阶线性方程}{205 / 234}\n4964:\\begin{QuestionSolution}{2016 年第 11 题}\n4968:\\end{QuestionSolution}\n4970:% Q 2024 13\n4971:\\QuestionPage{4.1 几类简单的微分方程}{填空题}{2024 年第 13 题}{2}{一阶微分方程}{206 / 234}\n4978:\\begin{QuestionSolution}{2024 年第 13 题}\n4987:\\end{QuestionSolution}\n4989:% Q 2025 15\n4990:\\QuestionPage{4.1 几类简单的微分方程}{填空题}{2025 年第 15 题}{2}{一阶微分方程初值问题}{207 / 234}\n4994:\\begin{QuestionSolution}{2025 年第 15 题}\n5002:\\end{QuestionSolution}\n5004:% Q 2009 18\n5005:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2009 年第 18 题}{3}{降阶方程与旋转体积}{208 / 234}\n5011:\\begin{QuestionSolution}{2009 年第 18 题}\n5023:\\end{QuestionSolution}\n5025:% Q 2011 18\n5026:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2011 年第 18 题}{3}{由切线倾角建立微分方程}{209 / 234}\n5031:\\begin{QuestionSolution}{2011 年第 18 题}\n5044:\\end{QuestionSolution}\n5046:% Q 2014 16\n5047:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2014 年第 16 题}{2}{可分离变量方程与极值}{210 / 234}\n5051:\\begin{QuestionSolution}{2014 年第 16 题}\n5059:\\end{QuestionSolution}\n5061:% Q 2015 20\n5062:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2015 年第 20 题}{3}{Newton 冷却模型}{211 / 234}\n5068:\\begin{QuestionSolution}{2015 年第 20 题}\n5072:\\end{QuestionSolution}\n5074:% Q 2017 21\n5075:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2017 年第 21 题}{4}{由切线和法线条件建立方程}{212 / 234}\n5081:\\begin{QuestionSolution}{2017 年第 21 题}\n5098:\\end{QuestionSolution}\n5100:% Q 2019 17\n5101:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2019 年第 17 题}{2}{一阶线性方程与旋转体积}{213 / 234}\n5110:\\begin{QuestionSolution}{2019 年第 17 题}\n5126:\\end{QuestionSolution}\n5128:% Q 2020 21\n5129:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2020 年第 21 题}{4}{由面积比建立微分方程}{214 / 234}\n5133:\\begin{QuestionSolution}{2020 年第 21 题}\n5151:\\end{QuestionSolution}\n5153:% Q 2021 20\n5154:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2021 年第 20 题}{3}{一阶方程与距离最值}{215 / 234}\n5165:\\begin{QuestionSolution}{2021 年第 20 题}\n5175:\\end{QuestionSolution}\n5177:% Q 2022 18\n5178:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2022 年第 18 题}{3}{一阶方程与曲线弧长}{216 / 234}\n5186:\\begin{QuestionSolution}{2022 年第 18 题}\n5199:\\end{QuestionSolution}\n5201:% Q 2023 17\n5202:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2023 年第 17 题}{3}{由切线截距建立一阶方程}{217 / 234}\n5210:\\begin{QuestionSolution}{2023 年第 17 题}\n5222:\\end{QuestionSolution}\n5224:% Q 2026 21\n5225:\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2026 年第 21 题}{2}{二阶微分方程降阶}{218 / 234}\n5236:\\begin{QuestionSolution}{2026 年第 21 题}\n5253:\\end{QuestionSolution}\n5264:% Q 2011 4\n5265:\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2011 年第 4 题}{1}{非齐次方程的特解形式}{219 / 234}\n5275:\\begin{QuestionSolution}{2011 年第 4 题}\n5279:\\end{QuestionSolution}\n5281:% Q 2017 4\n5282:\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2017 年第 4 题}{1}{常系数非齐次方程特解}{220 / 234}\n5292:\\begin{QuestionSolution}{2017 年第 4 题}\n5296:\\end{QuestionSolution}\n5298:% Q 2019 4\n5299:\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2019 年第 4 题}{1}{由通解确定方程系数}{221 / 234}\n5309:\\begin{QuestionSolution}{2019 年第 4 题}\n5313:\\end{QuestionSolution}\n5315:% Q 2023 4\n5316:\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2023 年第 4 题}{1}{常系数方程解的有界性}{222 / 234}\n5324:\\begin{QuestionSolution}{2023 年第 4 题}\n5328:\\end{QuestionSolution}\n5330:% Q 2025 3\n5331:\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2025 年第 3 题}{1}{常系数方程与反常积分收敛}{223 / 234}\n5336:\\begin{QuestionSolution}{2025 年第 3 题}\n5347:\\end{QuestionSolution}\n5349:% Q 2026 2\n5350:\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2026 年第 2 题}{1}{非齐次方程的解的结构}{224 / 234}\n5355:\\begin{QuestionSolution}{2026 年第 2 题}\n5359:\\end{QuestionSolution}\n5361:% Q 2010 9\n5362:\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2010 年第 9 题}{2}{三阶常系数齐次方程}{225 / 234}\n5366:\\begin{QuestionSolution}{2010 年第 9 题}\n5374:\\end{QuestionSolution}\n5376:% Q 2013 13\n5377:\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2013 年第 13 题}{2}{非齐次方程的特解与初值}{226 / 234}\n5383:\\begin{QuestionSolution}{2013 年第 13 题}\n5391:\\end{QuestionSolution}\n5393:% Q 2015 12\n5394:\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2015 年第 12 题}{2}{常系数齐次方程与极值条件}{227 / 234}\n5398:\\begin{QuestionSolution}{2015 年第 12 题}\n5402:\\end{QuestionSolution}\n5404:% Q 2020 13\n5405:\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2020 年第 13 题}{2}{齐次方程初值问题与积分}{228 / 234}\n5410:\\begin{QuestionSolution}{2020 年第 13 题}\n5420:\\end{QuestionSolution}\n5422:% Q 2021 15\n5423:\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2021 年第 15 题}{2}{常系数齐次方程的通解}{229 / 234}\n5429:\\begin{QuestionSolution}{2021 年第 15 题}\n5437:\\end{QuestionSolution}\n5439:% Q 2022 14\n5440:\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2022 年第 14 题}{2}{三阶常系数齐次方程}{230 / 234}\n5446:\\begin{QuestionSolution}{2022 年第 14 题}\n5455:\\end{QuestionSolution}\n5457:% Q 2009 20\n5458:\\QuestionPage{4.2 高阶线性微分方程}{解答题}{2009 年第 20 题}{4}{分段求解微分方程}{231 / 234}\n5465:\\begin{QuestionSolution}{2009 年第 20 题}\n5478:\\end{QuestionSolution}\n5480:% Q 2012 19\n5481:\\QuestionPage{4.2 高阶线性微分方程}{解答题}{2012 年第 19 题}{3}{常系数方程与积分曲线拐点}{232 / 234}\n5489:\\begin{QuestionSolution}{2012 年第 19 题}\n5500:\\end{QuestionSolution}\n5502:% Q 2016 19\n5503:\\QuestionPage{4.2 高阶线性微分方程}{解答题}{2016 年第 19 题}{3}{二阶变系数线性方程}{233 / 234}\n5508:\\begin{QuestionSolution}{2016 年第 19 题}\n5522:\\end{QuestionSolution}\n5524:% Q 2024 18\n5525:\\QuestionPage{4.2 高阶线性微分方程}{解答题}{2024 年第 18 题}{3}{Euler 方程与定积分}{234 / 234}\n5540:\\begin{QuestionSolution}{2024 年第 18 题}\n5558:\\end{QuestionSolution}\n"}
+
+## tool · 2026-11-12T07:03:06Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"4981d1","wall_time_seconds":0.000009291,"exit_code":0,"original_token_count":5984,"output":"\\begin{minipage}[t]{0.48\\linewidth}\n\\medskip\\textbf{一元函数积分学及其应用}\\par\n{\\small\\hyperlink{sec-3.1}{3.1\\quad 定积分的概念、存在条件与性质}\\hfill 11 题}\\par\n{\\small\\hyperlink{sec-3.2}{3.2\\quad 微积分基本公式与基本定理}\\hfill 11 题}\\par\n{\\small\\hyperlink{sec-3.3}{3.3\\quad 两种基本积分法}\\hfill 12 题}\\par\n{\\small\\hyperlink{sec-3.4}{3.4\\quad 定积分的应用}\\hfill 25 题}\\par\n{\\small\\hyperlink{sec-3.5}{3.5\\quad 反常积分}\\hfill 13 题}\\par\n\\medskip\\textbf{常微分方程}\\par\n{\\small\\hyperlink{sec-4.1}{4.1\\quad 几类简单的微分方程}\\hfill 17 题}\\par\n{\\small\\hyperlink{sec-4.2}{4.2\\quad 高阶线性微分方程}\\hfill 16 题}\\par\n{\\small\\hyperlink{sec-4.3}{4.3\\quad 线性微分方程组（教材星号节）}\\hfill 0 题}\\par\n\\end{minipage}%\n\n% 原卷取自本项目 302真题 所对应的 PDF。参校 https://lvjr.bitbucket.io/kysx.html\n% 2020--2026 年参校 https://www.cnblogs.com/zhaokaifeng/category/2511758.html\n\n\\SectionHeading{1.1}{函数、极限、连续}{集合、映射与函数}{定理与要点\\quad 教材 PDF 第 24 页起\\hfill 本节 1 题}\n\\pdfbookmark[1]{函数、极限、连续}{chapter-1.1}\n\\pdfbookmark[2]{1.1 集合、映射与函数}{section-1.1}\n\\Theory{定理 1.1}{29}{确界存在定理}{非空实数集若有上界，就有上确界。若有下界，就有下确界。}\n\\Theory{定理 1.2}{36}{逆映射存在定理}{双射 \\(f\\colon A\\to B\\) 有唯一的逆映射 \\(f^{-1}\\colon B\\to A\\)。}\n\\Theory{要点}{33--36}{函数性质与复合}{奇偶性先核对定义域关于原点对称。求复合函数时，同时限制内层的定义域和外层的输入。}\n% Q 2024 3\n\\QuestionPage{1.1 集合、映射与函数}{选择题}{2024 年第 3 题}{1}{函数的奇偶性}{001 / 234}\n已知\n\\[f(x)=\\int_0^{\\sin x}\\sin t^3\\,\\mathrm{d}t,\\qquad\ng(x)=\\int_0^x f(t)\\,\\mathrm{d}t,\n\\]\n则（ ）\n\\choices{\\(f(x)\\) 为奇函数，\\(g(x)\\) 为奇函数}{\\(f(x)\\) 为奇函数，\\(g(x)\\) 为偶函数}{\\(f(x)\\) 为偶函数，\\(g(x)\\) 为偶函数}{\\(f(x)\\) 为偶函数，\\(g(x)\\) 为奇函数}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2024 年第 3 题}\n\\textbf{入手角度}\\quad 分别考察每一层从 \\(0\\) 出发的积分在上限变号时如何变化。\n\n\\textbf{解析}\\quad 设 \\(F(u)=\\int_0^u\\sin(t^3)\\,\\mathrm{d}t\\)。换元 \\(t=-s\\)，由 \\(\\sin((-s)^3)=-\\sin(s^3)\\) 得 \\(F(-u)=F(u)\\)。于是 \\(f(-x)=F(-\\sin x)=F(\\sin x)=f(x)\\)。再次换元得到\n\\[\ng(-x)=-\\int_0^x f(-s)\\,\\mathrm{d}s=-\\int_0^x f(s)\\,\\mathrm{d}s=-g(x).\n\\]\n故 \\(f\\) 为偶函数，\\(g\\) 为奇函数，选 D。\n\\end{QuestionSolution}\n\n\\SectionHeading{1.2}{函数、极限、连续}{数列的极限}{定理与要点\\quad 教材 PDF 第 41 页起\\hfill 本节 10 题}\n\\pdfbookmark[2]{1.2 数列的极限}{section-1.2}\n\\Theory{定理 2.1}{46}{唯一性}{收敛数列只有一个极限。}\n\\Theory{定理 2.2}{47}{有界性}{收敛数列必有界。}\n\\Theory{定理 2.3}{47}{有理运算法则}{两收敛数列可逐项作和、差、积、商再取极限，取商时分母极限须非零。}\n\\Theory{定理 2.4}{49}{保号性}{数列收敛到非零值时，从某一项起与极限同号，并且绝对值离零有正的下界。}\n\\Theory{定理 2.5}{49}{夹逼性}{两端数列收敛到同一值时，最终被夹在其间的数列也收敛到该值。}\n\\Theory{定理 2.6}{51}{单调有界准则}{单调增且有上界，或单调减且有下界的数列必收敛。}\n\\Theory{定理 2.7}{54}{子列与极限}{数列收敛于 \\(a\\) 的充要条件是它的每个子列都收敛于 \\(a\\)。}\n\\Theory{定理 2.8}{54}{闭区间套定理}{逐级包含且长度趋于零的非空闭区间列，恰有一个公共点。}\n\\Theory{定理 2.9}{55}{Weierstrass 定理}{有界实数列至少有一个收敛子列。}\n\\Theory{定理 2.10}{56}{Cauchy 收敛原理}{实数列收敛，当且仅当任给正误差，充分靠后的任意两项之差的绝对值都小于该误差。}\n% Q 2012 3\n\\QuestionPage{1.2 数列的极限}{选择题}{2012 年第 3 题}{1}{数列与部分和的收敛}{002 / 234}\n设$a_n > 0$($n = 1,2, \\cdots$)，$S_n = a_1 + a_2 + \\cdots + a_n$，\n则数列$\\{s_n\\}$有界是数列$\\{a_n\\}$收敛的\\pickout{}\n\\begin{abcd}\n\\item 充分必要条件．\n\\item 充分非必要条件．\n\\item 必要非充分条件．\n\\item 即非充分也非必要条件．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 3 题}\n\\textbf{入手角度}\\quad 正项使部分和单调，相邻部分和的差正是数列的通项。\n\n\\textbf{解析}\\quad \\(S_{n+1}-S_n=a_{n+1}>0\\)。若 \\(\\{S_n\\}\\) 有界，单调有界准则给出 \\(S_n\\to S\\)，进而 \\(a_n=S_n-S_{n-1}\\to S-S=0\\)。反过来，取 \\(a_n=\\frac{1}{n}\\)，虽有 \\(a_n\\to0\\)，但 \\(S_n\\ge\\int_1^{n+1}\\frac{\\mathrm{d}t}{t}=\\ln(n+1)\\) 无界。因此有界性是充分非必要条件，选 B。\n\\end{QuestionSolution}\n\n% Q 2017 3\n\\QuestionPage{1.2 数列的极限}{选择题}{2017 年第 3 题}{1}{收敛数列的性质}{003 / 234}\n设数列$\\left\\{x_n \\right\\}$收敛，则\\pickout{}\n\\begin{abcd}\n\\item 当$\\lim_{n \\to \\infty} \\sin x_n = 0$时，$\\lim_{n \\to \\infty} x_n = 0$．\n\\item 当$\\lim_{n \\to \\infty} (x_n + \\sqrt{\\left| x_n \\right|}) = 0$时，$\\lim_{n \\to \\infty} x_n = 0$．\n\\item 当$\\lim_{n \\to \\infty} (x_n + x_n^2) = 0$时，$\\lim_{n \\to \\infty} x_n = 0$．\n\\item 当$\\lim_{n \\to \\infty} (x_n + \\sin x_n) = 0$时，$\\lim_{n \\to \\infty} x_n = 0$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2017 年第 3 题}\n\\textbf{入手角度}\\quad 设收敛极限为 \\(L\\)，连续性把各选项转化为实方程是否只有零解。\n\n\\textbf{解析}\\quad 常数数列 \\(x_n=\\pi\\) 使 A 的前提成立，常数数列 \\(x_n=-1\\) 使 B、C 的前提成立，这些极限均不为零。对 D，令 \\(h(t)=t+\\sin t\\)。有 \\(h(0)=0\\)，且 \\(h'(t)=1+\\cos t\\ge0\\)，只在离散点为零，所以 \\(h\\) 严格递增。由连续性，\\(h(L)=\\lim_{n\\to\\infty}h(x_n)=0\\)，只能有 \\(L=0\\)。选 D。\n\\end{QuestionSolution}\n\n% Q 2022 6\n\\QuestionPage{1.2 数列的极限}{选择题}{2022 年第 6 题}{1}{递推数列的性质}{004 / 234}\n设数列 \\(\\left\\{ x_{n} \\right\\}\\) 满足 \\(- \\frac{\\pi}{2} \\le x_{n} \\le \\frac{\\pi}{2}\\)，则 \\(\\left( \\ \\right)\\)\n\\choices{若 \\(\\lim_{n \\to \\infty} \\cos\\left( \\sin x_{n} \\right)\\) 存在，则 \\(\\lim_{n \\to \\infty} x_{n}\\) 存在}{若 \\(\\lim_{n \\to \\infty} \\sin\\left( \\cos x_{n} \\right)\\) 存在，则 \\(\\lim_{n \\to \\infty} x_{n}\\) 存在}{若 \\(\\lim_{n \\to \\infty} \\cos\\left( \\sin x_{n} \\right)\\) 存在，则 \\(\\lim_{n \\to \\infty} \\sin x_{n}\\) 存在，但 \\(\\lim_{n \\to \\infty} x_{n}\\) 不一定存在}{若 \\(\\lim_{n \\to \\infty} \\sin\\left( \\cos x_{n} \\right)\\) 存在，则 \\(\\lim_{n \\to \\infty} \\cos x_{n}\\) 存在，但 \\(\\lim_{n \\to \\infty} x_{n}\\) 不一定存在}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2022 年第 6 题}\n\\textbf{入手角度}\\quad 外层函数能否反解，取决于内层数列实际落在哪个区间。\n\n\\textbf{解析}\\quad \\(\\cos x_n\\in[0,1]\\)，而 \\(\\sin t\\) 在 \\([0,1]\\) 上有连续反函数。因此若 \\(\\sin(\\cos x_n)\\to L\\)，则 \\(\\cos x_n\\to\\arcsin L\\)。取 \\(x_n=\\frac{(-1)^n\\pi}{4}\\)，此时 \\(\\sin(\\cos x_n)\\) 和 \\(\\cos(\\sin x_n)\\) 都为常数，\\(x_n\\) 与 \\(\\sin x_n\\) 都不收敛。这一例排除 A、B、C，并验证 D 所述的可能性。选 D。\n\\end{QuestionSolution}\n\n% Q 2023 3\n\\QuestionPage{1.2 数列的极限}{选择题}{2023 年第 3 题}{1}{递推数列与无穷小比较}{005 / 234}\n已知数列 \\(\\{x_n\\}\\)，\\(\\{y_n\\}\\) 满足\n\\[x_1=y_1=\\frac12,\\qquad x_{n+1}=\\sin x_n,\\qquad y_{n+1}=y_n^2\\quad (n=1,2,\\cdots),\n\\]\n则当 \\(n\\to\\infty\\) 时，（ ）。\n\\choices{\\(x_n\\) 是 \\(y_n\\) 的高阶无穷小}{\\(y_n\\) 是 \\(x_n\\) 的高阶无穷小}{\\(x_n\\) 与 \\(y_n\\) 是等价无穷小}{\\(x_n\\) 与 \\(y_n\\) 是同阶但不等价的无穷小}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2023 年第 3 题}\n\\textbf{入手角度}\\quad \\(y_n\\) 每步平方，而 \\(x_n\\) 每步至少保留一个固定比例，可以用几何数列比较二者。\n\n\\textbf{解析}\\quad 对 \\(0<t\\le\\frac{1}{2}\\)，有 \\(\\frac{t}{2}<\\sin t<t\\)，下界可由 \\(\\sin t=\\int_0^t\\cos u\\,\\mathrm{d}u\\) 得到。于是 \\(x_n\\) 正且递减，极限 \\(L\\) 满足 \\(L=\\sin L\\)，故 \\(L=0\\)。下界还给出 \\(x_n\\ge 2^{-n}\\)。另一递推直接得到 \\(y_n=2^{-2^{n-1}}\\)。因此\n\\[\n0<\\frac{y_n}{x_n}\\le 2^{\\,n-2^{n-1}}\\longrightarrow0.\n\\]\n\\(y_n\\) 是 \\(x_n\\) 的高阶无穷小，选 B。\n\\end{QuestionSolution}\n\n% Q 2024 4\n\\QuestionPage{1.2 数列的极限}{选择题}{2024 年第 4 题}{1}{数列极限的敛散性}{006 / 234}\n已知数列 \\(\\{a_n\\}\\)（\\(a_n\\ne 0\\)），若 \\(\\{a_n\\}\\) 发散，则（ ）\n\\choices{\\(\\left\\{a_n+\\frac{1}{a_n}\\right\\}\\) 发散}{\\(\\left\\{a_n-\\frac{1}{a_n}\\right\\}\\) 发散}{\\(\\left\\{\\mathrm{e}^{a_n}+\\frac{1}{\\mathrm{e}^{a_n}}\\right\\}\\) 发散}{\\(\\left\\{\\mathrm{e}^{a_n}-\\frac{1}{\\mathrm{e}^{a_n}}\\right\\}\\) 发散}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2024 年第 4 题}\n\\textbf{入手角度}\\quad 检查变换能否把两个不同的常数映成同一个值，再找可连续反解的变换。\n\n\\textbf{解析}\\quad 令 \\(a_n\\) 在 \\(2\\) 和 \\(\\frac{1}{2}\\) 间交替，\\(a_n+\\frac{1}{a_n}\\) 恒为 \\(\\frac{5}{2}\\)，排除 A。令 \\(a_n=(-1)^n\\)，\\(a_n-\\frac{1}{a_n}\\) 恒为零，且 \\(\\mathrm{e}^{a_n}+\\mathrm{e}^{-a_n}\\) 恒为 \\(\\mathrm{e}+\\mathrm{e}^{-1}\\)，排除 B、C。若 \\(b_n=\\mathrm{e}^{a_n}-\\mathrm{e}^{-a_n}\\) 收敛，解二次方程得\n\\[\na_n=\\ln\\frac{b_n+\\sqrt{b_n^2+4}}2.\n\\]\n右端是 \\(b_n\\) 的连续函数，故 \\(a_n\\) 也收敛，与已知矛盾。选 D。\n\\end{QuestionSolution}\n\n% Q 2012 10\n\\QuestionPage{1.2 数列的极限}{填空题}{2012 年第 10 题}{2}{和式型数列极限与夹逼准则}{007 / 234}\n计算$\\lim_{n \\to \\infty} n\\left(\\frac{1}{1 + n^2} + \\frac{1}{2^2 + n^2}\n+ \\cdots + \\frac{1}{n^2 + n^2} \\right) =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 10 题}\n\\textbf{入手角度}\\quad 每个分母提出 \\(n^2\\)，各项便对应等分区间 \\([0,1]\\) 的右端点。\n\n\\textbf{解析}\\quad 将原式写为\n\\[\nn\\sum_{k=1}^n\\frac{1}{n^2+k^2}\n=\\frac1n\\sum_{k=1}^n\\frac{1}{1+(\\frac{k}{n})^2}.\n\\]\n被积函数 \\(t\\mapsto(1+t^2)^{-1}\\) 在 \\([0,1]\\) 上连续。当 \\(n\\to\\infty\\) 时，右端的 Riemann 和趋于 \\(\\int_0^1(1+t^2)^{-1}\\,\\mathrm{d}t=[\\arctan t]_0^1=\\boxed{\\frac{\\pi}{4}}\\)。\n\\end{QuestionSolution}\n\n% Q 2011 19\n\\QuestionPage{1.2 数列的极限}{解答题}{2011 年第 19 题}{3}{调和和式与数列收敛}{008 / 234}\n\\begin{enumerate}\n\\item\n证明：对任意的正整数$n$，都有$\\frac{1}{n + 1} < \\ln \\left(1 + \\frac{1}{n} \\right) < \\frac{1}{n}$成立．\n\\item\n设$a_n = 1 + \\frac{1}{2} + \\cdots + \\frac{1}{n} - \\ln n$（$n = 1,2, \\cdots$），\n证明数列$\\left\\{a_n \\right\\}$收敛．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 19 题}\n\\textbf{入手角度}\\quad 对数增量可写为 \\(\\frac{1}{t}\\) 在单位区间上的积分，上下界能同时用于判断单调性和给出下界。\n\n\\textbf{解析}\\quad （1）在 \\(n<t<n+1\\) 上有 \\(\\frac{1}{n+1}<\\frac{1}{t}<\\frac{1}{n}\\)，积分即得\n\\[\n\\frac1{n+1}<\\int_n^{n+1}\\frac{\\mathrm{d}t}{t}\n=\\ln(1+\\frac{1}{n})<\\frac1n.\n\\]\n（2）由左侧不等式，\\(a_{n+1}-a_n=\\frac{1}{n+1}-\\ln(1+\\frac{1}{n})<0\\)。对右侧不等式从 \\(k=1\\) 加到 \\(k=n-1\\) 得\n\\(\\ln n\\le\\sum_{k=1}^{n-1}\\frac{1}{k}\\)，其中 \\(n=1\\) 时两边为零。因此 \\(a_n\\ge \\frac{1}{n}>0\\)。数列单调递减且有下界，故收敛。\n\\end{QuestionSolution}\n\n% Q 2012 21\n\\QuestionPage{1.2 数列的极限}{解答题}{2012 年第 21 题}{4}{实根构成的数列极限}{009 / 234}\n\\begin{enumerate}\n\\item\n证明方程$x^n + x^{n - 1} + \\cdots + x = 1$（$n$为大于$1$的整数）\n在区间$\\left(\\frac{1}{2},1 \\right)$内有且仅有一个实根；\n\\item\n记第（1）问中的实根为$x_n$，证明$\\lim_{n \\to \\infty} x_n$存在，并求此极限．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 21 题}\n\\textbf{入手角度}\\quad 增加一项会使固定正数处的多项式变大，利用这一点比较相邻的根，再对有限等比和求极限。\n\n\\textbf{解析}\\quad （1）记 \\(P_n(t)=\\sum_{k=1}^n t^k\\)。它在 \\([\\frac{1}{2},1]\\) 连续且严格递增，\\(P_n(\\frac{1}{2})=1-2^{-n}<1<P_n(1)=n\\)，所以恰有一根 \\(x_n\\in(\\frac{1}{2},1)\\) 使 \\(P_n(x_n)=1\\)。\n\n（2）\\(P_{n+1}(x_n)=1+x_n^{n+1}>1=P_{n+1}(x_{n+1})\\)，故 \\(x_{n+1}<x_n\\)，从而 \\(x_n\\) 收敛且 \\(x_n\\le x_2<1\\)。等比求和得 \\(2x_n-1=x_n^{n+1}\\)，而右端介于零与 \\(x_2^{n+1}\\) 之间，趋于零。故 \\(\\lim_{n\\to\\infty}x_n=\\boxed{\\frac{1}{2}}\\)。\n\\end{QuestionSolution}\n\n% Q 2013 20\n\\QuestionPage{1.2 数列的极限}{解答题}{2013 年第 20 题}{3}{不等式约束下的数列极限}{010 / 234}\n设函数$f(x) = \\ln x + \\frac{1}{x}$．\n\\begin{enumerate}\n\\item\n求$f(x)$的最小值；\n\\item\n设数列$\\{x_n\\}$满足$\\ln x_n + \\frac{1}{x_{n + 1}} < 1$，证明$\\lim_{n \\to \\infty} x_n$存在，并求此极限．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2013 年第 20 题}\n\\textbf{入手角度}\\quad 先求同一个自变量下的下界，再将它与题给的相邻两项不等式相减。\n\n\\textbf{解析}\\quad （1）定义域为 \\(x>0\\)，且 \\(f'(x)=\\frac{x-1}{x^2}\\)，故 \\(f\\) 在 \\((0,1)\\) 递减，在 \\((1,\\infty)\\) 递增，最小值为 \\(f(1)=1\\)。\n\n（2）题意给出每个 \\(x_n>0\\)。由\n\\[\n\\ln x_n+\\frac1{x_{n+1}}<1\\le\\ln x_n+\\frac1{x_n}\n\\]\n可知 \\(x_{n+1}>x_n\\)。左侧原不等式还给出 \\(\\ln x_n<1\\)，故 \\(x_n<\\mathrm{e}\\)。由单调有界准则，\\(x_n\\to L\\ge x_1>0\\)。取极限得 \\(f(L)\\le1\\)，而（1）表明只有 \\(L=1\\) 时 \\(f(L)\\le1\\)。所求极限为 \\(\\boxed{1}\\)。\n\\end{QuestionSolution}\n\n% Q 2018 21\n\\QuestionPage{1.2 数列的极限}{解答题}{2018 年第 21 题}{4}{递推数列的收敛与极限}{011 / 234}\n设数列$\\left\\{x_n \\right\\}$满足：$x_1 > 0$，$x_n \\mathrm{e}^{x_{n + 1}} = \\mathrm{e}^{x_n} - 1$（$n = 1,2, \\cdots$）．\n证明$\\left\\{x_n \\right\\}$收敛，并求$\\lim_{n \\to \\infty} x_n$．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2018 年第 21 题}\n\\textbf{入手角度}\\quad 把 \\(\\frac{\\mathrm{e}^x-1}{x}\\) 写成 \\(\\mathrm{e}^t\\) 在 \\([0,x]\\) 上的平均值，可直接比较递推的相邻项。\n\n\\textbf{解析}\\quad 当 \\(x_n>0\\) 时，\n\\[\n1<\\mathrm{e}^{x_{n+1}}=\\frac1{x_n}\\int_0^{x_n}\\mathrm{e}^t\\,\\mathrm{d}t<\\mathrm{e}^{x_n}.\n\\]\n故 \\(0<x_{n+1}<x_n\\)，由 \\(x_1>0\\) 归纳得数列递减且有下界。设 \\(x_n\\to L\\ge0\\)。若 \\(L>0\\)，递推式取极限给出 \\(\\mathrm{e}^L=\\frac{\\mathrm{e}^L-1}{L}\\)，但同一平均值严格小于 \\(\\mathrm{e}^L\\)，矛盾。所以 \\(\\lim_{n\\to\\infty}x_n=\\boxed{0}\\)。\n\\end{QuestionSolution}\n\n\\SectionHeading{1.3}{函数、极限、连续}{函数的极限}{定理与要点\\quad 教材 PDF 第 60 页起\\hfill 本节 5 题}\n\\pdfbookmark[2]{1.3 函数的极限}{section-1.3}\n\\Theory{定理 3.1}{65}{Heine 定理}{当 \\(x\\to x_0\\) 时，函数 \\(f\\) 的极限为 \\(a\\) 的充要条件是，对定义域内任意满足 \\(x_n\\ne x_0\\) 且 \\(x_n\\to x_0\\) 的数列，都有 \\(f(x_n)\\to a\\)。}\n\\Theory{定理 3.2}{66}{唯一性与局部有界性}{函数的有限极限唯一，且函数在相应去心邻域内有界。}\n\\Theory{定理 3.3}{67}{保号、保序和夹逼}{非零极限在局部保号。局部大小关系传给极限，两端极限相同即可夹逼。}\n\\Theory{定理 3.4}{67}{有理运算法则}{和、差、积的极限由各自极限运算得到。商的分母极限须非零。}\n\\Theory{定理 3.5}{69}{复合函数的极限}{内层函数趋于 \\(u_0\\) 且在去心邻域内避开 \\(u_0\\) 时，可应用外层函数在 \\(u_0\\) 处的极限。}\n\\Theory{定理 3.6}{73}{单调有界准则}{在右半无限区间单调增且有上界或单调减且有下界时，右端极限存在。单调函数在区间内点有左右极限。}\n\\Theory{定理 3.7}{74}{Cauchy 收敛原理}{有限极限存在，当且仅当充分接近目标点的任意两处函数值都可彼此任意接近。}\n\\Theory{公式}{70--72}{两个重要极限}{\\(\\lim_{x\\to0}\\frac{\\sin x}{x}=1\\)，\\(\\lim_{u\\to0}(1+u)^{\\frac{1}{u}}=\\mathrm{e}\\)。}\n% Q 2011 9\n\\QuestionPage{1.3 函数的极限}{填空题}{2011 年第 9 题}{1}{函数极限}{012 / 234}\n$\\lim_{x \\to 0} \\left(\\frac{1 + 2^x}{2} \\right)^{\\frac{1}{x}} =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 9 题}\n\\textbf{入手角度}\\quad 底数趋于 \\(1\\)，取对数后只需保留底数偏离 \\(1\\) 的一次项。\n\n\\textbf{解析}\\quad 写底数为 \\(1+u\\)，其中 \\(u=\\frac{2^x-1}{2}\\)。由 \\(2^x=\\mathrm{e}^{x\\ln 2}=1+x\\ln 2+o(x)\\)，有\n\\[\n\\frac{\\ln(1+u)}{x}\n=\\frac{\\ln(1+u)}u\\frac{2^x-1}{2x}\n\\longrightarrow \\frac{\\ln 2}2.\n\\]\n指数化得到 \\(\\boxed{\\sqrt2}\\)。\n\\end{QuestionSolution}\n\n% Q 2013 9\n\\QuestionPage{1.3 函数的极限}{填空题}{2013 年第 9 题}{2}{指数型函数极限}{013 / 234}\n$\\lim_{x \\to 0} \\left(2 - \\frac{\\ln(1 + x)}{x} \\right)^{\\frac{1}{x}} =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2013 年第 9 题}\n\\textbf{入手角度}\\quad 底数中的 \\(\\ln(1+x)\\) 已除过一次 \\(x\\)，求对数极限需要先展开到二次。\n\n\\textbf{解析}\\quad \\(\\ln(1+x)=x-\\tfrac12x^2+o(x^2)\\)，所以 \\(2-\\frac{\\ln(1+x)}{x}=1+\\frac{x}{2}+o(x)\\)，在零点附近为正。原式的对数为\n\\[\n\\frac{1}{x}\\ln\\bigl(1+\\frac{x}{2}+o(x)\\bigr)\\longrightarrow\\frac12.\n\\]\n由指数函数连续性，原极限为 \\(\\boxed{\\sqrt{\\mathrm{e}}}\\)。\n\\end{QuestionSolution}\n\n% Q 2019 9\n\\QuestionPage{1.3 函数的极限}{填空题}{2019 年第 9 题}{1}{指数型函数极限}{014 / 234}\n$\\lim_{x \\to 0} \\left(x + 2^x \\right)^{\\frac{2}{x}} =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2019 年第 9 题}\n\\textbf{入手角度}\\quad \\(x\\) 与 \\(2^x-1\\) 都贡献一次项，需先相加再取对数。\n\n\\textbf{解析}\\quad \\(x+2^x=1+(1+\\ln 2)x+o(x)\\)，零点附近底数为正。故\n\\[\n\\frac{2}{x}\\ln(x+2^x)\\longrightarrow2(1+\\ln 2).\n\\]\n原极限为 \\(\\mathrm{e}^{2(1+\\ln 2)}=\\boxed{4\\mathrm{e}^2}\\)。\n\\end{QuestionSolution}\n\n% Q 2022 11\n\\QuestionPage{1.3 函数的极限}{填空题}{2022 年第 11 题}{2}{指数型函数极限}{015 / 234}\n\\(\\lim_{x \\to 0} \\left( \\frac{1 + \\mathrm{e}^{x}}{2} \\right)^{\\cot x} = \\blank{}\\)\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2022 年第 11 题}\n\\textbf{入手角度}\\quad 取对数后，把 \\(\\cot x\\) 的奇异因子吸收到 \\(x\\cot x\\) 中。\n\n\\textbf{解析}\\quad \\(x\\cot x\\to1\\)，且 \\(\\frac{1+\\mathrm{e}^x}{2}=1+\\frac{x}{2}+o(x)\\)。因此\n\\[\n\\cot x\\ln\\frac{1+\\mathrm{e}^x}{2}\n=(x\\cot x)\\frac{\\ln(1+\\frac{x}{2}+o(x))}{x}\\longrightarrow\\frac12.\n\\]\n所求极限为 \\(\\boxed{\\mathrm{e}^{\\frac{1}{2}}}\\)。\n\\end{QuestionSolution}\n\n% Q 2011 15\n\\QuestionPage{1.3 函数的极限}{解答题}{2011 年第 15 题}{2}{两处函数极限与参数}{016 / 234}\n已知函数$F(x) = \\frac{\\int_0^x \\ln(1 + t^2)\\,\\mathrm{d} t}{x^a}$，\n设$\\!\\!\\lim_{x \\to +\\infty}\\!\\!\\! F(x) = \\!\\lim_{x \\to 0^+}\\! F(x) = 0$，试求$a$的取值范围．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 15 题}\n\\textbf{入手角度}\\quad 分子在零点附近按 \\(x^3\\) 衰减，在无穷远按 \\(x\\ln x\\) 增长，分别约束参数。\n\n\\textbf{解析}\\quad 当 \\(x\\to0^+\\) 时，由 L'Hospital 法则，\n\\[\n\\lim_{x\\to0^+}\\frac{\\int_0^x\\ln(1+t^2)\\,\\mathrm{d}t}{x^3}\n=\\lim_{x\\to0^+}\\frac{\\ln(1+x^2)}{3x^2}=\\frac13.\n\\]\n因而 \\(F(x)\\to0\\) 当且仅当 \\(3-a>0\\)。当 \\(x\\to+\\infty\\) 时，分子和 \\(x\\ln x\\) 均趋于无穷，导数之比 \\(\\frac{\\ln(1+x^2)}{1+\\ln x}\\to2\\)，故分子等价于 \\(2x\\ln x\\)。此时 \\(F(x)\\to0\\) 当且仅当 \\(a>1\\)，因为对任意 \\(p>0\\) 都有 \\(\\frac{\\ln x}{x^p}\\to0\\)。合并得 \\(\\boxed{1<a<3}\\)。\n\\end{QuestionSolution}\n\n\\SectionHeading{1.4}{函数、极限、连续}{无穷小量与无穷大量}{定理与要点\\quad 教材 PDF 第 77 页起\\hfill 本节 23 题}\n\\pdfbookmark[2]{1.4 无穷小量与无穷大量}{section-1.4}\n\\Theory{定理 4.1}{78}{极限与无穷小}{函数 \\(f\\) 趋于有限值 \\(a\\) 的充要条件是 \\(f-a\\) 为无穷小量。}\n\\Theory{定理 4.2}{78}{无穷小的和与积}{在同一变化趋势下，有限个无穷小的代数和及乘积仍为无穷小。}\n\\Theory{定理 4.3}{78}{有界量乘无穷小}{局部有界函数乘无穷小，结果仍为无穷小。}\n\\Theory{定理 4.4}{81}{等价无穷小}{两非零无穷小等价，表示两者之差相对于其中任一量为高阶无穷小。}\n\\Theory{定理 4.5}{82}{无穷小等价代换}{求商的极限时，分子和分母的无穷小因子可分别换成各自的等价量。}\n\\Theory{定理 4.6}{84}{倒数关系}{非零无穷小的倒数为无穷大量，无穷大量的倒数为无穷小。}\n\\Theory{定理 4.7}{84}{无穷大量的运算}{有限个无穷大量的乘积仍是无穷大量。无穷大量与有界量的和仍是无穷大量。}\n\\Theory{公式}{82--85}{常用等价式与渐近线}{当 \\(x\\to0\\) 时，\\(\\sin x\\sim x\\)，\\(1-\\cos x\\sim\\frac{x^2}{2}\\)。求斜渐近线 \\(y=kx+b\\) 时，可依次求 \\(\\frac{f(x)}{x}\\) 和 \\(f(x)-kx\\) 的极限。}\n% Q 2009 2\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2009 年第 2 题}{1}{等价无穷小}{017 / 234}\n当$x \\to 0$时，$f(x) = x - \\sin ax$与$g(x) = x^2\\ln (1 - bx)$是等价无穷小，则\\pickout{}\n\\begin{abcd}\n\\item $a = 1,b = - \\frac{1}{6}$．\n\\item $a = 1,b = \\frac{1}{6}$．\n\\item $a = - 1,b = - \\frac{1}{6}$．\n\\item $a = - 1,b = \\frac{1}{6}$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2009 年第 2 题}\n\\textbf{入手角度}\\quad 右式最低有效幂次为三次，左式必须先消去一次项。\n\n\\textbf{解析}\\quad \\(x^2\\ln(1-bx)=-bx^3+o(x^3)\\)，等价关系要求 \\(b\\ne0\\)。而 \\(x-\\sin(ax)=(1-a)x+\\frac{a^3x^3}{6}+o(x^3)\\)，故先有 \\(a=1\\)，再有 \\(\\frac{1}{6}=-b\\)。取 \\(a=1,b=-\\frac{1}{6}\\) 时两式均等价于 \\(\\frac{x^3}{6}\\)。选 A。\n\\end{QuestionSolution}\n\n% Q 2011 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2011 年第 1 题}{1}{三角函数的等价无穷小}{018 / 234}\n已知当$x \\to 0$时，$f(x) = 3\\sin x - \\sin 3x$与$cx^k$是等价无穷小，则\\pickout{}\n\\begin{abcd}\n\\item $k = 1,c = 4$．\n\\item $k = 1,c = - 4$．\n\\item $k = 3,c = 4$．\n\\item $k = 3,c = - 4$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 1 题}\n\\textbf{入手角度}\\quad 正弦三倍角公式能直接消去一次项。\n\n\\textbf{解析}\\quad 由 \\(\\sin 3x=3\\sin x-4\\sin^3x\\)，有 \\(f(x)=4\\sin^3x\\)。于是 \\(\\frac{f(x)}{x^3}=4(\\frac{\\sin x}{x})^3\\to4\\)。只有 \\(k=3,c=4\\) 使 \\(\\frac{f(x)}{cx^k}\\to1\\)，选 C。\n\\end{QuestionSolution}\n\n% Q 2012 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2012 年第 1 题}{1}{渐近线条数}{019 / 234}\n曲线$y = \\frac{x^2 + x}{x^2 - 1}$渐近线的条数为\\pickout{}\n\\begin{abcd}\n\\item $0$．\n\\item $1$．\n\\item $2$．\n\\item $3$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 1 题}\n\\textbf{入手角度}\\quad 先约分区分可去间断点与真正的极点，再检查无穷远。\n\n\\textbf{解析}\\quad 在定义域内，\\(\\frac{x^2+x}{x^2-1}=\\frac{x}{x-1}=1+\\frac{1}{x-1}\\)。因此 \\(x=-1\\) 附近极限有限，只有 \\(x=1\\) 给出竖直渐近线。两端无穷远均趋于 \\(1\\)，故还有水平渐近线 \\(y=1\\)。有限的无穷远极限排除非水平斜线，总计 \\(\\boxed{2}\\) 条，选 C。\n\\end{QuestionSolution}\n\n% Q 2013 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2013 年第 1 题}{1}{三角无穷小的比较}{020 / 234}\n设$\\cos x - 1 = x\\sin \\alpha(x)$，其中$\\left| \\alpha(x) \\right| < \\frac{\\pi}{2}$，\n则当$x \\to 0$时，$\\alpha (x)$是\\pickout{}\n\\begin{abcd}\n\\item 比$x$高阶的无穷小．\n\\item 比$x$低阶的无穷小．\n\\item 与$x$同阶但不等价的无穷小．\n\\item 与$x$等价的无穷小．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2013 年第 1 题}\n\\textbf{入手角度}\\quad 角度已限制在正弦的单调区间，可先确定角度趋零，再比较一次项。\n\n\\textbf{解析}\\quad 当 \\(x\\ne0\\) 时，\n"}
+
+## tool · 2026-11-12T07:03:14Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"5b02e0","wall_time_seconds":0.00001,"exit_code":0,"original_token_count":6173,"output":"\\textbf{解析}\\quad 当 \\(x\\ne0\\) 时，\n\\(\\sin\\alpha(x)=\\frac{\\cos x-1}{x}\\sim-\\frac{x}{2}\\)。由于 \\(\\alpha(x)\\in(-\\frac{\\pi}{2},\\frac{\\pi}{2})\\)，有 \\(\\alpha(x)=\\arcsin(\\sin\\alpha(x))\\to0\\)。再由 \\(\\frac{\\alpha}{\\sin\\alpha}\\to1\\) 得 \\(\\frac{\\alpha(x)}{x}\\to-\\frac{1}{2}\\)。比值有限且非零，并且不等于 \\(1\\)，故同阶而不等价，选 C。\n\\end{QuestionSolution}\n\n% Q 2014 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2014 年第 1 题}{1}{幂次与无穷小阶}{021 / 234}\n当$x \\to 0^+$时，若$\\ln^{\\alpha}(1 + 2x)$，$(1 - \\cos x)^{\\frac{1}{\\alpha}}$\n均是比$x$高阶的无穷小，则$\\alpha$的可能取值范围是\\pickout{}\n\\begin{abcd}\n\\item $(2, +\\infty)$．\n\\item $(1,2)$．\n\\item $\\left(\\frac{1}{2},1 \\right)$．\n\\item $\\left(0,\\frac{1}{2} \\right)$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2014 年第 1 题}\n\\textbf{入手角度}\\quad 先把两个正底数换成幂函数的等价式，再与 \\(x\\) 作商。\n\n\\textbf{解析}\\quad 当 \\(x\\to0^+\\) 时，\n\\[\n\\frac{\\ln^\\alpha(1+2x)}x\\sim 2^\\alpha x^{\\alpha-1},\n\\qquad\n\\frac{(1-\\cos x)^{\\frac{1}{\\alpha}}}x\\sim 2^{-\\frac{1}{\\alpha}}x^{\\frac{2}{\\alpha}-1}.\n\\]\n第一个比值趋于零要求 \\(\\alpha>1\\)。此时 \\(\\alpha>0\\)，第二个比值趋于零要求 \\(\\frac{2}{\\alpha}>1\\)，即 \\(\\alpha<2\\)。所以 \\(\\boxed{1<\\alpha<2}\\)，选 B。\n\\end{QuestionSolution}\n\n% Q 2014 2\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2014 年第 2 题}{1}{渐近线的判定}{022 / 234}\n下列曲线有渐近线的是\\pickout{}\n\\begin{abcd}\n\\item $y = x + \\sin x$．\n\\item $y = x^2 + \\sin x$．\n\\item $y = x + \\sin \\frac{1}{x}$．\n\\item $y = x^2 + \\sin \\frac{1}{x}$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2014 年第 2 题}\n\\textbf{入手角度}\\quad 先排查有限点能否趋于无穷，再比较各曲线在无穷远的线性主项与余项。\n\n\\textbf{解析}\\quad 四个函数在每个有限点附近均有界，包括 C、D 在 \\(x=0\\) 的去心邻域，因此均无竖直渐近线。B、D 的 \\(\\frac{y}{x}\\) 在无穷远无有限极限，无法得到直线渐近线。A 在无穷远的斜率只能为 \\(1\\)，但 \\(y-x=\\sin x\\) 不收敛。C 有 \\(y-x=\\sin(\\frac{1}{x})\\to0\\)，故渐近线为 \\(y=x\\)，选 C。\n\\end{QuestionSolution}\n\n% Q 2016 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2016 年第 1 题}{1}{无穷小量的阶}{023 / 234}\n设$a_1 = x(\\cos \\sqrt{x} - 1)$，$a_2 = \\sqrt{x} \\ln(1 + \\sqrt[3]{x})$，$a_3 = \\sqrt[3]{x + 1} - 1$．\n当$x \\to 0^+$时，以上$3$个无穷小量按照从低阶到高阶的排序是\\pickout{}\n\\begin{abcd}\n\\item $a_1,a_2,a_3$．\n\\item $a_2,a_3,a_1$．\n\\item $a_2,a_1,a_3$．\n\\item $a_3,a_2,a_1$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2016 年第 1 题}\n\\textbf{入手角度}\\quad 将三个式子都化为常数乘 \\(x\\) 的幂，幂指数越大，趋于零越快。\n\n\\textbf{解析}\\quad 用 \\(\\cos u-1\\sim-\\frac{u^2}{2}\\)、\\(\\ln(1+u)\\sim u\\) 和 \\((1+u)^{\\frac{1}{3}}-1\\sim \\frac{u}{3}\\) 分别得到\n\\[\na_1\\sim-\\tfrac12x^2,\\qquad a_2\\sim x^{\\frac{5}{6}},\\qquad a_3\\sim\\tfrac13x.\n\\]\n由于 \\(\\frac{5}{6}<1<2\\)，从低阶到高阶为 \\(a_2,a_3,a_1\\)，选 B。\n\\end{QuestionSolution}\n\n% Q 2019 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2019 年第 1 题}{1}{正切函数的同阶无穷小}{024 / 234}\n当$x \\to 0$时，若$x - \\tan x$与$x^k$是同阶无穷小，则$k =$\\pickout{}\n\\begin{abcd}\n\\item $1$．\n\\item $2$．\n\\item $3$．\n\\item $4$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2019 年第 1 题}\n\\textbf{入手角度}\\quad \\(x-\\tan x\\) 的一次项抵消，考察差的导数可直接找到三次项。\n\n\\textbf{解析}\\quad \\((x-\\tan x)'=1-\\sec^2x=-\\tan^2 x\\)。由 L'Hospital 法则，\n\\[\n\\lim_{x\\to0}\\frac{x-\\tan x}{x^3}\n=-\\frac13\\lim_{x\\to0}\\left(\\frac{\\tan x}{x}\\right)^2=-\\frac13.\n\\]\n比值有限且非零，故 \\(k=\\boxed{3}\\)，选 C。\n\\end{QuestionSolution}\n\n% Q 2020 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2020 年第 1 题}{1}{积分形式的无穷小比阶}{025 / 234}\n当 \\(x \\to 0^{+}\\) 时，下列无穷小量中阶最高的是\n\\choices{\\(\\int_{0}^{x}{\\left( \\mathrm{e}^{t^{2}} - 1 \\right) \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{x}{\\ln \\left( 1 + \\sqrt{t^{3}} \\right) \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{\\sin x}{\\sin t^{2} \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{1-\\cos x}{\\sqrt{\\sin^{3} t} \\,\\mathrm{d} t}\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2020 年第 1 题}\n\\textbf{入手角度}\\quad 先按积分变量估计被积函数，再代入上限相对 \\(x\\) 的阶。\n\n\\textbf{解析}\\quad 若 \\(h(t)\\sim c t^p\\) 且 \\(p>-1\\)，由 L'Hospital 法则，\\(\\int_0^u h(t)\\,\\mathrm{d}t\\sim \\frac{c u^{p+1}}{p+1}\\)（\\(u\\to0^+\\)）。A、B、C、D 的被积函数分别等价于 \\(t^2,t^{\\frac{3}{2}},t^2,t^{\\frac{3}{2}}\\)。其中 \\(\\sin x\\sim x\\)，\\(1-\\cos x\\sim \\frac{x^2}{2}\\)，所以四个积分依次等价于\n\\[\n\\frac{x^3}3,\\qquad \\frac25 x^{\\frac{5}{2}},\\qquad\n\\frac{x^3}3,\\qquad \\frac25\\left(\\frac{x^2}2\\right)^{\\frac{5}{2}}.\n\\]\n最后一个为五阶，阶最高，选 D。\n\\end{QuestionSolution}\n\n% Q 2021 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2021 年第 1 题}{1}{变上限积分的无穷小阶}{026 / 234}\n当 \\(x \\to 0\\) 时，\\(\\int_{0}^{x^{2}} \\left(\\mathrm{e}^{t^3}-1\\right) \\mathrm{d} t\\) 是 \\(x^{7}\\) 的\n\\choices{低阶无穷小}{等价无穷小}{高阶无穷小}{同阶但非等价无穷小}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2021 年第 1 题}\n\\textbf{入手角度}\\quad 先展开指数得到被积函数的最低次幂，再计算这个幂次积分后对应的 \\(x\\) 的次数。\n\n\\textbf{解析}\\quad 当 \\(t\\to0\\) 时，\\(\\mathrm{e}^{t^3}-1=t^3+O(t^6)\\)。在 \\(0\\le t\\le x^2\\) 上积分，得\n\\[\n\\int_0^{x^2}(\\mathrm{e}^{t^3}-1)\\,\\mathrm{d}t\n=\\frac{x^8}{4}+O(x^{14}).\n\\]\n除以 \\(x^7\\) 后得到 \\(\\frac{x}{4}+O(x^7)\\to0\\)，所以原积分是 \\(x^7\\) 的高阶无穷小，选 C。\n\\end{QuestionSolution}\n\n% Q 2022 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2022 年第 1 题}{1}{等价无穷小的性质}{027 / 234}\n若当 \\(x \\to 0\\) 时，\\(\\alpha\\left( x \\right), \\beta\\left( x \\right)\\) 是非零无穷小量，则以下的命题中，\n\\par\\circnum{1} 若 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，则 \\(\\alpha^{2}\\left( x \\right) \\sim \\beta^{2}\\left( x \\right)\\)；\n\\par\\circnum{2} 若 \\(\\alpha^{2}\\left( x \\right) \\sim \\beta^{2}\\left( x \\right)\\)，则 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)；\n\\par\\circnum{3} 若 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，则 \\(\\alpha\\left( x \\right) - \\beta\\left( x \\right) = o\\left( \\alpha\\left( x \\right) \\right)\\)；\n\\par\\circnum{4} 若 \\(\\alpha\\left( x \\right) - \\beta\\left( x \\right) = o\\left( \\alpha\\left( x \\right) \\right)\\)，则 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，\n真命题的序号为 \\(\\left( \\ \\right)\\)\n\\choices{\\circnum{1}\\circnum{3}}{\\circnum{1}\\circnum{4}}{\\circnum{1}\\circnum{3}\\circnum{4}}{\\circnum{2}\\circnum{3}\\circnum{4}}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2022 年第 1 题}\n\\textbf{入手角度}\\quad 把等价关系写成比值趋于 \\(1\\)，再观察平方丢失的符号信息。\n\n\\textbf{解析}\\quad 若 \\(\\frac{\\alpha}{\\beta}\\to1\\)，平方仍趋于 \\(1\\)，且 \\(\\frac{\\alpha-\\beta}{\\alpha}=1-\\frac{\\beta}{\\alpha}\\to0\\)，所以第 1、3 个命题成立。取 \\(\\alpha=x,\\beta=-x\\)，平方相等但 \\(\\frac{\\alpha}{\\beta}=-1\\)，所以第 2 个命题不成立。若 \\(\\frac{\\alpha-\\beta}{\\alpha}\\to0\\)，则 \\(\\frac{\\beta}{\\alpha}\\to1\\)，取倒数得 \\(\\frac{\\alpha}{\\beta}\\to1\\)，所以第 4 个命题成立。选 C。\n\\end{QuestionSolution}\n\n% Q 2023 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2023 年第 1 题}{1}{斜渐近线}{028 / 234}\n曲线\n\\[y=x\\ln\\left(\\mathrm{e}+\\frac{1}{x-1}\\right)\n\\]\n的斜渐近线方程为（ ）。\n\\choices{\\(y=x+\\mathrm{e}\\)}{\\(y=x+\\dfrac{1}{\\mathrm{e}}\\)}{\\(y=x\\)}{\\(y=x-\\dfrac{1}{\\mathrm{e}}\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2023 年第 1 题}\n\\textbf{入手角度}\\quad 将对数中的 \\(\\mathrm{e}\\) 提出，常数项决定斜率，其余部分决定截距。\n\n\\textbf{解析}\\quad 当 \\(x\\to\\pm\\infty\\) 时，\\(\\frac{y}{x}\\to\\ln \\mathrm{e}=1\\)，且\n\\[\ny-x=x\\ln\\left(1+\\frac{1}{\\mathrm{e}(x-1)}\\right)\n\\sim\\frac{x}{\\mathrm{e}(x-1)}\\longrightarrow\\frac{1}{\\mathrm{e}}.\n\\]\n所以斜渐近线为 \\(\\boxed{y=x+\\frac{1}{\\mathrm{e}}}\\)，选 B。\n\\end{QuestionSolution}\n\n% Q 2025 4\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2025 年第 4 题}{1}{无穷小比阶}{029 / 234}\n设函数 \\(f\\left( x \\right)\\)，\\(g\\left( x \\right)\\) 在 \\(x = 0\\) 的某去心邻域内有定义且恒不为零.若当 \\(x \\to 0\\) 时，\\(f\\left( x \\right)\\) 是 \\(g\\left( x \\right)\\) 的高阶无穷小，则当 \\(x \\to 0\\) 时，\n\\choices{\\(f\\left( x \\right) + g\\left( x \\right) = o\\left( g\\left( x \\right) \\right)\\).}{\\(f\\left( x \\right) g\\left( x \\right) = o\\left( f^{2}\\left( x \\right) \\right)\\).}{\\(f\\left( x \\right) = o\\left( \\mathrm{e}^{g\\left( x \\right)} - 1 \\right)\\).}{\\(f\\left( x \\right) = o\\left( g^{2}\\left( x \\right) \\right)\\).}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2025 年第 4 题}\n\\textbf{入手角度}\\quad 由 \\(\\frac{f}{g}\\to0\\) 分别化简各选项的比值，注意 \\(\\mathrm{e}^g-1\\) 与 \\(g\\) 的等价关系。\n\n\\textbf{解析}\\quad \\(\\frac{f+g}{g}=1+\\frac{f}{g}\\to1\\)，故 \\(f+g\\) 与 \\(g\\) 等价，A 中的小 \\(o\\) 关系不成立。又有 \\(|\\frac{fg}{f^2}|=|\\frac{g}{f}|\\to+\\infty\\)，故 B 不成立。对 C，利用 \\(g\\to0\\) 得\n\\[\n\\frac{f}{\\mathrm{e}^g-1}=\\frac fg\\frac g{\\mathrm{e}^g-1}\\longrightarrow0.\n\\]\n最后取 \\(g(x)=x,f(x)=x^2\\)，有 \\(\\frac{f}{g}\\to0\\) 而 \\(\\frac{f}{g^2}=1\\)，故 D 不成立。选 C。\n\\end{QuestionSolution}\n\n% Q 2026 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2026 年第 1 题}{1}{等价无穷小求系数}{030 / 234}\n已知当 \\(x \\to 0\\) 时，\\(a x^{2} + b x + \\arcsin x\\) 与 \\(\\sqrt[3]{1 + x^{2}} - 1\\) 是等价无穷小，则\n\\choices{\\(a = \\frac{1}{3},\\ b = -1\\)}{\\(a = \\frac{1}{3},\\ b = 1\\)}{\\(a = \\frac{2}{3},\\ b = -1\\)}{\\(a = \\frac{2}{3},\\ b = 1\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2026 年第 1 题}\n\\textbf{入手角度}\\quad 立方根右式从二次项开始，先消去反正弦带来的一次项。\n\n\\textbf{解析}\\quad \\(\\arcsin x=x+o(x^2)\\)，且\n\\(\\sqrt[3]{1+x^2}-1=\\tfrac13x^2+o(x^2)\\)。等价要求左式 \\((b+1)x+ax^2+o(x^2)\\) 的一次系数为零，二次系数为 \\(\\frac{1}{3}\\)。因此 \\(\\boxed{a=\\frac{1}{3},\\ b=-1}\\)，选 A。\n\\end{QuestionSolution}\n\n% Q 2010 10\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2010 年第 10 题}{2}{曲线的渐近线}{031 / 234}\n曲线$y = \\frac{2x^3}{x^2 + 1}$的渐近线方程为 \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2010 年第 10 题}\n\\textbf{入手角度}\\quad 多项式相除可把分式写成一次式与趋于零的余项。\n\n\\textbf{解析}\\quad 对分子作多项式除法，得到\n\\[\ny=\\frac{2x^3}{x^2+1}=2x-\\frac{2x}{x^2+1}.\n\\]\n当 \\(x\\to\\pm\\infty\\) 时，\\(y-2x\\to0\\)。又 \\(x^2+1>0\\)，函数在各有限点连续，无竖直渐近线。所求渐近线为 \\(\\boxed{y=2x}\\)。\n\\end{QuestionSolution}\n\n% Q 2016 9\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2016 年第 9 题}{2}{斜渐近线}{032 / 234}\n曲线$y = \\frac{x^3}{1 + x^2} + \\arctan(1 + x^2)$的斜渐近线方程为 \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2016 年第 9 题}\n\\textbf{入手角度}\\quad 有理项给出线性主项，反正切项的无穷远极限给出截距。\n\n\\textbf{解析}\\quad \\(\\frac{x^3}{1+x^2}=x-\\frac{x}{1+x^2}\\)，从而\n\\[\ny-x=-\\frac{x}{1+x^2}+\\arctan(1+x^2)\\longrightarrow\\frac\\pi2\n\\quad(x\\to\\pm\\infty).\n\\]\n斜渐近线为 \\(\\boxed{y=x+\\frac{\\pi}{2}}\\)。\n\\end{QuestionSolution}\n\n% Q 2017 9\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2017 年第 9 题}{2}{斜渐近线}{033 / 234}\n曲线$y = x\\left(1 + \\arcsin \\frac{2}{x} \\right)$的斜渐近线方程为 \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2017 年第 9 题}\n\\textbf{入手角度}\\quad \\(x\\) 已经给出候选斜率，余项中的反正弦可按小角度展开。\n\n\\textbf{解析}\\quad 当 \\(x\\to\\pm\\infty\\) 时，\n\\[\ny-x=x\\arcsin(\\frac{2}{x})=2\\,\\frac{\\arcsin(\\frac{2}{x})}{\\frac{2}{x}}\\longrightarrow2.\n\\]\n故斜渐近线为 \\(\\boxed{y=x+2}\\)。\n\\end{QuestionSolution}\n\n% Q 2023 11\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2023 年第 11 题}{2}{等价无穷小求系数}{034 / 234}\n当 \\(x\\to 0\\) 时，函数\n\\[f(x)=ax+bx^2+\\ln(1+x)\n\\]\n与\n\\[g(x)=\\mathrm{e}^{x^2}-\\cos x\n\\]\n是等价无穷小，则\n\\[ab=\\blank{}.\n\\]\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2023 年第 11 题}\n\\textbf{入手角度}\\quad 指数与余弦的常数项抵消，需将两边都展开到二次项。\n\n\\textbf{解析}\\quad \\(g(x)=(1+x^2)-(1-\\frac{x^2}{2})+o(x^2)=\\tfrac32x^2+o(x^2)\\)，而\n\\[\nf(x)=(a+1)x+(b-\\tfrac12)x^2+o(x^2).\n\\]\n比值趋于 \\(1\\) 要求 \\(a+1=0\\) 且 \\(b-\\tfrac12=\\tfrac32\\)。因此 \\(a=-1,b=2\\)，所求 \\(ab=\\boxed{-2}\\)。\n\\end{QuestionSolution}\n\n% Q 2025 12\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2025 年第 12 题}{2}{斜渐近线}{035 / 234}\n曲线 \\(y = \\sqrt[3]{x^{3} - 3x^{2} + 1}\\) 的渐近线方程为 \\blank{}.\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2025 年第 12 题}\n\\textbf{入手角度}\\quad 从立方根中提出实数因子 \\(x\\)，剩下的括号趋于 \\(1\\)，其一次修正给出截距。\n\n\\textbf{解析}\\quad 对 \\(x\\ne0\\)，有 \\(y=x(1-\\frac{3}{x}+\\frac{1}{x^3})^{\\frac{1}{3}}\\)，故 \\(\\frac{y}{x}\\to1\\)。令 \\(u=-\\frac{3}{x}+\\frac{1}{x^3}\\)，则\n\\[\ny-x=xu\\,\\frac{(1+u)^{\\frac{1}{3}}-1}{u}\\longrightarrow-3\\cdot\\frac13=-1\n\\quad(x\\to\\pm\\infty).\n\\]\n曲线在所有有限点连续，渐近线为 \\(\\boxed{y=x-1}\\)。\n\\end{QuestionSolution}\n\n% Q 2012 15\n\\QuestionPage{1.4 无穷小量与无穷大量}{解答题}{2012 年第 15 题}{2}{同阶无穷小与参数}{036 / 234}\n已知函数$f(x) = \\frac{1 + x}{\\sin x} - \\frac{1}{x}$，记$a = \\lim_{x \\to 0} f(x)$．\\par\n\\begin{enumerate}\n\\item 求$a$的值；\n\\item 若当$x \\to 0$时，$f(x) - a$是$x^k$的同阶无穷小，求$k$．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 15 题}\n\\textbf{入手角度}\\quad 将含 \\(\\frac{1}{x}\\) 的差合并，先求常数极限，再检查扣去常数后的首项。\n\n\\textbf{解析}\\quad （1）分拆为\n\\[\nf(x)=\\frac{x}{\\sin x}+\\frac{x-\\sin x}{x\\sin x}.\n\\]\n由 \\(x-\\sin x=\\frac{x^3}{6}+o(x^3)\\)，第二项趋于零，第一项趋于 \\(1\\)，故 \\(a=1\\)。\n\n（2）第一项扣去 \\(1\\) 后为 \\(\\frac{x-\\sin x}{\\sin x}=O(x^2)\\)，第二项等价于 \\(\\frac{x}{6}\\)。因此 \\(f(x)-a=\\frac{x}{6}+o(x)\\)，所求 \\(k=\\boxed{1}\\)。\n\\end{QuestionSolution}\n\n% Q 2013 15\n\\QuestionPage{1.4 无穷小量与无穷大量}{解答题}{2013 年第 15 题}{2}{三角乘积的等价无穷小}{037 / 234}\n当$x \\to 0$时，$1 - \\cos x \\cdot \\cos 2x \\cdot \\cos 3x$与$ax^n$为等价无穷小，求$n$与$a$的值．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2013 年第 15 题}\n\\textbf{入手角度}\\quad 三个余弦的常数项均为 \\(1\\)，乘积的二次系数由三个因子的二次系数相加。\n\n\\textbf{解析}\\quad 对 \\(j=1,2,3\\)，\\(\\cos(jx)=1-\\frac{j^2x^2}{2}+o(x^2)\\)。相乘时，两个二次项相乘至少为四次，故\n\\[\n1-\\cos x\\cos 2x\\cos 3x\n=\\frac{1+4+9}2x^2+o(x^2)=7x^2+o(x^2).\n\\]\n因此 \\(\\boxed{n=2,\\ a=7}\\)。\n\\end{QuestionSolution}\n\n% Q 2015 15\n\\QuestionPage{1.4 无穷小量与无穷大量}{解答题}{2015 年第 15 题}{2}{等价无穷小求参数}{038 / 234}\n设函数$f(x) = x + a\\ln(1 + x) + bx\\sin x$，$g(x) = kx^3$，\n若$f(x)$与$g(x)$在$x \\to 0$是等价无穷小，求$a,b,k$的值．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2015 年第 15 题}\n\\textbf{入手角度}\\quad 与三次幂等价要求一次、二次系数同时为零，剩余三次系数决定 \\(k\\)。\n\n\\textbf{解析}\\quad 由 \\(\\ln(1+x)=x-\\frac{x^2}{2}+\\frac{x^3}{3}+o(x^3)\\) 与 \\(x\\sin x=x^2+o(x^3)\\)，得到\n\\[\nf(x)=(1+a)x+(b-\\frac{a}{2})x^2+(\\frac{a}{3})x^3+o(x^3).\n\\]\n先令 \\(1+a=0\\) 与 \\(b-\\frac{a}{2}=0\\)，再令 \\(k=\\frac{a}{3}\\)。所以 \\(\\boxed{a=-1,\\ b=-\\frac{1}{2},\\ k=-\\frac{1}{3}}\\)。\n\\end{QuestionSolution}\n\n% Q 2020 15\n\\QuestionPage{1.4 无穷小量与无穷大量}{解答题}{2020 年第 15 题}{2}{斜渐近线}{039 / 234}\n求曲线 \\(y = \\dfrac{x^{1+x}}{\\left( 1+x \\right)^{x}} \\left( x>0 \\right)\\) 的斜渐近线方程。\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2020 年第 15 题}\n\\textbf{入手角度}\\quad 提出一个 \\(x\\)，对剩余的幂取对数，并保留 \\(\\frac{1}{x}\\) 项来求截距。\n\n\\textbf{解析}\\quad 令 \\(u(x)=-x\\ln(1+\\frac{1}{x})\\)，则 \\(y=x\\mathrm{e}^{u(x)}\\)。当 \\(x\\to+\\infty\\) 时，\n\\[\nu(x)=-1+\\frac{1}{2x}+o(\\frac{1}{x}),\n\\qquad\n\\mathrm{e}^{u(x)}=\\mathrm{e}^{-1}\\left(1+\\frac{1}{2x}+o(\\frac{1}{x})\\right).\n\\]\n因此 \\(\\frac{y}{x}\\to\\frac{1}{\\mathrm{e}}\\)，\\(y-\\frac{x}{\\mathrm{e}}\\to\\frac{1}{2\\mathrm{e}}\\)。斜渐近线为 \\(\\boxed{y=\\frac{x}{\\mathrm{e}}+\\frac{1}{2\\mathrm{e}}}\\)。\n\\end{QuestionSolution}\n\n\\SectionHeading{1.5}{函数、极限、连续}{连续函数}{定理与要点\\quad 教材 PDF 第 86 页起\\hfill 本节 8 题}\n\\pdfbookmark[2]{1.5 连续函数}{section-1.5}\n\\Theory{定理 5.1}{90}{连续函数的四则运算}{在同一点连续的函数，其和、差、积、商仍连续，取商时分母在该点非零。}\n\\Theory{定理 5.2}{90}{复合函数的连续性}{内层函数在 \\(x_0\\) 处连续，且外层函数在对应的内层函数值处连续，则复合函数在 \\(x_0\\) 处连续。}\n\\Theory{定理 5.3}{91}{反函数的连续性}{区间上的连续严格单调函数有反函数，且反函数在值域上连续并保持单调方向。}\n\\Theory{定理 5.4}{94}{有界性}{闭区间上的连续函数有界。}\n\\Theory{定理 5.5}{94}{最大最小值定理}{闭区间上的连续函数能取到最大值和最小值。}\n\\Theory{定理 5.6}{95}{零点存在定理}{闭区间上连续且两端值异号，区间内部至少有一处零点。}\n\\Theory{定理 5.7}{97}{介值定理}{闭区间上的连续函数取到介于端点函数值之间的每一个值。}\n\\Theory{定理 5.8}{100}{一致连续性}{闭区间上的连续函数一致连续。}\n\\Theory{定理 5.9}{101}{压缩映射原理（星号内容）}{实直线上的压缩映射有唯一不动点，从任意实数开始迭代均收敛到该点。}\n\\Theory{要点}{86--89}{间断点分类}{先检查两侧极限是否有限且相等，再将共同极限与函数值比较。}\n% Q 2009 1\n\\QuestionPage{1.5 连续函数}{选择题}{2009 年第 1 题}{1}{可去间断点}{040 / 234}\n函数$f(x) = \\frac{x - x^3}{\\sin\\pi x}$的可去间断点的个数为\\pickout{}\n\\begin{abcd}\n\\item $1$．\n\\item $2$．\n\\item $3$．\n\\item 无穷多个．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2009 年第 1 题}\n\\textbf{入手角度}\\quad 在分母的所有零点中，找出分子也有零点、能抵消分母一次零点的位置。\n\n\\textbf{解析}\\quad \\(\\sin\\pi x\\) 仅在整数 \\(k\\) 处为零，且其导数在这些点为 \\(\\pi(-1)^k\\ne0\\)。分子 \\(x(1-x)(1+x)\\) 仅在 \\(-1,0,1\\) 为零。在这三点，分子与分母均可提出 \\(x-k\\)，约去后极限有限，所以是可去间断点。其余整数处分子不为零，商的绝对值趋于无穷。共 \\(\\boxed{3}\\) 个，选 C。\n\\end{QuestionSolution}\n\n% Q 2010 1\n\\QuestionPage{1.5 连续函数}{选择题}{2010 年第 1 题}{1}{无穷间断点}{041 / 234}\n函数$f(x) = \\frac{x^2 - x}{x^2 - 1}\\sqrt{1 + \\frac{1}{x^2}}$的无穷间断点的个数为\\pickout{}\n\\begin{abcd}\n\\item $0$．\n\\item $1$．\n\\item $2$．\n\\item $3$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2010 年第 1 题}\n\\textbf{入手角度}\\quad 化简根号时保留 \\(|x|\\)，再分别检查三个被排除的点。\n\n\\textbf{解析}\\quad 当 \\(x\\ne-1,0,1\\) 时，\n\\[\nf(x)=\\frac{x}{x+1}\\cdot\\frac{\\sqrt{x^2+1}}{|x|}\n=\\frac{x}{|x|}\\frac{\\sqrt{x^2+1}}{x+1}.\n\\]\n在 \\(-1\\) 处分母趋零而分子有非零单侧极限，故是无穷间断点。在 \\(0\\) 处左右极限为 \\(-1,1\\)，故是跳跃间断点。在 \\(1\\) 处极限为 \\(\\frac{\\sqrt2}{2}\\)，故是可去间断点。无穷间断点只有一个，选 B。\n\\end{QuestionSolution}\n\n% Q 2015 2\n\\QuestionPage{1.5 连续函数}{选择题}{2015 年第 2 题}{1}{由极限定义的函数及间断点}{042 / 234}\n函数$f(x) = \\lim_{t \\to 0} \\left(1 + \\frac{\\sin t}{x} \\right)^{\\frac{x^2}{t}}$\n在$(-\\infty , +\\infty)$内\\pickout{}\n\\begin{abcd}\n\\item 连续．\n\\item 有可去间断点．\n\\item 有跳跃间断点．\n\\item 有无穷间断点．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2015 年第 2 题}\n\\textbf{入手角度}\\quad 先固定 \\(x\\ne0\\) 求定义函数的 \\(t\\) 极限，再研究得到的函数在 \\(x=0\\) 附近的行为。\n\n\\textbf{解析}\\quad 对 \\(x\\ne0\\)，当 \\(t\\) 足够接近零时底数为正，且\n\\[\n\\frac{x^2}{t}\\ln\\left(1+\\frac{\\sin t}{x}\\right)\n=x\\,\\frac{\\sin t}{t}\n\\frac{\\ln\\!\\left(1+\\frac{\\sin t}{x}\\right)}{\\frac{\\sin t}{x}}\\longrightarrow x.\n\\]\n故 \\(f(x)=\\mathrm{e}^x\\) 对 \\(x\\ne0\\) 成立。原式在 \\(x=0\\) 无定义，左右极限都等于 \\(1\\)，可通过补定义为 \\(1\\) 恢复连续。选 B。\n\\end{QuestionSolution}\n\n% Q 2015 3\n\\QuestionPage{1.5 连续函数}{选择题}{2015 年第 3 题}{1}{分段函数连续性与参数}{043 / 234}\n设函数$f(x) = \\begin{cases}\n  x^{\\alpha}\\cos \\frac{1}{x^{\\beta}}, & x > 0 \\\\\n                                   0, & x \\le 0\n\\end{cases}$（$\\alpha > 0,\\beta > 0$），若$f'(x)$在$x = 0$处连续，则\\pickout{}\n\\begin{abcd}\n\\item $\\alpha - \\beta > 1$．\n\\item $0 < \\alpha - \\beta \\le 1$．\n\\item $\\alpha - \\beta > 2$．\n\\item $0 < \\alpha - \\beta \\le 2$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2015 年第 3 题}\n\\textbf{入手角度}\\quad 右段求导时，内层 \\(x^{-\\beta}\\) 会使其中一项幂次降低，再用使正弦达到 \\(1\\) 的点检验必要性。\n\n\\textbf{解析}\\quad 在 \\(x>0\\) 上，\n\\[\nf'(x)=\\alpha x^{\\alpha-1}\\cos(x^{-\\beta})\n+\\beta x^{\\alpha-\\beta-1}\\sin(x^{-\\beta}).\n\\]\n若 \\(f'\\) 在零点连续，由左侧恒为零知 \\(f'(0)=0\\)。取 \\(x_k=(\\frac{\\pi}{2}+2k\\pi)^{-\\frac{1}{\\beta}}\\)，则 \\(f'(x_k)=\\beta x_k^{\\alpha-\\beta-1}\\)，它趋于零要求 \\(\\alpha-\\beta>1\\)。反之该条件给出 \\(\\alpha>1\\)，零点右侧差商 \\(x^{\\alpha-1}\\cos(x^{-\\beta})\\to0\\)，故 \\(f'(0)=0\\)。上式两项也均趋零，故连续。选 A。\n\\end{QuestionSolution}\n\n% Q 2017 1\n\\QuestionPage{1.5 连续函数}{选择题}{2017 年第 1 题}{1}{分段函数的连续条件}{044 / 234}\n若函数$f(x) = \\begin{cases}\n  \\frac{1 - \\cos \\sqrt{x}}{ax}, & x > 0 \\\\\n                             b, & x \\le 0\n\\end{cases}$在$x = 0$处连续，则\\pickout{}\n\\begin{abcd}\n\\item $ab = \\frac{1}{2}$．\n\\item $ab = - \\frac{1}{2}$．\n\\item $ab = 0$．\n\\item $ab = 2$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2017 年第 1 题}\n\\textbf{入手角度}\\quad 左极限已经等于函数值，只需将右段的 \\(1-\\cos\\sqrt{x}\\) 化为关于 \\(x\\) 的等价式。\n\n\\textbf{解析}\\quad 因为 \\(1-\\cos u\\sim \\frac{u^2}{2}\\)，令 \\(u=\\sqrt{x}\\) 即得\n\\[\n\\lim_{x\\to0^+}\\frac{1-\\cos\\sqrt{x}}{ax}=\\frac1{2a}.\n\\]\n连续性要求该值等于 \\(f(0)=b\\)。因此 \\(\\boxed{ab=\\frac{1}{2}}\\)，选 A。\n\\end{QuestionSolution}\n\n% Q 2018 3\n\\QuestionPage{1.5 连续函数}{选择题}{2018 年第 3 题}{1}{分段函数和的连续性}{045 / 234}\n设函数$f(x) = \\begin{cases}\n  -1, & x < 0, \\\\\n   1, & x \\ge 0;\n\\end{cases}$，$g(x) = \\begin{cases}\n  2 - ax, & x \\le - 1, \\\\\n       x, & -1 < x < 0, \\\\\n   x - b, & x \\ge 0.\n\\end{cases}$若$f(x) + g(x)$在$R$上连续，则\\pickout{}\n\\begin{abcd}\n\\item $a = 3\\;,\\;b = 1$．\n\\item $a = 3\\;,\\;b = 2$．\n\\item $a = - 3\\;,\\;b = 1$．\n\\item $a = - 3\\;,\\;b = 2$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2018 年第 3 题}\n\\textbf{入手角度}\\quad 和函数只可能在分段点 \\(-1,0\\) 失去连续性，在两处分别匹配左右值。\n\n\\textbf{解析}\\quad 在 \\(-1\\) 处，\\(f=-1\\) 不跳变，故要求 \\(g(-1)=2+a=-1\\)，得到 \\(a=-3\\)。在 \\(0\\) 左侧，\\(f+g=-1+x\\to-1\\)，右侧及零点处 \\(f+g=1+x-b\\to1-b\\)，故 \\(1-b=-1\\)，得到 \\(b=2\\)。两处匹配后全轴连续，选 D。\n\\end{QuestionSolution}\n\n% Q 2020 2\n\\QuestionPage{1.5 连续函数}{选择题}{2020 年第 2 题}{1}{第二类间断点}{046 / 234}\n函数 \\(f\\left( x \\right) = \\dfrac{\\mathrm{e}^{\\frac{1}{x-1}} \\ln \\left| 1+x \\right|}{\\left( \\mathrm{e}^{x} - 1 \\right)\\left( x-2 \\right)}\\) 的第二类间断点的个数为\n\\choices{\\(1\\) 个}{\\(2\\) 个}{\\(3\\) 个}{\\(4\\) 个}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2020 年第 2 题}\n\\textbf{入手角度}\\quad 先列出所有被定义域排除的点，再判断每个点是否至少有一侧极限不为有限值。\n\n"}
+
+## tool · 2026-11-12T07:03:17Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"83b715","wall_time_seconds":0.000011791,"exit_code":0,"original_token_count":635,"output":"\n\\textbf{解析}\\quad 候选点为 \\(-1,0,1,2\\)。在 \\(-1\\) 处 \\(\\ln|1+x|\\to-\\infty\\)，其余因子的乘积趋于非零有限值，故是第二类。在 \\(0\\) 处 \\(\\frac{\\ln(1+x)}{\\mathrm{e}^x-1}\\to1\\)，故 \\(f(x)\\to-\\frac{1}{2\\mathrm{e}}\\)，为可去间断点。在 \\(1\\) 处，指数因子从左趋零、从右趋无穷，其他因子趋于非零值，故是第二类。在 \\(2\\) 处只有分母因子 \\(x-2\\) 趋零，故也是第二类。共 \\(\\boxed{3}\\) 个，选 C。\n\\end{QuestionSolution}\n\n% Q 2024 1\n\\QuestionPage{1.5 连续函数}{选择题}{2024 年第 1 题}{1}{间断点个数}{047 / 234}\n函数\n\\[f(x)=|x|^{\\frac{1}{(1-x)(x-2)}}\n\\]\n的第一类间断点的个数为（ ）\n\\choices{\\(3\\)}{\\(2\\)}{\\(1\\)}{\\(0\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2024 年第 1 题}\n\\textbf{入手角度}\\quad 对正底数的幂取对数，可区分指数发散时底数趋于 \\(1\\) 与趋于其他值的情形。\n\n\\textbf{解析}\\quad 设 \\(H(x)=\\frac{\\ln|x|}{(1-x)(x-2)}\\)，则 \\(f=\\mathrm{e}^H\\)。候选点为 \\(0,1,2\\)。当 \\(x\\to0\\) 时，分母趋 \\(-2\\)，\\(H\\to+\\infty\\)。当 \\(x\\to1\\) 时，\n\\[\nH(x)=\\frac{\\ln x}{x-1}\\frac{1}{2-x}\\longrightarrow1,\n\\]\n故 \\(f\\) 有有限双侧极限 \\(\\mathrm{e}\\)，为可去间断点。当 \\(x\\to2\\) 时，分子趋于 \\(\\ln 2>0\\)，而 \\(H\\) 的一侧趋 \\(+\\infty\\)，另一侧趋 \\(-\\infty\\)，故一侧 \\(f\\) 趋于无穷。只有 \\(x=1\\) 是第一类间断点，选 C。\n\\end{QuestionSolution}\n\n\\SectionHeading{2.1}{一元函数微分学及其应用}{导数的概念}{定理与要点\\quad 教材 PDF 第 108 页起\\hfill 本节 8 题}\n\\pdfbookmark[1]{一元函数微分学及其应用}{chapter-2.1}\n\\pdfbookmark[2]{2.1 导数的概念}{section-2.1}\n\\Theory{定理 1.1}{115}{可导推出连续}{函数在某点可导，则在该点连续。}\n\\Theory{要点}{108--115}{导数定义与几何意义}{差商的左右极限须存在且相等。有限导数给出切线斜率，非零时法线斜率为其负倒数。}\n% Q 2010 3\n\\QuestionPage{2.1 导数的概念}{选择题}{2010 年第 3 题}{1}{曲线相切}{048 / 234}\n曲线$y = x^2$与曲线$y = a\\ln x$（$a \\ne 0$）相切，则$a =$\\pickout{}\n\\begin{abcd}\n\\item $4\\mathrm{e}$．\n\\item $3\\mathrm{e}$．\n\\item $2\\mathrm{e}$．\n\\item $\\mathrm{e}$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2010 年第 3 题}\n\\textbf{入手角度}\\quad 相切同时要求两曲线在同一点的函数值相同、导数相同。\n\n\\textbf{解析}\\quad 设切点横坐标为 \\(x_0>0\\)，则\n\\[\nx_0^2=a\\ln x_0,\\qquad 2x_0=\\frac{a}{x_0}.\n\\]\n"}
+
+## tool · 2026-11-12T07:03:41Z
+
+
+
+
+## tool · 2026-11-12T07:05:27Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T07:05:34Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"48f7a7","wall_time_seconds":0.000010875,"exit_code":0,"original_token_count":2329,"output":"% Q 2011 19\n\\QuestionPage{1.2 数列的极限}{解答题}{2011 年第 19 题}{3}{调和和式与数列收敛}{008 / 234}\n\\begin{enumerate}\n\\item\n证明：对任意的正整数$n$，都有$\\frac{1}{n + 1} < \\ln \\left(1 + \\frac{1}{n} \\right) < \\frac{1}{n}$成立．\n\\item\n设$a_n = 1 + \\frac{1}{2} + \\cdots + \\frac{1}{n} - \\ln n$（$n = 1,2, \\cdots$），\n证明数列$\\left\\{a_n \\right\\}$收敛．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 19 题}\n\\textbf{入手角度}\\quad 对数增量可写为 \\(\\frac{1}{t}\\) 在单位区间上的积分，上下界能同时用于判断单调性和给出下界。\n\n\\textbf{解析}\\quad （1）在 \\(n<t<n+1\\) 上有 \\(\\frac{1}{n+1}<\\frac{1}{t}<\\frac{1}{n}\\)，积分即得\n\\[\n\\frac1{n+1}<\\int_n^{n+1}\\frac{\\mathrm{d}t}{t}\n=\\ln(1+\\frac{1}{n})<\\frac1n.\n\\]\n（2）由左侧不等式，\\(a_{n+1}-a_n=\\frac{1}{n+1}-\\ln(1+\\frac{1}{n})<0\\)。对右侧不等式从 \\(k=1\\) 加到 \\(k=n-1\\) 得\n\\(\\ln n\\le\\sum_{k=1}^{n-1}\\frac{1}{k}\\)，其中 \\(n=1\\) 时两边为零。因此 \\(a_n\\ge \\frac{1}{n}>0\\)。数列单调递减且有下界，故收敛。\n\\end{QuestionSolution}\n\n% Q 2012 21\n\\QuestionPage{1.2 数列的极限}{解答题}{2012 年第 21 题}{4}{实根构成的数列极限}{009 / 234}\n\\begin{enumerate}\n\\item\n证明方程$x^n + x^{n - 1} + \\cdots + x = 1$（$n$为大于$1$的整数）\n在区间$\\left(\\frac{1}{2},1 \\right)$内有且仅有一个实根；\n\\item\n记第（1）问中的实根为$x_n$，证明$\\lim_{n \\to \\infty} x_n$存在，并求此极限．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 21 题}\n\\textbf{入手角度}\\quad 增加一项会使固定正数处的多项式变大，利用这一点比较相邻的根，再对有限等比和求极限。\n\n\\textbf{解析}\\quad （1）记 \\(P_n(t)=\\sum_{k=1}^n t^k\\)。它在 \\([\\frac{1}{2},1]\\) 连续且严格递增，\\(P_n(\\frac{1}{2})=1-2^{-n}<1<P_n(1)=n\\)，所以恰有一根 \\(x_n\\in(\\frac{1}{2},1)\\) 使 \\(P_n(x_n)=1\\)。\n\n（2）\\(P_{n+1}(x_n)=1+x_n^{n+1}>1=P_{n+1}(x_{n+1})\\)，故 \\(x_{n+1}<x_n\\)，从而 \\(x_n\\) 收敛且 \\(x_n\\le x_2<1\\)。等比求和得 \\(2x_n-1=x_n^{n+1}\\)，而右端介于零与 \\(x_2^{n+1}\\) 之间，趋于零。故 \\(\\lim_{n\\to\\infty}x_n=\\boxed{\\frac{1}{2}}\\)。\n\\end{QuestionSolution}\n\n% Q 2013 20\n\\QuestionPage{1.2 数列的极限}{解答题}{2013 年第 20 题}{3}{不等式约束下的数列极限}{010 / 234}\n设函数$f(x) = \\ln x + \\frac{1}{x}$．\n\\begin{enumerate}\n\\item\n求$f(x)$的最小值；\n\\item\n设数列$\\{x_n\\}$满足$\\ln x_n + \\frac{1}{x_{n + 1}} < 1$，证明$\\lim_{n \\to \\infty} x_n$存在，并求此极限．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2013 年第 20 题}\n\\textbf{入手角度}\\quad 先求同一个自变量下的下界，再将它与题给的相邻两项不等式相减。\n\n\\textbf{解析}\\quad （1）定义域为 \\(x>0\\)，且 \\(f'(x)=\\frac{x-1}{x^2}\\)，故 \\(f\\) 在 \\((0,1)\\) 递减，在 \\((1,\\infty)\\) 递增，最小值为 \\(f(1)=1\\)。\n\n（2）题意给出每个 \\(x_n>0\\)。由\n\\[\n\\ln x_n+\\frac1{x_{n+1}}<1\\le\\ln x_n+\\frac1{x_n}\n\\]\n可知 \\(x_{n+1}>x_n\\)。左侧原不等式还给出 \\(\\ln x_n<1\\)，故 \\(x_n<\\mathrm{e}\\)。由单调有界准则，\\(x_n\\to L\\ge x_1>0\\)。取极限得 \\(f(L)\\le1\\)，而（1）表明只有 \\(L=1\\) 时 \\(f(L)\\le1\\)。所求极限为 \\(\\boxed{1}\\)。\n\\end{QuestionSolution}\n\n% Q 2018 21\n\\QuestionPage{1.2 数列的极限}{解答题}{2018 年第 21 题}{4}{递推数列的收敛与极限}{011 / 234}\n设数列$\\left\\{x_n \\right\\}$满足：$x_1 > 0$，$x_n \\mathrm{e}^{x_{n + 1}} = \\mathrm{e}^{x_n} - 1$（$n = 1,2, \\cdots$）．\n证明$\\left\\{x_n \\right\\}$收敛，并求$\\lim_{n \\to \\infty} x_n$．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2018 年第 21 题}\n\\textbf{入手角度}\\quad 把 \\(\\frac{\\mathrm{e}^x-1}{x}\\) 写成 \\(\\mathrm{e}^t\\) 在 \\([0,x]\\) 上的平均值，可直接比较递推的相邻项。\n\n\\textbf{解析}\\quad 当 \\(x_n>0\\) 时，\n\\[\n1<\\mathrm{e}^{x_{n+1}}=\\frac1{x_n}\\int_0^{x_n}\\mathrm{e}^t\\,\\mathrm{d}t<\\mathrm{e}^{x_n}.\n\\]\n故 \\(0<x_{n+1}<x_n\\)，由 \\(x_1>0\\) 归纳得数列递减且有下界。设 \\(x_n\\to L\\ge0\\)。若 \\(L>0\\)，递推式取极限给出 \\(\\mathrm{e}^L=\\frac{\\mathrm{e}^L-1}{L}\\)，但同一平均值严格小于 \\(\\mathrm{e}^L\\)，矛盾。所以 \\(\\lim_{n\\to\\infty}x_n=\\boxed{0}\\)。\n\\end{QuestionSolution}\n\n\\SectionHeading{1.3}{函数、极限、连续}{函数的极限}{定理与要点\\quad 教材 PDF 第 60 页起\\hfill 本节 5 题}\n\\pdfbookmark[2]{1.3 函数的极限}{section-1.3}\n\\Theory{定理 3.1}{65}{Heine 定理}{当 \\(x\\to x_0\\) 时，函数 \\(f\\) 的极限为 \\(a\\) 的充要条件是，对定义域内任意满足 \\(x_n\\ne x_0\\) 且 \\(x_n\\to x_0\\) 的数列，都有 \\(f(x_n)\\to a\\)。}\n\\Theory{定理 3.2}{66}{唯一性与局部有界性}{函数的有限极限唯一，且函数在相应去心邻域内有界。}\n\\Theory{定理 3.3}{67}{保号、保序和夹逼}{非零极限在局部保号。局部大小关系传给极限，两端极限相同即可夹逼。}\n\\Theory{定理 3.4}{67}{有理运算法则}{和、差、积的极限由各自极限运算得到。商的分母极限须非零。}\n\\Theory{定理 3.5}{69}{复合函数的极限}{内层函数趋于 \\(u_0\\) 且在去心邻域内避开 \\(u_0\\) 时，可应用外层函数在 \\(u_0\\) 处的极限。}\n\\Theory{定理 3.6}{73}{单调有界准则}{在右半无限区间单调增且有上界或单调减且有下界时，右端极限存在。单调函数在区间内点有左右极限。}\n\\Theory{定理 3.7}{74}{Cauchy 收敛原理}{有限极限存在，当且仅当充分接近目标点的任意两处函数值都可彼此任意接近。}\n\\Theory{公式}{70--72}{两个重要极限}{\\(\\lim_{x\\to0}\\frac{\\sin x}{x}=1\\)，\\(\\lim_{u\\to0}(1+u)^{\\frac{1}{u}}=\\mathrm{e}\\)。}\n% Q 2011 9\n\\QuestionPage{1.3 函数的极限}{填空题}{2011 年第 9 题}{1}{函数极限}{012 / 234}\n$\\lim_{x \\to 0} \\left(\\frac{1 + 2^x}{2} \\right)^{\\frac{1}{x}} =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 9 题}\n\\textbf{入手角度}\\quad 底数趋于 \\(1\\)，取对数后只需保留底数偏离 \\(1\\) 的一次项。\n\n\\textbf{解析}\\quad 写底数为 \\(1+u\\)，其中 \\(u=\\frac{2^x-1}{2}\\)。由 \\(2^x=\\mathrm{e}^{x\\ln 2}=1+x\\ln 2+o(x)\\)，有\n\\[\n\\frac{\\ln(1+u)}{x}\n=\\frac{\\ln(1+u)}u\\frac{2^x-1}{2x}\n\\longrightarrow \\frac{\\ln 2}2.\n\\]\n指数化得到 \\(\\boxed{\\sqrt2}\\)。\n\\end{QuestionSolution}\n\n% Q 2013 9\n\\QuestionPage{1.3 函数的极限}{填空题}{2013 年第 9 题}{2}{指数型函数极限}{013 / 234}\n$\\lim_{x \\to 0} \\left(2 - \\frac{\\ln(1 + x)}{x} \\right)^{\\frac{1}{x}} =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2013 年第 9 题}\n\\textbf{入手角度}\\quad 底数中的 \\(\\ln(1+x)\\) 已除过一次 \\(x\\)，求对数极限需要先展开到二次。\n\n\\textbf{解析}\\quad \\(\\ln(1+x)=x-\\tfrac12x^2+o(x^2)\\)，所以 \\(2-\\frac{\\ln(1+x)}{x}=1+\\frac{x}{2}+o(x)\\)，在零点附近为正。原式的对数为\n\\[\n\\frac{1}{x}\\ln\\bigl(1+\\frac{x}{2}+o(x)\\bigr)\\longrightarrow\\frac12.\n\\]\n由指数函数连续性，原极限为 \\(\\boxed{\\sqrt{\\mathrm{e}}}\\)。\n\\end{QuestionSolution}\n\n% Q 2019 9\n\\QuestionPage{1.3 函数的极限}{填空题}{2019 年第 9 题}{1}{指数型函数极限}{014 / 234}\n$\\lim_{x \\to 0} \\left(x + 2^x \\right)^{\\frac{2}{x}} =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2019 年第 9 题}\n\\textbf{入手角度}\\quad \\(x\\) 与 \\(2^x-1\\) 都贡献一次项，需先相加再取对数。\n\n\\textbf{解析}\\quad \\(x+2^x=1+(1+\\ln 2)x+o(x)\\)，零点附近底数为正。故\n\\[\n\\frac{2}{x}\\ln(x+2^x)\\longrightarrow2(1+\\ln 2).\n\\]\n原极限为 \\(\\mathrm{e}^{2(1+\\ln 2)}=\\boxed{4\\mathrm{e}^2}\\)。\n\\end{QuestionSolution}\n\n% Q 2022 11\n\\QuestionPage{1.3 函数的极限}{填空题}{2022 年第 11 题}{2}{指数型函数极限}{015 / 234}\n\\(\\lim_{x \\to 0} \\left( \\frac{1 + \\mathrm{e}^{x}}{2} \\right)^{\\cot x} = \\blank{}\\)\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2022 年第 11 题}\n\\textbf{入手角度}\\quad 取对数后，把 \\(\\cot x\\) 的奇异因子吸收到 \\(x\\cot x\\) 中。\n\n\\textbf{解析}\\quad \\(x\\cot x\\to1\\)，且 \\(\\frac{1+\\mathrm{e}^x}{2}=1+\\frac{x}{2}+o(x)\\)。因此\n\\[\n\\cot x\\ln\\frac{1+\\mathrm{e}^x}{2}\n=(x\\cot x)\\frac{\\ln(1+\\frac{x}{2}+o(x))}{x}\\longrightarrow\\frac12.\n\\]\n所求极限为 \\(\\boxed{\\mathrm{e}^{\\frac{1}{2}}}\\)。\n\\end{QuestionSolution}\n\n% Q 2011 15\n\\QuestionPage{1.3 函数的极限}{解答题}{2011 年第 15 题}{2}{两处函数极限与参数}{016 / 234}\n已知函数$F(x) = \\frac{\\int_0^x \\ln(1 + t^2)\\,\\mathrm{d} t}{x^a}$，\n设$\\!\\!\\lim_{x \\to +\\infty}\\!\\!\\! F(x) = \\!\\lim_{x \\to 0^+}\\! F(x) = 0$，试求$a$的取值范围．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 15 题}\n\\textbf{入手角度}\\quad 分子在零点附近按 \\(x^3\\) 衰减，在无穷远按 \\(x\\ln x\\) 增长，分别约束参数。\n\n\\textbf{解析}\\quad 当 \\(x\\to0^+\\) 时，由 L'Hospital 法则，\n\\[\n\\lim_{x\\to0^+}\\frac{\\int_0^x\\ln(1+t^2)\\,\\mathrm{d}t}{x^3}\n=\\lim_{x\\to0^+}\\frac{\\ln(1+x^2)}{3x^2}=\\frac13.\n\\]\n因而 \\(F(x)\\to0\\) 当且仅当 \\(3-a>0\\)。当 \\(x\\to+\\infty\\) 时，分子和 \\(x\\ln x\\) 均趋于无穷，导数之比 \\(\\frac{\\ln(1+x^2)}{1+\\ln x}\\to2\\)，故分子等价于 \\(2x\\ln x\\)。此时 \\(F(x)\\to0\\) 当且仅当 \\(a>1\\)，因为对任意 \\(p>0\\) 都有 \\(\\frac{\\ln x}{x^p}\\to0\\)。合并得 \\(\\boxed{1<a<3}\\)。\n\\end{QuestionSolution}\n\n"}
+
+## tool · 2026-11-12T07:08:04Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T07:08:10Z
+
+
+
+
+## tool · 2026-11-12T07:08:16Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"7341af","wall_time_seconds":0.000010167,"exit_code":0,"original_token_count":2636,"output":"% Q 2009 2\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2009 年第 2 题}{1}{等价无穷小}{017 / 234}\n当$x \\to 0$时，$f(x) = x - \\sin ax$与$g(x) = x^2\\ln (1 - bx)$是等价无穷小，则\\pickout{}\n\\begin{abcd}\n\\item $a = 1,b = - \\frac{1}{6}$．\n\\item $a = 1,b = \\frac{1}{6}$．\n\\item $a = - 1,b = - \\frac{1}{6}$．\n\\item $a = - 1,b = \\frac{1}{6}$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2009 年第 2 题}\n\\textbf{入手角度}\\quad 右式最低有效幂次为三次，左式必须先消去一次项。\n\n\\textbf{解析}\\quad \\(x^2\\ln(1-bx)=-bx^3+o(x^3)\\)，等价关系要求 \\(b\\ne0\\)。而 \\(x-\\sin(ax)=(1-a)x+\\frac{a^3x^3}{6}+o(x^3)\\)，故先有 \\(a=1\\)，再有 \\(\\frac{1}{6}=-b\\)。取 \\(a=1,b=-\\frac{1}{6}\\) 时两式均等价于 \\(\\frac{x^3}{6}\\)。选 A。\n\\end{QuestionSolution}\n\n% Q 2011 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2011 年第 1 题}{1}{三角函数的等价无穷小}{018 / 234}\n已知当$x \\to 0$时，$f(x) = 3\\sin x - \\sin 3x$与$cx^k$是等价无穷小，则\\pickout{}\n\\begin{abcd}\n\\item $k = 1,c = 4$．\n\\item $k = 1,c = - 4$．\n\\item $k = 3,c = 4$．\n\\item $k = 3,c = - 4$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 1 题}\n\\textbf{入手角度}\\quad 正弦三倍角公式能直接消去一次项。\n\n\\textbf{解析}\\quad 由 \\(\\sin 3x=3\\sin x-4\\sin^3x\\)，有 \\(f(x)=4\\sin^3x\\)。于是 \\(\\frac{f(x)}{x^3}=4(\\frac{\\sin x}{x})^3\\to4\\)。只有 \\(k=3,c=4\\) 使 \\(\\frac{f(x)}{cx^k}\\to1\\)，选 C。\n\\end{QuestionSolution}\n\n% Q 2012 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2012 年第 1 题}{1}{渐近线条数}{019 / 234}\n曲线$y = \\frac{x^2 + x}{x^2 - 1}$渐近线的条数为\\pickout{}\n\\begin{abcd}\n\\item $0$．\n\\item $1$．\n\\item $2$．\n\\item $3$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 1 题}\n\\textbf{入手角度}\\quad 先约分区分可去间断点与真正的极点，再检查无穷远。\n\n\\textbf{解析}\\quad 在定义域内，\\(\\frac{x^2+x}{x^2-1}=\\frac{x}{x-1}=1+\\frac{1}{x-1}\\)。因此 \\(x=-1\\) 附近极限有限，只有 \\(x=1\\) 给出竖直渐近线。两端无穷远均趋于 \\(1\\)，故还有水平渐近线 \\(y=1\\)。有限的无穷远极限排除非水平斜线，总计 \\(\\boxed{2}\\) 条，选 C。\n\\end{QuestionSolution}\n\n% Q 2013 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2013 年第 1 题}{1}{三角无穷小的比较}{020 / 234}\n设$\\cos x - 1 = x\\sin \\alpha(x)$，其中$\\left| \\alpha(x) \\right| < \\frac{\\pi}{2}$，\n则当$x \\to 0$时，$\\alpha (x)$是\\pickout{}\n\\begin{abcd}\n\\item 比$x$高阶的无穷小．\n\\item 比$x$低阶的无穷小．\n\\item 与$x$同阶但不等价的无穷小．\n\\item 与$x$等价的无穷小．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2013 年第 1 题}\n\\textbf{入手角度}\\quad 角度已限制在正弦的单调区间，可先确定角度趋零，再比较一次项。\n\n\\textbf{解析}\\quad 当 \\(x\\ne0\\) 时，\n\\(\\sin\\alpha(x)=\\frac{\\cos x-1}{x}\\sim-\\frac{x}{2}\\)。由于 \\(\\alpha(x)\\in(-\\frac{\\pi}{2},\\frac{\\pi}{2})\\)，有 \\(\\alpha(x)=\\arcsin(\\sin\\alpha(x))\\to0\\)。再由 \\(\\frac{\\alpha}{\\sin\\alpha}\\to1\\) 得 \\(\\frac{\\alpha(x)}{x}\\to-\\frac{1}{2}\\)。比值有限且非零，并且不等于 \\(1\\)，故同阶而不等价，选 C。\n\\end{QuestionSolution}\n\n% Q 2014 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2014 年第 1 题}{1}{幂次与无穷小阶}{021 / 234}\n当$x \\to 0^+$时，若$\\ln^{\\alpha}(1 + 2x)$，$(1 - \\cos x)^{\\frac{1}{\\alpha}}$\n均是比$x$高阶的无穷小，则$\\alpha$的可能取值范围是\\pickout{}\n\\begin{abcd}\n\\item $(2, +\\infty)$．\n\\item $(1,2)$．\n\\item $\\left(\\frac{1}{2},1 \\right)$．\n\\item $\\left(0,\\frac{1}{2} \\right)$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2014 年第 1 题}\n\\textbf{入手角度}\\quad 先把两个正底数换成幂函数的等价式，再与 \\(x\\) 作商。\n\n\\textbf{解析}\\quad 当 \\(x\\to0^+\\) 时，\n\\[\n\\frac{\\ln^\\alpha(1+2x)}x\\sim 2^\\alpha x^{\\alpha-1},\n\\qquad\n\\frac{(1-\\cos x)^{\\frac{1}{\\alpha}}}x\\sim 2^{-\\frac{1}{\\alpha}}x^{\\frac{2}{\\alpha}-1}.\n\\]\n第一个比值趋于零要求 \\(\\alpha>1\\)。此时 \\(\\alpha>0\\)，第二个比值趋于零要求 \\(\\frac{2}{\\alpha}>1\\)，即 \\(\\alpha<2\\)。所以 \\(\\boxed{1<\\alpha<2}\\)，选 B。\n\\end{QuestionSolution}\n\n% Q 2014 2\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2014 年第 2 题}{1}{渐近线的判定}{022 / 234}\n下列曲线有渐近线的是\\pickout{}\n\\begin{abcd}\n\\item $y = x + \\sin x$．\n\\item $y = x^2 + \\sin x$．\n\\item $y = x + \\sin \\frac{1}{x}$．\n\\item $y = x^2 + \\sin \\frac{1}{x}$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2014 年第 2 题}\n\\textbf{入手角度}\\quad 先排查有限点能否趋于无穷，再比较各曲线在无穷远的线性主项与余项。\n\n\\textbf{解析}\\quad 四个函数在每个有限点附近均有界，包括 C、D 在 \\(x=0\\) 的去心邻域，因此均无竖直渐近线。B、D 的 \\(\\frac{y}{x}\\) 在无穷远无有限极限，无法得到直线渐近线。A 在无穷远的斜率只能为 \\(1\\)，但 \\(y-x=\\sin x\\) 不收敛。C 有 \\(y-x=\\sin(\\frac{1}{x})\\to0\\)，故渐近线为 \\(y=x\\)，选 C。\n\\end{QuestionSolution}\n\n% Q 2016 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2016 年第 1 题}{1}{无穷小量的阶}{023 / 234}\n设$a_1 = x(\\cos \\sqrt{x} - 1)$，$a_2 = \\sqrt{x} \\ln(1 + \\sqrt[3]{x})$，$a_3 = \\sqrt[3]{x + 1} - 1$．\n当$x \\to 0^+$时，以上$3$个无穷小量按照从低阶到高阶的排序是\\pickout{}\n\\begin{abcd}\n\\item $a_1,a_2,a_3$．\n\\item $a_2,a_3,a_1$．\n\\item $a_2,a_1,a_3$．\n\\item $a_3,a_2,a_1$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2016 年第 1 题}\n\\textbf{入手角度}\\quad 将三个式子都化为常数乘 \\(x\\) 的幂，幂指数越大，趋于零越快。\n\n\\textbf{解析}\\quad 用 \\(\\cos u-1\\sim-\\frac{u^2}{2}\\)、\\(\\ln(1+u)\\sim u\\) 和 \\((1+u)^{\\frac{1}{3}}-1\\sim \\frac{u}{3}\\) 分别得到\n\\[\na_1\\sim-\\tfrac12x^2,\\qquad a_2\\sim x^{\\frac{5}{6}},\\qquad a_3\\sim\\tfrac13x.\n\\]\n由于 \\(\\frac{5}{6}<1<2\\)，从低阶到高阶为 \\(a_2,a_3,a_1\\)，选 B。\n\\end{QuestionSolution}\n\n% Q 2019 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2019 年第 1 题}{1}{正切函数的同阶无穷小}{024 / 234}\n当$x \\to 0$时，若$x - \\tan x$与$x^k$是同阶无穷小，则$k =$\\pickout{}\n\\begin{abcd}\n\\item $1$．\n\\item $2$．\n\\item $3$．\n\\item $4$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2019 年第 1 题}\n\\textbf{入手角度}\\quad \\(x-\\tan x\\) 的一次项抵消，考察差的导数可直接找到三次项。\n\n\\textbf{解析}\\quad \\((x-\\tan x)'=1-\\sec^2x=-\\tan^2 x\\)。由 L'Hospital 法则，\n\\[\n\\lim_{x\\to0}\\frac{x-\\tan x}{x^3}\n=-\\frac13\\lim_{x\\to0}\\left(\\frac{\\tan x}{x}\\right)^2=-\\frac13.\n\\]\n比值有限且非零，故 \\(k=\\boxed{3}\\)，选 C。\n\\end{QuestionSolution}\n\n% Q 2020 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2020 年第 1 题}{1}{积分形式的无穷小比阶}{025 / 234}\n当 \\(x \\to 0^{+}\\) 时，下列无穷小量中阶最高的是\n\\choices{\\(\\int_{0}^{x}{\\left( \\mathrm{e}^{t^{2}} - 1 \\right) \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{x}{\\ln \\left( 1 + \\sqrt{t^{3}} \\right) \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{\\sin x}{\\sin t^{2} \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{1-\\cos x}{\\sqrt{\\sin^{3} t} \\,\\mathrm{d} t}\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2020 年第 1 题}\n\\textbf{入手角度}\\quad 先按积分变量估计被积函数，再代入上限相对 \\(x\\) 的阶。\n\n\\textbf{解析}\\quad 若 \\(h(t)\\sim c t^p\\) 且 \\(p>-1\\)，由 L'Hospital 法则，\\(\\int_0^u h(t)\\,\\mathrm{d}t\\sim \\frac{c u^{p+1}}{p+1}\\)（\\(u\\to0^+\\)）。A、B、C、D 的被积函数分别等价于 \\(t^2,t^{\\frac{3}{2}},t^2,t^{\\frac{3}{2}}\\)。其中 \\(\\sin x\\sim x\\)，\\(1-\\cos x\\sim \\frac{x^2}{2}\\)，所以四个积分依次等价于\n\\[\n\\frac{x^3}3,\\qquad \\frac25 x^{\\frac{5}{2}},\\qquad\n\\frac{x^3}3,\\qquad \\frac25\\left(\\frac{x^2}2\\right)^{\\frac{5}{2}}.\n\\]\n最后一个为五阶，阶最高，选 D。\n\\end{QuestionSolution}\n\n% Q 2021 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2021 年第 1 题}{1}{变上限积分的无穷小阶}{026 / 234}\n当 \\(x \\to 0\\) 时，\\(\\int_{0}^{x^{2}} \\left(\\mathrm{e}^{t^3}-1\\right) \\mathrm{d} t\\) 是 \\(x^{7}\\) 的\n\\choices{低阶无穷小}{等价无穷小}{高阶无穷小}{同阶但非等价无穷小}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2021 年第 1 题}\n\\textbf{入手角度}\\quad 先展开指数得到被积函数的最低次幂，再计算这个幂次积分后对应的 \\(x\\) 的次数。\n\n\\textbf{解析}\\quad 当 \\(t\\to0\\) 时，\\(\\mathrm{e}^{t^3}-1=t^3+O(t^6)\\)。在 \\(0\\le t\\le x^2\\) 上积分，得\n\\[\n\\int_0^{x^2}(\\mathrm{e}^{t^3}-1)\\,\\mathrm{d}t\n=\\frac{x^8}{4}+O(x^{14}).\n\\]\n除以 \\(x^7\\) 后得到 \\(\\frac{x}{4}+O(x^7)\\to0\\)，所以原积分是 \\(x^7\\) 的高阶无穷小，选 C。\n\\end{QuestionSolution}\n\n% Q 2022 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2022 年第 1 题}{1}{等价无穷小的性质}{027 / 234}\n若当 \\(x \\to 0\\) 时，\\(\\alpha\\left( x \\right), \\beta\\left( x \\right)\\) 是非零无穷小量，则以下的命题中，\n\\par\\circnum{1} 若 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，则 \\(\\alpha^{2}\\left( x \\right) \\sim \\beta^{2}\\left( x \\right)\\)；\n\\par\\circnum{2} 若 \\(\\alpha^{2}\\left( x \\right) \\sim \\beta^{2}\\left( x \\right)\\)，则 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)；\n\\par\\circnum{3} 若 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，则 \\(\\alpha\\left( x \\right) - \\beta\\left( x \\right) = o\\left( \\alpha\\left( x \\right) \\right)\\)；\n\\par\\circnum{4} 若 \\(\\alpha\\left( x \\right) - \\beta\\left( x \\right) = o\\left( \\alpha\\left( x \\right) \\right)\\)，则 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，\n真命题的序号为 \\(\\left( \\ \\right)\\)\n\\choices{\\circnum{1}\\circnum{3}}{\\circnum{1}\\circnum{4}}{\\circnum{1}\\circnum{3}\\circnum{4}}{\\circnum{2}\\circnum{3}\\circnum{4}}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2022 年第 1 题}\n\\textbf{入手角度}\\quad 把等价关系写成比值趋于 \\(1\\)，再观察平方丢失的符号信息。\n\n\\textbf{解析}\\quad 若 \\(\\frac{\\alpha}{\\beta}\\to1\\)，平方仍趋于 \\(1\\)，且 \\(\\frac{\\alpha-\\beta}{\\alpha}=1-\\frac{\\beta}{\\alpha}\\to0\\)，所以第 1、3 个命题成立。取 \\(\\alpha=x,\\beta=-x\\)，平方相等但 \\(\\frac{\\alpha}{\\beta}=-1\\)，所以第 2 个命题不成立。若 \\(\\frac{\\alpha-\\beta}{\\alpha}\\to0\\)，则 \\(\\frac{\\beta}{\\alpha}\\to1\\)，取倒数得 \\(\\frac{\\alpha}{\\beta}\\to1\\)，所以第 4 个命题成立。选 C。\n\\end{QuestionSolution}\n\n"}
+
+## tool · 2026-11-12T07:10:58Z
+
+
+Script failed
+Wall time 0.0 seconds
+Output:
+
+Script error:
+apply_patch verification failed: Failed to find expected lines in /Volumes/SamsungSSD990PRO/GitHub/codex-question-bank/output/302数学二分节真题集（原生LaTeX横屏版）.tex:
+-\frac13\lim_{x\to0}\left(\frac{\tan x}{x}\right)^2=-\frac13.
+\]
+比值有限且非零，故 \(k=\boxed{3}\)，选 C。
+
+## tool · 2026-11-12T07:11:04Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"b828e0","wall_time_seconds":0.000011584,"exit_code":0,"original_token_count":104,"output":"\\begin{QuestionSolution}{2019 年第 1 题}\n\\textbf{入手角度}\\quad \\(x-\\tan x\\) 的一次项抵消，考察差的导数可直接找到三次项。\n\n\\textbf{解析}\\quad \\((x-\\tan x)'=1-\\sec^2x=-\\tan^2 x\\)。由 L'Hospital 法则，\n\\[\n\\lim_{x\\to0}\\frac{x-\\tan x}{x^3}\n=-\\frac13\\lim_{x\\to0}\\left(\\frac{\\tan x}{x}\\right)^2=-\\frac13.\n\\]\n比值有限且非零，故 \\(k=\\boxed{3}\\)，选 C。\n\\end{QuestionSolution}\n"}
+
+## tool · 2026-11-12T07:12:44Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T07:13:53Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"ddddc7","wall_time_seconds":0.000011834,"exit_code":0,"original_token_count":1108,"output":"% Q 2019 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2019 年第 1 题}{1}{正切函数的同阶无穷小}{024 / 234}\n当$x \\to 0$时，若$x - \\tan x$与$x^k$是同阶无穷小，则$k =$\\pickout{}\n\\begin{abcd}\n\\item $1$．\n\\item $2$．\n\\item $3$．\n\\item $4$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2019 年第 1 题}\n\\textbf{入手角度}\\quad \\(x-\\tan x\\) 的一次项抵消，考察差的导数可直接找到三次项。\n\n\\textbf{解析}\\quad \\((x-\\tan x)'=1-\\sec^2x=-\\tan^2 x\\)。由 L'Hospital 法则，\n\\[\n\\lim_{x\\to0}\\frac{x-\\tan x}{x^3}\n=-\\frac13\\lim_{x\\to0}\\left(\\frac{\\tan x}{x}\\right)^2=-\\frac13.\n\\]\n比值有限且非零，故 \\(k=\\boxed{3}\\)，选 C。\n\\end{QuestionSolution}\n\n% Q 2020 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2020 年第 1 题}{1}{积分形式的无穷小比阶}{025 / 234}\n当 \\(x \\to 0^{+}\\) 时，下列无穷小量中阶最高的是\n\\choices{\\(\\int_{0}^{x}{\\left( \\mathrm{e}^{t^{2}} - 1 \\right) \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{x}{\\ln \\left( 1 + \\sqrt{t^{3}} \\right) \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{\\sin x}{\\sin t^{2} \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{1-\\cos x}{\\sqrt{\\sin^{3} t} \\,\\mathrm{d} t}\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2020 年第 1 题}\n\\textbf{入手角度}\\quad 先按积分变量估计被积函数，再代入上限相对 \\(x\\) 的阶。\n\n\\textbf{解析}\\quad 若 \\(h(t)\\sim c t^p\\) 且 \\(p>-1\\)，由 L'Hospital 法则，\\(\\int_0^u h(t)\\,\\mathrm{d}t\\sim \\frac{c u^{p+1}}{p+1}\\)（\\(u\\to0^+\\)）。A、B、C、D 的被积函数分别等价于 \\(t^2,t^{\\frac{3}{2}},t^2,t^{\\frac{3}{2}}\\)。其中 \\(\\sin x\\sim x\\)，\\(1-\\cos x\\sim \\frac{x^2}{2}\\)，所以四个积分依次等价于\n\\[\n\\frac{x^3}3,\\qquad \\frac25 x^{\\frac{5}{2}},\\qquad\n\\frac{x^3}3,\\qquad \\frac25\\left(\\frac{x^2}2\\right)^{\\frac{5}{2}}.\n\\]\n最后一个为五阶，阶最高，选 D。\n\\end{QuestionSolution}\n\n% Q 2021 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2021 年第 1 题}{1}{变上限积分的无穷小阶}{026 / 234}\n当 \\(x \\to 0\\) 时，\\(\\int_{0}^{x^{2}} \\left(\\mathrm{e}^{t^3}-1\\right) \\mathrm{d} t\\) 是 \\(x^{7}\\) 的\n\\choices{低阶无穷小}{等价无穷小}{高阶无穷小}{同阶但非等价无穷小}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2021 年第 1 题}\n\\textbf{入手角度}\\quad 先展开指数得到被积函数的最低次幂，再计算这个幂次积分后对应的 \\(x\\) 的次数。\n\n\\textbf{解析}\\quad 当 \\(t\\to0\\) 时，\\(\\mathrm{e}^{t^3}-1=t^3+O(t^6)\\)。在 \\(0\\le t\\le x^2\\) 上积分，得\n\\[\n\\int_0^{x^2}(\\mathrm{e}^{t^3}-1)\\,\\mathrm{d}t\n=\\frac{x^8}{4}+O(x^{14}).\n\\]\n除以 \\(x^7\\) 后得到 \\(\\frac{x}{4}+O(x^7)\\to0\\)，所以原积分是 \\(x^7\\) 的高阶无穷小，选 C。\n\\end{QuestionSolution}\n\n% Q 2022 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2022 年第 1 题}{1}{等价无穷小的性质}{027 / 234}\n若当 \\(x \\to 0\\) 时，\\(\\alpha\\left( x \\right), \\beta\\left( x \\right)\\) 是非零无穷小量，则以下的命题中，\n\\par\\circnum{1} 若 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，则 \\(\\alpha^{2}\\left( x \\right) \\sim \\beta^{2}\\left( x \\right)\\)；\n\\par\\circnum{2} 若 \\(\\alpha^{2}\\left( x \\right) \\sim \\beta^{2}\\left( x \\right)\\)，则 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)；\n\\par\\circnum{3} 若 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，则 \\(\\alpha\\left( x \\right) - \\beta\\left( x \\right) = o\\left( \\alpha\\left( x \\right) \\right)\\)；\n\\par\\circnum{4} 若 \\(\\alpha\\left( x \\right) - \\beta\\left( x \\right) = o\\left( \\alpha\\left( x \\right) \\right)\\)，则 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，\n真命题的序号为 \\(\\left( \\ \\right)\\)\n\\choices{\\circnum{1}\\circnum{3}}{\\circnum{1}\\circnum{4}}{\\circnum{1}\\circnum{3}\\circnum{4}}{\\circnum{2}\\circnum{3}\\circnum{4}}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2022 年第 1 题}\n\\textbf{入手角度}\\quad 把等价关系写成比值趋于 \\(1\\)，再观察平方丢失的符号信息。\n\n\\textbf{解析}\\quad 若 \\(\\frac{\\alpha}{\\beta}\\to1\\)，平方仍趋于 \\(1\\)，且 \\(\\frac{\\alpha-\\beta}{\\alpha}=1-\\frac{\\beta}{\\alpha}\\to0\\)，所以第 1、3 个命题成立。取 \\(\\alpha=x,\\beta=-x\\)，平方相等但 \\(\\frac{\\alpha}{\\beta}=-1\\)，所以第 2 个命题不成立。若 \\(\\frac{\\alpha-\\beta}{\\alpha}\\to0\\)，则 \\(\\frac{\\beta}{\\alpha}\\to1\\)，取倒数得 \\(\\frac{\\alpha}{\\beta}\\to1\\)，所以第 4 个命题成立。选 C。\n\\end{QuestionSolution}\n\n"}
+{}
+
+## tool · 2026-11-12T07:14:00Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"a6e0fb","wall_time_seconds":0.000009125,"exit_code":0,"original_token_count":2341,"output":"% Q 2023 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2023 年第 1 题}{1}{斜渐近线}{028 / 234}\n曲线\n\\[y=x\\ln\\left(\\mathrm{e}+\\frac{1}{x-1}\\right)\n\\]\n的斜渐近线方程为（ ）。\n\\choices{\\(y=x+\\mathrm{e}\\)}{\\(y=x+\\dfrac{1}{\\mathrm{e}}\\)}{\\(y=x\\)}{\\(y=x-\\dfrac{1}{\\mathrm{e}}\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2023 年第 1 题}\n\\textbf{入手角度}\\quad 将对数中的 \\(\\mathrm{e}\\) 提出，常数项决定斜率，其余部分决定截距。\n\n\\textbf{解析}\\quad 当 \\(x\\to\\pm\\infty\\) 时，\\(\\frac{y}{x}\\to\\ln \\mathrm{e}=1\\)，且\n\\[\ny-x=x\\ln\\left(1+\\frac{1}{\\mathrm{e}(x-1)}\\right)\n\\sim\\frac{x}{\\mathrm{e}(x-1)}\\longrightarrow\\frac{1}{\\mathrm{e}}.\n\\]\n所以斜渐近线为 \\(\\boxed{y=x+\\frac{1}{\\mathrm{e}}}\\)，选 B。\n\\end{QuestionSolution}\n\n% Q 2025 4\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2025 年第 4 题}{1}{无穷小比阶}{029 / 234}\n设函数 \\(f\\left( x \\right)\\)，\\(g\\left( x \\right)\\) 在 \\(x = 0\\) 的某去心邻域内有定义且恒不为零.若当 \\(x \\to 0\\) 时，\\(f\\left( x \\right)\\) 是 \\(g\\left( x \\right)\\) 的高阶无穷小，则当 \\(x \\to 0\\) 时，\n\\choices{\\(f\\left( x \\right) + g\\left( x \\right) = o\\left( g\\left( x \\right) \\right)\\).}{\\(f\\left( x \\right) g\\left( x \\right) = o\\left( f^{2}\\left( x \\right) \\right)\\).}{\\(f\\left( x \\right) = o\\left( \\mathrm{e}^{g\\left( x \\right)} - 1 \\right)\\).}{\\(f\\left( x \\right) = o\\left( g^{2}\\left( x \\right) \\right)\\).}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2025 年第 4 题}\n\\textbf{入手角度}\\quad 由 \\(\\frac{f}{g}\\to0\\) 分别化简各选项的比值，注意 \\(\\mathrm{e}^g-1\\) 与 \\(g\\) 的等价关系。\n\n\\textbf{解析}\\quad \\(\\frac{f+g}{g}=1+\\frac{f}{g}\\to1\\)，故 \\(f+g\\) 与 \\(g\\) 等价，A 中的小 \\(o\\) 关系不成立。又有 \\(|\\frac{fg}{f^2}|=|\\frac{g}{f}|\\to+\\infty\\)，故 B 不成立。对 C，利用 \\(g\\to0\\) 得\n\\[\n\\frac{f}{\\mathrm{e}^g-1}=\\frac fg\\frac g{\\mathrm{e}^g-1}\\longrightarrow0.\n\\]\n最后取 \\(g(x)=x,f(x)=x^2\\)，有 \\(\\frac{f}{g}\\to0\\) 而 \\(\\frac{f}{g^2}=1\\)，故 D 不成立。选 C。\n\\end{QuestionSolution}\n\n% Q 2026 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2026 年第 1 题}{1}{等价无穷小求系数}{030 / 234}\n已知当 \\(x \\to 0\\) 时，\\(a x^{2} + b x + \\arcsin x\\) 与 \\(\\sqrt[3]{1 + x^{2}} - 1\\) 是等价无穷小，则\n\\choices{\\(a = \\frac{1}{3},\\ b = -1\\)}{\\(a = \\frac{1}{3},\\ b = 1\\)}{\\(a = \\frac{2}{3},\\ b = -1\\)}{\\(a = \\frac{2}{3},\\ b = 1\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2026 年第 1 题}\n\\textbf{入手角度}\\quad 立方根右式从二次项开始，先消去反正弦带来的一次项。\n\n\\textbf{解析}\\quad \\(\\arcsin x=x+o(x^2)\\)，且\n\\(\\sqrt[3]{1+x^2}-1=\\tfrac13x^2+o(x^2)\\)。等价要求左式 \\((b+1)x+ax^2+o(x^2)\\) 的一次系数为零，二次系数为 \\(\\frac{1}{3}\\)。因此 \\(\\boxed{a=\\frac{1}{3},\\ b=-1}\\)，选 A。\n\\end{QuestionSolution}\n\n% Q 2010 10\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2010 年第 10 题}{2}{曲线的渐近线}{031 / 234}\n曲线$y = \\frac{2x^3}{x^2 + 1}$的渐近线方程为 \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2010 年第 10 题}\n\\textbf{入手角度}\\quad 多项式相除可把分式写成一次式与趋于零的余项。\n\n\\textbf{解析}\\quad 对分子作多项式除法，得到\n\\[\ny=\\frac{2x^3}{x^2+1}=2x-\\frac{2x}{x^2+1}.\n\\]\n当 \\(x\\to\\pm\\infty\\) 时，\\(y-2x\\to0\\)。又 \\(x^2+1>0\\)，函数在各有限点连续，无竖直渐近线。所求渐近线为 \\(\\boxed{y=2x}\\)。\n\\end{QuestionSolution}\n\n% Q 2016 9\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2016 年第 9 题}{2}{斜渐近线}{032 / 234}\n曲线$y = \\frac{x^3}{1 + x^2} + \\arctan(1 + x^2)$的斜渐近线方程为 \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2016 年第 9 题}\n\\textbf{入手角度}\\quad 有理项给出线性主项，反正切项的无穷远极限给出截距。\n\n\\textbf{解析}\\quad \\(\\frac{x^3}{1+x^2}=x-\\frac{x}{1+x^2}\\)，从而\n\\[\ny-x=-\\frac{x}{1+x^2}+\\arctan(1+x^2)\\longrightarrow\\frac\\pi2\n\\quad(x\\to\\pm\\infty).\n\\]\n斜渐近线为 \\(\\boxed{y=x+\\frac{\\pi}{2}}\\)。\n\\end{QuestionSolution}\n\n% Q 2017 9\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2017 年第 9 题}{2}{斜渐近线}{033 / 234}\n曲线$y = x\\left(1 + \\arcsin \\frac{2}{x} \\right)$的斜渐近线方程为 \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2017 年第 9 题}\n\\textbf{入手角度}\\quad \\(x\\) 已经给出候选斜率，余项中的反正弦可按小角度展开。\n\n\\textbf{解析}\\quad 当 \\(x\\to\\pm\\infty\\) 时，\n\\[\ny-x=x\\arcsin(\\frac{2}{x})=2\\,\\frac{\\arcsin(\\frac{2}{x})}{\\frac{2}{x}}\\longrightarrow2.\n\\]\n故斜渐近线为 \\(\\boxed{y=x+2}\\)。\n\\end{QuestionSolution}\n\n% Q 2023 11\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2023 年第 11 题}{2}{等价无穷小求系数}{034 / 234}\n当 \\(x\\to 0\\) 时，函数\n\\[f(x)=ax+bx^2+\\ln(1+x)\n\\]\n与\n\\[g(x)=\\mathrm{e}^{x^2}-\\cos x\n\\]\n是等价无穷小，则\n\\[ab=\\blank{}.\n\\]\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2023 年第 11 题}\n\\textbf{入手角度}\\quad 指数与余弦的常数项抵消，需将两边都展开到二次项。\n\n\\textbf{解析}\\quad \\(g(x)=(1+x^2)-(1-\\frac{x^2}{2})+o(x^2)=\\tfrac32x^2+o(x^2)\\)，而\n\\[\nf(x)=(a+1)x+(b-\\tfrac12)x^2+o(x^2).\n\\]\n比值趋于 \\(1\\) 要求 \\(a+1=0\\) 且 \\(b-\\tfrac12=\\tfrac32\\)。因此 \\(a=-1,b=2\\)，所求 \\(ab=\\boxed{-2}\\)。\n\\end{QuestionSolution}\n\n% Q 2025 12\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2025 年第 12 题}{2}{斜渐近线}{035 / 234}\n曲线 \\(y = \\sqrt[3]{x^{3} - 3x^{2} + 1}\\) 的渐近线方程为 \\blank{}.\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2025 年第 12 题}\n\\textbf{入手角度}\\quad 从立方根中提出实数因子 \\(x\\)，剩下的括号趋于 \\(1\\)，其一次修正给出截距。\n\n\\textbf{解析}\\quad 对 \\(x\\ne0\\)，有 \\(y=x(1-\\frac{3}{x}+\\frac{1}{x^3})^{\\frac{1}{3}}\\)，故 \\(\\frac{y}{x}\\to1\\)。令 \\(u=-\\frac{3}{x}+\\frac{1}{x^3}\\)，则\n\\[\ny-x=xu\\,\\frac{(1+u)^{\\frac{1}{3}}-1}{u}\\longrightarrow-3\\cdot\\frac13=-1\n\\quad(x\\to\\pm\\infty).\n\\]\n曲线在所有有限点连续，渐近线为 \\(\\boxed{y=x-1}\\)。\n\\end{QuestionSolution}\n\n% Q 2012 15\n\\QuestionPage{1.4 无穷小量与无穷大量}{解答题}{2012 年第 15 题}{2}{同阶无穷小与参数}{036 / 234}\n已知函数$f(x) = \\frac{1 + x}{\\sin x} - \\frac{1}{x}$，记$a = \\lim_{x \\to 0} f(x)$．\\par\n\\begin{enumerate}\n\\item 求$a$的值；\n\\item 若当$x \\to 0$时，$f(x) - a$是$x^k$的同阶无穷小，求$k$．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 15 题}\n\\textbf{入手角度}\\quad 将含 \\(\\frac{1}{x}\\) 的差合并，先求常数极限，再检查扣去常数后的首项。\n\n\\textbf{解析}\\quad （1）分拆为\n\\[\nf(x)=\\frac{x}{\\sin x}+\\frac{x-\\sin x}{x\\sin x}.\n\\]\n由 \\(x-\\sin x=\\frac{x^3}{6}+o(x^3)\\)，第二项趋于零，第一项趋于 \\(1\\)，故 \\(a=1\\)。\n\n（2）第一项扣去 \\(1\\) 后为 \\(\\frac{x-\\sin x}{\\sin x}=O(x^2)\\)，第二项等价于 \\(\\frac{x}{6}\\)。因此 \\(f(x)-a=\\frac{x}{6}+o(x)\\)，所求 \\(k=\\boxed{1}\\)。\n\\end{QuestionSolution}\n\n% Q 2013 15\n\\QuestionPage{1.4 无穷小量与无穷大量}{解答题}{2013 年第 15 题}{2}{三角乘积的等价无穷小}{037 / 234}\n当$x \\to 0$时，$1 - \\cos x \\cdot \\cos 2x \\cdot \\cos 3x$与$ax^n$为等价无穷小，求$n$与$a$的值．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2013 年第 15 题}\n\\textbf{入手角度}\\quad 三个余弦的常数项均为 \\(1\\)，乘积的二次系数由三个因子的二次系数相加。\n\n\\textbf{解析}\\quad 对 \\(j=1,2,3\\)，\\(\\cos(jx)=1-\\frac{j^2x^2}{2}+o(x^2)\\)。相乘时，两个二次项相乘至少为四次，故\n\\[\n1-\\cos x\\cos 2x\\cos 3x\n=\\frac{1+4+9}2x^2+o(x^2)=7x^2+o(x^2).\n\\]\n因此 \\(\\boxed{n=2,\\ a=7}\\)。\n\\end{QuestionSolution}\n\n% Q 2015 15\n\\QuestionPage{1.4 无穷小量与无穷大量}{解答题}{2015 年第 15 题}{2}{等价无穷小求参数}{038 / 234}\n设函数$f(x) = x + a\\ln(1 + x) + bx\\sin x$，$g(x) = kx^3$，\n若$f(x)$与$g(x)$在$x \\to 0$是等价无穷小，求$a,b,k$的值．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2015 年第 15 题}\n\\textbf{入手角度}\\quad 与三次幂等价要求一次、二次系数同时为零，剩余三次系数决定 \\(k\\)。\n\n\\textbf{解析}\\quad 由 \\(\\ln(1+x)=x-\\frac{x^2}{2}+\\frac{x^3}{3}+o(x^3)\\) 与 \\(x\\sin x=x^2+o(x^3)\\)，得到\n\\[\nf(x)=(1+a)x+(b-\\frac{a}{2})x^2+(\\frac{a}{3})x^3+o(x^3).\n\\]\n先令 \\(1+a=0\\) 与 \\(b-\\frac{a}{2}=0\\)，再令 \\(k=\\frac{a}{3}\\)。所以 \\(\\boxed{a=-1,\\ b=-\\frac{1}{2},\\ k=-\\frac{1}{3}}\\)。\n\\end{QuestionSolution}\n\n% Q 2020 15\n\\QuestionPage{1.4 无穷小量与无穷大量}{解答题}{2020 年第 15 题}{2}{斜渐近线}{039 / 234}\n求曲线 \\(y = \\dfrac{x^{1+x}}{\\left( 1+x \\right)^{x}} \\left( x>0 \\right)\\) 的斜渐近线方程。\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2020 年第 15 题}\n\\textbf{入手角度}\\quad 提出一个 \\(x\\)，对剩余的幂取对数，并保留 \\(\\frac{1}{x}\\) 项来求截距。\n\n\\textbf{解析}\\quad 令 \\(u(x)=-x\\ln(1+\\frac{1}{x})\\)，则 \\(y=x\\mathrm{e}^{u(x)}\\)。当 \\(x\\to+\\infty\\) 时，\n\\[\nu(x)=-1+\\frac{1}{2x}+o(\\frac{1}{x}),\n\\qquad\n\\mathrm{e}^{u(x)}=\\mathrm{e}^{-1}\\left(1+\\frac{1}{2x}+o(\\frac{1}{x})\\right).\n\\]\n因此 \\(\\frac{y}{x}\\to\\frac{1}{\\mathrm{e}}\\)，\\(y-\\frac{x}{\\mathrm{e}}\\to\\frac{1}{2\\mathrm{e}}\\)。斜渐近线为 \\(\\boxed{y=\\frac{x}{\\mathrm{e}}+\\frac{1}{2\\mathrm{e}}}\\)。\n\\end{QuestionSolution}\n\n"}
+
+## tool · 2026-11-12T07:16:42Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T07:18:46Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"e3a6dd","wall_time_seconds":0.000009,"exit_code":0,"original_token_count":1923,"output":"% Q 2009 1\n\\QuestionPage{1.5 连续函数}{选择题}{2009 年第 1 题}{1}{可去间断点}{040 / 234}\n函数$f(x) = \\frac{x - x^3}{\\sin\\pi x}$的可去间断点的个数为\\pickout{}\n\\begin{abcd}\n\\item $1$．\n\\item $2$．\n\\item $3$．\n\\item 无穷多个．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2009 年第 1 题}\n\\textbf{入手角度}\\quad 在分母的所有零点中，找出分子也有零点、能抵消分母一次零点的位置。\n\n\\textbf{解析}\\quad \\(\\sin\\pi x\\) 仅在整数 \\(k\\) 处为零，且其导数在这些点为 \\(\\pi(-1)^k\\ne0\\)。分子 \\(x(1-x)(1+x)\\) 仅在 \\(-1,0,1\\) 为零。在这三点，分子与分母均可提出 \\(x-k\\)，约去后极限有限，所以是可去间断点。其余整数处分子不为零，商的绝对值趋于无穷。共 \\(\\boxed{3}\\) 个，选 C。\n\\end{QuestionSolution}\n\n% Q 2010 1\n\\QuestionPage{1.5 连续函数}{选择题}{2010 年第 1 题}{1}{无穷间断点}{041 / 234}\n函数$f(x) = \\frac{x^2 - x}{x^2 - 1}\\sqrt{1 + \\frac{1}{x^2}}$的无穷间断点的个数为\\pickout{}\n\\begin{abcd}\n\\item $0$．\n\\item $1$．\n\\item $2$．\n\\item $3$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2010 年第 1 题}\n\\textbf{入手角度}\\quad 化简根号时保留 \\(|x|\\)，再分别检查三个被排除的点。\n\n\\textbf{解析}\\quad 当 \\(x\\ne-1,0,1\\) 时，\n\\[\nf(x)=\\frac{x}{x+1}\\cdot\\frac{\\sqrt{x^2+1}}{|x|}\n=\\frac{x}{|x|}\\frac{\\sqrt{x^2+1}}{x+1}.\n\\]\n在 \\(-1\\) 处分母趋零而分子有非零单侧极限，故是无穷间断点。在 \\(0\\) 处左右极限为 \\(-1,1\\)，故是跳跃间断点。在 \\(1\\) 处极限为 \\(\\frac{\\sqrt2}{2}\\)，故是可去间断点。无穷间断点只有一个，选 B。\n\\end{QuestionSolution}\n\n% Q 2015 2\n\\QuestionPage{1.5 连续函数}{选择题}{2015 年第 2 题}{1}{由极限定义的函数及间断点}{042 / 234}\n函数$f(x) = \\lim_{t \\to 0} \\left(1 + \\frac{\\sin t}{x} \\right)^{\\frac{x^2}{t}}$\n在$(-\\infty , +\\infty)$内\\pickout{}\n\\begin{abcd}\n\\item 连续．\n\\item 有可去间断点．\n\\item 有跳跃间断点．\n\\item 有无穷间断点．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2015 年第 2 题}\n\\textbf{入手角度}\\quad 先固定 \\(x\\ne0\\) 求定义函数的 \\(t\\) 极限，再研究得到的函数在 \\(x=0\\) 附近的行为。\n\n\\textbf{解析}\\quad 对 \\(x\\ne0\\)，当 \\(t\\) 足够接近零时底数为正，且\n\\[\n\\frac{x^2}{t}\\ln\\left(1+\\frac{\\sin t}{x}\\right)\n=x\\,\\frac{\\sin t}{t}\n\\frac{\\ln\\!\\left(1+\\frac{\\sin t}{x}\\right)}{\\frac{\\sin t}{x}}\\longrightarrow x.\n\\]\n故 \\(f(x)=\\mathrm{e}^x\\) 对 \\(x\\ne0\\) 成立。原式在 \\(x=0\\) 无定义，左右极限都等于 \\(1\\)，可通过补定义为 \\(1\\) 恢复连续。选 B。\n\\end{QuestionSolution}\n\n% Q 2015 3\n\\QuestionPage{1.5 连续函数}{选择题}{2015 年第 3 题}{1}{分段函数连续性与参数}{043 / 234}\n设函数$f(x) = \\begin{cases}\n  x^{\\alpha}\\cos \\frac{1}{x^{\\beta}}, & x > 0 \\\\\n                                   0, & x \\le 0\n\\end{cases}$（$\\alpha > 0,\\beta > 0$），若$f'(x)$在$x = 0$处连续，则\\pickout{}\n\\begin{abcd}\n\\item $\\alpha - \\beta > 1$．\n\\item $0 < \\alpha - \\beta \\le 1$．\n\\item $\\alpha - \\beta > 2$．\n\\item $0 < \\alpha - \\beta \\le 2$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2015 年第 3 题}\n\\textbf{入手角度}\\quad 右段求导时，内层 \\(x^{-\\beta}\\) 会使其中一项幂次降低，再用使正弦达到 \\(1\\) 的点检验必要性。\n\n\\textbf{解析}\\quad 在 \\(x>0\\) 上，\n\\[\nf'(x)=\\alpha x^{\\alpha-1}\\cos(x^{-\\beta})\n+\\beta x^{\\alpha-\\beta-1}\\sin(x^{-\\beta}).\n\\]\n若 \\(f'\\) 在零点连续，由左侧恒为零知 \\(f'(0)=0\\)。取 \\(x_k=(\\frac{\\pi}{2}+2k\\pi)^{-\\frac{1}{\\beta}}\\)，则 \\(f'(x_k)=\\beta x_k^{\\alpha-\\beta-1}\\)，它趋于零要求 \\(\\alpha-\\beta>1\\)。反之该条件给出 \\(\\alpha>1\\)，零点右侧差商 \\(x^{\\alpha-1}\\cos(x^{-\\beta})\\to0\\)，故 \\(f'(0)=0\\)。上式两项也均趋零，故连续。选 A。\n\\end{QuestionSolution}\n\n% Q 2017 1\n\\QuestionPage{1.5 连续函数}{选择题}{2017 年第 1 题}{1}{分段函数的连续条件}{044 / 234}\n若函数$f(x) = \\begin{cases}\n  \\frac{1 - \\cos \\sqrt{x}}{ax}, & x > 0 \\\\\n                             b, & x \\le 0\n\\end{cases}$在$x = 0$处连续，则\\pickout{}\n\\begin{abcd}\n\\item $ab = \\frac{1}{2}$．\n\\item $ab = - \\frac{1}{2}$．\n\\item $ab = 0$．\n\\item $ab = 2$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2017 年第 1 题}\n\\textbf{入手角度}\\quad 左极限已经等于函数值，只需将右段的 \\(1-\\cos\\sqrt{x}\\) 化为关于 \\(x\\) 的等价式。\n\n\\textbf{解析}\\quad 因为 \\(1-\\cos u\\sim \\frac{u^2}{2}\\)，令 \\(u=\\sqrt{x}\\) 即得\n\\[\n\\lim_{x\\to0^+}\\frac{1-\\cos\\sqrt{x}}{ax}=\\frac1{2a}.\n\\]\n连续性要求该值等于 \\(f(0)=b\\)。因此 \\(\\boxed{ab=\\frac{1}{2}}\\)，选 A。\n\\end{QuestionSolution}\n\n% Q 2018 3\n\\QuestionPage{1.5 连续函数}{选择题}{2018 年第 3 题}{1}{分段函数和的连续性}{045 / 234}\n设函数$f(x) = \\begin{cases}\n  -1, & x < 0, \\\\\n   1, & x \\ge 0;\n\\end{cases}$，$g(x) = \\begin{cases}\n  2 - ax, & x \\le - 1, \\\\\n       x, & -1 < x < 0, \\\\\n   x - b, & x \\ge 0.\n\\end{cases}$若$f(x) + g(x)$在$R$上连续，则\\pickout{}\n\\begin{abcd}\n\\item $a = 3\\;,\\;b = 1$．\n\\item $a = 3\\;,\\;b = 2$．\n\\item $a = - 3\\;,\\;b = 1$．\n\\item $a = - 3\\;,\\;b = 2$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2018 年第 3 题}\n\\textbf{入手角度}\\quad 和函数只可能在分段点 \\(-1,0\\) 失去连续性，在两处分别匹配左右值。\n\n\\textbf{解析}\\quad 在 \\(-1\\) 处，\\(f=-1\\) 不跳变，故要求 \\(g(-1)=2+a=-1\\)，得到 \\(a=-3\\)。在 \\(0\\) 左侧，\\(f+g=-1+x\\to-1\\)，右侧及零点处 \\(f+g=1+x-b\\to1-b\\)，故 \\(1-b=-1\\)，得到 \\(b=2\\)。两处匹配后全轴连续，选 D。\n\\end{QuestionSolution}\n\n% Q 2020 2\n\\QuestionPage{1.5 连续函数}{选择题}{2020 年第 2 题}{1}{第二类间断点}{046 / 234}\n函数 \\(f\\left( x \\right) = \\dfrac{\\mathrm{e}^{\\frac{1}{x-1}} \\ln \\left| 1+x \\right|}{\\left( \\mathrm{e}^{x} - 1 \\right)\\left( x-2 \\right)}\\) 的第二类间断点的个数为\n\\choices{\\(1\\) 个}{\\(2\\) 个}{\\(3\\) 个}{\\(4\\) 个}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2020 年第 2 题}\n\\textbf{入手角度}\\quad 先列出所有被定义域排除的点，再判断每个点是否至少有一侧极限不为有限值。\n\n\\textbf{解析}\\quad 候选点为 \\(-1,0,1,2\\)。在 \\(-1\\) 处 \\(\\ln|1+x|\\to-\\infty\\)，其余因子的乘积趋于非零有限值，故是第二类。在 \\(0\\) 处 \\(\\frac{\\ln(1+x)}{\\mathrm{e}^x-1}\\to1\\)，故 \\(f(x)\\to-\\frac{1}{2\\mathrm{e}}\\)，为可去间断点。在 \\(1\\) 处，指数因子从左趋零、从右趋无穷，其他因子趋于非零值，故是第二类。在 \\(2\\) 处只有分母因子 \\(x-2\\) 趋零，故也是第二类。共 \\(\\boxed{3}\\) 个，选 C。\n\\end{QuestionSolution}\n\n% Q 2024 1\n\\QuestionPage{1.5 连续函数}{选择题}{2024 年第 1 题}{1}{间断点个数}{047 / 234}\n函数\n\\[f(x)=|x|^{\\frac{1}{(1-x)(x-2)}}\n\\]\n的第一类间断点的个数为（ ）\n\\choices{\\(3\\)}{\\(2\\)}{\\(1\\)}{\\(0\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2024 年第 1 题}\n\\textbf{入手角度}\\quad 对正底数的幂取对数，可区分指数发散时底数趋于 \\(1\\) 与趋于其他值的情形。\n\n\\textbf{解析}\\quad 设 \\(H(x)=\\frac{\\ln|x|}{(1-x)(x-2)}\\)，则 \\(f=\\mathrm{e}^H\\)。候选点为 \\(0,1,2\\)。当 \\(x\\to0\\) 时，分母趋 \\(-2\\)，\\(H\\to+\\infty\\)。当 \\(x\\to1\\) 时，\n\\[\nH(x)=\\frac{\\ln x}{x-1}\\frac{1}{2-x}\\longrightarrow1,\n\\]\n故 \\(f\\) 有有限双侧极限 \\(\\mathrm{e}\\)，为可去间断点。当 \\(x\\to2\\) 时，分子趋于 \\(\\ln 2>0\\)，而 \\(H\\) 的一侧趋 \\(+\\infty\\)，另一侧趋 \\(-\\infty\\)，故一侧 \\(f\\) 趋于无穷。只有 \\(x=1\\) 是第一类间断点，选 C。\n\\end{QuestionSolution}\n\n"}
+{}
+
+## tool · 2026-11-12T07:18:55Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"92c0fc","wall_time_seconds":0.000009792,"exit_code":0,"original_token_count":3045,"output":"% Q 2023 3\n\\QuestionPage{1.2 数列的极限}{选择题}{2023 年第 3 题}{1}{递推数列与无穷小比较}{005 / 234}{***}\n已知数列 \\(\\{x_n\\}\\)，\\(\\{y_n\\}\\) 满足\n\\[x_1=y_1=\\frac12,\\qquad x_{n+1}=\\sin x_n,\\qquad y_{n+1}=y_n^2\\quad (n=1,2,\\cdots),\n\\]\n则当 \\(n\\to\\infty\\) 时，（ ）。\n\\choices{\\(x_n\\) 是 \\(y_n\\) 的高阶无穷小}{\\(y_n\\) 是 \\(x_n\\) 的高阶无穷小}{\\(x_n\\) 与 \\(y_n\\) 是等价无穷小}{\\(x_n\\) 与 \\(y_n\\) 是同阶但不等价的无穷小}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2023 年第 3 题}\n\\textbf{已知与目标}\\quad 两个数列从 \\(\\frac{1}{2}\\) 开始，分别反复取正弦和平方。要先确认两者都趋于零，再比较它们趋于零的速度。\n\n\\textbf{方法与条件}\\quad 若 \\(\\frac{y_n}{x_n}\\to0\\)，称 \\(y_n\\) 为 \\(x_n\\) 的高阶无穷小。直接求 \\(x_n\\) 的通项较困难，可以用下界控制这个比值。\n\n\\textbf{推导}\\quad 对 \\(0<t\\le\\frac{1}{2}\\)，由 \\(\\sin t=\\int_0^t\\cos u\\,\\mathrm{d}u\\) 以及 \\(\\frac{1}{2}<\\cos u\\le1\\)，得 \\(\\frac{t}{2}<\\sin t<t\\)。归纳可知 \\(0<x_{n+1}<x_n\\le\\frac{1}{2}\\)。故 \\(x_n\\) 递减且有下界，极限 \\(L\\in[0,\\frac{1}{2}]\\) 存在。递推式取极限得到 \\(L=\\sin L\\)，而正数 \\(L\\le\\frac{1}{2}\\) 满足 \\(\\sin L<L\\)，所以 \\(L=0\\)。\n\n由 \\(x_{n+1}>\\frac{x_n}{2}\\) 和 \\(x_1=\\frac{1}{2}\\)，逐步得到 \\(x_n\\ge2^{-n}\\)。另一边，连续平方给出 \\(y_n=2^{-2^{n-1}}\\to0\\)。于是\n\\[\n0<\\frac{y_n}{x_n}\\le 2^{\\,n-2^{n-1}}\\longrightarrow0.\n\\]\n上界趋于零，因为 \\(2^{n-1}-n\\to+\\infty\\)。夹逼后得到 \\(\\frac{y_n}{x_n}\\to0\\)。\n\n\\textbf{结论与检查}\\quad \\(y_n\\) 是 \\(x_n\\) 的高阶无穷小，选 \\(\\boxed{\\mathrm B}\\)。两数列始终为正，比较时分母不会为零。\n\\end{QuestionSolution}\n\n% Q 2024 4\n\\QuestionPage{1.2 数列的极限}{选择题}{2024 年第 4 题}{1}{数列极限的敛散性}{006 / 234}{**}\n已知数列 \\(\\{a_n\\}\\)（\\(a_n\\ne 0\\)），若 \\(\\{a_n\\}\\) 发散，则（ ）\n\\choices{\\(\\left\\{a_n+\\frac{1}{a_n}\\right\\}\\) 发散}{\\(\\left\\{a_n-\\frac{1}{a_n}\\right\\}\\) 发散}{\\(\\left\\{\\mathrm{e}^{a_n}+\\frac{1}{\\mathrm{e}^{a_n}}\\right\\}\\) 发散}{\\(\\left\\{\\mathrm{e}^{a_n}-\\frac{1}{\\mathrm{e}^{a_n}}\\right\\}\\) 发散}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2024 年第 4 题}\n\\textbf{已知与目标}\\quad \\(a_n\\ne0\\) 且数列发散，即没有有限的实数极限。要找出一定保持发散的变换。\n\n\\textbf{方法与条件}\\quad 不同输入若能产生同一输出，交替取这两个输入就可能使变换后的数列收敛。对能连续反解的变换，可用反证法：输出收敛将迫使输入收敛。\n\n\\textbf{推导}\\quad A 取 \\(a_n\\) 在 \\(2\\) 和 \\(\\frac{1}{2}\\) 间交替，输出恒为 \\(2+\\frac{1}{2}=\\frac{5}{2}\\)。B、C 取 \\(a_n=(-1)^n\\)，分别得到恒为零的 \\(a_n-\\frac{1}{a_n}\\) 和恒为 \\(\\mathrm e+\\mathrm e^{-1}\\) 的 \\(\\mathrm e^{a_n}+\\mathrm e^{-a_n}\\)。这些输入均发散，因此三项都不能保证。\n\n对 D，假设 \\(b_n=\\mathrm e^{a_n}-\\mathrm e^{-a_n}\\to b\\)。令 \\(z_n=\\mathrm e^{a_n}>0\\)，则 \\(z_n^2-b_nz_n-1=0\\)。舍去负根，得\n\\[\na_n=\\ln\\frac{b_n+\\sqrt{b_n^2+4}}2.\n\\]\n因为 \\(\\sqrt{b_n^2+4}>|b_n|\\)，对数中的量恒正；该式关于 \\(b_n\\) 连续，所以 \\(a_n\\to\\ln\\frac{b+\\sqrt{b^2+4}}{2}\\)，与发散矛盾。\n\n\\textbf{结论与检查}\\quad D 的变换一定发散，选 \\(\\boxed{\\mathrm D}\\)。反证覆盖交替振荡及趋于无穷等所有没有有限极限的情形。\n\\end{QuestionSolution}\n\n% Q 2012 10\n\\QuestionPage{1.2 数列的极限}{填空题}{2012 年第 10 题}{2}{和式型数列极限与夹逼准则}{007 / 234}{**}\n计算$\\lim_{n \\to \\infty} n\\left(\\frac{1}{1 + n^2} + \\frac{1}{2^2 + n^2}\n+ \\cdots + \\frac{1}{n^2 + n^2} \\right) =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 10 题}\n\\textbf{已知与目标}\\quad 求含 \\(n\\) 项的和乘以 \\(n\\) 后的极限。项数和每项分母都随 \\(n\\) 改变，不能逐项取极限后相加。\n\n\\textbf{方法与条件}\\quad Riemann 和是“函数值乘小区间长度再求和”。连续函数在闭区间上的等分和趋于定积分，因此先把式子整理成区间 \\([0,1]\\) 上的等分和。\n\n\\textbf{推导}\\quad 每项分母提出 \\(n^2\\)，外面的 \\(n\\) 与 \\(n^2\\) 约去一个因子，得到\n\\[\nn\\sum_{k=1}^n\\frac{1}{n^2+k^2}\n=\\frac1n\\sum_{k=1}^n\\frac{1}{1+(\\frac{k}{n})^2}.\n\\]\n这里小区间长为 \\(\\frac{1}{n}\\)，取样点是 \\(t_k=\\frac{k}{n}\\)，函数 \\(\\frac{1}{1+t^2}\\) 在 \\([0,1]\\) 上连续。因此极限为\n\\[\n\\int_0^1\\frac{1}{1+t^2}\\,\\mathrm{d}t\n=[\\arctan t]_0^1=\\frac{\\pi}{4}-0=\\frac{\\pi}{4}.\n\\]\n\n\\textbf{结论与检查}\\quad 所求值为 \\(\\boxed{\\frac{\\pi}{4}}\\)。各取样函数值介于 \\(\\frac{1}{2}\\) 与 \\(1\\) 之间，平均值也在该范围，答案与此相符。\n\\end{QuestionSolution}\n\n% Q 2011 19\n\\QuestionPage{1.2 数列的极限}{解答题}{2011 年第 19 题}{3}{调和和式与数列收敛}{008 / 234}{***}\n\\begin{enumerate}\n\\item\n证明：对任意的正整数$n$，都有$\\frac{1}{n + 1} < \\ln \\left(1 + \\frac{1}{n} \\right) < \\frac{1}{n}$成立．\n\\item\n设$a_n = 1 + \\frac{1}{2} + \\cdots + \\frac{1}{n} - \\ln n$（$n = 1,2, \\cdots$），\n证明数列$\\left\\{a_n \\right\\}$收敛．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 19 题}\n\\textbf{已知与目标}\\quad 第一问证明对数增量的双边估计；第二问利用它证明 \\(a_n\\) 收敛，不要求求出极限的具体数值。\n\n\\textbf{方法与条件}\\quad \\(\\ln(n+1)-\\ln n\\) 是 \\(\\frac{1}{t}\\) 在 \\([n,n+1]\\) 上的积分。先估计积分，再证明 \\(a_n\\) 单调且有下界，即可应用单调有界准则。\n\n\\textbf{推导}\\quad （1）由于 \\(n\\ge1\\)，函数 \\(\\frac{1}{t}\\) 在 \\([n,n+1]\\) 连续且严格递减。在内部各点都有 \\(\\frac{1}{n+1}<\\frac{1}{t}<\\frac{1}{n}\\)，区间长度为 \\(1\\)，故积分满足严格不等式\n\\[\n\\frac1{n+1}<\\int_n^{n+1}\\frac{\\mathrm{d}t}{t}\n=\\ln(1+\\frac{1}{n})<\\frac1n.\n\\]\n（2）相邻两项相减，前 \\(n\\) 项的调和和抵消，得到\n\\[\na_{n+1}-a_n=\\frac{1}{n+1}-\\ln\\left(1+\\frac{1}{n}\\right)<0,\n\\]\n这里使用第一问的左边估计。再将右边估计对 \\(k=1,\\ldots,n-1\\) 求和，对数可合并为 \\(\\ln2+\\ln\\frac{3}{2}+\\cdots+\\ln\\frac{n}{n-1}=\\ln n\\)，于是 \\(\\ln n\\le\\sum_{k=1}^{n-1}\\frac{1}{k}\\)。因此 \\(a_n\\ge\\frac{1}{n}>0\\)；当 \\(n=1\\) 时直接有 \\(a_1=1\\)，结论同样成立。\n\n\\textbf{结论与检查}\\quad 第一问的两个严格不等式均成立；第二问的数列递减且以 \\(0\\) 为下界，故收敛。仅证明相邻差趋零不足以证明收敛，这里已经另外给出了下界。\n\\end{QuestionSolution}\n\n% Q 2012 21\n\\QuestionPage{1.2 数列的极限}{解答题}{2012 年第 21 题}{4}{实根构成的数列极限}{009 / 234}{****}\n\\begin{enumerate}\n\\item\n证明方程$x^n + x^{n - 1} + \\cdots + x = 1$（$n$为大于$1$的整数）\n在区间$\\left(\\frac{1}{2},1 \\right)$内有且仅有一个实根；\n\\item\n记第（1）问中的实根为$x_n$，证明$\\lim_{n \\to \\infty} x_n$存在，并求此极限．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 21 题}\n\\textbf{已知与目标}\\quad 对每个整数 \\(n>1\\)，先证明方程在 \\((\\frac{1}{2},1)\\) 内恰有一根，再证明这些根组成的数列收敛并求极限。\n\n\\textbf{方法与条件}\\quad 零点存在定理要求函数在闭区间上连续且端点值异号；严格单调可保证根唯一。比较相邻方程在同一点的值，可以判断根的大小，继而使用单调有界准则。\n\n\\textbf{推导}\\quad （1）记 \\(P_n(t)=\\sum_{k=1}^n t^k\\)。多项式连续，且在正半轴上 \\(P_n'(t)=\\sum_{k=1}^n kt^{k-1}>0\\)，故严格递增。端点代入得\n\\[\nP_n\\left(\\frac{1}{2}\\right)=\\frac{\\frac{1}{2}(1-2^{-n})}{1-\\frac{1}{2}}=1-2^{-n}<1,\n\\qquad P_n(1)=n>1.\n\\]\n因此 \\(P_n(t)-1\\) 在两端异号，内部有零点，且严格递增使零点至多一个，记为 \\(x_n\\)。\n\n（2）将 \\(x_n\\) 代入下一方程，得到 \\(P_{n+1}(x_n)=P_n(x_n)+x_n^{n+1}=1+x_n^{n+1}>1\\)。而 \\(P_{n+1}(x_{n+1})=1\\)，由严格递增得 \\(x_{n+1}<x_n\\)。又 \\(x_n>\\frac{1}{2}\\)，故极限存在。\n\n由 \\(x_n\\ne1\\) 可用等比求和：\\(\\frac{x_n(1-x_n^n)}{1-x_n}=1\\)，整理为 \\(2x_n-1=x_n^{n+1}\\)。不能仅由 \\(x_n<1\\) 就判定右侧趋零，须使用统一上界：当 \\(n\\ge2\\) 时 \\(0<x_n\\le x_2<1\\)，所以 \\(0<x_n^{n+1}\\le x_2^{n+1}\\to0\\)。\n\n\\textbf{结论与检查}\\quad 对每个 \\(n>1\\) 均有唯一根，且 \\(\\boxed{\\lim_{n\\to\\infty}x_n=\\frac{1}{2}}\\)。每项虽严格大于 \\(\\frac{1}{2}\\)，极限仍可等于这个区间端点。\n\\end{QuestionSolution}\n\n% Q 2013 20\n\\QuestionPage{1.2 数列的极限}{解答题}{2013 年第 20 题}{3}{不等式约束下的数列极限}{010 / 234}{***}\n设函数$f(x) = \\ln x + \\frac{1}{x}$．\n\\begin{enumerate}\n\\item\n求$f(x)$的最小值；\n\\item\n设数列$\\{x_n\\}$满足$\\ln x_n + \\frac{1}{x_{n + 1}} < 1$，证明$\\lim_{n \\to \\infty} x_n$存在，并求此极限．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2013 年第 20 题}\n\\textbf{已知与目标}\\quad 第一问求 \\(\\ln x+\\frac{1}{x}\\) 的全局最小值；第二问中相邻两项满足不等式，要由此推出收敛并确定极限。\n\n\\textbf{方法与条件}\\quad 先利用导数符号求出对所有正数有效的下界，再与题设不等式比较。对数有定义保证各项为正，因而比较倒数时可以改变不等号方向。\n\n\\textbf{推导}\\quad （1）定义域为 \\(x>0\\)，\n\\[\nf'(x)=\\frac{1}{x}-\\frac{1}{x^2}=\\frac{x-1}{x^2}.\n\\]\n分母恒正，因此 \\(0<x<1\\) 时导数为负，\\(x>1\\) 时为正。函数先减后增，故全局最小值为 \\(f(1)=\\ln1+1=1\\)，且仅在 \\(x=1\\) 取到。\n\n（2）每个 \\(x_n>0\\)。将第一问代入 \\(x_n\\)，并结合题设，有\n\\[\n\\ln x_n+\\frac1{x_{n+1}}<1\\le\\ln x_n+\\frac1{x_n}\n\\]\n消去 \\(\\ln x_n\\)，得 \\(\\frac{1}{x_{n+1}}<\\frac{1}{x_n}\\)，所以 \\(x_{n+1}>x_n\\)。原不等式中倒数为正，故 \\(\\ln x_n<1\\)，即 \\(x_n<\\mathrm e\\)。数列递增且有上界，因而 \\(x_n\\to L\\)，并且 \\(L\\ge x_1>0\\)。这保证 \\(\\ln L\\) 与 \\(\\frac{1}{L}\\) 都有意义。取极限时严格不等式只能保留为\n\\[\n\\ln L+\\frac{1}{L}\\le1.\n\\]\n第一问又给出左端至少为 \\(1\\)，等号只能在 \\(L=1\\) 取得。\n\n\\textbf{结论与检查}\\quad 最小值为 \\(\\boxed{1}\\)，数列极限为 \\(\\boxed{1}\\)。取极限前已证明收敛且极限为正，使用连续性和倒数运算的条件齐备。\n\\end{QuestionSolution}\n\n% Q 2018 21\n\\QuestionPage{1.2 数列的极限}{解答题}{2018 年第 21 题}{4}{递推数列的收敛与极限}{011 / 234}{****}\n设数列$\\left\\{x_n \\right\\}$满足：$x_1 > 0$，$x_n \\mathrm{e}^{x_{n + 1}} = \\mathrm{e}^{x_n} - 1$（$n = 1,2, \\cdots$）．\n证明$\\left\\{x_n \\right\\}$收敛，并求$\\lim_{n \\to \\infty} x_n$．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2018 年第 21 题}\n\\textbf{已知与目标}\\quad 仅已知 \\(x_1>0\\) 及相邻项的指数关系。需要证明所有后续项保持正值、数列确实收敛，再求极限。\n\n\\textbf{方法与条件}\\quad 对正数 \\(x\\)，\\(\\frac{\\mathrm e^x-1}{x}\\) 是 \\(\\mathrm e^t\\) 在 \\([0,x]\\) 上的平均值，即积分除以区间长度。它严格介于端点函数值之间，可以同时给出正性和递减性。\n\n\\textbf{推导}\\quad 假设 \\(x_n>0\\)。因为 \\(1<\\mathrm e^t<\\mathrm e^{x_n}\\) 对 \\(0<t<x_n\\) 成立，积分后除以正数 \\(x_n\\)，得到\n\\[\n1<\\mathrm{e}^{x_{n+1}}=\\frac1{x_n}\\int_0^{x_n}\\mathrm{e}^t\\,\\mathrm{d}t<\\mathrm{e}^{x_n}.\n\\]\n指数函数严格递增，比较指数便得 \\(0<x_{n+1}<x_n\\)。从 \\(x_1>0\\) 出发归纳，所有项都为正并严格递减，因此以 \\(0\\) 为下界，必收敛。设极限为 \\(L\\ge0\\)。\n\n若 \\(L>0\\)，分母的极限非零，可在递推式中取极限，得到\n\\[\n\\mathrm e^L=\\frac{\\mathrm e^L-1}{L}\n=\\frac{1}{L}\\int_0^L\\mathrm e^t\\,\\mathrm{d}t<\\mathrm e^L,\n\\]\n最后的严格不等式仍来自正长度区间上的平均值估计，形成矛盾。故 \\(L>0\\) 不可能。\n\n\\textbf{结论与检查}\\quad 数列收敛且 \\(\\boxed{\\lim_{n\\to\\infty}x_n=0}\\)。将 \\(L=0\\) 代入原递推式的极限关系 \\(L\\mathrm e^L=\\mathrm e^L-1\\)，两边均为零，结果相容。\n\\end{QuestionSolution}\n\n"}
+
+## tool · 2026-11-12T07:20:07Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T07:21:21Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"0b1487","wall_time_seconds":0.000009875,"exit_code":0,"original_token_count":815,"output":"% Q 2011 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2011 年第 1 题}{1}{三角函数的等价无穷小}{018 / 234}{*}\n已知当$x \\to 0$时，$f(x) = 3\\sin x - \\sin 3x$与$cx^k$是等价无穷小，则\\pickout{}\n\\begin{abcd}\n\\item $k = 1,c = 4$．\n\\item $k = 1,c = - 4$．\n\\item $k = 3,c = 4$．\n\\item $k = 3,c = - 4$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 1 题}\n\\textbf{已知与目标}\\quad 要把 \\(3\\sin x-\\sin3x\\) 写成 \\(cx^k\\) 的等价形式，即求使两者比值趋于 \\(1\\) 的系数和幂次。\n\n\\textbf{方法与条件}\\quad 三倍角恒等式 \\(\\sin3x=3\\sin x-4\\sin^3x\\) 能直接化简差式，再使用弧度制下的基本极限 \\(\\frac{\\sin x}{x}\\to1\\)。\n\n\\textbf{推导}\\quad 代入恒等式得 \\(f(x)=4\\sin^3x\\)，所以\n\\[\n\\frac{f(x)}{x^3}=4\\left(\\frac{\\sin x}{x}\\right)^3\\longrightarrow4.\n\\]\n因此最低非零幂次为三次，系数为 \\(4\\)，也就是 \\(f(x)\\sim4x^3\\)。\n\n\\textbf{结论与检查}\\quad \\(\\boxed{k=3,\\ c=4}\\)，选 C。除以 \\(4x^3\\) 后极限为 \\(1\\)，符合等价的定义。\n\\end{QuestionSolution}\n\n% Q 2019 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2019 年第 1 题}{1}{正切函数的同阶无穷小}{024 / 234}{*}\n当$x \\to 0$时，若$x - \\tan x$与$x^k$是同阶无穷小，则$k =$\\pickout{}\n\\begin{abcd}\n\\item $1$．\n\\item $2$．\n\\item $3$．\n\\item $4$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2019 年第 1 题}\n\\textbf{已知与目标}\\quad 求使 \\(x-\\tan x\\) 与 \\(x^k\\) 同阶的幂次 \\(k\\)。同阶指比值趋于有限非零常数，常数可以为负。\n\n\\textbf{方法与条件}\\quad 对 \\(\\frac{x-\\tan x}{x^3}\\) 使用 L'Hospital 法则：分子、分母均趋零，在足够小的去心邻域中可导，分母导数 \\(3x^2\\ne0\\)。\n\n\\textbf{推导}\\quad 因为 \\((\\tan x)'=\\sec^2x\\) 且 \\(1-\\sec^2x=-\\tan^2x\\)，所以\n\\[\n\\lim_{x\\to0}\\frac{x-\\tan x}{x^3}\n=-\\frac{1}{3}\\lim_{x\\to0}\\left(\\frac{\\tan x}{x}\\right)^2=-\\frac{1}{3}.\n\\]\n这里 \\(\\frac{\\tan x}{x}=\\frac{\\sin x}{x}\\frac{1}{\\cos x}\\to1\\)，导数比的极限存在，法则适用。\n\n\\textbf{结论与检查}\\quad \\(\\boxed{k=3}\\)，选 C。\\(x-\\tan x\\sim-\\frac{x^3}{3}\\)，所以它与 \\(x^3\\) 同阶，但二者并不等价。\n\\end{QuestionSolution}\n\n% Q 2010 10\n\\QuestionPage{1.4 无穷小量与无穷大量}{填空题}{2010 年第 10 题}{2}{曲线的渐近线}{031 / 234}{*}\n曲线$y = \\frac{2x^3}{x^2 + 1}$的渐近线方程为 \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2010 年第 10 题}\n\\textbf{已知与目标}\\quad 求有理曲线在有限点或无穷远处的直线渐近线。\n\n\\textbf{方法与条件}\\quad 若 \\(y-(kx+b)\\to0\\)，则 \\(y=kx+b\\) 是无穷远处的渐近线。分子次数比分母高一次，直接作多项式除法即可提取线性部分。\n\n\\textbf{推导}\\quad 由 \\(2x^3=2x(x^2+1)-2x\\)，得到\n\\[\ny=\\frac{2x^3}{x^2+1}=2x-\\frac{2x}{x^2+1}.\n\\]\n余项 \\(-\\frac{2x}{x^2+1}=-\\frac{\\frac{2}{x}}{1+\\frac{1}{x^2}}\\to0\\)，故候选直线为 \\(y=2x\\)。又因 \\(x^2+1>0\\)，函数在每个有限点连续，附近有界，没有竖直渐近线。\n\n\\textbf{结论与检查}\\quad 渐近线为 \\(\\boxed{y=2x}\\)。曲线与直线的差在正负两个无穷远处都趋零，无常数截距修正。\n\\end{QuestionSolution}\n\n"}
+{}
+
+## tool · 2026-11-12T07:23:16Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"1f17df","wall_time_seconds":0.000008125,"exit_code":0,"original_token_count":1461,"output":"% Q 2020 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2020 年第 1 题}{1}{积分形式的无穷小比阶}{025 / 234}{***}\n当 \\(x \\to 0^{+}\\) 时，下列无穷小量中阶最高的是\n\\choices{\\(\\int_{0}^{x}{\\left( \\mathrm{e}^{t^{2}} - 1 \\right) \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{x}{\\ln \\left( 1 + \\sqrt{t^{3}} \\right) \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{\\sin x}{\\sin t^{2} \\,\\mathrm{d} t}\\)}{\\(\\int_{0}^{1-\\cos x}{\\sqrt{\\sin^{3} t} \\,\\mathrm{d} t}\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2020 年第 1 题}\n\\textbf{已知与目标}\\quad 比较四个积分作为 \\(x\\to0^+\\) 时的无穷小阶。既要考虑被积函数的幂次，也要考虑积分上限的幂次。\n\n\\textbf{方法与条件}\\quad 若连续的 \\(h(t)\\sim ct^p\\)、\\(c\\ne0\\)、\\(p>-1\\)，则 \\(\\int_0^u h(t)\\,\\mathrm{d}t\\sim\\frac{c}{p+1}u^{p+1}\\)。这里分子和比较量均趋零，L'Hospital 法则将二者比值化为 \\(\\frac{h(u)}{cu^p}\\to1\\)，说明这一积分等价式成立。\n\n\\textbf{推导}\\quad A 中 \\(\\mathrm e^{t^2}-1\\sim t^2\\)，积分后为 \\(\\frac{x^3}{3}\\)。B 中 \\(\\sqrt{t^3}=t^{\\frac{3}{2}}\\)，故对数等价于 \\(t^{\\frac{3}{2}}\\)，积分后为 \\(\\frac{2}{5}x^{\\frac{5}{2}}\\)。C 中 \\(\\sin(t^2)\\sim t^2\\)，先得上限 \\(u\\) 的三次量，再代入 \\(u=\\sin x\\sim x\\)。D 中 \\(t\\ge0\\) 且接近零时 \\(\\sin t\\ge0\\)，所以 \\(\\sqrt{\\sin^3t}\\sim t^{\\frac{3}{2}}\\)，再代入 \\(u=1-\\cos x\\sim\\frac{x^2}{2}\\)。四项依次等价于\n\\[\n\\frac{x^3}{3},\\qquad \\frac{2}{5}x^{\\frac{5}{2}},\\qquad\n\\frac{x^3}{3},\\qquad \\frac{2}{5}\\left(\\frac{x^2}{2}\\right)^{\\frac{5}{2}}.\n\\]\n\n\\textbf{结论与检查}\\quad 幂次分别为 \\(3,\\frac{5}{2},3,5\\)，所以 D 阶最高，选 \\(\\boxed{\\mathrm D}\\)。四个最低项系数都为正且非零，比较幂次足以判定。\n\\end{QuestionSolution}\n\n% Q 2022 1\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2022 年第 1 题}{1}{等价无穷小的性质}{027 / 234}{***}\n若当 \\(x \\to 0\\) 时，\\(\\alpha\\left( x \\right), \\beta\\left( x \\right)\\) 是非零无穷小量，则以下的命题中，\n\\par\\circnum{1} 若 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，则 \\(\\alpha^{2}\\left( x \\right) \\sim \\beta^{2}\\left( x \\right)\\)；\n\\par\\circnum{2} 若 \\(\\alpha^{2}\\left( x \\right) \\sim \\beta^{2}\\left( x \\right)\\)，则 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)；\n\\par\\circnum{3} 若 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，则 \\(\\alpha\\left( x \\right) - \\beta\\left( x \\right) = o\\left( \\alpha\\left( x \\right) \\right)\\)；\n\\par\\circnum{4} 若 \\(\\alpha\\left( x \\right) - \\beta\\left( x \\right) = o\\left( \\alpha\\left( x \\right) \\right)\\)，则 \\(\\alpha\\left( x \\right) \\sim \\beta\\left( x \\right)\\)，\n真命题的序号为 \\(\\left( \\ \\right)\\)\n\\choices{\\circnum{1}\\circnum{3}}{\\circnum{1}\\circnum{4}}{\\circnum{1}\\circnum{3}\\circnum{4}}{\\circnum{2}\\circnum{3}\\circnum{4}}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2022 年第 1 题}\n\\textbf{已知与目标}\\quad \\(\\alpha,\\beta\\) 都趋于零且在去心邻域非零，要逐条判断四个关系是否必然成立。\n\n\\textbf{方法与条件}\\quad \\(\\alpha\\sim\\beta\\) 表示 \\(\\frac{\\alpha}{\\beta}\\to1\\)；\\(r=o(\\alpha)\\) 表示 \\(\\frac{r}{\\alpha}\\to0\\)。非零条件保证可以作商，而极限为 \\(1\\) 时也可以取倒数。\n\n\\textbf{推导}\\quad 命题①：若 \\(\\frac{\\alpha}{\\beta}\\to1\\)，则 \\(\\frac{\\alpha^2}{\\beta^2}=(\\frac{\\alpha}{\\beta})^2\\to1\\)，故成立。\n\n命题②：取 \\(\\alpha(x)=x,\\beta(x)=-x\\)，二者在 \\(x\\ne0\\) 时非零且都趋零。平方比恒为 \\(1\\)，但原比恒为 \\(-1\\)，所以不成立。\n\n命题③：等价关系给出 \\(\\frac{\\beta}{\\alpha}\\to1\\)，故 \\(\\frac{\\alpha-\\beta}{\\alpha}=1-\\frac{\\beta}{\\alpha}\\to0\\)，成立。命题④：若这个差商趋零，同一等式反推 \\(\\frac{\\beta}{\\alpha}\\to1\\)，再取倒数得 \\(\\frac{\\alpha}{\\beta}\\to1\\)，也成立。\n\n\\textbf{结论与检查}\\quad 真命题为 \\(\\boxed{\\text{①③④}}\\)，选 C。平方会丢失正负号，故②不能从平方等价反推原量等价。\n\\end{QuestionSolution}\n\n% Q 2025 4\n\\QuestionPage{1.4 无穷小量与无穷大量}{选择题}{2025 年第 4 题}{1}{无穷小比阶}{029 / 234}{***}\n设函数 \\(f\\left( x \\right)\\)，\\(g\\left( x \\right)\\) 在 \\(x = 0\\) 的某去心邻域内有定义且恒不为零.若当 \\(x \\to 0\\) 时，\\(f\\left( x \\right)\\) 是 \\(g\\left( x \\right)\\) 的高阶无穷小，则当 \\(x \\to 0\\) 时，\n\\choices{\\(f\\left( x \\right) + g\\left( x \\right) = o\\left( g\\left( x \\right) \\right)\\).}{\\(f\\left( x \\right) g\\left( x \\right) = o\\left( f^{2}\\left( x \\right) \\right)\\).}{\\(f\\left( x \\right) = o\\left( \\mathrm{e}^{g\\left( x \\right)} - 1 \\right)\\).}{\\(f\\left( x \\right) = o\\left( g^{2}\\left( x \\right) \\right)\\).}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2025 年第 4 题}\n\\textbf{已知与目标}\\quad 题设中的高阶无穷小表示 \\(f\\to0\\)、\\(g\\to0\\) 且 \\(\\frac{f}{g}\\to0\\)。要判断这个条件能保证四个小 \\(o\\) 关系中的哪一个。\n\n\\textbf{方法与条件}\\quad \\(u=o(v)\\) 的含义是 \\(\\frac{u}{v}\\to0\\)，逐项作商即可。题设保证 \\(f,g\\) 在去心邻域非零；又因实数 \\(g\\ne0\\) 时 \\(\\mathrm e^g-1\\ne0\\)，各商均有定义。\n\n\\textbf{推导}\\quad A 中 \\(\\frac{f+g}{g}=1+\\frac{f}{g}\\to1\\)，故不成立。B 中 \\(\\frac{fg}{f^2}=\\frac{g}{f}\\)，其绝对值是 \\(|\\frac{f}{g}|\\) 的倒数，趋于正无穷，不会趋零。\n\nC 中，利用 \\(g\\to0\\) 和基本等价式 \\(\\mathrm e^g-1\\sim g\\)，有\n\\[\n\\frac{f}{\\mathrm{e}^g-1}=\\frac{f}{g}\\frac{g}{\\mathrm{e}^g-1}\\longrightarrow0\\cdot1=0.\n\\]\nD 则不能保证：取 \\(g(x)=x,f(x)=x^2\\)，在 \\(x\\ne0\\) 时二者非零，且 \\(\\frac{f}{g}=x\\to0\\)，但 \\(\\frac{f}{g^2}=1\\)。\n\n\\textbf{结论与检查}\\quad 只有 C 必然成立，选 \\(\\boxed{\\mathrm C}\\)。高于 \\(g\\) 的阶，并不能保证也高于 \\(g^2\\) 的阶。\n\\end{QuestionSolution}\n\n"}
+{}
+
+## tool · 2026-11-12T07:23:57Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"33e1b9","wall_time_seconds":0.000012416,"exit_code":0,"original_token_count":507,"output":"% Q 2015 3\n\\QuestionPage{1.5 连续函数}{选择题}{2015 年第 3 题}{1}{分段函数连续性与参数}{043 / 234}{***}\n设函数$f(x) = \\begin{cases}\n  x^{\\alpha}\\cos \\frac{1}{x^{\\beta}}, & x > 0 \\\\\n                                   0, & x \\le 0\n\\end{cases}$（$\\alpha > 0,\\beta > 0$），若$f'(x)$在$x = 0$处连续，则\\pickout{}\n\\begin{abcd}\n\\item $\\alpha - \\beta > 1$．\n\\item $0 < \\alpha - \\beta \\le 1$．\n\\item $\\alpha - \\beta > 2$．\n\\item $0 < \\alpha - \\beta \\le 2$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2015 年第 3 题}\n\\textbf{已知与目标}\\quad \\(\\alpha,\\beta>0\\)，左段恒为零。要求导函数 \\(f'\\) 在零点连续，既须保证 \\(f'(0)\\) 存在，也须使右侧导数趋于同一个值。\n\n\\textbf{方法与条件}\\quad 零点导数用差商定义，不能把只对 \\(x>0\\) 成立的求导式直接代入零。对振荡项的必要条件，可选正弦为 \\(1\\)、余弦为 \\(0\\) 的点，避免两项抵消。\n\n\\textbf{推导}\\quad 在 \\(x>0\\) 上，用乘积法则和复合求导法则，\\((x^{-\\beta})'=-\\beta x^{-\\beta-1}\\)，得到\n\\[\nf'(x)=\\alpha x^{\\alpha-1}\\cos(x^{-\\beta})\n+\\beta x^{\\alpha-\\beta-1}\\sin(x^{-\\beta}).\n\\]\n必要性：若 \\(f'\\) 连续，由左段导数恒为零知 \\(f'(0)=0\\)。取 \\(x_k=(\\frac{\\pi}{2}+2k\\pi)^{-\\frac{1}{\\beta}}\\to0^+\\)，此时余弦为零、正弦为 \\(1\\)，所以 \\(f'(x_k)=\\beta x_k^{\\alpha-\\beta-1}\\)。其趋零要求指数 \\(\\alpha-\\beta-1>0\\)；指数为零时值为 \\(\\beta\\ne0\\)，指数为负时无界。\n\n充分性：若 \\(\\alpha-\\beta>1\\)，则 \\(\\alpha>1\\)。零点右侧差商的绝对值为 \\(|x^{\\alpha-1}\\cos(x^{-\\beta})|\\le x^{\\alpha-1}\\to0\\)，与左侧差商零相等，故 \\(f'(0)=0\\)。上面的右侧导数满足\n\\[\n|f'(x)|\\le\\alpha x^{\\alpha-1}+\\beta x^{\\alpha-\\beta-1}\\longrightarrow0,\n\\]\n所以 \\(f'\\) 在零点连续。\n\n\\textbf{结论与检查}\\quad 条件为 \\(\\boxed{\\alpha-\\beta>1}\\)，选 A。必要性与充分性都已证明，等号情形被选取的数列明确排除。\n\\end{QuestionSolution}\n\n"}
+{}
+{"chunk_id":"7b28aa","wall_time_seconds":0.000007875,"exit_code":0,"original_token_count":688,"output":"import hashlib\nfrom pathlib import Path\nimport re\nimport unittest\n\n\nSOURCE = Path(__file__).resolve().parents[2] / \"output/302数学二分节真题集（原生LaTeX横屏版）.tex\"\nCOUNTS = [1, 10, 5, 23, 8, 8, 28, 0, 12, 9, 25, 11, 11, 12, 25, 13, 17, 16, 0]\nHEAD = re.compile(\n    r\"\\\\QuestionPage\\{([^{}]+)\\}\\{([^{}]+)\\}\\{(\\d+) 年第 (\\d+) 题\\}\"\n    r\"\\{(\\d+(?:、\\d+)*)\\}\\{([^{}]+)\\}\\{(\\d+) / 234\\}\\{(\\*{1,5})\\}\"\n)\n\n\nclass QuestionBankTests(unittest.TestCase):\n    @classmethod\n    def setUpClass(cls):\n        cls.source = SOURCE.read_text()\n        cls.sections = re.split(r\"(?=^\\\\SectionHeading\\{)\", cls.source, flags=re.M)[1:]\n\n    def test_question_identity_and_section_counts(self):\n        identities = re.findall(r\"^% Q (\\d+) (\\d+)$\", self.source, re.M)\n        self.assertEqual(len(identities), 234)\n        self.assertEqual(len(set(identities)), 234)\n        self.assertEqual(hashlib.sha256(str(sorted(identities)).encode()).hexdigest(),\n                         \"b201d7886afc28e8454c0aad1e060a7dc4c552f94eeb9347d55294a8a7e715ff\")\n        self.assertEqual([len(re.findall(r\"^% Q \", s, re.M)) for s in self.sections], COUNTS)\n\n    def test_ratings_and_stable_section_order(self):\n        self.assertEqual(len(HEAD.findall(self.source)), 234)\n        for section in self.sections:\n            heads = HEAD.findall(section)\n            order = [(len(h[7]), int(h[6])) for h in heads]\n            self.assertEqual(order, sorted(order), section.splitlines()[0])\n\n    def test_complete_solutions_match_questions(self):\n        blocks = re.split(r\"^% Q \", self.source, flags=re.M)[1:]\n        for block in blocks:\n            identity = block.splitlines()[0]\n            year, number = identity.split()\n            self.assertEqual(block.count(r\"\\begin{QuestionSolution}\"), 1, identity)\n            self.assertEqual(block.count(r\"\\end{QuestionSolution}\"), 1, identity)\n            self.assertIn(r\"\\begin{QuestionSolution}{\" + f\"{year} 年第 {number} 题\" + \"}\", block)\n            solution = block.split(r\"\\begin{QuestionSolution}\", 1)[1].split(r\"\\end{QuestionSolution}\", 1)[0]\n            for label in (\"已知与目标\", \"方法与条件\", \"推导\", \"结论与检查\"):\n                self.assertIn(r\"\\textbf{\" + label + \"}\", solution, identity)\n\n    def test_readable_stacked_fractions(self):\n        self.assertFalse(r\"\\tfrac\" in self.source, \"源稿仍有紧缩分式\")\n        self.assertNotRegex(self.source, r\"[¼½¾⅐-⅞]\")\n        for line in self.source.splitlines():\n            if line.startswith(\"%\") or line.startswith(r\"\\QuestionPage{\") or \"svg\" in line:\n                continue\n            self.assertNotRegex(line, r\"(?:\\d|[xyztn])\\s*/\\s*(?:\\d|[xyztn(])\", line[:160])\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"}
+
+## tool · 2026-11-12T07:24:07Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"c74f1c","wall_time_seconds":0.000007583,"exit_code":0,"original_token_count":563,"output":"questions 47 ratings Counter({2: 30, 3: 12, 1: 3, 4: 2})\nfour parts [('已知与目标', 47), ('方法与条件', 47), ('推导', 47), ('结论与检查', 47)]\ntfrac 0\n[('1.1 集合、映射与函数', '001', '**')]\n[('1.2 数列的极限', '002', '**'), ('1.2 数列的极限', '003', '**'), ('1.2 数列的极限', '004', '**'), ('1.2 数列的极限', '006', '**'), ('1.2 数列的极限', '007', '**'), ('1.2 数列的极限', '005', '***'), ('1.2 数列的极限', '008', '***'), ('1.2 数列的极限', '010', '***'), ('1.2 数列的极限', '009', '****'), ('1.2 数列的极限', '011', '****')]\n[('1.3 函数的极限', '012', '**'), ('1.3 函数的极限', '013', '**'), ('1.3 函数的极限', '014', '**'), ('1.3 函数的极限', '015', '**'), ('1.3 函数的极限', '016', '***')]\n[('1.4 无穷小量与无穷大量', '018', '*'), ('1.4 无穷小量与无穷大量', '024', '*'), ('1.4 无穷小量与无穷大量', '031', '*'), ('1.4 无穷小量与无穷大量', '017', '**'), ('1.4 无穷小量与无穷大量', '019', '**'), ('1.4 无穷小量与无穷大量', '020', '**'), ('1.4 无穷小量与无穷大量', '021', '**'), ('1.4 无穷小量与无穷大量', '022', '**'), ('1.4 无穷小量与无穷大量', '023', '**'), ('1.4 无穷小量与无穷大量', '026', '**'), ('1.4 无穷小量与无穷大量', '028', '**'), ('1.4 无穷小量与无穷大量', '030', '**'), ('1.4 无穷小量与无穷大量', '032', '**'), ('1.4 无穷小量与无穷大量', '033', '**'), ('1.4 无穷小量与无穷大量', '034', '**'), ('1.4 无穷小量与无穷大量', '035', '**'), ('1.4 无穷小量与无穷大量', '036', '**'), ('1.4 无穷小量与无穷大量', '037', '**'), ('1.4 无穷小量与无穷大量', '025', '***'), ('1.4 无穷小量与无穷大量', '027', '***'), ('1.4 无穷小量与无穷大量', '029', '***'), ('1.4 无穷小量与无穷大量', '038', '***'), ('1.4 无穷小量与无穷大量', '039', '***')]\n[('1.5 连续函数', '040', '**'), ('1.5 连续函数', '041', '**'), ('1.5 连续函数', '042', '**'), ('1.5 连续函数', '044', '**'), ('1.5 连续函数', '045', '**'), ('1.5 连续函数', '043', '***'), ('1.5 连续函数', '046', '***'), ('1.5 连续函数', '047', '***')]\nbrace balance 0\n"}
+{"chunk_id":"cee5f9","wall_time_seconds":0.000008125,"exit_code":0,"original_token_count":71290,"output":"Warning: truncated output (original token count: 71290)\nTotal output lines: 3370\n\n.question-bank-work/older-forty-zhang-6.md\n.question-bank-work/302-older-10-1-volume-8.md\n.question-bank-work/older-forty-lilin-1.md\n.question-bank-work/older-topic-2-lilin-v2.md\n.question-bank-work/older-topic-candidate-1-zhang8-v6.md\n.question-bank-work/302-zhang-1-unique-3.md\n.question-bank-work/302-zhang-1-volume-7.md\n.question-bank-work/older-topic-2-zhang4-v1.md\n.question-bank-work/older-topic-candidate-2-chaoyue-v1.md\n.question-bank-work/older-topic-2-zhang8-v6.md\n.question-bank-work/302-lilin-volume-2.md\n.question-bank-work/render-302-older.py\n.question-bank-work/older-topic-candidate-1-zhang4-v1.md\n.question-bank-work/older-topic-candidate-1-lilin-v3.md\n.question-bank-work/notation-after/302数学二分节真题集（原生LaTeX常规版）.pdf\n.question-bank-work/notation-after/302数学二分节真题集.pdf\n.question-bank-work/notation-after/27302阶段模拟卷.pdf\n.question-bank-work/notation-after/302数学二分节真题集（原生LaTeX横屏版）.pdf\n.question-bank-work/notation-after/27302阶段模拟卷（第二至五卷及补充练习）.pdf\n.question-bank-work/302-older-twenty-comparison.txt\n.question-bank-work/apply-302-hefei.py\n.question-bank-work/302-older-10-1-unique-8.md\n.question-bank-work/older-forty-lilin-5.md\n.question-bank-work/npm/_update-notifier-last-checked\n.question-bank-work/npm/_cacache/index-v5/8b/a1/842516d0cd2de0174cdbefbf8f092075459ff051f963d450a3902dffde15\n.question-bank-work/npm/_cacache/index-v5/71/62/b0fcc1eec538191e75969d0af19ecb4a816eb58ccad4d8b34af971365286\n.question-bank-work/render-proof-302-doing-books.py\n.question-bank-work/render-proof-302-official.py\n.question-bank-work/older-topic-2-zhang4-v2.md\n.question-bank-work/302-zhang-1-volume-4.md\n.question-bank-work/older-topic-1-zhang8-v3.md\n.question-bank-work/render-302-zhang-year-differences.py\n.question-bank-work/older-topic-1-zhang4-v4.md\n.question-bank-work/older-topic-2-zhang8-v5.md\n.question-bank-work/302-lilin-volume-1.md\n.question-bank-work/older-topic-candidate-2-chaoyue-v2.md\n.question-bank-work/older-topic-candidate-1-zhang4-v2.md\n.question-bank-work/older-topic-candidate-2-zhang8-v3.md\n.question-bank-work/older-topic-candidate-1-chaoyue-v3.md\n.question-bank-work/apply-302-twenty-two.py\n.question-bank-work/302-zhang-horizontal-check.txt\n.question-bank-work/older-forty-lilin-6.md\n.question-bank-work/remove-302-standalone-math3.py\n.question-bank-work/assemble-302-twenty-one.py\n.question-bank-work/302-ten-two-v7.md\n.question-bank-work/older-forty-zhang-1.md\n.question-bank-work/older-topic-1-zhang8-v7.md\n.question-bank-work/older-topic-1-chaoyue-v9.md\n.question-bank-work/302-zhang-1-unique-4.md\n.question-bank-work/npm/_cacache/index-v5/f8/cb/8e5065809b1b4a9592fe58cc98e9edc5a2200edc2b345be58e519e5cadac\n.question-bank-work/assemble-302-wu-basic.py\n.question-bank-work/older-topic-2-zhang8-v1.md\n.question-bank-work/clean-302-questions.py\n.question-bank-work/older-topic-candidate-2-chaoyue-v6.md\n.question-bank-work/older-lilin-2-v1.md\n.question-bank-work/older-topic-candidate-1-chaoyue-v7.md\n.question-bank-work/older-topic-candidate-1-lilin-v4.md\n.question-bank-work/302-lilin-volume-5.md\n.question-bank-work/older-topic-candidate-2-zhang8-v7.md\n.question-bank-work/older-topic-candidate-1-zhang8-v1.md\n.question-bank-work/302-zhang-editions-check.txt\n.question-bank-work/older-forty-zhang-4.md\n.question-bank-work/302-wu-basic-all.md\n.question-bank-work/302-ten-two-v2.md\n.question-bank-work/render-302-zhang-a4-outliers.py\n.question-bank-work/older-forty-lilin-3.md\n.question-bank-work/302-hefei-2.md\n.question-bank-work/302-zhang-1-unique-1.md\n.question-bank-work/older-topic-candidate-1-zhang8-v4.md\n.question-bank-work/older-topic-2-zhang4-v3.md\n.question-bank-work/older-topic-1-zhang8-v2.md\n.question-bank-work/302-zhang-1-volume-5.md\n.question-bank-work/older-topic-2-zhang8-v4.md\n.question-bank-work/older-topic-candidate-2-chaoyue-v3.md\n.question-bank-work/topic8-other-sections.json\n.question-bank-work/older-topic-candidate-1-zh…69290 tokens truncated….question-bank-work/302-ocr-cache/a0/4c79d0a99bbab3c234c87a4e06bdf5898459d6fc3e26d8175fc06f18308b85\n.question-bank-work/302-ocr-cache/c2/ffc6eeebbd4d1a62baf4c10eb06336254eeecc48ba8589b84f1923a6be3094\n.question-bank-work/302-ocr-cache/c2/ef31b37b98e1546b011a08cef7cd438d57f3a6d6a78cb8fe213809f54ae7ca\n.question-bank-work/302-ocr-cache/c2/209c7de3f87a2417424dbc50ea8d010af04dac6b276e616ec2c03d34db47a9\n.question-bank-work/302-ocr-cache/ba/1f99a7575578ca0b875012f362c5d5879f8dc98a8686214d31f5ee465f3720\n.question-bank-work/302-ocr-cache/ba/21bd43d24eb1f815648a04a263ee2d1b63ed408c0b7a55dd4bdacd14e3b4a5\n.question-bank-work/302-ocr-cache/ba/24f6f103c3f771976080bd81ebc1fcd8885095dcbc4f020e177c1eca8e98f2\n.question-bank-work/302-ocr-cache/ba/aaabc48637f7efbfc30d5dc28e4aff913a5bad0ff042ca4b75de10e87a3deb\n.question-bank-work/302-ocr-cache/ba/0122adfbf668ba1dfffd57b09ff2a107b8277d2eba5927a45750207304cf3f\n.question-bank-work/302-ocr-cache/ba/d928f6addc070aaf7a7f31adb25f1789a12bd1d6abfaefb8b8c6630b0e1f6a\n.question-bank-work/302-ocr-cache/83/37cae62829c1fd558cbec5f4b0e5489360adcf2821e9c78f77a1183a9defab\n.question-bank-work/302-ocr-cache/83/7b29feed5551dfebd36ce85eacf97a5b939bcbbeac9fd84c71cafdf445f229\n.question-bank-work/302-ocr-cache/83/500d92e00d04838742970a31a520e70441c6a9231a86f8732962f3612d1aa3\n.question-bank-work/302-ocr-cache/83/b7a80b36a9a632c30cd217872f15b023e9daac4dd91c75aa5060c862e495b0\n.question-bank-work/302-ocr-cache/83/22a3b2e4706194444b8797b70f220048aac1a6c9c19ea6f45cf2b2e4ce9300\n.question-bank-work/302-ocr-cache/d3/a1a6119f4c4cededbb654cc28aa92e7eff6c24edee0b39a8891a11c033ef34\n.question-bank-work/302-ocr-cache/d3/4618ae17011e6221d9e41264a4e5faf83328ab4012ba975236235f8bec53fd\n.question-bank-work/302-ocr-cache/d3/204b75cdea76e528783b92b50d546ecdeac1c7b78da62e2c89e32395d09d98\n.question-bank-work/302-ocr-cache/d3/f6fa36d659118441b4c89152a1bf3ceab6dd83326e2be3068e5ba4883127d1\n.question-bank-work/302-ocr-cache/d3/de76c3b77f4084838dbafe58394a7d120f9d9aca47bdb3e10f1e81fd22d62a\n.question-bank-work/302-ocr-cache/d3/608b5ec990d1a61a32e677a8620f5b2a8e8e3df5c56dd744047a612b465939\n.question-bank-work/302-ocr-cache/d3/da9c96e06276a97b5bfedd4e5fa6f24c9565ba49d8032a0a73f0aff9174c95\n.question-bank-work/302-ocr-cache/e1/a85cf3e3df285c1e53e1110639e927bdabc8b8fc73a0a1a967dcfac47b1507\n.question-bank-work/302-ocr-cache/e1/2fde60a6213100e694271c21b9b27b0297bfee22cc932020eafe1b87047aee\n.question-bank-work/302-ocr-cache/e1/014b30de30842cc1d9ab6e17c573f8a486f615c47a4fec0d72fa83dfcdadcc\n.question-bank-work/302-ocr-cache/e1/e33bee5d7e4258569a93c8a668fb180bb8f795f9c1e6afd27c47c086bfb6d6\n.question-bank-work/302-ocr-cache/e1/7812d1915571c23ee70805611072a575a9c21f0ca2e9f2d906818c6874bc55\n.question-bank-work/302-ocr-cache/e1/6c05cb702ff520bfac3357d091d795ce402872d8fc2cc1634f926217e5b2e7\n.question-bank-work/302-ocr-cache/e1/aa5676e525d56414c776ac21f1a5af2422eec08e2cea0653686cf4b24d287a\n.question-bank-work/302-ocr-cache/e1/4ff1931f299f2d039798b6434467086c41e39a9ebc7a66acb5fb25533e2203\n.question-bank-work/302-ocr-cache/e1/287063eee6a0ab639a0985e8ae2ff5e441fa638df27083ab865ec0bb8f8a7a\n.question-bank-work/302-ocr-cache/e1/36718165d844a95ed721854598b9c697fc987694b13e2baf3c092490d51271\n.question-bank-work/302-ocr-cache/e1/491616711819e55b48e90a148ae70a6d1012a60f746f5feddf10322e53345f\n.question-bank-work/302-ocr-cache/c5/57588b019a666c0d45d0632b38a1237753d654cf59fe76c68bbe5936167347\n.question-bank-work/302-ocr-cache/c5/44de9006d926f779ab6c6dd7a5eda971a4d226bfbf8b5c92e78eedc6e54bbf\n.question-bank-work/302-ocr-cache/ea/5bde96a675e34b2c7b9582a92760204cf8e7c0383ca67d7fd622501e1e6d5f\n.question-bank-work/302-ocr-cache/63/6fb98058712e5d457817cbbdacc9dd61ac4fcd5e2f1a2b65199aa9e50018c2\n.question-bank-work/302-ocr-cache/63/89c9325bcea56159dd6fb7dd9fea357439215f59861b6f673fed1a08d5e59b\n.question-bank-work/302-ocr-cache/63/3f7e2718065412814097a29fccf5be553cd8ef16d1754819871dfa041590ef\n.question-bank-work/302-ocr-cache/63/b749119745e10a742a29a5aa35ae2efa329777b773d61148802f60137a5bb1\n"}
+
+## tool · 2026-11-12T07:24:15Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"a6b1fe","wall_time_seconds":0.000009458,"exit_code":1,"original_token_count":0,"output":""}
+{"chunk_id":"aed894","wall_time_seconds":0.000007667,"exit_code":0,"original_token_count":14,"output":"第一章47题评级与节内稳定排序检查通过\n"}
+
+## tool · 2026-11-12T07:24:22Z
+
+
+
+
+## tool · 2026-11-12T07:24:27Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"564d19","wall_time_seconds":0.000007583,"exit_code":0,"original_token_count":7420,"output":"\\SectionHeading{4.1}{常微分方程}{几类简单的微分方程}{定理与要点\\quad 教材 PDF 第 262 页起\\hfill 本节 17 题}\n\\pdfbookmark[1]{常微分方程}{chapter-4.1}\n\\pdfbookmark[2]{4.1 几类简单的微分方程}{section-4.1}\n\\Theory{方法}{263--265}{方程、初值与通解}{先识别阶数、未知函数及初值。通解中的任意常数由给定条件确定。}\n\\Theory{方法}{266--267}{分离变量}{将同一变量的项移到等式同侧后积分。除以含未知函数的因子前，检查其为零时的常值解。}\n\\Theory{方法}{267--270}{一阶线性方程}{对 \\(y'+p(x)y=q(x)\\)，先求对应的齐次方程通解，再用常数变易法求非齐次方程通解。}\n\\Theory{方法}{270--274}{变量代换}{齐次型方程可令 \\(u=\\frac{y}{x}\\)。Bernoulli 方程可作幂函数代换化为线性方程。}\n\\Theory{方法}{274--277}{高阶方程降阶}{方程不显含 \\(y\\) 时可令 \\(p=y'\\)。方程不显含 \\(x\\) 时可将 \\(p\\) 视为 \\(y\\) 的函数，写成 \\(y''=p\\frac{\\mathrm{d}p}{\\mathrm{d}y}\\)。}\n% Q 2010 2\n\\QuestionPage{4.1 几类简单的微分方程}{选择题}{2010 年第 2 题}{1}{一阶线性方程解的关系}{202 / 234}{**}\n设$y_1,y_2$是一阶线性非齐次微分方程$y' + p(x)y = q(x)$的两个特解，\n若常数$\\lambda ,\\mu$使$\\lambda y_1 + \\mu y_2$是该方程的解，\n$\\lambda y_1 - \\mu y_2$是该方程对应的齐次方程的解，则\\pickout{}\n\\begin{abcd}\n\\item $\\lambda = \\frac{1}{2},\\mu = \\frac{1}{2}$．\n\\item $\\lambda = - \\frac{1}{2},\\mu = - \\frac{1}{2}$．\n\\item $\\lambda = \\frac{2}{3},\\mu = \\frac{1}{3}$．\n\\item $\\lambda = \\frac{2}{3},\\mu = \\frac{2}{3}$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2010 年第 2 题}\n\\textbf{已知与目标}\\quad \\(y_1,y_2\\) 都满足同一个非齐次方程，要确定两种组合分别仍满足原方程、对应齐次方程时的常数 \\(\\lambda,\\mu\\)。齐次方程指右端改为零的方程。\n\n\\textbf{方法与条件}\\quad 导数对常数倍及加减满足分配规律，因此可以直接代入组合，不必先求出 \\(y_1,y_2\\)。非齐次表示 \\(q(x)\\) 不恒等于零。\n\n\\textbf{推导}\\quad 已知 \\(y_1'+py_1=y_2'+py_2=q\\)。把两种组合分别代入左端，得到\n\\[\n(\\lambda+\\mu)q(x)=q(x),\\qquad(\\lambda-\\mu)q(x)=0.\n\\]\n由于至少存在一点使 \\(q(x)\\ne0\\)，而两式要在整个区间成立，必须有 \\(\\lambda+\\mu=1\\)、\\(\\lambda-\\mu=0\\)。两式相加得 \\(2\\lambda=1\\)，继而 \\(\\mu=\\lambda=\\frac{1}{2}\\)。\n\n\\textbf{结论与检查}\\quad 选 A。代回系数关系，和为 \\(1\\)、差为 \\(0\\)，所以两种组合的右端确为 \\(q\\) 和 \\(0\\)，符合题意。\n\\end{QuestionSolution}\n\n% Q 2011 10\n\\QuestionPage{4.1 几类简单的微分方程}{填空题}{2011 年第 10 题}{1}{一阶线性方程初值问题}{203 / 234}{**}\n微分方程$y' + y = \\mathrm{e}^{- x}\\cos x$满足条件$y(0) = 0$的解为$y =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 10 题}\n\\textbf{已知与目标}\\quad 已知一阶方程 \\(y'+y=\\mathrm{e}^{-x}\\cos x\\) 及初值 \\(y(0)=0\\)，求满足两者的函数。\n\n\\textbf{方法与条件}\\quad 用积分因子法：寻找一个乘数，使左边成为一个乘积的导数。本题乘数为 \\(\\mathrm{e}^x\\)，它处处非零，乘上或除去它均不改变解。\n\n\\textbf{推导}\\quad 由乘积求导公式，\\((\\mathrm{e}^xy)'=\\mathrm{e}^xy'+\\mathrm{e}^xy\\)。原方程两边乘 \\(\\mathrm{e}^x\\)，得\n\\[\n(\\mathrm{e}^xy)'=\\cos x,\n\\qquad \\mathrm{e}^xy=\\int\\cos x\\,\\mathrm{d}x=\\sin x+C.\n\\]\n代入 \\(x=0,y=0\\) 得 \\(C=0\\)，故 \\(\\boxed{y=\\mathrm{e}^{-x}\\sin x}\\)。\n\n\\textbf{结论与检查}\\quad 求导得 \\(y'=\\mathrm{e}^{-x}(\\cos x-\\sin x)\\)，所以 \\(y'+y=\\mathrm{e}^{-x}\\cos x\\)；同时 \\(y(0)=0\\)。答案在全部实数范围成立。\n\\end{QuestionSolution}\n\n% Q 2012 12\n\\QuestionPage{4.1 几类简单的微分方程}{填空题}{2012 年第 12 题}{2}{一阶微分方程初值问题}{204 / 234}{**}\n微分方程$y\\,\\mathrm{d} x + (x - 3y^2)\\,\\mathrm{d} y = 0$满足初始条件$y|_{x = 1}$=1的解为$y =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 12 题}\n\\textbf{已知与目标}\\quad 已知微分关系及经过点 \\((1,1)\\) 的条件，求以 \\(x\\) 为自变量的解 \\(y(x)\\)。\n\n\\textbf{方法与条件}\\quad 乘积微分公式给出 \\(\\mathrm{d}(xy)=y\\,\\mathrm{d}x+x\\,\\mathrm{d}y\\)，又有 \\(\\mathrm{d}(y^3)=3y^2\\,\\mathrm{d}y\\)，所以可以整体积分，避免先除以可能为零的 \\(y\\)。\n\n\\textbf{推导}\\quad 原式为 \\(\\mathrm{d}(xy-y^3)=0\\)，因此 \\(xy-y^3=C\\)。用初值计算 \\(C=1\\cdot1-1^3=0\\)，得到\n\\[\ny(x-y^2)=0.\n\\]\n初值处 \\(y=1>0\\)，连续性保证其附近 \\(y\\ne0\\)，故该分支必须满足 \\(y^2=x\\)。两个平方根中，只有正根在 \\(x=1\\) 时等于 \\(1\\)，于是 \\(\\boxed{y=\\sqrt{x},\\ x>0}\\)。常值分支 \\(y=0\\) 不满足初值。\n\n\\textbf{结论与检查}\\quad \\(y'=\\frac{1}{2\\sqrt{x}}\\)，代入得 \\(y+(x-3y^2)y'=\\sqrt{x}-\\frac{2x}{2\\sqrt{x}}=0\\)。\\(y(1)=1\\)，且 \\(x>0\\) 时导数有限；不能把 \\(x=0\\) 纳入这个可导解的区间。\n\\end{QuestionSolution}\n\n% Q 2016 11\n\\QuestionPage{4.1 几类简单的微分方程}{填空题}{2016 年第 11 题}{2}{由特解确定一阶线性方程}{205 / 234}{**}\n以$y = x^2 - \\mathrm{e}^x$和$y = x^2$为特解的一阶非齐次线性微分方程为 \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2016 年第 11 题}\n\\textbf{已知与目标}\\quad 两个指定函数是同一个一阶非齐次线性方程的解，求这个方程。\n\n\\textbf{方法与条件}\\quad 把方程写成 \\(y'+p(x)y=q(x)\\)。将两个解满足的等式相减，右端消去，就能先求 \\(p(x)\\)。这说明两个非齐次解之差满足右端为零的齐次方程。\n\n\\textbf{推导}\\quad 两解之差为 \\(-\\mathrm{e}^x\\)，其导数也是 \\(-\\mathrm{e}^x\\)，故\n\\[\n-\\mathrm{e}^x-p(x)\\mathrm{e}^x=0.\n\\]\n因为 \\(\\mathrm{e}^x>0\\)，得 \\(p(x)=-1\\)。再将较简单的解 \\(y=x^2\\) 代入，求得 \\(q(x)=2x-x^2\\)。所以可写为 \\(\\boxed{y'-y=2x-x^2}\\)。\n\n\\textbf{结论与检查}\\quad 对另一解，\\((x^2-\\mathrm{e}^x)'-(x^2-\\mathrm{e}^x)=2x-x^2\\)，同样成立。右端不恒为零，符合非齐次要求。\n\\end{QuestionSolution}\n\n% Q 2024 13\n\\QuestionPage{4.1 几类简单的微分方程}{填空题}{2024 年第 13 题}{2}{一阶微分方程}{206 / 234}{**}\n微分方程\n\\[y'=\\frac{1}{(x+y)^2}\n\\]\n满足初始条件 \\(y(1)=0\\) 的解为 \\blank{}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2024 年第 13 题}\n\\textbf{已知与目标}\\quad 求 \\(y'=\\frac{1}{(x+y)^2}\\) 经过 \\((1,0)\\) 的解；分母要求 \\(x+y\\ne0\\)。\n\n\\textbf{方法与条件}\\quad 右端只含组合 \\(x+y\\)，令 \\(u=x+y\\)。由 \\(u'=1+y'\\) 可将方程变成只含 \\(u\\) 的关系。\\(u'>0\\) 保证可以局部反解，把 \\(x\\) 看成 \\(u\\) 的函数。\n\n\\textbf{推导}\\quad \\(u(1)=1\\)，初值所在分支有 \\(u>0\\)，且 \\(u'=1+\\frac{1}{u^2}\\)。取倒数并分解被积式，得\n\\[\n\\frac{\\mathrm{d}x}{\\mathrm{d}u}=\\frac{u^2}{1+u^2},\n\\qquad x=\\int\\left(1-\\frac{1}{1+u^2}\\right)\\mathrm{d}u=u-\\arctan u+C.\n\\]\n代入 \\(x=u=1\\)，得 \\(1=1-\\frac{\\pi}{4}+C\\)，所以 \\(C=\\frac{\\pi}{4}\\)。还原 \\(u=x+y\\)，得隐式解（用 \\(x,y\\) 共同满足的等式表示的解）\n\\[\n\\boxed{y=\\arctan(x+y)-\\frac{\\pi}{4}},\\qquad x+y>0.\n\\]\n\n\\textbf{结论与检查}\\quad 对答案求导，\\(y'=\\frac{1+y'}{1+(x+y)^2}\\)，移项得 \\((x+y)^2y'=1\\)，正是原式。\\((1,0)\\) 满足答案。由 \\(u-\\arctan u\\) 在 \\(u>0\\) 上严格增加、值域为 \\((0,\\infty)\\)，此分支的 \\(x\\) 区间是 \\((\\frac{\\pi}{4},\\infty)\\)。\n\\end{QuestionSolution}\n\n% Q 2025 15\n\\QuestionPage{4.1 几类简单的微分方程}{填空题}{2025 年第 15 题}{2}{一阶微分方程初值问题}{207 / 234}{***}\n微分方程 \\(\\left( 2y - 3x \\right) \\mathrm{d} x + \\left( 2x - 5y \\right) \\mathrm{d} y = 0\\) 满足条件 \\(y\\left( 1 \\right) = 1\\) 的解为 \\blank{}.\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2025 年第 15 题}\n\\textbf{已知与目标}\\quad 已知微分关系及 \\(y(1)=1\\)，求经过该点的函数分支。\n\n\\textbf{方法与条件}\\quad \\(2y\\,\\mathrm{d}x+2x\\,\\mathrm{d}y=\\mathrm{d}(2xy)\\)，其余两项也是平方函数的微分，所以先整体积分，再由初值选择二次方程的根。\n\n\\textbf{推导}\\quad 原式可写为 \\(\\mathrm{d}(2xy-\\frac{3}{2}x^2-\\frac{5}{2}y^2)=0\\)，故括号等于常数。代入 \\((1,1)\\)，得常数为 \\(2-\\frac{3}{2}-\\frac{5}{2}=-2\\)。两边乘 \\(-2\\)，整理为\n\\[\n5y^2-4xy+3x^2-4=0.\n\\]\n把它看作关于 \\(y\\) 的二次方程，判别式为 \\(16x^2-20(3x^2-4)=4(20-11x^2)\\)，所以\n\\[\ny=\\frac{4x\\pm2\\sqrt{20-11x^2}}{10}\n=\\frac{2x\\pm\\sqrt{20-11x^2}}{5}.\n\\]\n在 \\(x=1\\) 时，正根为 \\(1\\)，负根为 \\(-\\frac{1}{5}\\)，因此\n\\[\n\\boxed{y=\\frac{2x+\\sqrt{20-11x^2}}{5}},\\qquad |x|<\\sqrt{\\frac{20}{11}}.\n\\]\n\n\\textbf{结论与检查}\\quad 对隐式关系求导得 \\((6x-4y)+(10y-4x)y'=0\\)，除以 \\(-2\\) 就是原方程。所取分支有 \\(2x-5y=-\\sqrt{20-11x^2}\\ne0\\)，故在上述开区间内可导；初值亦满足。\n\\end{QuestionSolution}\n\n% Q 2009 18\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2009 年第 18 题}{3}{降阶方程与旋转体积}{208 / 234}{***}\n设非负函数$y = y(x)$（$x \\ge 0$）满足微分方程$xy'' - y' + 2 = 0$，\n当曲线$y = y(x)$过原点时，其与直线$x = 1$及$y = 0$围成平面区域$D$的面积为$2$，\n求$D$绕$y$轴旋转所得旋转体体积．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2009 年第 18 题}\n\\textbf{已知与目标}\\quad 曲线非负、过原点、满足二阶方程，且在 \\([0,1]\\) 下方区域面积为 \\(2\\)。求该区域绕 \\(y\\) 轴的旋转体积。\n\n\\textbf{方法与条件}\\quad 方程不直接含 \\(y\\)，令 \\(p=y'\\) 可降低一阶。确定曲线后，用圆柱壳法：宽为 \\(\\mathrm{d}x\\) 的竖条绕 \\(y\\) 轴旋转，薄壳体积为周长 \\(2\\pi x\\) 乘高 \\(y(x)\\) 乘厚度 \\(\\mathrm{d}x\\)。\n\n\\textbf{推导}\\quad 在 \\(x>0\\) 时，\\(xp'-p+2=0\\)。因为\n\\[\n\\left(\\frac{p-2}{x}\\right)'=\\frac{xp'-p+2}{x^2}=0,\n\\]\n所以 \\(p=2+Cx\\)。再积分得 \\(y=2x+\\frac{C}{2}x^2+D\\)。用 \\(y(0)=0\\) 得 \\(D=0\\)，把 \\(\\frac{C}{2}\\) 记为 \\(a\\)。由非负性，面积直接为函数积分：\n\\[\n2=\\int_0^1(2x+ax^2)\\,\\mathrm{d}x\n=\\left[x^2+\\frac{a}{3}x^3\\right]_0^1=1+\\frac{a}{3},\n\\]\n得 \\(a=3\\)，即 \\(y=2x+3x^2\\)。于是\n\\[\n\\begin{aligned}\nV&=2\\pi\\int_0^1x(2x+3x^2)\\,\\mathrm{d}x\\\\\n&=2\\pi\\left[\\frac{2}{3}x^3+\\frac{3}{4}x^4\\right]_0^1\n=\\boxed{\\frac{17\\pi}{6}}.\n\\end{aligned}\n\\]\n\n\\textbf{结论与检查}\\quad \\(y'=2+6x,y''=6\\)，所以 \\(xy''-y'+2=0\\)，曲线在 \\(x\\ge0\\) 非负且过原点。体积为正；题目未给具体长度单位，结果以相应的立方单位计。\n\\end{QuestionSolution}\n\n% Q 2011 18\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2011 年第 18 题}{3}{由切线倾角建立微分方程}{209 / 234}{***}\n设函数$y(x)$具有二阶导数，且曲线$l:y = y(x)$与直线$y = x$相切于原点，\n记$\\alpha$为曲线$l$在点$(x,y)$处切线的倾角，若$\\frac{\\mathrm{d}\\alpha}{\\mathrm{d} x} = \\frac{\\mathrm{d} y}{\\mathrm{d} x}$，求$y(x)$的表达式．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 18 题}\n\\textbf{已知与目标}\\quad 曲线在原点与 \\(y=x\\) 相切，故 \\(y(0)=0,y'(0)=1\\)。还已知切线倾角的变化率 \\(\\alpha'\\) 等于 \\(y'\\)，要求曲线表达式。\n\n\\textbf{方法与条件}\\quad 倾角是切线与 \\(x\\) 轴正方向所成的角，斜率为 \\(\\tan\\alpha\\)。在初值点附近取连续的角度分支；\\(y'(0)=1\\) 对应 \\(\\alpha(0)=\\frac{\\pi}{4}\\)。用正弦的导数可避免直接积分正切的倒数。\n\n\\textbf{推导}\\quad 由 \\(\\alpha'=y'\\) 积分，得 \\(\\alpha-y=C\\)，用初值得 \\(C=\\frac{\\pi}{4}\\)。又有 \\(\\alpha'=y'=\\tan\\alpha\\)，所以\n\\[\n\\frac{\\mathrm{d}}{\\mathrm{d}x}\\sin\\alpha\n=\\cos\\alpha\\,\\alpha'=\\sin\\alpha.\n\\]\n该方程的解为 \\(\\sin\\alpha=K\\mathrm{e}^x\\)。在 \\(x=0\\) 时 \\(K=\\sin\\frac{\\pi}{4}=\\frac{1}{\\sqrt{2}}\\)。初值附近 \\(0<\\alpha<\\frac{\\pi}{2}\\)，因此取反正弦的主值，得到\n\\[\n\\boxed{y(x)=\\arcsin\\left(\\frac{\\mathrm{e}^x}{\\sqrt{2}}\\right)-\\frac{\\pi}{4}},\n\\qquad x<\\frac{1}{2}\\ln2.\n\\]\n\n\\textbf{结论与检查}\\quad \\(y'=\\frac{\\mathrm{e}^x}{\\sqrt{2-\\mathrm{e}^{2x}}}\\)，所以 \\(y(0)=0,y'(0)=1\\)。令 \\(\\alpha=y+\\frac{\\pi}{4}\\)，则 \\(\\tan\\alpha=y'\\)、\\(\\alpha'=y'\\) 均成立。区间右端的根号变为零，导数不再有限，故必须取严格不等号。\n\\end{QuestionSolution}\n\n% Q 2014 16\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2014 年第 16 题}{2}{可分离变量方程与极值}{210 / 234}{***}\n已知函数$y = y(x)$满足微分方程$x^2 + y^2 y' = 1 - y'$，且$y(2) = 0$，求$y(x)$的极大值和极小值．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2014 年第 16 题}\n\\textbf{已知与目标}\\quad 已知微分方程及 \\(y(2)=0\\)，求解函数的极大值和极小值，即在某个邻域中比附近值大或小的函数值。\n\n\\textbf{方法与条件}\\quad 先用导数符号判断极值位置，再求这些位置的函数值。因为 \\(1+y^2>0\\)，导数符号完全由 \\(1-x^2\\) 决定，不必显式解出三次方程。\n\n\\textbf{推导}\\quad 整理原式得 \\(y'=\\frac{1-x^2}{1+y^2}\\)。因此 \\(x<-1\\) 时导数为负，\\(-1<x<1\\) 时为正，\\(x>1\\) 时为负。故 \\(x=-1\\) 为极小值点，\\(x=1\\) 为极大值点。\n\n分离变量 \\((1+y^2)\\,\\mathrm{d}y=(1-x^2)\\,\\mathrm{d}x\\)，积分得\n\\[\ny+\\frac{y^3}{3}=x-\\frac{x^3}{3}+C .\n\\]\n代入初值得 \\(0=2-\\frac{8}{3}+C\\)，所以 \\(C=\\frac{2}{3}\\)。在 \\(x=-1\\) 时右端为 \\(-1+\\frac{1}{3}+\\frac{2}{3}=0\\)，故 \\(y=0\\)；在 \\(x=1\\) 时右端为 \\(\\frac{4}{3}\\)，而 \\(1+\\frac{1}{3}=\\frac{4}{3}\\)，故 \\(y=1\\)。\n\n\\textbf{结论与检查}\\quad 极大值为 \\(\\boxed{1}\\)，极小值为 \\(\\boxed{0}\\)。函数 \\(H(y)=y+\\frac{y^3}{3}\\) 满足 \\(H'(y)=1+y^2>0\\)，且值域为全部实数，因此上述两个 \\(y\\) 值均唯一，没有遗漏其他根。导数确实在两点发生相应变号。\n\\end{QuestionSolution}\n\n% Q 2015 20\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2015 年第 20 题}{3}{Newton 冷却模型}{211 / 234}{***}\n已知高温物体置于低温介质中，任一时刻该物体温度对时间的变化率与该时刻物体和介质的温差成正比，\n现将一初始温度为$120^{\\circ}C$的物体在$20^{\\circ}C$的恒温介质中冷却，$30$min后该物体降至$30^{\\circ}C$，\n若要将该物体的温度继续降至$21^{\\circ}C$，还需冷却多长时间？\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2015 年第 20 题}\n\\textbf{已知与目标}\\quad 环境温度恒为 \\(20^\\circ\\mathrm{C}\\)，物体在 \\(30\\) 分钟内由 \\(120^\\circ\\mathrm{C}\\) 降到 \\(30^\\circ\\mathrm{C}\\)。求从 \\(30^\\circ\\mathrm{C}\\) 继续降到 \\(21^\\circ\\mathrm{C}\\) 所需时间。\n\n\\textbf{方法与条件}\\quad 按题给的冷却规律，变化率正比于温差。设 \\(t\\) 的单位为分钟，温差 \\(u(t)=T(t)-20\\) 的单位为摄氏度。冷却时导数为负，故 \\(u'=-ku\\)，其中 \\(k>0\\)，单位为 \\(\\mathrm{min}^{-1}\\)。\n\n\\textbf{推导}\\quad 分离变量并积分：\\(\\frac{\\mathrm{d}u}{u}=-k\\,\\mathrm{d}t\\)，得 \\(u=A\\mathrm{e}^{-kt}\\)。由 \\(u(0)=100\\)，得 \\(u(t)=100\\mathrm{e}^{-kt}\\)。用 \\(u(30)=10\\)，得\n\\[\n\\mathrm{e}^{-30k}=\\frac{1}{10},\\qquad k=\\frac{\\ln10}{30}\\ \\mathrm{min}^{-1}.\n\\]\n目标温差为 \\(21-20=1^\\circ\\mathrm{C}\\)。设还需 \\(\\Delta t\\)，则 \\(10\\mathrm{e}^{-k\\Delta t}=1\\)，即温差也要缩小到此前的 \\(\\frac{1}{10}\\)，所以 \\(\\Delta t=\\frac{\\ln10}{k}=30\\) 分钟。\n\n\\textbf{结论与检查}\\quad 还需 \\(\\boxed{30\\text{ 分钟}}\\)。总时长 \\(60\\) 分钟时，\\(T(60)=20+100(\\frac{1}{10})^2=21^\\circ\\mathrm{C}\\)。温度始终高于环境温度且不断降低，与冷却过程一致。\n\\end{QuestionSolution}\n\n% Q 2019 17\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2019 年第 17 题}{2}{一阶线性方程与旋转体积}{213 / 234}{***}\n设函数$y(x)$是微分方程$y'-xy=\\frac{1}{2\\sqrt{x}}\\mathrm{e}^{\\frac{x^2}{2}}$满足条件$y(1)=\\sqrt{\\mathrm{e}}$的特解．\n\\begin{enumerate}\n\\item 求$y(x)$的表达式；\n\\item 设平面区域$D = \\{(x,y)|1 \\le x \\le 2,0 \\le y \\le y(x)\\}$，\n      求$D$绕$x$轴旋转一周所形成的旋转体的体积．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2019 年第 17 题}\n\\textbf{已知与目标}\\quad 先求一阶方程满足 \\(y(1)=\\sqrt{\\mathrm{e}}\\) 的解，再求其在 \\([1,2]\\) 下方区域绕 \\(x\\) 轴的旋转体积。第二问要使用第一问得到的函数。\n\n\\textbf{方法与条件}\\quad （1）一阶线性方程用积分因子 \\(\\mathrm{e}^{\\int -x\\,\\mathrm{d}x}=\\mathrm{e}^{-\\frac{x^2}{2}}\\)，使左端成为乘积的导数。原式含 \\(\\sqrt{x}\\) 作分母，故在 \\(x>0\\) 上求解。（2）绕 \\(x\\) 轴时垂直于该轴的截面为圆盘，面积为 \\(\\pi y^2\\)。\n\n\\textbf{推导}\\quad （1）两边乘积分因子，由乘积求导公式得\n\\[\n(y\\mathrm{e}^{-\\frac{x^2}{2}})'=\\frac{1}{2\\sqrt{x}},\n\\qquad y\\mathrm{e}^{-\\frac{x^2}{2}}=\\sqrt{x}+C.\n\\]\n代入初值，左端为 \\(\\sqrt{\\mathrm{e}}\\,\\mathrm{e}^{-\\frac{1}{2}}=1\\)，故 \\(1=1+C\\)，得 \\(C=0\\)。于是 \\(\\boxed{y=\\sqrt{x}\\,\\mathrm{e}^{\\frac{x^2}{2}},\\ x>0}\\)。\n\n（2）\\(y(x)>0\\)，所以直接用圆盘面积积分。令 \\(u=x^2\\)，则 \\(\\mathrm{d}u=2x\\,\\mathrm{d}x\\)，两端变为 \\(1,4\\)，因此\n\\[\nV=\\pi\\int_1^2 y(x)^2\\,\\mathrm{d}x\n=\\pi\\int_1^2 x\\mathrm{e}^{x^2}\\,\\mathrm{d}x\n=\\frac{\\pi}{2}\\int_1^4\\mathrm{e}^u\\,\\mathrm{d}u\n=\\boxed{\\frac{\\pi}{2}(\\mathrm{e}^4-\\mathrm{e})}.\n\\]\n\n\\textbf{结论与检查}\\quad 对第一问的解求导，\\(y'=\\frac{\\mathrm{e}^{\\frac{x^2}{2}}}{2\\sqrt{x}}+xy\\)，与原方程一致，初值也成立。第二问体积为正；题目没有指定长度单位，按相应的立方单位计。\n\\end{QuestionSolution}\n\n% Q 2021 20\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2021 年第 20 题}{3}{一阶方程与距离最值}{215 / 234}{***}\n设函数 \\(y=y(x)\\)（\\(x>0\\)）满足微分方程\n\\[xy'-6y=-6,\n\\]\n且 \\(y\\left(\\sqrt{3}\\right)=10\\)。\n\\begin{enumerate}\n\\item 求 \\(y(x)\\)；\n\\item \\(P\\) 为曲线 \\(y=y(x)\\) 上的一点，曲线在点 \\(P\\) 的法线在 \\(y\\) 轴上的截距为 \\(I_y\\)。为使 \\(I_y\\) 最小，求 \\(P\\) 的坐标。\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2021 年第 20 题}\n\\textbf{已知与目标}\\quad 先由方程和 \\(y(\\sqrt{3})=10\\) 求曲线，再确定法线纵截距最小时的点。截距是直线在 \\(y\\) 轴上的交点纵坐标。\n\n\\textbf{方法与条件}\\quad 将 \\(y-1\\) 作为整体可化简方程；法线垂直于切线，切线斜率非零时，两斜率乘积为 \\(-1\\)。最后在题给的 \\(x>0\\) 上研究截距函数的增减。\n\n\\textbf{推导}\\quad （1）原式为 \\(xy'-6(y-1)=0\\)。由于\n\\[\n\\bigl(x^{-6}(y-1)\\bigr)'=x^{-7}\\bigl(xy'-6(y-1)\\bigr)=0,\n\\]\n可得 \\(y=1+Cx^6\\)。初值给出 \\(10=1+27C\\)，故 \\(C=\\frac{1}{3}\\)，即 \\(\\boxed{y=1+\\frac{x^6}{3}}\\)。\n\n（2）设所求点横坐标为 \\(x>0\\)。切线斜率为 \\(y'=2x^5\\ne0\\)，法线方程为 \\(Y-y=-\\frac{1}{2x^5}(X-x)\\)。令 \\(X=0\\)，得\n\\[\nI_y(x)=y+\\frac{1}{2x^4}=1+\\frac{x^6}{3}+\\frac{1}{2x^4},\n\\qquad I_y'(x)=2x^5-\\frac{2}{x^5}=\\frac{2(x^{10}-1)}{x^5}.\n\\]\n分母为正，故 \\(0<x<1\\) 时递减，\\(x>1\\) 时递增。全区间最小值在 \\(x=1\\) 取得，对应 \\(\\boxed{P=(1,\\frac{4}{3})}\\)。\n\n\\textbf{结论与检查}\\quad 解满足 \\(xy'-6y=-6\\) 及给定初值。最优点的法线为 \\(Y-\\frac{4}{3}=-\\frac{1}{2}(X-1)\\)，纵截距为 \\(\\frac{11}{6}\\)。两端 \\(x\\to0^+\\) 和 \\(x\\to\\infty\\) 时截距均趋于无穷，内部最小值没有遗漏边界。\n\\end{QuestionSolution}\n\n% Q 2022 18\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2022 年第 18 题}{3}{一阶方程与曲线弧长}{216 / 234}{***}\n设函数 \\(y\\left( x \\right)\\) 是微分方程\n\\(2x y^{\\prime} - 4y = 2\\ln x - 1\\)\n的满足条件\n\\(y\\left( 1 \\right) = \\frac{1}{4}\\)\n的解，求曲线 \\(y = y\\left( x \\right)\\) 在 \\(\\left[ 1,\\mathrm{e} \\right]\\) 上的弧长.\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2022 年第 18 题}\n\\textbf{已知与目标}\\quad 曲线满足一阶方程及 \\(y(1)=\\frac{1}{4}\\)，求 \\([1,\\mathrm{e}]\\) 上的弧长。必须先确定导数 \\(y'\\)。\n\n\\textbf{方法与条件}\\quad 原式含 \\(\\ln x\\)，在 \\(x>0\\) 上计算。用一个非齐次特解加上齐次通解求函数，再用弧长公式 \\(s=\\int_1^{\\mathrm{e}}\\sqrt{1+(y')^2}\\,\\mathrm{d}x\\)。该公式适用于导数连续的曲线。\n\n\\textbf{推导}\\quad 取 \\(y_p=-\\frac{1}{2}\\ln x\\)，其导数为 \\(-\\frac{1}{2x}\\)，故 \\(2xy_p'-4y_p=-1+2\\ln x\\)，恰为题给右端。对于齐次部分，\\(2xy'-4y=0\\) 等价于 \\((\\frac{y}{x^2})'=0\\)，得 \\(y_h=Cx^2\\)。因此 \\(y=Cx^2-\\frac{1}{2}\\ln x\\)。由初值得 \\(C=\\frac{1}{4}\\)，于是\n\\[\ny(x)=\\frac{x^2}{4}-\\frac{1}{2}\\ln x,\\qquad\ny'(x)=\\frac{x}{2}-\\frac{1}{2x}.\n\\]\n注意 \\(1+(y')^2=\\frac{x^2+2+x^{-2}}{4}=(\\frac{x+x^{-1}}{2})^2\\)。由于 \\(x>0\\)，括号为正，开方后不用绝对值，得到\n\\[\ns=\\int_1^{\\mathrm{e}}\\left(\\frac{x}{2}+\\frac{1}{2x}\\right)\\mathrm{d}x\n=\\left[\\frac{x^2}{4}+\\frac{1}{2}\\ln x\\right]_1^{\\mathrm{e}}\n=\\boxed{\\frac{\\mathrm{e}^2+1}{4}}.\n\\]\n\n\\textbf{结论与检查}\\quad 代回可得 \\(2xy'-4y=(x^2-1)-(x^2-2\\ln x)=2\\ln x-1\\)，初值成立。弧长约为 \\(2.097\\)，大于水平跨度 \\(\\mathrm{e}-1\\approx1.718\\)，符合几何要求。未指定长度单位，按相应长度单位计。\n\\end{QuestionSolution}\n\n% Q 2023 17\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2023 年第 17 题}{3}{由切线截距建立一阶方程}{217 / 234}{***}\n设曲线 \\(\\boldsymbol L:y=y(x)\\)（\\(x>\\mathrm{e}\\)）经过点 \\((\\mathrm{e}^2,0)\\)，且 \\(\\boldsymbol L\\) 上任一点 \\(P(x,y)\\) 到 \\(y\\) 轴的距离等于该点处切线在 \\(y\\) 轴上的截距。\n\\begin{enumerate}\n\\item 求 \\(y(x)\\)；\n\\item 在 \\(\\boldsymbol L\\) 上求一点，使该点处的切线与两坐标轴所围三角形的面积最小，并求此最小面积。\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2023 年第 17 题}\n\\textbf{已知与目标}\\quad 在 \\(x>\\mathrm{e}\\) 上，曲线经过 \\((\\mathrm{e}^2,0)\\)，且点到 \\(y\\) 轴的距离等于切线纵截距。先求曲线，再求切线围成三角形的最小面积及切点。\n\n\\textbf{方法与条件}\\quad 将切线的截距写成 \\(y,y'\\) 的关系建立微分方程。两轴截距确定后，三角形面积为它们乘积绝对值的一半；先判断符号再使用公式。\n\n\\textbf{推导}\\quad （1）切线为 \\(Y-y=y'(X-x)\\)，令 \\(X=0\\) 得纵截距 \\(y-xy'\\)。因 \\(x>0\\)，点到 \\(y\\) 轴的距离为 \\(x\\)，故 \\(y-xy'=x\\)。由商的求导公式，\n\\[\n\\left(\\frac{y}{x}\\right)'=\\frac{xy'-y}{x^2}=-\\frac{1}{x},\n\\qquad \\frac{y}{x}=-\\ln x+C.\n\\]\n代入 \\((\\mathrm{e}^2,0)\\) 得 \\(C=2\\)，即 \\(\\boxed{y=x(2-\\ln x)}\\)。\n\n（2）\\(y'=1-\\ln x<0\\)，切线纵截距为 \\(x>0\\)，横截距为 \\(-\\frac{x}{1-\\ln x}=\\frac{x}{\\ln x-1}>0\\)。所以\n\\[\nS(x)=\\frac{x^2}{2(\\ln x-1)},\\qquad\nS'(x)=\\frac{x(2\\ln x-3)}{2(\\ln x-1)^2}.\n\\]\n分母为正，导数在 \\(\\mathrm{e}<x<\\mathrm{e}^{\\frac{3}{2}}\\) 时为负，在 \\(x>\\mathrm{e}^{\\frac{3}{2}}\\) 时为正。因此所求点为\n\\[\n\\boxed{\\left(\\mathrm{e}^{\\frac{3}{2}},\\frac{\\mathrm{e}^{\\frac{3}{2}}}{2}\\right)},\n\\qquad S_{\\min}=\\frac{\\mathrm{e}^3}{2(\\frac{3}{2}-1)}=\\boxed{\\mathrm{e}^3}.\n\\]\n\n\\textbf{结论与检查}\\quad 曲线在 \\(x=\\mathrm{e}^2\\) 时为零，且 \\(y-xy'=x\\) 恒成立。最优横坐标大于 \\(\\mathrm{e}\\)；面积在左右端均趋于无穷，所得最小值是全区间最小值。\n\\end{QuestionSolution}\n\n% Q 2017 21\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2017 年第 21 题}{4}{由切线和法线条件建立方程}{212 / 234}{****}\n设$y(x)$是区间$\\left(0,\\frac{3}{2} \\right)$内的可导函数，且$y(1) = 0$．\n点$P$是曲线$L:y = y(x)$上的任意一点．$L$在$P$处的切线与$y$轴相交于点$\\left(0,Y_p\\right)$，\n法线与$x$轴相交于点$\\left(X_p,0 \\right)$，若$X_p = Y_p$，求$L$上点的坐标$(x,y)$满足的方程．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2017 年第 21 题}\n\\textbf{已知与目标}\\quad 曲线在 \\(0<x<\\frac{3}{2}\\) 可导，经过 \\((1,0)\\)。每点的切线纵截距等于法线横截距，求曲线的隐式方程。\n\n\\textbf{方法与条件}\\quad 切线斜率为 \\(y'\\)，法线是与切线垂直的直线。用方向向量表示法线，可以同时处理 \\(y'=0\\) 时的竖直法线；得到方程后，因右端只含 \\(\\frac{y}{x}\\)，令 \\(u=\\frac{y}{x}\\) 化为可分离变量方程。\n\n\\textbf{推导}\\quad 切线 \\(Y-y=y'(X-x)\\) 给出 \\(Y_p=y-xy'\\)。切线的方向向量是 \\((1,y')\\)，与之垂直的向量可取 \\((-y',1)\\)，故法线写为 \\((X,Y)=(x,y)+s(-y',1)\\)。令 \\(Y=0\\) 得 \\(s=-y\\)，进而 \\(X_p=x+yy'\\)。令两截距相等，得\n\\[\n(x+y)y'=y-x.\n\\]\n若 \\(x+y=0\\)，则右端为 \\(-2x\\ne0\\)，产生矛盾，所以可以除以 \\(x+y\\)。由 \\(y=xu\\)、\\(y'=u+xu'\\)，得\n\\[\nu+xu'=\\frac{u-1}{u+1},\\qquad\nxu'=-\\frac{1+u^2}{1+u}.\n\\]\n移项积分（\\(1+u^2\\) 恒正）得\n\\[\n\\int\\frac{1+u}{1+u^2}\\,\\mathrm{d}u=-\\int\\frac{1}{x}\\,\\mathrm{d}x,\n\\qquad \\arctan u+\\frac{1}{2}\\ln(1+u^2)=-\\ln x+C.\n\\]\n初值 \\((x,u)=(1,0)\\) 给出 \\(C=0\\)。还原后，利用 \\(x>0\\) 合并对数，得\n\\[\n\\boxed{\\arctan\\left(\\frac{y}{x}\\right)+\\frac{1}{2}\\ln(x^2+y^2)=0},\n\\qquad 0<x<\\frac{3}{2}.\n\\]\n\n\\textbf{结论与检查}\\quad 取经过 \\((1,0)\\) 的连续分支，此分支有 \\(x+y>0\\)。对答案求导，左边导数为 \\(\\frac{xy'-y+x+yy'}{x^2+y^2}\\)，令它为零便恢复截距关系；初值也使左边等于零。全过程未除以 \\(y'\\)，所以没有遗漏水平切线的情形。\n\\end{QuestionSolution}\n\n% Q 2020 21\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2020 年第 21 题}{4}{由面积比建立微分方程}{214 / 234}{****}\n设函数 \\(f\\left( x \\right)\\) 可导，且 \\(f^{\\prime}\\left( x \\right)>0\\)，曲线 \\(y=f\\left( x \\right)\\left( x\\geq 0 \\right)\\) 经过坐标原点 \\(O\\)。\\(M\\) 为其上任意一点，点 \\(M\\) 处的切线与 \\(x\\) 轴交于点 \\(T\\)，又 \\(MP\\) 垂直 \\(x\\) 轴于点 \\(P\\)。已知由曲线 \\(y=f\\left( x \\right)\\)、直线 \\(MP\\) 以及 \\(x\\) 轴所围图形的面积与 \\(\\triangle MTP\\) 的面积之比恒为 \\(3:2\\)，求满足上述条件的曲线方程。\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2020 年第 21 题}\n\\textbf{已知与目标}\\quad 曲线过原点、在正半轴严格上升，曲边图形与切线三角形的面积比为 \\(3:2\\)，求曲线。面积比只在 \\(M\\ne O\\) 的非退化图形上有意义。\n\n\\textbf{方法与条件}\\quad 设 \\(F(x)=\\int_0^x f(t)\\,\\mathrm{d}t\\) 表示曲边面积。由 \\(f(0)=0,f'>0\\) 得 \\(x>0\\) 时 \\(f(x)>0,F(x)>0\\)，可安全作后面的除法。利用 \\(F'=f\\) 把面积关系化成可分离变量的方程。\n\n\\textbf{推导}\\quad 在 \\(M=(x,f(x))\\) 的切线方程中令纵坐标为零，得 \\(T\\) 的横坐标 \\(x-\\frac{f(x)}{f'(x)}\\)。因此底边 \\(TP=\\frac{f(x)}{f'(x)}\\)，高为 \\(f(x)\\)，三角形面积为 \\(\\frac{f(x)^2}{2f'(x)}\\)。由面积比，\n\\[\n\\frac{F(x)}{\\frac{f(x)^2}{2f'(x)}}=\\frac{3}{2},\n\\qquad F(x)f'(x)=\\frac{3}{4}f(x)^2.\n\\]\n这里不需要对 \\(f'\\) 再求导。直接计算\n\\[\n\\left(\\frac{f}{F^{\\frac{3}{4}}}\\right)'\n=F^{-\\frac{7}{4}}\\left(Ff'-\\frac{3}{4}fF'\\right)=0.\n\\]\n故 \\(f=kF^{\\frac{3}{4}}\\)，且 \\(k>0\\)。由 \\(F'=f\\)，得 \\((F^{\\frac{1}{4}})'=\\frac{1}{4}F^{-\\frac{3}{4}}F'=\\frac{k}{4}\\)。积分并令 \\(x\\to0^+\\)，利用 \\(F(0)=0\\) 得 \\(F^{\\frac{1}{4}}=\\frac{kx}{4}\\)。因此\n\\[\nF(x)=\\left(\\frac{kx}{4}\\right)^4,\n\\qquad f(x)=\\frac{k^4}{64}x^3=Cx^3,\\quad C>0.\n\\]\n\n\\textbf{结论与检查}\\quad 所求曲线为 \\(\\boxed{y=Cx^3,\\ C>0,\\ x\\ge0}\\)。曲边面积为 \\(\\frac{Cx^4}{4}\\)，三角形面积为 \\(\\frac{Cx^4}{6}\\)，其比确为 \\(3:2\\)；\\(x>0\\) 时导数为 \\(3Cx^2>0\\)。此解在原点的右导数为 \\(0\\)。因此这里将严格导数条件理解为针对 \\(x>0\\) 的非退化点；若还要求原点右导数严格大于零，则与面积比推得的结果矛盾，在该额外要求下无解。\n\\end{QuestionSolution}\n\n% Q 2026 21\n\\QuestionPage{4.1 几类简单的微分方程}{解答题}{2026 年第 21 题}{2}{二阶微分方程降阶}{218 / 234}{****}\n（本题满分 12 分）\n求微分方程\n\\[x^2y''-2xy'-(y')^2=0\\qquad (x>2)\n\\]\n满足条件\n\\[y\\big|_{x=3}=\\frac12,\\qquad y'\\big|_{x=3}=-9\n\\]\n的解.\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2026 年第 21 题}\n\\textbf{已知与目标}\\quad 在 \\(x>2\\) 上求二阶方程满足 \\(y(3)=\\frac{1}{2}\\)、\\(y'(3)=-9\\) 的解。\n\n\\textbf{方法与条件}\\quad 原式没有直接出现 \\(y\\)，先令 \\(p=y'\\) 降阶。所得式含 \\(p^2\\)，再令 \\(q=\\frac{1}{p}\\) 化成一阶线性方程。初值处 \\(p\\ne0\\)，这个代换在其附近合法；最后须检查所得解在整个 \\(x>2\\) 上均无零分母。\n\n\\textbf{推导}\\quad 降阶得 \\(x^2p'-2xp-p^2=0\\)。由 \\(q'=-\\frac{p'}{p^2}\\)，两边除以 \\(p^2\\) 并移项得\n\\[\nq'+\\frac{2}{x}q=-\\frac{1}{x^2},\\qquad\n(x^2q)'=-1.\n\\]\n第二式由两边乘积分因子 \\(x^2\\) 得到。积分得 \\(x^2q=C-x\\)；代入 \\(q(3)=-\\frac{1}{9}\\)，有 \\(-1=C-3\\)，故 \\(C=2\\)。取倒数并作多项式除法：\n\\[\ny'=p=\\frac{x^2}{2-x}=-\\frac{x^2}{x-2}=-x-2-\\frac{4}{x-2}.\n\\]\n这里用了 \\(x^2=(x-2)(x+2)+4\\)。逐项积分，且 \\(x-2>0\\)，得到 \\(y=-\\frac{x^2}{2}-2x-4\\ln(x-2)+C_1\\)。由 \\(\\frac{1}{2}=-\\frac{9}{2}-6+C_1\\)，得 \\(C_1=11\\)。因此\n\\[\n\\boxed{y=11-\\frac{x^2}{2}-2x-4\\ln(x-2)},\\qquad x>2 .\n\\]\n\n\\textbf{结论与检查}\\quad \\(y'=-\\frac{x^2}{x-2}\\ne0\\)，\\(y''=-\\frac{x(x-4)}{(x-2)^2}\\)。代回方程的分子为 \\(-x^3(x-4)+2x^3(x-2)-x^4=0\\)。在 \\(x=3\\) 时分别得到 \\(y=\\frac{1}{2}\\)、\\(y'=-9\\)。常值解虽满足原方程，但不满足导数初值，故除以 \\(p^2\\) 没有遗漏所求解。\n\\end{QuestionSolution}\n\n"}
+
+## tool · 2026-11-12T07:24:35Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"5e1fab","wall_time_seconds":0.000008833,"exit_code":0,"original_token_count":7503,"output":"\\SectionHeading{4.2}{常微分方程}{高阶线性微分方程}{定理与要点\\quad 教材 PDF 第 284 页起\\hfill 本节 16 题}\n\\pdfbookmark[2]{4.2 高阶线性微分方程}{section-4.2}\n\\Theory{定理 2.1}{287}{齐次解的叠合性}{线性齐次方程的解作任意常系数线性组合，仍是解。}\n\\Theory{定理 2.2}{290}{基本解组与通解}{\\(n\\) 阶线性齐次方程若有 \\(n\\) 个线性无关的解，则它们的任意常系数组合构成通解。}\n\\Theory{定理 2.3}{290}{解的线性无关判别法}{\\(n\\) 个齐次解线性无关的充要条件是其 Wronski 行列式在区间内某点非零。}\n\\Theory{定理 2.4}{292}{线性齐次方程的通解结构}{任何一个解都能由 \\(n\\) 个线性无关的齐次解作常系数线性组合表示。}\n\\Theory{定理 2.5}{293}{线性非齐次方程解的结构}{任一非齐次特解加上对应齐次通解，即得非齐次通解。}\n\\Theory{定理 2.6}{294}{不同右端项的叠合}{右端项为 \\(F_1\\)、\\(F_2\\) 的两个线性方程特解相加，可得到右端项为 \\(F_1+F_2\\) 的特解。}\n\\Theory{方法}{294--307}{常系数方程}{齐次方程按特征根构造基本解。非齐次待定系数法遇到重合根时，按重数乘相应的自变量幂。}\n% Q 2011 4\n\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2011 年第 4 题}{1}{非齐次方程的特解形式}{219 / 234}{**}\n微分方程$y'' - \\lambda^2 y = \\mathrm{e}^{\\lambda x} + \\mathrm{e}^{- \\lambda x}$（$\\lambda > 0$）的特解形式为\\pickout{}\n\\begin{abcd}\n\\item $a(\\mathrm{e}^{\\lambda x} + \\mathrm{e}^{- \\lambda x})$．\n\\item $ax(\\mathrm{e}^{\\lambda x} + \\mathrm{e}^{- \\lambda x})$．\n\\item $x(a\\mathrm{e}^{\\lambda x} + b\\mathrm{e}^{- \\lambda x})$．\n\\item $x^2(a\\mathrm{e}^{\\lambda x} + b\\mathrm{e}^{- \\lambda x})$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2011 年第 4 题}\n\\textbf{已知与目标}\\quad 方程右端有两个指数项，\\(\\lambda>0\\)。要求能包含一个特解的试探形式，系数可由代入确定。\n\n\\textbf{方法与条件}\\quad 待定系数法先按右端函数的类型设特解。特征方程来自将 \\(y=\\mathrm{e}^{rx}\\) 代入齐次方程：若右端指数的指数系数恰为一个单特征根，试探项须乘 \\(x\\)，以免代入后左端恒为零。\n\n\\textbf{推导}\\quad 特征方程为 \\(r^2-\\lambda^2=0\\)，根为 \\(\\lambda,-\\lambda\\)。因 \\(\\lambda>0\\)，两根不同，均为单根。因此设\n\\[\ny^*=ax\\mathrm{e}^{\\lambda x}+bx\\mathrm{e}^{-\\lambda x}.\n\\]\n例如 \\((x\\mathrm{e}^{\\lambda x})'=(1+\\lambda x)\\mathrm{e}^{\\lambda x}\\)，二阶导数为 \\((2\\lambda+\\lambda^2x)\\mathrm{e}^{\\lambda x}\\)，扣去 \\(\\lambda^2x\\mathrm{e}^{\\lambda x}\\) 后仅余 \\(2\\lambda\\mathrm{e}^{\\lambda x}\\)。同理负指数项给出 \\(-2\\lambda\\mathrm{e}^{-\\lambda x}\\)。故代入得到\n\\[\n2\\lambda a\\mathrm{e}^{\\lambda x}-2\\lambda b\\mathrm{e}^{-\\lambda x}\n=\\mathrm{e}^{\\lambda x}+\\mathrm{e}^{-\\lambda x},\n\\quad a=\\frac{1}{2\\lambda},\\ b=-\\frac{1}{2\\lambda}.\n\\]\n\n\\textbf{结论与检查}\\quad 选 C。两个系数需分别确定，实际一正一负，B 中共用同一个系数无法满足两项。以上代入也直接验证了该形式可行。\n\\end{QuestionSolution}\n\n% Q 2017 4\n\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2017 年第 4 题}{1}{常系数非齐次方程特解}{220 / 234}{***}\n微分方程$y'' - 4y' + 8y = \\mathrm{e}^{2x}(1 + \\cos 2x)$的特解可设为$y^* =$\\pickout{}\n\\begin{abcd}\n\\item $A\\mathrm{e}^{2x} + \\mathrm{e}^{2x}\\left(B\\cos 2x + C\\sin 2x \\right)$．\n\\item $Ax \\mathrm{e}^{2x} + \\mathrm{e}^{2x}\\left(B\\cos 2x + C\\sin 2x \\right)$．\n\\item $A\\mathrm{e}^{2x} + x\\mathrm{e}^{2x}\\left(B\\cos 2x + C\\sin 2x \\right)$．\n\\item $Ax \\mathrm{e}^{2x} + x\\mathrm{e}^{2x}\\left(B\\cos 2x + C\\sin 2x \\right)$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2017 年第 4 题}\n\\textbf{已知与目标}\\quad 右端为 \\(\\mathrm{e}^{2x}+\\mathrm{e}^{2x}\\cos2x\\)，求两个部分合在一起时应设的特解形式。\n\n\\textbf{方法与条件}\\quad 先令 \\(y=\\mathrm{e}^{2x}z\\) 消去共同指数。若试探项本来就是齐次解，代入后会得到零，须乘 \\(x\\) 形成新的试探项。这种右端与齐次解重合的情况常称为共振。\n\n\\textbf{推导}\\quad 由 \\(y'=\\mathrm{e}^{2x}(z'+2z)\\)、\\(y''=\\mathrm{e}^{2x}(z''+4z'+4z)\\)，代入并约去非零的指数得 \\(z''+4z=1+\\cos2x\\)。常数右端可取 \\(z_1=\\frac{1}{4}\\)，不需乘 \\(x\\)。齐次方程 \\(z''+4z=0\\) 的解含 \\(\\cos2x,\\sin2x\\)，所以余弦右端需要设 \\(z_2=x(B\\cos2x+C\\sin2x)\\)。例如\n\\[\n(x\\sin2x)'=\\sin2x+2x\\cos2x,\n\\qquad (x\\sin2x)''=4\\cos2x-4x\\sin2x.\n\\]\n因此可取 \\(z_2=\\frac{x\\sin2x}{4}\\)。乘回 \\(\\mathrm{e}^{2x}\\)，总特解包含于 \\(A\\mathrm{e}^{2x}+x\\mathrm{e}^{2x}(B\\cos2x+C\\sin2x)\\)。\n\n\\textbf{结论与检查}\\quad 选 C。取 \\(A=\\frac{1}{4},B=0,C=\\frac{1}{4}\\) 即能使右端为题给函数。只有余弦对应的部分需要乘 \\(x\\)，不能让两部分一律乘 \\(x\\)。\n\\end{QuestionSolution}\n\n% Q 2019 4\n\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2019 年第 4 题}{1}{由通解确定方程系数}{221 / 234}{**}\n已知微分方程$y'' + ay' + by = c\\mathrm{e}^x$的通解为$y = (C_1 + C_2 x) \\mathrm{e}^{- x} + \\mathrm{e}^x$，则$a,b,c$依次为\\pickout{}\n\\begin{abcd}\n\\item $1,0,1$．\n\\item $1,0,2$．\n\\item $2,1,3$．\n\\item $2,1,4$．\n\\end{abcd}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2019 年第 4 题}\n\\textbf{已知与目标}\\quad 给出方程通解，求常数 \\(a,b,c\\)。通解指包含所有解、任意常数可自由取值的表达式。\n\n\\textbf{方法与条件}\\quad 非齐次通解等于齐次通解加一个固定特解。含任意常数的部分可反推出齐次方程的特征根；再代入固定项求右端系数。\n\n\\textbf{推导}\\quad 齐次部分为 \\((C_1+C_2x)\\mathrm{e}^{-x}\\)。出现 \\(\\mathrm{e}^{-x}\\) 和 \\(x\\mathrm{e}^{-x}\\)，说明特征根 \\(-1\\) 重复两次，因此\n\\[\nr^2+ar+b=(r+1)^2=r^2+2r+1.\n\\]\n比较同次幂系数得 \\(a=2,b=1\\)。固定项 \\(y_p=\\mathrm{e}^x\\) 的一、二阶导数均为 \\(\\mathrm{e}^x\\)，所以 \\(y_p''+2y_p'+y_p=4\\mathrm{e}^x\\)，得 \\(c=4\\)。\n\n\\textbf{结论与检查}\\quad \\(\\boxed{a=2,b=1,c=4}\\)，选 D。将两个齐次基解分别代入左端均得零，加上特解后恰得到 \\(4\\mathrm{e}^x\\)，与通解结构一致。\n\\end{QuestionSolution}\n\n% Q 2023 4\n\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2023 年第 4 题}{1}{常系数方程解的有界性}{222 / 234}{***}\n若微分方程\n\\[y''+ay'+by=0\n\\]\n的解在 \\((-\\infty,+\\infty)\\) 上有界，则（ ）。\n\\choices{\\(a<0,\\ b>0\\)}{\\(a>0,\\ b>0\\)}{\\(a=0,\\ b>0\\)}{\\(a=0,\\ b<0\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2023 年第 4 题}\n\\textbf{已知与目标}\\quad 方程的所有解在整个实轴上有界，即每个解的绝对值都可由某个有限常数控制。求 \\(a,b\\) 应满足的关系。\n\n\\textbf{方法与条件}\\quad 特征根决定解中的指数和三角因子。题目要求在 \\(x\\to+\\infty\\) 和 \\(x\\to-\\infty\\) 两端都不增长，必须逐类排除可能的根。\n\n\\textbf{推导}\\quad 特征方程为 \\(r^2+ar+b=0\\)。若有非零实根 \\(r\\)，解 \\(\\mathrm{e}^{rx}\\) 在一端增长到无穷，故不允许。若两根都是零，则通解 \\(C_1+C_2x\\) 含无界的 \\(x\\)，也不允许。因此只能是共轭复根 \\(\\sigma\\pm i\\omega\\)，其中 \\(\\omega>0\\)，对应解\n\\[\ny=\\mathrm{e}^{\\sigma x}(C_1\\cos\\omega x+C_2\\sin\\omega x).\n\\]\n如果 \\(\\sigma\\ne0\\)，取余弦等于 \\(1\\) 的点列，指数仍在某一端无限增长，故必须 \\(\\sigma=0\\)。由根的和为 \\(-a\\)、积为 \\(b\\)，得到 \\(-a=0\\)、\\(b=\\omega^2>0\\)。\n\n\\textbf{结论与检查}\\quad 选 C，即 \\(\\boxed{a=0,b>0}\\)。反过来，此时 \\(y=C_1\\cos(\\sqrt{b}x)+C_2\\sin(\\sqrt{b}x)\\)，满足 \\(|y|\\le |C_1|+|C_2|\\)，确实处处有界。边界 \\(b=0\\) 会出现线性增长解，故不能取等号。\n\\end{QuestionSolution}\n\n% Q 2025 3\n\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2025 年第 3 题}{1}{常系数方程与反常积分收敛}{223 / 234}{****}\n如果对微分方程 \\(y^{\\prime\\prime} - 2a y^{\\prime} + \\left( a + 2 \\right) y = 0\\) 的任一解 \\(y\\left( x \\right)\\)，反常积分 \\(\\int_{0}^{+\\infty} y\\left( x \\right) \\,\\mathrm{d} x\\) 均收敛，那么 \\(a\\) 的取值范围是\n\\choices{\\(\\left( -2, -1 \\right]\\)}{\\(\\left( -\\infty, -1 \\right]\\)}{\\(\\left( -2, 0 \\right)\\)}{\\(\\left( -\\infty, 0 \\right)\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2025 年第 3 题}\n\\textbf{已知与目标}\\quad 要求方程每一个解在 \\([0,\\infty)\\) 上的反常积分都收敛，即 \\(\\lim_{R\\to\\infty}\\int_0^R y(x)\\,\\mathrm{d}x\\) 是有限实数，求参数 \\(a\\) 的范围。\n\n\\textbf{方法与条件}\\quad 常系数方程的解由特征根构造。先判断每个基本解的积分能否收敛，再用二次方程根的和、积表达参数条件，可以避免逐一讨论判别式的复杂区间。\n\n\\textbf{推导}\\quad 特征方程为 \\(r^2-2ar+(a+2)=0\\)。若所有根的实部都为负，解中的指数随 \\(x\\) 增大而衰减，\\(\\mathrm{e}^{rx}\\)、重根时的 \\(x\\mathrm{e}^{rx}\\) 以及带正弦、余弦的衰减项，绝对值积分均有限。\n\n反过来，若有非负实根，\\(\\mathrm{e}^{rx}\\) 的积分就发散。若有复根 \\(\\sigma\\pm i\\omega\\)，\\(\\sigma\\ge0,\\omega>0\\)，则解 \\(\\mathrm{e}^{\\sigma x}\\cos\\omega x\\) 的一个原函数为\n\\[\n\\frac{\\mathrm{e}^{\\sigma x}(\\sigma\\cos\\omega x+\\omega\\sin\\omega x)}\n{\\sigma^2+\\omega^2},\n\\]\n它在无穷远或振荡或增长，没有有限极限。因此所求条件确为两根实部均负。\n\n设两根为 \\(r_1,r_2\\)，有 \\(r_1+r_2=2a\\)、\\(r_1r_2=a+2\\)。实根时，积正使两根同号，再由和负判定两根都负；复根时，实部为 \\(a\\)，积为模长平方。因此统一条件为\n\\[\n2a<0,\\qquad a+2>0,\n\\quad\\Longleftrightarrow\\quad -2<a<0.\n\\]\n\n\\textbf{结论与检查}\\quad 选 C，\\(\\boxed{a\\in(-2,0)}\\)。在 \\(a=-2\\) 时出现零根，常数解积分发散；在 \\(a=0\\) 时出现纯振荡解，积分无极限，两端均不包括。\n\\end{QuestionSolution}\n\n% Q 2026 2\n\\QuestionPage{4.2 高阶线性微分方程}{选择题}{2026 年第 2 题}{1}{非齐次方程的解的结构}{224 / 234}{**}\n设 \\(y_1(x),y_2(x)\\) 是某二阶非齐次线性微分方程的两个特解.若常数 \\(\\lambda,\\mu\\) 使得 \\(2\\lambda y_1(x)+\\mu y_2(x)\\) 是该方程的解，\\(\\lambda y_1(x)-2\\mu y_2(x)\\) 是该方程对应齐次方程的解，则\n\\choices{\\(\\lambda=\\frac15,\\ \\mu=\\frac25\\)}{\\(\\lambda=\\frac25,\\ \\mu=\\frac15\\)}{\\(\\lambda=\\frac14,\\ \\mu=\\frac12\\)}{\\(\\lambda=\\frac12,\\ \\mu=\\frac14\\)}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2026 年第 2 题}\n\\textbf{已知与目标}\\quad \\(y_1,y_2\\) 都是同一非齐次方程的特解，要求两种指定组合分别为非齐次解和齐次解时的 \\(\\lambda,\\mu\\)。\n\n\\textbf{方法与条件}\\quad 把左端的求导、乘系数及相加的运算整体记为 \\(L[y]\\)，称为线性微分算子。线性表示 \\(L[cy+dz]=cL[y]+dL[z]\\)，其中 \\(c,d\\) 为常数。非齐次右端 \\(q\\) 不恒为零。\n\n\\textbf{推导}\\quad 已知 \\(L[y_1]=L[y_2]=q\\)，所以题设给出\n\\[\nL[2\\lambda y_1+\\mu y_2]=(2\\lambda+\\mu)q=q,\n\\qquad L[\\lambda y_1-2\\mu y_2]=(\\lambda-2\\mu)q=0.\n\\]\n由于 \\(q\\not\\equiv0\\)，可得 \\(2\\lambda+\\mu=1\\)、\\(\\lambda-2\\mu=0\\)。第二式给出 \\(\\lambda=2\\mu\\)，代入第一式得 \\(5\\mu=1\\)，故 \\(\\lambda=\\frac{2}{5},\\mu=\\frac{1}{5}\\)。\n\n\\textbf{结论与检查}\\quad 选 B。代回有 \\(2\\lambda+\\mu=\\frac{4}{5}+\\frac{1}{5}=1\\)，\\(\\lambda-2\\mu=0\\)，分别恢复题目要求的两个右端。\n\\end{QuestionSolution}\n\n% Q 2010 9\n\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2010 年第 9 题}{2}{三阶常系数齐次方程}{225 / 234}{**}\n$3$阶常系数线性齐次微分方程$y''' - 2y'' + y' - 2y = 0$的通解为$y =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2010 年第 9 题}\n\\textbf{已知与目标}\\quad 求三阶常系数齐次方程的通解，应包含三个独立的任意常数。\n\n\\textbf{方法与条件}\\quad 令试探解 \\(y=\\mathrm{e}^{rx}\\)，求导后每次多乘一个 \\(r\\)，便得到特征方程。实根 \\(r\\) 对应 \\(\\mathrm{e}^{rx}\\)，共轭复根 \\(\\alpha\\pm i\\beta\\) 对应两个实函数 \\(\\mathrm{e}^{\\alpha x}\\cos\\beta x\\)、\\(\\mathrm{e}^{\\alpha x}\\sin\\beta x\\)。\n\n\\textbf{推导}\\quad 代入并约去非零的 \\(\\mathrm{e}^{rx}\\)，得到\n\\[\nr^3-2r^2+r-2=r^2(r-2)+(r-2)=(r-2)(r^2+1)=0.\n\\]\n根为 \\(2,i,-i\\)，互不相同。因此\n\\[\n\\boxed{y=C_1\\mathrm{e}^{2x}+C_2\\cos x+C_3\\sin x}.\n\\]\n\n\\textbf{结论与检查}\\quad 三个函数分别代入原式均为零。例如余弦项给出 \\(\\sin x+2\\cos x-\\sin x-2\\cos x=0\\)。它们线性无关，且共有三个任意常数，构成三阶方程的全部解。\n\\end{QuestionSolution}\n\n% Q 2013 13\n\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2013 年第 13 题}{2}{非齐次方程的特解与初值}{226 / 234}{***}\n已知$y_1 = \\mathrm{e}^{3x} - x\\mathrm{e}^{2x}$，$y_2 = \\mathrm{e}^x - x\\mathrm{e}^{2x}$，$y_3 = - x\\mathrm{e}^{2x}$\n是某二阶常系数非齐次线性微分方程的$3$个解，\n该方程满足条件$y\\big|_{x = 0} = 0$，$y'\\big|_{x = 0} = 1$的解为$y =$ \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2013 年第 13 题}\n\\textbf{已知与目标}\\quad 已知同一二阶常系数非齐次方程的三个解，要求满足 \\(y(0)=0,y'(0)=1\\) 的解，不需要先写出原方程。\n\n\\textbf{方法与条件}\\quad 两个非齐次解相减会消去共同右端，得到齐次解。若两个齐次解无法互相表示成常数倍，就线性无关，可组成二阶齐次通解。再加一个已知非齐次解即可。\n\n\\textbf{推导}\\quad 相减得 \\(y_1-y_3=\\mathrm{e}^{3x}\\)、\\(y_2-y_3=\\mathrm{e}^x\\)。两者比值为 \\(\\mathrm{e}^{2x}\\)，不是常数，故线性无关。原方程通解为\n\\[\ny=C_1\\mathrm{e}^{3x}+C_2\\mathrm{e}^x-x\\mathrm{e}^{2x},\n\\quad y'=3C_1\\mathrm{e}^{3x}+C_2\\mathrm{e}^x-(1+2x)\\mathrm{e}^{2x}.\n\\]\n代入两个初值，得\n\\[\nC_1+C_2=0,\\qquad 3C_1+C_2-1=1 .\n\\]\n第二式减第一式得 \\(2C_1=2\\)，故 \\(C_1=1,C_2=-1\\)。于是 \\(\\boxed{y=\\mathrm{e}^{3x}-\\mathrm{e}^x-x\\mathrm{e}^{2x}}\\)。\n\n\\textbf{结论与检查}\\quad 答案就是 \\(y_1-y_2+y_3\\)，三项的系数和为 \\(1\\)，因此仍满足同一非齐次方程。\\(y(0)=1-1=0\\)，\\(y'(0)=3-1-1=1\\)，两初值均正确。\n\\end{QuestionSolution}\n\n% Q 2015 12\n\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2015 年第 12 题}{2}{常系数齐次方程与极值条件}{227 / 234}{**}\n设函数$y = y(x)$是微分方程$y'' + y' - 2y = 0$的解，且在$x = 0$处$y(x)$取得极值$3$，则$y(x)$= \\blank{}．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2015 年第 12 题}\n\\textbf{已知与目标}\\quad 解在 \\(x=0\\) 处取得极值 \\(3\\)，求该解。这里不仅知道函数值，还知道极值点处的导数信息。\n\n\\textbf{方法与条件}\\quad 可导函数在内部极值点处导数为零，因此条件转成 \\(y(0)=3,y'(0)=0\\)。用特征方程求通解，再确定两个常数。导数为零只是极值的必要条件，最后还要检查确有极值。\n\n\\textbf{推导}\\quad 特征方程为 \\(r^2+r-2=(r-1)(r+2)=0\\)，得 \\(y=C_1\\mathrm{e}^x+C_2\\mathrm{e}^{-2x}\\)，\\(y'=C_1\\mathrm{e}^x-2C_2\\mathrm{e}^{-2x}\\)。代入条件：\n\\[\nC_1+C_2=3,\\qquad C_1-2C_2=0.\n\\]\n由第二式 \\(C_1=2C_2\\)，代入第一式得 \\(3C_2=3\\)，故 \\(C_1=2,C_2=1\\)。因此 \\(\\boxed{y=2\\mathrm{e}^x+\\mathrm{e}^{-2x}}\\)。\n\n\\textbf{结论与检查}\\quad \\(y''=2\\mathrm{e}^x+4\\mathrm{e}^{-2x}>0\\)，所以在 \\(x=0\\) 处确为极小值，且值为 \\(3\\)。代入 \\(y''+y'-2y\\) 后两个指数项的系数均为零，原方程成立。\n\\end{QuestionSolution}\n\n% Q 2020 13\n\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2020 年第 13 题}{2}{齐次方程初值问题与积分}{228 / 234}{***}\n设 \\(y = y\\left( x \\right)\\) 满足 \\(y^{\\prime\\prime} + 2y^{\\prime} + y = 0\\)，且 \\(y\\left( 0 \\right) = 0\\)，\\(y^{\\prime}\\left( 0 \\right) = 1\\)，则 \\(\\int_{0}^{+\\infty}{y\\left( x \\right) \\,\\mathrm{d} x} =\\)\n\\blank{}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2020 年第 13 题}\n\\textbf{已知与目标}\\quad 已知二阶齐次方程和两个初值，求解函数在正半轴上的积分。\n\n\\textbf{方法与条件}\\quad 先用特征方程及初值确定 \\(y\\)，再把无穷上限积分定义为有限上限积分的极限。计算采用分部积分，把 \\(x\\) 求导、指数积分，可以减少多项式次数。\n\n\\textbf{推导}\\quad 特征方程 \\(r^2+2r+1=(r+1)^2=0\\)，故 \\(y=(C_1+C_2x)\\mathrm{e}^{-x}\\)。其导数为 \\((C_2-C_1-C_2x)\\mathrm{e}^{-x}\\)。初值给出 \\(C_1=0,C_2-C_1=1\\)，所以 \\(y=x\\mathrm{e}^{-x}\\)。对 \\(R>0\\)，\n\\[\n\\int_0^R x\\mathrm{e}^{-x}\\,\\mathrm{d}x\n=[-x\\mathrm{e}^{-x}]_0^R+\\int_0^R\\mathrm{e}^{-x}\\,\\mathrm{d}x\n=1-(R+1)\\mathrm{e}^{-R}.\n\\]\n因为 \\(\\lim_{R\\to\\infty}\\frac{R+1}{\\mathrm{e}^R}=0\\)（可用 L'Hospital 法则求得），所以所求为 \\(\\boxed{1}\\)。\n\n\\textbf{结论与检查}\\quad \\(y'= (1-x)\\mathrm{e}^{-x}\\)、\\(y''=(x-2)\\mathrm{e}^{-x}\\)，代回方程和初值均成立。被积函数非负且有指数衰减，所得积分为正并收敛。\n\\end{QuestionSolution}\n\n% Q 2021 15\n\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2021 年第 15 题}{2}{常系数齐次方程的通解}{229 / 234}{**}\n微分方程 \\(y'''-y=0\\) 的通解\n\\[y= \\blank{}\n\\]\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2021 年第 15 题}\n\\textbf{已知与目标}\\quad 求 \\(y'''-y=0\\) 的实通解，需保留三个任意常数。\n\n\\textbf{方法与条件}\\quad 设 \\(y=\\mathrm{e}^{rx}\\) 得特征方程。共轭复根 \\(\\alpha\\pm i\\beta\\) 成对出现时，可用实函数 \\(\\mathrm{e}^{\\alpha x}\\cos\\beta x\\)、\\(\\mathrm{e}^{\\alpha x}\\sin\\beta x\\) 表示它们对应的解，其中 \\(i^2=-1\\)。\n\n\\textbf{推导}\\quad 特征方程为 \\(r^3-1=0\\)。利用立方差公式，\n\\[\nr^3-1=(r-1)(r^2+r+1),\\qquad\nr^2+r+1=\\left(r+\\frac{1}{2}\\right)^2+\\frac{3}{4}.\n\\]\n故一个实根为 \\(1\\)，另两根为 \\(-\\frac{1}{2}\\pm\\frac{i\\sqrt{3}}{2}\\)。按上述对应关系，\n\\[\n\\boxed{y=C_1\\mathrm{e}^x+\\mathrm{e}^{-\\frac{x}{2}}\n\\left(C_2\\cos\\frac{\\sqrt3x}{2}+C_3\\sin\\frac{\\sqrt3x}{2}\\right)}.\n\\]\n\n\\textbf{结论与检查}\\quad 三个特征根不同，给出的三个实基解线性无关，共有三个任意常数。每个指数形式代入原式均因 \\(r^3-1=0\\) 而成立，其实部和虚部也满足实系数方程，故实通解正确。\n\\end{QuestionSolution}\n\n% Q 2022 14\n\\QuestionPage{4.2 高阶线性微分方程}{填空题}{2022 年第 14 题}{2}{三阶常系数齐次方程}{230 / 234}{**}\n微分方程\n\\(y^{\\prime\\prime\\prime} - 2y^{\\prime\\prime} + 5y^{\\prime} = 0\\)\n的通解为 \\(y\\left( x \\right) = \\blank{}\\)\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2022 年第 14 题}\n\\textbf{已知与目标}\\quad 求三阶齐次方程的通解。原式不直接含 \\(y\\)，常数函数一定是其中一类解。\n\n\\textbf{方法与条件}\\quad 用 \\(\\mathrm{e}^{rx}\\) 代入得到特征方程。零特征根对应 \\(\\mathrm{e}^{0x}=1\\)，复根的实部决定指数因子，虚部决定三角函数频率。\n\n\\textbf{推导}\\quad 特征方程为\n\\[\nr^3-2r^2+5r=r\\bigl((r-1)^2+4\\bigr)=0.\n\\]\n所以根为 \\(0,1+2i,1-2i\\)，其中 \\(i^2=-1\\)。后两根对应 \\(\\mathrm{e}^x\\cos2x\\) 与 \\(\\mathrm{e}^x\\sin2x\\)。三个根均为单根，故\n\\[\n\\boxed{y=C_1+\\mathrm{e}^x(C_2\\cos2x+C_3\\sin2x)}.\n\\]\n\n\\textbf{结论与检查}\\quad 常数项的各阶导数均为零，确实满足原式。另两个基解分别来自特征根，代入亦为零；三个任意常数与三阶方程相符，未遗漏零根对应的常数解。\n\\end{QuestionSolution}\n\n% Q 2009 20\n\\QuestionPage{4.2 高阶线性微分方程}{解答题}{2009 年第 20 题}{4}{分段求解微分方程}{231 / 234}{****}\n设$y = y(x)$是区间$(- \\pi ,\\pi)$内过点\n$\\left(- \\frac{\\pi}{\\sqrt{2}},\\frac{\\pi}{\\sqrt{2}} \\right)$的光滑曲线，\n当$- \\pi < x < 0$时，曲线上任一点处的法线都过原点，\n当$0 \\le x < \\pi$时，函数$y(x)$满足$y'' + y + x = 0$．求$y(x)$的表达式．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2009 年第 20 题}\n\\textbf{已知与目标}\\quad 左半区间由法线条件约束，右半区间满足二阶方程，整条曲线经过指定点且光滑相接。求两段函数，并确定它们在 \\(x=0\\) 处的连接条件。\n\n\\textbf{方法与条件}\\quad 法线垂直于切线，所以法线经过原点可转成向量内积为零。先从已知点求左段，再由连接处函数值与一阶导数连续，为右段提供两个初值。右段采用齐次通解加特解。\n\n\\textbf{推导}\\quad 对 \\(-\\pi<x<0\\)，切向量为 \\((1,y')\\)，原点到曲线点的向量为 \\((x,y)\\)，法线条件给出 \\((x,y)\\cdot(1,y')=x+yy'=0\\)。由于 \\((x^2+y^2)'=2x+2yy'\\)，积分得 \\(x^2+y^2=C\\)。代入已知点，得 \\(C=\\frac{\\pi^2}{2}+\\frac{\\pi^2}{2}=\\pi^2\\)。在该开区间 \\(y^2=\\pi^2-x^2>0\\)，由连续性及已知点纵坐标为正，整段应取正根：\n\\[\ny=\\sqrt{\\pi^2-x^2},\\qquad y'=-\\frac{x}{\\sqrt{\\pi^2-x^2}}.\n\\]\n令 \\(x\\to0^-\\)，得到 \\(y(0)=\\pi,y'(0)=0\\)，这是光滑连接要求的右段初值。\n\n在右侧，方程写成 \\(y''+y=-x\\)。齐次特征根为 \\(\\pm i\\)，所以齐次通解为 \\(A\\cos x+B\\sin x\\)；取特解 \\(y_p=-x\\)，它满足 \\(y_p''+y_p=-x\\)。因此 \\(y=A\\cos x+B\\sin x-x\\)，\\(y'=-A\\sin x+B\\cos x-1\\)。代入初值得 \\(A=\\pi,B-1=0\\)。综上，\n\\[\n\\boxed{y(x)=\n\\begin{cases}\n\\sqrt{\\pi^2-x^2},&-\\pi<x<0,\\\\\n\\pi\\cos x+\\sin x-x,&0\\le x<\\pi.\n\\end{cases}}\n\\]\n\n\\textbf{结论与检查}\\quad 左段满足 \\(x+yy'=0\\) 且经过指定点；两段在零点的函数值均为 \\(\\pi\\)，斜率均为 \\(0\\)，相接时没有折角。右段求导两次后有 \\(y''=-\\pi\\cos x-\\sin x\\)，故在右侧 \\(y''+y+x=0\\)。\n\\end{QuestionSolution}\n\n% Q 2012 19\n\\QuestionPage{4.2 高阶线性微分方程}{解答题}{2012 年第 19 题}{3}{常系数方程与积分曲线拐点}{232 / 234}{****}\n设函数$f(x)$满足方程$f''(x) + f'(x) - 2f(x) = 0$及$f'(x) + f(x) = 2\\mathrm{e}^x$．\n\\begin{enumerate}\n\\item 求表达式$f(x)$；\n\\item 求曲线$y = f(x^2)\\int_0^x f(- t^2)\\,\\mathrm{d} t$的拐点．\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2012 年第 19 题}\n\\textbf{已知与目标}\\quad （1）求同时满足二阶方程及一阶关系的 \\(f\\)；（2）将它代入含积分的曲线，求拐点。拐点是曲线凹凸性发生改变的点，不能仅凭二阶导数等于零判定。\n\n\\textbf{方法与条件}\\quad 先求常系数方程通解，再用附加关系确定常数。第二问的积分无需求原函数：用乘积求导与变上限积分求导，随后判断 \\(y''\\) 的符号。\n\n\\textbf{推导}\\quad （1）特征方程 \\(r^2+r-2=(r-1)(r+2)=0\\)，得 \\(f=A\\mathrm{e}^x+B\\mathrm{e}^{-2x}\\)。代入附加关系，\n\\[\nf'+f=2A\\mathrm{e}^x-B\\mathrm{e}^{-2x}=2\\mathrm{e}^x.\n\\]\n两种指数函数线性无关，比较系数得 \\(A=1,B=0\\)，所以 \\(\\boxed{f(x)=\\mathrm{e}^x}\\)。\n\n（2）代入后 \\(y=\\mathrm{e}^{x^2}\\int_0^x\\mathrm{e}^{-t^2}\\,\\mathrm{d}t\\)。被积函数连续，积分求导为 \\(\\mathrm{e}^{-x^2}\\)，因此\n\\[\ny'=2x\\mathrm{e}^{x^2}\\int_0^x\\mathrm{e}^{-t^2}\\,\\mathrm{d}t\n+\\mathrm{e}^{x^2}\\mathrm{e}^{-x^2}=2xy+1,\n\\]\n再求一次导数并代入 \\(y'\\)，得到\n\\[\ny''=2y+2xy'=2y+2x(2xy+1)=(2+4x^2)y+2x.\n\\]\n由于 \\(\\mathrm{e}^{-t^2}>0\\)，\\(x>0\\) 时积分为正，\\(x<0\\) 时因上下限反向积分为负，所以 \\(y\\) 与 \\(x\\) 同号。系数 \\(2+4x^2\\) 恒正，故 \\(x<0\\) 时 \\(y''<0\\)，\\(x>0\\) 时 \\(y''>0\\)。\n\n\\textbf{结论与检查}\\quad \\(f=\\mathrm{e}^x\\) 代回两个原关系均成立。第二问只有零点两侧的凹凸性改变，且 \\(y(0)=0\\)，所以唯一拐点为 \\(\\boxed{(0,0)}\\)。两侧的严格符号同时排除了其他拐点。\n\\end{QuestionSolution}\n\n% Q 2016 19\n\\QuestionPage{4.2 高阶线性微分方程}{解答题}{2016 年第 19 题}{3}{二阶变系数线性方程}{233 / 234}{****}\n已知$y_1(x) = \\mathrm{e}^x$，$y_2(x) = u(x) \\mathrm{e}^x$是二阶微分方程$(2x - 1)y'' - (2x + 1)y' + 2y = 0$的解，\n若$u(- 1) = \\mathrm{e}$，$u(0) = - 1$，求$u(x)$，并写出该微分方程的通解．\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2016 年第 19 题}\n\\textbf{已知与目标}\\quad 已知 \\(\\mathrm{e}^x\\) 和 \\(u\\mathrm{e}^x\\) 均满足二阶方程，且 \\(u(-1)=\\mathrm{e},u(0)=-1\\)。求 \\(u\\) 及原方程通解。\n\n\\textbf{方法与条件}\\quad 代入 \\(y=u\\mathrm{e}^x\\)，利用已知解消去不含 \\(u\\) 导数的项，再令 \\(v=u'\\) 降阶。最高阶系数 \\(2x-1\\) 在 \\(x=\\frac{1}{2}\\) 为零，除法先在不含该点的区间进行；两个给定点都在其左侧。\n\n\\textbf{推导}\\quad 乘积求导得 \\(y'=\\mathrm{e}^x(u'+u)\\)、\\(y''=\\mathrm{e}^x(u''+2u'+u)\\)。代入原方程，\\(u\\) 的系数为 \\((2x-1)-(2x+1)+2=0\\)，故\n\\[\n(2x-1)u''+(2x-3)u'=0.\n\\]\n令 \\(v=u'\\)，方程变为 \\((2x-1)v'+(2x-3)v=0\\)。在 \\(x\\ne\\frac{1}{2}\\) 的区间，直接求导可验证\n\\[\n\\left(\\frac{\\mathrm{e}^xv}{2x-1}\\right)'\n=\\frac{\\mathrm{e}^x\\bigl((2x-1)v'+(2x-3)v\\bigr)}{(2x-1)^2}=0.\n\\]\n因此 \\(v=C(2x-1)\\mathrm{e}^{-x}\\)。由于 \\(((2x+1)\\mathrm{e}^{-x})'=-(2x-1)\\mathrm{e}^{-x}\\)，积分并重命名常数后有 \\(u=A+B(2x+1)\\mathrm{e}^{-x}\\)。代入给定条件，得\n\\[\nA-B\\mathrm{e}=\\mathrm{e},\\qquad A+B=-1.\n\\]\n由 \\(A=-1-B\\) 代入第一式，得 \\(-1-(1+\\mathrm{e})B=\\mathrm{e}\\)，所以 \\(B=-1,A=0\\)。因此 \\(\\boxed{u=-(2x+1)\\mathrm{e}^{-x}}\\)，第二个原方程解为 \\(-(2x+1)\\)。它与 \\(\\mathrm{e}^x\\) 无法互为常数倍，故在通常的非奇异区间上通解为\n\\[\n\\boxed{y=C_1\\mathrm{e}^x+C_2(2x+1)}.\n\\]\n\n\\textbf{结论与检查}\\quad \\(u(-1)=\\mathrm{e},u(0)=-1\\)。对 \\(y=2x+1\\) 有 \\(y'=2,y''=0\\)，原方程左端为 \\(-2(2x+1)+2(2x+1)=0\\)；\\(\\mathrm{e}^x\\) 亦满足原式。\n\n若要求跨过 \\(x=\\frac{1}{2}\\) 的二阶可导解，左右常数也不能任意拼接。两侧 \\(u'\\) 都趋于零，而 \\(u''(\\frac{1}{2})\\) 的单侧差商为 \\(-2B\\mathrm{e}^{-\\frac{1}{2}}\\)，其存在迫使两侧 \\(B\\) 相同；再由 \\(u\\) 连续知 \\(A\\) 相同。因此上述表达式也给出这样的整体解。\n\\end{QuestionSolution}\n\n% Q 2024 18\n\\QuestionPage{4.2 高阶线性微分方程}{解答题}{2024 年第 18 题}{3}{Euler 方程与定积分}{234 / 234}{****}\n设 \\(y=y(x)\\) 满足方程\n\\[x^2y''+xy'-9y=0,\n\\]\n且\n\\[y\\big|_{x=1}=2,\\qquad y'\\big|_{x=1}=6.\n\\]\n\\begin{enumerate}\n\\item 利用变换 \\(x=\\mathrm{e}^t\\) 化简方程，并求 \\(y(x)\\)；\n\\item 求\n\\[\\int_1^2 y(x)\\sqrt{4-x^2}\\,\\mathrm{d}x.\n\\]\n\\end{enumerate}\n\\QuestionEnd\n\n\\begin{QuestionSolution}{2024 年第 18 题}\n\\textbf{已知与目标}\\quad （1）按指定代换 \\(x=\\mathrm{e}^t\\) 解方程及两个初值；（2）用所得 \\(y\\) 计算定积分。第二问的根号在积分区间 \\([1,2]\\) 上为实数。\n\n\\textbf{方法与条件}\\quad Euler 方程的导数系数是对应阶数的 \\(x\\) 幂，指数代换可把它变成常系数方程。该代换对应 \\(x>0\\)，涵盖初值及积分区间。第二问令 \\(u=4-x^2\\)，使根号变成幂函数。\n\n\\textbf{推导}\\quad （1）记 \\(Y(t)=y(\\mathrm{e}^t)\\)，区分对 \\(t\\) 与对 \\(x\\) 的求导。由链式法则，\n\\[\n\\frac{\\mathrm{d}Y}{\\mathrm{d}t}=xy',\\qquad\n\\frac{\\mathrm{d}^2Y}{\\mathrm{d}t^2}=x\\frac{\\mathrm{d}}{\\mathrm{d}x}(xy')=xy'+x^2y''.\n\\]\n故原式变成 \\(Y''-9Y=0\\)，特征根为 \\(3,-3\\)，得 \\(Y=C_1\\mathrm{e}^{3t}+C_2\\mathrm{e}^{-3t}\\)。初值 \\(x=1\\) 对应 \\(t=0\\)，且 \\(Y'(0)=1\\cdot y'(1)=6\\)，于是\n\\[\nC_1+C_2=2,\\qquad 3C_1-3C_2=6.\n\\]\n两式相加、相减可得 \\(C_1=2,C_2=0\\)。由 \\(\\mathrm{e}^{3t}=x^3\\)，还原为 \\(\\boxed{y(x)=2x^3,\\ x>0}\\)。\n\n（2）令 \\(u=4-x^2\\)，则 \\(2x\\,\\mathrm{d}x=-\\mathrm{d}u\\)，\\(x^2=4-u\\)。当 \\(x=1,2\\) 时，\\(u=3,0\\)，所以\n\\[\n\\begin{aligned}\n\\int_1^2 2x^3\\sqrt{4-x^2}\\,\\mathrm{d}x\n&=\\int_0^3 (4-u)\\sqrt{u}\\,\\mathrm{d}u\\\\\n&=4\\int_0^3u^{\\frac{1}{2}}\\,\\mathrm{d}u-\\int_0^3u^{\\frac{3}{2}}\\,\\mathrm{d}u\\\\\n&=\\left[\\frac{8}{3}u^{\\frac{3}{2}}-\\frac{2}{5}u^{\\frac{5}{2}}\\right]_0^3\n=\\boxed{\\frac{22\\sqrt3}{5}}.\n\\end{aligned}\n\\]\n其中 \\(3^{\\frac{3}{2}}=3\\sqrt{3}\\)、\\(3^{\\frac{5}{2}}=9\\sqrt{3}\\)，故末式为 \\((8-\\frac{18}{5})\\sqrt{3}\\)。\n\n\\textbf{结论与检查}\\quad \\(y'=6x^2,y''=12x\\)，代回得 \\(12x^3+6x^3-18x^3=0\\)，两个初值也成立。被积函数非负，结果 \\(\\frac{22\\sqrt{3}}{5}>0\\)；换元倒置积分上下限时已经同时消去负号。\n\\end{QuestionSolution}\n\n\\SectionHeading{4.3}{常微分方程}{线性微分方程组（教材星号节）}{定理与要点\\quad 教材 PDF 第 310 页起\\hfill 本节 0 题}\n\\pdfbookmark[2]{4.3 线性微分方程组（教材星号节）}{section-4.3}\n\\Theory{定理 3.1}{313}{齐次方程组解的相关性}{一组齐次解线性相关，等价于它们在区间内某一点取值所得向量组线性相关。}\n\\Theory{定理 3.2}{314}{齐次方程组的通解}{\\(n\\) 维线性齐次方程组有 \\(n\\) 个线性无关的解，通解为它们的常系数线性组合。}\n\\Theory{定理 3.3}{315}{Wronski 行列式判别}{\\(n\\) 个齐次解线性无关的充要条件是其 Wronski 行列式在区间内某点非零。}\n\\Theory{定理 3.4}{316}{非齐次方程组解的结构}{非齐次通解等于任一特解加对应齐次方程组的通解。}\n\\Theory{定理 3.5}{317}{基解矩阵与常数变易法}{取基解矩阵 \\(X\\)，写成 \\(\\boldsymbol{x}=X\\boldsymbol{c}\\)，对所得的 \\(\\boldsymbol{c}'\\) 积分可构造零初值特解。}\n\\Theory{定理 3.6}{320}{特征向量法}{若系数矩阵有 \\(n\\) 个线性无关的特征向量，则用各特征向量乘对应的指数因子组成基解矩阵。}\n\\Theory{定理 3.7}{323}{重特征值对应的特解}{重数为 \\(m\\) 的特征值提供 \\(m\\) 个线性无关的解，每个解是指数函数乘次数至多为 \\(m-1\\) 的向量多项式。}\n\\Theory{定理 3.8}{324}{由各特征值构造基本解组}{合并各不同特征值对应的线性无关解，组成 \\(n\\) 维常系数齐次系统的基本解组。}\n\\Theory{定理 3.9}{329}{常系数非齐次系统的通解}{取满足 \\(X(0)=E\\) 的基解矩阵，非齐次项的贡献由 \\(X(t-\\tau)\\) 乘右端项后积分得到。}\n本节在所收原卷中没有以该节为主考点的题目。\n\\end{document}\n"}
+
+## tool · 2026-11-12T07:24:55Z
+
+
+
+
+## tool · 2026-11-12T07:27:40Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+{"chunk_id":"9248f8","wall_time_seconds":0.000012708,"exit_code":0,"original_token_count":49,"output":"4.2共16题，稳定排序通过 [(2, 219), (2, 221), (2, 224), (2, 225), (2, 227), (2, 229), (2, 230), (3, 220), (3, 222), (3, 226), (3, 228), (4, 223), (4, 231), (4, 232), (4, 233), (4, 234)]\n"}

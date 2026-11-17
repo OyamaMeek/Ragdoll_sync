@@ -1,0 +1,84 @@
+{
+  "created" : 1793190267760,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-10-28T20-24-10-01a18277-c666-7752-b990-a7c901239789.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:76d3e8e658d67d9b25d6691e",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a18277-c666-7752-b990-a7c901239789",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "查询 TP-Link 路由器流量统计",
+  "updated" : 1793190545490,
+  "usage" : [
+    {
+      "cacheRead" : 23552,
+      "cacheWrite" : 0,
+      "id" : "resp_01d608b768479d75016ae1e97ed700819181ee077484fd50d8",
+      "input" : 24997,
+      "model" : "gpt-6.1-sol",
+      "output" : 141,
+      "time" : 1793190280620
+    },
+    {
+      "cacheRead" : 23552,
+      "cacheWrite" : 0,
+      "id" : "resp_01d608b768479d75016ae1e98cb3d88191b0d4a78c080ce8d4",
+      "input" : 33382,
+      "model" : "gpt-6.1-sol",
+      "output" : 509,
+      "time" : 1793190302229
+    },
+    {
+      "cacheRead" : 57216,
+      "cacheWrite" : 0,
+      "id" : "resp_01d608b768479d75016ae1ea4225048191870f84eb2b00fcc9",
+      "input" : 3468,
+      "model" : "gpt-6.1-sol",
+      "output" : 114,
+      "time" : 1793190471551
+    },
+    {
+      "cacheRead" : 60672,
+      "cacheWrite" : 0,
+      "id" : "resp_01d608b768479d75016ae1ea4bdedc8191814647d3d726a967",
+      "input" : 7976,
+      "model" : "gpt-6.1-sol",
+      "output" : 126,
+      "time" : 1793190480698
+    },
+    {
+      "cacheRead" : 68608,
+      "cacheWrite" : 0,
+      "id" : "resp_01d608b768479d75016ae1ea54966c819199c420a41993d040",
+      "input" : 8297,
+      "model" : "gpt-6.1-sol",
+      "output" : 65,
+      "time" : 1793190487895
+    },
+    {
+      "cacheRead" : 76800,
+      "cacheWrite" : 0,
+      "id" : "resp_01d608b768479d75016ae1ea5b806881918fe1f4ce4e036a73",
+      "input" : 256,
+      "model" : "gpt-6.1-sol",
+      "output" : 364,
+      "time" : 1793190504834
+    },
+    {
+      "cacheRead" : 77312,
+      "cacheWrite" : 0,
+      "id" : "resp_01d608b768479d75016ae1ea811b708191b8fad95c380ad6a2",
+      "input" : 3351,
+      "model" : "gpt-6.1-sol",
+      "output" : 334,
+      "time" : 1793190545483
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

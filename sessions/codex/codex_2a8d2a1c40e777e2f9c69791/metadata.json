@@ -1,0 +1,75 @@
+{
+  "created" : 1791904794884,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/10/13/rollout-2026-10-13T23-19-54-01a135d9-4854-7de0-bd76-201016176c02.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:2a8d2a1c40e777e2f9c69791",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a135d9-4854-7de0-bd76-201016176c02",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1791904881350,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_002c4698e33a5ce2016ace4c20f36c81919576bee094e4044a",
+      "input" : 21835,
+      "model" : "codex-auto-review",
+      "output" : 221,
+      "time" : 1791904803608
+    },
+    {
+      "cacheRead" : 27392,
+      "cacheWrite" : 0,
+      "id" : "resp_002c4698e33a5ce2016ace4c2529ac8191b2123571ba978104",
+      "input" : 919,
+      "model" : "codex-auto-review",
+      "output" : 146,
+      "time" : 1791904807427
+    },
+    {
+      "cacheRead" : 27392,
+      "cacheWrite" : 0,
+      "id" : "resp_002c4698e33a5ce2016ace4c4cb3f48191a3fa1609fce52261",
+      "input" : 2649,
+      "model" : "codex-auto-review",
+      "output" : 284,
+      "time" : 1791904848877
+    },
+    {
+      "cacheRead" : 29440,
+      "cacheWrite" : 0,
+      "id" : "resp_002c4698e33a5ce2016ace4c694ebc8191853a1dada1304b74",
+      "input" : 2622,
+      "model" : "codex-auto-review",
+      "output" : 90,
+      "time" : 1791904874762
+    },
+    {
+      "cacheRead" : 31488,
+      "cacheWrite" : 0,
+      "id" : "resp_002c4698e33a5ce2016ace4c6c5c84819183584ab3a326730b",
+      "input" : 973,
+      "model" : "codex-auto-review",
+      "output" : 86,
+      "time" : 1791904878882
+    },
+    {
+      "cacheRead" : 31488,
+      "cacheWrite" : 0,
+      "id" : "resp_002c4698e33a5ce2016ace4c702c9c819192d152019a2e0534",
+      "input" : 1359,
+      "model" : "codex-auto-review",
+      "output" : 84,
+      "time" : 1791904881338
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

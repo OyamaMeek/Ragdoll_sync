@@ -1,0 +1,30 @@
+{
+  "created" : 1793768564337,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-04T13-02-27-01a1a4ef-e2bd-7660-9b0c-bed166765705.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:10fbefe58ec93bc150701633",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1a4ef-e2bd-7660-9b0c-bed166765705",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "恢复 git add 前状态",
+  "updated" : 1793768582554,
+  "usage" : [
+    {
+      "cacheRead" : 12928,
+      "cacheWrite" : 0,
+      "id" : "resp_05973c163d2bd888016aeabc7b4d1487d09d6c9c41d79c6e5e",
+      "input" : 26645,
+      "model" : "gpt-6.1-sol",
+      "output" : 366,
+      "time" : 1793768582497
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

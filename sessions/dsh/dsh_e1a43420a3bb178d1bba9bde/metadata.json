@@ -1,0 +1,625 @@
+{
+  "created" : 1792637655828,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Agent-DSH--/session-c3da6024-2088-457e-9ee5-b0043b481cdd/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:e1a43420a3bb178d1bba9bde",
+  "messages" : [
+
+  ],
+  "nativeID" : "session-c3da6024-2088-457e-9ee5-b0043b481cdd",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "happa",
+  "source" : "dsh",
+  "title" : "视频重命名与观看顺序规划",
+  "updated" : 1792638881724,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "17",
+      "input" : 13121,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 41,
+      "time" : 1792637751318
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "25",
+      "input" : 36415,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 88,
+      "time" : 1792637759233
+    },
+    {
+      "cacheRead" : 34360,
+      "cacheWrite" : 0,
+      "id" : "32",
+      "input" : 3537,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 73,
+      "time" : 1792637763011
+    },
+    {
+      "cacheRead" : 35841,
+      "cacheWrite" : 0,
+      "id" : "39",
+      "input" : 2530,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 39,
+      "time" : 1792637766981
+    },
+    {
+      "cacheRead" : 36316,
+      "cacheWrite" : 0,
+      "id" : "46",
+      "input" : 2576,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 100,
+      "time" : 1792637772373
+    },
+    {
+      "cacheRead" : 38888,
+      "cacheWrite" : 0,
+      "id" : "53",
+      "input" : 3166,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 66,
+      "time" : 1792637778184
+    },
+    {
+      "cacheRead" : 40002,
+      "cacheWrite" : 0,
+      "id" : "60",
+      "input" : 4083,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 48,
+      "time" : 1792637786028
+    },
+    {
+      "cacheRead" : 42030,
+      "cacheWrite" : 0,
+      "id" : "67",
+      "input" : 2471,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 86,
+      "time" : 1792637791316
+    },
+    {
+      "cacheRead" : 42447,
+      "cacheWrite" : 0,
+      "id" : "74",
+      "input" : 2347,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 305,
+      "time" : 1792637796174
+    },
+    {
+      "cacheRead" : 42741,
+      "cacheWrite" : 0,
+      "id" : "85",
+      "input" : 2705,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 49,
+      "time" : 1792637810559
+    },
+    {
+      "cacheRead" : 43392,
+      "cacheWrite" : 0,
+      "id" : "92",
+      "input" : 2244,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 47,
+      "time" : 1792637814075
+    },
+    {
+      "cacheRead" : 43583,
+      "cacheWrite" : 0,
+      "id" : "99",
+      "input" : 2291,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 101,
+      "time" : 1792637818461
+    },
+    {
+      "cacheRead" : 43824,
+      "cacheWrite" : 0,
+      "id" : "106",
+      "input" : 3043,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 216,
+      "time" : 1792637834710
+    },
+    {
+      "cacheRead" : 44817,
+      "cacheWrite" : 0,
+      "id" : "115",
+      "input" : 3120,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 876,
+      "time" : 1792637844021
+    },
+    {
+      "cacheRead" : 45889,
+      "cacheWrite" : 0,
+      "id" : "124",
+      "input" : 3572,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 852,
+      "time" : 1792637852275
+    },
+    {
+      "cacheRead" : 49474,
+      "cacheWrite" : 0,
+      "id" : "133",
+      "input" : 7125,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 64,
+      "time" : 1792637881108
+    },
+    {
+      "cacheRead" : 56606,
+      "cacheWrite" : 0,
+      "id" : "140",
+      "input" : 5531,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 922,
+      "time" : 1792637893770
+    },
+    {
+      "cacheRead" : 60089,
+      "cacheWrite" : 0,
+      "id" : "150",
+      "input" : 3817,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 73,
+      "time" : 1792637960340
+    },
+    {
+      "cacheRead" : 61846,
+      "cacheWrite" : 0,
+      "id" : "159",
+      "input" : 2855,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 290,
+      "time" : 1792637965230
+    },
+    {
+      "cacheRead" : 64751,
+      "cacheWrite" : 0,
+      "id" : "168",
+      "input" : 22333,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 390,
+      "time" : 1792637971664
+    },
+    {
+      "cacheRead" : 87080,
+      "cacheWrite" : 0,
+      "id" : "177",
+      "input" : 2447,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 324,
+      "time" : 1792637978657
+    },
+    {
+      "cacheRead" : 87476,
+      "cacheWrite" : 0,
+      "id" : "186",
+      "input" : 3233,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 61,
+      "time" : 1792638034355
+    },
+    {
+      "cacheRead" : 90718,
+      "cacheWrite" : 0,
+      "id" : "193",
+      "input" : 7373,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 82,
+      "time" : 1792638039422
+    },
+    {
+      "cacheRead" : 96040,
+      "cacheWrite" : 0,
+      "id" : "203",
+      "input" : 3324,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 56,
+      "time" : 1792638115749
+    },
+    {
+      "cacheRead" : 97314,
+      "cacheWrite" : 0,
+      "id" : "210",
+      "input" : 3893,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 126,
+      "time" : 1792638121101
+    },
+    {
+      "cacheRead" : 101203,
+      "cacheWrite" : 0,
+      "id" : "228",
+      "input" : 5361,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 74,
+      "time" : 1792638125251
+    },
+    {
+      "cacheRead" : 104510,
+      "cacheWrite" : 0,
+      "id" : "235",
+      "input" : 2378,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 1640,
+      "time" : 1792638148999
+    },
+    {
+      "cacheRead" : 106878,
+      "cacheWrite" : 0,
+      "id" : "251",
+      "input" : 3291,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 968,
+      "time" : 1792638162391
+    },
+    {
+      "cacheRead" : 110167,
+      "cacheWrite" : 0,
+      "id" : "260",
+      "input" : 2911,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 4354,
+      "time" : 1792638209907
+    },
+    {
+      "cacheRead" : 113082,
+      "cacheWrite" : 0,
+      "id" : "265",
+      "input" : 4775,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 4309,
+      "time" : 1792638240195
+    },
+    {
+      "cacheRead" : 117860,
+      "cacheWrite" : 0,
+      "id" : "270",
+      "input" : 4398,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 34,
+      "time" : 1792638245253
+    },
+    {
+      "cacheRead" : 120204,
+      "cacheWrite" : 0,
+      "id" : "275",
+      "input" : 2229,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 83,
+      "time" : 1792638261273
+    },
+    {
+      "cacheRead" : 120380,
+      "cacheWrite" : 0,
+      "id" : "282",
+      "input" : 2425,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 4290,
+      "time" : 1792638292424
+    },
+    {
+      "cacheRead" : 122809,
+      "cacheWrite" : 0,
+      "id" : "287",
+      "input" : 4772,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 156,
+      "time" : 1792638298656
+    },
+    {
+      "cacheRead" : 125529,
+      "cacheWrite" : 0,
+      "id" : "296",
+      "input" : 2569,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 4217,
+      "time" : 1792638328814
+    },
+    {
+      "cacheRead" : 128103,
+      "cacheWrite" : 0,
+      "id" : "309",
+      "input" : 4844,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 4735,
+      "time" : 1792638382551
+    },
+    {
+      "cacheRead" : 132955,
+      "cacheWrite" : 0,
+      "id" : "314",
+      "input" : 6047,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 73,
+      "time" : 1792638394823
+    },
+    {
+      "cacheRead" : 136949,
+      "cacheWrite" : 0,
+      "id" : "319",
+      "input" : 2507,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 63,
+      "time" : 1792638401104
+    },
+    {
+      "cacheRead" : 137403,
+      "cacheWrite" : 0,
+      "id" : "324",
+      "input" : 2432,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 4845,
+      "time" : 1792638432204
+    },
+    {
+      "cacheRead" : 139840,
+      "cacheWrite" : 0,
+      "id" : "337",
+      "input" : 5111,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 4763,
+      "time" : 1792638488979
+    },
+    {
+      "cacheRead" : 144959,
+      "cacheWrite" : 0,
+      "id" : "342",
+      "input" : 6185,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 1254,
+      "time" : 1792638502875
+    },
+    {
+      "cacheRead" : 149095,
+      "cacheWrite" : 0,
+      "id" : "349",
+      "input" : 3627,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 1339,
+      "time" : 1792638513692
+    },
+    {
+      "cacheRead" : 150672,
+      "cacheWrite" : 0,
+      "id" : "356",
+      "input" : 3450,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 1314,
+      "time" : 1792638526941
+    },
+    {
+      "cacheRead" : 152072,
+      "cacheWrite" : 0,
+      "id" : "363",
+      "input" : 3408,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 1054,
+      "time" : 1792638558757
+    },
+    {
+      "cacheRead" : 153430,
+      "cacheWrite" : 0,
+      "id" : "370",
+      "input" : 3149,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 3833,
+      "time" : 1792638589696
+    },
+    {
+      "cacheRead" : 156582,
+      "cacheWrite" : 0,
+      "id" : "377",
+      "input" : 4075,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 367,
+      "time" : 1792638602085
+    },
+    {
+      "cacheRead" : 158610,
+      "cacheWrite" : 0,
+      "id" : "382",
+      "input" : 4061,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 56,
+      "time" : 1792638613015
+    },
+    {
+      "cacheRead" : 160618,
+      "cacheWrite" : 0,
+      "id" : "389",
+      "input" : 2425,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 73,
+      "time" : 1792638618296
+    },
+    {
+      "cacheRead" : 163043,
+      "cacheWrite" : 0,
+      "id" : "396",
+      "input" : 3210,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 81,
+      "time" : 1792638633383
+    },
+    {
+      "cacheRead" : 164202,
+      "cacheWrite" : 0,
+      "id" : "403",
+      "input" : 2777,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 54,
+      "time" : 1792638638230
+    },
+    {
+      "cacheRead" : 164927,
+      "cacheWrite" : 0,
+      "id" : "410",
+      "input" : 2575,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 73,
+      "time" : 1792638647295
+    },
+    {
+      "cacheRead" : 165453,
+      "cacheWrite" : 0,
+      "id" : "417",
+      "input" : 3359,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 76,
+      "time" : 1792638657718
+    },
+    {
+      "cacheRead" : 166760,
+      "cacheWrite" : 0,
+      "id" : "424",
+      "input" : 2452,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 233,
+      "time" : 1792638664028
+    },
+    {
+      "cacheRead" : 167160,
+      "cacheWrite" : 0,
+      "id" : "431",
+      "input" : 2367,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 250,
+      "time" : 1792638670448
+    },
+    {
+      "cacheRead" : 167475,
+      "cacheWrite" : 0,
+      "id" : "438",
+      "input" : 2519,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 988,
+      "time" : 1792638679193
+    },
+    {
+      "cacheRead" : 167945,
+      "cacheWrite" : 0,
+      "id" : "452",
+      "input" : 3109,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 1006,
+      "time" : 1792638694596
+    },
+    {
+      "cacheRead" : 169005,
+      "cacheWrite" : 0,
+      "id" : "457",
+      "input" : 3249,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 41,
+      "time" : 1792638702486
+    },
+    {
+      "cacheRead" : 170202,
+      "cacheWrite" : 0,
+      "id" : "462",
+      "input" : 2194,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 66,
+      "time" : 1792638734789
+    },
+    {
+      "cacheRead" : 170344,
+      "cacheWrite" : 0,
+      "id" : "469",
+      "input" : 2395,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 915,
+      "time" : 1792638743912
+    },
+    {
+      "cacheRead" : 170690,
+      "cacheWrite" : 0,
+      "id" : "474",
+      "input" : 3017,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 55,
+      "time" : 1792638748826
+    },
+    {
+      "cacheRead" : 171657,
+      "cacheWrite" : 0,
+      "id" : "481",
+      "input" : 2644,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 120,
+      "time" : 1792638756643
+    },
+    {
+      "cacheRead" : 174318,
+      "cacheWrite" : 0,
+      "id" : "488",
+      "input" : 7291,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 84,
+      "time" : 1792638766828
+    },
+    {
+      "cacheRead" : 181624,
+      "cacheWrite" : 0,
+      "id" : "495",
+      "input" : 7038,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 218,
+      "time" : 1792638821127
+    },
+    {
+      "cacheRead" : 186611,
+      "cacheWrite" : 0,
+      "id" : "502",
+      "input" : 2645,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 56,
+      "time" : 1792638829262
+    },
+    {
+      "cacheRead" : 187204,
+      "cacheWrite" : 0,
+      "id" : "509",
+      "input" : 2319,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 333,
+      "time" : 1792638837837
+    },
+    {
+      "cacheRead" : 187474,
+      "cacheWrite" : 0,
+      "id" : "516",
+      "input" : 3103,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 53,
+      "time" : 1792638845636
+    },
+    {
+      "cacheRead" : 188526,
+      "cacheWrite" : 0,
+      "id" : "523",
+      "input" : 2445,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 3410,
+      "time" : 1792638881325
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

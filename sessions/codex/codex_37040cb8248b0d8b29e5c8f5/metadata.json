@@ -1,0 +1,39 @@
+{
+  "created" : 1794284503554.7256,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-10T12-21-42-01a1c3b0-bf30-72b0-91f3-ebf42386c26e.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:37040cb8248b0d8b29e5c8f5",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1c3b0-bf30-72b0-91f3-ebf42386c26e",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "<external_codex_apps_open_page>{\"page_id\":null}</external_codex_apps_open_page>",
+  "updated" : 1794325136115,
+  "usage" : [
+    {
+      "cacheRead" : 13568,
+      "cacheWrite" : 0,
+      "id" : "resp_025037b65aa74a23016af29bdb96a487d09111c7c9cfb5dfbb",
+      "input" : 26932,
+      "model" : "gpt-6.1-sol",
+      "output" : 759,
+      "time" : 1794284523640
+    },
+    {
+      "cacheRead" : 39936,
+      "cacheWrite" : 0,
+      "id" : "resp_025037b65aa74a23016af29c39490887d0a9b8def96ac91bbb",
+      "input" : 1437,
+      "model" : "gpt-6.1-sol",
+      "output" : 407,
+      "time" : 1794284610305
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

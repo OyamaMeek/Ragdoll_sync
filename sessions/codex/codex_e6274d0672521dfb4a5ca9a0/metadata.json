@@ -1,0 +1,156 @@
+{
+  "created" : 1793976989572,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-06T22-55-35-01a1b15b-a546-7062-b10c-6f74e517ea50.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:e6274d0672521dfb4a5ca9a0",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1b15b-a546-7062-b10c-6f74e517ea50",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "将 Claude 域名和网段加入列表",
+  "updated" : 1793977116912,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeaa1be9087d0b1f04da6d77353e0",
+      "input" : 25370,
+      "model" : "gpt-6.1-sol",
+      "output" : 239,
+      "time" : 1793977001405
+    },
+    {
+      "cacheRead" : 38400,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeaaa440c87d08f4087278e40f211",
+      "input" : 2572,
+      "model" : "gpt-6.1-sol",
+      "output" : 273,
+      "time" : 1793977010599
+    },
+    {
+      "cacheRead" : 40704,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeab36e9487d09a3b91b1595461d4",
+      "input" : 7022,
+      "model" : "gpt-6.1-sol",
+      "output" : 460,
+      "time" : 1793977024708
+    },
+    {
+      "cacheRead" : 47360,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeac185a487d0a42a394b7bf82f3e",
+      "input" : 1660,
+      "model" : "gpt-6.1-sol",
+      "output" : 259,
+      "time" : 1793977033079
+    },
+    {
+      "cacheRead" : 48896,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeac9bbf087d0a055c2fa252956a1",
+      "input" : 407,
+      "model" : "gpt-6.1-sol",
+      "output" : 136,
+      "time" : 1793977038847
+    },
+    {
+      "cacheRead" : 49152,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeacf7a3887d08bc5c9cccca7b66b",
+      "input" : 1805,
+      "model" : "gpt-6.1-sol",
+      "output" : 591,
+      "time" : 1793977055706
+    },
+    {
+      "cacheRead" : 50688,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeae07c6087d083ff8b1afd3b7197",
+      "input" : 884,
+      "model" : "gpt-6.1-sol",
+      "output" : 120,
+      "time" : 1793977060581
+    },
+    {
+      "cacheRead" : 51456,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeae536a087d0b36b82b9ec8acb6f",
+      "input" : 533,
+      "model" : "gpt-6.1-sol",
+      "output" : 66,
+      "time" : 1793977063807
+    },
+    {
+      "cacheRead" : 51712,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeae8774c87d0a109574f51fe043b",
+      "input" : 367,
+      "model" : "gpt-6.1-sol",
+      "output" : 118,
+      "time" : 1793977069798
+    },
+    {
+      "cacheRead" : 51712,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeaee731087d0a60c4a077c53a157",
+      "input" : 564,
+      "model" : "gpt-6.1-sol",
+      "output" : 171,
+      "time" : 1793977076628
+    },
+    {
+      "cacheRead" : 51968,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeafbbc1087d098c62ae5bcc1b268",
+      "input" : 693,
+      "model" : "gpt-6.1-sol",
+      "output" : 62,
+      "time" : 1793977086035
+    },
+    {
+      "cacheRead" : 52480,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeafeadd887d09d0576201d646e06",
+      "input" : 642,
+      "model" : "gpt-6.1-sol",
+      "output" : 140,
+      "time" : 1793977091314
+    },
+    {
+      "cacheRead" : 52992,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeb04012887d088222a2514c3815b",
+      "input" : 294,
+      "model" : "gpt-6.1-sol",
+      "output" : 260,
+      "time" : 1793977100558
+    },
+    {
+      "cacheRead" : 52992,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeb14ac2c87d0b946b5f0e94f3fe3",
+      "input" : 967,
+      "model" : "gpt-6.1-sol",
+      "output" : 116,
+      "time" : 1793977112775
+    },
+    {
+      "cacheRead" : 53760,
+      "cacheWrite" : 0,
+      "id" : "resp_0514fe87197b6603016aedeb19750487d081cad536b787e3d3",
+      "input" : 569,
+      "model" : "gpt-6.1-sol",
+      "output" : 96,
+      "time" : 1793977116864
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

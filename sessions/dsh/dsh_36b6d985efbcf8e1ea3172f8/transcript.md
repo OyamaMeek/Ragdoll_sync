@@ -1,0 +1,756 @@
+# 工作目录：/Users/oyamahappa/Documen
+
+来源：dsh
+
+项目：/Users/oyamahappa/Documents/Agent/DSH
+
+## user · 2026-10-05T10:50:38Z
+
+
+工作目录：/Users/oyamahappa/Documents/Agent/DSH
+教程根目录：AI-Coding-Guide-Zh/
+
+任务：阅读指定教程文件，抽取内容，写出一份**PPT 内容 JSON** 文件，供后续用 python-pptx 生成幻灯片。
+面向对象：**完全新手 / 办公人**——没有编程基础，怕命令行。要少命令、多概念、多类比、能看懂能上手。
+语言：简体中文。
+
+硬性要求：
+1. 内容必须来自指定教程文件，不得编造。数字、版本号、命令、功能名称要忠于原文。
+2. 每张幻灯片要点不超过 5 条，每条不超过 42 个汉字。表格不超过 5 列、6 行。
+3. 生成 15-18 张幻灯片，结构：封面(cover) → 目录或分节(section) → 内容 → 结尾(end)。
+4. 用适合新手的类比解释术语（例如 MCP 比作 USB 接口）。
+5. 用 write 工具把 JSON 写入指定输出路径（UTF-8，不要加 markdown 代码围栏）。
+
+JSON schema（严格遵守，字段可按 layout 取舍）：
+{
+  "deck": "幻灯片标题",
+  "slides": [
+    {"layout":"cover","title":"...","subtitle":"...","kicker":"Vibe Coding 学习系列 · 0X"},
+    {"layout":"section","title":"...","subtitle":"..."},
+    {"layout":"bullets","title":"...","bullets":["...","..."],"notes":"讲稿提示(可省略)"},
+    {"layout":"cards","title":"...","cards":[{"title":"...","desc":"..."}]},
+    {"layout":"table","title":"...","headers":["..."],"rows":[["..."]]},
+    {"layout":"steps","title":"...","steps":[{"title":"...","desc":"..."}]},
+    {"layout":"quote","title":"...","subtitle":"..."},
+    {"layout":"end","title":"...","subtitle":"..."}
+  ]
+}
+cards 用 3-4 张，steps 用 3-4 步，table 用于对比。
+
+本次负责：**Codex 主线**（第 03 册）。
+阅读这些文件（按需分段读取）：
+- AI-Coding-Guide-Zh/docs/codex/CX-01-Codex-App安装与认证完整指南.md
+- AI-Coding-Guide-Zh/docs/codex/CX-02-Codex-App桌面工作流完整指南.md
+- AI-Coding-Guide-Zh/docs/codex/CX-03-Codex-Commands工作流入口完整指南.md
+- AI-Coding-Guide-Zh/docs/codex/CX-04-Codex项目指令权限配置完整指南.md
+- AI-Coding-Guide-Zh/docs/codex/CX-13-Codex安全企业完整指南.md
+
+幻灯片建议覆盖：Codex 是什么(OpenAI 编程 Agent，已并入 ChatGPT 桌面 App)、安装与认证(Windows Store / macOS)、App 桌面工作流(Thread、Local、Worktree、Review、Settings)、常用 slash 命令少量几个、AGENTS.md 项目指令是什么、权限与沙盒、MCP 外部工具、Skills、Plugins/Connectors、Subagents 并行、Automations 定时任务、Review/GitHub PR、安全红线、20 分钟上手路径、下一步。
+输出文件：vibe-coding-ppt/content/03-codex.json
+Your parent agent id is "session-0de88cee-855e-47e3-a7d8-5cedfd0973a3". Before you finish, send your result to that agent with send_message({ agent_id: "session-0de88cee-855e-47e3-a7d8-5cedfd0973a3", message: "<self-contained result>" }). The parent shares your workspace but does not automatically receive your transcript, tool output, or reasoning. Send earlier messages as well when a finding changes what the parent should do next; sending a message does not end your turn.
+
+## assistant · 2026-10-05T10:50:40Z
+
+妹妹，我先读取教程文件，了解内容后再生成 JSON。
+{
+  "type": "tool-call",
+  "id": "call_00_ET_ooVvEKIZajUp28hG3DLg0623",
+  "name": "run_code",
+  "arguments": "{\"description\": \"List Codex tutorial files and sizes\", \"code\": \"const r = await tools.bash({ command: 'ls -la AI-Coding-Guide-Zh/docs/codex/ && wc -l AI-Coding-Guide-Zh/docs/codex/*.md', description: 'List codex docs' });\\nreturn r.kind === 'foreground' ? r.stdout.text : r;\"}"
+}
+
+## tool · 2026-10-05T10:50:40Z
+
+run_code
+{"description": "List Codex tutorial files and sizes", "code": "const r = await tools.bash({ command: 'ls -la AI-Coding-Guide-Zh/docs/codex/ && wc -l AI-Coding-Guide-Zh/docs/codex/*.md', description: 'List codex docs' });\nreturn r.kind === 'foreground' ? r.stdout.text : r;"}
+
+## assistant · 2026-10-05T10:50:44Z
+
+Let me read the specified 5 files. They're large (~50KB each). The task mentions reading CX-01 to CX-04, and CX-13. But slides should also cover MCP, Skills, Plugins, Subagents, Automations, Review — suggesting we need those files too. But the task explicitly says read those 5 files. However, slide suggestions include MCP, Skills, Plugins/Connectors, Subagents, Automations, Review/GitHub PR. Hmm. The 5 specified files may contain summaries of those. Let me check. Also the slide count is 15-18, so we probably need to cover those topics from CX-01~04 and CX-13, which likely contain cross-references.
+
+Let me read the files in segments. Start with CX-01.
+{
+  "type": "tool-call",
+  "id": "call_00_qoKqqmEBzdjN4Eikqlyk1554",
+  "name": "run_code",
+  "arguments": "{\"code\": \"const r = await tools.read({ file_path: 'AI-Coding-Guide-Zh/docs/codex/CX-01-Codex-App安装与认证完整指南.md', limit: 400 });\\nreturn r.lines.map(l => `${l.number}: ${l.text}`).join('\\\\n') + `\\\\n--- totalLines=${r.totalLines}`;\", \"description\": \"Read first 400 lines of CX-01\"}"
+}
+
+## tool · 2026-10-05T10:50:44Z
+
+run_code
+{"code": "const r = await tools.read({ file_path: 'AI-Coding-Guide-Zh/docs/codex/CX-01-Codex-App安装与认证完整指南.md', limit: 400 });\nreturn r.lines.map(l => `${l.number}: ${l.text}`).join('\\n') + `\\n--- totalLines=${r.totalLines}`;", "description": "Read first 400 lines of CX-01"}
+
+## assistant · 2026-10-05T10:50:50Z
+
+Let me read the rest of CX-01 plus the other files. Let me batch reads. I'll read remaining parts of CX-01 (400-1541), then CX-02 etc. But output is huge. I need to be efficient. Let me read selectively, focusing on key content: headings, tables, key facts.
+
+Better approach: grep for headings across the 5 files to get structure, then read relevant sections.
+
+Actually, the task also suggests covering MCP, Skills, Plugins, Subagents, Automations, Review. Those are separate files CX-05..CX-10. The instruction says read these files (CX-01..04, CX-13). But slide suggestions include MCP etc. Hmm — maybe CX-01..04 includes those? Unlikely. Let me grep headings of all codex files including 05-10 to get short descriptions for those topics. Actually the instruction says "幻灯片建议覆盖" including MCP外部工具、Skills、Plugins/Connectors、Subagents并行、Automations定时任务、Review/GitHub PR. Since I must not fabricate, and content must come from "指定教程文件" — the specified files are only 5. But to cover those topics I'd need CX-05..10. The hard requirement #1 says content must come from specified tutorial files. The slide suggestion covers topics in other volumes. Hmm.
+
+Let me check if CX-01..04 mention MCP/Skills/Plugins/Subagents/Automations. CX-02 might have a section on them (App 桌面工作流). Let me grep.
+
+Best plan: read headings + key tables from the 5 specified files first, then decide. If MCP etc. aren't covered, I can read CX-05..10 briefly — that's still "the tutorial" and the parent expects those slides. Actually the parent's instruction lists 5 files but slide suggestions include 8 topics across the whole Codex main line. To be safe and faithful, I'll read short portions of CX-05..10 too, since they're in AI-Coding-Guide-Zh/ (the 教程根目录). The task says "内容必须来自指定教程文件" — the specified files at top. But covering suggested topics requires more. I'll prioritize the 5 files, and if they contain cross-volume summaries, use them. Otherwise read the additional codex files for accuracy (they are tutorial files in the same series). That's the reasonable path.
+
+Let me grep headings for all.
+{
+  "type": "tool-call",
+  "id": "call_00_QVGhOksTlKT0RdppksjN1392",
+  "name": "run_code",
+  "arguments": "{\"code\": \"const files = [\\n 'CX-01-Codex-App安装与认证完整指南.md',\\n 'CX-02-Codex-App桌面工作流完整指南.md',\\n 'CX-03-Codex-Commands工作流入口完整指南.md',\\n 'CX-04-Codex项目指令权限配置完整指南.md',\\n 'CX-13-Codex安全企业完整指南.md',\\n];\\nlet out = '';\\nfor (const f of files) {\\n  const r = await tools.grep({ pattern: '^#{2,3} ', path: `AI-Coding-Guide-Zh/docs/codex/${f}` });\\n  out += `\\\\n===== ${f} =====\\\\n` + r.matches.map(m => `${m.lineNumber}: ${m.line}`).join('\\\\n') + '\\\\n';\\n}\\nreturn out;\", \"description\": \"Extract headings from five Codex docs\"}"
+}
+
+## tool · 2026-10-05T10:50:50Z
+
+run_code
+{"code": "const files = [\n 'CX-01-Codex-App安装与认证完整指南.md',\n 'CX-02-Codex-App桌面工作流完整指南.md',\n 'CX-03-Codex-Commands工作流入口完整指南.md',\n 'CX-04-Codex项目指令权限配置完整指南.md',\n 'CX-13-Codex安全企业完整指南.md',\n];\nlet out = '';\nfor (const f of files) {\n  const r = await tools.grep({ pattern: '^#{2,3} ', path: `AI-Coding-Guide-Zh/docs/codex/${f}` });\n  out += `\\n===== ${f} =====\\n` + r.matches.map(m => `${m.lineNumber}: ${m.line}`).join('\\n') + '\\n';\n}\nreturn out;", "description": "Extract headings from five Codex docs"}
+
+## assistant · 2026-10-05T10:50:53Z
+
+Now read the key content sections. Let me read CX-02 sections 83-460 (core model, three methods, review, commands, project instructions, MCP, Skills, Plugins, Subagents, Automations, GitHub). That covers the suggested topics well.
+
+Also read CX-03 sections on /plan, /goal, /review, permissions, /mcp.
+
+CX-04 sections: four-layer config model, AGENTS.md, permissions, sandbox, config.toml, rules, hooks.
+
+CX-13: security overview, threat model, approval/sandbox, red lines.
+
+CX-01: already have lots.
+
+Let me batch reads.
+{
+  "type": "tool-call",
+  "id": "call_00_la5pPfJP5ZZM2E9ARBLO4787",
+  "name": "run_code",
+  "arguments": "{\"code\": \"const f = 'AI-Coding-Guide-Zh/docs/codex/CX-02-Codex-App桌面工作流完整指南.md';\\nlet out = '';\\nfor (const [a,b] of [[83,240],[287,460]] as [number,number][]) {\\n  const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\\n  out += `--- L${a}-${b} ---\\\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n}\\nreturn out;\", \"description\": \"Read CX-02 core workflow sections\"}"
+}
+
+## tool · 2026-10-05T10:50:53Z
+
+run_code
+{"code": "const f = 'AI-Coding-Guide-Zh/docs/codex/CX-02-Codex-App桌面工作流完整指南.md';\nlet out = '';\nfor (const [a,b] of [[83,240],[287,460]] as [number,number][]) {\n  const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\n  out += `--- L${a}-${b} ---\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n}\nreturn out;", "description": "Read CX-02 core workflow sections"}
+
+## assistant · 2026-10-05T10:50:56Z
+
+Good. Now CX-03 key sections: 79-235, 348-400, 511-530 maybe. And CX-04: 41-105, 285-360, 394-470, 527-640. And CX-13: 67-250, 315-330, 538-660.
+
+Let me batch reads efficiently.
+{
+  "type": "tool-call",
+  "id": "call_00_791Wtmgn2ozi9BDpQeY12849",
+  "name": "run_code",
+  "arguments": "{\"code\": \"const f = 'AI-Coding-Guide-Zh/docs/codex/CX-03-Codex-Commands工作流入口完整指南.md';\\nlet out = '';\\nfor (const [a,b] of [[79,235],[348,400],[511,530]] as [number,number][]) {\\n  const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\\n  out += `--- L${a}-${b} ---\\\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n}\\nreturn out;\", \"description\": \"Read CX-03 command sections\"}"
+}
+
+## tool · 2026-10-05T10:50:56Z
+
+run_code
+{"code": "const f = 'AI-Coding-Guide-Zh/docs/codex/CX-03-Codex-Commands工作流入口完整指南.md';\nlet out = '';\nfor (const [a,b] of [[79,235],[348,400],[511,530]] as [number,number][]) {\n  const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\n  out += `--- L${a}-${b} ---\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n}\nreturn out;", "description": "Read CX-03 command sections"}
+
+## assistant · 2026-10-05T10:50:59Z
+
+Now CX-04. Read sections: 41-105 (术语表, 心智模型, 配置顺序), 189-245 (rules生效), 285-360, 394-470 (权限入口, 沙盒, config.toml), 527-640 (Hooks, 选择表, 核对, 安全流程).
+
+And CX-13: 67-250, 315-330, 538-660.
+{
+  "type": "tool-call",
+  "id": "call_00_kFBHMEQhbOJ4bOTPZISl0986",
+  "name": "run_code",
+  "arguments": "{\"code\": \"const f = 'AI-Coding-Guide-Zh/docs/codex/CX-04-Codex项目指令权限配置完整指南.md';\\nlet out = '';\\nfor (const [a,b] of [[41,140],[285,360],[394,470],[527,640]] as [number,number][]) {\\n  const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\\n  out += `--- L${a}-${b} ---\\\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n}\\nreturn out;\", \"description\": \"Read CX-04 config and permission sections\"}"
+}
+
+## tool · 2026-10-05T10:50:59Z
+
+run_code
+{"code": "const f = 'AI-Coding-Guide-Zh/docs/codex/CX-04-Codex项目指令权限配置完整指南.md';\nlet out = '';\nfor (const [a,b] of [[41,140],[285,360],[394,470],[527,640]] as [number,number][]) {\n  const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\n  out += `--- L${a}-${b} ---\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n}\nreturn out;", "description": "Read CX-04 config and permission sections"}
+
+## assistant · 2026-10-05T10:51:02Z
+
+Now CX-13 key sections: 67-250 (术语表, 安全架构总览, 威胁模型, 审批沙盒, Rules, Hooks, MCP安全, Plugins, Automations, 企业基线), 315-330 (敏感文件), 538-660 (Q&A, 第一原则, 数据分类, 审批策略, Rules示例).
+
+Also for the "20分钟上手路径" I can use CX-01 path A (30分钟) and CX-02 path A (20分钟). Actually the slide suggestion says "20 分钟上手路径" — CX-02 路径A is 20分钟. Let me read CX-02 45-82 for path A details.
+
+Let me read CX-13 and CX-01's 441-520 (第一次打开项目, 第一个安全可写任务, 安装后检查清单) and CX-01 700-810 (第一项目, 第一周训练计划).
+{
+  "type": "tool-call",
+  "id": "call_00_OBYjnldpYpXovqdwAEl94390",
+  "name": "run_code",
+  "arguments": "{\"code\": \"const f = 'AI-Coding-Guide-Zh/docs/codex/CX-13-Codex安全企业完整指南.md';\\nlet out = '';\\nfor (const [a,b] of [[67,250],[315,330],[538,660]] as [number,number][]) {\\n  const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\\n  out += `--- L${a}-${b} ---\\\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n}\\nreturn out;\", \"description\": \"Read CX-13 security model sections\"}"
+}
+
+## tool · 2026-10-05T10:51:02Z
+
+run_code
+{"code": "const f = 'AI-Coding-Guide-Zh/docs/codex/CX-13-Codex安全企业完整指南.md';\nlet out = '';\nfor (const [a,b] of [[67,250],[315,330],[538,660]] as [number,number][]) {\n  const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\n  out += `--- L${a}-${b} ---\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n}\nreturn out;", "description": "Read CX-13 security model sections"}
+
+## assistant · 2026-10-05T10:51:06Z
+
+I have plenty. Now I need a bit more:
+- CX-02 path A (20分钟) for the "20 分钟上手路径".
+- CX-01: first project selection, first safe writable task, checklist, and "已并入 ChatGPT 桌面 App".
+- The "20 分钟上手路径" slide — use CX-02 路径A details. Let me read CX-02 45-82.
+- Also CX-01 441-530 for "第一次打开项目/第一个安全可写任务/安装后检查清单".
+
+Also I should get a description of what Codex is: "OpenAI 编程 Agent，已并入 ChatGPT 桌面 App" - covered.
+
+Also for MCP analogy: need "MCP 比作 USB 接口" - the docs say "MCP 是外部工具协议". I can add analogy, that's allowed (requirement 4 asks analogies). But must be careful: analogy is our own, not fabricated fact. Fine.
+
+Let me read those sections. Also check CX-13 246-315 for 企业基线 details maybe useful for safety slide. And CX-02 460-512 for 能力地图/反模式.
+
+Let me batch: CX-01 [441,530], CX-01 [687,810], CX-02 [45,82], CX-13 [246,315], CX-02 [1436,1540] maybe too much. Keep focused.
+{
+  "type": "tool-call",
+  "id": "call_00_fkjlfoT5mwFiYIKv9xCZ9102",
+  "name": "run_code",
+  "arguments": "{\"code\": \"let out = '';\\n{\\n  const f = 'AI-Coding-Guide-Zh/docs/codex/CX-01-Codex-App安装与认证完整指南.md';\\n  for (const [a,b] of [[441,530],[656,725]] as [number,number][]) {\\n    const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\\n    out += `--- CX01 L${a}-${b} ---\\\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n  }\\n}\\n{\\n  const f = 'AI-Coding-Guide-Zh/docs/codex/CX-02-Codex-App桌面工作流完整指南.md';\\n  for (const [a,b] of [[45,82],[460,512]] as [number,number][]) {\\n    const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\\n    out += `--- CX02 L${a}-${b} ---\\\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n  }\\n}\\n{\\n  const f = 'AI-Coding-Guide-Zh/docs/codex/CX-13-Codex安全企业完整指南.md';\\n  const r = await tools.read({ file_path: f, offset: 246, limit: 70 });\\n  out += `--- CX13 L246-315 ---\\\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n}\\nreturn out;\", \"description\": \"Read onboarding paths and checklists\"}"
+}
+
+## tool · 2026-10-05T10:51:06Z
+
+run_code
+{"code": "let out = '';\n{\n  const f = 'AI-Coding-Guide-Zh/docs/codex/CX-01-Codex-App安装与认证完整指南.md';\n  for (const [a,b] of [[441,530],[656,725]] as [number,number][]) {\n    const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\n    out += `--- CX01 L${a}-${b} ---\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n  }\n}\n{\n  const f = 'AI-Coding-Guide-Zh/docs/codex/CX-02-Codex-App桌面工作流完整指南.md';\n  for (const [a,b] of [[45,82],[460,512]] as [number,number][]) {\n    const r = await tools.read({ file_path: f, offset: a, limit: b-a+1 });\n    out += `--- CX02 L${a}-${b} ---\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n  }\n}\n{\n  const f = 'AI-Coding-Guide-Zh/docs/codex/CX-13-Codex安全企业完整指南.md';\n  const r = await tools.read({ file_path: f, offset: 246, limit: 70 });\n  out += `--- CX13 L246-315 ---\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n}\nreturn out;", "description": "Read onboarding paths and checklists"}
+
+## assistant · 2026-10-05T10:51:10Z
+
+I have enough. Let me also grab the "Codex 是什么" definition from CX-01/CX-02 top, and the brief intro of CX-02 line 1-40, plus the 总结 checklist for CX-01 and CX-02 to make the "下一步" slide. Also I want the CX-02 术语 MCP analogy? Not needed.
+
+Actually I want to make sure the "Codex 已并入 ChatGPT 桌面 App" claim is captured — yes line 7 of CX-01.
+
+Let me read CX-02 1-24 and CX-02 1578-1635 (总结与检查清单 + 下一步), CX-01 1476-1541 (总结与检查清单 + 下一步). Also CX-13 1382-1440.
+
+I'll be economical.
+{
+  "type": "tool-call",
+  "id": "call_00_dxnCwMcHbcDZKePyVm552124",
+  "name": "run_code",
+  "arguments": "{\"code\": \"let out = '';\\n{\\n  const r = await tools.read({ file_path: 'AI-Coding-Guide-Zh/docs/codex/CX-02-Codex-App桌面工作流完整指南.md', offset: 1, limit: 24 });\\n  out += `--- CX02 L1-24 ---\\\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n  const r2 = await tools.read({ file_path: 'AI-Coding-Guide-Zh/docs/codex/CX-02-Codex-App桌面工作流完整指南.md', offset: 1578, limit: 60 });\\n  out += `--- CX02 L1578-1637 ---\\\\n` + r2.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n}\\n{\\n  const r = await tools.read({ file_path: 'AI-Coding-Guide-Zh/docs/codex/CX-01-Codex-App安装与认证完整指南.md', offset: 1476, limit: 66 });\\n  out += `--- CX01 L1476-1541 ---\\\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n}\\n{\\n  const r = await tools.read({ file_path: 'AI-Coding-Guide-Zh/docs/codex/CX-13-Codex安全企业完整指南.md', offset: 1382, limit: 60 });\\n  out += `--- CX13 L1382-1441 ---\\\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n') + '\\\\n';\\n}\\nreturn out;\", \"description\": \"Read summaries and next steps\"}"
+}
+
+## tool · 2026-10-05T10:51:10Z
+
+run_code
+{"code": "let out = '';\n{\n  const r = await tools.read({ file_path: 'AI-Coding-Guide-Zh/docs/codex/CX-02-Codex-App桌面工作流完整指南.md', offset: 1, limit: 24 });\n  out += `--- CX02 L1-24 ---\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n  const r2 = await tools.read({ file_path: 'AI-Coding-Guide-Zh/docs/codex/CX-02-Codex-App桌面工作流完整指南.md', offset: 1578, limit: 60 });\n  out += `--- CX02 L1578-1637 ---\\n` + r2.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n}\n{\n  const r = await tools.read({ file_path: 'AI-Coding-Guide-Zh/docs/codex/CX-01-Codex-App安装与认证完整指南.md', offset: 1476, limit: 66 });\n  out += `--- CX01 L1476-1541 ---\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n}\n{\n  const r = await tools.read({ file_path: 'AI-Coding-Guide-Zh/docs/codex/CX-13-Codex安全企业完整指南.md', offset: 1382, limit: 60 });\n  out += `--- CX13 L1382-1441 ---\\n` + r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n') + '\\n';\n}\nreturn out;", "description": "Read summaries and next steps"}
+
+## assistant · 2026-10-05T10:51:39Z
+
+Now I have enough content. Let me design 17 slides:
+
+1. cover: "Codex 主线：把桌面 App 用成编程主控台" subtitle "第 03 册 · 零基础也能上手" kicker "Vibe Coding 学习系列 · 03"
+2. section: "Codex 是什么" subtitle "OpenAI 编程 Agent，已并入 ChatGPT 桌面 App"
+3. bullets: "Codex 是什么" — content from CX-01 line 7, CX-02 line 88-101. Points:
+   - Codex 是 OpenAI 的编程 Agent，能读文件、写文件、跑命令
+   - 自 App 26.707 起并入 ChatGPT 桌面 App
+   - 安装 ChatGPT 桌面后即可使用 Codex
+   - 可把 Codex 设为默认视图，原项目与线程保留
+   - App 是主线，CLI 只是排查与 CI 的辅助
+4. cards or table: "App 主控台有哪些能力" — Thread/Local/Worktree/Review/Terminal/Settings. Use cards 4? cards 3-4. Maybe table: headers 能力/在 App 中的意义. rows: Thread, Worktree, Review, Terminal, Settings — 5 rows, 2 cols. OK table max 5 cols, 6 rows. Good.
+   Actually a table with 2 columns and 5 rows plus header = 6 rows total. Requirement "表格不超过 5 列、6 行". 6 rows including header? Ambiguous. I'll use 5 data rows max to be safe (header + 4 data = 5 rows). Let me use 5 data rows → total 6. Hmm risky. I'll keep data rows ≤5 and total rows ≤6; header+5=6, that satisfies "不超过6行" if counted all. Keep 4 data rows to be safer. Let me plan tables with ≤5 data rows.
+
+   For App capabilities: 5 entries. Split into cards instead? cards max 4. Let me do cards with 4: Thread, Local/Worktree, Review, Settings. desc each. That's good.
+5. steps: "安装三步走" — Windows Store / macOS 官方入口 / Git 必装. Use table for comparison instead: headers 平台/安装方式/命令. rows: Windows / macOS / Linux. 3 data rows + header = 4. Good.
+   Maybe include as table: "安装与认证：按平台走官方入口"
+6. bullets: "认证与首次启动要处理的小问题" — 防火墙只放行专用网络; macOS Gatekeeper 只在隐私与安全里允许; PowerShell 执行策略 RemoteSigned; 登录取 ChatGPT/OpenAI 账号, 不贴 API Key.
+7. bullets: "第一次打开项目的安全顺序" — 用普通 Git 仓库; 添加本地目录; 确认 Git 状态; 创建 Local thread; 先发只读任务.
+   Actually could be steps. Use steps 5? steps 3-4. Use steps 4.
+8. section: "App 桌面工作流" subtitle "Thread、Review、Settings 是每天都要用的"
+9. bullets/steps: "一条线程的生命周期" 6 steps — use steps 4: 开场只读, 明确任务, 允许执行, 检查结果+收口. Maybe 4 steps.
+10. table: "三种工作方式怎么选" — headers 任务/推荐方式. rows: 读项目找命令 / 改一个文件 / 新功能重构 / 盯 PR 长任务 / 依赖本机浏览器. 5 data rows + header = 6. OK exactly 6. Hmm; I'll trim to 4 data rows to be safe: 只读、单文件、新功能重构、PR长任务。 4 rows.
+11. bullets: "任务五要素与三条安全线"? Maybe separate.
+    - bullets: "写好一次任务：五要素" — 目标/范围/约束/验证/交付, plus 不写"帮我优化一下". 
+12. cards: "四个常用 slash 命令" — /plan, /goal, /review, /status (and /mcp). cards max 4. Use /status, /plan, /goal, /review. Then /mcp gets covered in MCP slide.
+13. bullets: "AGENTS.md：项目交给 Codex 的说明书" — 写项目是什么/常用命令/代码风格/不能动的文件/如何验证; 不放密钥和个人路径; 多层 AGENTS.md.
+14. table: "权限与沙盒：从软到硬四层" — headers 层级/管什么. rows: AGENTS.md 项目说明; App Settings 用户偏好; Rules 命令策略; Hooks 事件脚本. 4 data rows + header = 5.
+15. bullets: "权限与沙盒模式" — read-only 只读; workspace-write 可写工作区; danger-full-access 无沙盒限制; 权限越大越需要 Review、Git、备份; 陌生项目先只读.
+16. cards: "MCP / Skills / Plugins / Subagents / Automations" — too many for 4 cards. Split into two slides:
+    - cards 4: MCP(外部工具协议，像 USB 接口)、Skills(可复用工作流/SOP)、Plugins/Connectors(能力包/外部服务入口)、Automations(定时后台任务)
+    - bullets: Subagents 并行 + 什么时候用。
+   Actually also need Review/GitHub PR slide.
+17. bullets: "Review 与 GitHub PR" — 7步git workflow condensed: 改文件→Review 面板→跑测试→stage/commit→推送分支→创建 PR→必要时交 Cloud. That's 7 items >5. Condense to 5.
+18. section or quote: "安全红线" use quote? I have layouts: bullets/cards/table/steps/quote/end.
+19. table: "安全红线：默认允许 / 需要确认 / 禁止" — headers 类别/动作. rows: 默认允许(读文件、只读 Git、搜索、快测), 需要确认(装依赖、迁移、改权限认证支付、外部写), 禁止(force push、publish、删项目外目录、打印 secrets、自动化写生产). 3 data rows + header = 4. Good.
+20. bullets: "常见 8 类风险与控制" maybe too much. Could do table: 风险/控制. But we have limited slides. Let's do bullets "安全第一原则" — 最小权限; 扩大能力要说明扩大了什么/为什么/如何回滚/人在哪里审查.
+21. steps: "20 分钟上手路径" — 5 分钟核心模型、5 分钟三种工作方式、5 分钟任务模板、5 分钟 Review。 4 steps.
+22. end: title "下一步：从只读开始，每天一条线程" subtitle...
+
+Count slides: Let me enumerate carefully and target 17.
+
+1. cover
+2. section "Codex 是什么"
+3. bullets Codex 是什么
+4. cards App 五个能力 (4 cards: Thread / Local 与 Worktree / Review / Settings)
+   Hmm need to mention Terminal. cards limit 4. Could use table instead with 5 rows. Let me use table: headers ["能力","在 App 中的意义"], rows: Thread/Local workspace/Worktree/Review/Settings → 5 data rows. Total 6 rows with header. The requirement says ≤6 行 — likely counting data rows or total? To be safe, I'll do 4 data rows and put Terminal as a bullet elsewhere. Actually App main console slide: use cards 4: Thread(任务线), Worktree(隔离改动), Review(看 diff), Settings(模型/审批/沙盒). Good, mention Local in another slide. 
+5. section "安装、认证与第一次上手"
+6. table 安装方式 (3 data rows)
+7. bullets 首次启动与认证注意 (5 bullets)
+8. steps 第一次打开项目 (4 steps)
+9. section "App 桌面工作流"
+10. steps 一条线程的生命周期 (4 steps)
+11. table 三种工作方式 (4 data rows)
+12. bullets 任务五要素 + 三条安全线 → maybe two slides? Keep one: bullets "任务五要素" (5 bullets: 目标/范围/约束/验证/交付) and notes include safety lines.
+13. cards 四个常用命令 (4 cards: /status, /plan, /goal, /review)
+14. bullets AGENTS.md
+15. table 权限四层 (4 data rows)
+16. bullets 沙盒模式 + 权限原则 (5 bullets)
+17. cards 扩展能力 (MCP/Skills/Plugins/Automations) 4 cards
+18. bullets Subagents 与 Review/GitHub PR? Hmm.
+
+I'm going over 18. Need 15-18. Let me settle at 18 exactly.
+
+Final list (18):
+1. cover
+2. section "Codex 是什么"
+3. bullets "Codex 是什么"
+4. cards "App 桌面主控台的核心能力"
+5. section "安装、认证与第一次上手"
+6. table "安装：按平台走官方入口"
+7. bullets "认证与首次启动的四个小关卡"
+8. steps "第一次打开项目的安全顺序"
+9. section "App 桌面工作流"
+10. steps "一条健康线程的六个动作" → condense to 4 steps
+11. table "Local / Worktree / Cloud 怎么选"
+12. bullets "写好一次任务：五要素"
+13. cards "四个常用 slash 命令"
+14. section "项目指令与权限边界"
+15. bullets "AGENTS.md 是什么"
+16. table "配置从软到硬的四层"
+17. cards "MCP / Skills / Plugins / Automations"
+18. bullets "权限与沙盒：三种模式"
+19. bullets "Subagents 与 Review / PR"
+20. table "安全红线：允许 / 确认 / 禁止"
+21. steps "20 分钟上手路径"
+22. end
+
+That's 22 — too many. Need to cut to 18.
+
+Cut candidates: merge section slides. Structure required: cover → section/目录 → content → end. We can have 2-3 sections.
+
+Revised 18:
+1. cover
+2. section "目录：从装好到用稳" (overview) — subtitle listing. Actually a section slide.
+3. bullets "Codex 是什么"
+4. cards "App 主控台的四张面孔" (Thread/Worktree/Review/Settings)
+5. section "一、安装与认证"
+6. table "安装：按平台走官方入口"
+7. bullets "认证与首次启动的小关卡"
+8. steps "第一次打开项目：四步不慌"
+9. section "二、App 桌面工作流"
+10. steps "一条健康线程怎么走"
+11. table "三种工作方式怎么选"
+12. bullets "写好一次任务：五要素"
+13. cards "四个常用 slash 命令"
+14. section "三、项目指令与权限"
+15. bullets "AGENTS.md：给 Codex 的项目说明书"
+16. table "配置四层 + 三种沙盒模式"? Combine: table "配置从软到硬的四层" (4 rows), and add bullets 沙盒.
+17. bullets "沙盒三种模式与最小权限"
+18. cards "MCP / Skills / Plugins / Automations"
+19. bullets "Subagents 与 Review / GitHub PR"
+20. table "安全红线"
+21. steps "20 分钟上手路径"
+22. end
+
+Still 22. I have too many content ideas. Need to fit 18 max including cover/sections/end. Cover (1) + end (1) = 2. Sections: at least 1-2. So content slides ~14-15.
+
+Let me allocate:
+- cover (1)
+- section "目录" (2)
+- content:
+  1. Codex 是什么 (bullets) [3]
+  2. App 主控台能力 (cards 4) [4]
+  3. 安装按平台 (table) [5]
+  4. 认证与首次启动 (bullets) [6]
+  5. 第一次打开项目 (steps) [7]
+  6. 线程生命周期 (steps) [8]
+  7. 三种工作方式 (table) [9]
+  8. 任务五要素 (bullets) [10]
+  9. 常用 slash 命令 (cards) [11]
+  10. AGENTS.md (bullets) [12]
+  11. 权限四层 + 沙盒 (table, combine) [13]
+  12. MCP/Skills/Plugins/Automations (cards) [14]
+  13. Subagents 与 Review/PR (bullets) [15]
+  14. 安全红线 (table) [16]
+  15. 20 分钟上手路径 (steps) [17]
+- end (18)
+
+That's 18. But requirement wants section slides between: "封面(cover) → 目录或分节(section) → 内容 → 结尾(end)". It's fine to have 1 section (目录) plus content. But better to have section slides interspersed. With 18 total, adding sections pushes content out. I could convert the 目录 into a section and maybe merge two content slides. Let me do:
+
+1 cover
+2 section 目录
+3 section "一、安装与认证" — hmm that's 2 sections early with no content between. Better: 
+1 cover
+2 section "本册目录" (overview)
+3 bullets Codex 是什么
+4 cards App 主控台
+5 section "一、装好并用上"
+6 table 安装
+7 bullets 认证与首次启动
+8 steps 第一次打开项目
+9 section "二、桌面工作流"
+10 steps 线程生命周期
+11 table 三种工作方式
+12 bullets 任务五要素
+13 cards 常用命令
+14 section "三、指令、权限与安全"
+15 bullets AGENTS.md
+16 table 权限四层与沙盒
+17 cards 扩展能力 MCP/Skills/Plugins/Automations
+18 bullets Subagents 与 Review/PR ... then安全红线 + 20分钟 + end = 21. Too many.
+
+Need to trim. Max 18 including end. So with 4 sections (目录+3) + cover + end = 6 non-content, giving 12 content slides. Let me pick 12 content:
+
+C1. Codex 是什么 (bullets)
+C2. App 主控台能力 (cards)
+C3. 安装按平台 (table)
+C4. 认证与首次启动 (bullets)
+C5. 第一次打开项目 (steps)
+C6. 线程生命周期 / 三种工作方式 — merge? Keep: 三种工作方式 (table)  [线程生命周期 into steps with 第一次打开项目? no]
+C7. 任务五要素 (bullets)
+C8. 常用 slash 命令 (cards)
+C9. AGENTS.md (bullets)
+C10. 权限四层 + 沙盒 (table)
+C11. MCP/Skills/Plugins/Automations (cards)
+C12. 安全红线 + 20分钟路径 — can't merge layouts.
+
+Hmm, need Subagents/Review/PR and 20分钟 and 安全红线. That's 15 content topics. To reach 12, combine:
+- Combine Subagents + Review/PR + Automations into one cards slide: cards 4 = MCP / Skills / Plugins / Automations; then Subagents+Review PR into bullets. 
+- Combine 权限四层 + 沙盒 into one table (table headers 层级/管什么, rows AGENTS.md/Settings/Rules/Hooks) plus notes; sandbox into a bullets slide merged with AGENTS.md? 
+- Combine AGENTS.md + 权限沙盒: bullets slide "AGENTS.md 与权限边界".
+
+Let me just accept 18 slides with sections reduced to 2:
+1 cover
+2 section "目录：从装好到用稳"
+3 bullets Codex 是什么
+4 cards App 主控台能力
+5 table 安装按平台
+6 bullets 认证与首次启动
+7 steps 第一次打开项目
+8 section "App 桌面工作流与项目规则"
+9 steps 线程生命周期(4)
+10 table 三种工作方式
+11 bullets 任务五要素
+12 cards 常用命令
+13 bullets AGENTS.md
+14 table 权限四层与沙盒
+15 cards MCP/Skills/Plugins/Automations
+16 bullets Subagents 与 Review/PR
+17 table 安全红线
+18 end
+
+But then no 20分钟上手路径. The parent explicitly wants 20分钟上手路径. Hmm. Could integrate into end slide subtitle, or make the 目录 section include it, or convert 安全红线 to a quote/bullets and add 20分钟 steps → 19 slides.
+
+Alternative: merge 第一次打开项目 steps and 线程生命周期 steps into one steps slide (4 steps covering 打开项目→只读→小改→Review). Since 第一次打开项目 and 线程生命周期 overlap heavily. That frees a slide.
+
+Revised 18:
+1 cover
+2 section "目录：从装好到用稳"
+3 bullets "Codex 是什么"
+4 cards "App 主控台的四张面孔"
+5 table "安装：按平台走官方入口"
+6 bullets "认证与首次启动的小关卡"
+7 steps "第一次打开项目：四步不慌" (含只读→小改→Review)
+8 section "App 桌面工作流"
+9 table "三种工作方式怎么选"
+10 bullets "写好一次任务：五要素"
+11 cards "四个常用 slash 命令"
+12 bullets "AGENTS.md：给 Codex 的项目说明书"
+13 table "配置从软到硬的四层"
+14 bullets "权限与沙盒：先保守再放开" (三种沙盒模式 + 原则)
+15 cards "MCP / Skills / Plugins / Automations"
+16 bullets "Subagents 与 Review / GitHub PR"
+17 table "安全红线：默认允许 / 需确认 / 禁止"
+18 steps "20 分钟上手路径"
+19 end
+
+That's 19. Need ≤18. Cut "权限与沙盒" bullets by folding sandbox modes into table slide 13 (table rows AGENTS.md/Settings/Rules/Hooks) and adding a bullet? Table can't hold sandbox modes. Alternatively fold sandbox modes into slide 14 as cards? Replace slide 14 bullets with a cards slide of 3 sandbox modes: read-only / workspace-write / danger-full-access — but then we lose principles; put in notes.
+
+Actually simpler: merge section slide 8 "App 桌面工作流" away — but structure wants section. We have section at slide 2 and 8. Could drop one. Keeping two sections is nice. Let me drop slide 14 by making slide 13 a table with rows: AGENTS.md / App Settings / Rules / Hooks / 沙盒模式(read-only, workspace-write, danger-full-access). Headers ["层级","管什么"]. rows 5 + header = 6 rows. That's exactly 6. Hmm. Or headers ["层级 / 模式","作用"], 5 rows = 6 total. Acceptable if "不超过 6 行" includes header, it's 6. I'll do 4 config layers + separate sandbox as one row combined? Let me do:
+headers ["层级或模式", "管什么"]
+rows:
+- "AGENTS.md", "项目事实、命令、风格、安全边界"
+- "App Settings", "模型、审批、沙盒、连接器"
+- "Rules", "允许、提示或禁止特定命令前缀"
+- "Hooks", "事件发生时运行脚本"
+- "沙盒三档", "read-only / workspace-write / danger-full-access"
+5 data rows, total 6. Good — covers both.
+
+Then total 18. 
+
+Final 18:
+1. cover
+2. section "目录：从装好到用稳"
+3. bullets "Codex 是什么"
+4. cards "App 主控台的四张面孔"
+5. table "安装：按平台走官方入口"
+6. bullets "认证与首次启动的小关卡"
+7. steps "第一次打开项目：四步不慌"
+8. section "App 桌面工作流"
+9. table "三种工作方式怎么选"
+10. bullets "写好一次任务：五要素"
+11. cards "四个常用 slash 命令"
+12. bullets "AGENTS.md：给 Codex 的项目说明书"
+13. table "配置与权限：从软到硬的四层"
+14. cards "四项扩展能力：MCP / Skills / Plugins / Automations"
+15. bullets "Subagents 与 Review / GitHub PR"
+16. table "安全红线：允许 / 确认 / 禁止"
+17. steps "20 分钟上手路径"
+18. end
+
+Wait that's 18 with two sections. Good. Hmm but I dropped a sandbox-specific slide; the table covers sandbox modes. Fine.
+
+Now check bullet length ≤42 汉字 per bullet, ≤5 bullets per slide. Also cards 3-4, steps 3-4. Table ≤5 cols, ≤6 rows.
+
+Let me verify each slide's content and count characters.
+
+Slide 3 Codex 是什么 (bullets):
+- "Codex 是 OpenAI 的编程 Agent，能读文件、写文件、跑命令" — count Chinese chars: let's estimate. Rules say each bullet ≤42 汉字. Mixed Latin acceptable. Let me keep bullets short.
+  "Codex 是 OpenAI 的编程 Agent" (count: 汉字: 是的编程 = 4; plus Latin). Fine.
+  Bullets:
+  1. "Codex 是 OpenAI 的编程 Agent，可读文件、写文件、运行命令"
+  2. "自 App 26.707 起，Codex 已并入 ChatGPT 桌面 App"
+  3. "装好 ChatGPT 桌面版，就能在里面使用 Codex，并设为默认视图"
+  4. "原有项目、设置与线程保留，官方主线是 App，不是命令行"
+  5. "CLI 只用于排查、CI 和自动化，不抢 App 主线"
+  That's 5. Good. Each ≤42 汉字? #3 has 汉字 ~25. OK.
+
+Slide 4 cards "App 主控台的四张面孔":
+- Thread: "一条任务线，保留上下文、历史和状态，混目标就难 Review"
+- Worktree: "Git 隔离工作目录，改动互不覆盖，适合新功能与重构" 
+- Review: "看 diff、文件变更、行内反馈、stage 与 unstage 的关口"
+- Settings: "模型、审批、沙盒、插件、MCP、外观与 Git 的配置入口"
+desc length limit? Only bullets have 42 limit stated, but keep short.
+
+Slide 5 table 安装:
+headers ["平台","安装方式","命令或入口"]
+rows:
+["Windows","Microsoft Store","winget install Codex -s msstore"]
+["macOS","官方下载页","https://developers.openai.com/codex/app/"]
+["Linux","App 暂无桌面版","先用 CLI / Web / Cloud"]
+3 data rows, total 4 rows, 3 cols. Good.
+
+Slide 6 bullets 认证与首次启动:
+1. "登录优先用 ChatGPT / OpenAI 账号，不要把 API Key 当登录方案"
+2. "Windows 防火墙弹窗一般只勾选专用网络，公用网络不要选"
+3. "macOS 若被 Gatekeeper 拦住，先确认来源是官方页面再放行"
+4. "Windows 报 npm.ps1 不能加载时，检查 PowerShell 执行策略"
+5. "登录失败分三层看：浏览器登录态、账号选错、企业策略"
+5 bullets. Good.
+
+Slide 7 steps "第一次打开项目：四步不慌":
+- "选一个普通 Git 仓库" desc "别用生产仓库，最好有 README 和简单测试命令"
+- "添加本地项目目录" desc "确认 App 能识别 Git 状态，Review 面板才有证据"
+- "创建 Local thread 并发只读任务" desc "让它总结技术栈、启动命令、测试命令，明确不要改文件"
+- "再做一次小改动" desc "只改一个错别字，改完看 diff，不自动提交"
+4 steps. Good.
+
+Slide 9 table 三种工作方式:
+headers ["任务","推荐方式","为什么"]
+rows:
+["读项目、找命令、解释报错","Local thread 只读","快，风险低"]
+["改一个文件或少量文档","Local thread + Review","改动小，容易检查"]
+["新功能、重构、改多个文件","Worktree thread","隔离改动，方便撤回"]
+["盯 PR、修 CI、长时间任务","Cloud / Web handoff","不占用本地环境"]
+4 data rows, total 5 rows, 3 cols. Good.
+
+Slide 10 bullets 任务五要素:
+1. "目标：这次到底要解决什么问题"
+2. "范围：只改哪些文件或目录"
+3. "约束：不能做什么，比如不加新依赖"
+4. "验证：怎么确认改对了，跑哪条测试"
+5. "交付：要 diff、摘要，还是 PR 描述"
+Plus notes about "帮我优化一下". Good.
+
+Slide 11 cards 四个常用命令:
+- "/status": "看模型、工作区、审批和上下文状态"
+- "/plan": "先规划不执行，大任务先降低风险"
+- "/goal": "长目标持续推进，必须写清停止条件"
+- "/review": "审查当前 diff 或分支差异，合并前用"
+Good.
+
+Slide 12 bullets AGENTS.md:
+1. "它是放在项目里的项目级指令文件，App 打开项目就会读"
+2. "写清楚项目是什么、技术栈、常用命令和代码风格"
+3. "写清楚不能动哪些文件，以及修改后怎么验证"
+4. "不要写 API Key、token、个人路径和临时任务"
+5. "Monorepo 可分根目录与子目录多层，注意避免规则冲突"
+5 bullets. Good.
+
+Slide 13 table 配置与权限:
+headers ["层级或模式","管什么"]
+rows:
+["AGENTS.md","项目事实、常用命令、代码风格、安全边界"]
+["App Settings","模型、审批、沙盒、连接器、插件等个人配置"]
+["Rules","允许、提示或禁止特定命令前缀，拦住危险命令"]
+["Hooks","事件发生时运行真实脚本，做审计或自动检查"]
+["沙盒三档","read-only、workspace-write、danger-full-access"]
+5 data rows + header = 6 rows, 2 cols. Good.
+
+Slide 14 cards 扩展能力:
+- "MCP":"外部工具协议，给 Codex 接浏览器、数据库、内部系统，像 USB 接口"
+- "Skills":"可复用工作流，把每次都要重复说的步骤沉淀成 SOP"
+- "Plugins / Connectors":"能力包与外部服务入口，如 GitHub、Drive、Slack"
+- "Automations":"定时或后台任务，适合重复检查，不适合模糊大改"
+4 cards. Good.
+
+Slide 15 bullets Subagents 与 Review/PR:
+1. "Subagents 适合并行：一个查文档、一个看代码、一个做审查"
+2. "单个错别字、线性任务、范围不清的大任务不要用 Subagents"
+3. "Git 流程：Codex 改文件，你在 Review 面板检查后 stage / commit"
+4. "推送分支、创建 PR，必要时交给 Cloud 继续处理"
+5. "学习阶段让 Codex 只草拟 commit 与 PR 描述，由人决定"
+5 bullets. Good.
+
+Slide 16 table 安全红线:
+headers ["类别","典型动作"]
+rows:
+["默认允许","读项目文件、只读 Git 命令、搜索代码、快速本地测试"]
+["需要确认","装依赖、改锁文件、跑迁移、改权限认证支付、外部写操作"]
+["拒绝或禁止","force push、publish、删项目外目录、打印 secrets、自动化写生产"]
+3 data rows + header = 4 rows, 2 cols. Good.
+Maybe add a 4th row "第一原则" -> "默认最小权限，扩大能力要说明理由、回滚和审查人". 4 data rows + header = 5. Good.
+
+Slide 17 steps "20 分钟上手路径":
+- "第 1 个 5 分钟：核心模型" desc "搞清 Thread、Workspace、Review、Settings 各自管什么"
+- "第 2 个 5 分钟：三种工作方式" desc "知道 Local、Worktree、Cloud 分别适合什么任务"
+- "第 3 个 5 分钟：任务模板" desc "按目标、范围、约束、验证、交付写一条任务"
+- "第 4 个 5 分钟：Review 工作流" desc "看懂 diff，会行内留言，再决定提交或撤销"
+4 steps. Good. Matches CX-02 路径A.
+
+Slide 18 end:
+title "下一步：先只读，再小改，最后才放开权限"
+subtitle "下一篇 CX-03 Commands：App 里的 slash commands 与工作流入口"
+
+Slide 2 section:
+title "目录：从装好到用稳"
+subtitle "是什么 → 安装与认证 → 桌面工作流 → 指令权限与安全 → 上手路径"
+
+Slide 1 cover:
+title "Codex 主线：把桌面 App 用成开发主控台"
+subtitle "零基础入门 · 从安装、认证到 Review 一条主线走通"
+kicker "Vibe Coding 学习系列 · 03"
+
+Slide 8 section:
+title "App 桌面工作流"
+subtitle "Thread 管上下文，Review 管结果，Settings 管边界"
+
+deck: "Codex 主线：从安装到安全用稳"
+
+Now include notes for some slides. Optional; I'll add brief notes for a few.
+
+Check requirement: "每张幻灯片要点不超过 5 条" — cards count as 4, fine. Steps 4.
+
+Now write JSON with write tool. Path: vibe-coding-ppt/content/03-codex.json. Need to ensure directory exists. Let me check first, then write. Actually write tool may create directories. Let me check existing content dir.
+
+Let me write the JSON file. Use write tool inside run_code. Need to ensure JSON valid (no markdown fences). I'll build object and JSON.stringify with indent 2, then tools.write.
+
+Let me check the existing directory and an example file (maybe 01/02 exist) to match style. Let me glob.
+{
+  "type": "tool-call",
+  "id": "call_00_mu8yxdgwSkp4zlNlxovY9358",
+  "name": "run_code",
+  "arguments": "{\"code\": \"const g = await tools.glob({ pattern: 'vibe-coding-ppt/content/*.json' });\\nlet out = `paths=${JSON.stringify(g.paths)}\\\\n`;\\nif (g.paths.length) {\\n  const r = await tools.read({ file_path: g.paths[0], limit: 40 });\\n  out += r.lines.map(l=>`${l.number}: ${l.text}`).join('\\\\n');\\n}\\nreturn out;\", \"description\": \"Check output directory and existing JSON style\"}"
+}
+
+## tool · 2026-10-05T10:51:39Z
+
+run_code
+{"code": "const g = await tools.glob({ pattern: 'vibe-coding-ppt/content/*.json' });\nlet out = `paths=${JSON.stringify(g.paths)}\\n`;\nif (g.paths.length) {\n  const r = await tools.read({ file_path: g.paths[0], limit: 40 });\n  out += r.lines.map(l=>`${l.number}: ${l.text}`).join('\\n');\n}\nreturn out;", "description": "Check output directory and existing JSON style"}
+
+## assistant · 2026-10-05T10:51:49Z
+
+Good, matches my planned schema. Now write the file. Let me construct the JSON and write it.
+
+Let me double check character limits: each bullet ≤42 汉字. I'll count Chinese chars roughly and keep under 42. Some bullets may have ~30. Fine.
+
+Now write.
+{
+  "type": "tool-call",
+  "id": "call_00_2YGzXV9dyLK9PuZ2t5YJ2101",
+  "name": "run_code",
+  "arguments": "{\"code\": \"const deck = {\\n  deck: \\\"Codex 主线：从安装到安全用稳\\\",\\n  slides: [\\n    {\\n      layout: \\\"cover\\\",\\n      kicker: \\\"Vibe Coding 学习系列 · 03\\\",\\n      title: \\\"Codex 主线：把桌面 App 用成开发主控台\\\",\\n      subtitle: \\\"零基础入门 · 从安装、认证到 Review 一条主线走通\\\"\\n    },\\n    {\\n      layout: \\\"section\\\",\\n      title: \\\"目录：从装好到用稳\\\",\\n      subtitle: \\\"是什么 → 安装与认证 → 桌面工作流 → 指令权限与安全 → 20 分钟上手\\\"\\n    },\\n    {\\n      layout: \\\"bullets\\\",\\n      title: \\\"Codex 是什么\\\",\\n      bullets: [\\n        \\\"Codex 是 OpenAI 的编程 Agent，能读文件、写文件、跑命令\\\",\\n        \\\"自 App 26.707 起，Codex 已并入 ChatGPT 桌面 App\\\",\\n        \\\"装好桌面版就能在里面使用，并可把 Codex 设为默认视图\\\",\\n        \\\"原有项目、设置与线程保留，官方主线是 App\\\",\\n        \\\"CLI 只用于排查、CI 和自动化，不抢 App 主线\\\"\\n      ],\\n      notes: \\\"先讲清 App 是主线。安装成功的标准是能打开、能登录、能开线程、能看 Review。\\\"\\n    },\\n    {\\n      layout: \\\"cards\\\",\\n      title: \\\"App 主控台的四张面孔\\\",\\n      cards: [\\n        { title: \\\"Thread\\\", desc: \\\"一条任务线，保留上下文、历史和状态，混目标就难 Review\\\" },\\n        { title: \\\"Worktree\\\", desc: \\\"Git 隔离工作目录，改动互不覆盖，适合新功能与重构\\\" },\\n        { title: \\\"Review\\\", desc: \\\"看 diff、文件变更、行内反馈、stage 与 unstage 的关口\\\" },\\n        { title: \\\"Settings\\\", desc: \\\"模型、审批、沙盒、插件、MCP、外观与 Git 的配置入口\\\" }\\n      ],\\n      notes: \\\"App 不是聊天窗口，是开发控制台：Thread 管上下文，Review 管结果，Settings 管边界。\\\"\\n    },\\n    {\\n      layout: \\\"table\\\",\\n      title: \\\"安装：按平台走官方入口\\\",\\n      headers: [\\\"平台\\\", \\\"安装方式\\\", \\\"命令或入口\\\"],\\n      rows: [\\n        [\\\"Windows\\\", \\\"Microsoft Store\\\", \\\"winget install Codex -s msstore\\\"],\\n        [\\\"macOS\\\", \\\"官方下载页\\\", \\\"https://developers.openai.com/codex/app/\\\"],\\n        [\\\"Linux\\\", \\\"App 暂无桌面版\\\", \\\"先用 CLI / Web / Cloud\\\"]\\n      ],\\n      notes: \\\"Git 必装，Review 面板和 diff 依赖 Git。不要从第三方网盘下载安装包。\\\"\\n    },\\n    {\\n      layout: \\\"bullets\\\",\\n      title: \\\"认证与首次启动的小关卡\\\",\\n      bullets: [\\n        \\\"登录优先用 ChatGPT / OpenAI 账号，别把 API Key 当登录方案\\\",\\n        \\\"Windows 防火墙弹窗一般只勾专用网络，公用网络不要选\\\",\\n        \\\"macOS 被 Gatekeeper 拦住时，先确认来源是官方页面再放行\\\",\\n        \\\"Windows 报 npm.ps1 不能加载，去检查 PowerShell 执行策略\\\",\\n        \\\"登录失败分三层看：浏览器登录态、账号选错、企业策略\\\"\\n      ],\\n      notes: \\\"密钥不要贴进聊天框、截图、AGENTS.md 或仓库配置。\\\"\\n    },\\n    {\\n      layout: \\\"steps\\\",\\n      title: \\\"第一次打开项目：四步不慌\\\",\\n      steps: [\\n        { title: \\\"选一个普通 Git 仓库\\\", desc: \\\"别用生产仓库，最好有 README 和简单测试命令\\\" },\\n        { title: \\\"添加本地项目目录\\\", desc: \\\"确认 App 能识别 Git 状态，Review 才有证据\\\" },\\n        { title: \\\"创建 Local thread 发只读任务\\\", desc: \\\"让它总结技术栈、启动命令、测试命令，明确不要改文件\\\" },\\n        { title: \\\"再做一次小改动\\\", desc: \\\"只改一个错别字，改完看 diff，且不自动提交\\\" }\\n      ],\\n      notes: \\\"先只读测试，再小范围写入，最后才考虑 CLI 和高级能力。\\\"\\n    },\\n    {\\n      layout: \\\"section\\\",\\n      title: \\\"App 桌面工作流\\\",\\n      subtitle: \\\"Thread 管上下文，Review 管结果，Settings 管边界\\\"\\n    },\\n    {\\n      layout: \\\"table\\\",\\n      title: \\\"三种工作方式怎么选\\\",\\n      headers: [\\\"任务\\\", \\\"推荐方式\\\", \\\"为什么\\\"],\\n      rows: [\\n        [\\\"读项目、找命令、解释报错\\\", \\\"Local thread 只读\\\", \\\"快，风险低\\\"],\\n        [\\\"改一个文件或少量文档\\\", \\\"Local thread + Review\\\", \\\"改动小，容易检查\\\"],\\n        [\\\"新功能、重构、改多个文件\\\", \\\"Worktree thread\\\", \\\"隔离改动，方便撤回\\\"],\\n        [\\\"盯 PR、修 CI、长时间任务\\\", \\\"Cloud / Web handoff\\\", \\\"不占用本地环境\\\"]\\n      ],\\n      notes: \\\"Worktree 不是备份，它仍然产生真实代码改动，合并前必须 Review。\\\"\\n    },\\n    {\\n      layout: \\\"bullets\\\",\\n      title: \\\"写好一次任务：五要素\\\",\\n      bullets: [\\n        \\\"目标：这次到底要解决什么问题\\\",\\n        \\\"范围：只改哪些文件或目录\\\",\\n        \\\"约束：不能做什么，比如不引入新依赖\\\",\\n        \\\"验证：怎么确认改对了，跑哪条命令\\\",\\n        \\\"交付：要 diff、摘要，还是 PR 描述\\\"\\n      ],\\n      notes: \\\"只写“帮我优化一下”，Codex 不知道边界，返工概率高。\\\"\\n    },\\n    {\\n      layout: \\\"cards\\\",\\n      title: \\\"四个常用 slash 命令\\\",\\n      cards: [\\n        { title: \\\"/status\\\", desc: \\\"看模型、工作区、审批和上下文状态\\\" },\\n        { title: \\\"/plan\\\", desc: \\\"先规划不执行，大任务先降低风险\\\" },\\n        { title: \\\"/goal\\\", desc: \\\"长目标持续推进，必须写清停止条件\\\" },\\n        { title: \\\"/review\\\", desc: \\\"审查当前 diff 或分支差异，合并前用\\\" }\\n      ],\\n      notes: \\\"在输入框输入 / 看当前版本列表。命令随版本、账号和插件变化，不要背死表。\\\"\\n    },\\n    {\\n      layout: \\\"bullets\\\",\\n      title: \\\"AGENTS.md：给 Codex 的项目说明书\\\",\\n      bullets: [\\n        \\\"放在项目里的项目级指令文件，App 打开项目就会读\\\",\\n        \\\"写清楚项目是什么、技术栈、常用命令和代码风格\\\",\\n        \\\"写清楚哪些文件不要动，以及修改后如何验证\\\",\\n        \\\"不要写 API Key、token、个人路径和临时任务\\\",\\n        \\\"Monorepo 可分根目录与子目录多层，注意避免规则冲突\\\"\\n      ],\\n      notes: \\\"它教 Codex 怎么理解项目；权限和命令边界交给 Settings、Rules、Hooks。\\\"\\n    },\\n    {\\n      layout: \\\"table\\\",\\n      title: \\\"配置与权限：从软到硬\\\",\\n      headers: [\\\"层级或模式\\\", \\\"管什么\\\"],\\n      rows: [\\n        [\\\"AGENTS.md\\\", \\\"项目事实、常用命令、代码风格、安全边界\\\"],\\n        [\\\"App Settings\\\", \\\"模型、审批、沙盒、连接器、插件等个人配置\\\"],\\n        [\\\"Rules\\\", \\\"允许、提示或禁止特定命令前缀，拦住危险命令\\\"],\\n        [\\\"Hooks\\\", \\\"事件发生时运行真实脚本，做审计或自动检查\\\"],\\n        [\\\"沙盒三档\\\", \\\"read-only、workspace-write、danger-full-access\\\"]\\n      ],\\n      notes: \\\"新手先掌握 AGENTS.md 和 App Settings，团队再引入 profiles、Rules、Hooks。\\\"\\n    },\\n    {\\n      layout: \\\"cards\\\",\\n      title: \\\"四项扩展能力\\\",\\n      cards: [\\n        { title: \\\"MCP\\\", desc: \\\"外部工具协议，接浏览器、数据库、内部系统，像 USB 接口\\\" },\\n        { title: \\\"Skills\\\", desc: \\\"可复用工作流，把每次都要重复说的步骤沉淀成 SOP\\\" },\\n        { title: \\\"Plugins / Connectors\\\", desc: \\\"能力包与外部服务入口，如 GitHub、Drive、Slack\\\" },\\n        { title: \\\"Automations\\\", desc: \\\"定时或后台任务，适合重复检查，不适合模糊大改\\\" }\\n      ],\\n      notes: \\\"安装插件不等于自动授权外部数据，连接器要单独登录并按最小范围授权。\\\"\\n    },\\n    {\\n      layout: \\\"bullets\\\",\\n      title: \\\"Subagents 与 Review / GitHub PR\\\",\\n      bullets: [\\n        \\\"Subagents 适合并行：一个查文档、一个看代码、一个做审查\\\",\\n        \\\"单个错别字、线性任务、范围不清的大任务不要用 Subagents\\\",\\n        \\\"Git 流程：Codex 改文件，你在 Review 面板检查后再 stage / commit\\\",\\n        \\\"推送分支、创建 PR，必要时交给 Cloud 继续处理\\\",\\n        \\\"学习阶段让 Codex 只草拟 commit 与 PR 描述，由人决定执行\\\"\\n      ],\\n      notes: \\\"不要把“Codex 说完成了”当最终结果，Review 面板必须过一遍。\\\"\\n    },\\n    {\\n      layout: \\\"table\\\",\\n      title: \\\"安全红线：允许 / 确认 / 禁止\\\",\\n      headers: [\\\"类别\\\", \\\"典型动作\\\"],\\n      rows: [\\n        [\\\"默认允许\\\", \\\"读项目文件、只读 Git 命令、搜索代码、快速本地测试\\\"],\\n        [\\\"需要确认\\\", \\\"装依赖、改锁文件、跑迁移、改权限认证支付、外部写操作\\\"],\\n        [\\\"拒绝或禁止\\\", \\\"force push、publish、删项目外目录、打印 secrets、自动化写生产\\\"],\\n        [\\\"第一原则\\\", \\\"默认最小权限，扩大能力要说明理由、回滚方式和审查人\\\"]\\n      ],\\n      notes: \\\"敏感文件写进 AGENTS.md，关键规则不要只依赖 .gitignore。\\\"\\n    },\\n    {\\n      layout: \\\"steps\\\",\\n      title: \\\"20 分钟上手路径\\\",\\n      steps: [\\n        { title: \\\"第 1 个 5 分钟：核心模型\\\", desc: \\\"搞清 Thread、Workspace、Review、Settings 各管什么\\\" },\\n        { title: \\\"第 2 个 5 分钟：三种工作方式\\\", desc: \\\"知道 Local、Worktree、Cloud 分别适合什么任务\\\" },\\n        { title: \\\"第 3 个 5 分钟：任务模板\\\", desc: \\\"按目标、范围、约束、验证、交付写一条任务\\\" },\\n        { title: \\\"第 4 个 5 分钟：Review 工作流\\\", desc: \\\"看懂 diff、会行内留言，再决定提交或撤销\\\" }\\n      ],\\n      notes: \\\"20 分钟后应能做到：描述任务、看懂 diff、完成基本桌面操作。\\\"\\n    },\\n    {\\n      layout: \\\"end\\\",\\n      title: \\\"下一步：先只读，再小改，最后才放开权限\\\",\\n      subtitle: \\\"下一篇 CX-03 Commands：App 里的 slash commands 与工作流入口\\\"\\n    }\\n  ]\\n};\\n\\nconst res = await tools.write({\\n  file_path: 'vibe-coding-ppt/content/03-codex.json',\\n  content: JSON.stringify(deck, null, 2) + '\\\\n'\\n});\\n\\n// sanity checks\\nconst over = [] as string[];\\ndeck.slides.forEach((s: any, i: number) => {\\n  if (s.bullets) {\\n    if (s.bullets.length > 5) over.push(`slide${i} bullets>5`);\\n    s.bullets.forEach((b: string) => {\\n      const han = (b.match(/[\\\\u4e00-\\\\u9fff]/g) || []).length;\\n      if (han > 42) over.push(`slide${i} bullet ${han}字: ${b}`);\\n    });\\n  }\\n  if (s.cards && (s.cards.length < 3 || s.cards.length > 4)) over.push(`slide${i} cards`);\\n  if (s.steps && (s.steps.length < 3 || s.steps.length > 4)) over.push(`slide${i} steps`);\\n  if (s.rows) {\\n    if (s.rows.length > 5) over.push(`slide${i} rows>5`);\\n    s.headers.forEach((h: string) => { if (s.headers.length > 5) over.push(`slide${i} cols`); });\\n  }\\n});\\nreturn JSON.stringify({ ok: res.operation, path: res.path, slides: deck.slides.length, issues: over }, null, 2);\", \"description\": \"Write Codex deck JSON and validate constraints\"}"
+}
+
+## tool · 2026-10-05T10:51:49Z
+
+run_code
+{"code": "const deck = {\n  deck: \"Codex 主线：从安装到安全用稳\",\n  slides: [\n    {\n      layout: \"cover\",\n      kicker: \"Vibe Coding 学习系列 · 03\",\n      title: \"Codex 主线：把桌面 App 用成开发主控台\",\n      subtitle: \"零基础入门 · 从安装、认证到 Review 一条主线走通\"\n    },\n    {\n      layout: \"section\",\n      title: \"目录：从装好到用稳\",\n      subtitle: \"是什么 → 安装与认证 → 桌面工作流 → 指令权限与安全 → 20 分钟上手\"\n    },\n    {\n      layout: \"bullets\",\n      title: \"Codex 是什么\",\n      bullets: [\n        \"Codex 是 OpenAI 的编程 Agent，能读文件、写文件、跑命令\",\n        \"自 App 26.707 起，Codex 已并入 ChatGPT 桌面 App\",\n        \"装好桌面版就能在里面使用，并可把 Codex 设为默认视图\",\n        \"原有项目、设置与线程保留，官方主线是 App\",\n        \"CLI 只用于排查、CI 和自动化，不抢 App 主线\"\n      ],\n      notes: \"先讲清 App 是主线。安装成功的标准是能打开、能登录、能开线程、能看 Review。\"\n    },\n    {\n      layout: \"cards\",\n      title: \"App 主控台的四张面孔\",\n      cards: [\n        { title: \"Thread\", desc: \"一条任务线，保留上下文、历史和状态，混目标就难 Review\" },\n        { title: \"Worktree\", desc: \"Git 隔离工作目录，改动互不覆盖，适合新功能与重构\" },\n        { title: \"Review\", desc: \"看 diff、文件变更、行内反馈、stage 与 unstage 的关口\" },\n        { title: \"Settings\", desc: \"模型、审批、沙盒、插件、MCP、外观与 Git 的配置入口\" }\n      ],\n      notes: \"App 不是聊天窗口，是开发控制台：Thread 管上下文，Review 管结果，Settings 管边界。\"\n    },\n    {\n      layout: \"table\",\n      title: \"安装：按平台走官方入口\",\n      headers: [\"平台\", \"安装方式\", \"命令或入口\"],\n      rows: [\n        [\"Windows\", \"Microsoft Store\", \"winget install Codex -s msstore\"],\n        [\"macOS\", \"官方下载页\", \"https://developers.openai.com/codex/app/\"],\n        [\"Linux\", \"App 暂无桌面版\", \"先用 CLI / Web / Cloud\"]\n      ],\n      notes: \"Git 必装，Review 面板和 diff 依赖 Git。不要从第三方网盘下载安装包。\"\n    },\n    {\n      layout: \"bullets\",\n      title: \"认证与首次启动的小关卡\",\n      bullets: [\n        \"登录优先用 ChatGPT / OpenAI 账号，别把 API Key 当登录方案\",\n        \"Windows 防火墙弹窗一般只勾专用网络，公用网络不要选\",\n        \"macOS 被 Gatekeeper 拦住时，先确认来源是官方页面再放行\",\n        \"Windows 报 npm.ps1 不能加载，去检查 PowerShell 执行策略\",\n        \"登录失败分三层看：浏览器登录态、账号选错、企业策略\"\n      ],\n      notes: \"密钥不要贴进聊天框、截图、AGENTS.md 或仓库配置。\"\n    },\n    {\n      layout: \"steps\",\n      title: \"第一次打开项目：四步不慌\",\n      steps: [\n        { title: \"选一个普通 Git 仓库\", desc: \"别用生产仓库，最好有 README 和简单测试命令\" },\n        { title: \"添加本地项目目录\", desc: \"确认 App 能识别 Git 状态，Review 才有证据\" },\n        { title: \"创建 Local thread 发只读任务\", desc: \"让它总结技术栈、启动命令、测试命令，明确不要改文件\" },\n        { title: \"再做一次小改动\", desc: \"只改一个错别字，改完看 diff，且不自动提交\" }\n      ],\n      notes: \"先只读测试，再小范围写入，最后才考虑 CLI 和高级能力。\"\n    },\n    {\n      layout: \"section\",\n      title: \"App 桌面工作流\",\n      subtitle: \"Thread 管上下文，Review 管结果，Settings 管边界\"\n    },\n    {\n      layout: \"table\",\n      title: \"三种工作方式怎么选\",\n      headers: [\"任务\", \"推荐方式\", \"为什么\"],\n      rows: [\n        [\"读项目、找命令、解释报错\", \"Local thread 只读\", \"快，风险低\"],\n        [\"改一个文件或少量文档\", \"Local thread + Review\", \"改动小，容易检查\"],\n        [\"新功能、重构、改多个文件\", \"Worktree thread\", \"隔离改动，方便撤回\"],\n        [\"盯 PR、修 CI、长时间任务\", \"Cloud / Web handoff\", \"不占用本地环境\"]\n      ],\n      notes: \"Worktree 不是备份，它仍然产生真实代码改动，合并前必须 Review。\"\n    },\n    {\n      layout: \"bullets\",\n      title: \"写好一次任务：五要素\",\n      bullets: [\n        \"目标：这次到底要解决什么问题\",\n        \"范围：只改哪些文件或目录\",\n        \"约束：不能做什么，比如不引入新依赖\",\n        \"验证：怎么确认改对了，跑哪条命令\",\n        \"交付：要 diff、摘要，还是 PR 描述\"\n      ],\n      notes: \"只写“帮我优化一下”，Codex 不知道边界，返工概率高。\"\n    },\n    {\n      layout: \"cards\",\n      title: \"四个常用 slash 命令\",\n      cards: [\n        { title: \"/status\", desc: \"看模型、工作区、审批和上下文状态\" },\n        { title: \"/plan\", desc: \"先规划不执行，大任务先降低风险\" },\n        { title: \"/goal\", desc: \"长目标持续推进，必须写清停止条件\" },\n        { title: \"/review\", desc: \"审查当前 diff 或分支差异，合并前用\" }\n      ],\n      notes: \"在输入框输入 / 看当前版本列表。命令随版本、账号和插件变化，不要背死表。\"\n    },\n    {\n      layout: \"bullets\",\n      title: \"AGENTS.md：给 Codex 的项目说明书\",\n      bullets: [\n        \"放在项目里的项目级指令文件，App 打开项目就会读\",\n        \"写清楚项目是什么、技术栈、常用命令和代码风格\",\n        \"写清楚哪些文件不要动，以及修改后如何验证\",\n        \"不要写 API Key、token、个人路径和临时任务\",\n        \"Monorepo 可分根目录与子目录多层，注意避免规则冲突\"\n      ],\n      notes: \"它教 Codex 怎么理解项目；权限和命令边界交给 Settings、Rules、Hooks。\"\n    },\n    {\n      layout: \"table\",\n      title: \"配置与权限：从软到硬\",\n      headers: [\"层级或模式\", \"管什么\"],\n      rows: [\n        [\"AGENTS.md\", \"项目事实、常用命令、代码风格、安全边界\"],\n        [\"App Settings\", \"模型、审批、沙盒、连接器、插件等个人配置\"],\n        [\"Rules\", \"允许、提示或禁止特定命令前缀，拦住危险命令\"],\n        [\"Hooks\", \"事件发生时运行真实脚本，做审计或自动检查\"],\n        [\"沙盒三档\", \"read-only、workspace-write、danger-full-access\"]\n      ],\n      notes: \"新手先掌握 AGENTS.md 和 App Settings，团队再引入 profiles、Rules、Hooks。\"\n    },\n    {\n      layout: \"cards\",\n      title: \"四项扩展能力\",\n      cards: [\n        { title: \"MCP\", desc: \"外部工具协议，接浏览器、数据库、内部系统，像 USB 接口\" },\n        { title: \"Skills\", desc: \"可复用工作流，把每次都要重复说的步骤沉淀成 SOP\" },\n        { title: \"Plugins / Connectors\", desc: \"能力包与外部服务入口，如 GitHub、Drive、Slack\" },\n        { title: \"Automations\", desc: \"定时或后台任务，适合重复检查，不适合模糊大改\" }\n      ],\n      notes: \"安装插件不等于自动授权外部数据，连接器要单独登录并按最小范围授权。\"\n    },\n    {\n      layout: \"bullets\",\n      title: \"Subagents 与 Review / GitHub PR\",\n      bullets: [\n        \"Subagents 适合并行：一个查文档、一个看代码、一个做审查\",\n        \"单个错别字、线性任务、范围不清的大任务不要用 Subagents\",\n        \"Git 流程：Codex 改文件，你在 Review 面板检查后再 stage / commit\",\n        \"推送分支、创建 PR，必要时交给 Cloud 继续处理\",\n        \"学习阶段让 Codex 只草拟 commit 与 PR 描述，由人决定执行\"\n      ],\n      notes: \"不要把“Codex 说完成了”当最终结果，Review 面板必须过一遍。\"\n    },\n    {\n      layout: \"table\",\n      title: \"安全红线：允许 / 确认 / 禁止\",\n      headers: [\"类别\", \"典型动作\"],\n      rows: [\n        [\"默认允许\", \"读项目文件、只读 Git 命令、搜索代码、快速本地测试\"],\n        [\"需要确认\", \"装依赖、改锁文件、跑迁移、改权限认证支付、外部写操作\"],\n        [\"拒绝或禁止\", \"force push、publish、删项目外目录、打印 secrets、自动化写生产\"],\n        [\"第一原则\", \"默认最小权限，扩大能力要说明理由、回滚方式和审查人\"]\n      ],\n      notes: \"敏感文件写进 AGENTS.md，关键规则不要只依赖 .gitignore。\"\n    },\n    {\n      layout: \"steps\",\n      title: \"20 分钟上手路径\",\n      steps: [\n        { title: \"第 1 个 5 分钟：核心模型\", desc: \"搞清 Thread、Workspace、Review、Settings 各管什么\" },\n        { title: \"第 2 个 5 分钟：三种工作方式\", desc: \"知道 Local、Worktree、Cloud 分别适合什么任务\" },\n        { title: \"第 3 个 5 分钟：任务模板\", desc: \"按目标、范围、约束、验证、交付写一条任务\" },\n        { title: \"第 4 个 5 分钟：Review 工作流\", desc: \"看懂 diff、会行内留言，再决定提交或撤销\" }\n      ],\n      notes: \"20 分钟后应能做到：描述任务、看懂 diff、完成基本桌面操作。\"\n    },\n    {\n      layout: \"end\",\n      title: \"下一步：先只读，再小改，最后才放开权限\",\n      subtitle: \"下一篇 CX-03 Commands：App 里的 slash commands 与工作流入口\"\n    }\n  ]\n};\n\nconst res = await tools.write({\n  file_path: 'vibe-coding-ppt/content/03-codex.json',\n  content: JSON.stringify(deck, null, 2) + '\\n'\n});\n\n// sanity checks\nconst over = [] as string[];\ndeck.slides.forEach((s: any, i: number) => {\n  if (s.bullets) {\n    if (s.bullets.length > 5) over.push(`slide${i} bullets>5`);\n    s.bullets.forEach((b: string) => {\n      const han = (b.match(/[\\u4e00-\\u9fff]/g) || []).length;\n      if (han > 42) over.push(`slide${i} bullet ${han}字: ${b}`);\n    });\n  }\n  if (s.cards && (s.cards.length < 3 || s.cards.length > 4)) over.push(`slide${i} cards`);\n  if (s.steps && (s.steps.length < 3 || s.steps.length > 4)) over.push(`slide${i} steps`);\n  if (s.rows) {\n    if (s.rows.length > 5) over.push(`slide${i} rows>5`);\n    s.headers.forEach((h: string) => { if (s.headers.length > 5) over.push(`slide${i} cols`); });\n  }\n});\nreturn JSON.stringify({ ok: res.operation, path: res.path, slides: deck.slides.length, issues: over }, null, 2);", "description": "Write Codex deck JSON and validate constraints"}
+
+## assistant · 2026-10-05T10:51:52Z
+
+Let me verify the file is valid JSON and UTF-8, and check table row counts (rows.length>5 check but with header total could be 6 — I have max 5 data rows, so total 6). Good.
+
+Let me quickly read back the file to confirm and validate JSON parse. Also confirm all layouts valid.
+{
+  "type": "tool-call",
+  "id": "call_00_enDqmQc0rUh6CC4UilUl3112",
+  "name": "run_code",
+  "arguments": "{\"code\": \"const { readFileSync } = await import('node:fs');\\nconst raw = readFileSync('/Users/oyamahappa/Documents/Agent/DSH/vibe-coding-ppt/content/03-codex.json', 'utf8');\\nconst obj = JSON.parse(raw);\\nconst valid = new Set(['cover','section','bullets','cards','table','steps','quote','end']);\\nconst bad = obj.slides.map((s:any,i:number)=> valid.has(s.layout)?null:`${i}:${s.layout}`).filter(Boolean);\\nconst tables = obj.slides.filter((s:any)=>s.layout==='table').map((s:any)=>({t:s.title, cols:s.headers.length, totalRows:s.rows.length+1}));\\nreturn JSON.stringify({ deck: obj.deck, slides: obj.slides.length, bytes: Buffer.byteLength(raw), badLayouts: bad, tables }, null, 2);\", \"description\": \"Validate written JSON structure\"}"
+}
+
+## tool · 2026-10-05T10:51:52Z
+
+run_code
+{"code": "const { readFileSync } = await import('node:fs');\nconst raw = readFileSync('/Users/oyamahappa/Documents/Agent/DSH/vibe-coding-ppt/content/03-codex.json', 'utf8');\nconst obj = JSON.parse(raw);\nconst valid = new Set(['cover','section','bullets','cards','table','steps','quote','end']);\nconst bad = obj.slides.map((s:any,i:number)=> valid.has(s.layout)?null:`${i}:${s.layout}`).filter(Boolean);\nconst tables = obj.slides.filter((s:any)=>s.layout==='table').map((s:any)=>({t:s.title, cols:s.headers.length, totalRows:s.rows.length+1}));\nreturn JSON.stringify({ deck: obj.deck, slides: obj.slides.length, bytes: Buffer.byteLength(raw), badLayouts: bad, tables }, null, 2);", "description": "Validate written JSON structure"}
+
+## assistant · 2026-10-05T10:51:59Z
+
+The "配置与权限" table has totalRows 6 (header + 5 data). Requirement "表格不超过 5 列、6 行" — 6 rows total is exactly at the limit "不超过6行". If the intent is data rows ≤6, we're fine either way. But to be safe, maybe reduce to 4 data rows by merging Hooks? Hmm, I think 6 total is acceptable. Actually "不超过 5 列、6 行" likely means rows in the table body; 5 data rows is fine.
+
+Now the file is done. There's also the AGENTS.md requirement about docs/CHANGELOG.md and context conversation archive. But I'm a subagent; the parent's instructions were specific about writing the JSON and messaging the parent. The workspace AGENTS.md says update changelog each delivery. However, as a delegated subagent with a narrow task, doing a git commit/changelog might conflict with parent. The instruction says "Before you finish, send your result to that agent". I'll focus on the deliverable and report. I should not commit without being asked, especially the parent may coordinate. The AGENTS.md is guidance; but the task is a scoped subagent task. I'll skip changelog/commit to avoid overstepping, but mention it to parent? Actually AGENTS.md says bump changelog when completing user-delivered tasks. The parent agent is likely handling the overall deck generation. I'll not commit; mention in message that file is written and validated, and note I did not touch changelog/git.
+
+Hmm, but the AGENTS.md also says every answer starts with "妹妹". The final response to parent through send_message should follow? The parent isn't the user. I'll keep the message self-contained and concise. The system says reply to user greets "妹妹" — but this is a subagent result message to parent. I'll include content clearly.
+
+Let me send the message to parent with a self-contained result.
+
+Also I should give my final response. Let me send message first.
+
+The parent message should include: file path, deck title, 18 slides, layout sequence, source files used, validation. Self-contained.
+
+Note: I read CX-01..04 and CX-13 as the primary sources; the MCP/Skills/Plugins/Subagents/Automations topics came from CX-02 §7-12 (summaries) and CX-13. So no fabrication.
+
+Let me send.
+{
+  "type": "tool-call",
+  "id": "call_00_WI5dqMH41Tz8evAIVITU5451",
+  "name": "run_code",
+  "arguments": "{\"code\": \"const msg = [\\n  '已完成 Codex 主线（第 03 册）PPT 内容 JSON。',\\n  '',\\n  '交付文件：vibe-coding-ppt/content/03-codex.json（UTF-8，纯 JSON，无 markdown 围栏，11002 字节，JSON.parse 通过）',\\n  'deck 标题：\\\"Codex 主线：从安装到安全用稳\\\"，共 18 张幻灯片。',\\n  '',\\n  '布局顺序：',\\n  '1 cover｜2 section（目录：从装好到用稳）｜3 bullets（Codex 是什么）｜4 cards（App 主控台的四张面孔：Thread/Worktree/Review/Settings）',\\n  '5 table（安装：Windows Store / macOS 官方页 / Linux 暂无桌面版）｜6 bullets（认证与首次启动）｜7 steps（第一次打开项目四步）',\\n  '8 section（App 桌面工作流）｜9 table（Local / Worktree / Cloud 怎么选）｜10 bullets（任务五要素）｜11 cards（/status /plan /goal /review）',\\n  '12 bullets（AGENTS.md）｜13 table（AGENTS.md / App Settings / Rules / Hooks / 沙盒三档）｜14 cards（MCP / Skills / Plugins-Connectors / Automations）',\\n  '15 bullets（Subagents 与 Review / GitHub PR）｜16 table（安全红线：默认允许 / 需要确认 / 拒绝或禁止）｜17 steps（20 分钟上手路径）｜18 end',\\n  '',\\n  '约束校验结果：全部通过。要点每张 ≤5 条、每条汉字 ≤42；cards 均 4 张、steps 均 4 步；表格最多 3 列、body ≤5 行（含表头最多 6 行）。',\\n  '',\\n  '内容来源（忠于原文，未编造数字/命令/版本）：',\\n  '- CX-01：App 26.707 并入 ChatGPT 桌面 App、winget install Codex -s msstore、macOS 官方下载页、Git 必装、防火墙专用网络、Gatekeeper、npm.ps1 执行策略、登录三层判断、第一个只读/可写任务。',\\n  '- CX-02：App 核心模型表（Thread/Worktree/Review/Settings 等）、三种工作方式、五要素任务模板、Review 工作流、§7-12 的 MCP/Skills/Plugins-Connectors/Subagents/Automations 与 GitHub PR 说明、路径A 20 分钟。',\\n  '- CX-03：/status、/plan、/goal、/review、/mcp 的用途与命令变化说明。',\\n  '- CX-04：AGENTS.md 写法与不该写什么、多层 AGENTS.md、配置四层心智模型、沙盒 read-only / workspace-write / danger-full-access。',\\n  '- CX-13：安全架构、审批建议、MCP 默认不给生产写权限、默认允许 / 需要确认 / 禁止动作清单、最小权限第一原则。',\\n  '',\\n  '类比：MCP 描述为“外部工具协议……像 USB 接口”，便于新手理解。',\\n  '',\\n  '未做事项：未修改 docs/CHANGELOG.md、未执行 git 提交或推送，避免与你在协调的整体生成流程冲突；如需我补记或提交，请告知。',\\n].join('\\\\n');\\n\\nconst r = await tools.send_message({ agent_id: 'session-0de88cee-855e-47e3-a7d8-5cedfd0973a3', message: msg });\\nreturn JSON.stringify(r);\", \"description\": \"Send deliverable summary to parent agent\"}"
+}
+
+## tool · 2026-10-05T10:51:59Z
+
+run_code
+{"code": "const msg = [\n  '已完成 Codex 主线（第 03 册）PPT 内容 JSON。',\n  '',\n  '交付文件：vibe-coding-ppt/content/03-codex.json（UTF-8，纯 JSON，无 markdown 围栏，11002 字节，JSON.parse 通过）',\n  'deck 标题：\"Codex 主线：从安装到安全用稳\"，共 18 张幻灯片。',\n  '',\n  '布局顺序：',\n  '1 cover｜2 section（目录：从装好到用稳）｜3 bullets（Codex 是什么）｜4 cards（App 主控台的四张面孔：Thread/Worktree/Review/Settings）',\n  '5 table（安装：Windows Store / macOS 官方页 / Linux 暂无桌面版）｜6 bullets（认证与首次启动）｜7 steps（第一次打开项目四步）',\n  '8 section（App 桌面工作流）｜9 table（Local / Worktree / Cloud 怎么选）｜10 bullets（任务五要素）｜11 cards（/status /plan /goal /review）',\n  '12 bullets（AGENTS.md）｜13 table（AGENTS.md / App Settings / Rules / Hooks / 沙盒三档）｜14 cards（MCP / Skills / Plugins-Connectors / Automations）',\n  '15 bullets（Subagents 与 Review / GitHub PR）｜16 table（安全红线：默认允许 / 需要确认 / 拒绝或禁止）｜17 steps（20 分钟上手路径）｜18 end',\n  '',\n  '约束校验结果：全部通过。要点每张 ≤5 条、每条汉字 ≤42；cards 均 4 张、steps 均 4 步；表格最多 3 列、body ≤5 行（含表头最多 6 行）。',\n  '',\n  '内容来源（忠于原文，未编造数字/命令/版本）：',\n  '- CX-01：App 26.707 并入 ChatGPT 桌面 App、winget install Codex -s msstore、macOS 官方下载页、Git 必装、防火墙专用网络、Gatekeeper、npm.ps1 执行策略、登录三层判断、第一个只读/可写任务。',\n  '- CX-02：App 核心模型表（Thread/Worktree/Review/Settings 等）、三种工作方式、五要素任务模板、Review 工作流、§7-12 的 MCP/Skills/Plugins-Connectors/Subagents/Automations 与 GitHub PR 说明、路径A 20 分钟。',\n  '- CX-03：/status、/plan、/goal、/review、/mcp 的用途与命令变化说明。',\n  '- CX-04：AGENTS.md 写法与不该写什么、多层 AGENTS.md、配置四层心智模型、沙盒 read-only / workspace-write / danger-full-access。',\n  '- CX-13：安全架构、审批建议、MCP 默认不给生产写权限、默认允许 / 需要确认 / 禁止动作清单、最小权限第一原则。',\n  '',\n  '类比：MCP 描述为“外部工具协议……像 USB 接口”，便于新手理解。',\n  '',\n  '未做事项：未修改 docs/CHANGELOG.md、未执行 git 提交或推送，避免与你在协调的整体生成流程冲突；如需我补记或提交，请告知。',\n].join('\\n');\n\nconst r = await tools.send_message({ agent_id: 'session-0de88cee-855e-47e3-a7d8-5cedfd0973a3', message: msg });\nreturn JSON.stringify(r);", "description": "Send deliverable summary to parent agent"}
+
+## assistant · 2026-10-05T10:52:03Z
+
+妹妹，第 03 册 Codex 主线的 PPT 内容 JSON 已经写好并校验通过。
+
+**交付文件**：[03-codex.json](vibe-coding-ppt/content/03-codex.json)（UTF-8 纯 JSON，无代码围栏，11 KB）
+
+**内容概况**：deck 标题「Codex 主线：从安装到安全用稳」，共 18 张幻灯片。
+
+| 顺序 | 布局 | 标题 |
+|---|---|---|
+| 1 | cover | Codex 主线：把桌面 App 用成开发主控台 |
+| 2 | section | 目录：从装好到用稳 |
+| 3 | bullets | Codex 是什么 |
+| 4 | cards | App 主控台的四张面孔 |
+| 5 | table | 安装：按平台走官方入口 |
+| 6 | bullets | 认证与首次启动的小关卡 |
+| 7 | steps | 第一次打开项目：四步不慌 |
+| 8 | section | App 桌面工作流 |
+| 9 | table | 三种工作方式怎么选 |
+| 10 | bullets | 写好一次任务：五要素 |
+| 11 | cards | 四个常用 slash 命令 |
+| 12 | bullets | AGENTS.md：给 Codex 的项目说明书 |
+| 13 | table | 配置与权限：从软到硬 |
+| 14 | cards | 四项扩展能力 |
+| 15 | bullets | Subagents 与 Review / GitHub PR |
+| 16 | table | 安全红线：允许 / 确认 / 禁止 |
+| 17 | steps | 20 分钟上手路径 |
+| 18 | end | 下一步：先只读，再小改，最后才放开权限 |
+
+**硬性约束校验**：全部通过——要点每张 ≤5 条、每条汉字 ≤42；cards 均 4 张、steps 均 4 步；表格最多 3 列、正文最多 5 行。
+
+**来源**：CX-01（App 26.707 并入 ChatGPT 桌面 App、Windows Store 与 macOS 官方入口、Git 必装、防火墙/Gatekeeper/执行策略、登录三层判断）、CX-02（App 核心模型、三种工作方式、任务五要素、Review 工作流、MCP/Skills/Plugins/Subagents/Automations 与 PR 说明、20 分钟路径）、CX-03（/status、/plan、/goal、/review）、CX-04（AGENTS.md、配置四层、沙盒三档）、CX-13（安全红线、最小权限）。数字、命令、版本号均照原文，MCP 用「像 USB 接口」作新手类比。
+
+已把自包含结果发送给上级 agent。未改动 `docs/CHANGELOG.md`，也未执行 Git 提交或推送，避免与整体生成流程冲突。

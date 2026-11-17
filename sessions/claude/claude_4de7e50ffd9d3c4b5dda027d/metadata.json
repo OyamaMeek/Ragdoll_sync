@@ -1,0 +1,30 @@
+{
+  "created" : 1794841633105,
+  "files" : [
+    "/Users/oyamahappa/.claude/projects/-Volumes-SamsungSSD990PRO-GitHub-Ragdoll--agent-tests-e0346315-ebd7-410c-aa6b-14914eb4545a/da65e1a2-dd5d-4618-a0e1-0467fbb00dbf.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:4de7e50ffd9d3c4b5dda027d",
+  "messages" : [
+
+  ],
+  "nativeID" : "da65e1a2-dd5d-4618-a0e1-0467fbb00dbf",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/tests/e0346315-ebd7-410c-aa6b-14914eb4545a",
+  "source" : "claude",
+  "title" : "Remember the code RAGDOLL_CHECK_1729. Reply only OK. Do not inspect files or use any tools.",
+  "updated" : 1794841633172,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "956b11f8-cfbb-488a-8d13-7b6b5b033cc9",
+      "input" : 0,
+      "model" : "<synthetic>",
+      "output" : 0,
+      "time" : 1794841633172
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

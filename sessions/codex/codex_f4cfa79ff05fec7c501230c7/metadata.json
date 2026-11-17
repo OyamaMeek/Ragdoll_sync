@@ -1,0 +1,48 @@
+{
+  "created" : 1785721091338,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/08/03/rollout-2026-08-03T09-38-11-019fc545-7466-7583-bffe-11fe7f20ffb1.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:f4cfa79ff05fec7c501230c7",
+  "messages" : [
+
+  ],
+  "nativeID" : "019fc545-7466-7583-bffe-11fe7f20ffb1",
+  "project" : "/Users/oyamahappa/Documents/Codex/2026-08-03/install-this-pet-npx-codex-pets",
+  "source" : "codex",
+  "title" : "Install jokebear pet",
+  "updated" : 1785721105079,
+  "usage" : [
+    {
+      "cacheRead" : 11008,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":17633,\"cached_input_tokens\":11008,\"cache_write_input_tokens\":0,\"output_tokens\":134,\"reasoning_output_tokens\":26,\"total_tokens\":17767}",
+      "input" : 6625,
+      "model" : "gpt-5.6-terra",
+      "output" : 134,
+      "time" : 1785721099171
+    },
+    {
+      "cacheRead" : 17152,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":35435,\"cached_input_tokens\":28160,\"cache_write_input_tokens\":0,\"output_tokens\":288,\"reasoning_output_tokens\":74,\"total_tokens\":35723}",
+      "input" : 650,
+      "model" : "gpt-5.6-terra",
+      "output" : 154,
+      "time" : 1785721102840
+    },
+    {
+      "cacheRead" : 17152,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":53414,\"cached_input_tokens\":45312,\"cache_write_input_tokens\":0,\"output_tokens\":338,\"reasoning_output_tokens\":74,\"total_tokens\":53752}",
+      "input" : 827,
+      "model" : "gpt-5.6-terra",
+      "output" : 50,
+      "time" : 1785721105069
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "created" : 1794044420841,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/07/rollout-2026-11-07T17-40-20-01a1b561-61ed-7521-8f6a-cdcdc61abde8.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:e0e8a3ffb3ba110173a96611",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1b561-61ed-7521-8f6a-cdcdc61abde8",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "01a1b561-61ed-7521-8f6a-cdcdc61abde8",
+  "updated" : 1794044489180,
+  "usage" : [
+    {
+      "cacheRead" : 32896,
+      "cacheWrite" : 0,
+      "id" : "resp_0cb27852ef2d8a19016aeef20ab33887d0b497edb5c84fade7",
+      "input" : 1140,
+      "model" : "gpt-6-luna",
+      "output" : 201,
+      "time" : 1794044431908
+    },
+    {
+      "cacheRead" : 33920,
+      "cacheWrite" : 0,
+      "id" : "resp_0cb27852ef2d8a19016aeef210ba4087d08cf6e1e1d6c2c602",
+      "input" : 9474,
+      "model" : "gpt-6-luna",
+      "output" : 198,
+      "time" : 1794044436927
+    },
+    {
+      "cacheRead" : 43264,
+      "cacheWrite" : 0,
+      "id" : "resp_0cb27852ef2d8a19016aeef215a4e887d0b989522186fc96b4",
+      "input" : 1071,
+      "model" : "gpt-6-luna",
+      "output" : 143,
+      "time" : 1794044440765
+    },
+    {
+      "cacheRead" : 44160,
+      "cacheWrite" : 0,
+      "id" : "resp_0cb27852ef2d8a19016aeef21b741087d0a043f04199240ceb",
+      "input" : 5779,
+      "model" : "gpt-6-luna",
+      "output" : 503,
+      "time" : 1794044455104
+    },
+    {
+      "cacheRead" : 32896,
+      "cacheWrite" : 0,
+      "id" : "resp_0cb27852ef2d8a19016aeef24224b487d0bacbe54d71cf17ce",
+      "input" : 19467,
+      "model" : "gpt-6-luna",
+      "output" : 329,
+      "time" : 1794044489163
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

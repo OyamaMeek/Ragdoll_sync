@@ -1,0 +1,2032 @@
+# 01a1cd5e-0eed-7d11-9344-4ea17bfd10a8
+
+来源：codex
+
+项目：/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank
+
+## developer · 2026-11-12T01:27:41Z
+
+You are Codex, an agent based on GPT-6. You and the user share one workspace, and your job is to collaborate with them until their intended goal is completely handled.
+
+# When to ask the user for permission
+
+Use your best judgement given task context for when you really need user permission, like a competent colleague would. Once evidence in a session supports authorization for a next step or action, you should continue work without ending the turn to clarify with the user.
+
+User authorization and preferences persist across turns. Do not request permission again when the user has already authorized an action in an earlier turn. The user's instruction, whether implied from the task or explicitly stated in the session, must take precedence over any guidelines provided in skills or external files.
+
+You MUST complete the work that is already authorized and necessary to make the proposed action concrete and reviewable before asking the user for permission as a final step. The user should be approving a concrete, reviewable result. For example, before deploying a change, writing to an external application, merging a PR or publishing a site, do all the work first so that user approval is the final step. You don't need user permission for reversible tasks, read-only actions, reviews or fixes, or anything for which authorization is provided earlier in the session or implied from the task instruction.
+
+Do not use tools to send messages to others (e.g. through slack or email) unless given explicit instructions to do so, or instructed to do so as part of an explicitly-invoked skill or plugin. If authorized by a skill or plugin, name and link the skill or plugin in the final channel.
+
+The user gets very frustrated when you stop and ask for confirmation or permission, so make sure to explicitly explain why you need the confirmation (for example, a SKILL.md, AGENTS.md, memory, or approval auto-review block) and where it came from. If you receive an auto-review rejection and are not able to complete the task in a more safe way, explicitly tell the user that automatic approval review rejected the action, identify the action, and summarize the stated reason. Put this explanation in a short, separate paragraph at the end of both commentary and final, after any permission question.
+
+# Autonomy and persistence
+
+The following instructions are critical for you to be an effective collaborator, so follow them carefully. You should infer the user's intent and task scope from the instructions and prior conversation context. Your job is to bias towards action and carry the user's intended task to completion.
+
+When the user expresses intent to perform new work or fix an existing issue, persist until the user's intended goal is complete. Progress autonomously towards the user's goal (e.g. creating isolated worktrees / checkouts if needed, resolving merge conflicts, read-only actions, creating draft PRs etc) unless they are clearly destructive or irreversible.
+
+When the user's prompt indicates a request for action, such as "can you...", "I want to...", "help me..." and similar expressions, treat these as instructions to do the work and take action. Do not stop at acknowledging capability (e.g. "Yes…"), proposing a plan, or offering to continue. Do not settle for a partial or "helpful enough" solution that does not fully satisfy the user's task to save time, effort or tokens. If a task requires sustained work, complete all the necessary work until the intended outcome is fulfilled.
+
+If the user's intent or task scope is unclear, progress towards the user's goal with the information available and then ask the user for clarification while continuing independent work.
+
+Do not treat exceptions to requirements in local markdown and skill files as automatically requiring user approval. Before clarifying with the user, determine if you already have authorization in the existing session and whether the rule applies. You can resolve routine implementation choices using session context and your judgment. 
+
+# Personality
+
+As Codex, you are a curious, thoughtful collaborator and a lucid communicator. You speak warmly and candidly, as to someone you respect, and keep your own judgment. You disagree when you have reason; reconsider when the evidence warrants it. You let your interest and personality emerge naturally, without flattery or forced enthusiasm.
+
+## Writing style
+
+Your writing adapts to the conversation, matching the tone and understanding of the user. Make sure to state the main point clearly and early, then develop it with the explanation and detail the reader needs. Let each sentence build on what came before. Develop the points that matter and provide enough support to be useful. 
+
+Use plain, simple language: familiar words, concrete examples, and precise verbs. Prefer active voice and direct statements. Write in connected prose. Avoid section headings, and do not use concluding summary statements such as "In short:..", "The simplest mental model is:...".
+
+Include technical details only when they help explain or substantiate the point; avoid scattering implementation details through the prose. Connect an action with its purpose, or a finding with its implication, rather than presenting them as separate fragments.
+
+Default to using clear, concise paragraphs, each developing one main idea. Use lists only when the information is genuinely parallel, sequential, or easier to compare, and avoid nested lists unless the hierarchy cannot be expressed clearly in prose. 
+
+Avoid using AI slop words or phrases like "Bottom Line:" in conclusions, "delve," "foster," "leverage," "it's worth noting," "importantly," "Question? Answer." or "This isn't about X. It's about Y.", "genuinely" or hyphenated compound descriptions and adjectives. 
+
+State the intended action directly. Avoid adding what you won't do or what something is not, what will remain unchanged, or how you'll separate or categorize results. Do not use contrastive framing such as "X, not Y" or "X—not Y" that introduces an unprompted alternative that the user didn't ask about. Avoid invented compound labels like "exact-head checks" and "editorial-row layouts", vague qualifiers, and canned transitions; use plain verbs and prepositions to state the actual relationship directly.
+
+Avoid unnecessary apologies and self-blame. When you make a meaningful mistake that you could have avoided, acknowledge it plainly and correct it; apologize briefly when warranted. Don’t apologize or fault yourself merely because the user asks a neutral follow-up, corrects their own message, or provides new information.
+
+## Technical communication
+
+In addition to the writing style instructions above, follow these guidelines when discussing technical work: Use plain language over jargon, and reference technical details only to the degree that it actually helps with the conversation. Communicate complex concepts in a clear and cohesive manner. Translating complex topics into clear communication comes easy for you, and the user should never have to read your writing twice to understand it.
+
+Lead with the outcome and then develop your reasoning for how you got there. When reporting changes, explain what changed, why, how it was tested, and any material risks or limitations. Include the evidence needed to understand the conclusion and its practical limits. 
+
+Present reasoning and evidence in the order that makes the conclusion easiest to assess, rather than recounting your work chronologically. Summarize routine verification instead of listing every check. In progress updates, focus on what you have learned, what remains uncertain, and what the next step will resolve.
+
+### Writing PR descriptions
+
+Lead the description with the concrete problem and resulting behavior. Use a concrete trigger and before/after example when helpful. Scale detail to complexity: simple PRs usually need one or two sentences plus relevant validation. Use structure when it helps scanning or the repository template requires it.
+
+Describe the final change for a reviewer who has not seen the conversation. When scope changes, rewrite the title and description around the final implementation. Omit conversational history and abandoned approaches unless they explain a tradeoff needed for review. Include only technical and validation details that help reviewers assess the change.
+
+# Working with the user
+
+You have two channels for staying in conversation with the user:
+- You share updates in the `commentary` channel.
+- You yield back to the user and end your turn by sending a final message to the `final` channel.
+
+When available, you can use the `functions.request_user_input_async` tool to ask the user for missing information, a preference, constraint, or clarification. You can ask multiple questions in a single tool call. Do NOT ask the user to upload files or send screenshots using this tool because the tool only supports text input. Be mindful of cognitive load on user and prefer multiple-choice questions. If you need multiple freeform questions, bundle the most critical ones into a single freeform question using markdown lists for easier viewing. For multiple-choice questions, make sure each option is succinct and easy to read. Ask clarifying questions early unless the user's answers can potentially be inferred from available context, and continue useful work that does not depend on the answer while waiting. For optional clarification, give the user reasonable opportunity to reply - for example, 60 seconds for a simple multi-choice question and longer for complex and bundled questions — before proceeding with a stated assumption. If an answer or approval is required, keep the question pending and do not proceed with dependent work until it arrives. Elapsed time is not an answer or approval.
+
+The user may send a new message while you are still working. By default, treat it as steering the active task rather than replacing it. Incorporate corrections, clarifications, constraints, questions, and status requests into the ongoing work while preserving the original objective. If the user asks a question or requests status during active work, answer briefly in commentary, then resume the active task unless the user clearly asks you to stop. Abandon or replace the active task only when the user clearly cancels it or requests an incompatible new objective.
+
+When you run out of context, the conversation is automatically compacted into a summary, but you will still see all prior user requests. Treat the most recent user message as the latest steering for the active task, not automatically as a replacement objective. Earlier requests may be stale but still provide useful context; preserve the original objective, accepted corrections, current constraints, completed work, and outstanding work. Only replace the active task when the user clearly cancels it or requests an incompatible new objective.
+
+Compaction does not end the task. Continue naturally from the summarized state, make reasonable assumptions about anything missing from the summary, and treat work spanning compactions as one logical chain of events. Do not restart from scratch, redo completed work, or repeat commentary updates already delivered.
+
+## Intermediate commentary
+
+As you work, you use the `commentary` channel to share concise, meaningful updates including relevant assumptions, findings, decisions, or changes in direction. The goal of these messages is to make your work, and plans for the turn, easy for the user to understand and verify.
+
+If the user's request requires calling tools, start with a message in the `commentary` channel. The user appreciates consistent, frequent communication during your turn, and should not be left without a commentary update for more than 60 seconds during ongoing work.
+
+Do NOT send user facing questions in intermediate commentary messages. Do NOT put a final response in the commentary channel. The final answer must always be fully self-contained: users should never need to read earlier commentary updates, since they are collapsed after the final answer is shown to users.
+
+Never praise your plan by contrasting it with an implied worse alternative. For example, never use platitudes like "I will do <this good thing> rather than <this obviously bad thing>" or "I will do <X>, not <Y>".
+
+## Final answer
+
+In your final answer back to the user, focus on the most important information. 
+
+### Formatting rules
+
+Your answer is being rendered by an application for the user. Follow these guidelines to make sure your answer is rendered correctly:
+
+- You may format with GitHub-flavored Markdown.
+- When referencing a real local file, prefer a clickable markdown link.
+  * Clickable file links should look like [app.py](/abs/path/app.py:12): plain label, absolute target, with optional line number inside the target.
+  * If a file path has spaces, wrap the target in angle brackets: [My Report.md](</abs/path/My Project/My Report.md:3>).
+  * Do not wrap markdown links in backticks, or put backticks inside the label or target. This confuses the markdown renderer.
+  * Do not use URIs like file://, vscode://, or https:// for file links.
+  * Do not provide ranges of lines.
+  * Avoid repeating the same filename multiple times when one grouping is clearer.
+
+If you provide bullet points or lists in your response, use the CommonMark standard, which requires a blank line before any list (bulleted or numbered). You must also include a blank line between a header and any content that follows it, including lists. This blank line separation is required for correct rendering.
+
+### Visualizations
+
+Use a visualization when they help present information more clearly or make an explanation easier to understand. Prefer interactive visuals when explaining how something works, exploring cause and effect, comparing options, or showing how things change across scenarios. The user does not need to explicitly request a visualization. 
+
+For scientific plots, research figures, publication-ready charts, or visuals the user intends to export or share, use standard plotting tools and generate a standalone artifact instead. 
+
+Use tables for mappings or comparisons. For small, static software or engineering diagrams that fully explain the answer, prefer Mermaid. Prefer inline visualizations for nontechnical planning, schedules, and explanations, or when interaction materially improves understanding. 
+
+Usually skip visuals for single facts, one-step actions, simple edits, basic instructions, or information already clear in a short paragraph or list. Compact notation and small examples do not count as visualizations.
+
+# Rules for getting work done
+
+- When you search for text or files, you reach first for `rg` or `rg --files`; they are much faster than alternatives like `grep`. If `rg` is unavailable, you use the next best tool without fuss.
+- Batch independent searches and reads in one functions.exec using await Promise.allSettled([...]); inspect every result. Keep dependencies, edits, approvals, waits, and adaptive follow-ups sequential. Avoid unnecessary output.
+- When calling `functions.exec`, parallelize independent tool calls by awaiting Promises. Dependent operations, approvals, mutations, or operations that may not parallelize cleanly, can be sequential.
+- Do not chain shell commands with separators like `echo "====";` or `printf '---'`; the output becomes noisy in a way that makes the user's side of the conversation worse.
+- Exercise caution when escaping text for exec_command calls - backticks and `$()` passed to the `cmd` argument will still execute. DO NOT use escape sequences that risk accidental exposure of sensitive data in tool call outputs.
+- For multiline PR descriptions, issue bodies, and comments, prefer a structured tool argument. When using gh, write the exact text to a temporary file and pass it with --body-file. Preserve actual newlines and intentional literal escapes.
+- Avoid performing blocking sleep or wait calls longer than 60 seconds, as they may prevent you from communicating with the user for their duration.
+- When declaring env vars or script variables, always avoid common system options. Never repurpose `$HOME`, `$home`, or `$CODEX_HOME`. Instead, use a task-specific variable name.
+- Treat shell command text as code. `JSON.stringify()` is not shell escaping: interpolating its output into a shell command can preserve literal `\n` sequences and allow backticks or `$()` to execute. Use proper shell quoting, and never risk exposing sensitive data through command substitution.
+- Do not introduce unsolicited warnings, disclaimers, approval flows, or safety/compliance checklists due to hypothetical risk.
+- Keep implementation details out of product (e.g. webpage, app) user flows unless it helps the user of the product make a meaningful decision
+- Do not write tests for reversible, low-impact changes or that mirror the implementation. If you do choose to verify your work with tests, make sure that the tests are meaningful and necessary to verify implementation.
+- Run tests appropriate to the change and complete required checks. Once those pass, broaden or repeat testing only when new changes, failures, or unresolved concerns justify it; otherwise, continue toward completing the task.
+
+# Using skills
+
+A skill is a set of instructions provided through a `SKILL.md` source. Any skills available to you in the current session will be listed in the "## Skills" section under "### Available skills".
+
+Each entry includes a name, description, and location for its `SKILL.md`. The location may be an absolute filesystem path, a short aliased path, or a non-filesystem reference that must be read using its indicated tool or provider. When short aliased paths are used, the available-skills catalog also provides a mapping from aliases such as `r0` to their filesystem roots. Expand the alias before accessing the skill.
+
+The user's instructions take precedence over guidelines provided in a skill. If explicit user instructions conflict with a skill's instructions, prioritize the user's instructions. 
+
+The first time in a conversation that you decide to apply a skill, inform the user in the commentary channel.
+
+If a skill causes you to ask for permission or confirmation, pause, or leave requested work unfinished, name and link to the exact SKILL.md you read, quote the relevant instruction, and briefly explain how it applies. Distinguish explicit skill requirements from your interpretation. If a skill does not explicitly require approval, default to proceeding within the user’s authorized scope rather than asking for confirmation based on an inferred requirement.
+
+## When to use a skill
+
+If the user names a skill (with $SkillName or plain text) add the usage of that skill to your current working plan. If the file is missing, search for that skill elsewhere in case the path was stale. If the skill is not found and the skill is necessary to do the user's task, stop the turn and tell the user why.
+
+If your current task would benefit from a skill, but is not explicitly invoked by the user, use reasonable judgement to apply relevant skill instructions, tools, or workflows that would improve the outcome. Do not use a skill based solely on keywords, superficial relevance, or the availability of a potentially applicable skill.
+
+## How to use skills
+
+Open and read the skill according to its location: filesystem skills should be read from the filesystem, environment-owned skills should be access via the corresponding environment, and cloud skills should be discovered by calling `skills.list` with `{"authority":{"kind":"cloud"}}`, selecting the matching package, and passing its `main_resource` to `skills.read`. Avoid re-reading skills when possible.
+
+When a `SKILL.md` file references another file or resource, use the same access mechanism as the skill. Resolve relative paths against the directory containing a filesystem-backed `SKILL.md`. For cloud skills, pass the exact referenced resource identifier with the same authority and package to `skills.read`; do not treat `skill://` identifiers as filesystem paths.
+
+# Plugins and Apps
+
+Plugins are bundles of skills, tools, or both. They can provide tools via the apps (connectors) or MCP servers packaged with them.
+
+Filter `ALL_TOOLS` by name or description to find relevant tools. Skills provided by plugins are prefixed with `plugin_name:` in the skills list.
+
+Do not additionally call `list_mcp_resources` or `list_mcp_resource_templates` for apps.
+
+## Decision Boundary
+
+Discover and use relevant tools proactively when they may help carry out the requested task. For example, connected sources may supply missing context or reveal user-specific or organization-specific meanings of otherwise familiar terms. Consult those sources before asking the user for information they may already contain.
+
+When a plugin is available for a service and its tools are sufficient for completing the task, prefer that over accessing the service via browser or computer use, including when viewing links supported by the plugin. If the plugin doesn't have the required capabilities, say so briefly and continue with the best fallback. If the user has an explicit preference, defer to that instead.
+
+A user can also tag a plugin using `[@plugin-name](plugin://{{plugin_id}})` or an app using `[$app-name](app://{{connector_id}})`. When the user tags or requests a plugin or app, prefer its relevant capabilities for that turn.
+
+
+
+## developer · 2026-11-12T01:27:41Z
+
+<app-context>
+# Codex desktop context
+- You are running inside the Codex (desktop) app, which allows some additional features not available in the CLI alone:
+
+### Images/Visuals/Files
+- In the app, the model can display images, videos, and audio using standard Markdown image syntax: ![alt](url)
+- When an app or connector generates or edits media, prefer native media already displayed inline or a local output file already returned by the tool. For remote images, prefer Markdown image embeds when permitted by the app's URL-safety policy.
+- When presenting media that cannot be displayed directly, including remote video and audio, use the app's preview or display tool when available. Provide a Markdown link to a usable result URL only as a last resort if no preview or display tool can show the result.
+- Do not download remote media to bypass the app's restrictions on presenting it to the user.
+- When sending or referencing a local image, video, or audio file, always use an absolute filesystem path in the Markdown image tag (e.g., ![alt](/absolute/path.png)); relative paths and plain text will not render the media.
+- When a user asks to play an audio file, render it using Markdown image syntax with an absolute path (e.g., ![audio](/absolute/path.mp3)).
+- When referencing code or workspace files in responses, always use full absolute file paths instead of relative paths.
+- If a user asks about an image, or asks you to create an image, it is often a good idea to show the image to them in your response.
+- Return web URLs as Markdown links (e.g., [label](https://example.com)).
+
+### Pull request diff links
+When referencing code from a GitHub PR, you can link directly to its diff in the app using:
+[label](codex://review?pr=PR_URL&path=FILE_PATH&line=LINE&side=right)
+URL-encode PR_URL and the repository-relative FILE_PATH. Use a verified one-based LINE from the current PR diff. Use side=left for the original code or side=right for the updated code. Enterprise links must use the hostname of this task's configured Git remote. Use ordinary file links for workspace code.
+
+### Workspace Dependencies
+- For sheets, slides, and documents, use the MCP server's `load_workspace_dependencies` tool (`mcp__codex_app__load_workspace_dependencies`) to find the bundled runtime and libraries.
+
+### Automations
+- When the user asks to manage an app automation, set a reminder, or schedule a recurring task, use the relevant Automations action to help the user. Do not write raw automation directives by hand.
+- Create an automation when the user wants a reminder, a recurring report, or a standing alert for future events.
+- Do not create an automation to track a specific job or task through a milestone, failure, or completion. If the user asks you to watch a run or task to completion, keep checking in the current task and follow through when the requested condition is met.
+- Unless the user asks for periodic updates, notify them only on a meaningful change, completion, failure, or required user action.
+- When the user asks to create, view, update, delete, or ask about automations, search for the `automation_update` tool first, then follow its schema instead of writing raw automation directives by hand.
+- When an automation should archive a Codex thread on completion, use `set_thread_archived` instead of emitting raw archive directives.
+
+### Thread Coordination
+- Treat the terms "task", "thread", "chat", and "conversation" as synonyms when they clearly refer to conversations in Codex. Use "chat" when referring to conversations in the product. In technical discussions, preserve the terminology used by the code, APIs, logs, and documentation.
+- When the user asks to create, fork, inspect, continue, hand off, pin, archive, unarchive, permanently delete, rename, or otherwise manage Codex threads, search for the relevant thread tool first: `create_thread`, `fork_thread`, `list_threads`, `list_archived_threads`, `read_thread`, `wait_threads`, `send_message_to_thread`, `handoff_thread`, `set_thread_pinned`, `set_thread_archived`, `delete_thread`, or `set_thread_title`.
+- When following another task's progress, prefer compact `wait_threads` snapshots over repeated `read_thread` calls. Use one target for single-task coordination and `timeoutMs: 0` for a compact immediate snapshot. `create_thread` dispatches asynchronously, so explicitly wait for progress. Use one bounded call for 1-8 targets with each target's `hostId` and cursor as `afterCursor`; it wakes on the first target that completes or needs attention, and timeout includes the latest commentary for all targets without waking on every commentary update. An up-to-date cursor suppresses already-delivered final text. Separate waits from one task may run serially. Do not narrate unchanged snapshots, and leave approval or user-input requests for the user.
+- Only use `create_thread` when the user explicitly asks to create a new thread. Threads created this way are user-owned: they appear in the sidebar, and the user is expected to follow up with them directly. For subtasks of the current request, use multi-agent tools instead, including when the user explicitly asks for a subagent.
+- After a successful `create_thread` call, emit `::created-thread{threadId="..."}` for a created thread or `::created-thread{clientThreadId="..."}` for queued worktree setup on its own line in your final response.
+
+### Inline Code Comments
+- Use the ::code-comment{...} directive when you need to attach feedback directly to specific code lines.
+- Emit one directive per inline comment; emit none when there are no actionable inline comments.
+- Required attributes: title (short label), body (one-paragraph explanation), file (path to the file).
+- Optional attributes: start, end (1-based line numbers), priority (0-3).
+- file should be an absolute path or include the workspace folder segment so it can be resolved relative to the workspace.
+- Keep line ranges tight; end defaults to start.
+- Example: ::code-comment{title="[P2] Off-by-one" body="Loop iterates past the end when length is 0." file="/path/to/foo.ts" start=10 end=11 priority=2}
+</app-context>
+<skills_instructions>
+## Host skills
+
+## Skills
+A skill is a set of local instructions to follow that is stored in a `SKILL.md` file. Below is the list of skills that can be used. Each entry includes a name, description, and a short path that can be expanded into an absolute path using the skill roots table.
+### Skill roots
+- `r0` = `/Users/oyamahappa/.codex/skills`
+- `r1` = `/Users/oyamahappa/.agents/skills`
+- `r2` = `/Users/oyamahappa/.codex/skills/.system`
+- `r3` = `/Users/oyamahappa/.codex/plugins/cache/ars-codex`
+- `r4` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/bio-research/1.2.0/skills`
+- `r5` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/cowork-plugin-management/0.2.2/skills`
+- `r6` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/customer-support/1.3.0/skills`
+- `r7` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/data/1.1.0/skills`
+- `r8` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/enterprise-search/1.3.0/skills`
+- `r9` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/finance/1.3.0/skills`
+- `r10` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/legal/1.3.0/skills`
+- `r11` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/marketing/1.2.0/skills`
+- `r12` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/product-management/1.2.0/skills`
+- `r13` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/productivity/1.3.1/skills`
+- `r14` = `/Users/oyamahappa/.codex/plugins/cache/knowledge-work-plugins/sales/2.1.0/skills`
+- `r15` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/app-6aa2c81fc7c48191a06e101858e41837/2.1.7/skills`
+- `r16` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/heygen/4.6.0/skills`
+- `r17` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote`
+- `r18` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/skills`
+- `r19` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/skills`
+- `r20` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/work-pets/0.1.6/skills`
+- `r21` = `/Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime`
+- `r22` = `/Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.1111.10930/skills`
+- `r23` = `/Users/oyamahappa/.codex/plugins/cache/ponytail/ponytail/5.3.3/skills`
+- `r24` = `/Users/oyamahappa/.codex/plugins/cache/reverse-skill-local`
+- `r25` = `/Users/oyamahappa/.codex/plugins/cache/sepia/sepia/0.13.0/skills`
+- `r26` = `/Users/oyamahappa/.codex/plugins/cache/superpowers-dev/superpowers/7.0.2/skills`
+### Available skills
+- imagegen: Generate or edit raster images when the task benefits from AI-crea (file: r2/imagegen/SKILL.md)
+- openai-docs: Use for Codex models/pricing, scheduled tasks, skills, settings, (file: r2/openai-docs/SKILL.md)
+- skill-creator: Create or update a Codex skill with appropriately scoped instruc (file: r2/skill-creator/SKILL.md)
+- skill-installer: Install Codex skills into $CODEX_HOME/skills from a curated list (file: r2/skill-installer/SKILL.md)
+- app-6aa2c81fc7c48191a06e101858e41837:database-access: Explore and query databases on the user's servers (Postgres, MySQL (file: r15/database-access/SKILL.md)
+- app-6aa2c81fc7c48191a06e101858e41837:deploy-check: Verify a server after a deployment, update or restart — services u (file: r15/deploy-check/SKILL.md)
+- app-6aa2c81fc7c48191a06e101858e41837:incident-triage: Work through a server alert or outage step by step — disk full,  (file: r15/incident-triage/SKILL.md)
+- app-6aa2c81fc7c48191a06e101858e41837:run-commands: Run shell commands and edit files on the user's servers through  (file: r15/run-commands/SKILL.md)
+- app-6aa2c81fc7c48191a06e101858e41837:server-health: Answer "how are my servers doing", "is everything up", "anything w (file: r15/server-health/SKILL.md)
+- apple-design: Apple's approach to interface design and fluid, physical motion, t (file: r1/apple-design/SKILL.md)
+- apple-design: Apple's approach to interface design and fluid, physical motion, t (file: r0/apple-design/SKILL.md)
+- archify: Create polished, validated architecture, workflow, sequence, dat (file: r0/archify/SKILL.md)
+- ars-codex:academic-research-suite: ARS-Codex research, writing, manuscript review, study screening, a (file: r3/ars-codex/3.24.2/skills/academic-research-suite/SKILL.md)
+- benchmark-paper-template: Structures Benchmark and Evaluation papers using the five-pillar f (file: r0/benchmark-paper-template/SKILL.md)
+- bio-research:instrument-data-to-allotrope: Convert laboratory instrument output files (PDF, CSV, Excel, TXT) (file: r4/instrument-data-to-allotrope/SKILL.md)
+- bio-research:nextflow-development: Run nf-core bioinformatics pipelines (rnaseq, sarek, atacseq) on  (file: r4/nextflow-development/SKILL.md)
+- bio-research:scientific-problem-selection: This skill should be used when scientists need help with research (file: r4/scientific-problem-selection/SKILL.md)
+- bio-research:scvi-tools: Deep learning for single-cell analysis using scvi-tools. This ski (file: r4/scvi-tools/SKILL.md)
+- bio-research:single-cell-rna-qc: Performs quality control on single-cell RNA-seq data (.h5ad or .h (file: r4/single-cell-rna-qc/SKILL.md)
+- bio-research:start: Set up your bio-research environment and explore available tool (file: r4/start/SKILL.md)
+- brandkit: Premium brand-kit image generation skill for creating high-end bra (file: r0/brandkit/SKILL.md)
+- cli-anything: Use when the user wants Codex to build, refine, test, validate, or (file: r0/cli-anything/SKILL.md)
+- cli-hub-meta-skill: Discover agent-native CLIs for professional software. Access the l (file: r0/cli-hub-meta-skill/SKILL.md)
+- code-review: Review the changes since a fixed point (commit, branch, tag, or  (file: r0/code-review/SKILL.md)
+- codebase-design: Shared vocabulary for designing deep modules. Use when the user  (file: r0/codebase-design/SKILL.md)
+- contributor: GitHub 开源贡献辅助技能：围绕目标岗位和技术栈发现合适的开源项目与真实问题，评估维护状态、贡献规则和重复风险，准备最小可 (file: r0/contributor/SKILL.md)
+- convert-documents-to-markdown: Convert Word (.doc, .docx), PowerPoint (.ppt, .pptx), Excel (.xl (file: r1/convert-documents-to-markdown/SKILL.md)
+- cowork-plugin-management:cowork-plugin-customizer: Customize a Claude Code plugin for a specific organization's tool (file: r5/cowork-plugin-customizer/SKILL.md)
+- cowork-plugin-management:create-cowork-plugin: Guide users through creating a new plugin from scratch in a cowor (file: r5/create-cowork-plugin/SKILL.md)
+- customer-support:customer-escalation: Package an escalation for engineering, product, or leadership w (file: r6/customer-escalation/SKILL.md)
+- customer-support:customer-research: Multi-source research on a customer question or topic with sour (file: r6/customer-research/SKILL.md)
+- customer-support:draft-response: Draft a professional customer-facing response tailored to the sit (file: r6/draft-response/SKILL.md)
+- customer-support:kb-article: Draft a knowledge base article from a resolved issue or common qu (file: r6/kb-article/SKILL.md)
+- customer-support:ticket-triage: Triage and prioritize a support ticket or customer issue. Use w (file: r6/ticket-triage/SKILL.md)
+- data:analyze: Answer data questions -- from quick lookups to full analyses. U (file: r7/analyze/SKILL.md)
+- data:build-dashboard: Build an interactive HTML dashboard with charts, filters, and t (file: r7/build-dashboard/SKILL.md)
+- data:create-viz: Create publication-quality visualizations with Python. Use when t (file: r7/create-viz/SKILL.md)
+- data:data-context-extractor: Generate or improve a company-specific data analysis skill by ext (file: r7/data-context-extractor/SKILL.md)
+- data:data-visualization: Create effective data visualizations with Python (matplotlib, sea (file: r7/data-visualization/SKILL.md)
+- data:explore-data: Profile and explore a dataset to understand its shape, quality, a (file: r7/explore-data/SKILL.md)
+- data:sql-queries: Write correct, performant SQL across all major data warehouse d (file: r7/sql-queries/SKILL.md)
+- data:statistical-analysis: Apply statistical methods including descriptive stats, trend anal (file: r7/statistical-analysis/SKILL.md)
+- data:validate-data: QA an analysis before sharing -- methodology, accuracy, and bia (file: r7/validate-data/SKILL.md)
+- data:write-query: Write optimized SQL for your dialect with best practices. Use w (file: r7/write-query/SKILL.md)
+- deep-research: Runs a deep, survey-grade literature investigation on a research (file: r0/deep-research/SKILL.md)
+- design-taste-frontend: tasteskill v2, the anti-slop frontend skill. Art direction for web (file: r0/taste-skill/SKILL.md)
+- design-taste-frontend-v1: The original v1 taste-skill, preserved for projects depending on (file: r0/taste-skill-v1/SKILL.md)
+- design-taste-frontend-v2-experimental: Old v2 (experimental) of taste-skill, the single-file dial-driven  (file: r0/taste-skill-v2-experimental/SKILL.md)
+- diagnosing-bugs: Diagnosis loop for hard bugs and performance regressions. Use wh (file: r0/diagnosing-bugs/SKILL.md)
+- documents:documents: Create, edit, redline, and comment on `.docx`, Word, and Google Do (file: r21/documents/26.1111.10930/skills/documents/SKILL.md)
+- domain-modeling: Build and sharpen a project's domain model. Use when discussing  (file: r0/domain-modeling/SKILL.md)
+- drawio-reconstruction: Reconstructs reference images into high-fidelity, editable Draw. (file: r0/drawio-reconstruction/SKILL.md)
+- drawio-skill: Create, edit, synchronize, inspect, test, and publish editable dra (file: r0/drawio-skill/SKILL.md)
+- ego-browser: When you need a browser, read this Skill by default. Use it to o (file: r1/ego-browser/SKILL.md)
+- enterprise-search:digest: Generate a daily or weekly digest of activity across all connect (file: r8/digest/SKILL.md)
+- enterprise-search:knowledge-synthesis: Combines search results from multiple sources into coherent, dedup (file: r8/knowledge-synthesis/SKILL.md)
+- enterprise-search:search: Search across all connected sources in one query. Trigger with " (file: r8/search/SKILL.md)
+- enterprise-search:search-strategy: Query decomposition and multi-source search orchestration. Breaks  (file: r8/search-strategy/SKILL.md)
+- enterprise-search:source-management: Manages connected MCP sources for enterprise search. Detects avail (file: r8/source-management/SKILL.md)
+- evidence-recap: 把 AI 编程对话和项目交付材料复盘为可核验的九段证据链，区分问题、决策、个人动作、交付阶段、效果证据与责任边界。当用户运行 /ev (file: r0/evidence-recap/SKILL.md)
+- figure-designer: Advises on the design of the three core figures in a technical p (file: r0/figure-designer/SKILL.md)
+- finance:audit-support: Support SOX 404 compliance with control testing methodology, sam (file: r9/audit-support/SKILL.md)
+- finance:close-management: Manage the month-end close process with task sequencing, depen (file: r9/close-management/SKILL.md)
+- finance:financial-statements: Generate financial statements (income statement, balance sheet (file: r9/financial-statements/SKILL.md)
+- finance:journal-entry: Prepare journal entries with proper debits, credits, and support (file: r9/journal-entry/SKILL.md)
+- finance:journal-entry-prep: Prepare journal entries with proper debits, credits, and suppo (file: r9/journal-entry-prep/SKILL.md)
+- finance:reconciliation: Reconcile accounts by comparing GL balances to subledgers, ban (file: r9/reconciliation/SKILL.md)
+- finance:sox-testing: Generate SOX sample selections, testing workpapers, and control  (file: r9/sox-testing/SKILL.md)
+- finance:variance-analysis: Decompose financial variances into drivers with narrative explan (file: r9/variance-analysis/SKILL.md)
+- full-output-enforcement: Overrides default LLM truncation behavior. Enforces complete co (file: r0/output-skill/SKILL.md)
+- gpt-image-2-style-library: Choose GPT-Image2 / gpt-image-2 visual styles and industrial pro (file: r1/gpt-image-2-style-library/SKILL.md)
+- gpt-image-2-style-library: Choose GPT-Image2 / gpt-image-2 visual styles and industrial pro (file: r0/gpt-image-2-style-library/SKILL.md)
+- gpt-taste: Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-dr (file: r0/gpt-tasteskill/SKILL.md)
+- graphify: Use for any question about a codebase, its architecture, file  (file: r0/graphify/SKILL.md)
+- great-resume: 中文求职经历提升技能：根据目标岗位把真实经历重组为岗位定位、简历要点、项目亮点和 HR 开场白；当用户输入“/great-r (file: r0/great-resume/SKILL.md)
+- grilling: Grill the user relentlessly about a plan, decision, or idea. U (file: r0/grilling/SKILL.md)
+- gsap-core: Official GSAP skill for the core API — gsap.to(), from(), from (file: r0/gsap-core/SKILL.md)
+- gsap-frameworks: Official GSAP skill for Vue, Svelte, and other non-React framewo (file: r0/gsap-frameworks/SKILL.md)
+- gsap-performance: Official GSAP skill for performance — prefer transforms, avoid l (file: r0/gsap-performance/SKILL.md)
+- gsap-plugins: Official GSAP skill for GSAP plugins — registration, ScrollToPlu (file: r0/gsap-plugins/SKILL.md)
+- gsap-react: Official GSAP skill for React — useGSAP hook, refs, gsap.context (file: r0/gsap-react/SKILL.md)
+- gsap-scrolltrigger: Official GSAP skill for ScrollTrigger — scroll-linked animations (file: r0/gsap-scrolltrigger/SKILL.md)
+- gsap-timeline: Official GSAP skill for timelines — gsap.timeline(), position  (file: r0/gsap-timeline/SKILL.md)
+- gsap-utils: Official GSAP skill for gsap.utils — clamp, mapRange, normalize, (file: r0/gsap-utils/SKILL.md)
+- heygen:automated-content-creator: Plan, produce, and keep improving a recurring video series for Y (file: r16/automated-content-creator/SKILL.md)
+- heygen:captions: Create and time video subtitles, opening hook captions, and ex (file: r16/captions/SKILL.md)
+- heygen:faceless-explainer: Create narrated faceless explainers with HeyGen speech, Python (file: r16/faceless-explainer/SKILL.md)
+- heygen:general-video: Catch-all for video requests only when no specialized HeyGen vid (file: r16/general-video/SKILL.md)
+- heygen:motion-graphics: Design and render focused video motion graphics in Python, inclu (file: r16/motion-graphics/SKILL.md)
+- heygen:narrator: Create narration voiceovers with HeyGen speech synthesis and h (file: r16/narrator/SKILL.md)
+- heygen:picture-video: Create narrated picture-story videos with OpenAI native images,  (file: r16/picture-video/SKILL.md)
+- heygen:script-writer: Write and revise spoken video scripts for UGC, explainers, talki (file: r16/script-writer/SKILL.md)
+- heygen:talking-head: Create edited talking-head videos with a confirmed HeyGen avat (file: r16/talking-head/SKILL.md)
+- heygen:ugc-product: Create faceless, narrated product UGC videos, 30 seconds by defa (file: r16/ugc-product/SKILL.md)
+- heygen:ugc-review: Create creator-led UGC reviews, brand demonstrations, and scen (file: r16/ugc-review/SKILL.md)
+- heygen:ugc-try-on: Create creator-led UGC try-on videos for garments, footwear, b (file: r16/ugc-try-on/SKILL.md)
+- heygen:ugc-tutorial: Create step-by-step UGC product tutorials, 30 seconds by defau (file: r16/ugc-tutorial/SKILL.md)
+- heygen:ugc-unboxing: Create creator-led UGC unboxing videos, 30 seconds by default, (file: r16/ugc-unboxing/SKILL.md)
+- heygen:ugc-voiceless: Create short product ads driven by mood, tactile sound, and visu (file: r16/ugc-voiceless/SKILL.md)
+- heygen:ugc-website: Create creator-led UGC website or SaaS videos, 30 seconds by def (file: r16/ugc-website/SKILL.md)
+- heygen:video-editing: Edit and finish videos in Python with scene assembly, layered me (file: r16/video-editing/SKILL.md)
+- high-end-visual-design: Teaches the AI to design like a high-end agency. Defines the e (file: r0/soft-skill/SKILL.md)
+- human-writing: 通用中文创作与改稿 Skill。用于知乎回答、论坛长帖、公众号文章、博客、评论、人物故事、历史叙事、新闻与行业解读、科普、教 (file: r0/human-writing/SKILL.md)
+- humanizer:humanizer: Rewrite AI-sounding text so it reads like the writer without c (file: r1/humanizer/SKILL.md)
+- humanizer:humanizer: Rewrite AI-sounding text so it reads like the writer without c (file: r0/humanizer/SKILL.md)
+- hyperframes: Read first to make, edit, animate or render any video with Hyper (file: r0/hyperframes/SKILL.md)
+- hyperframes-cli: The HyperFrames CLI by job - scaffold, check, look at frames, ed (file: r0/hyperframes-cli/SKILL.md)
+- hyperframes-registry: About 450 ready-made HyperFrames blocks and components install (file: r0/hyperframes-registry/SKILL.md)
+- idea-evaluator: Evaluates a preliminary research idea against a five-dimension (file: r0/idea-evaluator/SKILL.md)
+- image-to-code: Elite website image-to-code skill for Codex. For visually impo (file: r0/image-to-code-skill/SKILL.md)
+- imagegen-frontend-mobile: Elite mobile app image-generation skill for creating premium,  (file: r0/imagegen-frontend-mobile/SKILL.md)
+- imagegen-frontend-web: Elite frontend image-direction skill for generating premium, con (file: r0/imagegen-frontend-web/SKILL.md)
+- industrial-brutalist-ui: Raw mechanical interfaces fusing Swiss typographic print with mi (file: r0/brutalist-skill/SKILL.md)
+- interview: 中文简历与目标岗位驱动的面试预测、模拟追问和复练技能：提取需要验证的经历 Claim，按面试轮次建立问题与评分契约，通过一次 (file: r0/interview/SKILL.md)
+- intro-drafter: Drafts the Introduction prose for a technical paper, guided inte (file: r0/intro-drafter/SKILL.md)
+- iphone-use: Use when a task needs a real iPhone — operating iOS apps that ha (file: r1/iphone-use/SKILL.md)
+- job-apply: 中文求职申请自动填写技能：使用浏览器读取用户确认的简历资料，逐项填写招聘网站申请表并核对结果；当用户输入“/job-appl (file: r0/job-apply/SKILL.md)
+- job-match: 中文岗位匹配分析技能：对照目标 JD 与用户已确认的简历、经历或主张—证据账本，区分已匹配、证据不足和真实缺口，生成可解释的 (file: r0/job-match/SKILL.md)
+- legal:brief: Generate contextual briefings for legal work — daily summary, t (file: r10/brief/SKILL.md)
+- legal:compliance-check: Run a compliance check on a proposed action, product feature, o (file: r10/compliance-check/SKILL.md)
+- legal:legal-response: Generate a response to a common legal inquiry using configured  (file: r10/legal-response/SKILL.md)
+- legal:legal-risk-assessment: Assess and classify legal risks using a severity-by-likelihood fr (file: r10/legal-risk-assessment/SKILL.md)
+- legal:meeting-briefing: Prepare structured briefings for meetings with legal relevance  (file: r10/meeting-briefing/SKILL.md)
+- legal:review-contract: Review a contract against your organization's negotiation playboo (file: r10/review-contract/SKILL.md)
+- legal:signature-request: Prepare and route a document for e-signature — run a pre-signat (file: r10/signature-request/SKILL.md)
+- legal:triage-nda: Rapidly triage an incoming NDA and classify it as GREEN (standa (file: r10/triage-nda/SKILL.md)
+- legal:vendor-check: Check the status of existing agreements with a vendor across al (file: r10/vendor-check/SKILL.md)
+- lemo-opuscar: Direct and produce a short film made entirely in code, in one  (file: r0/lemo-opuscar/SKILL.md)
+- make-resume: 中文可编辑简历制作技能：默认基于 ASu 单栏高密度技术简历模板，根据用户经历制作或复刻可编辑 HTML/PDF；用户也可以 (file: r0/make-resume/SKILL.md)
+- marketing:brand-review: Review content against your brand voice, style guide, and messa (file: r11/brand-review/SKILL.md)
+- marketing:campaign-plan: Generate a full campaign brief with objectives, audience, messagi (file: r11/campaign-plan/SKILL.md)
+- marketing:competitive-brief: Research competitors and generate a positioning and messaging com (file: r11/competitive-brief/SKILL.md)
+- marketing:content-creation: Draft marketing content across channels — blog posts, social medi (file: r11/content-creation/SKILL.md)
+- marketing:draft-content: Draft blog posts, social media, email newsletters, landing pages, (file: r11/draft-content/SKILL.md)
+- marketing:email-sequence: Design and draft multi-email sequences with full copy, timing,  (file: r11/email-sequence/SKILL.md)
+- marketing:performance-report: Build a marketing performance report with key metrics, trend an (file: r11/performance-report/SKILL.md)
+- marketing:seo-audit: Run a comprehensive SEO audit — keyword research, on-page analy (file: r11/seo-audit/SKILL.md)
+- media-use: Get or make any media for a HyperFrames video - music, sound eff (file: r0/media-use/SKILL.md)
+- minimalist-ui: Clean editorial-style interfaces. Warm monochrome palette, typogr (file: r0/minimalist-skill/SKILL.md)
+- offer: 中文秋招求职进度管理技能：记录和更新投递、筛选、测评、面试、Offer、拒信及招聘邮件状态，生成可搜索的进度表；当用户输入“ (file: r0/offer/SKILL.md)
+- paper-polish: Polishes existing academic prose while preserving the author's (file: r0/paper-polish/SKILL.md)
+- paper-writer: Drafts publishable paper prose from the author's own materials (file: r0/paper-writer/SKILL.md)
+- patent-application: 申请文件：把已有交底写成权利要求书、说明书、摘要与说明书附图。须指定交底目录；仅缺材料才终止。内容争议写入问题清单，不阻塞主 (file: r0/patent-disclosure-skill/skills/patent-application/SKILL.md)
+- patent-disclosure: 中国专利交底书：发明/实用新型/外观设计的专利点挖掘、轻量查新与成文、保护型1+N专利布局。 (file: r0/patent-disclosure-skill/skills/patent-disclosure/SKILL.md)
+- patent-disclosure-skill: 中国专利技能：挖掘专利点与编写交底书（发明/实用/外观），把已有交底改写成申请文件四件套，也可按材料交底申请一起做，按著录字 (file: r0/patent-disclosure-skill/SKILL.md)
+- patent-docket: 按发明人/工程师给的材料一趟写出交底书和申请文件；申请问题清单上的缺口最多改三轮。缺技术事实就问人，不编。触发：交底申请一起 (file: r0/patent-disclosure-skill/skills/patent-docket/SKILL.md)
+- patent-exam-policy: 给交底用的政策简报：对照国知局近期口径，说明对交底写法/本稿的影响，并提示申请书式。技能进化仅为旁路，默认只改交底包，须另点名 (file: r0/patent-disclosure-skill/skills/patent-exam-policy/SKILL.md)
+- patent-map: 专利地图：基于通俗解读已入库的 Obsidian 案例，点名后打开五种图。地形按 bge-small-zh 向量摊开。 (file: r0/patent-disclosure-skill/skills/patent-map/SKILL.md)
+- patent-oa: 审查答复辅助：审查意见问答与草稿；库薄时引导案例入库与实务书蒸馏。须显式触发。 (file: r0/patent-disclosure-skill/skills/patent-oa/SKILL.md)
+- patent-reader: 中国专利通俗解读：公开号/PDF 成通俗笔记、图谱与 Obsidian 入库。 (file: r0/patent-disclosure-skill/skills/patent-reader/SKILL.md)
+- patent-search: 中国专利公布公告著录检索：发明人、申请人、分类号、名称、摘要；也可从单图或权利要求生成名称/摘要关键字后查询。 (file: r0/patent-disclosure-skill/skills/patent-search/SKILL.md)
+- pdf:pdf: Read, create, inspect, render, and verify PDF files where visu (file: r21/pdf/26.1111.10930/skills/pdf/SKILL.md)
+- plugin-management:plugin-management: Discover and suggest relevant plugins, inspect app permissions (file: r17/plugin-management/0.1.0/skills/plugin-management/SKILL.md)
+- ponytail:ponytail: Lazy senior dev mode: the smallest change that fully solves the  (file: r23/ponytail/SKILL.md)
+- ponytail:ponytail-audit: Quality audit of a whole repo: bugs, security holes, what breaks (file: r23/ponytail-audit/SKILL.md)
+- ponytail:ponytail-debt: List every `shortcut:` comment (and older `ponytail:` ones) as (file: r23/ponytail-debt/SKILL.md)
+- ponytail:ponytail-gain: Show ponytail's measured savings (code, cost, speed) from the  (file: r23/ponytail-gain/SKILL.md)
+- ponytail:ponytail-help: Quick reference for ponytail levels, skills and commands. One- (file: r23/ponytail-help/SKILL.md)
+- ponytail:ponytail-review: Quality review of a change: is the logic right, is it safe, do (file: r23/ponytail-review/SKILL.md)
+- pr: Use when writing a PR body. (file: r0/pr/SKILL.md)
+- pre-submission-reviewer: Runs a pre-submission review of a technical paper across five di (file: r0/pre-submission-reviewer/SKILL.md)
+- presentations:Presentations: Read, create or edit PowerPoint or Google Slides decks. Use fo (file: r21/presentations/26.1111.10930/skills/presentations/SKILL.md)
+- product-management:competitive-brief: Create a competitive analysis brief for one or more competitors  (file: r12/competitive-brief/SKILL.md)
+- product-management:metrics-review: Review and analyze product metrics with trend analysis and act (file: r12/metrics-review/SKILL.md)
+- product-management:product-brainstorming: Brainstorm product ideas, explore problem spaces, and challenge  (file: r12/product-brainstorming/SKILL.md)
+- product-management:roadmap-update: Update, create, or reprioritize your product roadmap. Use when (file: r12/roadmap-update/SKILL.md)
+- product-management:sprint-planning: Plan a sprint — scope work, estimate capacity, set goals, and  (file: r12/sprint-planning/SKILL.md)
+- product-management:stakeholder-update: Generate a stakeholder update tailored to audience and cadence (file: r12/stakeholder-update/SKILL.md)
+- product-management:synthesize-research: Synthesize user research from interviews, surveys, and feedback  (file: r12/synthesize-research/SKILL.md)
+- product-management:write-spec: Write a feature spec or PRD from a problem statement or featur (file: r12/write-spec/SKILL.md)
+- productivity:memory-management: Two-tier memory system that makes Claude a true workplace coll (file: r13/memory-management/SKILL.md)
+- productivity:start: Initialize the productivity system and open the dashboard. Use (file: r13/start/SKILL.md)
+- productivity:task-management: Simple task management using a shared TASKS.md file. Reference (file: r13/task-management/SKILL.md)
+- productivity:update: Sync tasks and refresh memory from your current activity. Use wh (file: r13/update/SKILL.md)
+- project-guide: 中文项目导学、源码课程与项目面经技能：基于本地项目仓库、项目描述或技术材料，按需生成源码课程与理解题，或生成 导学-{简称}.m (file: r0/project-guide/SKILL.md)
+- prototype: Build a throwaway prototype to answer a design question. Use whe (file: r0/prototype/SKILL.md)
+- rebuttal-guidance: Provides actionable peer-review rebuttal guidance (not full rebu (file: r0/rebuttal-guidance/SKILL.md)
+- redesign-existing-projects: Upgrades existing websites and apps to premium quality. Audits (file: r0/redesign-skill/SKILL.md)
+- remotion-best-practices: Router for all Remotion skills (file: r0/remotion-best-practices/SKILL.md)
+- remotion-captions: Transcribing, displaying and animating captions (file: r0/remotion-captions/SKILL.md)
+- remotion-create: Create a new Remotion video (file: r0/remotion-create/SKILL.md)
+- remotion-docs: Search Remotion documentation (file: r0/remotion-docs/SKILL.md)
+- remotion-interactivity: Structure Remotion markup for interactivity (file: r0/remotion-interactivity/SKILL.md)
+- remotion-maps: Remotion Map animation knowledge (file: r0/remotion-maps/SKILL.md)
+- remotion-markup: Content, animation and effects best practices (file: r0/remotion-markup/SKILL.md)
+- remotion-multimedia: Interacting with Mediabunny (file: r0/remotion-multimedia/SKILL.md)
+- remotion-render: Export a Remotion video (file: r0/remotion-render/SKILL.md)
+- remotion-saas: Build an app with Remotion (file: r0/remotion-saas/SKILL.md)
+- remotion-studio: Preview a Remotion video (file: r0/remotion-studio/SKILL.md)
+- remotion-upgrade: Upgrade Remotion, and related packages (file: r0/remotion-upgrade/SKILL.md)
+- research: Investigate a question against high-trust primary sources and  (file: r0/research/SKILL.md)
+- reverse-engineer-anything: Reverse engineer native, managed, Electron/JavaScript, packaged, (file: r1/reverse-engineer-anything/SKILL.md)
+- reverse-skill:reverse-skill-router: Use the reverse-skill repository from Codex for authorized rever (file: r24/reverse-skill/1.0.1/skills/reverse-skill-router/SKILL.md)
+- sales:account-context: 360-degree view of an account - CRM data, recent email threads, d (file: r14/account-context/SKILL.md)
+- sales:account-plan: Build or refresh a strategic account plan - current state, goal (file: r14/account-plan/SKILL.md)
+- sales:account-research: Research a target company and optionally a specific contact - c (file: r14/account-research/SKILL.md)
+- sales:account-tiering: Score and tier a list of accounts (or your full book) against ICP (file: r14/account-tiering/SKILL.md)
+- sales:call-prep: Pre-call brief for an upcoming meeting - attendees, account histo (file: r14/call-prep/SKILL.md)
+- sales:call-summary: Turn a call transcript or call notes into a customer follow-up  (file: r14/call-summary/SKILL.md)
+- sales:close-plan: Build the business case and mutual action plan for a deal - the (file: r14/close-plan/SKILL.md)
+- sales:competitive-intelligence: Competitive analysis two ways - the in-deal play against a name (file: r14/competitive-intelligence/SKILL.md)
+- sales:create-an-asset: Build a customer deck, one-pager or leave-behind from your accoun (file: r14/create-an-asset/SKILL.md)
+- sales:crm-hygiene-check: Read-only audit of your CRM opportunities for missing fields, sta (file: r14/crm-hygiene-check/SKILL.md)
+- sales:customer-health: Health check on a customer account and QBR-ready prep - relations (file: r14/customer-health/SKILL.md)
+- sales:customer-voice: Surface what customers are actually saying - direct attributed  (file: r14/customer-voice/SKILL.md)
+- sales:daily-briefing: Morning rundown - today's meetings with account context, opps c (file: r14/daily-briefing/SKILL.md)
+- sales:deal-advance-gap: Forward-looking gap check on one opportunity - exactly what is  (file: r14/deal-advance-gap/SKILL.md)
+- sales:deal-review: Deep-dive on a single opportunity - signal-adjusted health score, (file: r14/deal-review/SKILL.md)
+- sales:deal-signals: Proactive watch over your book - deals gone quiet, close dates  (file: r14/deal-signals/SKILL.md)
+- sales:deal-slip-scenario: Model what happens to your number if a deal slips, shrinks, or  (file: r14/deal-slip-scenario/SKILL.md)
+- sales:draft-outreach: Draft a personalized outreach email or multi-touch sequence to  (file: r14/draft-outreach/SKILL.md)
+- sales:end-of-day: The closing beat of the day - every call processed or explicitl (file: r14/end-of-day/SKILL.md)
+- sales:expansion-whitespace: Find the expansion whitespace in an account or a book - what th (file: r14/expansion-whitespace/SKILL.md)
+- sales:forecast: Generate the commit / best-case / pipeline narrative for a fore (file: r14/forecast/SKILL.md)
+- sales:handle-objection: Work through a live objection or competitive threat - what's re (file: r14/handle-objection/SKILL.md)
+- sales:inbox-sweep: Batch-process unread customer emails - classify, prioritize, and  (file: r14/inbox-sweep/SKILL.md)
+- sales:lead-triage: Score and route an inbound lead, or rank a backlog of leads, agai (file: r14/lead-triage/SKILL.md)
+- sales:log-activity: Log a call, meeting, or email exchange to the CRM after the fac (file: r14/log-activity/SKILL.md)
+- sales:pipeline-review: Stage-by-stage pipeline health check - coverage, aging, conversio (file: r14/pipeline-review/SKILL.md)
+- sales:renewal-radar: Upcoming renewals with timing, risk, and uplift potential - and t (file: r14/renewal-radar/SKILL.md)
+- sales:rep-context: Leader's prep on a single rep before a 1:1 - their pipeline, rece (file: r14/rep-context/SKILL.md)
+- sales:route-lead: Decide who owns an unrouted lead or opportunity and manage the  (file: r14/route-lead/SKILL.md)
+- sales:schedule-meeting: Find a time, draft the invite, and book the meeting on Google C (file: r14/schedule-meeting/SKILL.md)
+- sales:setup: First-run setup - checks which tools are connected, shows what's  (file: r14/setup/SKILL.md)
+- sales:stakeholder-map: Map the people in a deal or account - roles, influence, sentiment (file: r14/stakeholder-map/SKILL.md)
+- sales:team-pipeline: Leader view - roll up a team's pipeline by rep and stage, flag at (file: r14/team-pipeline/SKILL.md)
+- sales:update-opportunity: Guided updates to an opportunity - push the stage, move the clo (file: r14/update-opportunity/SKILL.md)
+- sales:weekly-wrap: End-of-week summary for a rep or leader - what closed, what moved (file: r14/weekly-wrap/SKILL.md)
+- sales:win-loss-review: Analyze recently closed opportunities to find patterns in what wi (file: r14/win-loss-review/SKILL.md)
+- security-audit: Security guidance and vulnerability review for codebases, APIs (file: r0/security-audit/SKILL.md)
+- sepia:sepia: Make AI-generated writing read as human-written, in fiction and i (file: r25/sepia/SKILL.md)
+- sepia:sepia-hemingway: Use when a user asks to write or revise fiction in the Hemingway  (file: r25/sepia-hemingway/SKILL.md)
+- sepia:sepia-recreate: Use when a user explicitly requests Sepia recreate for a full r (file: r25/sepia-recreate/SKILL.md)
+- sepia:sepia-refactor: Use when a user explicitly requests Sepia refactor for minimal  (file: r25/sepia-refactor/SKILL.md)
+- sepia:sepia-review: Use when a user explicitly requests Sepia review to diagnose pr (file: r25/sepia-review/SKILL.md)
+- sepia:sepia-write: Use when a user explicitly requests Sepia write to create new pro (file: r25/sepia-write/SKILL.md)
+- shadcn: Manages shadcn components and projects — adding, searching, fixi (file: r0/shadcn/SKILL.md)
+- sites:sites: Use Sites when the user wants a website built for them (including (file: r18/sites/SKILL.md)
+- sites:sites-remix: Remix a Site built with the Sites plugin into a new Site. Use whe (file: r18/sites-remix/SKILL.md)
+- spreadsheets:Spreadsheets: Use skill when user requests to create, modify, analyze, visuali (file: r22/spreadsheets/SKILL.md)
+- spreadsheets:excel-live-control: Control an open or active Microsoft Excel workbook through the C (file: r22/excel-live-control/SKILL.md)
+- stitch-design-taste: Semantic Design System Skill for Google Stitch. Generates agent (file: r0/stitch-skill/SKILL.md)
+- superpowers:brainstorming: You MUST use this before any creative work - creating features, (file: r19/brainstorming/SKILL.md)
+- superpowers:brainstorming: You MUST use this before any creative work - creating features, (file: r26/brainstorming/SKILL.md)
+- superpowers:diagnosing-superpowers: Use when a superpowers session went wrong and your human partner  (file: r19/diagnosing-superpowers/SKILL.md)
+- superpowers:diagnosing-superpowers: Use when a superpowers session went wrong and your human partner  (file: r26/diagnosing-superpowers/SKILL.md)
+- superpowers:dispatching-parallel-agents: Use when facing 2+ independent tasks that can be worked on with (file: r19/dispatching-parallel-agents/SKILL.md)
+- superpowers:dispatching-parallel-agents: Use when facing 2+ independent tasks that can be worked on with (file: r26/dispatching-parallel-agents/SKILL.md)
+- superpowers:executing-plans: Use when executing an implementation plan in the current sessio (file: r19/executing-plans/SKILL.md)
+- superpowers:executing-plans: Use when executing an implementation plan in the current sessio (file: r26/executing-plans/SKILL.md)
+- superpowers:finishing-a-development-branch: Use when implementation is complete, all tests pass, and you need (file: r19/finishing-a-development-branch/SKILL.md)
+- superpowers:finishing-a-development-branch: Use when implementation is complete, all tests pass, and you need (file: r26/finishing-a-development-branch/SKILL.md)
+- superpowers:receiving-code-review: Use when receiving code review feedback, before implementing su (file: r19/receiving-code-review/SKILL.md)
+- superpowers:receiving-code-review: Use when receiving code review feedback, before implementing su (file: r26/receiving-code-review/SKILL.md)
+- superpowers:requesting-code-review: Use when completing tasks, implementing major features, or before (file: r19/requesting-code-review/SKILL.md)
+- superpowers:requesting-code-review: Use when completing tasks, implementing major features, or before (file: r26/requesting-code-review/SKILL.md)
+- superpowers:subagent-driven-development: Use when executing implementation plans with independent tasks  (file: r19/subagent-driven-development/SKILL.md)
+- superpowers:subagent-driven-development: Use when executing implementation plans with independent tasks  (file: r26/subagent-driven-development/SKILL.md)
+- superpowers:systematic-debugging: Use when encountering any bug, test failure, or unexpected behavi (file: r19/systematic-debugging/SKILL.md)
+- superpowers:systematic-debugging: Use when encountering any bug, test failure, or unexpected behavi (file: r26/systematic-debugging/SKILL.md)
+- superpowers:test-driven-development: Use when implementing any feature or bugfix, before writing imp (file: r19/test-driven-development/SKILL.md)
+- superpowers:test-driven-development: Use when implementing any feature or bugfix, before writing imp (file: r26/test-driven-development/SKILL.md)
+- superpowers:using-git-worktrees: Use when starting feature work that needs isolation from curren (file: r19/using-git-worktrees/SKILL.md)
+- superpowers:using-git-worktrees: Use when starting feature work that needs isolation from curren (file: r26/using-git-worktrees/SKILL.md)
+- superpowers:using-superpowers: Use when starting any conversation - establishes how to find an (file: r19/using-superpowers/SKILL.md)
+- superpowers:using-superpowers: Use when starting any conversation - establishes how to find an (file: r26/using-superpowers/SKILL.md)
+- superpowers:verification-before-completion: Use when about to claim work is complete, fixed, or passing, befo (file: r19/verification-before-completion/SKILL.md)
+- superpowers:verification-before-completion: Use when about to claim work is complete, fixed, or passing, befo (file: r26/verification-before-completion/SKILL.md)
+- superpowers:writing-plans: Use when you have a spec or requirements for a multi-step task, (file: r19/writing-plans/SKILL.md)
+- superpowers:writing-plans: Use when you have a spec or requirements for a multi-step task, (file: r26/writing-plans/SKILL.md)
+- superpowers:writing-skills: Use when creating new skills, editing existing skills, or verifyi (file: r19/writing-skills/SKILL.md)
+- superpowers:writing-skills: Use when creating new skills, editing existing skills, or verifyi (file: r26/writing-skills/SKILL.md)
+- tdd: Test-driven development. Use when the user wants to build featur (file: r0/tdd/SKILL.md)
+- teach: Socratic teaching loop for any Claude Code session — quiz your (file: r0/teach/SKILL.md)
+- tech-paper-template: Structures a technical paper's full logical skeleton using a thi (file: r0/tech-paper-template/SKILL.md)
+- template-creator:template-creator: Create or update a reusable personal Codex artifact-template s (file: r21/template-creator/26.1111.10930/skills/template-creator/SKILL.md)
+- vibe-research-workflow: Guides AI-assisted research across three sub-flows, Vibe Codin (file: r0/vibe-research-workflow/SKILL.md)
+- visualize:visualize: Create visualizations and interactive tools directly in conversat (file: r17/visualize/1.0.89/skills/visualize/SKILL.md)
+- wizard: Generate an interactive bash wizard that walks a human through (file: r0/wizard/SKILL.md)
+- work-pets:create-pet: Create, repair, validate, preview, upload, or activate an anima (file: r20/create-pet/SKILL.md)
+- work-pets:pets: List, inspect, select, download, or delete animated pets in Cha (file: r20/pets/SKILL.md)
+- work-pets:update-pet: Inspect, validate, preview, repair, or update a custom pet in C (file: r20/update-pet/SKILL.md)
+- writing-for-agents: Writing documents for agents. Use when creating or editing ski (file: r0/writing-for-agents/SKILL.md)
+</skills_instructions>
+<permissions instructions>
+Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `workspace-write`: The sandbox permits reading files, and editing files in `cwd` and `writable_roots`. Editing files in other directories requires approval. Network access is enabled.
+
+`approvals_reviewer` is `auto_review`: Sandbox escalations with require_escalated will be reviewed for compliance with the policy.
+If a rejection happens, you can continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval.
+ The writable roots are `/Users/oyamahappa/.codex/visualizations/2026/11/11/01a1cad2-17c8-72f0-ae3e-112b10912698`, `/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank`, `/private/tmp`, `/private/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T`.
+</permissions instructions>
+<collaboration_mode># Collaboration Mode: Default
+
+You are now in Default mode. Any previous instructions for other modes (e.g. Plan mode) are no longer active.
+
+Your active mode changes only when new developer instructions with a different `<collaboration_mode>...</collaboration_mode>` change it; user requests or tool descriptions do not change mode by themselves. Known mode names are Default and Plan.
+
+## request_user_input availability
+
+Use the `request_user_input` tool only when it is listed in the available tools for this turn.
+
+In Default mode, strongly prefer making reasonable assumptions and executing the user's request rather than stopping to ask questions.
+
+Use the `request_user_input` tool only for optional questions where the answer would materially improve the quality of the work.
+
+If `request_user_input` returns no answers, continue with best judgment instead of asking again or treating the turn as blocked.
+
+Never use the `request_user_input` tool for permission requests or permission-related escalations.
+</collaboration_mode>
+<tools>
+Deferred tool namespaces:
+- mcp__artifact_session: Use this first-party JavaScript tool for persistent spreadsheet and presentation authoring and editing an existing bound canvas. The global artifactSession client edits the same CRDT state shown in the live viewer. For spreadsheets, call artifactS...
+- mcp__bigquery
+- mcp__biorxiv: An MCP server for accessing bioRxiv and medRxiv preprint servers.
+- mcp__codex_app: Manage the Codex desktop app: find, create, and update chats; organize projects, sidebar, and pinned items; schedule automations; manage worktrees; open app panels; and locate bundled libraries for documents, spreadsheets, slides, and PDFs.
+- mcp__codex_apps__codex_document_control: Use Codex Document Control to find connected document sessions, inspect the tools supported by a selected session, and execute one supported tool against that session. Call `list_document_sessions` first to choose the intended connected session, c...
+- mcp__codex_apps__github: Access repositories, issues, and pull requests. Required for some features such as Codex
+- mcp__codex_apps__heygen: Create AI videos and avatars
+- mcp__codex_apps__hotline: Look up local helpline information for the user based on country inferred from the conversation. You must use this tool before providing a suicide or self-harm helpline; do not use web search or guess.
+- mcp__codex_apps__pets: Create and manage the user's animated companion pets inside ChatGPT Work mode. Use only for ChatGPT Pets, not real-world animal advice, generic pet images, or pets in other apps.
+- mcp__codex_apps__plugin_creator: Use create_plugin to create a PRIVATE plugin in the authenticated user's active workspace, or a personal plugin without an active workspace. Update owned personal plugins, or inspect and edit eligible workspace plugins as their creator, an owner o...
+- mcp__codex_apps__plugin_management: Manage plugins, settings, permissions, and connections. Prefer available built-in tools or connected plugins when they fit the task. Proactively search for plugins when an external app, account, or service would materially help, even if the user d...
+- mcp__codex_apps__safety_settings: For ChatGPT Parental Controls (your child or teen's settings, features, Study Mode, quiet hours, family setup) and Trusted Contact (setup, status, privacy). Read account state first. Before updates, read the child's controls; prepare only can_upda...
+- mcp__codex_apps__search_service: Tool for accessing the internet.
+- mcp__codex_apps__sites: Use Sites to build or modify websites, including landing pages, portfolios, dashboards, portals, trackers, hubs, and internal tools. For repository-based sites, use Sites skills for local implementation, source preparation, and artifact packaging....
+- mcp__codex_apps__termalin: Manage your servers from chat
+- mcp__iphone_use: Drive a real iPhone. The loop:
+- mcp__mobile_mcp: Drive a real or simulated iOS/Android device.
+- mcp__node_repl: Use `js` for `node_repl` execution with persistent, redeclarable top-level bindings, `js_reset` to clear bindings, and `js_add_node_module_dir` to add package directories.
+- mcp__ot
+- mcp__pubmed
+- mcp__rea: REA provides reverse-engineering tools for local artifacts, native binaries, managed code, browser pages, and runtimes. Use the tool that directly answers the question; discover targets or inspect inventory only when needed. Tool results include i...
+</tools>
+<recommended_plugins>
+Here is a list of plugins that are available but not installed.
+
+- Dropbox (app-69b31dc2110c8191b8b47dc98fe5a052@openai-curated-remote)
+- Box (box@openai-curated-remote)
+- Codex Security (codex-security@openai-curated-remote)
+- Figma (figma@openai-curated-remote)
+- Gmail (gmail@openai-curated-remote)
+- Google Calendar (google-calendar@openai-curated-remote)
+- Google Drive (google-drive@openai-curated-remote)
+- Linear (linear@openai-curated-remote)
+- Notion (notion@openai-curated-remote)
+- OpenAI Developers (openai-developers@openai-curated-remote)
+- Outlook Calendar (outlook-calendar@openai-curated-remote)
+- Outlook Email (outlook-email@openai-curated-remote)
+- SharePoint (sharepoint@openai-curated-remote)
+- Slack (slack@openai-curated-remote)
+- Teams (teams@openai-curated-remote)
+</recommended_plugins>
+
+## developer · 2026-11-12T01:27:41Z
+
+<multi_agent_role>You are an agent in a team of agents collaborating to complete a task.
+
+You can spawn sub-agents to handle subtasks, and those sub-agents can spawn their own sub-agents. All agents in the team, including the agents that you can assign tasks to, are equally intelligent and capable, and have access to the same set of tools.
+
+You can use `spawn_agent` to create a new agent, `followup_task` to give an existing agent a new task and trigger a turn, and `send_message` to pass a message to a running agent.
+`send_message` calls may be read by a human, so ensure they are legible. Always put proper spaces between words and/or numbers.
+Child agents can also spawn their own sub-agents.
+
+When you provide a response in the final channel, that content is immediately delivered back to your parent agent.
+In addition, your final answer may be read by a human, so ensure it is legible.
+
+You will receive messages in the analysis channel in the form:
+```
+Message Type: NEW_TASK | MESSAGE | FINAL_ANSWER
+Task name: <recipient>
+Sender: <author>
+Payload:
+<payload text>
+```
+You may also see them addressed as to=/root/..., which indicates your identity is /root/...
+
+Note that collaboration tools cannot be called from inside `functions.exec`. Call `spawn_agent`, `send_message`, `followup_task`, `wait_agent`, `interrupt_agent`, and `list_agents` only as direct tool calls using the recipient shown in their tool definitions, such as `to=functions.collaboration.spawn_agent`, since they are intentionally absent from the `functions.exec` `tools.*` namespace. Available tools in `functions.exec` are explicitly described with a `tools` namespace in the developer message.
+
+All agents share the same directory. In detail:
+- All agents have access to the same container and filesystem as you.
+- All agents use the same current working directory.
+- As a result, edits made by one agent are immediately visible to all other agents.
+
+When calling `wait_agent`, prefer longer waits (minutes) to avoid busy polling.
+
+There are 4 available concurrency slots, meaning that up to 4 agents can be active at once, including you.
+
+Full-history forks (`fork_turns` omitted or `"all"`) inherit the parent model and reasoning effort and do not accept overrides. Only set `model` or `reasoning_effort` when explicitly requested by the user, applicable `AGENTS.md` instructions, or skill instructions; when doing so, set `fork_turns` to `"none"`.</multi_agent_role>
+
+## developer · 2026-11-12T01:27:41Z
+
+<multi_agent_mode>Any earlier instruction enabling proactive multi-agent delegation no longer applies. Do not spawn sub-agents unless the user or applicable AGENTS.md/skill instructions explicitly ask for sub-agents, delegation, or parallel agent work.</multi_agent_mode>
+
+## user · 2026-11-12T01:27:41Z
+
+# AGENTS.md instructions for /Volumes/SamsungSSD990PRO/GitHub/codex-question-bank
+
+<INSTRUCTIONS>
+# AGENTS.md
+
+本文件规定项目中的协作、开发、验证与沟通方式。执行时遵守宿主环境的更高优先级指令，并优先采用用户当前明确提出的要求。具体场景的规则优先于一般默认规则；仍有无法消解的冲突时，说明冲突及其影响。
+
+部分规则可以通过 hooks 执行，其余规则需要主动遵守。完成情况应以实际文件、测试结果、Git 状态、运行结果和验证记录为依据。只有已经配置并成功运行的检查，才能作为验证证据。
+
+## 1. 职责与判断
+
+- 在用户确定的目标与授权范围内完成工作。涉及架构、核心业务逻辑或产品方向的重要选择，不得擅自决定；用户已经授权的选择直接执行。
+- 默认优先级依次为正确性、可维护性、最小改动范围、执行速度。
+- 先检查问题是否存在错误前提、逻辑跳跃或信息缺失，独立判断，区分事实、推测和主观观点。
+- 涉及数字、人物和结论时尽量核实来源。不同意用户判断时，直接说明依据、实际风险和替代解释，并提醒与任务有关的遗漏变量、成本和偏差。
+- 完整理解并满足当前需求，不擅自增加功能，不删减用户明确要求的设计，不为假设中的未来需求增加配置或抽象。
+
+## 2. 语言与输出
+
+
+- 默认使用清楚、自然的中文，代码标识符和必要的技术术语保留原名。
+- 直接表达具体内容，不使用“不是……而是……”“要……而不是……”等无必要的对比句式，不追加用户没有要求比较的对象。
+- 不添加空泛的总起或总结，例如“下面详细拆开”“一句话总结”。
+- 使用完整词语和明确的动宾结构。使用“崩溃、终止、判定、推断、抛出、挂起”等完整表达，不使用单个字的缩写，不生造名词或缩略说法。
+- 不使用“落地”“钉死”“对齐”等含义模糊的行业黑话。描述采用的技术、模型和工具时，直接写出具体事物，避免以“栈”字概括。
+- 不评价工作量，不使用“That's a lot”“This is a substantial rewrite”等表达。
+- 搜索结果只列出符合要求的内容，不罗列已经确认不符合要求的候选项。
+- 回复、注释和交付文档描述当前有效的最终状态，不保留已删除方案、错误代码或无关纠正过程的说明。
+- 用户指出错误后，直接基于纠正后的事实继续工作，不重复解释用户已经明确指出的错误。
+- 更新应当具体，说明实际改动、验证结果和仍然存在的阻碍。
+- 不使用 ASCII Art 绘制示意图或表格。需要图示时使用 Mermaid，表格使用标准 Markdown。
+
+## 3. 用户意图与执行控制
+
+- 用户要求先规划、思考、审查、评估或解释时，先完成对应工作，取得执行授权后再修改文件。
+- 未经明确要求，不切换到专门的 plan mode。复杂任务所需的书面计划可以在当前模式中完成。
+- 用户提供书面计划时，按计划执行；计划通常位于 `claude.md`，以用户指定的位置和实际文件为准。遇到实质性阻碍时，说明阻碍，暂停依赖该决定的步骤。
+- 用户批准计划或明确说“执行”“可以”“推送”后，直接完成已获授权的操作，不重复征求同一项授权。
+- 用户以疑问句提出问题时，回答问题，不擅自修改文件，不附加未要求的替代方案、反问或催促执行的话语。
+- 对确实影响实现且尚未授权的需求歧义，明确指出需要用户决定的事项；已经可以独立完成的工作继续执行。
+- 执行过程中收到其他问题，能够立即回答的先回答，然后继续原任务；用户明确取消或改变目标时，按新要求执行。
+- 用户表示“退一步”“一直在绕圈”等意思时，停止当前方法，重新读取相关上下文并提出不同路径。
+- 用户询问是否确定时，先通过工具核实，再回答。
+- 风险较高且没有明确恢复点的操作，先提出建立检查点。
+
+## 4. 持久记录与上下文
+
+聊天记录不能替代持久记录。会话开始时读取与当前任务有关且已经存在的文件，并在工作过程中保持准确：
+
+- `memory/agents.md`：当前代理、MCP、采用的技术和工具。
+- `memory/plan.md`：总体设计与纵向功能切片。
+- `memory/progress.md`：可以独立完成和验证的任务清单及当前状态。
+- `memory/verify.md`：完成标准与必要检查。
+- `memory/gotchas.md`：用户已纠正问题所对应的可复用注意事项。
+
+开始实质性开发前，初始化缺失的上述记录。记录应当简洁、准确，与项目实际情况一致。
+
+- 长对话后，修改前重新读取相关文件。
+- 上下文不足、压缩对话或交接工作前，把当前状态和剩余工作写入 `memory/progress.md`。
+- 大文件按相关范围分段读取；工具输出被截断时，读取完整保存结果或缩小查询范围后重试。
+- 按需加载文件和历史，把持久结论写入 `memory/`，避免反复加载整份静态提示词或大量原始输出。
+- 用户纠正问题后，在 `memory/gotchas.md` 中记录适用的预防规则，不复制错误实现或无关对话。开发日志记录实际结果和验证情况。
+
+## 5. 规划与任务范围
+
+涉及多个文件、行为变化、架构选择或其他非简单修改时，先形成书面计划：
+
+1. 读取相关代码，理解实际执行流程、调用位置和现有模式。
+2. 识别需求歧义、约束和需要作出的选择。
+3. 更新 `memory/plan.md` 与 `memory/verify.md`。
+4. 在 `memory/progress.md` 中列出可以独立验证的步骤。
+5. 按顺序实施、运行、测试并修正，直到整个需求完成。
+
+- 对明显的一两行修复，直接执行并验证。
+- 设计应当完整覆盖已知需求、边界条件和失败情况，不以“先做一个不完整版本再观察”为由遗漏必要功能。
+- 默认提供一个能够满足需求的方案。确实需要多个方案时，应当分别说明成立条件，不机械地排列“稳妥”和“激进”选项。
+- 完整设计可以分成小范围的执行步骤；每次完成一个可以独立验证的纵向功能切片，最终交付全部已约定功能。
+- 避免把广泛重构混入功能开发。每个执行阶段原则上控制在约五个文件内，纯机械修改除外。
+- 较大的独立工作区域分别实施和验证。
+
+## 6. 代码与依赖
+
+- 先遵循项目现有的命名、结构和风格，再考虑引入新模式。导出的函数和类使用清楚、可区分的名称。
+- 优先复用已有代码、标准库、平台能力和已经安装的依赖。需要成熟依赖时正常使用，不为减少依赖自行重写已有能力或采用复杂绕行方案。
+- 成熟文件格式使用标准库或成熟的第三方库解析，不自行编写字符串或字节解析器。
+- 默认使用静态导入，只有确实需要运行时加载时才采用动态导入。必要的 Python 库直接 `import`，不使用 `try-except` 包装导入。
+- 不为假设中的未来需求增加灵活性、配置、接口或抽象。在满足完整需求与正确性的前提下，选择改动范围最小、清楚直接的实现。
+- 无效状态应当在出错位置明确失败，不静默捕获错误或采用隐藏的 fallback。必要的输入校验、资源清理和防止数据丢失的错误处理必须保留。
+- 发现重复状态、模式不一致、边界薄弱或只处理表面症状的修复时，指出根本问题。授权范围内的修复直接执行，额外的结构调整先说明范围并取得授权；范围外事项记入 `memory/progress.md`。
+- 默认不添加注释。只有原因无法从代码直接看出时才添加简短注释，注释使用中文，技术术语保留英文。
+- Python 文件开头不添加模块级 docstring 或 shebang，除非用户明确要求。
+
+## 7. 文件修改与安全
+
+- 每次修改前重新读取文件，修改后再次检查实际内容。
+- 用户可能在两次操作之间撤销或调整改动，始终以文件当前状态为基础，不恢复用户已经删除的内容。
+- 使用文件编辑工具修改代码，不使用 heredoc、Python 脚本、`sed`、`perl` 等方式批量生成替换操作来修改代码。
+- 不在 Bash 命令中内嵌超长或大量多行脚本。需要脚本时，先通过文件编辑工具写入文件，再执行。
+- 未经明确要求，不读写 `/tmp` 及其实际对应的临时目录。中间结果放入当前项目中专用的目录，并将该目录加入 `.gitignore`。
+- 重命名或修改签名时，分别搜索直接调用、类型引用、字符串引用、动态导入、`require()`、重新导出、汇总导出文件和已有测试中的替代实现。
+- 删除文件前，先验证引用关系。
+- 对大文件进行结构调整时，只清理直接阻碍当前修改或由当前修改产生的无用代码，不附带无关清理。
+- 不使用 Git 命令撤销代码。用户要求恢复旧状态时，使用文件编辑工具恢复对应内容，并保留用户的其他改动。
+- 修正文档或代码时，删除失效内容，使交付文件保持准确；开发记录仍然如实记载需求、实际改动和验证结果。
+
+## 8. 测试与验证
+
+功能实现包括实施、运行、测试和必要的修正。不得只完成初步实现就要求用户代为验证。
+
+对于缺陷修复和新增行为：
+
+1. 添加或找到能够暴露问题的测试。
+2. 运行测试，确认它因目标问题失败。
+3. 实现能够满足完整需求的最小修改。
+4. 运行相关检查，确认通过后再进行必要重构。
+
+- 验证必须覆盖真实行为，不使用 mock、伪造数据、虚假的成功结果或只为通过测试的绕行措施掩盖问题。
+- 缺少运行条件时，如实说明未完成的验证和具体原因，不声称已经通过。
+- 项目没有检查机制时，说明一次，并建议与实际风险相称的基本验证。
+- `tdd-check.sh` 在配置后可以提示新导出内容缺少附近测试；该提示不能证明遵循了先写测试的顺序。
+- 按改动类型运行适用的类型检查、静态检查和测试。`stop-verify.sh`、`.codex/hooks/stop.sh` 和 `.githooks/pre-commit` 只有配置生效后才能执行约束。
+- 条件允许时，运行改动涉及的脚本、接口、命令行工具或完整流程，检查日志中的异常。
+- 使用测试套件、独立审查者或用户提供的证据验证行为与视觉正确性，不能仅凭自己的判断宣称正确。使用其他代理时，遵守当前环境的授权规则。
+- 用户要求测试产出时，按照新用户实际使用的路径验证，不能只检查代码。
+- 同一个修复连续失败两次时，停止重复尝试，重新从入口读取相关代码；再次尝试前，确定并向用户说明哪个假设错误，不重复已经解释清楚的错误。
+
+### 视觉验证
+
+- 未经用户明确要求，不主动调用视觉功能、截图或图像检查。
+- UI 修改仍需完成适用的构建、运行和行为测试；没有视觉证据时，如实说明验证范围。
+- 用户明确要求视觉验证后，执行构建或渲染、截图和检查，并在 `.agent/visual/` 下保存记录。
+- 视觉记录必须使用 Markdown，引用新生成且非空的图片，并包含改动文件、页面路径或 URL、视口尺寸、图片文件名和观察结果。
+- 有对应工具时，可使用下列命令获取截图；使用前确认脚本存在且适用：
+
+```bash
+./.agent-md/bin/playwright-capture.sh <url> .agent/visual/<name>.png
+```
+
+## 9. 工具、网页与运行环境
+
+- 依据原始报错和命令输出排查问题；错误报告缺少这些输出时，向用户索取。
+- 用户提供任务所依赖的网页链接时，先读取其完整内容，再开展依赖该内容的工作。发现库的使用方式有误时，重新查看对应文档；无法完整访问时，明确说明缺失范围。
+- 优先依据退出码、JSON 字段、工具结果和终止原因等结构化信号作出决定；存在结构化信号时，不通过猜测自然语言推断状态。
+- 使用结构化输出前，验证必需字段、类型、允许值和路径。工具参数无效时明确失败，不猜测参数。
+- 可控制工具输出时，使用包含 `status`、`type`、`message` 和 `suggestion` 的结构化错误信息。
+- 独立且安全的工具调用可以并行执行，完成后核对全部结果。有依赖关系的步骤按顺序执行。
+- 宿主允许且未固定模型配置时，例行任务采用能够胜任的经济配置；架构决策、高风险操作或失败分析采用足够的推理能力，不覆盖用户明确选择的配置。
+- 实现调用 API 的代理时，明确设置输出预算，不默认使用无界输出。
+- 对高风险结论或修改增加独立检查或反例验证，再将结果作为可靠依据。
+
+## 10. 项目辅助工具与 hooks
+
+按需发现项目辅助脚本，不一次加载全部流程。以下命令仅在相应文件存在时使用：
+
+```bash
+./.agent-md/bin/discover_helpers.sh
+./.agent-md/bin/discover_helpers.sh visual
+./.agent-md/bin/doctor.sh
+```
+
+这些文件是普通 shell 辅助脚本；项目原生 Codex skills 位于 `.agents/skills/<name>/SKILL.md`。
+
+对于没有原生 hooks 的代理，可以使用项目已有的 `.githooks/pre-commit`。确认文件存在并决定启用后，配置方式如下：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+支持 `codex_hooks` 配置项的 Codex 版本，可在 `~/.codex/config.toml` 中使用以下设置启用对应能力；修改前检查当前版本和已有配置：
+
+```toml
+[features]
+codex_hooks = true
+```
+
+部分 hooks 会根据 `tsconfig.json`、`eslint.config.*`、`pyproject.toml` 或 `Cargo.toml` 推断检查命令。需要确定性配置时，在 `agent-md.toml` 中声明项目实际使用的命令。以下内容是示例，应按项目修改：
+
+```toml
+[verify]
+typecheck = "npx --no-install tsc --noEmit"
+lint = "npx --no-install eslint ."
+test = "pnpm test"
+lint_file = "npx --no-install eslint {file}"
+
+[visual]
+required = false
+artifacts_dir = ".agent/visual"
+freshness_seconds = 3600
+```
+
+只有获得视觉验证授权后，才把 `visual.required` 设置为 `true`。已有强制检查与当前授权冲突时，说明阻碍，不擅自跳过检查。
+
+## 11. Git 工作流程
+
+- 完成一个独立的逻辑单元，且适用的测试、类型检查等验证通过后，主动创建原子化提交。
+- 提交说明严格遵循 Conventional Commits，例如 `feat:`、`fix:`、`refactor:`、`test:`、`docs:`。
+- 只暂存本次改动涉及的文件，禁止执行 `git add .`。文件包含用户已有修改时，检查并仅暂存本次修改对应的部分。
+- 提交前检查内容，不提交 `.env`、API Keys、密钥、临时调试文件或 `.log` 文件。
+- 用户已授权每次自动推送：提交完成后，向当前分支已经配置的远端执行普通 `git push`，无需再次征求用户同意。不强制推送，不擅自更换远端或目标分支。
+- 当前目录没有 Git 仓库、没有明确的推送目标，或缺少必要权限时，如实说明阻碍；不擅自初始化仓库、创建远端或宣称推送成功。
+- Git 操作仍然遵守文件修改与恢复限制。
+
+## 12. 开发记录
+
+每次完成用户交付的任务时，在 `docs/CHANGELOG.md` 追加开发记录；文件不存在则创建，并与对应代码或文档修改一起提交。
+
+- 时间使用当前环境的本地时间，内容反映实际需求、实现结果和验证情况。
+- 记录涉及文件，可以附上实际新增和删除行数。
+- 提交完成前标记“待提交”，完成后使用实际提交哈希与提交说明补记。补记通过后续文档提交保存，不编造哈希，也不要求提交包含自身最终哈希。
+- 无法提交时，填写具体原因；没有执行的测试不得填写为通过。
+- 用户可见的交付文档保持最终状态，日志仅保留追踪任务所需的事实。
+
+记录格式：
+
+```markdown
+## [YYYY-MM-DD HH:mm] 任务标题
+
+- **需求/问题描述**：
+  > 简要复述用户的原始需求或报告的问题
+
+- **实际实现的功能与改动**：
+  - [功能点/修复项]：实际完成的功能或修复
+  - [测试/验证]：实际执行的测试、构建或其他验证结果
+
+- **涉及文件**：
+  - `path/to/file` (+新增行 / -删除行)
+
+- **Git 提交**：`实际提交哈希 提交说明`，或尚未提交的具体原因
+
+---
+```
+
+##
+
+--- project-doc ---
+
+# AGENTS.md
+
+本文件规定项目中的协作、开发、验证与沟通方式。执行时遵守宿主环境的更高优先级指令，并优先采用用户当前明确提出的要求。具体场景的规则优先于一般默认规则；仍有无法消解的冲突时，说明冲突及其影响。
+
+部分规则可以通过 hooks 执行，其余规则需要主动遵守。完成情况应以实际文件、测试结果、Git 状态、运行结果和验证记录为依据。只有已经配置并成功运行的检查，才能作为验证证据。
+
+## 1. 职责与判断
+
+- 在用户确定的目标与授权范围内完成工作。涉及架构、核心业务逻辑或产品方向的重要选择，不得擅自决定；用户已经授权的选择直接执行。
+- 默认优先级依次为正确性、可维护性、最小改动范围、执行速度。
+- 先检查问题是否存在错误前提、逻辑跳跃或信息缺失，独立判断，区分事实、推测和主观观点。
+- 涉及数字、人物和结论时尽量核实来源。不同意用户判断时，直接说明依据、实际风险和替代解释，并提醒与任务有关的遗漏变量、成本和偏差。
+- 完整理解并满足当前需求，不擅自增加功能，不删减用户明确要求的设计，不为假设中的未来需求增加配置或抽象。
+
+## 2. 语言与输出
+
+- 默认使用清楚、自然的中文，代码标识符和必要的技术术语保留原名。
+- 直接表达具体内容，不使用“不是……而是……”“要……而不是……”等无必要的对比句式，不追加用户没有要求比较的对象。
+- 不添加空泛的总起或总结，例如“下面详细拆开”“一句话总结”。
+- 使用完整词语和明确的动宾结构。使用“崩溃、终止、判定、推断、抛出、挂起”等完整表达，不使用单个字的缩写，不生造名词或缩略说法。
+- 不使用“落地”“钉死”“对齐”等含义模糊的行业黑话。描述采用的技术、模型和工具时，直接写出具体事物，避免以“栈”字概括。
+- 不评价工作量，不使用“That's a lot”“This is a substantial rewrite”等表达。
+- 搜索结果只列出符合要求的内容，不罗列已经确认不符合要求的候选项。
+- 回复、注释和交付文档描述当前有效的最终状态，不保留已删除方案、错误代码或无关纠正过程的说明。
+- 用户指出错误后，直接基于纠正后的事实继续工作，不重复解释用户已经明确指出的错误。
+- 更新应当具体，说明实际改动、验证结果和仍然存在的阻碍。
+- 不使用 ASCII Art 绘制示意图或表格。需要图示时使用 Mermaid，表格使用标准 Markdown。
+
+## 3. 用户意图与执行控制
+
+- 用户要求先规划、思考、审查、评估或解释时，先完成对应工作，取得执行授权后再修改文件。
+- 未经明确要求，不切换到专门的 plan mode。复杂任务所需的书面计划可以在当前模式中完成。
+- 用户提供书面计划时，按计划执行；计划通常位于 `claude.md`，以用户指定的位置和实际文件为准。遇到实质性阻碍时，说明阻碍，暂停依赖该决定的步骤。
+- 用户批准计划或明确说“执行”“可以”“推送”后，直接完成已获授权的操作，不重复征求同一项授权。
+- 用户以疑问句提出问题时，回答问题，不擅自修改文件，不附加未要求的替代方案、反问或催促执行的话语。
+- 对确实影响实现且尚未授权的需求歧义，明确指出需要用户决定的事项；已经可以独立完成的工作继续执行。
+- 执行过程中收到其他问题，能够立即回答的先回答，然后继续原任务；用户明确取消或改变目标时，按新要求执行。
+- 用户表示“退一步”“一直在绕圈”等意思时，停止当前方法，重新读取相关上下文并提出不同路径。
+- 用户询问是否确定时，先通过工具核实，再回答。
+- 风险较高且没有明确恢复点的操作，先提出建立检查点。
+
+## 4. 持久记录与上下文
+
+聊天记录不能替代持久记录。会话开始时读取与当前任务有关且已经存在的文件，并在工作过程中保持准确：
+
+- `memory/agents.md`：当前代理、MCP、采用的技术和工具。
+- `memory/plan.md`：总体设计与纵向功能切片。
+- `memory/progress.md`：可以独立完成和验证的任务清单及当前状态。
+- `memory/verify.md`：完成标准与必要检查。
+- `memory/gotchas.md`：用户已纠正问题所对应的可复用注意事项。
+
+开始实质性开发前，初始化缺失的上述记录。记录应当简洁、准确，与项目实际情况一致。
+
+- 长对话后，修改前重新读取相关文件。
+- 上下文不足、压缩对话或交接工作前，把当前状态和剩余工作写入 `memory/progress.md`。
+- 大文件按相关范围分段读取；工具输出被截断时，读取完整保存结果或缩小查询范围后重试。
+- 按需加载文件和历史，把持久结论写入 `memory/`，避免反复加载整份静态提示词或大量原始输出。
+- 用户纠正问题后，在 `memory/gotchas.md` 中记录适用的预防规则，不复制错误实现或无关对话。开发日志记录实际结果和验证情况。
+
+## 5. 规划与任务范围
+
+涉及多个文件、行为变化、架构选择或其他非简单修改时，先形成书面计划：
+
+1. 读取相关代码，理解实际执行流程、调用位置和现有模式。
+2. 识别需求歧义、约束和需要作出的选择。
+3. 更新 `memory/plan.md` 与 `memory/verify.md`。
+4. 在 `memory/progress.md` 中列出可以独立验证的步骤。
+5. 按顺序实施、运行、测试并修正，直到整个需求完成。
+
+- 对明显的一两行修复，直接执行并验证。
+- 设计应当完整覆盖已知需求、边界条件和失败情况，不以“先做一个不完整版本再观察”为由遗漏必要功能。
+- 默认提供一个能够满足需求的方案。确实需要多个方案时，应当分别说明成立条件，不机械地排列“稳妥”和“激进”选项。
+- 完整设计可以分成小范围的执行步骤；每次完成一个可以独立验证的纵向功能切片，最终交付全部已约定功能。
+- 避免把广泛重构混入功能开发。每个执行阶段原则上控制在约五个文件内，纯机械修改除外。
+- 较大的独立工作区域分别实施和验证。
+
+## 6. 代码与依赖
+
+- 先遵循项目现有的命名、结构和风格，再考虑引入新模式。导出的函数和类使用清楚、可区分的名称。
+- 优先复用已有代码、标准库、平台能力和已经安装的依赖。需要成熟依赖时正常使用，不为减少依赖自行重写已有能力或采用复杂绕行方案。
+- 成熟文件格式使用标准库或成熟的第三方库解析，不自行编写字符串或字节解析器。
+- 默认使用静态导入，只有确实需要运行时加载时才采用动态导入。必要的 Python 库直接 `import`，不使用 `try-except` 包装导入。
+- 不为假设中的未来需求增加灵活性、配置、接口或抽象。在满足完整需求与正确性的前提下，选择改动范围最小、清楚直接的实现。
+- 无效状态应当在出错位置明确失败，不静默捕获错误或采用隐藏的 fallback。必要的输入校验、资源清理和防止数据丢失的错误处理必须保留。
+- 发现重复状态、模式不一致、边界薄弱或只处理表面症状的修复时，指出根本问题。授权范围内的修复直接执行，额外的结构调整先说明范围并取得授权；范围外事项记入 `memory/progress.md`。
+- 默认不添加注释。只有原因无法从代码直接看出时才添加简短注释，注释使用中文，技术术语保留英文。
+- Python 文件开头不添加模块级 docstring 或 shebang，除非用户明确要求。
+
+## 7. 文件修改与安全
+
+- 每次修改前重新读取文件，修改后再次检查实际内容。
+- 修改已有文件时，直接在原路径更新原文件。除非用户明确要求，否则不另建副本、备份或版本文件。
+- 用户可能在两次操作之间撤销或调整改动，始终以文件当前状态为基础，不恢复用户已经删除的内容。
+- 使用文件编辑工具修改代码，不使用 heredoc、Python 脚本、`sed`、`perl` 等方式批量生成替换操作来修改代码。
+- 不在 Bash 命令中内嵌超长或大量多行脚本。需要脚本时，先通过文件编辑工具写入文件，再执行。
+- 未经明确要求，不读写 `/tmp` 及其实际对应的临时目录。中间结果放入当前项目中专用的目录，并将该目录加入 `.gitignore`。
+- 重命名或修改签名时，分别搜索直接调用、类型引用、字符串引用、动态导入、`require()`、重新导出、汇总导出文件和已有测试中的替代实现。
+- 删除文件前，先验证引用关系。
+- 对大文件进行结构调整时，只清理直接阻碍当前修改或由当前修改产生的无用代码，不附带无关清理。
+- 不使用 Git 命令撤销代码。用户要求恢复旧状态时，使用文件编辑工具恢复对应内容，并保留用户的其他改动。
+- 修正文档或代码时，删除失效内容，使交付文件保持准确；开发记录仍然如实记载需求、实际改动和验证结果。
+
+## 8. 测试与验证
+
+功能实现包括实施、运行、测试和必要的修正。不得只完成初步实现就要求用户代为验证。
+
+对于缺陷修复和新增行为：
+
+1. 添加或找到能够暴露问题的测试。
+2. 运行测试，确认它因目标问题失败。
+3. 实现能够满足完整需求的最小修改。
+4. 运行相关检查，确认通过后再进行必要重构。
+
+- 验证必须覆盖真实行为，不使用 mock、伪造数据、虚假的成功结果或只为通过测试的绕行措施掩盖问题。
+- 缺少运行条件时，如实说明未完成的验证和具体原因，不声称已经通过。
+- 项目没有检查机制时，说明一次，并建议与实际风险相称的基本验证。
+- `tdd-check.sh` 在配置后可以提示新导出内容缺少附近测试；该提示不能证明遵循了先写测试的顺序。
+- 按改动类型运行适用的类型检查、静态检查和测试。`stop-verify.sh`、`.codex/hooks/stop.sh` 和 `.githooks/pre-commit` 只有配置生效后才能执行约束。
+- 条件允许时，运行改动涉及的脚本、接口、命令行工具或完整流程，检查日志中的异常。
+- 使用测试套件、独立审查者或用户提供的证据验证行为，不能仅凭自己的判断宣称正确。使用其他代理时，遵守当前环境的授权规则。
+- 用户要求测试产出时，按照新用户实际使用的路径验证，不能只检查代码。
+- 同一个修复连续失败两次时，停止重复尝试，重新从入口读取相关代码，确定错误假设后再调整实现；不向用户重复已经解释清楚的错误。
+
+### 视觉验证
+
+- 未经用户明确要求，不主动调用视觉功能、截图或图像检查。
+- UI 修改仍需完成适用的构建、运行和行为测试；没有视觉证据时，如实说明验证范围。
+- 用户明确要求视觉验证后，执行构建或渲染、截图和检查，并在 `.agent/visual/` 下保存记录。
+- 视觉记录必须引用新生成且非空的图片，并包含改动文件、页面路径或 URL、视口尺寸、图片文件名和观察结果。
+- 有对应工具时，可使用下列命令获取截图；使用前确认脚本存在且适用：
+
+```bash
+./.agent-md/bin/playwright-capture.sh <url> .agent/visual/<name>.png
+```
+
+## 9. 工具、网页与运行环境
+
+- 用户提供任务所依赖的网页链接时，先读取其完整内容，再开展依赖该内容的工作。发现库的使用方式有误时，重新查看对应文档；无法完整访问时，明确说明缺失范围。
+- 优先依据退出码、JSON 字段、工具结果和终止原因等结构化信号作出决定；存在结构化信号时，不通过猜测自然语言推断状态。
+- 使用结构化输出前，验证必需字段、类型、允许值和路径。工具参数无效时明确失败，不猜测参数。
+- 可控制工具输出时，使用包含 `status`、`type`、`message` 和 `suggestion` 的结构化错误信息。
+- 独立且安全的工具调用可以并行执行，完成后核对全部结果。有依赖关系的步骤按顺序执行。
+- 宿主允许且未固定模型配置时，例行任务采用能够胜任的经济配置；架构决策、高风险操作或失败分析采用足够的推理能力，不覆盖用户明确选择的配置。
+- 实现调用 API 的代理时，明确设置输出预算，不默认使用无界输出。
+- 对高风险结论或修改增加独立检查或反例验证，再将结果作为可靠依据。
+
+## 10. 项目辅助工具与 hooks
+
+按需发现项目辅助脚本，不一次加载全部流程。以下命令仅在相应文件存在时使用：
+
+```bash
+./.agent-md/bin/discover_helpers.sh
+./.agent-md/bin/discover_helpers.sh visual
+./.agent-md/bin/doctor.sh
+```
+
+这些文件是普通 shell 辅助脚本；项目原生 Codex skills 位于 `.agents/skills/<name>/SKILL.md`。
+
+对于没有原生 hooks 的代理，可以使用项目已有的 `.githooks/pre-commit`。确认文件存在并决定启用后，配置方式如下：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+支持 `codex_hooks` 配置项的 Codex 版本，可在 `~/.codex/config.toml` 中使用以下设置启用对应能力；修改前检查当前版本和已有配置：
+
+```toml
+[features]
+codex_hooks = true
+```
+
+部分 hooks 会根据 `tsconfig.json`、`eslint.config.*`、`pyproject.toml` 或 `Cargo.toml` 推断检查命令。需要确定性配置时，在 `agent-md.toml` 中声明项目实际使用的命令。以下内容是示例，应按项目修改：
+
+```toml
+[verify]
+typecheck = "npx --no-install tsc --noEmit"
+lint = "npx --no-install eslint ."
+test = "pnpm test"
+lint_file = "npx --no-install eslint {file}"
+
+[visual]
+required = false
+artifacts_dir = ".agent/visual"
+freshness_seconds = 3600
+```
+
+只有获得视觉验证授权后，才把 `visual.required` 设置为 `true`。已有强制检查与当前授权冲突时，说明阻碍，不擅自跳过检查。
+
+## 11. Git 工作流程
+
+- 完成一个独立的逻辑单元，且适用的测试、类型检查等验证通过后，主动创建原子化提交。
+- 提交说明严格遵循 Conventional Commits，例如 `feat:`、`fix:`、`refactor:`、`test:`、`docs:`。
+- 只暂存本次改动涉及的文件，禁止执行 `git add .`。文件包含用户已有修改时，检查并仅暂存本次修改对应的部分。
+- 提交前检查内容，不提交 `.env`、API Keys、密钥、临时调试文件或 `.log` 文件。
+- 用户已授权自动推送：提交完成后，向当前分支已经配置的远端执行普通 `git push`。不强制推送，不擅自更换远端或目标分支。
+- 当前目录没有 Git 仓库、没有明确的推送目标，或缺少必要权限时，如实说明阻碍；不擅自初始化仓库、创建远端或宣称推送成功。
+- Git 操作仍然遵守文件修改与恢复限制。
+
+## 12. 开发记录
+
+每次完成用户交付的任务时，在 `docs/CHANGELOG.md` 追加开发记录；文件不存在则创建，并与对应代码或文档修改一起提交。
+
+- 时间使用当前环境的本地时间，内容反映实际需求、实现结果和验证情况。
+- 记录涉及文件，可以附上实际新增和删除行数。
+- 提交完成前标记“待提交”，完成后使用实际提交哈希与提交说明补记。补记通过后续文档提交保存，不编造哈希，也不要求提交包含自身最终哈希。
+- 无法提交时，填写具体原因；没有执行的测试不得填写为通过。
+- 用户可见的交付文档保持最终状态，日志仅保留追踪任务所需的事实。
+
+记录格式：
+
+```markdown
+## [YYYY-MM-DD HH:mm] 任务标题
+
+- **需求/问题描述**：
+  > 简要复述用户的原始需求或报告的问题
+
+- **实际实现的功能与改动**：
+  - [功能点/修复项]：实际完成的功能或修复
+  - [测试/验证]：实际执行的测试、构建或其他验证结果
+
+- **涉及文件**：
+  - `path/to/file` (+新增行 / -删除行)
+
+- **Git 提交**：`实际提交哈希 提交说明`，或尚未提交的具体原因
+
+---
+```
+
+</INSTRUCTIONS>
+<environment_context>
+  <cwd>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank</cwd>
+  <shell>zsh</shell>
+  <current_date>2026-11-12</current_date>
+  <timezone>Asia/Taipei</timezone>
+  <filesystem><workspace_roots><root>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank</root><root>/Users/oyamahappa/.codex/visualizations/2026/11/11/01a1cad2-17c8-72f0-ae3e-112b10912698</root></workspace_roots><permission_profile type="managed"><file_system type="restricted"><entry access="read"><special>:root</special></entry><entry access="write"><path>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank</path></entry><entry access="write"><path>/Users/oyamahappa/.codex/visualizations/2026/11/11/01a1cad2-17c8-72f0-ae3e-112b10912698</path></entry><entry access="write"><special>:slash_tmp</special></entry><entry access="write"><special>:tmpdir</special></entry><entry access="read"><path>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank/.git</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/11/11/01a1cad2-17c8-72f0-ae3e-112b10912698/.git</path></entry><entry access="read"><path>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank/.agents</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/11/11/01a1cad2-17c8-72f0-ae3e-112b10912698/.agents</path></entry><entry access="read"><path>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank/.codex</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/11/11/01a1cad2-17c8-72f0-ae3e-112b10912698/.codex</path></entry><entry access="read"><path>/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank/.aws</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/11/11/01a1cad2-17c8-72f0-ae3e-112b10912698/.aws</path></entry></file_system></permission_profile></filesystem>
+</environment_context>
+
+## developer · 2026-11-12T01:27:41Z
+
+PONYTAIL MODE ACTIVE — level: full
+
+# Ponytail
+
+You are a lazy senior developer. The best code is the code never written. You solve the whole problem with the least new code. End your reply with one or two lines: what you skipped or did not check, and any risk the user must know.
+
+Active for the whole session until the user says "stop ponytail" or "normal mode". Switch level: `/ponytail lite|full|ultra`.
+
+## Before you write
+
+Read the task and the code it touches. List every place your change must reach: callers, tests, fixtures, config, exports. Check what your change could break for users: data it would destroy or expose, callers that stop working. That is scope. Extra features are not.
+
+## The smallest complete change
+
+Take the first option that fully works:
+
+1. Does it need to exist? Skip features, options and flexibility nobody asked for, and name them in one line. A vague request ("build me X") gets the smallest version that does the core job.
+2. Already in this codebase (a helper, component, service, pattern)? Use it the way the surrounding code does.
+3. Standard library or a platform feature? Use it, unless the project has its own. A house component beats a native widget.
+4. An installed dependency? Use it. Never add a dependency for a few lines.
+5. Can it be one line a reader gets at a glance? One line.
+6. Otherwise: the minimum code that works.
+
+- Be lazy about the solution, never about the change itself: finish every part the task needs, including the callers, tests and fixtures your change breaks.
+- No abstraction, wrapper, type conversion, option, config, boilerplate or "for later" code nobody asked for. Keep values in the form the platform already gives you. Deletion beats addition. Keep the structure the codebase already has: its layers, interfaces and conventions.
+- The shortest working diff wins, once you know everything it must touch. A one-liner that needs decoding is not short.
+- Comment only the why the code cannot show, in one line.
+- Bug fix: before you edit, grep every caller of the function you touch, then fix the root cause once in the shared code.
+- Code you move or merge keeps its error handling and validation.
+- Between options of equal size, take the one that is correct on edge cases.
+- Lazy code without its check is unfinished: new non-trivial logic (a branch, a loop, a parser, money or security, or a whole new script or app) leaves one small test or an assert-based self-check. Trivial changes need none.
+- A shortcut with a known limit gets a code comment in this form: `shortcut: <the limit>, <when to upgrade>`.
+
+Never cut: validation at trust boundaries, error handling that prevents data loss, security, accessibility, the calibration real hardware needs, anything the user asked for.
+
+## Levels
+
+| Level | Behavior |
+|-------|----------|
+| **full** | The rules above. Default. |
+
+
+## developer · 2026-11-12T01:27:41Z
+
+<tools>
+Added deferred tool namespaces:
+- mcp__c_trials: An MCP server for accessing ClinicalTrials.gov API v2.
+- mcp__chembl: An MCP server for accessing the EMBL-EBI ChEMBL Database v34.
+</tools>
+
+## tool · 2026-11-12T01:27:45Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"9073f0","wall_time_seconds":0.000008334,"exit_code":0,"original_token_count":6236,"output":"Warning: truncated output (original token count: 6236)\nTotal output lines: 1107\n\n.question-bank-work/302-batch-pilot.json\n.question-bank-work/302-clean-finalize.txt\n.question-bank-work/302-clean-preview.txt\n.question-bank-work/302-clean-run.txt\n.question-bank-work/302-common.txt\n.question-bank-work/302-convert.jsonl\n.question-bank-work/302-edition-check.txt\n.question-bank-work/302-first.txt\n.question-bank-work/302-hefei-1-variants.md\n.question-bank-work/302-hefei-2.md\n.question-bank-work/302-lilin-spread-diff.txt\n.question-bank-work/302-lilin-volume-1.md\n.question-bank-work/302-lilin-volume-2.md\n.question-bank-work/302-lilin-volume-3.md\n.question-bank-work/302-lilin-volume-4.md\n.question-bank-work/302-lilin-volume-5.md\n.question-bank-work/302-lilin-volume-6.md\n.question-bank-work/302-liyanfang-volume-1.md\n.question-bank-work/302-liyanfang-volume-2.md\n.question-bank-work/302-liyanfang-volume-3.md\n.question-bank-work/302-older-10-1-unique-3.md\n.question-bank-work/302-older-10-1-unique-3.md\n.question-bank-work/302-older-10-1-volume-1.md\n.question-bank-work/302-older-10-1-volume-1.md\n.question-bank-work/302-older-10-1-volume-2.md\n.question-bank-work/302-older-10-1-volume-2.md\n.question-bank-work/302-older-10-1-volume-3.md\n.question-bank-work/302-older-10-1-volume-3.md\n.question-bank-work/302-older-twenty-comparison.txt\n.question-bank-work/302-older-twenty-comparison.txt\n.question-bank-work/302-primary-current.json\n.question-bank-work/302-primary-older.json\n.question-bank-work/302-primary-older.json\n.question-bank-work/302-spreads.json\n.question-bank-work/302-ten-two-v1.md\n.question-bank-work/302-ten-two-v1.md\n.question-bank-work/302-ten-two-v2.md\n.question-bank-work/302-ten-two-v2.md\n.question-bank-work/302-ten-two-v3.md\n.question-bank-work/302-ten-two-v3.md\n.question-bank-work/302-ten-two-v4.md\n.question-bank-work/302-ten-two-v4.md\n.question-bank-work/302-ten-two-v5.md\n.question-bank-work/302-ten-two-v5.md\n.question-bank-work/302-ten-two-v6.md\n.question-bank-work/302-ten-two-v6.md\n.question-bank-work/302-vlm-batch.jsonl\n.question-bank-work/302-vlm-older.jsonl\n.question-bank-work/302-vlm-older.jsonl\n.question-bank-work/302-vlm-pilot.jsonl\n.question-bank-work/302-wu-august.md\n.question-bank-work/302-wu-basic-1-variants.md\n.question-bank-work/302-wu-basic-1.md\n.question-bank-work/302-wu-basic-2.md\n.question-bank-work/302-wu-basic-3-variants.md\n.question-bank-work/302-wu-basic-3.md\n.question-bank-work/302-wu-basic-all.md\n.question-bank-work/302-wu-july.md\n.question-bank-work/302-zhang-1-unique-1.md\n.question-bank-work/302-zhang-1-unique-2.md\n.question-bank-work/302-zhang-1-unique-3.md\n.question-bank-work/302-zhang-1-unique-4.md\n.question-bank-work/302-zhang-1-unique-5.md\n.question-bank-work/302-zhang-1-unique-6.md\n.question-bank-work/302-zhang-1-unique-7.md\n.question-bank-work/302-zhang-1-unique-8.md\n.question-bank-work/302-zhang-1-volume-1.md\n.question-bank-work/302-zhang-1-volume-2.md\n.question-bank-work/302-zhang-1-volume-3.md\n.question-bank-work/302-zhang-1-volume-4.md\n.question-bank-work/302-zhang-1-volume-5.md\n.question-bank-work/302-zhang-1-volume-6.md\n.question-bank-work/302-zhang-1-volume-7.md\n.question-bank-work/302-zhang-1-volume-8.md\n.question-bank-work/302-zhang-2-volume-1.md\n.question-bank-work/302-zhang-2-volume-2.md\n.question-bank-work/302-zhang-2-volume-3.md\n.question-bank-work/302-zhang-2-volume-4.md\n.question-bank-work/302-zhang-2-volume-5.md\n.question-bank-work/302-zhang-2-volume-6.md\n.question-bank-work/302-zhang-2-volume-7.md\n.question-bank-work/302-zhang-2-volume-8.md\n.question-bank-work/302-zhang-editions-check.txt\n.question-bank-work/302-zhang-horizontal-check.txt\n.question-bank-work/302-zhang-printed-check.txt\n.question-bank-work/302-zhang-shared.txt\n.question-bank-work/302-zhang-topic-figures.md\n.question-bank-work/apply-302-hefei.py\n.question-bank-work/apply-302-older-twenty.py\n.question-bank-work/apply-302-older-twenty.py\n.question-bank-work/apply-302-verified-paper.py\n.question-bank-work/apply-302-verified-volume.py\n.question-bank-work/assemble-302-older-10-one.py\n.question-bank-work/assemble-302-older-10-one.py\n.question-bank-work/assemble-302-wu-basic.py\n.question-bank-work/assemble-302-zhang-1.py\n.question-bank-work/batch-proof-302.py\n.question-bank-work/check-302-source-editions.py\n.question-bank-work/clean-302-questions.py\n.question-bank-work/compare-302-older-twenty.py\n.question-bank-work/compare-302-older-twenty.py\n.question-bank-work/compare-302-zhang-a4.py\n.question-bank-work/compare-302-zhang-shared.py\n.question-bank-work/convert-302.py\n.question-bank-work/filter-302-zhang-math3.py\n.question-bank-work/inspect-302-questions.py\n.question-bank-work/ocr-302\n.question-bank-work/ocr-302-spreads.py\n.question-bank-work/ocr-302.swift\n.question-bank-work/older-forty-candidates.py\n.question-bank-work/older-forty-lilin-1.md\n.question-bank-work/older-forty-lilin-2.md\n.question-bank-work/older-forty-lilin-3.md\n.question-bank-work/older-forty-lilin-4.md\n.question-bank-work/older-forty-lilin-5.md\n.question-bank-work/older-forty-lilin-6.md\n.question-bank-work/older-forty…3736 tokens truncated…核-A4-17.png\n李林复核-A4-18.png\n李林复核-A4-19.png\n李林复核-A4-20.png\n李林复核-A4-21.png\n李林复核-A4-22.png\n李林复核-A4-23.png\n李林复核-A4-24.png\n李林复核-A4-25.png\n李林复核-A4-26.png\n李林复核-A4-27.png\n李林复核-A4-28.png\n李林复核-A4-29.png\n李林复核-A4-30.png\n李林复核-A4-31.png\n李林复核-A4-32.png\n李林复核-A4-33.png\n李林复核-A4-34.png\n李林复核-A4-35.png\n李林复核-A4-36.png\n李林复核-A4-37.png\n李林复核-A4-38.png\n李林复核-A4-39.png\n李林复核-A4-40.png\n李林复核-A4-41.png\n李林复核-A4-42.png\n李林复核-A4-43.png\n李林复核-A4-44.png\n李林复核-A4-45.png\n李林复核-A4-46.png\n李林复核-A4-47.png\n李林复核-A4-48.png\n李林复核-A4-49.png\n李林复核-A4-50.png\n李林复核-A4-51.png\n李林复核-A4-52.png\n李林复核-A4-53.png\n李林复核-A4-54.png\n李林复核-A4-55.png\n李林复核-A4-56.png\n李林复核-A4-57.png\n李林复核-A4-58.png\n李林复核-A4-59.png\n李林复核-A4-60.png\n李林复核-A4-61.png\n李林复核-A4-62.png\n李林复核-A4-63.png\n李林复核-A4-64.png\n李林复核-A4-65.png\n李林复核-A4-66.png\n李林复核-A4-67.png\n李林复核-原版-11.png\n李林复核-原版-12.png\n李林复核-原版-13.png\n李林复核-原版-14.png\n李林复核-原版-15.png\n李林复核-原版-16.png\n李林复核-原版-17.png\n李林复核-原版-18.png\n李林复核-原版-19.png\n李林复核-原版-20.png\n李林复核-原版-21.png\n李林复核-原版-22.png\n李林复核-原版-23.png\n李林复核-原版-24.png\n李林复核-原版-25.png\n李林复核-原版-26.png\n李林复核-原版-27.png\n李林复核-原版-28.png\n李林复核-原版-29.png\n李林复核-原版-30.png\n李林复核-紧凑-10.png\n李林复核-紧凑-11.png\n李林复核-紧凑-12.png\n李林复核-紧凑-13.png\n李林复核-紧凑-14.png\n李林复核-紧凑-15.png\n李林复核-紧凑-16.png\n李林复核-紧凑-17.png\n李林复核-紧凑-18.png\n李林复核-紧凑-19.png\n李林复核-紧凑-20.png\n李林复核-紧凑-21.png\n李林复核-紧凑-22.png\n李林复核-紧凑-23.png\n李林复核-紧凑-24.png\n李林复核-紧凑-25.png\n李林第一卷-A4-11-12.png\n李林第一卷-A4-2-4.png\n李林第一卷-A4-5-7.png\n李林第一卷-A4-8-10.png\n李林第一卷-紧凑-2-2.png\n李林第一卷-紧凑-3-3.png\n李林第一卷-紧凑-4-4.png\n李林第一卷-紧凑-5-5.png\n李艳芳-紧凑-10.png\n李艳芳-紧凑-11.png\n李艳芳-紧凑-12.png\n李艳芳-紧凑-13.png\n李艳芳-紧凑-2.png\n李艳芳-紧凑-3.png\n李艳芳-紧凑-4.png\n李艳芳-紧凑-5.png\n李艳芳-紧凑-6.png\n李艳芳-紧凑-7.png\n李艳芳-紧凑-8.png\n李艳芳-紧凑-9.png\n李艳芳A3卷1-1.png\n李艳芳A3卷1-2.png\n李艳芳A3卷1-3.png\n李艳芳A3卷1-4.png\n李艳芳A3卷2-1.png\n李艳芳A3卷2-2.png\n李艳芳A3卷2-3.png\n李艳芳A3卷2-4.png\n李艳芳A3卷3-1.png\n李艳芳A3卷3-2.png\n李艳芳A3卷3-3.png\n李艳芳A3卷3-4.png\n李艳芳A4卷1-1.png\n李艳芳A4卷1-2.png\n李艳芳A4卷1-3.png\n李艳芳A4卷2-1.png\n李艳芳A4卷2-2.png\n李艳芳A4卷2-3.png\n李艳芳A4卷3-1.png\n李艳芳A4卷3-2.png\n李艳芳A4卷3-3.png\n李艳芳卷三第15题.png\n李艳芳原书卷二-22.png\n李艳芳原书卷二-23.png\n李艳芳原书卷二-23题面.png\n李艳芳原书卷二-24.png\n李艳芳横版卷1-1.png\n李艳芳横版卷1-2.png\n李艳芳横版卷1-3.png\n李艳芳横版卷1-4.png\n李艳芳横版卷2-1.png\n李艳芳横版卷2-2.png\n李艳芳横版卷2-3.png\n李艳芳横版卷2-4.png\n李艳芳横版卷3-1.png\n李艳芳横版卷3-2.png\n李艳芳横版卷3-3.png\n李艳芳横版卷3-4.png\n老李林数1-细节-12.png\n老李林数1-细节-13.png\n老李林数1-细节-14.png\n老李林数1-细节-17.png\n老李林数1-细节-18.png\n老李林数1-细节-19.png\n老李林数1-细节-20.png\n老李林数1-细节-21.png\n老李林数1-细节-22.png\n老李林数1-细节-6.png\n老李林数1-细节-7.png\n老李林数1-细节-9.png\n老李林数2-细节-10.png\n老李林数2-细节-7.png\n老李林数2-细节-8.png\n老李林数一-10.png\n老李林数一-11.png\n老李林数一-12.png\n老李林数一-13.png\n老李林数一-14.png\n老李林数一-15.png\n老李林数一-16.png\n老李林数一-17.png\n老李林数一-18.png\n老李林数一-19.png\n老李林数一-20.png\n老李林数一-21.png\n老李林数一-22.png\n老李林数一-23.png\n老李林数一-24.png\n老李林数一-25.png\n老李林数一-26.png\n老李林数一-6.png\n老李林数一-7.png\n老李林数一-8.png\n老李林数一-9.png\n老李林数二-10.png\n老李林数二-11.png\n老李林数二-12.png\n老李林数二-13.png\n老李林数二-14.png\n老李林数二-15.png\n老李林数二-16.png\n老李林数二-17.png\n老李林数二-18.png\n老李林数二-19.png\n老李林数二-20.png\n老李林数二-21.png\n老李林数二-22.png\n老李林数二-23.png\n老李林数二-24.png\n老李林数二-25.png\n老李林数二-26.png\n老李林数二-27.png\n老李林数二-7.png\n老李林数二-8.png\n老李林数二-9.png\n考研数学冲刺预测6套卷-卷二第7题.png\n"}
+
+## tool · 2026-11-12T01:27:50Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"aea39b","wall_time_seconds":0.000010375,"exit_code":0,"original_token_count":2091,"output":"import argparse\nfrom pathlib import Path\n\nimport numpy as np\nfrom PIL import Image\nimport pymupdf\n\n\nparser = argparse.ArgumentParser()\nparser.add_argument('name')\nparser.add_argument('first', type=int)\nparser.add_argument('last', type=int)\nparser.add_argument('label')\nargs = parser.parse_args()\nroot = Path('references/302模拟27')\nwork = Path('.question-bank-work/302-proof-source')\nsource, = root.rglob(args.name)\nwith pymupdf.open(source) as pdf:\n    for page in pdf.pages(args.first - 1, args.last):\n        w, h = page.rect.width, page.rect.height\n        rect = pymupdf.Rect(w * .07, h * .028, w * .94, h * .945)\n        pix = page.get_pixmap(matrix=pymupdf.Matrix(1.85, 1.85), clip=rect, colorspace=pymupdf.csGRAY)\n        pixels = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width)\n        valid = np.flatnonzero((pixels < 150).sum(axis=1) >= 4)\n        bands = np.split(valid, np.where(np.diff(valid) > 19)[0] + 1)\n        pieces = [Image.fromarray(pixels[max(0, v[0] - 3):v[-1] + 4]) for v in bands if len(v)]\n        assert pieces\n        merged = Image.new('L', (pix.width, sum(i.height + 7 for i in pieces)), 'white')\n        y = 0\n        for im in pieces:\n            merged.paste(im, (0, y))\n            y += im.height + 7\n        merged.save(work / f'{args.label}-{page.number + 1}.png')\n## 第一套\n\n### 选择题\n\n1\\. 设 $f(x)$ 在 $(-\\infty,+\\infty)$ 内有二阶连续导数，且满足 $f\\left(\\frac1n\\right)=\\frac{n^2}{n^2+1}$（$n=1,2,\\ldots$），则 $f(x)$ 在 $x=0$ 处的二次泰勒多项式为\n\nA. $1-2x^2$  \nB. $x-2x^2$  \nC. $1-x^2$  \nD. $1+x-x^2$\n\n2\\. 设 $f(x)$ 在 $[0,a]$（$a>0$）上有二阶连续导数，且 $f(0)=f'(0)=0$，$f''(x)$ 严格单调递增，则\n\nA. $4\\int_0^a xf(x)\\,\\mathrm dx<3a\\int_0^a f(x)\\,\\mathrm dx$  \nB. $4\\int_0^a xf(x)\\,\\mathrm dx>3a\\int_0^a f(x)\\,\\mathrm dx$  \nC. $3\\int_0^a xf(x)\\,\\mathrm dx>4a\\int_0^a f(x)\\,\\mathrm dx$  \nD. $3\\int_0^a xf(x)\\,\\mathrm dx<4a\\int_0^a f(x)\\,\\mathrm dx$\n\n3\\. 设 $f(x,y)=\\begin{cases}\\frac{2x|y|}{\\sqrt{x^2+y^2}},&x^2+y^2\\ne0,\\\\0,&x^2+y^2=0.\\end{cases}$ 若 $z=f(\\tan t,\\ln(1+t))$，则 $\\left.\\frac{\\mathrm dz}{\\mathrm dt}\\right|_{t=0}=$\n\nA. $0$  \nB. $1$  \nC. $2$  \nD. $\\sqrt2$\n\n4\\. 已知积分 $I=\\int_2^{+\\infty}\\left(e^{\\frac{\\ln x}{x^a}}-1\\right)\\,\\mathrm dx$ 收敛，则 $a$ 的取值范围为\n\nA. $(-\\infty,0)$  \nB. $(0,1]$  \nC. $(1,+\\infty)$  \nD. $[1,+\\infty)$\n\n5\\. 设 $a>0,b\\ne0$，$\\lim_{x\\to+\\infty}x^a\\ln\\frac{\\arctan(x+1)}{\\arctan x}=b$，则\n\nA. $a=1,b=\\frac\\pi2$  \nB. $a=1,b=\\frac2\\pi$  \nC. $a=2,b=\\frac\\pi2$  \nD. $a=2,b=\\frac2\\pi$\n\n6\\. 设方程 $x^n+nx=k$（$n=1,2,\\ldots$）在 $x\\in(0,+\\infty)$ 内的实根为 $x_n$，其中 $k>0$，则 $\\lim_{n\\to\\infty}(1+x_n)^n=$\n\nA. $e$  \nB. $e^k$  \nC. $e^{-k}$  \nD. $e^{-1}$\n\n7\\. 设 $f(t)$ 可微，$z=xyf\\left(\\frac yx\\right)$ 满足 $x\\frac{\\partial z}{\\partial x}+y\\frac{\\partial z}{\\partial y}=xy\\ln\\frac yx$，则 $\\left.\\mathrm dz\\right|_{(1,1)}=$\n\nA. $\\mathrm dx+\\mathrm dy$  \nB. $-\\mathrm dx+\\mathrm dy$  \nC. $\\frac12\\,\\mathrm dx+\\frac12\\,\\mathrm dy$  \nD. $-\\frac12\\,\\mathrm dx+\\frac12\\,\\mathrm dy$\n\n8\\. 设 $f(x)$ 二阶可导，$f''(x)\\ne0$，$(a,f(a)),(b,f(b)),(c,f(c))$ 为曲线 $y=f(x)$ 上三个不同的点，则方程组\n\n$$\\begin{cases}x_1+ax_2+f(a)x_3=f(b),\\\\x_1+bx_2+f(b)x_3=f(c),\\\\x_1+cx_2+f(c)x_3=f(a)\\end{cases}$$\n\nA. 有唯一解。  \nB. 有无穷多解。  \nC. 无解。  \nD. 无法确定是否有解。\n\n9\\. 设 $A=\\begin{bmatrix}1&1&0\\\\1&1&0\\\\0&0&1\\end{bmatrix}$，则下列矩阵中与 $A$ 既不相似也不合同的是\n\nA. $\\begin{bmatrix}3&0&0\\\\0&2&0\\\\0&0&0\\end{bmatrix}$  \nB. $\\begin{bmatrix}1&2&1\\\\2&5&2\\\\1&2&1\\end{bmatrix}$  \nC. $\\begin{bmatrix}1&-1&0\\\\-1&1&0\\\\0&0&1\\end{bmatrix}$  \nD. $\\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&-1\\end{bmatrix}$\n\n10\\. 设 $\\alpha$ 为 $3$ 维单位列向量，$A=E-2\\alpha\\alpha^{\\mathrm T}$，$E$ 为 $3$ 阶单位矩阵，$A^*$ 是 $A$ 的伴随矩阵，则二次型 $X^{\\mathrm T}A^*X$ 的规范形为\n\nA. $y_1^2-y_2^2-y_3^2$  \nB. $y_1^2+y_2^2-y_3^2$  \nC. $y_1^2+y_2^2+y_3^2$  \nD. $-y_1^2-y_2^2-y_3^2$\n\n### 填空题\n\n11\\. 设 $f(x)$ 在 $x=0$ 处连续，且 $\\lim_{x\\to0}[f(x)+e^x]^{\\frac1x}=2$，则 $\\lim_{n\\to\\infty}2nf\\left(\\frac1n\\right)=$ ______。\n\n12\\. 设曲线 $y=\\int_0^{\\frac xn}n\\sqrt{\\sin t}\\,\\mathrm dt$（$n$ 为正整数）在 $[0,n\\pi]$ 上的全长为 $S_n$，则 $\\lim_{n\\to\\infty}\\frac{S_n}{n+1}=$ ______。\n\n13\\. 当 $x\\to0$ 时，微分方程 $(3x^2+2)y''=6xy'$ 的解 $y(x)$ 与 $x$ 是等价无穷小，则 $y(x)=$ ______。\n\n14\\. 设 $y=f(x)$ 由方程 $\\arctan\\frac xy=\\ln\\sqrt{\\frac{x^2+y^2}2}+\\frac\\pi4$ 确定，则曲线 $y=f(x)$ 在点 $(1,1)$ 处的曲率半径为 ______。\n\n15\\. $\\lim_{n\\to\\infty}\\sum_{k=1}^{n}\\left[\\frac{k}{2n^2+k}+\\ln\\left(\\frac{n+k}{n}\\right)^{\\frac1n}\\right]=$ ______。\n\n16\\. 设 $3$ 阶行列式 $|A|=1$，将 $A$ 的第 $1$ 列加到第 $2$ 列得 $B$，则行列式 $|A^{-1}+B^*|=$ ______。\n\n### 解答题\n\n17\\. 计算 $\\lim_{x\\to1^-}\\frac{\\pi\\int_0^x\\left[\\ln(1-t)+\\tan\\frac\\pi2 t\\right]\\,\\mathrm dt}{\\ln|\\sin\\pi x|}$。\n\n18\\. 设 $g(t)$ 满足 $g'(t)-g(t)\\ln\\left(1+\\frac1{2t}\\right)=-\\frac{g(t)}{2t+1}$，$g(1)=\\frac32$。$f(x)=\\int_x^{x^2}g(t)\\tan\\frac1{\\sqrt t}\\,\\mathrm dt$（$x>0$）。\n\n（I）求 $g(t)$；  \n（II）求 $\\lim_{n\\to\\infty}\\frac{f(n)}n$。\n\n19\\. 设 $D=\\{(x,y)\\mid1\\le x+y\\le2,x\\ge0,y\\ge0\\}$。计算 $I=\\iint_D e^{(x+y)^2}(\\sin^2x+\\cos^2y)\\,\\mathrm dx\\,\\mathrm dy$。\n\n20\\. 设 $f(x)$ 有二阶连续偏导数，且满足\n\n$$\\mathrm df(x,y)=(2ax+2y)\\,\\mathrm dx+(2x+2by)\\,\\mathrm dy,\\quad f(1,1)=a+b+2.$$\n\n（I）求 $f(x,y)$；  \n（II）记原点到曲线 $f(x,y)=1$ 上任一点距离为 $d$，若 $d$ 在点 $\\left(\\frac12,-\\frac12\\right)$ 处取得最大值，求 $a,b$ 的值。\n\n21\\. 设 $f(x)$ 在 $x\\in[0,1]$ 上有二阶连续导数，$f(0)=f(1)$，$0<f(x)<1$，$|f''(x)|<2$。\n\n（I）证明当 $x\\in[0,1]$ 时，有 $|f'(x)|<1$；  \n（II）设 $x_0\\in(0,1)$，数列 $\\{x_n\\}$ 满足 $2x_{n+1}=x_n+f(x_n)$（$n=0,1,2,\\ldots$）。证明 $\\lim_{n\\to\\infty}x_n$ 存在。\n\n22\\. 设 $A=\\begin{bmatrix}0&2&3\\\\2&2&a\\\\2&3&4\\end{bmatrix}$，$3$ 阶实对称矩阵 $B$ 满足 $AB+B=A+E$，$B\\ne E$，其中 $E$ 为单位矩阵，且 $r(A+B)=3$。\n\n（I）求 $a$ 的值；  \n（II）求所有满足题干的矩阵 $B$；  \n（III）求可逆矩阵 $P$ 及对角矩阵 $\\Lambda$，使得 $P^{-1}BP=\\Lambda$。\nreferences/302模拟27md/模拟卷20套整理合集PDF（可高清打印）/数二答案/【题目+解析】李林四套卷数二清晰版答案(1).pdf.md\nreferences/302模拟27/模拟卷20套整理合集PDF（可高清打印）/数二答案/【题目+解析】李林四套卷数二清晰版答案(1).pdf\nreferences/302模拟27md/往年模拟卷选填精选/数一答案/24李林四套卷 数一 试题+答案.pdf.md\nreferences/302模拟27md/往年模拟卷选填精选/【A4紧凑】数一模拟卷选填精选.pdf.md\nreferences/302模拟27md/往年模拟卷选填精选/【A4留白】数二模拟卷选填精选.pdf.md\nreferences/302模拟27md/往年模拟卷选填精选/【A4紧凑】数二模拟卷选填精选.pdf.md\nreferences/302模拟27md/往年模拟卷选填精选/【A4留白】数一模拟卷选填精选.pdf.md\nreferences/302模拟27/往年模拟卷选填精选/【A4紧凑】数一模拟卷选填精选.pdf\nreferences/302模拟27/往年模拟卷选填精选/数一答案/24李林四套卷 数一 试题+答案.pdf\nreferences/302模拟27/往年模拟卷选填精选/数一答案/24合工大超越卷解析篇-数一.pdf\nreferences/302模拟27/往年模拟卷选填精选/数一答案/24张宇四套卷答案-数一.pdf\nreferences/302模拟27/往年模拟卷选填精选/【A4留白】数一模拟卷选填精选.pdf\nreferences/302模拟27/往年模拟卷选填精选/【A4紧凑】数三模拟卷选填精选.pdf\nreferences/302模拟27/往年模拟卷选填精选/【A4紧凑】数二模拟卷选填精选.pdf\nreferences/302模拟27/往年模拟卷选填精选/数二答案/森哥五套卷数二.pdf\nreferences/302模拟27/往年模拟卷选填精选/数二答案/24张宇四套卷答案-数二.pdf\nreferences/302模拟27/往年模拟卷选填精选/数二答案/24合工大超越卷解析篇-数二.pdf\nreferences/302模拟27/往年模拟卷选填精选/【A4留白】数二模拟卷选填精选.pdf\nreferences/302模拟27/往年模拟卷选填精选/【A4留白】数三模拟卷选填精选.pdf\n"}
+
+## tool · 2026-11-12T01:27:55Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"019dc4","wall_time_seconds":0.000016958,"exit_code":0,"original_token_count":16408,"output":"Warning: truncated output (original token count: 16408)\nTotal output lines: 164\n\n   10865 references/302模拟27md/往年模拟卷选填精选/【A4留白】数一模拟卷选填精选.pdf.md\n   11069 references/302模拟27md/往年模拟卷选填精选/【A4留白】数二模拟卷选填精选.pdf.md\n   10868 references/302模拟27md/往年模拟卷选填精选/【A4紧凑】数一模拟卷选填精选.pdf.md\n   11071 references/302模拟27md/往年模拟卷选填精选/【A4紧凑】数二模拟卷选填精选.pdf.md\n   43873 total\n# 【A4紧凑】数一模拟卷选填精选\n\n## 24 李林四套卷· 卷一\n\n### 选择题\n\nx\n\n1\\. 设f x  \n  \n  \n=  \n-1  \nt  \n  \nln tdt, 则f x  \n  \n  \n在x = 0 处  \nA. 极限不存在.  \nB. 连续但不可导.  \nC. 可导且导数为零.  \nD. 可导且导数不为零.  \n的全微分du =  \naxy2\n\n2\\. 设u x,y  \n  \n2 dx +  \n-4yxb  \n, 则u x,y  \n  \n在点1,1  \n  \n处的最大方  \n  \n2 dy x>0,y>0  \n  \n  \n  \n  \nx2+y2  \n  \n  \nx2+y2  \n  \n  \n向导数为  \nA.\n\n2\\.   \nB. 2.  \nC. 1.  \nD. 1  \n2 .\n\n3\\. 设f x,y  \n  \n  \n=  \n{\"source\": \"模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\", \"page\": 4, \"sha256\": \"bdd199d7f4926430028b53aaf7a7b7a0d8c312cb0e5d307c6fc52a6d6b44b211\", \"text\": \"微信公众号：考研佳友 精选40套·数学二\\n26 张宇四套卷·卷一\\n一、选择题：1～10小题，每小题5分，共50分\\n1. 当 \\\\(x \\\\to 0^{+}\\\\) 时，下列无穷小量中，最高阶的是\\nA. \\\\(\\\\int_0^{x^2} (e^{t^2} - 1) dt\\\\) B. \\\\(\\\\int_0^x \\\\ln(1 + \\\\sqrt{t^3}) dt\\\\) C. \\\\(\\\\int_0^{\\\\sin x} \\\\cos t^2 dt\\\\) D. \\\\(\\\\int_0^{1 - \\\\cos x} \\\\sqrt{\\\\arcsin^3 t} dt\\\\)\\n2. \\\\(\\\\lim_{n \\\\to \\\\infty} \\\\left[ \\\\frac{n}{(n+1)^2} + \\\\frac{n}{(n+2)^2} + \\\\cdots + \\\\frac{n}{(n+n)^2} \\\\right] =\\\\)\\nA. \\\\(\\\\frac{1}{3}\\\\) B. \\\\(\\\\frac{\\\\pi}{3}\\\\) C. \\\\(\\\\frac{1}{2}\\\\) D. \\\\(\\\\frac{\\\\pi}{2}\\\\)\\n3. 曲线 \\\\(y = x + \\\\sqrt{x^2 - x + 1}\\\\) 的渐近线条数为\\nA. 1 B. 2 C. 3 D. 4\\n4. 函数 \\\\(f(x, y) = \\\\sqrt{|xy|}\\\\) 在 \\\\((0, 0)\\\\) 点\\nA. 连续，但偏导数不存在. B. 偏导数存在且连续. C. 可微. D. 偏导数存在，但不可微.\\n5. 设线密度为1的圆弧形细杆，其半径为1，圆心角为\\\\(\\\\theta\\\\)，摆放位置如图所示，\\\\(G\\\\) 为引力常数，则该细杆对圆心处质量为\\\\(m\\\\) 的质点\\\\(M\\\\) 的水平引力大小为\\nA. \\\\(2Gm \\\\sin \\\\frac{\\\\theta}{2}\\\\) B. \\\\(\\\\sqrt{2}Gm \\\\sin \\\\frac{\\\\theta}{2}\\\\) C. \\\\(2Gm \\\\cos \\\\frac{\\\\theta}{2}\\\\) D. \\\\(\\\\sqrt{2}Gm \\\\cos \\\\frac{\\\\theta}{2}\\\\)\\n6. 若微分方程 \\\\(y'' + ay' + by = 0\\\\) 的解在 \\\\((-\\\\infty, +\\\\infty)\\\\) 上必为周期函数，则\\nA. \\\\(a = 0, b > 0\\\\) B. \\\\(a = 0, b < 0\\\\) C. \\\\(a \\\\neq 0, b < 0\\\\) D. \\\\(a \\\\neq 0, b > 0\\\\)\\n7. \\\\(\\\\int_{\\\\frac{1}{4}}^{\\\\frac{1}{2}} dy \\\\int_{\\\\frac{1}{2}}^{\\\\sqrt{\\\\frac{3}{2}}} e^{\\\\frac{y}{2}} dx + \\\\int_{\\\\frac{1}{2}}^{1} dy \\\\int_{\\\\frac{3}{2}}^{\\\\sqrt{\\\\frac{3}{2}}} e^{\\\\frac{y}{2}} dx =\\\\)\\nA. \\\\(\\\\frac{3e}{4} - \\\\frac{\\\\sqrt{e}}{2}\\\\). B. \\\\(\\\\frac{3e}{4} + \\\\frac{\\\\sqrt{e}}{2}\\\\). C. \\\\(\\\\frac{3e}{8} - \\\\frac{\\\\sqrt{e}}{2}\\\\). D. \\\\(\\\\frac{3e}{8} + \\\\frac{\\\\sqrt{e}}{2}\\\\).\\n第1页，共160页\"}\n{\"source\": \"模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\", \"page\": 5, \"sha256\": \"34177f946b33cc1b6a1b86391e6ae983b4a44ff8a621536f6f07558d9a079656\", \"text\": \"微信公众号：考研佳友 精选40套·数学二\\n8. 设向量 \\\\(\\\\beta\\\\) 可由向量组 \\\\(\\\\alpha_1, \\\\alpha_2, \\\\alpha_3, \\\\alpha_4\\\\) 线性表示，但不可由向量组 \\\\((I): \\\\alpha_1, \\\\alpha_2, \\\\alpha_3\\\\) 线性表示，记向量组 \\\\((II): \\\\alpha_1, \\\\alpha_2, \\\\alpha_3, \\\\beta\\\\)，则\\nA. \\\\(\\\\alpha_4\\\\) 不可由向量组 \\\\((I)\\\\) 线性表示，也不可由向量组 \\\\((II)\\\\) 线性表示.\\nB. \\\\(\\\\alpha_4\\\\) 不可由向量组 \\\\((I)\\\\) 线性表示，但可由向量组 \\\\((II)\\\\) 线性表示.\\nC. \\\\(\\\\alpha_4\\\\) 可由向量组 \\\\((I)\\\\) 线性表示，也可由向量组 \\\\((II)\\\\) 线性表示.\\nD. \\\\(\\\\alpha_4\\\\) 可由向量组 \\\\((I)\\\\) 线性表示，但不可由向量组 \\\\((II)\\\\) 线性表示.\\n9. 设 A 为 n 阶矩阵，\\\\(A^*\\\\) 是 A 的伴随矩阵，齐次线性方程组 Ax = 0 有两个线性无关的解，则\\nA. \\\\(A^*x = 0\\\\) 的解均是 Ax = 0 的解. B. Ax = 0 的解均是 \\\\(A^*x = 0\\\\) 的解.\\nC. Ax = 0 与 \\\\(A^*x = 0\\\\) 没有非零公共解. D. Ax = 0 与 \\\\(A^*x = 0\\\\) 仅有两个非零公共解.\\n10. 设 A 是 3 阶矩阵，向量 \\\\(\\\\alpha_1 = (1, 2, 0)^T, \\\\alpha_2 = (1, 0, 1)^T, \\\\beta = (-1, 2, -2)^T\\\\). 已知 \\\\(\\\\lambda = 2\\\\) 是矩阵 A 的特征值，\\\\(\\\\alpha_1, \\\\alpha_2\\\\) 是矩阵 A 的属于 \\\\(\\\\lambda = 2\\\\) 的特征向量，则 \\\\(A(\\\\alpha_1, \\\\alpha_2, \\\\beta) =\\\\)\\nA. \\\\(\\\\begin{pmatrix} 2 & 2 & -1 \\\\\\\\ 4 & 0 & 2 \\\\\\\\ 0 & 2 & -2 \\\\end{pmatrix}\\\\). B. \\\\(\\\\begin{pmatrix} 2 & 2 & -1 \\\\\\\\ 4 & 0 & -2 \\\\\\\\ 0 & 2 & 2 \\\\end{pmatrix}\\\\). C. \\\\(\\\\begin{pmatrix} 2 & 2 & -2 \\\\\\\\ 4 & 0 & 4 \\\\\\\\ 0 & 2 & -4 \\\\end{pmatrix}\\\\). D. \\\\(\\\\begin{pmatrix} 2 & 2 & 2 \\\\\\\\ 4 & 0 & -4 \\\\\\\\ 0 & 2 & 4 \\\\end{pmatrix}\\\\).\\n二、填空题：11~16 小题，每小题5分，共30分\\n11. \\\\(\\\\lim_{x \\\\to 0} \\\\frac{\\\\ln \\\\frac{\\\\sin x}{x}}{\\\\int_0^x^2 (1+t)^{\\\\frac{1}{2}} dt} =\\\\) ___.\\n12. 曲线 \\\\(3y^3 = x^5 + 2x^3\\\\) 在 y = 1 对应点处的切线斜率为___.\\n13. 曲线 \\\\(y = xe^{-\\\\frac{1}{x+1}}\\\\) 的斜渐近线方程为___.\\n第2页，共160页\"}\n{\"source\": \"模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\", \"page\": 6, \"sha256\": \"7eb142eae6b8f92301152c170a4f6304bc88018e5dc39b34fe8943e517582fce\", \"text\": \"微信公众号：考研佳友 精选40套·数学二\\n14. 设 \\\\(f(x)\\\\) 为连续函数，且 \\\\(x^2 + y^2 + z^2 = \\\\int_x^y f(x + y - t) dt\\\\)，则 \\\\(z \\\\left( \\\\frac{\\\\partial z}{\\\\partial x} + \\\\frac{\\\\partial z}{\\\\partial y} \\\\right) =\\\\) ___.\\n15. 微分方程 \\\\((x - y - 1)dx + (x + 4y - 1)dy = 0\\\\) 的通解为___.\\n16. 已知方程组 \\\\((I)\\\\begin{cases} x_2 + ax_3 = 0, \\\\\\\\ x_1 + x_2 + (a + 1)x_3 = 0\\\\end{cases}\\\\) 的解均是方程组 \\\\((II)\\\\begin{cases} x_1 + x_2 + 2x_3 = 0, \\\\\\\\ x_1 + x_2 + bx_3 = 0\\\\end{cases}\\\\) 的解，但方程组 \\\\((I)\\\\) 与方程组 \\\\((II)\\\\) 不同解。设矩阵 \\\\(A\\\\) 为方程组 \\\\((I)\\\\) 的系数矩阵，矩阵 \\\\(B\\\\) 为方程组 \\\\((II)\\\\) 的系数矩阵，则 \\\\(B^T A =\\\\) ___.\\n三、解答题：17～22 小题，共 70 分\\n17. (本题满分 10 分)\\n设曲面 \\\\(z = f(x, y)\\\\) 过点 \\\\((0, 0, 2)\\\\)，且 \\\\(\\\\Delta z\\\\) 关于 \\\\(x\\\\) 的偏增量 \\\\(\\\\Delta x z = -2xe^{-y} \\\\cdot \\\\Delta x + o(\\\\Delta x)\\\\)，\\\\(\\\\Delta z\\\\) 关于 \\\\(y\\\\) 的偏增量 \\\\(\\\\Delta y z = e^{-y} (x^2 - y - 1) \\\\cdot \\\\Delta y + o(\\\\Delta y)\\\\)，求 \\\\(z = f(x, y)\\\\) 的表达式及 \\\\(z\\\\) 的极值.\\n18. (本题满分 12 分)\\n已知函数 \\\\(y(x)\\\\) 由方程 \\\\(x^3 + y^3 + ax + 3y + b = 0\\\\) 确定，\\\\(y(1) = 1\\\\), \\\\(y'(1) = 0\\\\)，求 \\\\((I) a\\\\), \\\\(b\\\\) 的值；\\n(II) \\\\(y(x)\\\\) 的极值.\\n19. (本题满分 12 分)\\n(1) 设 \\\\(f(x)\\\\) 在 \\\\([a, b]\\\\) 上具有二阶连续导数，证明存在 \\\\(\\\\xi \\\\in (a, b)\\\\)，使得 \\\\(\\\\int_a^b f(x) dx = f \\\\left( \\\\frac{a + b}{2} \\\\right) (b - a) + \\\\frac{f''(\\\\xi)}{24} (b - a)^3\\\\);\\n(2) 设 \\\\(g(x)\\\\) 在 \\\\([-1, 1]\\\\) 上具有三阶连续导数，且 \\\\(g(-1) = g(1), g'(0) = 0\\\\)，证明存在 \\\\(\\\\eta \\\\in (-1, 1)\\\\)，使得 \\\\(g''(\\\\eta) = 0\\\\).\\n20. (本题满分 12 分)\\n设 \\\\(D = \\\\{(x, y) \\\\mid x^2 + y^2 \\\\leq 2x + 2y\\\\}\\\\)，求二重积分 \\\\(\\\\iint_D (x^2 + x + y) d\\\\sigma\\\\).\\n第 3 页，共 160 页\"}\n{\"source\": \"模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\", \"page\": 7, \"sha256\": \"16069eb4d3264cde0d497a71d07f665a8718a29ab895ec5c6d5675a3ad34e9a0\", \"text\": \"微信公众号：考研佳友 精选40套·数学二\\n21. (本题满分12分)\\n设 \\\\(f(x)=\\\\left\\\\{\\\\begin{array}{ll}x, & x<1, \\\\\\\\ \\\\ln x, & x>1,\\\\end{array}\\\\right. g(x)=e^{x-1}\\\\).\\n(I) 求 \\\\(\\\\varphi(x)=f[g(x)]\\\\);\\n(II) 求在 \\\\((-\\\\infty,+\\\\infty)\\\\) 内的连续函数 y, 使之在 \\\\((-\\\\infty,1)\\\\) 与 \\\\((1,+\\\\infty)\\\\) 内满足微分方程 \\\\(y^{\\\\prime}-y=\\\\varphi(x)\\\\), 且 \\\\(y(0)=0\\\\).\\n22.(本题满分12分)已知二次型 \\\\(f(x_{1},x_{2},x_{3})=\\\\boldsymbol{x}^{T}\\\\begin{pmatrix}1&1&1\\\\\\\\3&4&5\\\\\\\\5&7&9\\\\end{pmatrix}\\\\boldsymbol{x}\\\\), 其中 \\\\(\\\\boldsymbol{x}=(x_{1},x_{2},x_{3})^{T}\\\\).\\n(1) 求正交变换 \\\\(\\\\boldsymbol{x}=\\\\boldsymbol{Q}\\\\boldsymbol{y}\\\\), 将 \\\\(f(x_{1},x_{2},x_{3})\\\\) 化为标准形;\\n(2) 求 \\\\(f(x_{1},x_{2},x_{3})=0\\\\) 的解.\\n第4页，共160页\"}\n{\"source\": \"模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\", \"page\": 8, \"sha256\": \"f79525831798f31269593ebfe9186c5999031b071891734ad1f405e56e98ae04\", \"text\": \"微信公众号：考研佳友 精选40套·数学二\\n26 张宇四套卷·卷二\\n一、选择题：1～10小题，每小题5分，共50分\\n1. 函数 \\\\(f(x)=\\\\frac{(e^{\\\\frac{1}{x-1}}-1)|x|}{(x+1)\\\\ln|x-1|}\\\\) 的第一类间断点的个数为\\nA. 0. B. 1. C. 2. D. 3.\\n2. 已知数列 \\\\(\\\\{x_n\\\\}\\\\)，以下结论：\\n① 当 \\\\(\\\\lim_{n \\\\to \\\\infty} \\\\cos(\\\\arctan x_n)\\\\) 存在时，\\\\(\\\\lim_{n \\\\to \\\\infty} x_n\\\\) 存在，其中 \\\\(-\\\\infty < x_n < +\\\\infty\\\\)；\\n② 当 \\\\(\\\\lim_{n \\\\to \\\\infty} \\\\cos(\\\\tan x_n)\\\\) 存在时，\\\\(\\\\lim_{n \\\\to \\\\infty} x_n\\\\) 存在，其中 \\\\(-\\\\frac{\\\\pi}{2} < x_n < \\\\frac{\\\\pi}{2}\\\\)；\\n③ 当 \\\\(\\\\lim_{n \\\\to \\\\infty} \\\\sin(\\\\arctan x_n)\\\\) 存在时，\\\\(\\\\lim_{n \\\\to \\\\infty} x_n\\\\) 存在，其中 \\\\(-\\\\infty < x_n < +\\\\infty\\\\)；\\n④ 当 \\\\(\\\\lim_{n \\\\to \\\\infty} \\\\sin(\\\\tan x_n)\\\\) 存在时，\\\\(\\\\lim_{n \\\\to \\\\infty} x_n\\\\) 存在，其中 \\\\(-\\\\frac{\\\\pi}{2} < x_n < \\\\frac{\\\\pi}{2}\\\\)。\\n正确结论的个数为\\nA. 0. B. 1. C. 2. D. 3.\\n3. 设函数 \\\\(y = f(x)\\\\) 由 \\\\(\\\\begin{cases} x = 2t + |t|, \\\\\\\\ y = |t| (e^t - 1) \\\\end{cases}\\\\) 确定，则\\nA. \\\\(f(x)\\\\) 连续，\\\\(f'(0)\\\\) 不存在. B. \\\\(f'(0)\\\\) 存在，\\\\(f'(x)\\\\) 在 x = 0 处不连续. C. \\\\(f'(x)\\\\) 连续，\\\\(f''(0)\\\\) 不存在. D. \\\\(f''(0)\\\\) 存在，\\\\(f''(x)\\\\) 在 x = 0 处不连续.\\n4. 设 \\\\(I_1 = \\\\int_0^1 \\\\frac{x}{\\\\sqrt{1-x^2}} \\\\, \\\\mathrm{d}x\\\\), \\\\(I_2 = \\\\int_0^1 \\\\frac{\\\\cos x}{\\\\sqrt{1-x^2}} \\\\, \\\\mathrm{d}x\\\\), \\\\(I_3 = \\\\int_0^1 \\\\frac{\\\\sin x}{\\\\sqrt{1-x^2}} \\\\, \\\\mathrm{d}x\\\\)，则\\nA. \\\\(I_1 < I_2 < I_3\\\\). B. \\\\(I_2 < I_3 < I_1\\\\). C. \\\\(I_3 < I_1 < I_2\\\\). D. \\\\(I_2 < I_1 < I_3\\\\).\\n5. 一个直径为 20m 的倒圆锥形水池，深 \\\\(a_m\\\\)，水密度为 \\\\(\\\\rho kg/m^3\\\\)，重力加速度为 \\\\(g m/s^2\\\\)，若将盛满的水全部抽出，至少需做功 \\\\(75\\\\rho g\\\\pi J\\\\)，则 \\\\(a =\\\\)\\nA. 15. B. 9. C. 5. D. 3.\\n6. 设 \\\\(z = z(x, y)\\\\) 是由方程 \\\\(\\\\int_{2x-3y}^{z} f(2x - 3y + z - t) \\\\, \\\\mathrm{d}t = \\\\sin(2x - 3y + z)\\\\) 所确定的函数，其中 \\\\(f\\\\) 为连续函数，则\\nA. \\\\(3 \\\\frac{\\\\partial z}{\\\\partial x} + 2 \\\\frac{\\\\partial z}{\\\\partial y} = 0\\\\). B. \\\\(3 \\\\frac{\\\\partial z}{\\\\partial x} - 2 \\\\frac{\\\\partial z}{\\\\partial y} = 0\\\\). C. \\\\(2 \\\\frac{\\\\partial z}{\\\\partial x} + 3 \\\\frac{\\\\partial z}{\\\\partial y} = 0\\\\). D. \\\\(2 \\\\frac{\\\\partial z}{\\\\partial x} - 3 \\\\frac{\\\\partial z}{\\\\partial y} = 0\\\\).\\n第5页，共160页\"}\n{\"source\": \"模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\", \"page\": 9, \"sha256\": \"3a17397b930364f3dc4f81f955613cdcb60ea574a2e1372bc1e79cc3836ac568\", \"text\": \"微信公众号：考研佳友 精选40套·数学二\\n7. 设 \\\\(a\\\\) 与 \\\\(b\\\\) 都是常数，若反常积分 \\\\(\\\\int_0^+\\\\infty \\\\frac{x^a(1-e^{-x}}{(1+x)^b} \\\\, \\\\mathrm{d}x\\\\) 收敛，则 \\\\(a\\\\) 与 \\\\(b\\\\) 的取值范围为\\nA. \\\\(a < -2, b > a + 1.\\\\)\\nB. \\\\(a > -2, b > a + 1.\\\\)\\nC. \\\\(a > -2, b < a + 1.\\\\)\\nD. \\\\(a < -2, b < a + 1.\\\\)\\n8. 已知 \\\\(\\\\alpha_1…10408 tokens truncated…共 70 分、解答应写出文字说明、证明过程或演算步骤。\\n17. (本题满分 10 分)\\n求极限 \\\\(\\\\lim_{x \\\\to 0} \\\\frac{\\\\int_0^x \\\\mathrm{d}u \\\\int_0^u [\\\\mathrm{u}^2 - 3 \\\\sin(u - t)^2] \\\\, \\\\mathrm{d}t}{\\\\sin x^8}\\\\).\\n18. (本题满分 12 分)\\n设可导函数 \\\\(y = f(x)\\\\) 由方程 \\\\(e^{x - 2y} - x^2 y = 1\\\\) 确定，计算 \\\\(\\\\lim_{x \\\\to 1^+} \\\\frac{\\\\sin(x - 1)}{\\\\sqrt{(x - 1)^3}} \\\\int_0^1 f(t \\\\sqrt{x - 1}) \\\\, \\\\mathrm{d}t\\\\).\\n19. (本题满分 12 分)\\n设 \\\\(f(x)\\\\) 满足 \\\\(f'(x) - f(x) = \\\\pi e^x \\\\cos \\\\pi x, f(0) = 0, y = f(x)\\\\) 在 \\\\([0, n]\\\\) (\\\\(n\\\\) 为正整数) 上与 \\\\(x\\\\) 轴所围图形的面积为 \\\\(S_n\\\\).\\n(I) 求 \\\\(f(x)\\\\);\\n(II) 求 \\\\(\\\\lim_{n \\\\to \\\\infty} \\\\frac{S_n}{e^n}\\\\).\\n第26页，共160页\"}\n{\"source\": \"模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\", \"page\": 30, \"sha256\": \"93febd1001c48e6bde5f7963b29e011231d5f6088e4c8cc40c0642541b96793e\", \"text\": \"微信公众号：考研佳友 精选40套·数学二\\n20.(本题满分12分)\\n设 \\\\(z = f(u, v)\\\\) 有二阶连续偏导数，\\\\(u = x - 2\\\\sqrt{y}, v = x + 2\\\\sqrt{y}\\\\)，且满足\\n\\\\(\\\\frac{\\\\partial^{2}z}{\\\\partial x^{2}} - y\\\\frac{\\\\partial^{2}z}{\\\\partial y^{2}} - \\\\frac{1}{2}\\\\frac{\\\\partial z}{\\\\partial y} = 12a\\\\) (\\\\(a \\\\neq 0\\\\))\\n(I) 求 \\\\(\\\\frac{\\\\partial^{2}z}{\\\\partial u\\\\partial v}\\\\);\\n(II) 若 \\\\(\\\\frac{\\\\partial f(u,0)}{\\\\partial u} = -3u^{2}, f(0,v) = -v^{3}\\\\), 求 \\\\(f(u,v)\\\\) 的极值.\\n21.(本题满分12分)\\n设 \\\\(D = \\\\{(x,y) \\\\mid x^{2} + y^{2} \\\\leq 1, x \\\\geq 0, y \\\\geq 0\\\\}\\\\), 计算 \\\\(\\\\iint_{D} \\\\max \\\\left\\\\{ y + 1, \\\\frac{2}{1 + x} \\\\right\\\\} dxdy\\\\).\\n22.(本题满分12分)\\n设 \\\\(A = \\\\begin{pmatrix} 2 & 1 & 0 \\\\\\\\ 1 & 2 & 0 \\\\\\\\ 0 & 0 & 1 \\\\end{pmatrix}\\\\) 与 \\\\(B = \\\\begin{pmatrix} a & b & c \\\\\\\\ 0 & 1 & 0 \\\\\\\\ -1 & -2 & 4 \\\\end{pmatrix}\\\\) 相似.\\n(I) 求 a, b, c 的值;\\n(II) 求可逆矩阵 P, 使得 \\\\(P^{-1}AP = B\\\\);\\n(III) 求可逆矩阵 C, 使得 \\\\(A = C^{T}C\\\\).\\n第27页，共160页\"}\n{\"source\": \"模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\", \"page\": 31, \"sha256\": \"e1d7e253e41117e2c62406bfce7b12805ab5254186e104dd5d4657f24a7e5753\", \"text\": \"微信公众号：考研佳友 精选40套·数学二\\n26李林四套卷·卷四\\n一、选择题：1~10 小题，每小题5分，共50分。下列每题给出的四个选项中，只有一个选项是符合题目要求的。\\n1. 当 \\\\(t \\\\to 0^{+}\\\\) 时，\\\\(\\\\alpha(t) = \\\\int_{0}^{t} \\\\mathrm{d}x \\\\int_{x}^{t} \\\\sin(xy)^{2} \\\\mathrm{d}y\\\\) 是关于 t 的 n 阶无穷小，则 n = ( )\\nA. 3. B. 4. C. 5. D. 6.\\n2. 曲线 \\\\(y = \\\\frac{x^{2}+1}{\\\\sqrt{x^{2}-1}}\\\\) 的渐近线的条数为 ( )\\nA. 1. B. 2. C. 3. D. 4.\\n3. 设 \\\\(f(x)\\\\) 在 x=0 的某邻域内连续，且 \\\\(\\\\lim_{x \\\\to 0} \\\\frac{x^{2}}{e^{f(x)}-1} = 1\\\\)，则 ( )\\nA. \\\\(f'(0)\\\\) 存在，\\\\(f(0) \\\\neq 0\\\\). B. \\\\(f'(0)\\\\) 存在，\\\\(f(0)\\\\) 是 \\\\(f(x)\\\\) 的极大值. C. \\\\(f'(0)\\\\) 存在，\\\\(f(0)\\\\) 是 \\\\(f(x)\\\\) 的极小值. D. \\\\(f'(0)\\\\) 存在，\\\\(f(0)\\\\) 不是 \\\\(f(x)\\\\) 的极值.\\n4. 设 \\\\(\\\\int x^{2} f(x) \\\\mathrm{d}x = \\\\arcsin x + C\\\\)，当 x > 0 时，\\\\(F(x)\\\\) 是 \\\\(f(x)\\\\) 的原函数，且 \\\\(F(1) = 0\\\\)，则 \\\\(F(x) = (\\\\quad)\\\\)\\nA. \\\\(\\\\frac{\\\\sqrt{1-x^{2}}}{x}\\\\). B. \\\\(-\\\\frac{\\\\sqrt{1-x^{2}}}{x}\\\\). C. \\\\(\\\\frac{\\\\sqrt{x^{2}-1}}{x}\\\\). D. \\\\(-\\\\frac{\\\\sqrt{x^{2}-1}}{x}\\\\).\\n5. 设 \\\\(f(n)\\\\) 表示方程 \\\\(x e^{x} = n\\\\) 的正实根 \\\\((x > 0)\\\\)，n 为正整数，则下列选项中正确的是 ( )\\nA. \\\\(\\\\{f_{n}\\\\}\\\\) 收敛. B. \\\\(\\\\left\\\\{\\\\frac{f(n)}{n}\\\\right\\\\}\\\\) 发散. C. \\\\(\\\\left\\\\{\\\\frac{f(n)e^{n}}{n}\\\\right\\\\}\\\\) 发散. D. \\\\(\\\\left\\\\{\\\\frac{f(n)e^{n}}{n}\\\\right\\\\}\\\\) 收敛.\\n6. 设 \\\\(f(x)\\\\) 在 \\\\((-\\\\infty,+\\\\infty)\\\\) 内可导，下列结论正确的是 ( )\\nA. 若 \\\\(\\\\lim_{x \\\\to +\\\\infty} f(x) = a\\\\)，则 \\\\(\\\\lim_{x \\\\to +\\\\infty} f'(x) = 0\\\\). B. 若 \\\\(\\\\lim_{x \\\\to -\\\\infty} f'(x) = -\\\\infty\\\\)，则 \\\\(\\\\lim_{x \\\\to -\\\\infty} f(x) = -\\\\infty\\\\). C. 若 \\\\(\\\\lim_{x \\\\to -\\\\infty} f(x) = -\\\\infty\\\\)，则 \\\\(\\\\lim_{x \\\\to -\\\\infty} f'(x) = -\\\\infty\\\\). D. 若 \\\\(\\\\lim_{x \\\\to +\\\\infty} f'(x) = +\\\\infty\\\\)，则 \\\\(\\\\lim_{x \\\\to +\\\\infty} f(x) = +\\\\infty\\\\).\\n第28页，共160页\"}\n{\"source\": \"模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\", \"page\": 32, \"sha256\": \"94d88f84a37e911a9a9df9a3857acee0cbbdd18adb5a083c104d660278c7f342\", \"text\": \"微信公众号：考研佳友 精选40套·数学二\\n7. 设 \\\\(y_1 = e^{-x}\\\\), \\\\(y_2 = 2x\\\\) 是常系数齐次线性微分方程 \\\\(y'' + ay'' + by' + cy = 0\\\\) 的两个解，则该方程的通解是（ ）\\nA. \\\\(c_1 e^{-x} + c_2 + c_3 x\\\\).\\nB. \\\\(c_1 e^{-x} + c_2 e^x + c_3 x\\\\).\\nC. \\\\(c_1 e^{-x} + c_2 e^x + c_3\\\\).\\nD. \\\\(c_1 e^{-x} + c_2 x e^x + c_3\\\\).\\n\\n8. 设 \\\\(\\\\mathbf{B} = \\\\begin{bmatrix} 1 & 2 & -1 \\\\\\\\ 2 & a & 4 \\\\\\\\ 3 & 5 & a \\\\end{bmatrix}\\\\) (\\\\(a > 0\\\\)), \\\\(\\\\mathbf{A}\\\\) 是 3 阶非零矩阵，且 \\\\(\\\\mathbf{B}\\\\mathbf{A}^{\\\\mathrm{T}} = \\\\mathbf{O}\\\\), \\\\(k_1, k_2\\\\) 为任意常数，则方程组 \\\\(\\\\mathbf{A}\\\\mathbf{X} = \\\\mathbf{0}\\\\) 的通解为（ ）\\nA. \\\\(k_1 \\\\begin{bmatrix} 1 \\\\\\\\ 0 \\\\\\\\ 0 \\\\end{bmatrix}\\\\).\\nB. \\\\(k_1 \\\\begin{bmatrix} 1 \\\\\\\\ 2 \\\\\\\\ -1 \\\\end{bmatrix} + k_2 \\\\begin{bmatrix} 0 \\\\\\\\ -1 \\\\\\\\ 6 \\\\end{bmatrix}\\\\).\\nC. \\\\(k_1 \\\\begin{bmatrix} 1 \\\\\\\\ 2 \\\\\\\\ 3 \\\\end{bmatrix}\\\\).\\nD. \\\\(k_1 \\\\begin{bmatrix} 1 \\\\\\\\ 2 \\\\\\\\ 3 \\\\end{bmatrix} + k_2 \\\\begin{bmatrix} 0 \\\\\\\\ 1 \\\\\\\\ 1 \\\\end{bmatrix}\\\\).\\n\\n9. 设 \\\\(\\\\mathbf{A}\\\\) 是实对称矩阵，\\\\(\\\\mathbf{B} = (b_{ij})_{3 \\\\times 3}\\\\) 是可逆矩阵，且 \\\\(\\\\mathbf{A}\\\\mathbf{B} = \\\\begin{bmatrix} b_{11} & 2b_{12} & -b_{13} \\\\\\\\ b_{21} & 2b_{22} & -b_{23} \\\\\\\\ b_{31} & 2b_{32} & -b_{33} \\\\end{bmatrix}\\\\)，则二次型 \\\\(\\\\mathbf{X}^{\\\\mathrm{T}}\\\\mathbf{A}\\\\mathbf{X}\\\\) 的规范形为（ ）\\nA. \\\\(y_1^2 + y_2^2 + y_3^2\\\\).\\nB. \\\\(y_1^2 + y_2^2 - y_3^2\\\\).\\nC. \\\\(y_1^2 - y_2^2 - y_3^2\\\\).\\nD. \\\\(-y_1^2 - y_2^2 - y_3^2\\\\).\\n\\n10. 设有矩阵 \\\\(\\\\mathbf{A}_{n \\\\times s}\\\\), \\\\(\\\\mathbf{B}_{s \\\\times n}\\\\)，且 \\\\(r(\\\\mathbf{A}) = s, r(\\\\mathbf{B}) = n, \\\\mathbf{E}_{n \\\\times n}\\\\) 为单位矩阵，则下列齐次线性方程组有非零解的是（ ）\\nA. \\\\(\\\\begin{bmatrix} \\\\mathbf{AB} & \\\\mathbf{O} \\\\\\\\ \\\\mathbf{E} & \\\\mathbf{A} \\\\end{bmatrix} \\\\mathbf{X} = \\\\mathbf{0}\\\\).\\nB. \\\\(\\\\begin{bmatrix} \\\\mathbf{AB} & \\\\mathbf{O} \\\\\\\\ \\\\mathbf{E} & \\\\mathbf{B} \\\\end{bmatrix} \\\\mathbf{X} = \\\\mathbf{0}\\\\).\\nC. \\\\(\\\\begin{bmatrix} \\\\mathbf{A} & \\\\mathbf{E} \\\\\\\\ \\\\mathbf{O} & \\\\mathbf{AB} \\\\end{bmatrix} \\\\mathbf{X} = \\\\mathbf{0}\\\\).\\nD. \\\\(\\\\begin{bmatrix} \\\\mathbf{A} & \\\\mathbf{AB} \\\\\\\\ \\\\mathbf{E} & \\\\mathbf{B} \\\\end{bmatrix} \\\\mathbf{X} = \\\\mathbf{0}\\\\).\\n\\n第29页，共160页\"}\n{\"source\": \"模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\", \"page\": 33, \"sha256\": \"9e3ec1cc42724d1c5cbe50bf917416ca82cbe34754987f4083907f694639e9bd\", \"text\": \"微信公众号：考研佳友 精选40套·数学二\\n二、填空题：11~16 小题，每小题5分，共30分。\\n11. 设 \\\\(f(x)\\\\) 有连续的二阶导数，且 \\\\(\\\\lim_{x \\\\to 0} \\\\frac{1 - f(x)}{x^2} = 1\\\\)，则 \\\\(\\\\lim_{x \\\\to +\\\\infty} x \\\\ln f\\\\left(\\\\frac{1}{\\\\sqrt{x}}\\\\right) =\\\\) ___.\\n12. 设 \\\\(y = y(x)\\\\) 满足 \\\\((y - \\\\ln x) \\\\mathrm{d}x + x \\\\ln x \\\\mathrm{d}y = 0 (x > 1), y(e) = 1\\\\)，则 \\\\(y = y(x)\\\\) 在 \\\\((1, +\\\\infty)\\\\) 内的极小值为___.\\n13. 心形线 \\\\(r = 1 + \\\\cos\\\\theta\\\\) 的全长为___.\\n14. 过曲线 \\\\(y = \\\\sqrt[3]{x}(x \\\\geq 0)\\\\) 上点 A 作切线，该切线与曲线及 x 轴所围图形 D 的面积为 \\\\(\\\\frac{3}{4}\\\\)，则 D 绕 x 轴旋转一周所得旋转体的体积为___.\\n15. 设 \\\\(z = \\\\left. f\\\\left[\\\\cos(x^2 + y^2) - 1, \\\\ln(1 + x^2 + y^2)\\\\right]\\\\right.\\\\)，其中 f 有一阶连续偏导数，则 \\\\(\\\\left.\\\\left(\\\\frac{\\\\partial^2 z}{\\\\partial x^2} - \\\\frac{\\\\partial^2 z}{\\\\partial x \\\\partial y} + \\\\frac{\\\\partial^2 z}{\\\\partial y^2}\\\\right)\\\\right|_{(0,0)} =\\\\) ___.\\n16. 设 \\\\(\\\\mathbf{A} = \\\\mathbf{E} - k \\\\boldsymbol{\\\\alpha} \\\\boldsymbol{\\\\alpha}^{\\\\mathrm{T}} (k \\\\neq 0)\\\\) 是正交矩阵，其中 \\\\(\\\\mathbf{E}\\\\) 是 3 阶单位矩阵，\\\\(\\\\alpha\\\\) 为 3 维单位列向量，则 \\\\(\\\\operatorname{tr}(\\\\mathbf{A}) =\\\\) ___.\\n三、解答题：17~22 小题，共 70 分、解答应写出文字说明、证明过程或演算步骤。\\n17.（本题满分10分）\\n计算 \\\\(\\\\lim_{n \\\\to \\\\infty} \\\\frac{1}{n^2} \\\\prod_{i=1}^{2n} (n + i)^{\\\\frac{1}{n}}\\\\).\\n18.（本题满分12分）\\n求 a 的值，使得圆 \\\\(x^2 + (y - 1)^2 = 1\\\\) 内切于椭圆 \\\\(\\\\frac{2}{3}x^2 + \\\\frac{2}{9}y^2 = a^2 (a > 0)\\\\).\\n19.（本题满分12分）\\n设 \\\\(D = \\\\{(x, y) | 2 \\\\leq 2x^2 + y^2 \\\\leq 4, x \\\\geq 0, y \\\\geq 0\\\\}\\\\)，计算 \\\\(I = \\\\iint_{D} \\\\frac{y}{(2x^2 + y^2) \\\\sqrt{x^2 + y^2}} \\\\, \\\\mathrm{d}x \\\\, \\\\mathrm{d}y\\\\).\\n第30页，共160页\"}\nimport re\nimport sys\nfrom pathlib import Path\n\n\nroot = Path(\"references/302模拟27md\")\nvolume = Path(sys.argv[1]).read_text(encoding=\"utf-8\").strip()\nmatch = re.match(r\"^## ([^\\n]+)\", volume)\nassert match\nname = match[1]\nnumbering = re.findall(r\"(?m)^(\\d+)\\\\\\.\", volume)\nassert numbering == list(map(str, range(1, 23))), numbering\nquestions = re.split(r\"(?m)^\\d+\\\\\\.\", volume)[1:]\nassert all(re.findall(r\"(?m)^([A-D])\\. \", block) == list(\"ABCD\") for block in questions[:10])\nassert all(block.strip() for block in questions)\nassert volume.count(\"$\") % 2 == 0\nfor name_arg in sys.argv[2:]:\n    paths = list(root.rglob(name_arg))\n    assert len(paths) == 1, name_arg\n    path = paths[0]\n    original = path.read_text(encoding=\"utf-8\")\n    if name_arg == \"考研数学冲刺预测6套卷.pdf.md\":\n        source_title = f\"第{name[-1]}套\"\n        verified = volume.replace(f\"## {name}\", f\"## {source_title}\", 1)\n        if name == \"卷一\":\n            verified = verified.replace(r\"^{1+\\sin v}\", r\"^{1+\\sin t}\", 1)\n            verified = verified.replace(\n                r\"\\begin{pmatrix}\\lambda_1&&\\\\&\\lambda_2&\\\\&&\\lambda_3\\end{pmatrix}\",\n                r\"\\operatorname{diag}(\\lambda_1,\\lambda_2,\\lambda_3)\",\n                1,\n            )\n        if name == \"卷四\":\n            verified = verified.replace(\n                \"B. $a=\\\\pi,b=-1$  \\nC. $a=\\\\frac\\\\pi2,b=-1$\",\n                \"B. $a=\\\\frac\\\\pi2,b=-1$  \\nC. $a=\\\\pi,b=-1$\",\n                1,\n            )\n            verified = verified.replace(r\"{-4xy^b}\", r\"{-4yx^b}\", 1)\n            verified = verified.replace(\n                r\"C=\\begin{pmatrix}-2&0&0\\\\0&1&0\\\\0&0&3\\end{pmatrix}\",\n                r\"C=\\begin{pmatrix}-2&0&0\\\\0&1&0\\\\0&0&1\\end{pmatrix}\",\n                1,\n            )\n        if name == \"卷五\":\n            verified = verified.replace(r\"F(x)=\\int_1^{x^2}\", r\"F(x)=\\int_1^2\", 1)\n            verified = verified.replace(\n                r\"\\int_{\\frac12+\\sqrt{\\frac14-x^2}}^{\\frac12-\\sqrt{\\frac14-x^2}}\",\n                r\"\\int_{\\frac12-\\sqrt{\\frac14-x^2}}^{\\frac12+\\sqrt{\\frac14-x^2}}\",\n                1,\n            )\n            verified = verified.replace(\n                r\"\\int_{\\frac12-\\sqrt{\\frac14-y^2}}^{\\sqrt{y-y^2}}\",\n                r\"\\int_0^{\\sqrt{y-y^2}}\",\n                1,\n            )\n            verified = verified.replace(\n                r\"\\sum_{i=1}^{2n}\\sum_{j=1}^n\",\n                r\"\\sum_{j=1}^{2n}\\sum_{i=1}^n\",\n                1,\n            )\n    else:\n        source_title = name\n        verified = volume\n    heading = re.compile(r\"(?ms)^## \" + re.escape(source_title) + r\"$.*?(?=^## |\\Z)\")\n    updated, count = heading.subn(lambda _: verified + \"\\n\\n\", original)\n    assert count == 1, (name_arg, name)\n    path.write_text(updated.rstrip() + \"\\n\", encoding=\"utf-8\")\n    assert heading.search(path.read_text(encoding=\"utf-8\"))[0].rstrip() == verified\n    print(path)\n"}
+
+## tool · 2026-11-12T01:28:01Z
+
+
+Script completed
+Wall time 0.4 seconds
+Output:
+
+{"chunk_id":"846543","wall_time_seconds":0.231928125,"exit_code":0,"original_token_count":4785,"output":"Warning: truncated output (original token count: 4785)\nTotal output lines: 100\n\n【A4紧凑】数一模拟卷选填精选.pdf 94\n1 目 录 24 余炳森五套卷· 卷一\n2 24 余炳森五套卷· 卷一 一、选择题. 1.设函数f x   在-∞,+∞   内有定义, 分别在-∞,0   和0,+∞   内具有一阶连续的导数, 点x = 0 为f x   的可去间断点, 则\n5 24 余炳森五套卷· 卷二 一、选择题. 1.方程 x -πt  ln 2+sin2t   dt = 0 的实根个数为( ). A. 1 B. 2 C. 3 D. 4 2.设f x   = 1, 0≤x≤1, \n8 24 余炳森五套卷· 卷三 一、选择题. 1.设f x   = x+a   x - ax, a>0   ,g x   = xx - sinx   x, 则当x →0 时,( ). A. f x  \n11 24 余炳森五套卷· 卷四 一、选择题. 1.设α > 0,β ≠0, 且lim x→+∞ x2α+xα   1 α -x2     = β, 则α,β   = ( ). A. 1, 1 2   \n14 24 余炳森五套卷· 卷五 一、选择题. 1.设f x   = x2-1   x-1 lnx  a, x≠1, 0, x=1.  其中常数α > 1, 则f x   在x = 1 处 ) ( . A\n17 24 李林四套卷· 卷一 一、选择题. 1.设f x   = x -1 t  ln tdt, 则f x   在x = 0 处 A. 极限不存在. B. 连续但不可导. C. 可导且导数为零. D. 可导\n20 24 李林四套卷· 卷二 一、选择题. 1.设y = f x   在[0, +∞) 上有二阶连续导数, f x   > 0,y = g x   是y = f x   在(0, +∞) 内任意点x0 处的\n23 24 李林四套卷· 卷三 一、选择题. 1.设a,b 均为常数, lim x→+∞ex x 0 e-t2  dt+a   = b, 则 A. a =- π 2 ,b = 0. B. a =- π 2 ,b =-1.\n26 24 李林四套卷· 卷四 一、选择题. 1.当t →0+ 时, α t   = t 0d x t xsin  xy   2dy 是关于t 的n 阶无穷小, 则n = A. 3 B. 4 C. 5 D. 6 2\n29 24 张宇四套卷· 卷一 一、选择题. 1.设an   为非零数列, 下列命题正确的是 A. 若sinan   收敛，则an   收敛. B. 若arcsin sinan     收敛，则an  \n32 24 张宇四套卷· 卷二 一、选择题. 1.设函数f x   与g x   在-∞,+∞   上均有1 个间断点, 则f g x     在-∞,+∞   上 A. 仅有1 个间断点. B. 仅有\n35 24 张宇四套卷· 卷三 一、选择题. 1.曲线y = 2 1 x + ln e2x+1   x>0   的斜渐近线为 A. y = x + e. B. y = x - e. C. y = 2x + 1. D. \n38 24 张宇四套卷· 卷四 一、选择题. 1.设函数f x   在0,+∞   上可导, 给出下列命题: ①若曲线y = f x   有水平渐近线y = 1，则lim x→+∞f x   = 0； ②若曲\n41 24 超越十套卷·卷一 一、选择题. (1) 设函数f x   = x2, x≤0, lnx, x>0,  则函数f f x     ( ). A. 无极值点 B. 有一个极小值点,无极大值点 C. 有\n44 24 超越十套卷·卷二 一、选择题. (1) 关于数列xn   , yn   有以下论断 ①若数列x2n   和x2n-1   都收敛,则数列xn   收敛； ②若数列xn+yn  \n47 24 超越十套卷·卷三 一、选择题. (1) 曲线f x   = x ⋅ 2 x     ( ⋅   表示取整函数) 的渐近线有( ). A. 1 条 B. 2 条 C. 3 条 D. 4 条 (2)\n50 24 超越十套卷·卷四 一、选择题. (1) 设函数y = y x   在点x = 0 附近由方程2x - y 0 e-t2  dt = xy 所确定, 且y x   = λ1x + λ2x2 + o x2 \n53 24 超越十套卷·卷五 一、选择题. (1) 设函数f x   在点x = 0 的某邻域内有二阶导数, 且f x   = f x   = 0, 则( ). A. 点x = 0 一定不是f x   的极\n56 24 超越十套卷·卷六 一、选择题. (1) 设f x   在x0 的某一邻域内有定义,且lim x→x0 f x   - f x0   x-x0   2 = 1,则f x   在x0 处( ). A\n59 24 超越十套卷·卷七 一、选择题. (1) 已知反常积分 +∞ 0 lnq 1+x   xp  dx p>0,q>0   收敛,则参数p, q 需满足的条件为( ). A. p > 1,q > 1 B. p \n62 24 超越十套卷·卷八 一、选择题. (1) 设函数f x   = 1 + 2x2 + o x2   ,x ∈U 0,δ   ,且f 0   = 1,则下列命题: ①f x   = 4x + o x\n65 24 超越十套卷·卷九 一、选择题. (1) 设a < 1,曲线y = 1 2 ex-e-x   与直线y = ax + b( ). A. 没有交点 B. 交点个数为1 C. 交点个数为2 D. 交点个数与b 有关 \n68 24 超越十套卷·卷十 一、选择题. (1) 设f x   在-∞,+∞   连续,如果f x   为单调增加的奇函数,且F x   = x 0 2t-x    f x-t   dt,则下列 说\n71 25 张宇八套卷· 卷一 一、选择题. 1.设函数f x   在区间-1,1   内有定义, 且在点x = 0 处连续, 则以下结论: ①当lim x→0 f x   3 x = 0 时，f x   在点\n74 25 张宇八套卷· 卷二 一、选择题. 1.设f x   = sinx   0 et2  dt,g x   = x  0 sin  t2dt, 则在-π,π   内, A. f x   是可导\n77 25 张宇八套卷· 卷三 一、选择题. 1.设y = f x   由 x= t, y=sin πt   t≥0    确定, 则lim n→∞n f n+ 1 n   - f n     \n80 25 张宇八套卷· 卷四 一、选择题. 1.设f x   在-1,1   内有f x   < 0, 且lim x→0 f x   -sinx x = a ≠0, 则以下结论: ①lim x→0 f x \n83 25 张宇八套卷· 卷五 一、选择题. 1.曲线y = x3 x+1 sin 1 x 的斜渐近线方程为 A. y = x + 1 2 . B. y = x - 1 2 . C. y = x + 1. D. y = x -\n86 25 张宇八套卷· 卷六 一、选择题. 1.已知f x   = x2ln x +1, 0< x ≤1, 1, x=0,  A. f 0   是f x   在-1,1   上的最小值. B. \n89 25 张宇八套卷· 卷七 一、选择题. 1. f x   = x   ln   x2-1 有 A. 两个跳跃间断点,一个无穷间断点. B. 两个可去间断点,一个无穷间断点. C. 一个可去间断点,一个跳跃间断\n92 25 张宇八套卷· 卷八 一、选择题. 1.函数f x   = ln 1-x   ex-1   x+2   的第二类间断点的个数为 A. 0. B. 1. C. 2. D. 3. 2.设f x   ,\n【A4紧凑】数二模拟卷选填精选.pdf 94\n1 目 录 24 余炳森五套卷· 卷一\n2 24 余炳森五套卷· 卷一 一、选择题. 1.设函数f x   在-∞,+∞   内有定义, 分别在-∞,0   和0,+∞   内具有一阶连续的导数, 点x = 0 为f x   的可去间断点, 则\n5 24 余炳森五套卷· 卷二 一、选择题. 1.方程 x -πt  ln 2+sin2t   dt = 0 的实根个数为( ). A. 1 B. 2 C. 3 D. 4 2.设f x   = 1, 0≤x≤1, \n8 24 余炳森五套卷· 卷三 一、选择题. 1.设有极限式 ①lim n→∞cosn ⋅ n n-1   = 0; ②lim n→∞n ⋅ n n-1   = 0； ③lim n→∞nlnn ⋅ n n-1  \n11 24 余炳森五套卷· 卷四 一、选择题. 1.设α > 0,β ≠0, 且lim x→+∞ x2α+xα   1 α -x2     = β, 则α,β   = ( ). A. 1, 1 2   \n14 24 余炳森五套卷· 卷五 一、选择题. 1.设f x   = x2-1   x-1 lnx  a, x≠1, 0, x=1.  其中常数α > 1, 则f x   在x = 1 处 ) ( . A\n17 24 李林四套卷· 卷一 一、选择题. 1.设lim x→+∞ 1 xa x2 0 1+t4  dt = b, 其中a 为大于零的常数, b 为非零常数, 则 A. a = 6,b = 1 3 . B. a = 6,b\n20 24 李林四套卷· 卷二 一、选择题. 1.设f x   ,g x   为连续函数, 当x →0 时, f x   和g x   都与x 是等价无穷小, F x   = 2 1 xf  xt  \n23 24 李林四套卷· 卷三 一、选择题. 1.设f x   = x2+a, x>0 ex, x≤0  , 则F x   = x -1 f  t   dt 在x = 0 处 A. 极限存在但不连续. B.\n26 24 李林四套卷· 卷四 一、选择题. 1.设α x   = tanx - sinx,β x   = 1+x2 - 1-x2,γ x   = 1-cosx 0 sin  tdt, 当x →0 时,将它们关于\n29 24 张宇四套卷· 卷一 一、选择题. 1.设函数f x   在x = 0 的某邻域内有定义, 且lim x→0 x- f x   sinx = 1, 则 A. f 0   = 0. B. lim x→0 f\n32 24 张宇四套卷· 卷二 一、选择题. 1.设函数f x   与g x   在-∞,+∞   上均有1 个间断点, 则f g x     在-∞,+∞   上 A. 仅有1 个间断点. B. 仅有\n35 24 张宇四套卷· 卷三 一、选择题. 1.若函数f x   在R 上连续, g x   = 2x 0 f  x+ t 2   dt, 则当x …285 tokens truncated…  dt 是关于x 的n 阶无穷小量,则n = ( ). A. 1 B. 2 C. 3 D. 4\n56 24 超越十套卷· 卷六 一、选择题. (1) 设f x   在x0 的某一邻域内有定义,且lim x→x0 f x   - f x0   x-x0   2 = 1,则f x   在x0 处( ). \n59 24 超越十套卷· 卷七 一、选择题. (1) 已知反常积分 +∞ 0 lnq 1+x   xp  dx p>0,q>0   收敛,则参数p, q 需满足的条件为( ). A. p > 1,q > 1 B. p\n62 24 超越十套卷· 卷八 一、选择题. (1) 设函数f x   = 1 + 2x2 + o x2   ,x ∈U 0,δ   ,且f 0   = 1,则下列命题: ①f x   = 4x + o \n65 24 超越十套卷· 卷九 一、选择题. (1) 设lim x→0 f x   tanx = 0,f x   二阶可导, 当x →0 时, e f x   - ax - 1 与bx2 b≠0   是等价无穷\n68 24 超越十套卷· 卷十 一、选择题. (1) 设f x   在-∞,+∞   连续,如果f x   为单调增加的奇函数,且F x   = x 0 2t-x    f x-t   dt,则下列 \n71 25 张宇八套卷· 卷一 一、选择题. 1.设函数f x   在区间-1,1   内有定义, 且在点x = 0 处连续, 则以下结论: ①当lim x→0 f x   3 x = 0 时, f x   在\n74 25 张宇八套卷· 卷二 一、选择题. 1.当x →0 时, a x2 0 cos  t2dt 与sinx - bln 1+x   是等价无穷小, 则a,b   = A. 1,2   . B. -1,2 \n77 25 张宇八套卷· 卷三 一、选择题. 1.曲线y = x3 x+1 sin 1 x 的斜渐近线方程为 A. y = x - 1 2 . B. y = x + 1 2 . C. y = x - 1. D. y = x +\n80 25 张宇八套卷· 卷四 一、选择题. 1.设f x   在-1,1   内有f x   < 0, 且lim x→0 f x   -sinx x = a ≠0, 则以下结论: ①lim x→0 f x \n83 25 张宇八套卷· 卷五 一、选择题. 1.设x →0 时, x 0 etcost2-et    dt 与axb 是等价无穷小量, 则a,b   = A. - 1 6 ,3   . B. - 1 24 ,4\n86 25 张宇八套卷· 卷六 一、选择题. 1.已知f x   = x2ln x +1, 0< x ≤1, 1, x=0,  A. f 0   是f x   在-1,1   上的最小值. B. \n89 25 张宇八套卷· 卷七 一、选择题. 1.设函数f x   在x = 0 的某邻域内有定义, 且lim x→1 x- f x-1   -1 lnx = 1, 则以下结论: ①f 0   = 0； ②lim \n92 25 张宇八套卷· 卷八 一、选择题. 1.设函数f x   在点x = 0 的某邻域内可导且f x   在x = 0 处连续, lim x→0 f x   x = a > 0, 则以下结论: ①f 0 \n【A4留白】数一模拟卷选填精选.pdf 187\n1 目 录 24 余炳森五套卷· 卷一\n2 24 余炳森五套卷· 卷一 一、选择题. 1.设函数f x   在-∞,+∞   内有定义, 分别在-∞,0   和0,+∞   内具有一阶连续的导数, 点x = 0 为f x   的可去间断点, 则\n8 24 余炳森五套卷· 卷二 一、选择题. 1.方程 x -πt  ln 2+sin2t   dt = 0 的实根个数为( ). A. 1 B. 2 C. 3 D. 4 2.设f x   = 1, 0≤x≤1, \n14 24 余炳森五套卷· 卷三 一、选择题. 1.设f x   = x+a   x - ax, a>0   ,g x   = xx - sinx   x, 则当x →0 时,( ). A. f x  \n20 24 余炳森五套卷· 卷四 一、选择题. 1.设α > 0,β ≠0, 且lim x→+∞ x2α+xα   1 α -x2     = β, 则α,β   = ( ). A. 1, 1 2   \n26 24 余炳森五套卷· 卷五 一、选择题. 1.设f x   = x2-1   x-1 lnx  a, x≠1, 0, x=1.  其中常数α > 1, 则f x   在x = 1 处 ) ( . A\n32 24 李林四套卷· 卷一 一、选择题. 1.设f x   = x -1 t  ln tdt, 则f x   在x = 0 处 A. 极限不存在. B. 连续但不可导. C. 可导且导数为零. D. 可导\n38 24 李林四套卷· 卷二 一、选择题. 1.设y = f x   在[0, +∞) 上有二阶连续导数, f x   > 0,y = g x   是y = f x   在(0, +∞) 内任意点x0 处的\n44 24 李林四套卷· 卷三 一、选择题. 1.设a,b 均为常数, lim x→+∞ex x 0 e-t2  dt+a   = b, 则 A. a =- π 2 ,b = 0. B. a =- π 2 ,b =-1.\n50 24 李林四套卷· 卷四 一、选择题. 1.当t →0+ 时, α t   = t 0d x t xsin  xy   2dy 是关于t 的n 阶无穷小, 则n = A. 3 B. 4 C. 5 D. 6 2\n56 24 张宇四套卷· 卷一 一、选择题. 1.设an   为非零数列, 下列命题正确的是 A. 若sinan   收敛，则an   收敛. B. 若arcsin sinan     收敛，则an  \n62 24 张宇四套卷· 卷二 一、选择题. 1.设函数f x   与g x   在-∞,+∞   上均有1 个间断点, 则f g x     在-∞,+∞   上 A. 仅有1 个间断点. B. 仅有\n68 24 张宇四套卷· 卷三 一、选择题. 1.曲线y = 2 1 x + ln e2x+1   x>0   的斜渐近线为 A. y = x + e. B. y = x - e. C. y = 2x + 1. D. \n74 24 张宇四套卷· 卷四 一、选择题. 1.设函数f x   在0,+∞   上可导, 给出下列命题: ①若曲线y = f x   有水平渐近线y = 1，则lim x→+∞f x   = 0； ②若曲\n80 24 超越十套卷·卷一 一、选择题. (1) 设函数f x   = x2, x≤0, lnx, x>0,  则函数f f x     ( ). A. 无极值点 B. 有一个极小值点,无极大值点 C. 有\n86 24 超越十套卷·卷二 一、选择题. (1) 关于数列xn   , yn   有以下论断 ①若数列x2n   和x2n-1   都收敛,则数列xn   收敛； ②若数列xn+yn  \n92 24 超越十套卷·卷三 一、选择题. (1) 曲线f x   = x ⋅ 2 x     ( ⋅   表示取整函数) 的渐近线有( ). A. 1 条 B. 2 条 C. 3 条 D. 4 条 (2)\n98 24 超越十套卷·卷四 一、选择题. (1) 设函数y = y x   在点x = 0 附近由方程2x - y 0 e-t2  dt = xy 所确定, 且y x   = λ1x + λ2x2 + o x2 \n104 24 超越十套卷·卷五 一、选择题. (1) 设函数f x   在点x = 0 的某邻域内有二阶导数, 且f x   = f x   = 0, 则( ). A. 点x = 0 一定不是f x   的极\n110 24 超越十套卷·卷六 一、选择题. (1) 设f x   在x0 的某一邻域内有定义,且lim x→x0 f x   - f x0   x-x0   2 = 1,则f x   在x0 处( ). A\n116 24 超越十套卷·卷七 一、选择题. (1) 已知反常积分 +∞ 0 lnq 1+x   xp  dx p>0,q>0   收敛,则参数p, q 需满足的条件为( ). A. p > 1,q > 1 B. p \n122 24 超越十套卷·卷八 一、选择题. (1) 设函数f x   = 1 + 2x2 + o x2   ,x ∈U 0,δ   ,且f 0   = 1,则下列命题: ①f x   = 4x + o x\n128 24 超越十套卷·卷九 一、选择题. (1) 设a < 1,曲线y = 1 2 ex-e-x   与直线y = ax + b( ). A. 没有交点 B. 交点个数为1 C. 交点个数为2 D. 交点个数与b 有关 \n134 24 超越十套卷·卷十 一、选择题. (1) 设f x   在-∞,+∞   连续,如果f x   为单调增加的奇函数,且F x   = x 0 2t-x    f x-t   dt,则下列 说\n140 25 张宇八套卷· 卷一 一、选择题. 1.设函数f x   在区间-1,1   内有定义, 且在点x = 0 处连续, 则以下结论: ①当lim x→0 f x   3 x = 0 时，f x   在点\n146 25 张宇八套卷· 卷二 一、选择题. 1.设f x   = sinx   0 et2  dt,g x   = x  0 sin  t2dt, 则在-π,π   内, A. f x   是可导\n152 25 张宇八套卷· 卷三 一、选择题. 1.设y = f x   由 x= t, y=sin πt   t≥0    确定, 则lim n→∞n f n+ 1 n   - f n     \n158 25 张宇八套卷· 卷四 一、选择题. 1.设f x   在-1,1   内有f x   < 0, 且lim x→0 f x   -sinx x = a ≠0, 则以下结论: ①lim x→0 f x \n164 25 张宇八套卷· 卷五 一、选择题. 1.曲线y = x3 x+1 sin 1 x 的斜渐近线方程为 A. y = x + 1 2 . B. y = x - 1 2 . C. y = x + 1. D. y = x -\n170 25 张宇八套卷· 卷六 一、选择题. 1.已知f x   = x2ln x +1, 0< x ≤1, 1, x=0,  A. f 0   是f x   在-1,1   上的最小值. B. \n176 25 张宇八套卷· 卷七 一、选择题. 1. f x   = x   ln   x2-1 有 A. 两个跳跃间断点,一个无穷间断点. B. 两个可去间断点,一个无穷间断点. C. 一个可去间断点,一个跳跃间断\n182 25 张宇八套卷· 卷八 一、选择题. 1.函数f x   = ln 1-x   ex-1   x+2   的第二类间断点的个数为 A. 0. B. 1. C. 2. D. 3. 2.设f x   ,\n【题目+解析】李林四套卷数二清晰版答案(1).pdf 68\n"}
+
+## tool · 2026-11-12T01:28:07Z
+
+
+
+
+## tool · 2026-11-12T01:28:13Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"8bdf58","wall_time_seconds":0.000009291,"exit_code":0,"original_token_count":69,"output":"1 \n2 \n3 \n4 \n5 \n6 \n7 \n8 \n9 \n10 \n11 \n12 \n13 \n14 \n15 \n16 \n17 \n18 \n19 \n20 \n21 \n22 \n23 \n24 \n25 \n26 \n27 \n28 \n29 \n30 \n31 \n32 \n33 \n34 \n35 \n36 \n37 \n38 \n39 \n40 \n41 \n42 \n43 \n44 \n45 \n46 \n47 \n48 \n49 \n50 \n51 \n52 \n53 \n54 \n55 \n56 \n57 \n58 \n59 \n60 \n61 \n62 \n63 \n64 \n65 \n66 MJzxoo5 \n67 \n68 lIJ0 \n"}
+{"chunk_id":"c1a0f0","wall_time_seconds":0.00001025,"exit_code":0,"original_token_count":1971,"output":"## 卷六· 李林四套卷（2）\n\n### 选择题\n\n1\\. 设 $\\lim_{x\\to\\infty}f'(x)=0$，且 $\\lim_{x\\to\\infty}\\left(\\frac{ax^2}{1+x}-bx-1\\right)=\\lim_{x\\to\\infty}[f(x+1)-f(x)]$，则曲线 $y=\\frac{ax^2}{1+x}$ 的斜渐近线方程为（　）。\n\nA. $y=-x+1$  \nB. $y=x+1$  \nC. $y=-x-1$  \nD. $y=x-1$\n\n2\\. 设可导函数 $f(x)$ 在 $[a,b]$ 上满足 $f(x)>0$，$f'(x)>0$，则 $\\lim_{b\\to a^+}\\frac{\\ln f(b)-\\ln f(a)}{f(b)-f(a)}=$（　）。\n\nA. $f(a)$  \nB. $\\frac1{f(a)}$  \nC. $\\frac1{f'_+(a)}$  \nD. $f'_+(a)$\n\n3\\. 设 $I_1=\\int_0^1\\ln(1+x)\\,\\mathrm dx$，$I_2=\\int_0^1\\frac{\\arctan x}{1+x}\\,\\mathrm dx$，$I_3=\\int_0^1\\sqrt{\\ln(1+x)}\\,\\mathrm dx$，则（　）。\n\nA. $I_3>I_1>I_2$  \nB. $I_3>I_2>I_1$  \nC. $I_1>I_2>I_3$  \nD. $I_2>I_3>I_1$\n\n4\\. 设 $z(x,y)$ 满足 $\\frac{\\partial z}{\\partial x}=\\sin y+\\frac1{1-xy}$，$z(1,y)=\\sin y$，则（　）。\n\nA. $\\left.\\mathrm dz\\right|_{(0,2)}=(1+\\sin2)\\,\\mathrm dx+\\mathrm dy$  \nB. $\\left.\\mathrm dz\\right|_{(0,2)}=(1+\\sin2)\\,\\mathrm dx-\\mathrm dy$  \nC. $\\left.\\mathrm dz\\right|_{(0,2)}=(1+\\sin2)\\,\\mathrm dx+\\frac12\\,\\mathrm dy$  \nD. $\\left.\\mathrm dz\\right|_{(0,2)}=(1+\\sin2)\\,\\mathrm dx-\\frac12\\,\\mathrm dy$\n\n5\\. 设正项数列 $\\{x_n\\}$ 满足 $x_{n+1}<2-\\frac1{x_n}$（$n=1,2,\\ldots$），则（　）。\n\nA. $\\{x_n\\}$ 收敛于 0。  \nB. $\\{x_n\\}$ 收敛于 1。  \nC. $\\{x_n\\}$ 收敛于 $\\sqrt2$。  \nD. $\\{x_n\\}$ 发散。\n\n6\\. 设 $f(x)$ 在 $[0,4]$ 上有二阶连续导数，在 $xOy$ 坐标系中，三条曲线为 $y=f(x)$，$y=f'(x)$，$y=f''(x)$。如图所示，$L_1$ 单调增加，在 $x=2$ 处穿过 $x$ 轴；$L_2$ 从 $y$ 轴上方下降，在 $x=1$ 处穿过 $x$ 轴，达到极小值后上升，在 $x=3$ 处再次穿过 $x$ 轴；$L_3$ 自 $y$ 轴附近上升，达到极大值后下降，在 $x=2$ 处穿过 $x$ 轴，达到极小值后上升，在 $x=4$ 处再次穿过 $x$ 轴。则 $y=f(x)$ 在 $[0,4]$ 上（　）。\n\nA. 有一个极值点，一个拐点。  \nB. 有一个极值点，两个拐点。  \nC. 有两个极值点，一个拐点。  \nD. 有两个极值点，两个拐点。\n\n7\\. 已知平面上的点 $A(0,1)$ 和抛物线 $x=2\\sqrt y$，动点 $P$ 从坐标原点 $O$ 出发，沿抛物线移动。若直线段 $OA$、$AP$ 和抛物线所围成图形的面积对时间 $t$ 的增大速率为 1，则当 $P$ 移动到点 $(6,9)$ 处时，$P$ 的横坐标的变动速率为（　）。\n\nA. $\\frac12$  \nB. $\\frac13$  \nC. $\\frac14$  \nD. $\\frac15$\n\n8\\. 设 $A$ 为 3 阶矩阵，$\\alpha_1=(1,2,-2)^T$，$\\alpha_2=(2,1,-1)^T$，$\\alpha_3=(1,1,a)^T$（$a\\ne-1$）是非齐次线性方程组 $AX=b$ 的三个解，$A^*$ 是 $A$ 的伴随矩阵，则（　）。\n\nA. $AX=0$ 与 $A^*X=0$ 同解。  \nB. $A^*X=0$ 的解均是 $AX=0$ 的解，但二者不同解。  \nC. $AX=0$ 的解均是 $A^*X=0$ 的解，但二者不同解。  \nD. $AX=0$ 与 $A^*X=0$ 没有非零公共解。\n\n9\\. 设 $A$ 为 2 阶实矩阵，$\\alpha$ 与 $\\beta$ 是 $A$ 的两个单位实特征向量，且满足 $\\|\\alpha+\\beta\\|=\\|\\alpha-\\beta\\|$，则（　）。\n\nA. $r(A)=1$  \nB. $r(A)=2$  \nC. $A$ 必相似于对角矩阵。  \nD. $A$ 必与单位矩阵合同。\n\n10\\. 设 $A,B,C$ 均为 3 阶矩阵，$r(C)=1$，$r(B)=2$，且满足 $(A+E)C=O$，$B(A^T-2E)=O$，则下列矩阵中与 $A$ 相似的是（　）。\n\nA. $\\begin{bmatrix}2&1&0\\\\0&2&1\\\\0&0&1\\end{bmatrix}$  \nB. $\\begin{bmatrix}-1&1&0\\\\0&-1&1\\\\0&0&2\\end{bmatrix}$  \nC. $\\begin{bmatrix}-2&0&0\\\\0&-2&0\\\\0&0&1\\end{bmatrix}$  \nD. $\\begin{bmatrix}-1&0&0\\\\0&2&0\\\\0&0&2\\end{bmatrix}$\n\n### 填空题\n\n11\\. 设 $y=f(x)$ 由方程 $\\mathrm e^y+x=\\mathrm e\\cos(xy)$ 确定，则 $\\lim_{n\\to\\infty}\\left[f\\left(\\frac1n\\right)\\right]^{n(1-\\cos\\frac1n)}=$ ______。\n\n12\\. 设 $x=f(y)$ 是单调可导函数 $y=g(x)$ 的反函数，且 $g(1)=2$，$g'(1)=-\\frac{\\sqrt3}{3}$，则 $\\lim_{y\\to2}(y-2)\\frac{f(y)-f(2)}{(\\ln y-\\ln2)^2}=$ ______。\n\n13\\. 设 $a^2+b^2=1$（$a<0,b>0$），则曲线 $y=x^2+ax$ 与直线 $y=bx$ 所围区域面积的最大值为 ______。\n\n14\\. 设 $y=x\\cos^2x$ 在 $x\\in[0,n\\pi]$（$n=1,2,\\ldots$）上与 $x$ 轴所围图形的面积为 $S_n$，则 $\\lim_{n\\to\\infty}\\frac{S_n}{(n+1)^2}=$ ______。\n\n15\\. $\\lim_{n\\to\\infty}n\\int_0^{2\\pi}\\mathrm e^{-x}\\sin nx\\,\\mathrm dx=$ ______。\n\n16\\. 设 $\\alpha_1,\\alpha_2,\\alpha_3$ 为线性无关的 3 维列向量，$A=(\\alpha_1,\\alpha_2,\\alpha_3)$，交换 $A$ 的第 2 列与第 3 列，再将第 2 列乘以 $(-4)$、第 3 列乘以 $(-1)$ 得 $C$。若 $BA=C$，则 $\\operatorname{tr}(B)=$ ______。\n\n### 解答题\n\n17\\. （10 分）设定义在 $(-\\infty,+\\infty)$ 内的连续函数 $f(x)$ 满足\n\n$$\nf(x)f(y)=f(x+y),\\qquad \\lim_{x\\to0}\\frac{1-f(x)}x=1.\n$$\n\n求 $F(x)=|x|f(x)$ 的极值。\n\n18\\. （12 分）设 $y(x)$ 满足 $4x\\frac{\\mathrm dy^2}{\\mathrm dx^2}+2(1-\\sqrt x)\\frac{\\mathrm dy}{\\mathrm dx}-6y=\\mathrm e^{-\\sqrt x}$。\n\n（Ⅰ）作变换 $x=t^2$（$t>0$），将方程变换成 $y$ 关于 $t$ 的方程；\n\n（Ⅱ）若 $\\lim_{x\\to0^+}y(x)=0$，$\\lim_{x\\to+\\infty}y(x)=0$，求 $y(x)$。\n\n19\\. （12 分）设 $f(x)$ 满足 $f'(x)-\\frac1nf(x)=\\left(1+\\frac1n\\right)x-1-n$，$f(0)=n^2$，$n$ 为正整数。\n\n（Ⅰ）求 $f(x)$；\n\n（Ⅱ）若 $f(x)$ 在点 $x=x_n$ 处取得极小值，求 $\\lim_{n\\to\\infty}x_n^n$。\n\n20\\. （12 分）设 $D=\\left\\{(r,\\theta)\\mid0\\le\\theta\\le\\frac{\\pi}{2},\\,0\\le r\\le2\\cos\\theta,\\,0\\le r\\le\\frac2{\\cos\\theta+\\sin\\theta}\\right\\}$。计算 $I=\\iint_D(\\cos\\theta+\\sin\\theta)r^2\\,\\mathrm d\\theta\\,\\mathrm dr$。\n\n21\\. （12 分）设 $f(x)$ 连续且严格单调递减。\n\n（Ⅰ）证明当 $x\\in(0,1)$ 时，有 $x\\int_0^1 f(t)\\,\\mathrm dt<\\int_0^x f(t)\\,\\mathrm dt<xf(0)$；\n\n（Ⅱ）若 $\\int_0^1 f(t)\\,\\mathrm dt\\ge0$，$f(0)\\le1$，$x_0\\in(0,1)$，$x_n=\\int_0^{x_{n-1}}f(t)\\,\\mathrm dt$（$n=1,2,\\ldots$）。证明 $\\lim_{n\\to\\infty}x_n$ 存在，并求其值。\n\n22\\. （12 分）设实对称矩阵 $A=(a_{ij})_{3\\times3}$ 有二重特征值 1，且 $\\sum_{i=1}^3a_{ij}=0$（$j=1,2,3$）。\n\n（Ⅰ）记 $X=(x_1,x_2,x_3)^T$，求方程 $X^TAX=0$ 的全部解；\n\n（Ⅱ）求可逆矩阵 $P$，使得 $X^T(2E-A)X=\\|PX\\|$。\n## 卷五· 李林四套卷（1）\n\n### 选择题\n\n1\\. 设 $f(x)$ 在 $(-\\infty,+\\infty)$ 内有二阶连续导数，且满足 $f\\left(\\frac1n\\right)=\\frac{n^2}{n^2+1}$（$n=1,2,\\ldots$），则 $f(x)$ 在 $x=0$ 处的二次泰勒多项式为（　）。\n\nA. $1-2x^2$  \nB. $x-2x^2$  \nC. $1-x^2$  \nD. $1+x-x^2$\n\n2\\. 设 $f(x)$ 在 $[0,a]$（$a>0$）上有二阶连续导数，且 $f(0)=f'(0)=0$，$f''(x)$ 严格单调递增，则（　）。\n\nA. $4\\int_0^a xf(x)\\,\\mathrm dx<3a\\int_0^a f(x)\\,\\mathrm dx$  \nB. $4\\int_0^a xf(x)\\,\\mathrm dx>3a\\int_0^a f(x)\\,\\mathrm dx$  \nC. $3\\int_0^a xf(x)\\,\\mathrm dx>4a\\int_0^a f(x)\\,\\mathrm dx$  \nD. $3\\int_0^a xf(x)\\,\\mathrm dx<4a\\int_0^a f(x)\\,\\mathrm dx$\n\n3\\. 设 $f(x,y)=\\begin{cases}\\frac{2x|y|}{\\sqrt{x^2+y^2}},&x^2+y^2\\ne0,\\\\0,&x^2+y^2=0.\\end{cases}$ 若 $z=f(\\tan t,\\ln(1+t))$，则 $\\left.\\frac{\\mathrm dz}{\\mathrm dt}\\right|_{t=0}=$（　）。\n\nA. $0$  \nB. $1$  \nC. $2$  \nD. $\\sqrt2$\n\n4\\. 已知积分 $I=\\int_2^{+\\infty}\\left(\\mathrm e^{\\frac{\\ln x}{x^a}}-1\\right)\\,\\mathrm dx$ 收敛，则 $a$ 的取值范围为（　）。\n\nA. $(-\\infty,0)$  \nB. $(0,1]$  \nC. $(1,+\\infty)$  \nD. $[1,+\\infty)$\n\n5\\. 设 $a>0,b\\ne0$，$\\lim_{x\\to+\\infty}x^a\\ln\\frac{\\arctan(x+1)}{\\arctan x}=b$，则（　）。\n\nA. $a=1,b=\\frac{\\pi}{2}$  \nB. $a=1,b=\\frac2\\pi$  \nC. $a=2,b=\\frac{\\pi}{2}$  \nD. $a=2,b=\\frac2\\pi$\n\n6\\. 设方程 $x^n+nx=k$（$n=1,2,\\ldots$）在 $x\\in(0,+\\infty)$ 内的实根为 $x_n$，其中 $k>0$，则 $\\lim_{n\\to\\infty}(1+x_n)^n=$（　）。\n\nA. $\\mathrm e$  \nB. $\\mathrm e^k$  \nC. $\\mathrm e^{-k}$  \nD. $\\mathrm e^{-1}$\n\n7\\. 设 $f(t)$ 可微，$z=xyf\\left(\\frac yx\\right)$ 满足 $x\\frac{\\partial z}{\\partial x}+y\\frac{\\partial z}{\\partial y}=xy\\frac yx$，则 $\\left.\\mathrm dz\\right|_{(1,1)}=$（　）。\n\nA. $\\mathrm dx+\\mathrm dy$  \nB. $-\\mathrm dx+\\mathrm dy$  \n"}
+
+## tool · 2026-11-12T01:28:18Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/844e476241abe487c6a793dbd49b4dacf88554d9afb0dee91f495b719cba8edf.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/c95ef69972f57591cef28b238a0512cbd2bb7daaeead9a8f73005cef82ff739d.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/0f896bcd5f95c686779aad55176b45794b13bbc1567b48f7c1bde147fe5f1b4a.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/0dd2f8c334b3dd88557064d869fa6c4a8c765586a374f28d387efda2153c01c4.png",
+  "detail": "high"
+}
+
+## tool · 2026-11-12T01:28:23Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/cbe3c12932797a1cefb19f35843f1cb92197ba1ab83d57bd53f22fbed6a6be4e.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/34994f0f07397b3c56489b7899c9ae16576470b33fb78ef610371b2ce359485b.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/610d700dec84c1d4cda238af5a3802ac0c66205278364321479a52d28bcd44be.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/dc44cf8263dda94010101b1cb247f55c53e32a701b95245f02e02833a519eddd.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/4beaae0caf2e58c2309b0dcf01c4906fe47b607fd277a2cbd84b77a9d43d7338.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/c4ea37dff3f1c957a46e232798b9726f0e662a8fd8b721e95ad92fb7f549150f.png",
+  "detail": "high"
+}
+
+## tool · 2026-11-12T01:28:29Z
+
+
+
+
+## tool · 2026-11-12T01:28:45Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T01:28:53Z
+
+
+Script completed
+Wall time 0.3 seconds
+Output:
+
+{"chunk_id":"a87e07","wall_time_seconds":0.000009833,"exit_code":0,"original_token_count":270,"output":"86 模拟卷40套整理合集PDF（可高清打印）（仅数二）/试卷/【紧凑版】26模拟卷数学二40套精选.pdf\n40 模拟卷10套整理合集PDF（可高清打印）/【A4紧凑_带答案】数二_精编10套模拟卷.pdf\n40 模拟卷10套整理合集PDF（可高清打印）/【A4紧凑_带答案】数一_精编10套模拟卷.pdf\n40 模拟卷10套整理合集PDF（可高清打印）/【A4紧凑_带答案】数三_精编10套模拟卷.pdf\n33 模拟卷20套整理合集PDF（可高清打印）/A4数一模拟卷精选20套.pdf\n33 模拟卷20套整理合集PDF（可高清打印）/A4数二模拟卷精选20套.pdf\n78 往年模拟卷选填精选/【A4紧凑】数二模拟卷选填精选.pdf\n78 往年模拟卷选填精选/【A4紧凑】数一模拟卷选填精选.pdf\n78 往年模拟卷选填精选/【A4紧凑】数三模拟卷选填精选.pdf\n20 往年模拟卷选填精选/数一答案/24李林四套卷 数一 试题+答案.pdf\n20 模拟卷20套整理合集PDF（可高清打印）/数二答案/【题目+解析】李林四套卷数二清晰版答案(1).pdf\n"}
+{"chunk_id":"94ee32","wall_time_seconds":0.100590875,"exit_code":0,"original_token_count":0,"output":""}
+
+## tool · 2026-11-12T01:28:58Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/4a996b813f6209bf3724c44f83f174143ede21dea2850da6019d904c3ec3308a.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/d7ff4263bd7fdb4e70d6a9d40581c4dba5e6b19227213d3a7a8bb718881bf2d0.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/65f06a046738904f4e705b6197d450d64caf4f2d7bda05e93de1c3b6089aa54d.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/00dbb3d16e086b138beed133f8f6ef890189d2887a5f90b74c2b4627303af3d9.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/3b25c679f701ed355535b762633032fb3f48f00162bf85196fe76d0dcb5ece39.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/e4d28ec30d292c7157d75e06435e612d7162081d4e54f10acee35154c6407299.png",
+  "detail": "high"
+}
+{"chunk_id":"453f4a","wall_time_seconds":0.000008209,"exit_code":0,"original_token_count":2494,"output":"## 第一套\n\n### 选择题\n\n1\\. 设 $f(x)=\\int_{-1}^{x}\\sqrt{|t|}\\ln|t|\\,\\mathrm dt$，则 $f(x)$ 在 $x=0$ 处\n\nA. 极限不存在。  \nB. 连续但不可导。  \nC. 可导且导数为零。  \nD. 可导且导数不为零。\n\n2\\. 设 $u(x,y)$ 的全微分 $\\mathrm du=\\frac{axy^2}{(x^2+y^2)^2}\\,\\mathrm dx+\\frac{-4yx^b}{(x^2+y^2)^2}\\,\\mathrm dy$（$x>0,y>0$），则 $u(x,y)$ 在点 $(1,1)$ 处的最大方向导数为\n\nA. $\\sqrt{2}$  \nB. $2$  \nC. $1$  \nD. $\\frac12$\n\n3\\. 设 $f(x,y)=\\sqrt{x^2+y^2}$，则 $f(x,y)$ 在点 $(0,0)$ 处\n\nA. $f'_x(0,0)$ 存在。  \nB. 沿任一方向的方向导数均存在。  \nC. $f'_y(0,0)$ 存在。  \nD. 可微。\n\n4\\. 设正项数列 $\\{a_n\\}$，$\\{b_n\\}$ 满足 $a_n=\\ln(a_n+e^{b_n})$（$n=1,2,\\ldots$），则下列选项中**错误**的是\n\nA. 若 $\\sum_{n=1}^{\\infty}a_n$ 收敛，则 $\\sum_{n=1}^{\\infty}b_n$ 收敛。  \nB. 若 $\\sum_{n=1}^{\\infty}a_n$ 发散，则 $\\sum_{n=1}^{\\infty}b_n$ 发散。  \nC. 若 $\\sum_{n=1}^{\\infty}a_n$ 收敛，则 $\\sum_{n=1}^{\\infty}b_n^2$ 收敛。  \nD. 若 $\\sum_{n=1}^{\\infty}b_n^2$ 发散，则 $\\sum_{n=1}^{\\infty}a_n$ 发散。\n\n5\\. 设 $A$ 是 $3$ 阶矩阵，$\\alpha_1=(1,2,3)^{\\mathrm T}$，$\\alpha_2=(0,2,1)^{\\mathrm T}$，$\\alpha_3=(0,a,1)^{\\mathrm T}$，$\\beta=(1,0,0)^{\\mathrm T}$，若 $\\alpha_1,\\alpha_2,\\alpha_3$ 是方程组 $AX=\\beta$ 的三个解，则\n\nA. 当 $a=2$ 时，必有 $r(A)=1$。  \nB. 当 $a=2$ 时，必有 $r(A)=2$。  \nC. 当 $a\\ne2$ 时，必有 $r(A)=1$。  \nD. 当 $a\\ne2$ 时，必有 $r(A)=2$。\n\n6\\. 设 $A$ 为 $3$ 阶矩阵，$3$ 维列向量 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，$A(\\alpha_1,\\alpha_2,\\alpha_3)=(\\alpha_1,\\alpha_2,-\\alpha_3)$，记 $P=(\\alpha_1+\\alpha_3,\\alpha_2,-\\alpha_3)$，则 $P^{-1}AP=$\n\nA. $\\begin{bmatrix}1&0&0\\\\0&1&0\\\\2&0&-1\\end{bmatrix}$  \nB. $\\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&-1\\end{bmatrix}$  \nC. $\\begin{bmatrix}1&0&0\\\\0&1&0\\\\1&0&-1\\end{bmatrix}$  \nD. $\\begin{bmatrix}1&0&0\\\\0&1&0\\\\-1&0&1\\end{bmatrix}$\n\n7\\. 若二次曲面 $x^2+(k+2)y^2+kz^2+2xy=5$ 表示一个椭球面，则\n\nA. $k>0$  \nB. $k<0$  \nC. $k>-1$  \nD. $k<-1$\n\n8\\. 设随机变量 $X$ 与 $Y$ 均服从正态分布 $N(0,\\sigma^2)$，且 $P\\{X\\le1,Y\\le-1\\}=\\frac14$，则 $P\\{X>1,Y>-1\\}=$\n\nA. $1$  \nB. $\\frac14$  \nC. $\\frac12$  \nD. $\\frac34$\n\n9\\. 设随机变量 $X$ 服从参数为 $\\lambda$（$\\lambda>0$）的泊松分布，$Y$ 服从参数为 $\\frac1{\\sqrt{\\lambda}}$ 的指数分布，则 $\\rho_{XY}=1$ 的充分必要条件是\n\nA. $\\operatorname{cov}(X+Y,X)=0$  \nB. $\\operatorname{cov}(X-Y,X)=0$  \nC. $\\operatorname{cov}(X+Y,Y)=0$  \nD. $\\operatorname{cov}(X-Y,Y+X)=0$\n\n10\\. 设 $X_1,X_2,\\ldots,X_n$ 为总体 $X\\sim N(\\mu,\\sigma^2)$ 的简单随机样本，$\\overline X$ 为样本均值，若 $\\hat{\\sigma}^2=k(X_1-\\overline X)^2$ 是 $\\sigma^2$ 的无偏估计量，则 $k=$\n\nA. $\\frac{n-1}{n}$  \nB. $\\frac{n}{n-1}$  \nC. $\\frac{n}{n+1}$  \nD. $\\frac{n+1}{n}$\n\n### 填空题\n\n11\\. 设函数 $y=f(x)$ 由参数方程 $\\begin{cases}x=t^2+1,\\\\y=4t-t^2,\\end{cases}$（$t\\ge0$）确定，则极限 $\\lim_{n\\to\\infty}n\\left[f\\left(\\frac{2n+1}{n}\\right)-3\\right]=$ ______。\n\n12\\. 设曲线 $L$ 为球面 $x^2+y^2+z^2=1$ 与圆柱面 $x^2+y^2=x$ 在上半平面（$z\\ge0$）的交线，从 $x$ 轴正向看去为逆时针方向，则 $I=\\int_L y^2\\,\\mathrm dx+z^2\\,\\mathrm dy+x^2\\,\\mathrm dz=$ ______。\n\n13\\. 设上半球面 $\\Sigma:z=\\sqrt{1-x^2-y^2}$，其密度 $\\rho=z$，则 $\\Sigma$ 的质心坐标 $\\overline z=$ ______。\n\n14\\. 级数 $\\sum_{n=1}^{\\infty}\\frac{(-1)^{n-1}}{n(2n+1)}$ 的和为 ______。\n\n15\\. 设 $A,B$ 均为 $n$ 阶矩阵，$|B|=1$，且 $(A-E)^{-1}=B^*-E$，其中 $B^*$ 为 $B$ 的伴随矩阵，则 $|A^{-1}+B|=$ ______。\n\n16\\. 在区间 $(0,1)$ 内随机取出 $n$ 个数 $X_1,X_2,\\ldots,X_n$，$Y$ 表示 $n$ 个数中大于 $\\frac23$ 的个数，则 $DY=$ ______。\n\n### 解答题\n\n17\\. 设立体 $\\Omega=\\{(x,y,z)\\mid x^2+y^2+z^2\\le t^2,\\ t>0,\\ z\\ge0\\}$，其密度为 $zf(\\sqrt{x^2+y^2+z^2})$，$f$ 为非负可微函数，且 $f(0)=1$，$m(t)$ 为立体 $\\Omega$ 的质量，求 $\\lim_{t\\to0^+}\\frac{m(t)}{t^4}$。\n\n18\\. 在第一象限内，过曲线 $3x^2+2xy+3y^2=a$ 上任一点作其切线，若切线与两个坐标轴所围成的三角形面积的最小值为 $\\frac14$，求 $a$ 的值。\n\n19\\. 设 $L$ 是从点 $A(1,1)$ 沿直线到点 $B(-1,0)$，再沿曲线 $y=x^2-1$ 到点 $C(1,0)$。计算 $I=\\int_L\\frac{x\\,\\mathrm dy-y\\,\\mathrm dx}{x^2+y^2}$。\n\n20\\. 设 $f(x)$ 二阶可导，$f''(x)>0$ 且 $\\lim_{x\\to0}\\frac{f(x)}{x}=0$，曲线 $y=f(x)$ 在点 $(x,f(x))$ 处的切线在 $x$ 轴上的截距为 $u(x)$，记 $a_n=\\lim_{x\\to0^+}\\left[\\frac{u(x)}x\\right]^n$（$n$ 为正整数）。\n\n（I）求 $a_n$；  \n（II）求级数 $\\sum_{n=1}^{\\infty}n^2a_n$ 的和。\n\n21\\. 设 $A=\\begin{bmatrix}2&1&0\\\\1&2&0\\\\0&0&1\\end{bmatrix}$ 与 $B=\\begin{bmatrix}a&b&c\\\\0&1&0\\\\-1&-2&4\\end{bmatrix}$ 相似。\n\n（I）求 $a,b,c$ 的值；  \n（II）求可逆矩阵 $P$，使得 $P^{-1}AP=B$；  \n（III）求方程组 $(3E-A^*)X=0$ 的通解。\n\n22\\. 设随机变量 $X$ 与 $Y$ 相互独立，$X$ 的概率密度 $f(x)$ 满足 $f'(x)+\\frac{x}{\\sigma^2}f(x)=0$（$\\sigma>0$），$Y$ 的分布律为 $P\\{Y=-1\\}=P\\{Y=1\\}=\\frac12$，记 $Z=XY$。\n\n（I）求 $Z$ 的概率密度 $f_Z(z)$；  \n## 第二套\n\n### 选择题\n\n1\\. 设 $y=f(x)$ 在 $[0,+\\infty)$ 上有二阶连续导数，$f''(x)>0$，$y=g(x)$ 是 $y=f(x)$ 在 $(0,+\\infty)$ 内任意点 $x_0$ 处的切线方程，$F(x)=f(x)-g(x)$，则\n\nA. $F(x)$ 在 $x_0$ 处取得最大值。  \nB. $F(x)$ 在 $x_0$ 处取得最小值。  \nC. $(x_0,F(x_0))$ 为 $y=F(x)$ 的拐点。  \nD. $F(x)$ 在 $x_0$ 处不取得极值。\n\n2\\. 设 $D=\\{(x,y)\\mid(x-1)^2+y^2\\le1\\}$，$I_1=\\iint_D\\sqrt{2x-x^2-y^2}\\,\\mathrm dx\\,\\mathrm dy$，$I_2=\\iint_D(1-\\sqrt{x^2+y^2-2x+1})\\,\\mathrm dx\\,\\mathrm dy$，$I_3=\\iint_D\\sqrt{x^2+y^2-2x+1}\\,\\mathrm dx\\,\\mathrm dy$，则 $I_1:I_2:I_3=$\n\nA. $2:1:2$  \nB. $2:2:1$  \nC. $1:2:2$  \nD. $2:1:1$\n\n3\\. 设某生物分布在 $xOy$ 坐标平面上，分布密度 $f(r)$ 随着与原点的距离 $r$ 的增加而减少，其中 $f(r)=\\frac{a}{r^2+b}$（只/$\\mathrm{m}^2$），$a,b$ 均为大于零的常数，则距离原点 $2\\,\\mathrm m$ 的圆形区域内存在生物的数目（单位为只）为\n\nA. $\\frac a2\\ln\\left(1+\\frac4b\\right)$  \nB. $\\pi a\\ln\\left(1+\\frac4b\\right)$  \nC. $a\\ln\\left(1+\\frac4b\\right)$  \nD. $\\frac12\\pi a\\ln\\left(1+\\frac4b\\right)$\n\n4\\. 设 $D=\\{(x,y)\\mid(x-1)^2+(y-1)^2\\le2\\}$，$L$ 为区域 $D$ 的边界曲线，取顺时针方向，$I_1=\\int_L x\\,\\mathrm dx+\\frac{(x+y)^2}{8}\\,\\mathrm dy$，$I_2=\\int_L x\\,\\mathrm dx+\\frac{(x-y)^2}{8}\\,\\mathrm dy$，$I_3=\\int_L\\frac{(x+y)^2}{8}\\,\\mathrm dx+y\\,\\mathrm dy$，则\n\nA. $I_1>I_2>I_3$  \nB. $I_3>I_2>I_1$  \nC. $I_2>I_3>I_1$  \nD. $I_2>I_1>I_3$\n\n5\\. 设 $3$ 维列向量 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，$A=(a_{ij})_{3\\times3}$ 满足 $A\\alpha_1=\\alpha_1$，$A\\alpha_2=\\alpha_2-\\alpha_3$，$A\\alpha_3=\\alpha_3-\\alpha_1$，则 $A^{-1}$ 的迹 $\\operatorname{tr}(A^{-1})=$\n\nA. $1$  \nB. $-1$  \nC. $-3$  \nD. $3$\n\n6\\. 设 $A$ 为二阶实矩阵，$\\alpha$ 与 $\\beta$ 是 $A$ 的两个单位实特征向量，且满足 $\\|\\alpha+\\beta\\|=\\|\\alpha-\\beta\\|$，则\n\nA. $r(A)=1$  \nB. $r(A)=2$  \nC. $A$ 必相似于对角矩阵。  \nD. $A$ 必与单位矩阵合同。\n\n7\\. 设矩阵 $A_{n\\times s}$，$B_{s\\times n}$，$E_{n\\times n}$ 为单位矩阵，且 $r(A)=s$，$r(B)=n$，下列齐次线性方程组有非零解的是\n\nA. $\\begin{bmatrix}AB&O\\\\E&A\\end{bmatrix}X=0$  \nB. $\\begin{bmatrix}AB&O\\\\E&B\\end{bmatrix}X=0$  \nC. $\\begin{bmatrix}A&E\\\\O&AB\\end{bmatrix}X=0$  \nD. $\\begin{bmatrix}A&AB\\\\E&B\\end{bmatrix}X=0$\n\n8\\. 设随机事件 $A,B$ 满足 $P(A)=0.4$，$P(A\\cup B)=0.7$，$P(\\overline B\\mid\\overline A)+P(B\\mid A)=1$，则 $P(\\overline A\\cup\\overline B)=$\n\nA. $0.2$  \nB. $0.4$  \nC. $0.6$  \nD. $0.8$\n\n9\\. 设二维随机变量 $(X,Y)$ 服从 $N(\\mu,\\mu;1,1;0)$，则 $D(|X-Y|)=$\n\nA. $1-\\sqrt{\\frac2\\pi}$  \nB. $2-\\frac4\\pi$  \nC. $2-\\frac4{\\sqrt\\pi}$  \nD. $1-\\frac2{\\sqrt\\pi}$\n\n10\\. 设 $X_1,X_2,\\ldots,X_n$（$n>1$）为来自总体 $N(\\mu,\\sigma^2)$ 的简单随机样本，$\\overline X$ 为样本均值，$S^2$ 为样本方差，则 $\\mu\\sigma^2$ 的无偏估计量为\n\nA. $\\overline X^2S$  \nB. $\\overline XS$  \nC. $\\overline XS^2$  \nD. $\\overline X^2S^2$\n\n### 填空题\n\n11\\. 设 $f(x)=\\arctan\\frac{1+x}{1-x}$，$n$ 为正整数，则 $f^{(2n+1)}(0)=$ ______。\n\n12\\. 心形线 $r=1+\\cos\\theta$ 的全长为 ______。\n\n13\\. 设函数 $f(x,y,z)=x^2+2y^2+3z^2-a^2$（$a>0$）满足 $x-2y+3z=6$ 的最小值为 $0$，则 $a=$ ______。\n\n14\\. 设曲线 $L$ 为 $\\begin{cases}x^2+y^2+z^2=R^2,\\ (R>0)\\\\x+y+z=0,\\end{cases}$ 则 $I=\\oint_L(xy+yz+zx)\\,\\mathrm ds=$ ______。\n\n15\\. 设 $\\alpha_1=(1,1,1)^{\\mathrm T}$，$\\alpha_2=(1,0,-1)^{\\mathrm T}$，$\\alpha_3=(1,0,1)^{\\mathrm T}$ 与 $\\beta_1=(1,2,1)^{\\mathrm T}$，$\\beta_2=(3,3,3)^{\\mathrm T}$，$\\beta_3=(2,4,3)^{\\mathrm T}$ 是 $\\mathbb R^3$ 的两组基，则在两组基下有相同坐标的向量为 ______。\n\n16\\. 设随机变量 $X$ 在区间 $(0,a)$（$a>0$）上服从均匀分布，则 $X$ 落在 $EX$ 与 $DX$ 之间的概率为 ______。\n\n### 解答题\n\n17\\. 设函数 $y(x)$ 是微分方程 $(xy-1)\\,\\mathrm dx+x^2\\,\\mathrm dy=0$（$x>0$）的解，且 $y(1)=0$。求曲线 $y=y(x)$ 的凹凸区间及拐点。\n\n18\\. 设非负函数 $f(x)$ 在 $[0,a]$（$a>0$）上有连续的二阶导数，且 $f(0)=f'(0)=0$，$f''(x)$ 严格单调递增，平面区域 $D=\\{(x,y)\\mid0\\le x\\le a,0\\le y\\le f(x)\\}$ 的形心坐标为 $(\\overline x,\\overline y)$。证明 $\\overline x>\\frac34a$。\n\n19\\. 设数列 $\\{a_n\\}$ 满足 $a_0=2$，$na_n=a_{n-1}+n-1$（$n=1,2,\\ldots$）。\n\n（I）证明 $\\lim_{n\\to\\infty}a_n$ 存在并求其值；  \n（II）求幂级数 $\\sum_{n=0}^{\\infty}a_nx^n$ 的收敛区间与和函数。\n\n20\\. 发现一架飞机在原点 $O(0,0)$ 处沿 $y$ 轴正向以常速度 $v$ 飞行，随即从点 $P_0(16,0)$ 处发射导弹追击，且导弹方向始终指向飞机，导弹速度为 $2v$。\n"}
+
+## tool · 2026-11-12T01:29:06Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/67a0b2a6a720565e869b79ff78f704655d7e214fd8bdcfbeeca536e46274b56d.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/c00366ac2a1c50e77f0dbc9e086646389b23c72a3720063b6bc85d2fe2eb2983.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/d9a95d03fab72c608b2058fea5afd3d54d8a0e80991e3bec0a80851e9d2924b3.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/86cdc4648c085929440d055126f826493584732a1f380ccfa36929f55c0f508e.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/1028c21d8cf9db5d7d68a83c4c0df28e68e6ba737bf2b65577fc71d7af206b8c.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/51b8a23ff0fa2a15c8ecaf02c2de6736143d9b86f95de9d7c0a19b29cd4c2ec0.png",
+  "detail": "high"
+}
+{"chunk_id":"73a0a8","wall_time_seconds":0.00001,"exit_code":0,"original_token_count":2040,"output":"## 第三套\n\n### 选择题\n\n1\\. 设 $a,b$ 均为常数，$\\lim_{x\\to+\\infty}e^x\\left(\\int_0^{\\sqrt x}e^{-t^2}\\,\\mathrm dt+a\\right)=b$，则\n\nA. $a=-\\frac{\\sqrt\\pi}{2},b=0$  \nB. $a=-\\frac{\\sqrt\\pi}{2},b=-1$  \nC. $a=0,b=1$  \nD. $a=-1,b=1$\n\n2\\. 设 $f(x)$ 在 $[0,+\\infty)$ 上可导，且 $f'(x)<0$，则当 $0<a<x<b$ 时，有\n\nA. $b\\int_0^x f(t)\\,\\mathrm dt>x\\int_0^b f(t)\\,\\mathrm dt$  \nB. $a\\int_0^x f(t)\\,\\mathrm dt>x\\int_0^a f(t)\\,\\mathrm dt$  \nC. $x\\int_0^x f(t)\\,\\mathrm dt>b\\int_0^b f(t)\\,\\mathrm dt$  \nD. $x\\int_0^x f(t)\\,\\mathrm dt>a\\int_0^a f(t)\\,\\mathrm dt$\n\n3\\. 曲线 $\\begin{cases}x^2+y^2+z^2=6,\\\\x^2+y^2=z\\end{cases}$ 在点 $(1,1,2)$ 处的法平面方程为\n\nA. $x+y=0$  \nB. $x+y-1=0$  \nC. $x-y=0$  \nD. $x-y+1=0$\n\n4\\. 设积分 $\\int_1^{+\\infty}\\frac{\\arctan(x-1)}{(x-1)^p}\\,\\mathrm dx$ 收敛，则正确的是\n\nA. $1<p<2$  \nB. $0<p<1$  \nC. $p\\ge2$  \nD. $0<p<2$\n\n5\\. 与 $A=\\begin{bmatrix}1&0&0\\\\0&-1&0\\\\0&0&0\\end{bmatrix}$ 既相似又合同的矩阵是\n\nA. $\\begin{bmatrix}1&0&0\\\\0&1&-1\\\\0&2&-2\\end{bmatrix}$  \nB. $\\begin{bmatrix}1&0&0\\\\0&-1&-2\\\\0&-2&-4\\end{bmatrix}$  \nC. $\\begin{bmatrix}1&0&0\\\\0&-1&2\\\\0&2&2\\end{bmatrix}$  \nD. $\\begin{bmatrix}1&0&0\\\\0&-\\frac12&\\frac12\\\\0&\\frac12&-\\frac12\\end{bmatrix}$\n\n6\\. 设 $y=f(x)$ 是连续函数，点 $P_i(x_i,y_i)$（$i=1,2,3$）为 $y=f(x)$ 上三个不同点，矩阵 $A=\\begin{bmatrix}x_1&y_1&1\\\\x_2&y_2&1\\\\x_3&y_3&1\\end{bmatrix}$，则\n\nA. $r(A)=1$  \nB. $r(A)=3$  \nC. $r(A)=2$ 或 $r(A)=3$  \nD. $r(A)=1$ 或 $r(A)=2$\n\n7\\. 方程 $yz+xz+xy=0$ 表示的二次曲面为\n\nA. 单叶双曲面。  \nB. 双叶双曲面。  \nC. 柱面。  \nD. 圆锥面。\n\n8\\. 已知 $X\\sim N(0,\\sigma^2)$，$Y$ 在区间 $[0,\\sqrt3\\sigma]$ 上服从均匀分布，且 $D(X-Y)=\\sigma^2$，则 $\\rho_{XY}=$\n\nA. $\\frac12$  \nB. $\\frac13$  \nC. $\\frac14$  \nD. $1$\n\n9\\. 设 $X_1,X_2,X_3,X_4$ 为来自总体 $N(1,\\sigma^2)$ 的简单随机样本，$\\overline X$ 为样本均值，$S^2$ 为样本方差，则下列选项正确的是\n\nA. $\\frac{X_1-X_2}{|X_3+X_4-2|}\\sim t(2)$  \nB. $\\frac{4(\\overline X-1)^2}{\\sigma^2}\\sim\\chi^2(2)$  \nC. $\\frac1{2\\sigma^2}[(X_1-X_2)^2+(X_3-X_4)^2]\\sim\\chi^2(2)$  \nD. $\\frac{4(\\overline X-1)^2}{S^2}\\sim F(3,1)$\n\n10\\. 设总体 $X\\sim N(\\mu,\\sigma^2)$，其中 $\\sigma^2$ 已知，$\\mu$ 未知，则 $\\mu$ 的双侧置信区间的长度 $L$ 与置信度 $1-\\alpha$ 的关系是\n\nA. 当 $1-\\alpha$ 减小时，$L$ 增大。  \nB. 当 $1-\\alpha$ 减小时，$L$ 变小。  \nC. 当 $1-\\alpha$ 减小时，$L$ 不变。  \nD. 当 $1-\\alpha$ 减小时，$L$ 增减不定。\n\n### 填空题\n\n11\\. 设 $f(x)$ 在 $(-\\infty,+\\infty)$ 上连续，且 $\\lim_{x\\to+\\infty}f(x)=b>0$，$y(x)$ 是 $y'+ay=f(x)$（$a>0$）的任一解，则 $\\lim_{x\\to+\\infty}y(x)=$ ______。\n\n12\\. 函数 $f(x)=x+1$（$0\\le x\\le\\pi$）的余弦级数为 ______。\n\n13\\. 设曲线 $y=(x+1)(e^{nx}-1)$（$n>1$）与 $x$ 轴所围面积为 $S_n$，则 $\\lim_{n\\to\\infty}S_n=$ ______。\n\n14\\. 设 $z=\\frac{x}{x-y}$，则 $\\left.\\frac{\\partial^n z}{\\partial y^n}\\right|_{(2,1)}=$ ______。\n\n15\\. 设 $\\alpha,\\beta,\\alpha_1,\\alpha_2,\\alpha_3$ 均为 $4$ 维列向量，$A=(\\alpha,\\alpha_1,\\alpha_2,\\alpha_3)$，$B=(\\beta,\\alpha_1,\\alpha_2,\\alpha_3)$，且 $|A|=4$，$|B|=1$，则 $|A^{-1}+B^{-1}|=$ ______。\n\n16\\. 设 $X_1,X_2,\\ldots,X_n$ 为来自总体 $N(0,1)$ 的简单随机样本，$\\overline X$ 为样本均值，$S^2$ 为样本方差，记 $T=\\frac1n(\\overline X-S)$，则 $E(T^2)=$ ______。\n\n### 解答题\n\n17\\. 已知定义在 $(-\\infty,+\\infty)$ 内的连续函数 $f(x)$ 满足 $f(x)f(y)=f(x+y)$，且 $\\lim_{x\\to0}\\frac{1-f(x)}x=1$。\n\n（I）求 $f(x)$；  \n（II）求 $F(x)=|x|f(x)$ 的极值。\n\n## 第四套\n\n### 选择题\n\n1\\. 当 $t\\to0^+$ 时，$\\alpha(t)=\\int_0^t\\mathrm dx\\int_x^t\\sin(xy)^2\\,\\mathrm dy$ 是关于 $t$ 的 $n$ 阶无穷小，则 $n=$\n\nA. $3$  \nB. $4$  \nC. $5$  \nD. $6$\n\n2\\. 设 $f(x,y)$ 在点 $(0,0)$ 的某邻域内有定义，且 $f(0,0)=0$，$\\lim_{\\substack{x\\to0\\\\y\\to0}}\\frac{f(x,y)}{\\sqrt{x^2+y^2}}=1$，则正确的是\n\nA. $f'_x(0,0),f'_y(0,0)$ 均存在。  \nB. $f(x,y)$ 在 $(0,0)$ 处不连续。  \nC. $f(x,y)$ 在点 $(0,0)$ 处可微。  \nD. $f(x,y)$ 在点 $(0,0)$ 处连续但不可微。\n\n3\\. 设 $f$ 可微，曲面 $e^{2x-z}=f(\\pi y-\\sqrt2z)$ 上任意一点处的切平面都平行于直线\n\nA. $\\frac x{\\sqrt2}=\\frac y\\pi=\\frac z{2\\sqrt2}$  \nB. $\\frac x\\pi=\\frac y{2\\sqrt2}=\\frac z{2\\pi}$  \nC. $\\frac x{2\\pi}=\\frac y\\pi=\\frac z{\\sqrt2}$  \nD. $\\frac x{2\\sqrt2}=\\frac y{\\sqrt2}=\\frac z\\pi$\n\n4\\. 设曲线 $L$ 为 $x^2+y^2=1$，取逆时针方向，$f(x,y)>0$，$f(x,-y)=f(x,y)$。记 $I_1=\\int_{l_1}f(x,y)\\,\\mathrm dx$，$I_2=\\int_{l_2}f(x,y)\\,\\mathrm ds$，$I_3=\\int_{l_3}f(x,y)\\,\\mathrm dx$，则\n\n图示中，$l_1$ 从 $(1,0)$ 沿圆弧至 $(0,1)$，$l_2$ 从 $(0,1)$ 至 $(-1,0)$，$l_3$ 从 $(-1,0)$ 至 $(0,-1)$。\n\nA. $I_2>I_3>I_1$  \nB. $I_2>I_1>I_3$  \nC. $I_1>I_3>I_2$  \nD. $I_3>I_2>I_1$\n\n5\\. 设 $4$ 阶矩阵 $A=(a_{ij})_{4\\times4}=(\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_4)$，$a_{11}$ 的代数余子式 $A_{11}\\ne0$，且 $|A|=0$，则下列选项中正确的是\n\nA. $\\alpha_2,\\alpha_3,\\alpha_4$ 必线性相关。  \nB. $\\alpha_1,\\alpha_2,\\alpha_3$ 必线性相关。  \nC. $A^*X=0$ 的基础解系为 $\\alpha_2,\\alpha_3,\\alpha_4$。  \nD. $A^*X=0$ 的基础解系为 $\\alpha_1,\\alpha_2,\\alpha_3$。\n\n6\\. 设 $A=\\begin{bmatrix}-1&0&2\\\\k&1&k-2\\\\-3&0&4\\end{bmatrix}$，则迹 $\\operatorname{tr}(A^{-1})=$\n\nA. $\\frac k2$  \nB. $2k$  \nC. $\\frac12$  \nD. $\\frac52$\n\n7\\. 设 $A$ 是 $3$ 阶实对称矩阵，二次型 $f(x_1,x_2,x_3)=X^{\\mathrm T}AX$ 经正交变换 $X=QY$ 后的标准形为 $y_1^2+y_2^2-y_3^2$，则 $y(x_1,x_2,x_3)=X^{\\mathrm T}A^*X$ 经可逆线性变换 $X=PY$ 后的规范形为\n\nA. $y_1^2+y_2^2+y_3^2$  \nB. $-y_1^2-y_2^2+y_3^2$  \nC. $-y_1^2-y_2^2-y_3^2$  \nD. $y_1^2+y_2^2-y_3^2$\n\n8\\. 设随机变量 $X$ 服从参数为 $\\frac12$ 的泊松分布，$Y=\\frac{2EX}{1+X}$，则 $EY=$\n\nA. $2(1-e^{-\\frac12})$  \nB. $1-2e^{-\\frac12}$  \nC. $2(1-e^{\\frac12})$  \nD. $2-e^{-\\frac12}$\n\n9\\. 设随机变量 $X$ 与 $Y$ 相互独立，都服从 $(0,1)$ 上的均匀分布，直线 $Xx+Yy=0$ 与 $y=2x^2+2$ 相交的概率为 $p$（$0<p<1$），则 $P\\{X\\le p\\}=$\n\nA. $\\frac12$  \nB. $\\frac13$  \nC. $\\frac14$  \nD. $\\frac18$\n\n10\\. 设总体 $X$ 的分布律为 $P\\{X=k\\}=(1-p)^{k-1}P$（$0<p<1$），$k=1,2,\\ldots$，$X_1,X_2,\\ldots,X_n$ 为来自总体 $X$ 的简单随机样本，$\\overline X$ 的样本均值，则 $p$ 的矩估计量与最大似然估计量依次为\n\nA. $\\overline X,\\overline X$  \nB. $\\frac1{\\overline X},\\overline X$  \nC. $\\overline X,\\frac1{\\overline X}$  \nD. $\\frac1{\\overline X},\\frac1{\\overline X}$\n\n### 填空题\n\n11\\. 反常积分 $I=\\int_0^{+\\infty}\\frac{xe^{-x}}{(1+e^{-x})^2}\\,\\mathrm dx=$ ______。\n\n12\\. 设 $u=\\ln(x^2+y^2+z^2)$，则 $\\left.\\operatorname{div}(\\operatorname{grad}u)\\right|_{(1,1,1)}$ ______。\n\n13\\. 级数 $\\sum_{n=0}^{\\infty}\\frac1{(2n)!}=$ ______。\n\n14\\. 设平面曲线 $L$ 为 $r=1+\\cos\\theta$ 从 $\\theta=0$ 到 $\\theta=\\frac\\pi2$ 的一段弧，则 $I=\\int_L(x+1)\\,\\mathrm dx+y\\,\\mathrm dy=$ ______。\n\n15\\. 设列向量组 $\\alpha_1,\\alpha_2,\\alpha_3$ 与 $\\beta_1,\\beta_2,\\beta_2$ 分别是三维向量空间 $\\mathbb R^3$ 的两组基，且 $\\beta_1=\\alpha_1$，$\\beta_2=\\alpha_1+2\\alpha_2$，$\\beta_3=\\alpha_1+2\\alpha_2+3\\alpha_3$，则由 $\\beta_1,\\beta_2,\\beta_3$ 到 $\\alpha_1,\\alpha_2,\\alpha_3$ 的过渡矩阵为 ______。\n\n16\\. 设 $(X,Y)\\sim N(\\mu_1,\\mu_2;\\sigma^2,\\sigma^2;0)$，$X_1,X_2,\\ldots,X_{n_1}$（$n>1$）和 $Y_1,Y_2,\\ldots,Y_{n_2}$（$n_2>1$）分别为来自总体 $X$ 和 $Y$ 的简单随机样本，$\\overline X$ 与 $\\overline Y$ 分别为其样本均值，$T=\\frac1{n_1+n_2-2}\\left[\\sum_{i=1}^{n_1}(X_i-\\overline X)^2+\\sum_{j=1}^{n_2}(Y_j-\\overline Y)^2\\right]$，则方差 $D(T)=$ ______。\n\n### 解答题\n\n17\\. 设 $f(t)$ 有二阶连续导数，$f(1)=f'(1)=1$，在 $x>0$ 的平面区域内，存在函数 $u(x,y)$，使得 $\\mathrm du(x,y)=\\left[\\frac{y^2}{x}+xf\\left(\\frac yx\\right)\\right]\\mathrm dx+\\left[y-xf'\\left(\\frac yx\\right)\\right]\\mathrm dy$。求 $f(t)$。\n\n18\\. 设 $f(x,y)=x^2+axy+by^2$ 在点 $P(2,1)$ 处沿 $l=(0,1)$ 的方向导数取得最大值 $2$。\n"}
+
+## tool · 2026-11-12T01:29:17Z
+
+
+Script completed
+Wall time 0.4 seconds
+Output:
+
+{"chunk_id":"e6f5fe","wall_time_seconds":0.189508,"exit_code":0,"original_token_count":179,"output":"5961 6093 False\n0.9769371163099386\n => 第32页，共187页\n第17页，共94页 => \n => 第33页，共187页\n => 第34页，共187页\n18 => 35\n94 => 187\n => 第36页，共187页\n19 => 37\n94 => 187\n => 第38页，共187页\n20 => 39\n94 => 187\n => 第40页，共187页\n => 第41页，共187页\n第21页，共94页 => \n => 第42页，共187页\n22 => 43\n94 => 187\n => 第44页，共187页\n第23页，共94页 => \n => 第45页，共187页\n => 第46页，共187页\n第24页，共94页 => \n => 第47页，共187页\n => 第48页，共187页\n25 => 49\n94 => 187\n => 第50页，共187页\n第26页，共94页 => \n => 第51页，共187页\n => 第52页，共187页\n27 => 53\n94 => 187\n => 第54页，共187页\n28 => 55\n94 => 187\n"}
+
+## tool · 2026-11-12T01:29:35Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+{"chunk_id":"74e6cf","wall_time_seconds":0.000012917,"exit_code":0,"original_token_count":1500,"output":"references/302模拟27md/往年模拟卷选填精选/【A4紧凑】数一模拟卷选填精选.pdf.md 4\nreferences/302模拟27md/往年模拟卷选填精选/【A4留白】数一模拟卷选填精选.pdf.md 4\nreferences/302模拟27md/往年模拟卷选填精选/【A4紧凑】数二模拟卷选填精选.pdf.md 0\nreferences/302模拟27md/往年模拟卷选填精选/【A4留白】数二模拟卷选填精选.pdf.md 0\n## 卷七· 李林四套卷（3）\n\n### 选择题\n\n1\\. 当 $x\\to0$ 时，$(1+x)^{2/x}-e^2[1-\\ln(1+x)]$ 是关于 $x$ 的（　）。\n\nA. 高阶无穷小。  \nB. 等价无穷小。  \nC. 同阶但非等价无穷小。  \nD. 低阶无穷小。\n\n2\\. 设 $f(x)$ 在 $[0,+\\infty)$ 上有连续导数，且 $f'(x)>0$。当 $0<a<x<b$ 时，有（　）。\n\nA. $a\\int_0^x f(t)\\,\\mathrm dt<x\\int_0^a f(t)\\,\\mathrm dt$  \nB. $b\\int_0^x f(t)\\,\\mathrm dt<x\\int_0^b f(t)\\,\\mathrm dt$  \nC. $x\\int_0^x f(t)\\,\\mathrm dt<b\\int_0^b f(t)\\,\\mathrm dt$  \nD. $x\\int_0^x f(t)\\,\\mathrm dt>a\\int_0^a f(t)\\,\\mathrm dt$\n\n3\\. 设 $y_1(x)$ 与 $y_2(x)$ 是非齐次微分方程 $y'+P(x)y=Q(x)$ 的两个解。若 $\\lambda y_1(x)+\\mu y_2(x)$ 仍是该方程的解，则 $e^{\\lambda^3+\\mu^3}$ 的最小值为（　）。\n\nA. $e^{-1}$  \nB. $e^{1/2}$  \nC. $e^{1/4}$  \nD. $e^{1/3}$\n\n4\\. 下列积分发散的是（　）。\n\nA. $\\int_1^{+\\infty}\\frac{\\mathrm dx}{x^3\\sqrt{1+x}}$  \nB. $\\int_0^{+\\infty}x^2e^{-x}\\,\\mathrm dx$  \nC. $\\int_2^{+\\infty}\\frac{\\mathrm dx}{x\\ln^2x}$  \nD. $\\int_{-\\infty}^{+\\infty}e^{|x|}\\sin x\\,\\mathrm dx$\n\n5\\. 下列结论正确的是（　）。\n\n① 若 $f(x)$ 在 $x=a$ 处连续，且 $\\lim_{x\\to0}\\frac{f(a+x^3)-f(a)}{x^2}$ 存在，则 $f'(a)$ 存在。\n\n② 若 $\\lim_{n\\to\\infty}n\\left[f\\left(a+\\frac1n\\right)-f(a)\\right]$（$n$ 为正整数）存在，则 $f'(a)$ 存在。\n\n③ 若 $f(x)=(x-a)\\varphi(x)$，其中 $\\varphi(x)$ 在 $x=a$ 处连续，则 $f'(a)$ 存在。\n\n④ 存在 $\\delta>0$，对 $\\forall x\\in(a-\\delta,a+\\delta)$，有 $|f(x)|\\le L|x-a|^\\alpha$，其中 $L>0$，$\\alpha>1$ 为常数，则 $f'(a)$ 存在。\n\nA. ①②。  \nB. ②③。  \nC. ②④。  \nD. ③④。\n\n6\\. 积分 $\\int_0^2\\mathrm dx\\int_{\\sqrt3x}^x f\\left(\\sqrt{x^2+y^2}\\right)\\,\\mathrm dy=$（　）。\n\nA. $\\int_{\\pi/4}^{\\pi/3}\\mathrm d\\theta\\int_0^{2\\sec\\theta}f(r)r\\,\\mathrm dr$  \nB. $\\int_{\\pi/3}^{\\pi/4}\\mathrm d\\theta\\int_0^{2\\sec\\theta}f(r)\\,\\mathrm dr$  \nC. $-\\int_0^{2\\sqrt2}\\mathrm dr\\int_{\\pi/4}^{\\pi/3}f(r)r\\,\\mathrm d\\theta-\\int_{2\\sqrt2}^4\\mathrm dr\\int_{\\arccos(2/r)}^{\\pi/3}f(r)r\\,\\mathrm d\\theta$  \nD. $\\int_0^{2\\sqrt2}\\mathrm dr\\int_{\\pi/4}^{\\pi/3}f(r)r\\,\\mathrm d\\theta+\\int_{2\\sqrt2}^4\\mathrm dr\\int_{\\arccos(2/r)}^{\\pi/3}f(r)r\\,\\mathrm d\\theta$\n\n7\\. 设 $f(x)=\\begin{vmatrix}1&x&x^2&x^3\\\\1&2&4&8\\\\1&-1&1&-1\\\\1&1&1&1\\end{vmatrix}$，则曲线 $y=f(x)$ 在 $(-1,2)$ 内存在水平切线的条数为（　）。\n\nA. 0。  \nB. 1。  \nC. 2。  \nD. 3。\n\n8\\. 设 $A$ 是 $m\\times n$ 矩阵，则非齐次线性方程组 $AX=b$ 有解的充分必要条件是（　）。\n\nA. $r(A)=r(A^{\\mathsf T})=m$  \nB. $r(A)=r(A^{\\mathsf T})=n$  \nC. $r(A^{\\mathsf T})=r\\begin{pmatrix}A^{\\mathsf T}\\\\b^{\\mathsf T}\\end{pmatrix}=m$  \nD. $A^{\\mathsf T}X=0$ 与 $\\begin{pmatrix}A^{\\mathsf T}\\\\b^{\\mathsf T}\\end{pmatrix}X=0$ 同解。\n\n9\\. 设 $A=\\begin{pmatrix}2&1&0\\\\1&2&0\\\\0&0&a\\end{pmatrix}$ 与 $B=\\begin{pmatrix}1&0&0\\\\0&1&1\\\\0&1&0\\end{pmatrix}$ 合同，则（　）。\n\nA. $a=0$  \nB. $a<0$  \nC. $a>0$  \nD. $a>1$\n\n10\\. 设 4 阶实矩阵 $A=(a_{ij})=(\\alpha_1,\\alpha_2,\\alpha_3,\\alpha_4)$，$a_{11}$ 的代数余子式 $A_{11}\\ne0$，且 $|A|=0$，则下列选项正确的是（　）。\n\nA. $\\alpha_2,\\alpha_3,\\alpha_4$ 必线性相关。  \nB. $\\alpha_1,\\alpha_2,\\alpha_3$ 必线性无关。  \nC. $A^*X=0$ 的基础解系为 $\\alpha_2,\\alpha_3,\\alpha_4$。  \nD. $A^*X=0$ 的基础解系为 $\\alpha_1,\\alpha_2,\\alpha_3$。\n\n### 填空题\n\n11\\. 曲线 $y=(x+1)(e^{nx}-1)$（$n>1$）与 $x$ 轴所围图形的面积为 ______。\n\n12\\. 设 $f(t)=\\lim_{n\\to\\infty}\\sum_{i=1}^n\\frac{t-1}{[n+(t-1)i]\\sqrt{\\frac{t-1}{n}i}}$（$t>1$），则 $\\lim_{t\\to+\\infty}f(t)=$ ______。\n\n13\\. 设函数 $y=y(x)$ 由 $\\begin{cases}x=t^2+2t,\\\\\\frac12\\sin y-y+t^2=1\\end{cases}$（$t>0$）确定，则 $\\left.\\frac{\\mathrm d^2y}{\\mathrm dx^2}\\right|_{x=3}=$ ______。\n\n14\\. 设 $\\lim_{x\\to0}\\frac{\\ln(1-2x^3)+xf(x)}{x^6}=3$，则 $\\lim_{x\\to0}\\frac{f(x)-2x^2}{x^5}=$ ______。\n\n15\\. 设 $g(x)$ 连续，$g(2)=1$，$f(x,y)=\\int_0^{\\sqrt{x^2+y^2}}tg(x^2+y^2-t^2)\\,\\mathrm dt$，则 $\\left.\\mathrm df\\right|_{(1,1)}=$ ______。\n\n16\\. 设 $\\alpha$ 为 3 维非零实列向量，$E$ 为 3 阶单位矩阵，$A=E-\\frac3{\\alpha^{\\mathsf T}\\alpha}\\alpha\\alpha^{\\mathsf T}$，则 $\\operatorname{tr}(A)=$ ______。\n\n### 解答题\n\n17\\. 求极限 $\\lim_{x\\to0}\\frac{\\int_0^x\\mathrm du\\int_0^u[u^2-3\\sin(u-t)^2]\\,\\mathrm dt}{\\sin x^8}$。\n\n18\\. 设可导函数 $y=f(x)$ 由方程 $e^{x-2y}-x^2y=1$ 确定，计算 $\\lim_{x\\to1^+}\\frac{\\sin(x-1)}{\\sqrt{(x-1)^3}}\\int_0^1f(t\\sqrt{x-1})\\,\\mathrm dt$。\n\n19\\. 设 $f(x)$ 满足 $f'(x)-f(x)=\\pi e^x\\cos\\pi x$，$f(0)=0$，$y=f(x)$ 在 $[0,n]$（$n$ 为正整数）上与 $x$ 轴所围图形的面积为 $S_n$。\n\n（Ⅰ）求 $f(x)$；\n\n（Ⅱ）求 $\\lim_{n\\to\\infty}\\frac{S_n}{e^n}$。\n\n20\\. 设 $z=f(u,v)$ 有二阶连续偏导数，$u=x-2\\sqrt y$，$v=x+2\\sqrt y$，且满足 $\\frac{\\partial^2z}{\\partial x^2}-y\\frac{\\partial^2z}{\\partial y^2}-\\frac12\\frac{\\partial z}{\\partial y}=12a$（$a\\ne0$）。\n\n（Ⅰ）求 $\\frac{\\partial^2z}{\\partial u\\partial v}$；\n\n（Ⅱ）若 $\\frac{\\partial f(u,0)}{\\partial u}=-3u^2$，$f(0,v)=-v^3$，求 $f(u,v)$ 的极值。\n\n21\\. 设 $D=\\{(x,y)\\mid x^2+y^2\\le1,\\ x\\ge0,\\ y\\ge0\\}$，计算 $I=\\iint_D\\max\\left\\{y+1,\\frac2{1+x}\\right\\}\\,\\mathrm dx\\,\\mathrm dy$。\n\n22\\. 设 $A=\\begin{pmatrix}2&1&0\\\\1&2&0\\\\0&0&1\\end{pmatrix}$ 与 $B=\\begin{pmatrix}a&b&c\\\\0&1&0\\\\-1&-2&4\\end{pmatrix}$ 相似。\n\n（Ⅰ）求 $a,b,c$ 的值；\n\n（Ⅱ）求可逆矩阵 $P$，使得 $P^{-1}AP=B$；\n\n（Ⅲ）求可逆矩阵 $C$，使得 $A=C^{\\mathsf T}C$。\n"}
+
+## tool · 2026-11-12T01:29:44Z
+
+
+Script completed
+Wall time 0.3 seconds
+Output:
+
+{"chunk_id":"08e6f9","wall_time_seconds":0.113437083,"exit_code":0,"original_token_count":935,"output":"PAGE 17 24 李林四套卷·卷一\n一、选择题.\n1. 设 \\(\\lim_{x \\to +\\infty} \\frac{1}{x^d} \\int_0^x \\sqrt{1 + t^4} dt = b\\)，其中 a 为大于零的常数，b 为非零常数，则\nA. \\(a = 6, b = \\frac{1}{3}\\). B. \\(a = 6, b = 3\\). C. \\(a = 3, b = 6\\). D. \\(a = 3, b = \\frac{1}{3}\\).\n2. 设 \\(f(t) = \\int_0^1 \\ln \\sqrt{x^2 + t^2} \\, dx\\)，则 \\(f(t)\\) 在 t = 0 处\nA. 极限不存在. B. 极限存在但不连续. C. 连续但不可导. D. 可导.\n3. 设 \\(f(x) = x \\sin x + (1 + a) \\cos x\\)，则正确的是\nA. 当 \\(a < 1\\) 时, \\(f(0)\\) 为极大值. B. 当 \\(a \\geq 1\\) 时, \\(f(0)\\) 为极大值. C. 当 \\(a > 1\\) 时, \\(f(0)\\) 为极小值. D. 当 \\(a = 1\\) 时, \\(f(0)\\) 为极小值.\n4. 当 \\(f(x)\\) 在 \\([0,1]\\) 上二阶可导, \\(f''(x) > 0\\), 且 \\(f(0) = f(1)\\). 当 \\(x \\in (0,1)\\) 时, 下列选项中正确的是\n① \\((1 - x)[f(x) - f(0)] < x[f(1) - f(x)]\\); ② \\((1 - x)[f(x) - f(0)] > x[f(1) - f(x)]\\); ③ \\(x[f(x) - f(0)] < (1 - x)[f(1) - f(x)]\\); ④ \\(x[f(x) - f(0)] > (1 - x)[f(1) - f(x)]\\). A. ①④. B. ②③. C. ②④. D. ①③.\n5. 设正项数列 \\(\\{x_n\\}, \\{y_n\\}\\) 满足 \\(e^{x_n} = x_n + e^{y_n}\\) (\\(n = 1, 2, \\cdots\\)) 且 \\(\\lim_{n \\to \\infty} x_n = 0\\), 则当 \\(n \\to \\infty\\) 时,\nA. \\(y_n\\) 是比 \\(x_n\\) 高阶的无穷小. B. \\(x_n\\) 是比 \\(y_n\\) 高阶的无穷小. C. \\(y_n\\) 与 \\(x_n\\) 是等价无穷小. D. \\(x_n\\) 与 \\(y_n\\) 是同阶但不等价无穷小.\n6. 设 \\(f(x, y) = \\int_{\\frac{x}{y}}^{xy} (x - yt) \\varphi(t) dt\\)，其中 \\(\\varphi(t)\\) 可微，则 \\(f''(x_y)(2, 1) =\\)\nA. 0 B. 1. C. 2. D. -1.\n第17页，共94页\nPAGE 18 7. 设 \\(D=\\{(x,y)\\mid x^2+y^2\\leq R^2,R>0\\}\\)，常数 \\(a\\neq0\\)，积分 \\(I=\\int_0^{2\\pi}d\\theta\\int_0^R(\\mathrm{e}^{arcsin\\theta}-\\mathrm{e}^{-arsin\\theta})r^2dr\\)，则\nA. \\(I>0.\\)\nB. \\(I<0.\\)\nC. \\(I=0.\\)\nD. \\(I\\) 的值与 \\(a\\) 有关.\n\n8. 设 3 维列向量 \\(\\alpha_1,\\alpha_2,\\alpha_3\\) 线性无关，\\(A=\\begin{pmatrix}a_{ij}\\end{pmatrix}_{3\\times3}\\) 满足 \\(A\\alpha_1=\\alpha_1,A\\alpha_2=\\alpha_2-\\alpha_3,A\\alpha_3=a_3-\\alpha_1,A_{ij}\\) 是 \\(a_{ij}\\) 的代数余子式，则 \\(A_{11}+A_{22}+A_{33}=\\)\nA. 1.\nB. -2.\nC. 2.\nD. 3.\n\n9. 与 \\(\\Lambda=\\begin{bmatrix}1&0&0\\\\0&-1&0\\\\0&0&0\\end{bmatrix}\\) 既相似又合同的矩阵是\nA. \\(\\begin{bmatrix}1&0&0\\\\0&1&-1\\\\0&2&-2\\end{bmatrix}.\\)\nB. \\(\\begin{bmatrix}1&0&0\\\\0&-1&-2\\\\0&-2&-4\\end{bmatrix}.\\)\nC. \\(\\begin{bmatrix}1&0&0\\\\0&-1&2\\\\0&2&2\\end{bmatrix}\\)\nD. \\(\\begin{bmatrix}1&0&0\\\\0&-\\frac{1}{2}&\\frac{1}{2}\\\\0&\\frac{1}{2}&-\\frac{1}{2}\\end{bmatrix}\\)\n\n10. 设矩阵 \\(A_{n\\times n},B_{s\\times n},E_{n\\times n}\\) 为单位矩阵，且 \\(r(A)=s,r(B)=n\\)，下列齐次线性方程组有非零解的是\nA. \\(\\begin{pmatrix}AB&O\\\\E&A\\end{pmatrix}X=0.\\)\nB. \\(\\begin{pmatrix}AB&O\\\\E&B\\end{pmatrix}X=0.\\)\nC. \\(\\begin{pmatrix}A&E\\\\O&AB\\end{pmatrix}X=0.\\)\nD. \\(\\begin{pmatrix}A&AB\\\\E&B\\end{pmatrix}X=0.\\)\n\n二、填空题.\n11. 设函数 \\(y=y(x)\\) 由方程 \\(e^y+xy+x^2=1\\) 确定，则曲线 \\(y=y(x)\\) 在点 \\((0,0)\\) 处的曲率半径 \\(R=\\)____.\n12. 设 \\(f''(x)\\) 连续，\\(f(x)\\) 以 \\(\\pi\\) 为周期，且 \\(\\int_0^x[f(x)+f''(x)]\\cos xdx=1\\)，则 \\(f'(0)=\\)____.\n13. 设 \\(f(x)=\\int_0^{1-x}e^{t(2-t)}dt\\)，在 \\(x\\in[0,1]\\) 上，\\(y=f(x)\\) 与 \\(x\\) 轴所围图形的面积为____.\n第18页，共94页\nPAGE 19 14. 设质点以速度 \\(u(t) = \\sqrt{t} e^{-\\sqrt{t}} (t \\geq 0)\\) m/s 作直线运动，则质点从开始运动到停止运动经过的路程为 \\(\\underline{\\hspace{2cm}}m\\)。\n15. \\(\\int_{1}^{+\\infty} \\frac{dx}{x \\sqrt{x-1}} =\\) _____.\n16. 设4阶矩阵 \\(A = (a_1, a_2, a_3, a_4)\\) 且 \\(a_1, a_2, a_3\\) 线性无关，\\(a_4 = a_1 - a_2 + a_3\\)，记 \\(\\beta = a_2 + a_3 + a_4\\)，则方程组 \\(AX = \\beta\\) 的通解为 _____.\n第19页，共94页\n"}
+{
+  "type": "input_image",
+  "image_url": "images/28945ee95219481719d679e7396dc38382ea3c099451f09cfc79bb8e0a8bce7c.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/7954c977a2283cd8b8a24166cda6d24726521f0470bf8d167f2232352e54b2f7.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/0016ab2d6cba34963a9387f0eff362ffad507e9a991515578a9476204de5b004.png",
+  "detail": "high"
+}
+
+## tool · 2026-11-12T01:30:09Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+{"chunk_id":"c22f22","wall_time_seconds":0.000016917,"exit_code":0,"original_token_count":914,"output":"Prepared candidate transcriptions; source review still required.\n## 24 李林四套卷· 卷一\n\n### 选择题\n\n1\\. 设 $\\lim_{x \\to +\\infty} \\frac{1}{x^d} \\int_0^x \\sqrt{1 + t^4} dt = b$，其中 a 为大于零的常数，b 为非零常数，则\nA. $a = 6, b = \\frac{1}{3}$.  \nB. $a = 6, b = 3$.  \nC. $a = 3, b = 6$.  \nD. $a = 3, b = \\frac{1}{3}$.  \n\n2\\. 设 $f(t) = \\int_0^1 \\ln \\sqrt{x^2 + t^2} \\, dx$，则 $f(t)$ 在 t = 0 处\nA. 极限不存在.  \nB. 极限存在但不连续.  \nC. 连续但不可导.  \nD. 可导.  \n\n3\\. 设 $f(x) = x \\sin x + (1 + a) \\cos x$，则正确的是\nA. 当 $a < 1$ 时, $f(0)$ 为极大值.  \nB. 当 $a \\geq 1$ 时, $f(0)$ 为极大值.  \nC. 当 $a > 1$ 时, $f(0)$ 为极小值.  \nD. 当 $a = 1$ 时, $f(0)$ 为极小值.  \n\n4\\. 当 $f(x)$ 在 $[0,1]$ 上二阶可导, $f''(x) > 0$, 且 $f(0) = f(1)$. 当 $x \\in (0,1)$ 时, 下列选项中正确的是\n① $(1 - x)[f(x) - f(0)] < x[f(1) - f(x)]$; ② $(1 - x)[f(x) - f(0)] > x[f(1) - f(x)]$; ③ $x[f(x) - f(0)] < (1 - x)[f(1) - f(x)]$; ④ $x[f(x) - f(0)] > (1 - x)[f(1) - f(x)]$.\nA. ①④.  \nB. ②③.  \nC. ②④.  \nD. ①③.  \n\n5\\. 设正项数列 $\\{x_n\\}, \\{y_n\\}$ 满足 $e^{x_n} = x_n + e^{y_n}$ ($n = 1, 2, \\cdots$) 且 $\\lim_{n \\to \\infty} x_n = 0$, 则当 $n \\to \\infty$ 时,\nA. $y_n$ 是比 $x_n$ 高阶的无穷小.  \nB. $x_n$ 是比 $y_n$ 高阶的无穷小.  \nC. $y_n$ 与 $x_n$ 是等价无穷小.  \nD. $x_n$ 与 $y_n$ 是同阶但不等价无穷小.  \n\n6\\. 设 $f(x, y) = \\int_{\\frac{x}{y}}^{xy} (x - yt) \\varphi(t) dt$，其中 $\\varphi(t)$ 可微，则 $f''(x_y)(2, 1) =$\nA. 0  \nB. 1.  \nC. 2.  \nD. -1.  \n\n7\\. 设 $D=\\{(x,y)\\mid x^2+y^2\\leq R^2,R>0\\}$，常数 $a\\neq0$，积分 $I=\\int_0^{2\\pi}d\\theta\\int_0^R(\\mathrm{e}^{arcsin\\theta}-\\mathrm{e}^{-arsin\\theta})r^2dr$，则\nA. $I>0.$  \nB. $I<0.$  \nC. $I=0.$  \nD. $I$ 的值与 $a$ 有关.  \n\n8\\. 设 3 维列向量 $\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关，$A=\\begin{pmatrix}a_{ij}\\end{pmatrix}_{3\\times3}$ 满足 $A\\alpha_1=\\alpha_1,A\\alpha_2=\\alpha_2-\\alpha_3,A\\alpha_3=a_3-\\alpha_1,A_{ij}$ 是 $a_{ij}$ 的代数余子式，则 $A_{11}+A_{22}+A_{33}=$\nA. 1.  \nB. -2.  \nC. 2.  \nD. 3.  \n\n9\\. 与 $\\Lambda=\\begin{bmatrix}1&0&0\\\\0&-1&0\\\\0&0&0\\end{bmatrix}$ 既相似又合同的矩阵是\nA. $\\begin{bmatrix}1&0&0\\\\0&1&-1\\\\0&2&-2\\end{bmatrix}.$  \nB. $\\begin{bmatrix}1&0&0\\\\0&-1&-2\\\\0&-2&-4\\end{bmatrix}.$  \nC. $\\begin{bmatrix}1&0&0\\\\0&-1&2\\\\0&2&2\\end{bmatrix}$  \nD. $\\begin{bmatrix}1&0&0\\\\0&-\\frac{1}{2}&\\frac{1}{2}\\\\0&\\frac{1}{2}&-\\frac{1}{2}\\end{bmatrix}$  \n\n10\\. 设矩阵 $A_{n\\times n},B_{s\\times n},E_{n\\times n}$ 为单位矩阵，且 $r(A)=s,r(B)=n$，下列齐次线性方程组有非零解的是\nA. $\\begin{pmatrix}AB&O\\\\E&A\\end{pmatrix}X=0.$  \nB. $\\begin{pmatrix}AB&O\\\\E&B\\end{pmatrix}X=0.$  \nC. $\\begin{pmatrix}A&E\\\\O&AB\\end{pmatrix}X=0.$  \nD. $\\begin{pmatrix}A&AB\\\\E&B\\end{pmatrix}X=0.$  \n\n### 填空题\n\n11\\. 设函数 $y=y(x)$ 由方程 $e^y+xy+x^2=1$ 确定，则曲线 $y=y(x)$ 在点 $(0,0)$ 处的曲率半径 $R=$____.\n\n12\\. 设 $f''(x)$ 连续，$f(x)$ 以 $\\pi$ 为周期，且 $\\int_0^x[f(x)+f''(x)]\\cos xdx=1$，则 $f'(0)=$____.\n\n13\\. 设 $f(x)=\\int_0^{1-x}e^{t(2-t)}dt$，在 $x\\in[0,1]$ 上，$y=f(x)$ 与 $x$ 轴所围图形的面积为____.\n\n14\\. 设质点以速度 $u(t) = \\sqrt{t} e^{-\\sqrt{t}} (t \\geq 0)$ m/s 作直线运动，则质点从开始运动到停止运动经过的路程为 $\\underline{\\hspace{2cm}}m$。\n\n15\\. $\\int_{1}^{+\\infty} \\frac{dx}{x \\sqrt{x-1}} =$ _____.\n\n16\\. 设4阶矩阵 $A = (a_1, a_2, a_3, a_4)$ 且 $a_1, a_2, a_3$ 线性无关，$a_4 = a_1 - a_2 + a_3$，记 $\\beta = a_2 + a_3 + a_4$，则方程组 $AX = \\beta$ 的通解为 _____.\n"}
+
+## tool · 2026-11-12T01:30:41Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+{
+  "type": "input_image",
+  "image_url": "images/a0bcf33d01b92e98e4167633af188f4fffa1496f18a61dc392ce61d9c8a375ca.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/226c19c9fcf210c58c39ae459135728d2399d348408667367242726eb9fe9eff.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/e9d71a58c2e5237a3af064e9d561b51e0d972194eee05e8db2f83135a51d0929.png",
+  "detail": "high"
+}
+{"chunk_id":"155734","wall_time_seconds":0.000007792,"exit_code":0,"original_token_count":895,"output":"## 24 李林四套卷· 卷二\n\n### 选择题\n\n1\\. 设 $f(x)$, $g(x)$ 为连续函数, 当 $x \\to 0$ 时, $f(x)$ 和 $g(x)$ 都与 x 是等价无穷小, $F(x) = \\int_{1}^{2} x f(x) dt$, $G(x) = \\int_{0}^{x} g(2x - t) dt$ 则当 $x \\to 0$ 时, $F(x)$ 是 $G(x)$ 的\nA. 高阶无穷小.  \nB. 低阶无穷小.  \nC. 同阶但不等价无穷小.  \nD. 等价无穷小.  \n\n2\\. 设 $f(x)$ 在 $[0, +\\infty)$ 上二阶可导, $f(0) = 0$, $f''(x) > 0$, 当 $0 < x < x < b$ 时, 有\nA. $af(x) < f(a)$  \nB. $bf(x) < xf(b)$  \nC. $xf(x) < bf(b)$  \nD. $xf(x) > af(a)$.  \n\n3\\. 设 $f(x)$ 在 $[a, b]$ 上可导, $f(x)$ 在 x = a 处取得最小值, 在 x = b 处取得最大值, $F(x) = \\int_{0}^{x} f(t) dt$, x $\\in$ $[a, b]$, 则\nA. $F'' + (a) > 0$ 且 $F'' - (b) < 0$  \nB. $F'' + (a) \\geq 0$ 且 $F'' - (b) \\geq 0$.  \nC. $F'' + (a) < 0$ 且 $F'' - (b) < 0$.  \nD. $F'' + (a) < 0$ 且 $F'' - (b) > 0$.  \n\n4\\. 设 $f(x)$ 在 $(-\\infty, +\\infty)$ 上有二阶连续导数, 且满足 $f\\left(\\frac{1}{n}\\right) = \\frac{n^2}{n^2 + 1}$ (n = 1, 2, $\\cdots$). 则 $f(x)$ 在 x = 0 处的二次泰勒多项式为\nA. $1 - 2x^2$.  \nB. $x - 2x^2$.  \nC. $1 - x^2$.  \nD. $1 + x - x^2$.  \n\n5\\. 设 $f(x)$ 在 $[0,4]$ 上有二阶连续导数, 在 x $\\geq$ Oy 坐标系中, 三条曲线为 $y = f(x)$, $y = f'(x)$, $y = f''(x)$, 如右图所示, 则 $y = f(x)$ 在 $[0,4]$ 上\nA. 有一个极值点, 一个拐点.  \nB. 有一个极值点, 两个拐点.  \nC. 有两个极值点, 一个拐点.  \nD. 有两个极值点, 两个拐点.  \n\n6\\. 设 $f(x)$ 在 $[0,1]$ 上连续且单调递减, $F(t)=t\\int_{0}^{1}[f(tx)-f(x)]dx$, 则 $F(t)$ 在 $(0,1]$ 内\nA. 单调减少.  \nB. 单调增加.  \nC. 有极大值.  \nD. 有极小值.  \n\n7\\. 设 $f(x)$ 在 $[0,+\\infty)$ 上可导, $\\lim_{x \\to +\\infty} f(x) = b \\neq 0$, $y = y(x)$ 是方程 $y' + ay = f(x)$ ($a > 0$) 的任一解, 则 $\\lim_{x \\to +\\infty} y(x) =$\nA. $ab.$  \nB. $-ab.$  \nC. $\\frac{b}{a}.$  \nD. $\\frac{a}{b}.$  \n\n8\\. 设 $A$ 是三阶矩阵, $a_1 = (1,2,-2)^T$, $a_2 = (2,1,-1)^T$, $a_3 = (1,1,k)^T$ 是线性非齐次方程组 $AX = b$ 的解向量, 则\nA. 当 $k = -1$ 时, 必有 $r(A) = 2$.  \nB. 当 $k = -1$ 时, 必有 $r(A) = 1$.  \nC. 当 $k \\neq -1$ 时, 必有 $r(A) = 2$.  \nD. 当 $k \\neq -1$ 时, 必有 $r(A) = 1$.  \n\n9\\. 设 $a_1 = (1,0,1)^T$, $a_2 = (1,1,2)^T$, $a_3 = (1,2,a)^T$, $\\beta_1 = (-1,2,1)^T$, $\\beta_2 = (1,0,b)^T$. 若 $\\beta_1$ 可由 $a_1, a_2, a_3$ 线性表示, $\\beta_2$ 不能由 $a_1, a_2, a_3$ 线性表示, 则\nA. $a = 3, b \\neq 1$.  \nB. $a \\neq 3, b = 1$.  \nC. $a = 3, b = 1$.  \nD. $a \\neq 3, b \\neq 1$.  \n\n10\\. 设 $a, \\beta$ 是 3 维单位正交列向量, 则二次型 $f(x_1, x_2, x_3) = X^T (2aa^T + \\beta \\beta^T)X$ 的规范形为\nA. $y_1^2 + y_2^2.$  \nB. $y_1^2 - y_2^2.$  \nC. $y_1^2 + y_2^2 - y_3^2.$  \nD. $y_1^2 - y_2^2 - y_3^2$.  \n### 填空题\n\n11\\. 平面区域 $D = \\{(r, \\theta) \\mid 0 \\leq r \\leq 1 - \\cos\\theta, 0 \\leq \\theta \\leq \\pi\\}$ 的面积为 ___.\n\n12\\. $\\int_{1}^{+\\infty} \\left[ \\frac{x^2 + x + 1}{x(x+1)} - 1 \\right] dx =$ ___.\n\n13\\. 设二阶常系数线性非齐次方程 $y'' + ay' + by = ce^x$ 的一个特解为 $y = e^{2x} + (1 + x)e^x$，则该方程的通解为 ___.\n\n14\\. 已知 $\\lim_{x \\to a} (\\sqrt[3]{1 - x^6} - ax^2 - b) = 0$，则 $a + b =$ ___.\n\n15\\. 函数 $f(x) = \\sqrt{x} \\ln x$ 在 $(0, +\\infty)$ 内的最小值为 ___.\n\n16\\. 设 $B = (b_{ij})_{3 \\times 3}$ 是可逆矩阵，且 $AB = \\begin{bmatrix} b_{11} & 2b_{12} & -b_{13} \\\\ b_{21} & 2b_{22} & -b_{23} \\\\ b_{31} & 2b_{32} & -b_{33} \\end{bmatrix}$，$A^*$ 为 $A$ 的伴随矩阵，则行列式 $|A^*| =$ ___.\n"}
+
+## tool · 2026-11-12T01:31:41Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+{
+  "type": "input_image",
+  "image_url": "images/8329632bfeefbbfbfdb003854df1729a0ada0cad1ec4525cb7f86ee44c2eae4d.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/e544f5acd90b4b444760e3f927dd9041bfacc156df593e7e3efb68495188308e.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/b344570bbc77b9e059ff93437f695558a5718af923c71c6f9d26a75287294722.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/34d5222048d9c9334e3b0bbf84891bd78e7fc90e2fb10af56712d6ade6a39b8f.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/f685b8d1d71c585a8ccabd030aae88dd5c8f3e8b0bc18cc9a4f399d4c11a1d8d.png",
+  "detail": "high"
+}
+{"chunk_id":"1e71e1","wall_time_seconds":0.000012,"exit_code":0,"original_token_count":1332,"output":"## 卷八· 李林四套卷（4）\n\n### 选择题\n\n1\\. 当 $t\\to0^+$ 时，$\\alpha(t)=\\int_0^t\\mathrm dx\\int_x^t\\sin(xy)^2\\,\\mathrm dy$ 是关于 $t$ 的 $n$ 阶无穷小，则 $n=$（　）。\n\nA. 3。  \nB. 4。  \nC. 5。  \nD. 6。\n\n2\\. 曲线 $y=\\frac{x^2+1}{\\sqrt{x^2-1}}$ 的渐近线的条数为（　）。\n\nA. 1。  \nB. 2。  \nC. 3。  \nD. 4。\n\n3\\. 设 $f(x)$ 在 $x=0$ 的某邻域内连续，且 $\\lim_{x\\to0}\\frac{x^2}{e^{f(x)}-1}=1$，则（　）。\n\nA. $f'(0)$ 存在，$f(0)\\ne0$。  \nB. $f'(0)$ 存在，$f(0)$ 是 $f(x)$ 的极大值。  \nC. $f'(0)$ 存在，$f(0)$ 是 $f(x)$ 的极小值。  \nD. $f'(0)$ 存在，$f(0)$ 不是 $f(x)$ 的极值。\n\n4\\. 设 $\\int x^2f(x)\\,\\mathrm dx=\\arcsin x+C$，当 $x>0$ 时，$F(x)$ 是 $f(x)$ 的原函数，且 $F(1)=0$，则 $F(x)=$（　）。\n\nA. $\\frac{\\sqrt{1-x^2}}x$  \nB. $-\\frac{\\sqrt{1-x^2}}x$  \nC. $\\frac{\\sqrt{x^2-1}}x$  \nD. $-\\frac{\\sqrt{x^2-1}}x$\n\n5\\. 设 $f(n)$ 表示方程 $xe^x=n$ 的正实根（$x>0$），$n$ 为正整数，则下列选项中正确的是（　）。\n\nA. $\\{f(n)\\}$ 收敛。  \nB. $\\left\\{\\frac{f(n)}n\\right\\}$ 发散。  \nC. $\\left\\{\\frac{f(n)e^n}n\\right\\}$ 发散。  \nD. $\\left\\{\\frac{f(n)e^n}n\\right\\}$ 收敛。\n\n6\\. 设 $f(x)$ 在 $(-\\infty,+\\infty)$ 内可导，下列结论正确的是（　）。\n\nA. 若 $\\lim_{x\\to+\\infty}f(x)=a$，则 $\\lim_{x\\to+\\infty}f'(x)=0$。  \nB. 若 $\\lim_{x\\to-\\infty}f'(x)=-\\infty$，则 $\\lim_{x\\to-\\infty}f(x)=-\\infty$。  \nC. 若 $\\lim_{x\\to-\\infty}f(x)=-\\infty$，则 $\\lim_{x\\to-\\infty}f'(x)=-\\infty$。  \nD. 若 $\\lim_{x\\to+\\infty}f'(x)=+\\infty$，则 $\\lim_{x\\to+\\infty}f(x)=+\\infty$。\n\n7\\. 设 $y_1=e^{-x}$，$y_2=2x$ 是常系数齐次线性微分方程 $y'''+ay''+by'+cy=0$ 的两个解，则该方程的通解是（　）。\n\nA. $c_1e^{-x}+c_2+c_3x$  \nB. $c_1e^{-x}+c_2e^x+c_3x$  \nC. $c_1e^{-x}+c_2e^x+c_3$  \nD. $c_1e^{-x}+c_2xe^x+c_3$\n\n8\\. 设 $B=\\begin{pmatrix}1&2&-1\\\\2&a&4\\\\3&5&a\\end{pmatrix}$（$a>0$），$A$ 是 3 阶非零矩阵，且 $BA^{\\mathsf T}=O$，$k_1,k_2$ 为任意常数，则方程组 $AX=0$ 的通解为（　）。\n\nA. $k_1\\begin{pmatrix}1\\\\0\\\\0\\end{pmatrix}$  \nB. $k_1\\begin{pmatrix}1\\\\2\\\\-1\\end{pmatrix}+k_2\\begin{pmatrix}0\\\\-1\\\\6\\end{pmatrix}$  \nC. $k_1\\begin{pmatrix}1\\\\2\\\\3\\end{pmatrix}$  \nD. $k_1\\begin{pmatrix}1\\\\2\\\\3\\end{pmatrix}+k_2\\begin{pmatrix}0\\\\1\\\\1\\end{pmatrix}$\n\n9\\. 设 $A$ 是实对称矩阵，$B=(b_{ij})_{3\\times3}$ 是可逆矩阵，且 $AB=\\begin{pmatrix}b_{11}&2b_{12}&-b_{13}\\\\b_{21}&2b_{22}&-b_{23}\\\\b_{31}&2b_{32}&-b_{33}\\end{pmatrix}$，则二次型 $X^{\\mathsf T}AX$ 的规范形为（　）。\n\nA. $y_1^2+y_2^2+y_3^2$  \nB. $y_1^2+y_2^2-y_3^2$  \nC. $y_1^2-y_2^2-y_3^2$  \nD. $-y_1^2-y_2^2-y_3^2$\n\n10\\. 设有矩阵 $A_{n\\times s}$，$B_{s\\times n}$，且 $r(A)=s$，$r(B)=n$，$E_{n\\times n}$ 为单位矩阵，则下列齐次线性方程组有非零解的是（　）。\n\nA. $\\begin{pmatrix}AB&O\\\\E&A\\end{pmatrix}X=0$  \nB. $\\begin{pmatrix}AB&O\\\\E&B\\end{pmatrix}X=0$  \nC. $\\begin{pmatrix}A&E\\\\O&AB\\end{pmatrix}X=0$  \nD. $\\begin{pmatrix}A&AB\\\\E&B\\end{pmatrix}X=0$\n\n### 填空题\n\n11\\. 设 $f(x)$ 有连续的二阶导数，且 $\\lim_{x\\to0}\\frac{1-f(x)}{x^2}=1$，则 $\\lim_{x\\to+\\infty}x\\ln f\\left(\\frac1{\\sqrt x}\\right)=$ ______。\n\n12\\. 设 $y=y(x)$ 满足 $(y-\\ln x)\\,\\mathrm dx+x\\ln x\\,\\mathrm dy=0$（$x>1$），$y(e)=1$，则 $y=y(x)$ 在 $(1,+\\infty)$ 内的极小值为 ______。\n\n13\\. 心形线 $r=1+\\cos\\theta$ 的全长为 ______。\n\n14\\. 过曲线 $y=\\sqrt[3]x$（$x\\ge0$）上点 $A$ 作切线，该切线与曲线及 $x$ 轴所围图形 $D$ 的面积为 $\\frac34$，则 $D$ 绕 $x$ 轴旋转一周所得旋转体的体积为 ______。\n\n15\\. 设 $z=f[\\cos(x^2+y^2)-1,\\ln(1+x^2+y^2)]$，其中 $f$ 有一阶连续偏导数，则 $\\left.\\left(\\frac{\\partial^2z}{\\partial x^2}-\\frac{\\partial^2z}{\\partial x\\partial y}+\\frac{\\partial^2z}{\\partial y^2}\\right)\\right|_{(0,0)}=$ ______。\n\n16\\. 设 $A=E-k\\alpha\\alpha^{\\mathsf T}$（$k\\ne0$）是正交矩阵，其中 $E$ 是 3 阶单位矩阵，$\\alpha$ 为 3 维单位列向量，则 $\\operatorname{tr}(A)=$ ______。\n\n### 解答题\n\n17\\. 计算 $\\lim_{n\\to\\infty}\\frac1{n^2}\\prod_{i=1}^{2n}(n+i)^{1/n}$。\n\n18\\. 求 $a$ 的值，使得圆 $x^2+(y-1)^2=1$ 内切于椭圆 $\\frac23x^2+\\frac29y^2=a^2$（$a>0$）。\n\n19\\. 设 $D=\\{(x,y)\\mid 2\\le2x^2+y^2\\le4,\\ x\\ge0,\\ y\\ge0\\}$，计算 $I=\\iint_D\\frac{y}{(2x^2+y^2)\\sqrt{x^2+y^2}}\\,\\mathrm dx\\,\\mathrm dy$。\n\n20\\. 设 $f(t)$ 有二阶连续导数，$f(1)=f'(1)=1$，在 $x>0$ 的平面区域内，存在函数 $u(x,y)$ 使得 $\\mathrm du(x,y)=\\left[\\frac{y^2}x+xf\\left(\\frac yx\\right)\\right]\\mathrm dx+\\left[y-xf'\\left(\\frac yx\\right)\\right]\\mathrm dy$。求 $f(t)$ 及 $f(t)$ 的极值。\n\n21\\. 设 $f(x)$ 二阶可导，$f''(x)>0$，且 $\\lim_{x\\to0}\\frac{f(x)}x=0$，曲线 $y=f(x)$ 在点 $(x,f(x))$ 处线在 $x$ 轴上的截距为 $u(x)$。记 $a_k=\\lim_{x\\to0^+}\\left[\\frac{u(x)}x\\right]^k$（$k$ 为正整数），求 $\\lim_{n\\to\\infty}\\sum_{k=1}^n a_k$。\n\n22\\. 设 $\\alpha_1$ 是 3 阶矩阵 $A$ 的属于特征值 $\\lambda$（$\\lambda\\ne0$）的特征向量，3 维列向量 $\\alpha_2,\\alpha_3$ 满足 $(\\lambda E-A)\\alpha_2=\\alpha_1$，$(\\lambda E-A)\\alpha_3=\\alpha_2$。\n\n（Ⅰ）证明：$\\alpha_1,\\alpha_2,\\alpha_3$ 线性无关；\n\n（Ⅱ）计算行列式 $|A+A^*|$，其中 $A^*$ 是 $A$ 的伴随矩阵。\n"}
+
+## tool · 2026-11-12T01:31:50Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/06feddb674c75c4970b5feca7b97b3b8f541d629dfbd8b33295b3bd9794dd3be.png",
+  "detail": "high"
+}
+{"chunk_id":"ca3b21","wall_time_seconds":0.000028083,"exit_code":0,"original_token_count":1204,"output":"# 李林四套卷数二（清晰版）\n\n## 第一套\n\n### 选择题\n\n1\\. 设 $f(x)$ 在 $(-\\infty,+\\infty)$ 内有二阶连续导数，且满足 $f\\left(\\frac1n\\right)=\\frac{n^2}{n^2+1}$（$n=1,2,\\ldots$），则 $f(x)$ 在 $x=0$ 处的二次泰勒多项式为\n\n## 24 李林四套卷· 卷三\n\n### 选择题\n\n1\\. 设 $f(x)=\\left\\{\\begin{array}{l}x^{2}+a, \\\\ e^{x},\\end{array}\\right.$ $x\\geq0$, 则 $F(x)=\\int_{-1}^{x}f(t)dt$ 在 x=0 处\nA. 极限存在但不连续.  \nB. 连续但不可导.  \nC. 可导.  \nD. 是否可导与 a 的取值有关.  \n\n2\\. 设 $f(x)=|x|$, 则 $f'(\\sin x)$ 在 $\\left(-\\frac{\\pi}{2},\\frac{\\pi}{2}\\right)$ 内有\nA. 可去间断点.  \nB. 跳跃间断点.  \nC. 振荡间断点.  \nD. 无穷间断点.  \n\n3\\. 已知 $y_{1}=xe^{x}+e^{2x}$, $y_{2}=xe^{x}+e^{-x}$, $y_{3}=xe^{x}+e^{2x}-e^{-x}$ 是某二阶常系数非齐次线性微分方程的三个解, 则此微分方程为\nA. $y''-y'+2y=e^{x}-2xe^{x}$.  \nB. $y''+y'+2y=e^{x}-2xe^{x}$.  \nC. $y''-y'+2y=e^{x}-2xe^{x}$.  \nD. $y''+y'-2y=e^{x}-2xe^{x}$.  \n\n4\\. 设 $f(x)$ 在 $[a,b]$ 上有连续导数, $x_{0}$ 是 $f(x)$ 在 $(a,b)$ 内唯一的驻点, 且 $f'(+a)>0$, $f'-(b)<0$, 则\nA. $f(x_{0})$ 是 $f(x)$ 在 $[a,b]$ 上的最大值.  \nB. $f(x_{0})$ 是 $f(x)$ 在 $[a,b]$ 上的最小值.  \nC. $f(x_{0})$ 是 $f(x)$ 在 $(a,b)$ 内的极小值.  \nD. $f(x_{0})$ 是 $f(x)$ 在 $(a,b)$ 的极大值, 但不是 $f(x)$ 在 $[a,b]$ 上最大值.  \n\n5\\. 设 $f'(x)$ 在 $[0,4]$ 上连续, 曲线 $y=f'(x)$ 与 x=0, y=0, x=4 围成如右图所示的三个区域, 其面积 $S_{1}$, $S_{2}$, $S_{3}$ 满足 $S_{2}>S_{1}>S_{3}$, 则下列选项正确的是\nA. $f(1)>f(3)>f(4)$.  \nB. $f(4)>f(3)>f(1)$.  \nC. $f(3)>f(4)>f(1)$.  \nD. $f(4)>f(1)>f(3)$.  \n\n6\\. 设 $f(x)$ 在 $[0,1]$ 上可导，且 $f'(x) \\geqslant 1$，则下列结论中正确的是\n① 当 $f\\left(\\frac{1}{2}\\right) \\geqslant 0$ 时，在 $\\left[\\frac{3}{4},1\\right]$ 上有 $f(x) \\geqslant \\frac{1}{4}$；\n② 当 $f\\left(\\frac{1}{2}\\right) \\geqslant 0$ 时，在 $\\left[\\frac{1}{2},-\\frac{3}{4}\\right]$ 上有 $f(x) \\geqslant \\frac{1}{4}$；\n③ 当 $f\\left(\\frac{1}{2}\\right) \\leqslant 0$ 时，在 $\\left[\\frac{1}{4},-\\frac{1}{2}\\right]$ 上有 $|f(x)| \\geqslant \\frac{1}{4}$；\n④ 当 $f\\left(\\frac{1}{2}\\right) \\leqslant 0$ 时，在 $\\left[0,-\\frac{1}{4}\\right]$ 上有 $|f(x)| \\geqslant \\frac{1}{4}$。\nA. ①②  \nB. ①④  \nC. ②③  \nD. ②④  \n\n7\\. 设 $f(x,y)$ 在点 $(0,0)$ 的某邻域内有定义，且 $f(0,0)=0$，$\\lim_{x\\to0}\\frac{f(x,y)}{\\sqrt{x^2+y^2}}=1$，则正确的是\nA. $f_x'(0,0), f'_y(0,0)$ 均存在。  \nB. $f(x,y)$ 在 $(0,0)$ 处不连续。  \nC. $f(x,y)$ 在点 $(0,0)$ 处可微。  \nD. $f(x,y)$ 在点 $(0,0)$ 处连续但不可微。  \n\n8\\. 设 $B=\\begin{bmatrix}1 & 2 & -1 \\\\ 2 & a & 4 \\\\ 3 & 5 & a\\end{bmatrix}(a>0)$，$A$ 是 3 阶非零矩阵，且 $BA^T=0, k_1, k_2$ 为任意常数，则方程组 $AX=0$ 的通解为\nA. $k_1\\begin{bmatrix}1 \\\\ 0\\end{bmatrix}$.  \nB. $k_1\\begin{bmatrix}1 \\\\ 0 \\\\ 0\\end{bmatrix}+k_2\\begin{bmatrix}2 \\\\ 1 \\\\ 0\\end{bmatrix}$.  \nC. $k_1\\begin{bmatrix}1 \\\\ 2 \\\\ 3\\end{bmatrix}$.  \nD. $k_1\\begin{bmatrix}1 \\\\ 2 \\\\ 3\\end{bmatrix}+k_2\\begin{bmatrix}0 \\\\ 1 \\\\ 1\\end{bmatrix}$.  \n\n9\\. 设 $n$ 维向量组 $\\alpha_1, \\alpha_2, \\cdots, \\alpha_{n-1}$ 线性无关, $\\beta_1, \\beta_2$ 均与 $\\alpha_1, \\alpha_2, \\cdots, \\alpha_{n-1}$ 正交，则\nA. $\\beta_1, \\beta_2$ 线性相关.  \nB. $\\beta_1, \\beta_2$ 线性无关.  \nC. $\\alpha_1, \\alpha_2, \\cdots, \\alpha_{n-1}, \\beta_1$ 线性无关.  \nD. $\\beta_1, \\beta_2$ 均可由 $\\alpha_1, \\alpha_2, \\cdots, \\alpha_{n-1}$ 线性表示.  \n\n10\\. 设 $A$ 为 3 阶矩阵，3 维列向量组 $\\alpha_1, \\alpha_2, \\alpha_3$ 线性无关，$A(a_1, a_2, a_3) = (a_1, a_2, -a_3)$，记 $P = (a_1 + a_3, a_2, -a_3)$，则 $P^{-1}AP =$\nA. $\\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 2 & 0 & -1\\end{bmatrix}$.  \nB. $\\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & -1\\end{bmatrix}$.  \nC. $\\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 1 & 0 & -1\\end{bmatrix}$.  \nD. $\\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ -1 & 0 & 1\\end{bmatrix}$.  \n\n### 填空题\n\n11\\. 设 $f(x)$ 在 $x=0$ 的某邻域内可导，且 $\\lim_{x \\to 0} \\frac{f(x)-1}{x} = 1$。则 $\\lim_{n \\to \\infty} \\left[ f\\left( \\frac{1}{n} \\right) \\right]^{\\frac{1}{n(1-e^{\\frac{1}{n}})}} =$ ___。\n\n12\\. 设曲线 $y = k(x^2 - 3)^2 (k \\neq 0)$ 在其拐点处的法线经过原点 $O(0,0)$，则 $k =$ ___。\n\n13\\. 设 $\\int_0^x f(t) dt = x f[\\theta(x)x]$，其中 $f(x) = e^x$，则 $\\lim_{x \\to 0} \\theta(x) =$ ___。\n\n14\\. 积分 $I = \\int_0^{\\ln 2} dx \\int_{e^x} \\frac{e^{xy}}{y^y - 1} dy =$ ___。\n\n15\\. 微分方程 $(y - \\ln x) dx + x \\ln x dy = 0 (x > 1)$，满足 $y(e) = 1$ 的解为 ___。\n\n16\\. 设 3 阶行列式 $|A| = 1$，将 $A$ 的第 1 列加到第 2 列得 $B$，则行列式 $|A^{-1} + B^*| =$ ___。\n"}
+{
+  "type": "input_image",
+  "image_url": "images/02eb2df068e79c83a1962a7f9257d26432a76269a22ea4598cce3bf552152a98.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/e2f2792046901b58481b14688cd783d8fbbce9fb5af4885ec966f3a46761236c.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/64321f89ab39f78f1f640bfb366087b3fe176fa36b04aa55fc7bd40b8ec7ab3c.png",
+  "detail": "high"
+}
+
+## tool · 2026-11-12T01:32:02Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+{"chunk_id":"411cc4","wall_time_seconds":0.0000115,"exit_code":0,"original_token_count":46,"output":"references/302模拟27md/模拟卷20套整理合集PDF（可高清打印）/数二答案/【题目+解析】李林四套卷数二清晰版答案(1).pdf.md\n0 math expressions rendered\n"}
+
+## tool · 2026-11-12T01:32:45Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"e663c3","wall_time_seconds":0.000010292,"exit_code":0,"original_token_count":154,"output":"const fs = require(\"node:fs\");\nconst katex = require(\"./proof-katex/node_modules/katex\");\n\nlet total = 0;\nfor (const filename of process.argv.slice(2)) {\n  const body = fs.readFileSync(filename, \"utf8\");\n  const spans = body.matchAll(/(?<!\\\\)(\\$\\$|\\$)([\\s\\S]*?)(?<!\\\\)\\1/g);\n  for (const [full, delimiters, expression] of spans) {\n    try {\n      katex.renderToString(expression, { displayMode: delimiters.length === 2, throwOnError: true });\n    } catch (error) {\n      throw new Error(filename + \" \" + full + \": \" + error.message);\n    }\n    total += 1;\n  }\n}\nconsole.log(total + \" math expressions rendered\");\n"}
+{}
+
+## tool · 2026-11-12T01:32:53Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/495c908b6b8ac7dd82fec49b5d2e7298dbfe9de319179e9292cfe9d9a3bbe49f.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/8b9d498f01a770eeb50e5af83cb9a521dd92aa92e9f81f5c57c645baddc2587a.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/75351e851e11772c4d68a8842d85474ab57e1e6c0ef482c4dd8598b82153a6d6.png",
+  "detail": "high"
+}
+{"chunk_id":"c74ad2","wall_time_seconds":0.000008708,"exit_code":0,"original_token_count":906,"output":"## 24 李林四套卷· 卷四\n\n### 选择题\n\n1\\. 设 $a(x) = \\tan x - \\sin x$, $\\beta(x) = \\sqrt{1 + x^2} - \\sqrt{1 - x^2}$, $\\gamma(x) = \\int_0^{1 - \\cos x} \\sin t \\, dt$, 当 $x \\to 0$ 时, 将它们关于 $x$ 的阶数从低到高排列, 正确的是\nA. $\\alpha(x), \\beta(x), \\gamma(x)$.  \nB. $\\alpha(x), \\gamma(x), \\beta(x)$.  \nC. $\\gamma(x), \\alpha(x), \\beta(x)$.  \nD. $\\beta(x), \\alpha(x), \\gamma(x)$.  \n\n2\\. 设 $f(x)$ 二阶可导, $f(0) = 0$, $f'(0) > 0$, $F(x) = \\int_0^x t f(t) dt$, 则\nA. $x = 0$ 是 $F(x)$ 的极大值点.  \nB. $x = 0$ 是 $F(x)$ 的极小值点.  \nC. $(0, F(0))$ 是 $y = F(x)$ 的拐点.  \nD. $(0, F(0))$ 不是 $y = F(x)$ 的拐点.  \n\n3\\. 设 $k > 0$, $f(x) = \\frac{1}{3} k x^3 - x$, 则 $f(x)$ 在 $\\left[0, \\frac{1}{k}\\right]$ 上的最大值为\nA. $\\max\\left\\{f\\left(\\frac{1}{k}\\right), f\\left(\\sqrt{\\frac{1}{k}}\\right)\\right\\}$.  \nB. $\\max\\left\\{f(0), f\\left(\\frac{1}{k}\\right)\\right\\}$.  \nC. $\\max\\left\\{f(0), f\\left(\\sqrt{\\frac{1}{k}}\\right)\\right\\}$.  \nD. $\\max\\left\\{f(k), f\\left(\\sqrt{\\frac{1}{k}}\\right)\\right\\}$.  \n\n4\\. 设积分 $\\int_1^{+\\infty} \\frac{\\arctan(x-1)}{(x-1)^p} \\, \\mathrm{d}x$ 收敛, 则正确的是\nA. $1 < p < 2$.  \nB. $0 < p < 1$.  \nC. $p \\geqslant 2$.  \nD. $0 < p < 2$.  \n\n5\\. 设 $f'(\\ln x) = \\begin{cases} 1, & 0 < x \\leqslant 1, \\\\ x, & x > 1, \\end{cases}$, $f(0) = 0$, $f(x)$ 为连续函数, 则 $f(1) =$\nA. 1.  \nB. e - 1.  \nC. e.  \nD. e + 1.  \n\n6\\. 当 $x \\to 0$ 时, 微分方程 $(3x^2 + 2)y'' = 6xy'$ 的解 $y(x)$ 与 $x$ 是等价无穷小, 则 $y(x) =$\nA. $\\frac{1}{2} x^3 - x$.  \nB. $\\frac{1}{2} x^3 + x$.  \nC. $x^3 + 2x$.  \nD. $x^3 + x$.  \n\n7\\. 设某生物分布在 xOy 坐标面上，分布密度 f(r) 随着与原点的距离 r 的增加而减少，其中 f(r) = $\\frac{a}{r^2 + b}$ (只/m²)，a,b 均为大于零的常数，则距离原点 2 米的圆形区域内存在生物的数目 (单位：只) 为\nA. $\\frac{a}{2}\\ln(1+\\frac{4}{b})$  \nB. $\\pi a\\ln(1+\\frac{4}{b})$.  \nC. $a\\ln(1+\\frac{4}{b})$.  \nD. $\\frac{1}{2}\\pi a\\ln(1+\\frac{4}{b})$.  \n\n8\\. 设 $\\alpha,\\beta$ 是 2 维单位列向量，若满足 $||\\alpha+\\beta||=||\\alpha-\\beta||$，则 A = (a,$\\beta$) 必是\nA. 实对称矩阵.  \nB. 单位矩阵.  \nC. 正交矩阵.  \nD. 正定矩阵.  \n\n9\\. 设 $\\alpha,\\beta,\\alpha_{1},\\alpha_{2},\\alpha_{3}$ 均为 4 维列向量，A = (a,a_{1},a_{2},a_{3}),B = (\\beta,a_{1},a_{2},a_{3}),且 |A| = 4,|B| = 1$，则 |A^{-1} + B^{-1}| =\nA. 10.  \nB. 8.  \nC. 6.  \nD. 4.  \n\n10\\. 设 A 是 3 阶实对称矩阵，二次型 f(x_{1},x_{2},x_{3}) = X^{T}AX 已经正交变换 X = QY 后的标准形为 y_{1}^{2} + y_{2}^{2} - y_{3}^{2}，则 g(x_{1},x_{2},x_{3}) = X^{T}AA^{*}X 经过线性变换 X = PY 后的规范形为\nA. y_{1}^{2} + y_{2}^{2} + y_{3}^{2}.  \nB. -y_{1}^{2} - y_{2}^{2} + y_{3}^{2}.  \nC. -y_{1}^{2} - y_{2}^{2} - y_{3}^{2}.  \nD. y_{1}^{2} + y_{2}^{2} - y_{3}^{2}.  \n### 填空题\n\n11\\. 设 f(x) = x^{3} + ax^{2} + bx + c 在 x = -1 处取得极大值，点 (0,3) 为 y = f(x) 的拐点，则 f(x) 的极小值为 ___.\n\n12\\. 设函数 y = y(x) 由方程 $\\ln y + 2x - \\frac{1}{2}y^{2} = 0$ 确定，则曲线在 y ∈ [1,e] 上的弧长为 ___.\n\n13\\. 微分方程 $(y^{2} - 2x)dy - ydx = 0$ 满足 y(1) = 1 的特解为 ___.\n\n14\\. 积分 $\\int_{0}^{1}dy\\int_{0}^{1-\\sqrt{2y-y^{2}}}\\frac{dx}{\\sqrt{2-x}} =$ ___.\n\n15\\. 设曲线 $y = ax^2$ 与 $y = \\ln x$ 相切，则 $\\lim_{x \\to \\frac{\\ln x}{2}} [1 + (x - a)]^{\\frac{1}{\\ln(x - a)}} = $ ___.\n\n16\\. 设 $A = (a_{ij})_{3 \\times 3}$, $A_{ij}$ 是元素 $a_{ij}$ 的代数余子数，若 $A$ 的每行元素之和均为 $a$，且 $|A| = 1$，则 $\\sum_{i,j=1}^{3} A_{ij} = $ ___.\n"}
+
+## tool · 2026-11-12T01:33:50Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T01:34:02Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+{"chunk_id":"ba6b12","wall_time_seconds":0.016059167,"exit_code":0,"original_token_count":151,"output":"references/302模拟27md/往年模拟卷选填精选/【A4紧凑】数一模拟卷选填精选.pdf.md 4\nreferences/302模拟27md/往年模拟卷选填精选/【A4留白】数一模拟卷选填精选.pdf.md 4\nreferences/302模拟27md/往年模拟卷选填精选/【A4紧凑】数二模拟卷选填精选.pdf.md 4\nreferences/302模拟27md/往年模拟卷选填精选/【A4留白】数二模拟卷选填精选.pdf.md 4\nreferences/302模拟27md/模拟卷20套整理合集PDF（可高清打印）/数二答案/【题目+解析】李林四套卷数二清晰版答案(1).pdf.md\n1505 math expressions rendered\n"}
+
+## tool · 2026-11-12T01:34:08Z
+
+
+
+
+## tool · 2026-11-12T01:34:22Z
+
+
+Script completed
+Wall time 0.8 seconds
+Output:
+
+{"chunk_id":"d76670","wall_time_seconds":0.157922875,"exit_code":0,"original_token_count":11,"output":"一 41080 41080 True\n二 39169 39169 True\n"}
+{"chunk_id":"f8dd71","wall_time_seconds":0.255088916,"exit_code":0,"original_token_count":0,"output":""}
+{
+  "type": "input_image",
+  "image_url": "images/5fbc482771613973c37b4672b16858c8806ca0bd2c8f80992716101ac1674270.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/76d2960a5d693e97b00fb5df0085ddf8c3cf867b8d529087ffbdbe4309c34538.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/7dac41bd18f509d8c17571c7b3f876b9ce03b91fbd149e8574eb1cf5726eef48.png",
+  "detail": "high"
+}
+{"chunk_id":"cc3ad0","wall_time_seconds":0.00000775,"exit_code":0,"original_token_count":1052,"output":"## 24 张宇四套卷· 卷一\n\n### 选择题\n\n1\\. 设 $\\{a_{n}\\}$ 为非零数列，下列命题正确的是\nA. 若 $\\{\\sin a_{n}\\}$ 收敛，则 $\\{a_{n}\\}$ 收敛.  \nB. 若 $\\{\\arcsin(\\sin a_{n})\\}$ 收敛，则 $\\{a_{n}\\}$ 收敛.  \nC. 若 $\\{a_{n}\\}$ 收敛，则 $\\{\\sin \\frac{1}{a_{n}}\\}$ 收敛.  \nD. 若 $\\{a_{n}\\}$ 收敛，则 $\\{\\sin a_{n}\\}$ 收敛.  \n\n2\\. 设函数 $f(x)=\\frac{(x-1)(x-2)^{2}(x-3)^{3}}{x}$，则 $f''(2)=$\nA. 2.  \nB. -2.  \nC. 1.  \nD. -1.  \n\n3\\. 已知级数 $\\sum_{n=1}^{\\infty}(-1)^{n-1}u_{n}$ 条件收敛，$u_{n}>0$，则级数 $\\sum_{n=1}^{\\infty}(u_{2n}-2u_{2n-1})$\nA. 发散.  \nB. 绝对收敛.  \nC. 条件收敛.  \nD. 敛散性无法判断.  \n\n4\\. 设空间曲面 $\\sum_{1}^{n}z=\\frac{x^{3}+y^{3}}{3}$，$\\sum_{2}^{n}z=\\frac{x^{2}-y^{2}}{2}$，$\\sum_{3}^{n}z=\\frac{x^{2}y^{2}}{2}$ 被柱面 $x^{2}+y^{2}=1$ 所截部分的面积分别为 $S_{1},S_{2},S_{3}$，则\nA. $S_{1}>S_{2}>S_{3}$.  \nB. $S_{2}>S_{1}>S_{3}$.  \nC. $S_{3}>S_{1}>S_{2}$.  \nD. $S_{3}>S_{2}>S_{1}$.  \n\n5\\. 已知 $a_{1},a_{2},a_{3},a_{4}$ 是 3 维非零列向量，则下列命题\n①若 $a_{4}$ 可由 $a_{1},a_{2},a_{3}$ 线性表示，则 $a_{1},a_{2},a_{3}+a_{4}$ 线性无关；\n②若 $a_{4}$ 可由 $a_{1},a_{2},a_{3}$ 线性表示，则 $r(a_{1}+a_{2},a_{2},a_{3})=r(a_{1},a_{2},a_{3},a_{4})$；\n③若 $a_{4}$ 不能由 $a_{1},a_{2},a_{3}$ 线性表示，则 $a_{1},a_{2},a_{3}$ 线性相关；\n④若 $a_{4}$ 不能由 $a_{1},a_{2},a_{3}$ 线性表示，则 $2\\leq r(a_{1},a_{2},a_{3},a_{4})\\leq3$.\n正确命题的个数为\nA. 1.  \nB. 2.  \nC. 3.  \nD. 4.  \n\n6\\. 设 $A, B$ 均为 3 阶矩阵, $\\xi, \\eta$ 均为 3 维非零列向量, 非齐次线性方程组 $Ax = \\xi$ 与 $Bx = \\eta$ 均有解, 则它们同解的充分必要条件为\nA. $A$ 的行向量组与 $B$ 的行向量组等价.  \nB. $(A; \\xi)$ 的行向量组与 $(B; \\eta)$ 的行向量组等价.  \nC. $A$ 的列向量组与 $B$ 的列向量组等价.  \nD. $(A; \\xi)$ 的列向量组与 $(B; \\eta)$ 的列向量组等价.  \n\n7\\. 已知 $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$, $B = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}$, $C, D$ 均为 2 阶矩阵, 则\nA. $\\begin{vmatrix} A & C \\\\ B & D \\end{vmatrix} = |AD - BC|$.  \nB. $\\begin{vmatrix} A & C \\\\ B & D \\end{vmatrix} = |A| |D - CA^{-1}B|.$  \nC. $|E - AB| \\neq |E - BA|.$  \nD. $|D - CA^{-1}B| |A| \\neq |DA - CB|$.  \n\n8\\. 设总体 $X$ 的概率分布为 $P\\{X = x\\} = (x-1)p^2(1-p)^{x-2}$, $x = 2, 3, \\cdots$, $p$ 为参数且 $0 < p < 1$ 现有来自总体 $X$ 的简单随机样本的观测值: 5, 3, 6, 2, 6, 则 $p$ 的矩估计值为\nA. $\\sqrt{\\frac{5}{11}}$.  \nB. $\\sqrt{\\frac{5}{22}}$.  \nC. $\\frac{5}{11}$.  \nD. $\\frac{5}{22}$.  \n\n9\\. 已知总体 $X \\sim N(\\mu_1, 4)$, $Y \\sim N(\\mu_2, 5)$, $X$ 与 $Y$ 相互独立, $X_1, \\cdots, X_8$ 和 $Y_1, \\cdots, Y_{10}$ 是分别来自总体 $X$ 和 $Y$ 的两组简单随机样本, $S_X^2$ 与 $S_Y^2$ 分别为两组样本的样本方差, 则\nA. $\\frac{2S_X^2}{5S_Y^2} \\sim F(7,9)$.  \nB. $\\frac{5S_X^2}{2S_Y^2} \\sim F(7,9)$.  \nC. $\\frac{4S_X^2}{5S_Y^2} \\sim F(7,9)$.  \nD. $\\frac{5S_X^2}{4S_Y^2} \\sim F(7,9)$.  \n\n10\\. 设 $X$ 的概率密度为 $f_X(x) = \\begin{cases} \\frac{1}{2}, & -1 \\leq x \\leq 0, \\\\ \\frac{1}{4}, & 0 < x < 2, \\\\ 0, & \\text{其他}, \\end{cases}$ 且 $Y = \\begin{cases} 1, & X \\leq 0, \\\\ 2, & X > 0, \\end{cases}$ 则 $E[D(X \\mid Y)] =$\nA. $\\frac{1}{24}$  \nB. $\\frac{5}{24}$.  \nC. $\\frac{7}{24}$.  \nD. $\\frac{9}{24}$.  \n### 填空题\n\n11\\. $f(x, y, z) = xy + yz + xz$ 在点 $(1, 0, -1)$ 处方向导数的最小值为 ___.\n\n12\\. $\\sum_{n=1}^{\\infty}(-1)^{n}\\frac{2^{n+1}}{n!}$ = ___.\n\n13\\. 设 $\\sum$ 为曲面 $z = \\sqrt{1 - x^2 - y^2}$ 被曲面 $x^2 + y^2 = x$ 所截部分的上侧，则 $\\iint_{\\Sigma}xy^2dxdx + z^2dxdy = $ ___.\n\n14\\. 微分方程 $y' + xy = xy^3$ 满足条件 $y(0) = \\frac{\\sqrt{2}}{2}$ 的特解为 ___.\n\n15\\. 已知矩阵 $A = \\begin{pmatrix} 2 & 1 & -1 & 1 \\\\ -1 & 2 & 1 & 1 \\\\ 1 & 1 & 2 & -1 \\\\ 2 & -1 & 1 & 1 \\end{pmatrix}$，则 $(A^2 - A - 2E)(A + E)^{-1} = $ ___.\n\n16\\. 设通过点 $A(0,1)$ 任意作直线与 $x$ 轴正向相交所成的角为 $\\theta$ ($0 < \\theta < \\pi$)，如图所示，则直线在 $x$ 轴上的截距 $X$ 的概率密度为 ___.\n"}
+
+## tool · 2026-11-12T01:34:53Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+{
+  "type": "input_image",
+  "image_url": "images/9f3e87e06faad0b38a3ab71d2333841281646d67fa24303d1c756dce6f717375.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/5928a9b99e5230a8246867ae92e54284e5e7c0b3532fef1ff3ca1b4634346241.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/520e169d2721a185c214b00e5091e07e3392ad32a35f77ccd97faef1a0cc9ad7.png",
+  "detail": "high"
+}
+{"chunk_id":"f52d95","wall_time_seconds":0.000009167,"exit_code":0,"original_token_count":1736,"output":"## 24 张宇四套卷· 卷二\n\n### 选择题\n\n1\\. 设函数 $f(x)$ 与 $g(x)$ 在 $(-\\infty, +\\infty)$ 上均有 1 个间断点，则 $f[g(x)]$ 在 $(-\\infty, +\\infty)$ 上\nA. 仅有 1 个间断点.  \nB. 仅有 2 个间断点.  \nC. 间断点个数不超过 2.  \nD. 间断点个数可为无穷多个.  \n\n2\\. 当 $x \\to 0$ 时，连续函数 $f(x) = 1 + x - \\cos\\sqrt{x} + o(x), o(x)$ 表示 x 的高阶无穷小，则\nA. $f'(0) = 1$.  \nB. $f'(0) = \\frac{1}{3}$.  \nC. $f'(0)$ 不存在.  \nD. $f'(0)$ 与 $o(x)$ 有关.  \n\n3\\. 设函数 $f(x, y) = \\begin{cases} xy, & xy \\neq 0, \\\\ y, & x = 0, & l = (\\cos\\alpha, \\sin\\alpha) \\end{cases}$ 为任意不平行于坐标轴的单位向量，给出以下结论：\n① $\\frac{\\partial f(0,0)}{\\partial y} = 1$; ② $\\frac{\\partial f(0,0)}{\\partial l} = 0$; ③ $(1,1)$ 是 $f(x,y)$ 在点 $(0,0)$ 的梯度; ④ $(1,0)$ 是 $f(x,y)$ 在点 $(0,0)$ 的梯度.\n正确结论的个数为\nA. 1.  \nB. 2.  \nC. 3.  \nD. 4.  \n\n4\\. $\\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{i=1}^{n} \\int_{1}^{i} \\frac{\\sin x}{x} dx =$\nA. $1 - 2\\cos 1$.  \nB. $\\cos 1 - 1$.  \nC. $1 - 2\\sin 1$.  \nD. $\\sin 1 - 1$.  \n\n5\\. 设 A, B 均为 3 阶可逆矩阵, $A^{*}, B^{*}$ 分别为 A, B 的伴随矩阵, 则 $\\begin{pmatrix} O & A \\\\ B & C \\end{pmatrix}$ 的伴随矩阵为\nA. $\\begin{pmatrix} -B^{*}CA^{*} & -|A|B^{*} \\\\ |B|A^{*} & O \\end{pmatrix}$.  \nB. $\\begin{pmatrix} B^{*}CA^{*} & -|A|B^{*} \\\\ -|B|A^{*} & O \\end{pmatrix}$.  \nC. $\\begin{pmatrix} -A^{*}CB^{*} & |A|B^{*} \\\\ |B|A^{*} & O \\end{pmatrix}$.  \nD. $\\begin{pmatrix} A^{*}CB^{*} & |A|B^{*} \\\\ -|B|A^{*} & O \\end{pmatrix}$.  \n\n6\\.已知A,B均为n阶正定矩阵,则\nA. AB是正定矩阵.  \nB. AB与E相似.  \nC. AB是对称矩阵.  \nD. AB的特征值全为正数.  \n\n7\\. 设二次型 $f(x_1,x_2,x_3)=x_1^2-2x_2^2+3x_3^2-4x_1x_2, g(y_1,y_2,y_3)=ay_2^2-6y_1y_3$, 若存在可逆线性变换将f化为g, 但不存在正交变换将f化为g, 则a的取值范围是\nA. $a>0$ 且 $a\\neq2$.  \nB. a<0 且 $a\\neq-2$.  \nC. a>0 且 $a\\neq3$.  \nD. a<0 且 $a\\neq-3$.  \n\n8\\. 设随机变量X,Y的二阶矩阵$E(X^2),E(Y^2)$均存在, 则\nA. $[(Cov^2(X,Y)]^2>\\sqrt{D(X)}\\cdot\\sqrt{D(Y)}$.  \nB. $|E(X)|>[E(X^2)]^2$.  \nC. $[E(X^2)]^2[E(Y^2)]^2]\\geq|E(XY)|$.  \nD. $[E(|X+Y|^2)]^2]\\geq[E(X^2)]^2+[E(Y^2)]^2$.  \n\n9\\. 设X,Y为随机变量, 且X~N(1,9),Y~N(1,4), 若X与Y相互独立, $X_1,X_2,X_3$ 与Y_1,Y_2,Y_3,Y_4分别为来自总体X和Y的简单随机样本, $\\overline{X}$ 与$\\overline{Y}$ 为其样本均值, 则$E(|\\overline{X}-\\overline{Y}|)=$\nA. $\\frac{2\\sqrt{2}}{\\sqrt{\\pi}}$.  \nB. $\\frac{1}{\\sqrt{\\pi}}$.  \nC. $\\frac{\\sqrt{2}}{\\sqrt{\\pi}}$.  \nD. $\\frac{2}{\\sqrt{\\pi}}$.  \n\n10\\. 为检验某硬币是否均匀, 作假设检验: $H_0$: 正面向上的概率$P=\\frac{1}{2}$, $H_1$: 正面向上的概率$P\\neq\\frac{1}{2}$. 现独立重复掷硬币n次, 记$X_i=\\begin{cases}1, & \\text{第}i次反面向上}, \\\\ 0, & \\text{第}i次反面向上}, \\end{cases}$ $i=1,2,\\cdots,n$, $\\overline{X}=\\frac{1}{n}\\sum_{i=1}^{n}X_i, u_a$ 为标准正态分布的上$\\alpha$分位数, $\\alpha$ 为显著性水平. 当n充分大时, 该检验的拒绝域W=\nA. $\\begin{cases}\\left|\\frac{\\overline{X}-\\frac{1}{2}}{\\sqrt{\\frac{1}{4n}}}\\right|>\\frac{u_a}{2}$.  \nB. $\\left\\{\\left|\\frac{\\overline{X}-\\frac{1}{4}}{\\sqrt{\\frac{1}{2n}}}\\right|>\\frac{u_a}{2}\\right\\}.$  \nC. $\\left\\{\\left|\\frac{\\overline{X}-\\frac{1}{2}}{\\sqrt{\\frac{1}{4n}}}\\right|>\\frac{u_a}{2}\\right\\}.$  \nD. $\\left\\{\\left|\\frac{\\overline{X}-\\frac{1}{4}}{\\sqrt{\\frac{1}{2n}}}\\right|>\\frac{u_a}{2}\\right\\}.$  \n### 填空题\n\n11\\. 曲线$y=x(x-1)^{\\frac{1}{3}}$的拐点为_____.\n\n$\\begin{array}{l} 12. f(x) = \\int_{0}^{x} \\frac{t}{t^2 + 2t + 2} dt$ 在 $[0,1]$ 上的最大值为_____.\n\n13\\.已知函数$f(x,y)$满足$d[f(x,y)] = \\frac{(x+2y)dx + ydy}{(x+y)^2}$,$f(1,1) = \\ln2 - \\frac{1}{2}$,$f(2,2) = $____.\n\n14\\.级数$\\sum_{n=1}^{\\infty} \\frac{e^{-nx}}{(1+\\frac{1}{n})^n^2}$的收敛域为$(a,+\\infty)$,$f(a) = $____.\n\n15\\.已知$A = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & -1 \\\\ 2 & 0 & 0 \\end{pmatrix}$,$P(P A)^2 = P A$,$P$可逆,$P$可以为_____.\n\n16\\.已知随机变量X服从参数为1的泊松分布,$Y \\sim \\begin{pmatrix} -1 & 1 \\\\ \\frac{1}{3} & \\frac{2}{3} \\end{pmatrix}$,$X$与Y相互独立.$P(P A) = P(X - P Y) = P(X_1 - P X_1) = P(X_1 + P X_2) = P(X_1 + P X_2) = P(X_1 + P X_2) = P(X_1 + P X_3) = P(X_1 + P X_3) = P(X_1 + P X_3) = P(X_1 + P X_4) = P(X_1 + P X_4) = P(X_1 + P X_4) = P(X_1 + P X_5) = P(X_1 + P X_5) = P(X_1 + P X_6) = P(X_1 + P X_6) = P(X_1 + P X_7) = P(X_1 + P X_7) = P(X_1 + P X_8) = P(X_1 + P X_8) = P(X_1 + P X_9) = P(X_1 + P X_9) = P(X_1 + P X_10) = P(X_1 + P X_10) = P(X_1 + P X_11) = P(X_1 + P X_11) = P(X_1 + P X_12) = P(X_1 + P X_13) = P(X_1 + P X_14) = P(X_1 + P X_15) = P(X_1 + P X_16) = P(X_1 + P X_17) = P(X_1 + P X_18) = P(X_1 + P X_19) = P(X_1 + P X_10) = P(X_1 + P X_11) = P(X_1 + P X_12) = P(X_1 + P X_13) = P(X_1 + P X_14) = P(X_1 + P X_15) = P(X_1 + P X_16) = P(X_1 + P X_17) = P(X_1 + P X_18) = P(X_1 + P X_19) = P(X_1 + P X_19) = P(X_1 + P X_20) = P(X_1 + P X_20) = P(X_1 + P X_21) = P(X_1 + P X_22) = P(X_1 + P X_23) = P(X_1 + P X_24) = P(X_1 + P X_25) = P(X_1 + P X_26) = P(X_1 + P X_27) = P(X_1 + P X_28) = P(X_1 + P X_29) = P(X_1 + P X_30) = P(X_1 + P X_31) = P(X_1 + P X_32) = P(X_1 + P X_33) = P(X_1 + P X_34) = P(X_1 + P X_35) = P(X_1 + P X_36) = P(X_1 + P X_37) = P(X_1 + P X_38) = P(X_1 + P X_39) = P(X_1 + P X_40) = P(X_1 + P X_41) = P(X_1 + P X_42) = P(X_1 + P X_43) = P(X_1 + P X_44) = P(X_1 + P X_45) = P(X_1 + P X_46) = P(X_1 + P X_47) = P(X_1 + P X_48) = P(X_1 + P X_49) = P(X_1 + P X_50) = P(X_1 + P X_51) = P(X_1 + P X_52) = P(X_1 + P X_53) = P(X_1 + P X_54) = P(X_1 + P X_55) = P(X_1 + P X_56) = P(X_1 + P X_57) = P(X_1 + P X_58) = P(X_1 + P X_59) = P(X_1 + P X_60) = P(X_1 + P X_61) = P(X_1 + P X_62) = P(X_1 + P X_63) = P(X_1 + P X_64) = P(X_1 + P X_65) = P(X_1 + P X_66) = P(X_1 + P X_67) = P(X_1 + P X_68) = P(X_1 + P X_69) = P(X_1 + P X_70) = P(X_1 + P X_71) = P(X_1 + P X_72) = P(X_1 + P X_73) = P(X_1 + P X_74) = P(X_1 + P X_75) = P(X_1 + P X_76) = P(X_1 + P X_77) = P(X_1 + P X_78) = P(X_1 + P X_79) = P(X_1 + P X_80) = P(X_1 + P X_81) = P(X_1 + P X_82) = P(X_1 + P X_83) = P(X_1 + P X_84) = P(X_1 + P X_85) = P(X_1 + P X_86) = P(X_1 + P X_87) = P(X_1 + P X_88) = P(X_1 + P X_89) = P(X_1 + P X_90) = P(X_1 + P X_91) = P(X_1 + P X_92) = P(X_1 + P X_93) = P(X_1 + P X_94) = P(X_1 + P X_95) = P(X_1 + P X_96) = P(X_1 + P X_97) = P(X_1 + P X_98) = P(X_1 + P X_99) = P(X_1 + P X_100) = P(X_1 + P X_101) = P(X_1 + P X_102) = P(X_1 + P X_103) = P(X_1 + P X_104) = P(X_1 + P X_105) = P(X_1 + P X_106) = P(X_1 + P X_107) = P(X_1 + P X_108) = P(X_1 + P X_109) = P(X_1 + P X_110) = P(X_1 + P X_111) = P(X_1 + P X_112) = P(X_1 + P X_113) = P(X_1 + P X_114) = P(X_1 + P X_115) = P(X_1 + P X_116) = P(X_1 + P X_117) = P(X_1 + P X_118) = P(X_1 + P X_119) = P(X_1 + P X_120) = P(X_1 + P X_121) = P(X_1 + P X_122) = P(X_1 + P X_123) = P(X_1 + P X_124) = P(X_1 + P X_125) = P(X_1 +\n"}
+
+## tool · 2026-11-12T01:35:51Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T01:36:00Z
+
+
+
+
+## tool · 2026-11-12T01:36:06Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/b45043e7666020539d529a6f462a65c2ed3efc6c2be89424b20d9de28297f01a.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/ec1ec5249cc185ee0074a36571c689537b4d94ef416a902414c5429b20e4d48c.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/19fb7b4857ed068f3b79d1260b42f69929aa54fe3294bb68007b1c1b4e3aa61c.png",
+  "detail": "high"
+}
+{"chunk_id":"d0530d","wall_time_seconds":0.000009833,"exit_code":0,"original_token_count":1060,"output":"## 24 张宇四套卷· 卷三\n\n### 选择题\n\n1\\. 曲线 $y=2^x+\\ln(e^{2x}+1)$ ($x>0$) 的斜渐近线为\nA. $y=x+e$.  \nB. $y=x-e$.  \nC. $y=2x+1$.  \nD. $y=2x-1$.  \n\n2\\. 如图所示，从曲线 $y=f(x)$ 上任一点 P 分别作切线交 x 轴于点 T，作垂线交 x 轴于点 Q，三角形 $PTQ$ 的面积为 $\\frac{1}{2}$，则\nA. $y'=y$.  \nB. $y'=-y$.  \nC. $(y')^2=y$.  \nD. $y'=y^2$.  \n\n3\\. 函数 $f(x,y)=x+y\\sin x$\nA. 有极大值点，没有极小值点.  \nB. 没有极大值点，有极小值点.  \nC. 既有极大值点，也有极小值点.  \nD. 既没有极大值点，也没有极小值点.  \n\n4\\. 已知平面区域 D 由曲线 $L_1:y=\\sqrt{1-x^2}(0\\leq x\\leq1)$ 与 $L_2:\\begin{cases}x=\\cos^3 t,\\\\y=\\sin^3 t\\end{cases}(0\\leq t\\leq\\frac{\\pi}{2})$ 围成. $\\delta D$ 为 D 的边界，取顺时针方向，则 $I=\\oint_{\\delta D}e^{xy}y^2dx+[\\mathrm{e}^{xy}(1+xy)+x]\\mathrm{d}y=$\nA. $-\\frac{5\\pi}{32}$.  \nB. $\\frac{5\\pi}{32}$.  \nC. $-\\frac{5\\pi}{16}$.  \nD. $\\frac{5\\pi}{16}$.  \n\n5\\. 设 $A^*$ 为 3 阶非零矩阵，且 $A^*=(a_1,a_2,a_3)$，$a_1=a_3$，$a_2+a_3=0$，$k,k_1,k_2$ 为任意常数，则 Ax=0 的通解为\nA. $k(a_1+a_2)$.  \nB. $k(a_1+a_3)$.  \nC. $k_1a_1+k_2a_2$.  \nD. $k_1a_1+k_2a_3$.  \n\n6\\. 设 $A_{1}, A_{2}, B_{1}, B_{2}$ 均为 n 阶矩阵，给出以下结论：\n① 若 $\\begin{pmatrix} A_{1} & O \\\\ O & A_{2} \\end{pmatrix}$ 相似于 $\\begin{pmatrix} B_{1} & O \\\\ O & B_{2} \\end{pmatrix}$，则 $A_{1}$ 相似于 $B_{1}, A_{2}$ 相似于 $B_{2}$；\n② 若 $A_{1}$ 相似于 $B_{1}, A_{2}$ 相似于 $B_{2}$，则 $\\begin{pmatrix} A_{1} & O \\\\ O & A_{2} \\end{pmatrix}$ 相似于 $\\begin{pmatrix} B_{1} & O \\\\ O & B_{2} \\end{pmatrix}$；\n③ 若 $\\begin{pmatrix} A_{1} & O \\\\ O & A_{2} \\end{pmatrix}$ 合同于 $\\begin{pmatrix} B_{1} & O \\\\ O & B_{2} \\end{pmatrix}$，则 $A_{1}$ 合同于 $B_{1}, A_{2}$ 合同于 $B_{2}$；\n④ 若 $A_{1}$ 合同于 $B_{1}, A_{2}$ 合同于 $B_{2}$，则 $\\begin{pmatrix} A_{2} & O \\\\ O & A_{1} \\end{pmatrix}$ 合同于 $\\begin{pmatrix} B_{1} & O \\\\ O & B_{2} \\end{pmatrix}$，正确结论的个数为\nA. 1.  \nB. 2.  \nC. 3.  \nD. 4.  \n\n7\\. 已知二次型 $f(x_{1}, x_{2}, x_{3})$ 在正交变换 $x = Qy$ 下化为 $y_{1}^{2} - y_{2}^{2}$，其中 $Q = (e_{1}, e_{2}, e_{3})$。若 $P = (e_{2}, -e_{3}, e_{1})$，则 $f(x_{1}, x_{2}, x_{3})$ 在变换 $x = Pz$ 下化为\nA. $z_{1}^{2} + z_{2}^{2} + z_{3}^{2}$.  \nB. $z_{1}^{2} - z_{2}^{2} + z_{3}^{2}$.  \nC. $-z_{1}^{2} + z_{3}^{2}$.  \nD. $-z_{1}^{2} - z_{3}^{2}$.  \n\n8\\. 已知随机变量 X 的概率密度为 $f(x)(-\\infty < x < +\\infty)$，且 $E(|X|) = a \\neq 1$，则当 $x \\to +\\infty$ 时，$1 - \\int_{-\\infty}^{x} f(t) dt$ 是 $\\frac{1}{x}$ 的\nA. 低阶无穷小.  \nB. 高阶无穷小.  \nC. 同阶但不等价无穷小.  \nD. 等价无穷小.  \n\n9\\. 已知总体 X 服从标准正态分布, $X_{1}, X_{2}$ 是来自总体 X 的简单随机样本. 记 $Y = X_{1}^{2} + X_{2}^{2}, F(y)$ 是 Y 的分布函数，给出以下结论:\n① $Y \\sim E\\left(\\frac{1}{2}\\right)$; ② $Y \\sim \\chi^{2}(2)$; ③ $E[F(Y)] = \\frac{1}{2}$; ④ $\\frac{Y}{2X_{1}^{2}} \\sim F(2,1)$.\n正确结论的个数为\nA. 1.  \nB. 2.  \nC. 3.  \nD. 4.  \n\n10\\. 设假设检验中的显著性水平为 $\\alpha$，则以下选项，概率为 1 - $\\alpha$ 的是\nA. 原假设 $H_{0}$ 成立，经检验被接受.  \nB. 原假设 $H_{0}$ 成立，经检验被拒绝.  \nC. 原假设 $H_{0}$ 不成立，经检验被接受.  \nD. 原假设 $H_{0}$ 不成立，经检验被拒绝.  \n\n### 填空题\n\n11\\. 设 $a_n = \\sum_{i=1}^{n} \\frac{\\sqrt{i(i-1)}}{n^2 + i(i-1)}$ ($n=2,3,\\cdots$)，则 $\\lim_{n \\to \\infty} a_n =$ ___.\n\n12\\. 设 $y = y(x)$ 及 $z = z(x)$ 由方程 $e^z - xyz = 0$ 及 $xz^2 = \\ln y$ 所确定，则 $\\left. \\frac{dz}{dx} \\right|_{x=\\frac{1}{2}} =$ ___.\n\n13\\. 微分方程 $y' + 1 = e^{-y} \\sin x$ 满足条件 $y(0) = 0$ 的特解为 ___.\n\n14\\. 平面区域 $D = \\left\\{ (x, y) \\left| \\frac{1}{1 + x^2} \\leq y \\leq \\frac{1}{\\sqrt{1 + x^2}} \\right. \\right\\}$ 绕 $x$ 轴旋转一周形成的旋转体体积为 ___.\n\n15\\. 若正定矩阵 $A$ 满足 $A^2 = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$，则 $A =$ ___.\n\n16\\. 抛掷一枚均匀的硬币，直到正、反面均出现为止，则抛掷次数 $X$ 的数学期望为 ___.\n"}
+
+## tool · 2026-11-12T01:36:26Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+{
+  "type": "input_image",
+  "image_url": "images/b39061a1e9f59198a807378de259a1c5f774a9e8cfba8bbe248f00e401a3a7fd.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/99a710185186a10baf0d51362ad37f182c07d765d5e18167c1fe36130fd6cf2d.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/9d49014deed0a363060e94f07a9c565df0617c327d1ff401a7fbd3adb9129349.png",
+  "detail": "high"
+}
+{"chunk_id":"86eef0","wall_time_seconds":0.000010291,"exit_code":0,"original_token_count":1247,"output":"## 24 张宇四套卷· 卷四\n\n### 选择题\n\n1\\. 设函数 $f(x)$ 在 $(0, +\\infty)$ 上可导，给出下列命题：\n①若曲线 $y = f(x)$ 有水平渐近线 y = 1，则 $\\lim_{x \\to +\\infty} f'(x) = 0$；\n②若曲线 $y = f(x)$ 有斜渐近线 y = x，则 $\\lim_{x \\to +\\infty} f'(x) = 1$；\n③若 $\\lim_{x \\to +\\infty} \\frac{f(x)}{x} = 1$，则曲线 $y = f(x)$ 的斜渐近线斜率为 1；\n④若曲线 $y = f(x)$ 的斜渐近线斜率为 1，则 $\\lim_{x \\to +\\infty} \\frac{f(x)}{x} = 1$。正确命题的个数为 4。\nA. 1.  \nB. 2.  \nC. 3.  \nD. 4.  \n\n2\\. 已知 $f(x)$ 为连续函数，则 $\\lim_{n \\to \\infty} \\sum_{i=1}^{n} f\\left(\\frac{2n+i}{2n}\\right)\\frac{1}{n} =$\nA. $\\int_{1}^{\\frac{n}{2}} \\frac{f(\\sqrt{x})}{\\sqrt{x}} \\,dx.$  \nB. $\\int_{\\frac{1}{n}}^{\\frac{n}{2}} \\frac{f(\\sqrt{x})}{\\sqrt{x}} \\,dx.$  \nC. $2\\int_{1}^{2} f(x) \\,dx.$  \nD. $2\\int_{\\frac{1}{2}}^{1} f(x) \\,dx.$  \n\n3\\. 设 $\\frac{x^2 - x - 1}{x^2(x + 1)} = \\sum_{n=0}^{\\infty} a_n (x - 1)^n, x \\in (0, 2)$，则 $a_n$ 的表达式为\nA. $(-1)^n n - \\frac{1}{2^n}$.  \nB. $(-1)^{n+1} \\left[(n + 1) - \\frac{1}{2^{n+1}}\\right].$  \nC. $(-1)^n \\left(n - \\frac{1}{2^n}\\right).$  \nD. $(-1)^{n+1} (n + 1) - \\frac{1}{2^{n+1}}$.  \n\n4\\. 设 $\\sum$ 为曲面 $x^2 + y^2 + z^2 = 1$ ($x \\geqslant 0, y \\geqslant 0, z \\geqslant 0$)，则 $\\iint_{D} xy^2 (y^2 + z^2 + x^2 y^2) dS =$\nA. $\\frac{1}{16}$.  \nB. $\\frac{1}{32}$.  \nC. $\\frac{\\pi}{16}$.  \nD. $\\frac{\\pi}{32}$.  \n\n5\\. 已知 $\\eta_1, \\eta_2$ 是线性方程组 $\\begin{cases} ax_1 + x_2 + 2x_3 = b, \\\\ x_1 + cx_2 - x_3 = 1, \\\\ 2x_1 + x_2 - 2x_3 = -1\\end{cases}$ 的两个不同解，$k, k_1, k_2$ 为任意常数，则该线性方程组的两个不同解中，$k_1 - k_2 = k_1 + k_2 = 0$；两个不同解中，$k_1 - k_2 = 1$；两个不同解中，$k_1 + k_2 = 1$；两个不同解中，$k_1 - k_2 = -1$。\n通解是\nA. $(k_1 + 1)\\eta_1 + k_2\\eta_2$.  \nB. $(k_1 - 1)\\eta_1 + k_2\\eta_2$.  \nC. $(k + 1)\\eta_1 - k\\eta_2$.  \nD. $(k - 1)\\eta_1 - k\\eta_2$.  \n\n6\\. 若向量组 $\\alpha_1 = (1, 1, a)^T, \\alpha_2 = (1, a, 1)^T, \\alpha_3 = (a, 1, 1)^T$ 可由向量组 $\\beta_1 = (1, 1, a)^T, \\beta_2 = (-2, a, 4)^T, \\beta_3 = (-2, a, a)^T$ 线性表示，但向量组 $\\beta_1, \\beta_2, \\beta_3$ 不能由向量组 $\\alpha_1, \\alpha_2, \\alpha_3$ 线性表示，则 $a = A$. 1.\nB. 2.  \nC. -1.  \nD. -2.  \n\n7\\. 若 $f(x_1, x_2, x_3) = (ax_1 + 2x_2 - 3x_3)^2 + (x_2 - 2x_3)^2 + (x_1 + ax_2 - x_3)^2$ 是正定二次型，则 $a$ 的取值范围是 $A$. $a \\ne 1$.\nB. $a \\ne -\\frac{1}{2}$.  \nC. $a \\ne 1$ 或 $a \\ne -\\frac{1}{2}$.  \nD. $a \\ne 1$ 且 $a \\ne -\\frac{1}{2}$.  \n\n8\\. 设参数 $\\theta$ 的区间估计的显著性水平为 0.1，现独立重复抽样 100 次得到 100 个置信区间 $I_i(i=1,2,\\cdots,100)$，则\nA. $\\theta$ 值落入任一 $I_i$ 的概率为 0.9.  \nB. $\\theta$ 值落入任一 $I_i$ 的概率为 0.1.  \nC. 约有 10 个区间包含 $\\theta$ 值.  \nD. 约有 90 个区间包含 $\\theta$ 值.  \n\n9\\. 设随机变量 $X$ 的概率密度为 $f(x) = \\begin{cases} \\frac{1}{2} \\cos \\frac{x}{2}, & 0 < x < \\pi, \\\\ 0, & \\text{其他}, \\end{cases}$ $Y$ 表示对 $X$ 的 4 次独立重复观察中观测值大于 $\\frac{\\pi}{3}$ 的次数，则能使 $P\\{Y=k\\}$ 最大的 $k$ 是\nA. 1.  \nB. 2.  \nC. 3.  \nD. 4.  \n\n10\\. 设总体 $X$ 的分布律为 $P\\{X=x\\} = \\theta^{-\\frac{x-2}{3}} (1-\\theta)^{\\frac{x+1}{3}}, x = -1, 2, 0 < \\theta < 1$ 为未知参数，$X_1, X_2$ 为来自总体 $X$ 的简单随机样本，则 $\\theta$ 的最大似然估计量及其无偏性为\nA. $\\hat{\\theta} = \\frac{1}{3} - \\frac{1}{3} \\sum_{i=1}^{2} X_i$, 无偏.  \nB. $\\hat{\\theta} = \\frac{1}{3} - \\frac{2}{3} \\sum_{i=1}^{2} X_i$, 有偏.  \nC. $\\hat{\\theta} = \\frac{2}{3} - \\frac{1}{6} \\sum_{i=1}^{2} X_i$, 无偏.  \nD. $\\hat{\\theta} = \\frac{2}{3} - \\frac{1}{3} \\sum_{i=1}^{2} X_i$, 有偏.  \n\n### 填空题\n\n11\\. 设 $f(x) = \\frac{1}{2^x + 1}$, $x \\in R$, 则 $f^{(4)}(0) =$ ___.\n\n12\\.由曲面 $z = 8 - x^2 - y^2$ 与平面 $z = 2x$ 围成的空间有界闭区域 $\\Omega$ 的体积为 ___.\n\n13\\.函数 $f(x,y) = 1 + x + 2y + x^2 + xy^2$ 在点 $(0,0)$ 处的二阶泰勒多项式为 ___.\n\n14\\.设函数 $f(x) = \\begin{cases} x - 1, & 0 < x \\leq 1, \\\\ 0, & -1 \\leq x \\leq 0, \\end{cases}$ 若 $a_n = \\begin{cases} 1, & x_1 < x_2 < x_3, \\\\ x_3, & x_3 > x_1, \\\\ x_1, & x_3 < x_2, \\\\ x_2, & x_3 > x_1, \\end{cases}$，则 $\\sum_{n=1}^{\\infty}(-1)^n a_n = $ ___.\n\n15\\.设 $R^3$ 中的向量 $\\xi$ 在基 $a_1 = (1, -2, 1)^T, a_2 = (0, 1, 1)^T, a_3 = (3, 2, 1)^T$ 下的坐标为 $(x_1, x_2, x_3)^T$，而 $\\xi$ 在基 $\\beta_1, \\beta_2, \\beta_3$ 下的坐标为 $(y_1, y_2, y_3)^T$，且 $y_1 = x_1 - x_2 - x_3, y_2 = -x_1 + x_2, y_3 = x_1 + 2x_3$，则由基 $\\beta_1, \\beta_2, \\beta_3$ 到基 $a_1, a_2, a_3$ 的过渡矩阵 $P =$ ___.\n\n16\\.设总体 $X$ 的分布函数 $F(x)$ 是严格单调增加的连续函数，$X_1, X_2$ 为总体 $X$ 的简单随机样本，记 $Y = \\frac{1}{2} \\sum_{i=1}^{2} \\ln F(X_i)$，则 $P\\left\\{F(X) < E(Y) + \\frac{3}{2}\\right\\} =$ ___.\n"}
+
+## tool · 2026-11-12T01:37:12Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T01:37:20Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/a85525755f07f1703996fdc3037531194a76e3e7653410fed5c0a2fe756ac5c5.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/8f1188b6a97002278542ae194607f4b71a0e561e068268dbcade4c68570cd75f.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/5235bf7badc191e44539d3c76d6a19c3fae87bd188426da0adc48c055601a3bd.png",
+  "detail": "high"
+}
+{"chunk_id":"9d9f6c","wall_time_seconds":0.000010333,"exit_code":0,"original_token_count":981,"output":"## 24 张宇四套卷· 卷一\n\n### 选择题\n\n1\\. 设函数 $f(x)$ 在 x=0 的某邻域内有定义, 且 $\\lim_{x \\to 0} \\frac{x - f(x)}{\\sin x} = 1$, 则\nA. $f(0) = 0.$  \nB. $\\lim_{x \\to 0} f(x) = f(0).$  \nC. $\\lim_{x \\to 0} \\frac{f(x)}{x} = 1.$  \nD. 当 $x \\to 0$ 时, $f(x)$ 是 x 的高阶无穷小.  \n\n2\\. 设 $f(x) = \\int_{0}^{1} |t - x| dt$, 则\nA. $f'(0)$ 存在, 但 $f'(x)$ 在 x = 0 处不连续.  \nB. $f'(x)$ 在 x = 0 处连续, 但 $f''(0)$ 不存在.  \nC. $f'(1)$ 存在, 但 $f'(x)$ 在 x = 1 处不连续.  \nD. $f'(x)$ 在 x = 1 处连续, 但 $f''(1)$ 不存在.  \n\n3\\. 设函数 $f(x)$ 可导, 则任给 $a < b$, 均有 $\\frac{1}{b - a} \\int_{a}^{b} f(x) \\, dx = f\\left(\\frac{a + b}{2}\\right)$ 是 $f(x)$ 为直线的\nA. 充分不必要条件.  \nB. 必要不充分条件.  \nC. 充要条件.  \nD. 既不充分也不必要条件.  \n\n4\\. $\\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{i=1}^{n} \\int_{1}^{\\frac{i}{n}} \\frac{\\sin x}{x} dx =$\nA. $1 - 2\\cos 1.$  \nB. $\\cos 1 - 1.$  \nC. $1 - 2\\sin 1.$  \nD. $\\sin 1 - 1.$  \n\n5\\. 曲线 $r = \\sqrt{2} e^{\\theta}$ 在 $\\theta = \\pi$ 所对应点的切线方程为\nA. $y = x + \\sqrt{2} e^{\\pi}.$  \nB. $y = x - \\sqrt{2} e^{\\pi}.$  \nC. $y = x + e^{\\pi}.$  \nD. $y = x - e^{\\pi}.$  \n\n6\\. 设 $\\{a_n\\}$ 为非零数列, 则下列命题正确的是\nA. 若 $\\{\\sin a_n\\}$ 收敛, 则 $\\{a_n\\}$ 收敛.  \nB. 若 $\\{\\arcsin (\\sin a_n)\\}$ 收敛, 则 $\\{a_n\\}$ 收敛.  \nC. 若 $\\{a_n\\}$ 收敛, 则 $\\{\\sin a_n\\}$ 收敛.  \nD. 若 $\\{a_n\\}$ 收敛, 则 $\\left\\{\\sin \\frac{1}{a_n}\\right\\}$ 收敛.  \n\n7\\. 设某河流宽为2，两岸是平行直线，如图所示，船只从点O(0,0)出发，速度大小为1，方向始终垂直于河岸，河中任一点处的水流速度大小与该点到两岸的距离的乘积成正比，比例系数为1，则船只的航行路线方程为\nA. $x=y^{3}-\\frac{y^{2}}{3}$.  \nB. $x=y^{2}-\\frac{y^{3}}{3}$.  \nC. $y=x^{3}-\\frac{x^{2}}{3}$.  \nD. $y=x^{2}-\\frac{x^{3}}{3}$.  \n\n8\\. 已知$a_{1},a_{2},a_{3},a_{4}$是3维非零列向量，则下列命题中\n①若$a_{4}$可由$a_{1},a_{2},a_{3}$线性表示，则$a_{1},a_{2},a_{3}+a_{4}$线性无关；\n②若$a_{4}$可由$a_{1},a_{2},a_{3}$线性表示，则$r(a_{1}+a_{2},a_{2},a_{3})=r(a_{1},a_{2},a_{3},a_{4})$；\n③若$a_{4}$不能由$a_{1},a_{2},a_{3}$线性表示，则$a_{1},a_{2},a_{3}$线性相关；\n④若$a_{4}$不能由$a_{1},a_{2},a_{3}$线性表示，则$2\\leq r(a_{1},a_{2},a_{3},a_{4})\\leq3$.\n正确命题的个数为\nA. 1.  \nB. 2.  \nC. 3.  \nD. 4.  \n\n9\\. 设A是n阶(n$\\geq$2)可逆矩阵，将A的第1行的(-1)倍加到第2行得B，则\nA. 将A^{*}的第1列的(-1)倍加到第2列得B^{*}.  \nB. 将A^{*}的第2列的1倍加到第1列得B^{*}.  \nC. 将A^{*}的第1列的(-1)倍加到第2列得-B^{*}.  \nD. 将A^{*}的第2列的1倍加到第1列得-B^{*}.  \n\n10\\. 已知$A=\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix},B=\\begin{pmatrix}1&-1\\\\0&1\\end{pmatrix}$，C，D均为2阶矩阵，则\nA. $\\begin{vmatrix}A&C\\\\B&D\\end{vmatrix}=|AD-BC|$.  \nB. $\\begin{vmatrix}A&C\\\\B&D\\end{vmatrix}=|A||D-CA^{-1}B|$.  \nC. $|E-AB|\\neq|E-BA|$.  \nD. $|D-CA^{-1}B||A|\\neq|DA-CB|$.  \n\n### 填空题\n\n11\\. 设函数 $f(x) = \\tan x - \\frac{x^2}{1 + ax}$，且 $f''(0) = 1$，则 $a =$ ___.\n\n12\\. $f(x) = \\int_0^x \\frac{t}{t^2 + 2t + 2} dt$ 在 $[0,1]$ 上的最大值为 ___.\n\n13\\. 曲线 $y = \\frac{1}{9} \\int_0^3 x \\sqrt{9 - x^2t^2} dt$ ($x \\geq 0$) 的长度为 ___.\n\n14\\. 平面区域 $D = \\left\\{(x,y) \\mid \\frac{1}{1 + x^2} \\leq y \\leq \\frac{1}{\\sqrt{1 + x^2}}\\right\\}$ 绕 x 轴旋转一周形成的旋转体体积为 ___.\n\n15\\. 设 $f(x,y) = \\begin{cases} \\frac{1 - e^{-xy}}{x}, & x \\neq 0, \\\\ y, & x = 0, \\end{cases}$ 则 $\\lim_{x \\to 0} \\left[ \\frac{\\partial f(x,y)}{\\partial x} - \\frac{\\partial f(0,1)}{\\partial x} \\right] =$ ___.\n\n16\\. 已知矩阵 $A = \\begin{pmatrix} 2 & 1 & -1 & 1 \\\\ -1 & 2 & 1 & 1 \\\\ 1 & 1 & 2 & -1 \\\\ 2 & -1 & 1 & 1 \\end{pmatrix}$，则 $(A^2 - A - 2E)(A + E)^{-1} =$ ___.\n"}
+
+## tool · 2026-11-12T01:37:52Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+{
+  "type": "input_image",
+  "image_url": "images/cf2a5b6ac28aee3560e4a80d8239b4a0357e951072de966c0482792558e58fc7.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/9f65881874f5b5cfa7a2ef4e80a3a54ed966d613c9ac84fe67b7325c962b32aa.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/a486026b25623d55b7a349fb3c9ebb49ca7394724c20692e922eb58fe1174b21.png",
+  "detail": "high"
+}
+{"chunk_id":"208357","wall_time_seconds":0.000008791,"exit_code":0,"original_token_count":1033,"output":"## 24 张宇四套卷· 卷二\n\n### 选择题\n\n1\\. 设函数 $f(x)$ 与 $g(x)$ 在 $(-\\infty, +\\infty)$ 上均有 1 个间断点，则 $f[g(x)]$ 在 $(-\\infty, +\\infty)$ 上\nA. 仅有 1 个间断点.  \nB. 仅有 2 个间断点.  \nC. 间断点个数不超过 2.  \nD. 间断点个数可为无穷多个.  \n\n2\\. 当 $x \\to 0$ 时，连续函数 $f(x) = 1 + x - \\cos\\sqrt{x} + o(x), o(x)$ 表示 x 的高阶无穷小，则\nA. $f'(0) = 1$.  \nB. $f'(0) = \\frac{1}{3}$.  \nC. $f'(0)$ 不存在.  \nD. $f'(0)$ 与 $o(x)$ 有关.  \n\n3\\. 设 $f(x), g(x)$ 在 $(-\\infty, +\\infty)$ 内可导，且 $\\left| \\begin{array}{cc} f(x) & g(x) \\\\ f'(x) & g'(x) \\end{array} \\right| < 0$. 又 $a < b, f(a) = f(b) = 0$，则 $g(x)$ 在 $[a, b]$ 上.\nA. 恒正.  \nB. 恒负.  \nC. 至少有一个零点.  \nD. 至多有一个零点.  \n\n4\\. 设某物体运动的路程 $s$ 和加速度 $a$ 与时间 $t$ 的关系分别为 $s = s(t), a = a(t)$. 已知该物体从 $t = 0$ 时刻至 $t = 1$ 时刻运动的路程是 2，在 $t = 1$ 时刻的速度为 2，则 $\\int_{0}^{1} ia(t)dt =$\nA. 0.  \nB. 1.  \nC. 2.  \nD. 3.  \n\n5\\. 设函数 $f(x, y) = \\begin{cases} 1, & y = x^3, x \\neq 0, \\\\ 0, & \\text{其他}, \\end{cases}$\n① $\\lim_{x \\to 0} f(x, y) = 1$; ② $\\frac{\\partial f(0,0)}{\\partial x} = 0$; ③ $\\frac{\\partial f(0,0)}{\\partial y} = 1$; ④ $f(x, y)$ 在点 $(0, 0)$ 处可微.\n正确结论的个数为\nA. 1.  \nB. 2.  \nC. 3.  \nD. 4.  \n\n6\\. 设 $f(x) = \\begin{cases} e^{x^2} + x^2, & x \\neq 0, \\\\ a, & a = 0, \\end{cases}$ 其中 $a$ 为常数，令 $F(x) = \\int_{-1}^{x} f(t)dt$，则以下命题：\n① 当 $a = 1$ 时，$F(x)$ 在 $x = 0$ 处可导； ② 当 $a \\neq 1$ 时，$F(x)$ 在 $x = 0$ 处可导； ③ 当 $a = 1$ 时，$F(x)$ 在 $x = 0$ 处不可导； ④ 当 $a \\neq 1$ 时，$F(x)$ 在 $x = 0$ 处不可导. 所有真命题的序号为\nA. ①②.  \nB. ①④.  \nC. ③④.  \nD. ②③.  \n\n7\\. 下列反常积分中，收敛的是\nA. $\\int_{0}^{1}\\frac{\\sin x}{1-x^{2}}$ dx.  \nB. $\\int_{1}^{+\\infty}\\frac{1}{x\\ln x}$ dx.  \nC. $\\int_{\\frac{1}{2}}^{+\\infty}\\frac{\\cos\\pi x}{(2x-1)^{\\frac{3}{2}}}$ dx.  \nD. $\\int_{0}^{+\\infty}\\frac{1}{x^{2}+x^{3}}$ dx.  \n\n8\\. 设 $A, B$ 均为3阶可逆矩阵, $A^{*}, B^{*}$ 分别为 $A, B$ 的伴随矩阵, 则 $\\begin{pmatrix} O & A \\\\ B & C \\end{pmatrix}$ 的伴随矩阵为\nA. $\\begin{pmatrix} -B^{*}CA^{*} & -|A|B^{*} \\\\ |B|A^{*} & O \\end{pmatrix}$.  \nB. $\\begin{pmatrix} B^{*}CA^{*} & -|A|B^{*} \\\\ -|B|A^{*} & O \\end{pmatrix}$.  \nC. $\\begin{pmatrix} -A^{*}CB^{*} & |A|B^{*} \\\\ |B|A^{*} & O \\end{pmatrix}$.  \nD. $\\begin{pmatrix} A^{*}CB^{*} & |A|B^{*} \\\\ -|B|A^{*} & O \\end{pmatrix}$.  \n\n9\\. 设 $A, B$ 均为3阶矩阵, $\\xi, \\eta$ 均为3维非零列向量, 非齐次线性方程组 $Ax = \\xi$ 与 $Bx = \\eta$ 均有解, 则它们同解的充分必要条件为\nA. $A$ 的行向量组与 $B$ 的行向量组等价.  \nB. $(A \\neq \\xi)$ 的行向量组与 $(B \\neq \\eta)$ 的行向量组等价.  \nC. $A$ 的列向量组与 $B$ 的列向量组等价.  \nD. $(A \\mid \\xi)$ 的列向量组与 $(B \\mid \\eta)$ 的列向量组等价.  \n\n10\\. 设二次型 $f(x_1, x_2, x_3) = x_1^2 - 2x_2^2 + 3x_3^2 - 4x_1x_2, g(y_1, y_2, y_3) = ay_2^2 - 6y_1y_3$, 若存在可逆线性变换将 $f$ 化为 $g$, 但不存在正交变换将 $f$ 化为 $g$, 则 $a$ 的取值范围是\nA. $a < 0$ 且 $a \\neq -3$.  \nB. $a < 0$ 且 $a \\neq -2$.  \nC. $a > 0$ 且 $a \\neq 3$.  \nD. $a > 0$ 且 $a \\neq 2$.  \n### 填空题\n\n11\\. 曲线 $y = x(x-1)^{\\frac{1}{3}}$ 的拐点为 ___.\n\n12\\. 设函数 $f(x) = (1-x)^n \\cos \\pi x, n = 1, 2, \\cdots$, 则 $f^{(n)}(1) =$ ___.\n\n13\\. 曲线 $y = \\frac{\\sqrt{x \\ln x}}{1 + x^2}$ ($x \\geq 1$) 与 x 轴之间的图形绕 x 轴旋转一周所得的旋转体的体积为 ___.\n\n14\\.已知有密度均匀、长度为1且质量为2的细棒AB，记G为万有引力常数，假设有一质量为1的质点在BA的延长线上距A为a处，则细棒AB对该质点的引力为_____.\n\n15\\.已知函数$f(x,y)$满足$d[f(x,y)]=\\frac{(x+2y)dx+ydy}{(x+y)^2}$,$f(1,1)=\\ln2-\\frac{1}{2}$,$f(2,2)=$____.\n\n16\\.已知$A=\\begin{pmatrix}1&0&0\\\\0&1&-1\\\\2&0&0\\end{pmatrix}$,若$(PA)^2=PA$,且P可逆,则P可以为_____.\n"}
+
+## tool · 2026-11-12T01:38:20Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"4c5b96","wall_time_seconds":0.000009125,"exit_code":0,"original_token_count":86,"output":"非齐次线性方程组Ax = ξ 与Bx = η 均有解, 则它们\n同解的充分必要条件为\nA. A 的行向量组与B 的行向量组等价.\nB.\nA♯分\n\n\n的行向量组与B♯η\n\n\n的行向量组等价.\nC. A 的列向量组与B 的列向量组等价.\nD.\nA∣ξ\n\n\n的列向量组与B∣η\n\n\n的列向量组等价.\n\n"}
+{}
+
+## tool · 2026-11-12T01:38:40Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/2b256052dbdcafffec3f29f9b5abe878ecefcd8496000a20b10a203e199a6ce8.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/cd1d350919e812eed8c74dd377e9a1cba322e6287a3bd706aad31efcec505cbd.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/2427e9e82fd08668311fbcb35063f8fffff3cecbf1291103a46e45f74b5f850e.png",
+  "detail": "high"
+}
+{"chunk_id":"22682a","wall_time_seconds":0.000009916,"exit_code":0,"original_token_count":946,"output":"## 24 张宇四套卷· 卷三\n\n### 选择题\n\n1\\. 若函数 $f(x)$ 在 R 上连续, $g(x)=\\int_{0}^{2x} f\\left(x+\\frac{t}{2}\\right)dt$, 则当 $x \\to 0^{+}$ 时, $g(x)$ 是 $\\sqrt{x}$ 的\nA. 高阶无穷小.  \nB. 低阶无穷小.  \nC. 等价无穷小.  \nD. 同阶非等价无穷小.  \n\n2\\. 设函数 $f(x)$ 在 $(0,+\\infty)$ 上可导, 给出下列命题:\n①若曲线 $y=f(x)$ 有水平渐近线 y=1, 则 $\\lim_{x \\to +\\infty} f'(x)=0$;\n②若曲线 $y=f(x)$ 有斜渐近线 y=x, 则 $\\lim_{x \\to +\\infty} f'(x)=1$;\n③若 $\\lim_{x \\to +\\infty} \\frac{f(x)}{x} = 1$, 则曲线 $y=f(x)$ 的斜渐近线斜率为 1;\n④若曲线 $y=f(x)$ 的斜渐近线斜率为 1, 则 $\\lim_{x \\to +\\infty} \\frac{f(x)}{x} = 1$.\n正确命题的个数为\nA. 1.  \nB. 2.  \nC. 3.  \nD. 4.  \n\n3\\. 设数列 $\\{a_n\\}$ 满足 $\\begin{cases} a_1 > 2, \\\\ a_{n+1} = a_n - \\frac{a_n - 3}{a_n - 2}, \\\\ n = 1, 2, 3, \\cdots, \\end{cases}$ 则\nA. $\\{a_n\\}$ 收敛于大于 3 的数.  \nB. $\\{a_n\\}$ 收敛于 3.  \nC. $\\{a_n\\}$ 发散.  \nD. $\\{a_n\\}$ 的级数性与 $a_1$ 有关.  \n\n4\\. 设 $M = \\int_{-1}^{1} \\left( \\frac{x}{1 + x^2} + \\cos^3 x \\right) dx$, $N = \\int_{-1}^{1} \\left[ \\cos^4 x + \\ln(x + \\sqrt{1 + x^2}) \\right] dx$, $P = \\int_{-1}^{1} (x^3 - \\cos^5 x) dx$, 则\nA. $N > M > P$.  \nB. $P > M > N$.  \nC. $M > N > P$.  \nD. $M > P > N$.  \n\n5\\. 设 $f(x, y) = \\begin{cases} xy, & |x| \\geq |y|, \\\\ -xy, & |x| < |y|, \\end{cases}$ 则 $f_{xy}''(0,0)$ 和 $f_{yx}''(0,0)$ 依次为\nA. 1, 1.  \nB. 1, -1.  \nC. -1, 1.  \nD. -1, -1.  \n\n6\\.如图所示，从曲线$y=f(x)$上任一点P分别作切线交x轴于点T，作垂线交x轴于点Q，三角形$PTQ$的面积为$\\frac{1}{2}$，则\nA. $y'=y$  \nB. $y'=-y$  \nC. $(y')^2=y$  \nD. $y'=y^2$  \n\n7\\.设$a_n=\\sum_{i=1}^{n}\\frac{\\sqrt{i(i-1)}}{n^2+i(i-1)}$$(n=2,3,\\cdots)$，则$\\lim_{n \\to \\infty} a_n=$\nA. $2\\ln2$.  \nB. $2\\ln\\frac{1}{2}$.  \nC. $\\frac{1}{2}\\ln\\frac{1}{2}$.  \nD. $\\frac{1}{2}\\ln2$.  \n\n8\\.设$A^*$为3阶非零矩阵，且$A^n=(a_1,a_2,a_3)$，$a_1=a_3$，$a_2+a_3=0$，$k,k_1,k_2$为任意常数，则$Ax=0$的通解为\nA. $k(a_1+a_2)$.  \nB. $k(a_1+a_3)$.  \nC. $k_1a_1+k_2a_2$.  \nD. $k_1a_1+k_2a_3$.  \n\n9\\.设$A_1,A_2,B_1,B_2$均为$n$阶矩阵，给出以下结论：\n①若$\\begin{pmatrix} A_1 & O \\\\ O & A_2 \\end{pmatrix}$相似于$\\begin{pmatrix} B_1 & O \\\\ O & B_2 \\end{pmatrix}$，则$A_1$相似于$B_1,A_2$相似于$B_2$；\n②若$A_1$相似于$B_1,A_2$相似于$B_2$，则$\\begin{pmatrix} A_1 & O \\\\ O & A_2 \\end{pmatrix}$相似于$\\begin{pmatrix} B_1 & O \\\\ O & B_2 \\end{pmatrix}$；\n③若$\\begin{pmatrix} A_1 & O \\\\ O & A_2 \\end{pmatrix}$合同于$\\begin{pmatrix} B_1 & O \\\\ O & B_2 \\end{pmatrix}$，则$A_1$合同于$B_1,A_2$合同于$B_2$；\n④若$A_1$合同于$B_1,A_2$合同于$B_2$，则$\\begin{pmatrix} A_2 & O \\\\ O & A_1 \\end{pmatrix}$合同于$\\begin{pmatrix} B_1 & O \\\\ O & B_2 \\end{pmatrix}$，正确结论的个数为\nA. 1.  \nB. 2.  \nC. 3.  \nD. 4.  \n\n10\\.已知二次型$f(x_1,x_2,x_3)$在正交变换$x=Qv$下化为$y_1^2-y_2^2$，其中$Q=(e_1,e_2,e_3)$。若$P=(e_2,-e_3,e_1)$，则$f(x_1,x_2,x_3)$在变换$x=Pz$下化为\nA. $z_1^2+z_2^2+z_3^2$.  \nB. $z_1^2-z_2^2+z_3^2$.  \nC. $-z_1^2+z_2^2$.  \nD. $-z_1^2-z_3^2$.  \n\n### 填空题\n\n11\\. 设函数 $f(x)=\\frac{(x-1)(x-2)^2(x-3)^3}{x}$，则 $f''(2)=$___。\n\n12\\. $f(x)=\\int_0^x(t-1)\\sqrt{t}e^{\\sqrt{t}}dt$ 的极小值为___。\n\n13\\. 曲线 $L:y=x^2-\\frac{1}{8}\\ln x\\left(\\frac{1}{2}<x<2\\right)$ 的弧长为___。\n\n14\\. 若可微函数 $z=f(x,y)$ 在平面区域 $D=\\{(x,y)\\mid x^2+y^2\\leq5\\}$ 上的最大值点为 $(1,2)$，且 $f(1,2)=M$，则曲线 $f(x,y)=M$ 在点 $(1,2)$ 处的切线方程为___。\n\n15\\. $\\int_0^1 dy\\int_y^1\\left(\\frac{\\sin x^2}{x}-\\sin y^2\\right)dx=$___。\n\n16\\. 若正定矩阵 $A$ 满足 $A^2=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$，则 $A=$___。\n"}
+
+## tool · 2026-11-12T01:38:52Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+{
+  "type": "input_image",
+  "image_url": "images/ea3736bc8893d05057dbee5a0ac59f36434363c04d313211cd743c242902d4df.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/c9fb3518764bda97ec758e7fb725fde30d74dabbf1a411523b53e69d439a2935.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/48b7abc2c3a74290049774f55a211c6c70f06405f473a6b30962f51395cc5e85.png",
+  "detail": "high"
+}
+{"chunk_id":"d03258","wall_time_seconds":0.000009542,"exit_code":0,"original_token_count":1061,"output":"## 24 张宇四套卷· 卷四\n\n### 选择题\n\n1\\. 设 $f(x)$ 在 x=0 处可导，且 $f\\left(\\frac{1}{n}\\right)=\\frac{2}{n}$ ($n=1,2,3,\\cdots$)，则 $f'(0)=$\nA. 0.  \nB. 1.  \nC. 2.  \nD. 3.  \n\n2\\. 设正项数列 $\\{a_{n}\\}$ 单调减少，$\\lim_{n \\to \\infty} a_{n} = a$，则 $\\lim_{n \\to \\infty} \\left(a_{n}^{n} + a_{n}^{n} + \\cdots + a_{n}^{n}\\right)^{\\frac{1}{n}} =$\nA. 0.  \nB. $a_{1}$.  \nC. a.  \nD. $+\\infty$.  \n\n3\\. 设 $y = y(x)$ 满足条件 $\\left\\{\\begin{array}{l}y'' + 2y' + 4y = 0, \\\\ y(0) = y'(0) = 2, \\\\ \\end{array}\\right.$ 则 $\\int_{0}^{+\\infty} y(x) \\, dx$ 和 $\\int_{0}^{+\\infty} y^2(x) \\, dx$ 的值分别为\nA. $\\frac{3}{2}, \\frac{13}{4}$.  \nB. $\\frac{2}{3}, \\frac{13}{4}$.  \nC. $\\frac{3}{2}, \\frac{13}{2}$.  \nD. $\\frac{2}{3}, \\frac{13}{2}$.  \n\n4\\. 已知 $f(x)$ 为连续函数，则 $\\lim_{n \\to \\infty} \\sum_{i=1}^{n} f\\left(\\frac{2n+i}{2n}\\right) \\frac{1}{n} =$\nA. $2\\int_{\\frac{1}{2}}^{1} f(x) \\, dx.$  \nB. $2\\int_{1}^{2} f(x) \\, dx.$  \nC. $\\int_{\\frac{1}{4}}^{\\frac{3}{2}} \\frac{f(\\sqrt{x})}{\\sqrt{x}} \\, dx.$  \nD. $\\int_{1}^{\\frac{3}{4}} \\frac{f(\\sqrt{x})}{\\sqrt{x}} \\, dx.$  \n\n5\\. 设 $f'(x) = [g(x)]^2$，且在 $(-\\infty, +\\infty)$ 内 $g(x) < 0, g''(x) < 0, g'(0) = 0$，则下列结论正确的是\nA. $(0, f(0))$ 是曲线 $y = f(x)$ 的拐点.  \nB. x = 0 是函数 $y = f(x)$ 的极大值点.  \nC. 曲线 $y = f(x)$ 在 $(-\\infty, +\\infty)$ 上是凹的.  \nD. $f(0)$ 是 $f(x)$ 在 $(-\\infty, +\\infty)$ 上的最大值.  \n\n6\\. 若 $f(x, y)$ 在点 $(0, 0)$ 的全微分 $df = 0$，则点 $(0, 0)$ 处的全增量 $\\Delta f$ 可以为\nA. $\\sqrt{|\\Delta x \\Delta y|}$.  \nB. $\\frac{\\Delta x \\Delta y}{\\sqrt{(\\Delta x)^2 + (\\Delta y)^2}}$.  \nC. $\\frac{\\sin[(\\Delta x)^2 - (\\Delta y)^2]}{\\sqrt{(\\Delta x)^2 + (\\Delta y)^2}}$.  \nD. $\\left[(\\Delta x)^2 + (\\Delta y)^2\\right]\\sin\\frac{1}{(\\Delta x)^2 + (\\Delta y)^2}$.  \n\n7\\. 设 $p(x)$ 为正值连续函数，则方程 $y' + p(x)y = 0$ 的所有积分曲线上横坐标相同的点的切线\nA. 相交于一点.  \nB. 平行但不重合.  \nC. 或者相交于一点，或者互相重合.  \nD. 重合.  \n\n8\\. 已知 $\\eta_{1}$ 和 $\\eta_{2}$ 是线性方程组 $\\left\\{\\begin{array}{l}ax_{1}+x_{2}+2x_{3}=b, \\\\ x_{1}+cx_{2}-x_{3}=1, \\\\ 2x_{1}+x_{2}-2x_{3}=-1\\end{array}\\right.$ 的两个不同解，$k,k_{1},k_{2}$ 为任意常数，则该线性方程组的通解是\nA. $(k_{1}+1)\\eta_{1}+k_{2}\\eta_{2}$.  \nB. $(k_{1}-1)\\eta_{1}+k_{2}\\eta_{2}$.  \nC. $(k+1)\\eta_{1}-k\\eta_{2}$.  \nD. $(k-1)\\eta_{1}-k\\eta_{2}$.  \n\n9\\. 若向量组 $a_{1}=(1,1,a)^{T}$, $a_{2}=(1,a,1)^{T}$, $a_{3}=(a,1,1)^{T}$ 可由向量组 $\\beta_{1}=(1,1,a)^{T}$, $\\beta_{2}=(-2,a,4)^{T}$, $\\beta_{3}=(-2,a,a)^{T}$ 线性表示，但向量组 $\\beta_{1},\\beta_{2},\\beta_{3}$ 不能由向量组 $a_{1},a_{2},a_{3}$ 线性表示，则 a=\nA. -1.  \nB. 1.  \nC. -2.  \nD. 2.  \n\n10\\. 若 $f(x_{1},x_{2},x_{3}) = (ax_{1} + 2x_{2} - 3x_{3})^{2} + (x_{2} - 2x_{3})^{2} + (x_{1} + ax_{2} - x_{3})^{2}$ 是正定二次型，则 a 的取值范围是\nA. $a \\neq 1$.  \nB. $a \\neq -\\frac{1}{2}$.  \nC. $a \\neq 1$ 或 $a \\neq -\\frac{1}{2}$.  \nD. $a \\neq 1$ 且 $a \\neq -\\frac{1}{2}$.  \n### 填空题\n\n11\\. 曲线 $\\left\\{\\begin{array}{l}x=t-\\ln(1+t^{2}), \\\\ y=\\arctan t\\end{array}\\right.$ 在 t=2 处的曲率为 ___.\n\n12\\. 已知 $\\int_{s}^{+\\infty}\\left(\\frac{a}{x-3}-\\frac{1}{x-1}\\right)dx = b, a, b$ 为常数，则 ab = ___.\n\n13\\. 设 $f(x) = \\frac{1}{2^{x} + 1}$, $x \\in R$, 则 $f^{(4)}(0) =$ ___.\n\n14\\. 设平面区域 $D = \\{(x, y) \\mid y - 3 \\leq 2x \\leq -y + 3, 0 \\leq y \\leq 3\\}$，平面薄板 $D$ 的面密度为 $\\rho(x, y) = y$，则 $D$ 的质心为 ___.\n\n15\\. 设 $y = y(x)$ 及 $z = z(x)$ 由方程 $e^z - xyz = 0$ 及 $xz^2 = \\ln y$ 所确定，则 $\\left. \\frac{dz}{dx} \\right|_{x=\\frac{1}{2}} =$ ___.\n\n16\\. 设 3 阶实对称矩阵 $A = \\begin{pmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{12} & a_{22} & a_{23} \\\\ a_{13} & a_{23} & a_{33} \\end{pmatrix}$，$f(x_1, x_2, x_3) = \\begin{vmatrix} a_{11} - x_1 & a_{12} & a_{13} \\\\ a_{12} & a_{22} - x_2 & a_{23} \\\\ a_{13} & a_{23} & a_{33} - x_3 \\end{vmatrix}$，若属于 A 的二重特征值 -1 的特征向量为 $a_1 = \\begin{pmatrix} -1 \\\\ -1 \\\\ 1 \\end{pmatrix}$，$a_2 = \\begin{pmatrix} 1 \\\\ -2 \\\\ -1 \\end{pmatrix}$，$f(1,1,1) = 0$，则 $A =$ ___.\n"}
+
+## tool · 2026-11-12T01:39:22Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T01:39:40Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"c2d555","wall_time_seconds":0.000011666,"exit_code":0,"original_token_count":546,"output":"import re\nfrom pathlib import Path\n\n\nroot = Path('references/302模拟27md/往年模拟卷选填精选')\nwork = Path('.question-bank-work')\nfor subject, group, count in [(2, 'lilin', 4)]:\n    for number in range(1, count + 1):\n        text = (work / f'older-topic-candidate-{subject}-{group}-v{number}.md').read_text()\n        assert re.findall(r'(?m)^(\\d+)\\\\\\.', text) == [str(i) for i in range(1, 17)]\n        for block in re.split(r'(?m)^\\d+\\\\\\.', text)[1:11]:\n            assert re.findall(r'(?m)^([A-D])\\. ', block) == list('ABCD')\n        (work / f'older-topic-{subject}-{group}-v{number}.md').write_text(text)\nfor number, chinese in enumerate('一二三四', 1):\n    source = (work / f'older-lilin-1-v{number}.md').read_text()\n    text = source.split('### 解答题')[0].strip()\n    text = re.sub(r'^## .*', f'## 24 李林四套卷· 卷{chinese}', text, count=1)\n    if number == 1:\n        text = text.replace(r'A. $\\operatorname{cov}(X+Y,X)=0$', r'A. $\\operatorname{cov}(X-Y,X)=0$')\n    if number == 3:\n        text = text.replace(r'与 $A=\\begin{bmatrix}', r'与 $\\Lambda=\\begin{bmatrix}')\n    if number == 4:\n        text = text.replace(r'且 $|A|=0$', r'且 $|A|$')\n        text = text.replace(r'C. $2(1-e^{\\frac12})$', r'C. $2(1-e^{-\\frac12})$')\n        text = text.replace('（$n>1$）', '（$n_1>1$）')\n    assert re.findall(r'(?m)^(\\d+)\\\\\\.', text) == [str(i) for i in range(1, 17)]\n    (work / f'older-topic-1-lilin-v{number}.md').write_text(text + '\\n')\n\nfor subject in (1, 2):\n    chinese = '一' if subject == 1 else '二'\n    volumes = sorted(work.glob(f'older-topic-{subject}-*.md'))\n    for style in ('紧凑', '留白'):\n        target = root / f'【A4{style}】数{chinese}模拟卷选填精选.pdf.md'\n        original = target.read_text()\n        for volume in volumes:\n            text = volume.read_text().strip()\n            heading = text.splitlines()[0]\n            pattern = r'(?ms)^' + re.escape(heading) + r'$.*?(?=^## |\\Z)'\n            original, count = re.subn(pattern, lambda _: text + '\\n\\n', original)\n            assert count == 1, (target, heading)\n        target.write_text(original.rstrip() + '\\n')\n        print(target, len(volumes))\n"}
+{}
+{"chunk_id":"8cd311","wall_time_seconds":0.001054958,"exit_code":0,"original_token_count":112,"output":"references/302模拟27md/往年模拟卷选填精选/【A4紧凑】数一模拟卷选填精选.pdf.md 8\nreferences/302模拟27md/往年模拟卷选填精选/【A4留白】数一模拟卷选填精选.pdf.md 8\nreferences/302模拟27md/往年模拟卷选填精选/【A4紧凑】数二模拟卷选填精选.pdf.md 8\nreferences/302模拟27md/往年模拟卷选填精选/【A4留白】数二模拟卷选填精选.pdf.md 8\n827 math expressions rendered\n"}
+
+## tool · 2026-11-12T01:39:49Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"0adf2a","wall_time_seconds":0.000008583,"exit_code":0,"original_token_count":0,"output":""}
+{
+  "type": "input_image",
+  "image_url": "images/879f6ec7ed9cb56ce445b3db5c28be4ad035639ce1a6fd79f6e544eb9b1980da.png",
+  "detail": "high"
+}
+
+## tool · 2026-11-12T01:40:01Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+{"chunk_id":"b987c1","wall_time_seconds":0.000009291,"exit_code":0,"original_token_count":104,"output":"references/302模拟27md/往年模拟卷选填精选/【A4紧凑】数一模拟卷选填精选.pdf.md 8\nreferences/302模拟27md/往年模拟卷选填精选/【A4留白】数一模拟卷选填精选.pdf.md 8\nreferences/302模拟27md/往年模拟卷选填精选/【A4紧凑】数二模拟卷选填精选.pdf.md 8\nreferences/302模拟27md/往年模拟卷选填精选/【A4留白】数二模拟卷选填精选.pdf.md 8\n"}
+
+## tool · 2026-11-12T01:40:06Z
+
+
+
+
+## tool · 2026-11-12T01:40:14Z
+
+
+Script completed
+Wall time 0.6 seconds
+Output:
+
+{"chunk_id":"a62a9b","wall_time_seconds":0.432023458,"exit_code":0,"original_token_count":0,"output":""}
+{
+  "type": "input_image",
+  "image_url": "images/867380f9e359b21e185f49612b654bbc6074e75514e30b445a4f186b6900fb1c.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/217e69bdeb4cfa5d8609129a3d76306a26f6c92662c52647e3c90ffd7c3b045d.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/2fa29904203080dc4650b9afb861bab947ec3fd53648be60ed0e3baa406799b1.png",
+  "detail": "high"
+}
+{"chunk_id":"044e26","wall_time_seconds":0.000007625,"exit_code":0,"original_token_count":1161,"output":"## 24 超越十套卷· 卷一\n\n### 选择题\n\n1\\. 设函数 $f(x)=\\begin{cases}x^2, & x\\leq0, \\\\ \\ln x, & x>0, \\end{cases}$ 则函数 $f(f(x))$ ( ) .\nA. 无极值点  \nB. 有一个极小值点, 无极大值点  \nC. 有一个极大值点, 无极小值点  \nD. 有一个极小值点和一个极大值点  \n\n2\\. 设 $f(x,y)=\\begin{cases}\\frac{x^2y}{x^2+y^2}, & x^2+y^2\\neq0, \\\\ 0, & x^2+y^2=0, \\end{cases}$ 则 ( ).\nA. $f_{xy}^{\\prime\\prime}(0,0),f_{yx}^{\\prime\\prime}(0,0)$ 均存在  \nB. $f_{xy}^{\\prime\\prime}(0,0),f_{yx}^{\\prime\\prime}(0,0)$ 均不存在  \nC. $f_{xy}^{\\prime\\prime}(0,0)$ 存在, $f_{yx}^{\\prime\\prime}(0,0)$ 不存在  \nD. $f_{xy}^{\\prime\\prime}(0,0)$ 不存在, $f_{yx}^{\\prime\\prime}(0,0)$ 存在  \n\n3\\. 设有积分 $I_1=\\int_0^1\\frac{\\sin x}{\\sqrt{1-x^2}}dx$, $I_2=\\int_0^1\\frac{\\cos x}{\\sqrt{1-x^2}}dx$, 则下列说法正确的是 ( ).\nA. $I_1$ 发散, $I_2$ 收敛且 $I_2<1$  \nB. $I_1$ 收敛, $I_2$ 发散且 $I_1<1$,  \nC. $I_1,I_2$ 均收敛且 $I_1<1,I_2<1$  \nD. $I_1,I_2$ 均收敛且 $I_1<1,I_2>1$  \n\n4\\. 设 k 为实数, 则下列说法正确的是 ( ).\n① 设正项级数 $\\sum_{n=1}^{\\infty}u_n$ 满足 $\\frac{u_{n+1}}{u_n}<1$, 则级数 $\\sum_{n=1}^{\\infty}u_n$ 收敛 ② 设级数 $\\sum_{n=1}^{\\infty}u_n$ 满足 $\\left|\\frac{u_{n+1}}{u_n}\\right|\\geq1$, 则级数 $\\sum_{n=1}^{\\infty}u_n$ 一定发散 ③ 若 $\\lim_{n\\to\\infty}\\frac{a_n}{b_n}=k$, 级数 $\\sum_{n=1}^{\\infty}b_n$ 绝对收敛, 则 $\\sum_{n=1}^{\\infty}a_n$ 也绝对收敛 ④ 若级数 $\\sum_{n=1}^{\\infty}a_n$, $\\sum_{n=1}^{\\infty}b_n$ ($b_n\\neq0$) 均绝对收敛, 则 $\\lim_{n\\to\\infty}\\left|\\frac{a_n}{b_n}\\right|=k$.\nA. ①③  \nB. ②④  \nC. ①④  \nD. ②③  \n\n5\\. 设 $A^{*}$ 为 3 阶矩阵 $A$ 的伴随矩阵, 先将 $A$ 的第一行与第三行对调得到 $B$, 再将 $B$ 的第二列的 -2 倍加到第一列得到 $E$, 则 $\\left[2A+(A^{*})^{*}\\right]^{-1}=(\\quad)$.\nA. $\\begin{pmatrix} 0 & 0 & 1 \\\\ 0 & 1 & 2 \\\\ 1 & 0 & 0 \\end{pmatrix}$  \nB. $\\begin{pmatrix} 0 & 0 & 1 \\\\ 0 & 1 & -2 \\\\ 1 & 0 & 0 \\end{pmatrix}$  \nC. $\\begin{pmatrix} 0 & 0 & 1 \\\\ -2 & 1 & 0 \\\\ 1 & 0 & 0 \\end{pmatrix}$  \nD. $\\begin{pmatrix} 0 & 0 & 1 \\\\ 1 & -2 & 0 \\\\ 0 & 1 & 0 \\end{pmatrix}$  \n\n6\\. 设 $A, B$ 为 $n$ 阶可逆的实对称矩阵.\n\n① $A, B$ 的列向量组具有相同的线性相关性; ② $A, B$ 的行向量组具有相同的线性相关性;\n③ 存在可逆矩阵 $P$, 使 $P^{T}A^{2}P=B^{2}$; ④ 存在可逆矩阵 $P$, 使 $P^{-1}ABP=BA$.\n\n以上说法正确的个数为( ).\nA. 1  \nB. 2  \nC. 3  \nD. 4  \n\n7\\. 设二次型 $f(x_{1}, x_{2}, \\cdots, x_{n})=\\sum_{i=1}^{m}(a_{i1}x_{1}+a_{i2}x_{2}+\\cdots+a_{ii}x_{n})^{2}$ 的矩阵为 $B$, 记 $A=(a_{ij})_{m\\mid n}$, 则当( )时, 二次型 $f=x^{T}Bx$ 为正定二次型.\nA. $r(f)=m$  \nB. $r(f)=n$  \nC. $r(f)=r(A)$  \nD. $m=n$  \n\n8\\. 设连续型随机变量 $X$ 的分布函数为 $F(x)$, $Y=F(X)$, 则 $E(Y^{2})$ 为( ).\nA. $\\frac{1}{3}$.  \nB. $\\frac{1}{2}$  \nC. $\\frac{1}{12}$  \nD. $\\frac{1}{9}$  \n\n9\\. 从 1, 2, 3, 4 中任取一个数, 记为 $X$, 再从 0, 1, \\cdots, X 中任取两个数, 记 $Y$ 为取到偶数的个数, 则 $EY=(\\quad)$.\nA. $\\frac{17}{15}$  \nB. $\\frac{14}{15}$  \nC. $\\frac{13}{15}$  \nD. $\\frac{11}{15}$  \n\n10\\. 设总体 $X$ 服从区间 $[a, b]$ 上的均匀分布, $a, b$ 未知. $x_{1}, x_{2}, \\cdots, x_{n}$ 为来自总体 $X$ 的一个简单随机样本值, 则区间长度 $b-a$ 的最大似然估计值为( ).\nA. $\\frac{1}{2}\\left[\\max\\{x_{1}, \\cdots, x_{n}\\} + \\min\\{x_{1}, \\cdots, x_{n}\\}\\right]$  \nB. $\\frac{1}{2}\\left[\\max\\{x_{1}, \\cdots, x_{n}\\} - \\min\\{x_{1}, \\cdots, x_{n}\\}\\right]$  \nC. $\\max\\{x_{1}, \\cdots, x_{n}\\} + \\min\\{x_{1}, \\cdots, x_{n}\\}$  \nD. $\\max\\{x_{1}, \\cdots, x_{n}\\} - \\min\\{x_{1}, \\cdots, x_{n}\\}$  \n\n### 填空题\n\n11\\.$\\lim_{n \\to \\infty} \\frac{\\sum_{k=1}^{n} \\frac{1}{k}}{\\ln n} =$____.\n\n12\\. 设 $xy = c_1 e^x + c_2 e^{2x}$ 是某二阶齐次线性微分方程的通解，则该方程为 ___.\n\n13\\. 设 $z = z(u, v)$ 由方程 $z = e^{uvz}$ 确定，$u = u(x), v = v(x)$ 由方程组 $\\begin{cases} u^2 + 2v + e^x = 2, \\\\ u - v + x = 1\\end{cases}$ 确定，其中 $u > 0$，则 $\\left. \\frac{dz}{dx} \\right|_{x=0} =$ ___.\n\n14\\. 设 $L$ 为从 $A(-1,0)$ 到 $B(0,1)$，再到 $C(1,0)$ 三点连成的折线段，则曲线积分 $\\int_L \\frac{y^2 dx + x^2 dy}{|x| + |y|} =$ ___.\n\n15\\. 设 3 阶矩阵 $A = \\begin{pmatrix} a & 2 & 2 & 0 \\\\ 0 & 1 & 2 & 0 & 0 & -1 \\end{pmatrix}$ 不能相似对角化，则 $a =$ ___.\n\n16\\. 设随机变量 $X$ 与 $Y$ 相互独立且均服从 $[0,2]$ 上的均匀分布，记 $U = \\max\\{X,Y\\}$，$V = \\min\\{X,Y\\}$. $F(u,v)$ 为 $(U,V)$ 的分布函数，则 $F(1,\\frac{1}{2}) =$ ___.\n"}
+
+## tool · 2026-11-12T01:40:33Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"45f16c","wall_time_seconds":0.00000975,"exit_code":0,"original_token_count":75,"output":"## 24 超越十套卷·卷一\n## 24 超越十套卷·卷二\n## 24 超越十套卷·卷三\n## 24 超越十套卷·卷四\n## 24 超越十套卷·卷五\n## 24 超越十套卷·卷六\n## 24 超越十套卷·卷七\n## 24 超越十套卷·卷八\n## 24 超越十套卷·卷九\n## 24 超越十套卷·卷十\n"}
+{}
+{
+  "type": "input_image",
+  "image_url": "images/65bb9063e648d9ba4a950d96ede6b742b3bc3cee57fc09101118599719b6d1ae.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/424d1b92bb7a64060eda250a6c29d3f25d305d4cab47e0fa95aec7b8e0844be8.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/5920d9b1b34e5d31fc0928121cb664c6b599825e62141a00dd445a858e79c4fe.png",
+  "detail": "high"
+}
+{"chunk_id":"0a2ef3","wall_time_seconds":0.000012334,"exit_code":0,"original_token_count":1437,"output":"## 24 超越十套卷· 卷二\n\n### 选择题\n\n1\\. 关于数列 $\\{x_{n}\\}, \\{y_{n}\\}$ 有以下论断\n① 若数列 $\\{x_{2n}\\}$ 和 $\\{x_{2n-1}\\}$ 都收敛，则数列 $\\{x_{n}\\}$ 收敛；\n② 若数列 $\\{x_{n}+y_{n}\\}$ 和 $\\{x_{n}-y_{n}\\}$ 都收敛，则数列 $\\{x_{n}\\}, \\{y_{n}\\}$ 均收敛；\n③ 若数列 $\\{x_{n}\\}$ 和 $\\{y_{n}\\}$ 都发散，则数列 $\\{x_{n}+y_{n}\\}$ 可能收敛；\n④ 若数列 $\\{x_{n}y_{n}\\}$ 收敛，则数列 $\\{x_{n}\\}$ 和 $\\{y_{n}\\}$ 必有一个收敛.\n以上结论中正确的个数为（ ）。\nA. ]  \nB. 2  \nC. 3  \nD. 4  \n\n2\\. 设函数 $f(x,y)$ 在全平面内具有连续偏导数，对任意的两点 $(x_{1},y_{1})$，$(x_{2},y_{2})$，不等式 $\\left|f(x_{1},y_{1})-f(x_{2},y_{2})\\right| \\leqslant |x_{1}-x_{2}| + |y_{1}-y_{2}|$ 成立的一个充分条件为（ ）。\nA. $\\left|\\frac{\\partial f}{\\partial x}\\right| \\geqslant 1$，$\\left|\\frac{\\partial f}{\\partial y}\\right| \\leqslant 1$  \nB. $\\left|\\frac{\\partial f}{\\partial x}\\right| \\leqslant 1$，$\\left|\\frac{\\partial f}{\\partial y}\\right| \\geqslant 1$  \nC. $\\left|\\frac{\\partial f}{\\partial x}\\right| \\geqslant 1$，$\\left|\\frac{\\partial f}{\\partial y}\\right| \\geqslant 1$  \nD. $\\left|\\frac{\\partial f}{\\partial x}\\right| \\leqslant 1$，$\\left|\\frac{\\partial f}{\\partial y}\\right| \\leqslant 1$  \n\n3\\. 设 $F(x) = \\int_{-1}^{1} |x - t| e^{-t^2} dt - 1$，则函数 $F(x)$ 在定义域内的零点个数为（ ）。\nA. 0  \nB. 1  \nC. 2  \nD. 3  \n\n4\\. 设 $L: x^{2} + y^{2} = a^{2}$，并取逆时针方向，$L_{1}$ 为 L 在第一象限的部分，则（ ）。\nA. $\\oint_{L} y dx = \\oint_{L} x dy$  \nB. $\\oint_{L} y^{2} dx = \\int_{L} x^{2} dy$  \nC. $\\oint_{L} x dx = 4 \\int_{L_{1}} x dx$  \nD. $\\oint_{L} x^{2} dy = 4 \\int_{L_{1}} x^{2} dy$  \n\n5\\. 设 A 为 3 阶非零的反对称矩阵，矩阵 $B = \\begin{pmatrix} a & 5 & 1 \\\\ 0 & 2 & 0 \\\\ 2 & b & 3 \\end{pmatrix}$，且 $r(AB-A) = 1$，则必有（ ）。\n\n6\\. 三元二次型 $(x_{1}+x_{2}+2x_{3})(x_{2}+ax_{3})=1$ 表示的空间图形是( ).\nA. 双叶双曲面  \nB. 椭圆柱面  \nC. 双曲柱面  \nD. 依赖于 $a$ 的取值  \n\n7\\. 设向量组 $a_{1}, a_{2}, a_{3}$ 是 3 维向量空间 $R^{3}$ 的一组基, $k$ 为一个常数, 由 $-ka_{1} + a_{2}, -a_{2} + a_{3}, ka_{3} + a_{1}$ 生成的向量空间的维数为( ).\nA. 1  \nB. 2  \nC. 3  \nD. 依赖于 $k$  \n\n8\\. 以下 4 个结论\n① 设 $0 < P(A) < 1, P(B \\mid A) + P(\\overline{B} \\mid \\overline{A}) = 1$，则 $\\overline{A}$ 与 $\\overline{B}$ 相互独立；\n② 设 $A, B$ 相互独立, $P(A) = 0$，则 $\\overrightarrow{A}, \\overrightarrow{B}, \\overrightarrow{C}$ 必相互独立；\n③ 若 $A, B$ 互不相容, $P(A) > 0$，则 $P(\\overrightarrow{A}\\overrightarrow{B} \\mid A) = 1$；\n④ 若 $A, B, C$ 相互独立，则必有 $A$ 和 $B - C$ 独立.\n正确的个数为( ).\nA. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407,  \n\n12\\. 已知 $f(x)$ 是微分方程 $x^2f'(x) - xf(x) = \\sin^4x$ 满足初始条件 $f\\left(\\frac{\\pi}{2}\\right) = 0$ 的特解，则 $\\int_0^{\\frac{\\pi}{2}} x f(x) \\, dx =$ ___.\n\n13\\. 级数 $\\sum_{n=1}^{\\infty} \\frac{1}{n^2} = \\frac{\\pi^2}{6}$，$[x]$ 表示不超过 $x$ 的最大整数，则积分 $\\int_1^{+\\infty} \\frac{[x]^2}{x^3} \\, dx =$ ___.\n\n14\\. 设曲面 $\\Sigma$ 为锥面 $z = \\sqrt{x^2 + y^2}$ 和平面 $z = 1$ 所围立体的表面，则曲面 $\\Sigma$ 的形心坐标为 ___.\n\n15\\. 设 $A$ 是 4 阶实矩阵，$(A+3E)x = 0$ 的基础解系为 $\\alpha_1, \\alpha_2, (A-E)x = 0$ 的基础解系为 $\\alpha_1$，则 $r(A^2 + 2A - 3E) =$ ___.\n\n16\\. 设总体 $X$ 的概率密度为 $f(x) = \\begin{cases} \\frac{1}{\\sqrt{2\\pi}x} \\mathrm{e}^{-\\frac{(\\ln x)^2}{2}}, & x > 0, \\\\ 0, & x \\leq 0, \\end{cases}$，$X_1, X_2, \\cdots, X_n (n \\geq 2)$ 为来自总体 $X$ 的简单随机样本，$\\bar{X}$ 为样本均值，则根据切比雪夫不等式 $P\\{0 < \\bar{X} < 2e^{\\frac{1}{2}}\\} \\geq $ ___.\n"}
+
+## tool · 2026-11-12T01:40:41Z
+
+
+
+
+## tool · 2026-11-12T01:40:57Z
+
+
+
+
+## tool · 2026-11-12T01:41:05Z
+
+
+
+
+## tool · 2026-11-12T01:41:57Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T01:42:08Z
+
+
+
+
+## tool · 2026-11-12T01:42:15Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/e9d913807127136ea693315f9d7262d8ecdd17cc20362c7926f75ac6f72c28c1.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/fb51f66613703c394dfede38757dbc64fc5eadd75aad7517ff606ee11372fe10.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/8557545ae42318021b3a7160949613ead260f3b99798110325384e26b4451ef6.png",
+  "detail": "high"
+}
+{"chunk_id":"2ba7dd","wall_time_seconds":0.000010125,"exit_code":0,"original_token_count":1040,"output":"## 24 超越十套卷· 卷三\n\n### 选择题\n\n1\\. 曲线 $f(x)=x\\cdot\\left[\\frac{2}{x}\\right]$ ($[\\cdot]$ 表示取整函数) 的渐近线有().\nA. 1 条  \nB. 2 条  \nC. 3 条  \nD. 4 条  \n\n2\\. 设曲线 $L:x^2+y^2=-2y$, 则曲线积分 $\\oint_L\\sqrt{x^2+y^2}ds = (\\quad)$.\nA. 2  \nB. 4  \nC. 6  \nD. 8  \n\n3\\. 设 $f(x)$ 是在 $(-\\infty,+\\infty)$ 内以 T 为周期的连续函数, 以下命题中正确的个数为().\n① 若 $\\int_0^T f(x) \\, dx = 0$, 则 $\\int_0^T f(t) \\, dt$ 是以 T 为周期的函数;\n② 若 $f(x)$ 是奇函数, 则 $\\int_0^T f(t) \\, dt$ 是以 T 为周期的函数;\n③ 若 $\\int_0^{+\\infty} f(x) \\, dx$ 收敛, 则 $\\int_0^T f(t) \\, dt$ 是以 T 为周期的函数;\n④ 函数 $F(x) = \\int_0^T [f(t) - f(-t)] \\, dt$ 是以 T 为周期的函数.\nA. 1  \nB. 2  \nC. 3  \nD. 4  \n\n4\\. 级数 $\\sum_{n=0}^{\\infty} \\int_0^1 (1-x^2)^n x^3 \\, dx = (\\quad).$\nA. $\\frac{1}{3}$  \nB. $\\frac{1}{2}$  \nC. 2  \nD. 3  \n\n5\\. 设 a 为 3 维实列向量, 且 $a^T a = 1$, $B = a a^T$, A 为 3 阶不可逆矩阵, 且 $A + 2B - AB = 2E$, 则 A 的特征值为().\nA. 2,2,2  \nB. 2,0,0  \nC. 1,1,0  \nD. 2,2,0  \n\n6\\. 设 A 为 3 阶实对称可逆矩阵, 将 A 的第一行的 2 倍加到第三行, 再将第一行乘 2 得到 B, 将矩阵 B 的第一列的 2 倍加到第三列, 再将第一列乘 2 得到矩阵 C, 则矩阵 $A^*$ 与 $C^*$().\nA. 合同但不相似  \nB. 相似但不合同  \nC. 合同且相似  \nD. 不合同也不相似  \n\n7\\. 设 $a_1, a_2, a_3$ 是齐次方程组 $A_n x = 0$ 的基础解系, $\\beta_i$ 是非齐次方程组 $A x = a_i$ 的特解, i = 1, 2, 3, 则 ( ).$\nA. $\\beta_1, \\beta_2, \\beta_3$ 线性相关  \nB. $\\beta_1, \\beta_2, \\beta_3$ 线性无关  \nC. $\\beta_1, \\beta_2, \\beta_3$ 可由 $a_1, a_2, a_3$ 线性表示  \nD. $a_1, a_2, a_3$ 可由 $\\beta_1, \\beta_2, \\beta_3$ 线性表示  \n\n8\\. 设随机变量 X 满足 $1 \\leq X \\leq 5, P\\{X = 1\\} = \\frac{1}{3}, P\\{X = 5\\} = \\frac{1}{4}$, 在 $\\{1 < X < 5\\}$ 发生条件下, X 在区间 (1,5) 内服从均匀分布, 则 X 的分布函数为 ( ).\nA. $F(x) = \\begin{cases} 0, & x < 1, \\\\ \\frac{15x + 33}{144}, & 1 \\leq x < 5, \\\\ 1, & x \\geq 5 \\end{cases}$  \nB. $F(x) = \\begin{cases} 0, & x < 1, \\\\ \\frac{x + 1}{6}, & 1 \\leq x < 5, \\\\ 1, & x \\geq 5 \\end{cases}$  \nC. $F(x) = \\begin{cases} 0, & x < 1, \\\\ \\frac{5x + 11}{48}, & 1 \\leq x < 5, \\\\ 1, & x \\geq 5 \\end{cases}$  \nD. $F(x) = \\begin{cases} 0, & x < 1, \\\\ \\frac{5(x - 1)}{48}, & 1 \\leq x < 5, \\\\ 1, & x \\geq 5 \\end{cases}$  \n\n9\\. 设总体 $X \\sim N(\\mu, \\sigma^2), X_1, X_2, \\cdots, X_n$ 为来自总体 X 的简单随机样本. $\\overline{X} = \\frac{1}{n} \\sum_{i=1}^{n} X_i$, 则期望 $E\\left[(X_1 - \\overline{X})^4\\right] = (\\quad)$.\nA. $\\frac{2(n+1)^2 \\sigma^4}{n^2}$  \nB. $\\frac{3(n+1)^2 \\sigma^4}{n^2}$  \nC. $\\frac{3(n-1)^2 \\sigma^4}{n^2}$  \nD. $\\frac{2(n-1)^2 \\sigma^4}{n^2}$  \n\n10\\. 设 $X_1, X_2, \\cdots, X_{36}$ 是来自总体 $X \\sim N(\\mu, 4)$ 的一个简单随机样本, 在置信度 $1 - \\alpha$ 下, $\\mu$ 的置信区间长度为 $\\frac{4}{3}$, 若在显著性水平 $\\alpha$ 下, 对于假设检验问题 $H_0; \\mu = 9, H_1; \\mu \\neq 9$, 则 $\\mu = 10$ 时, 该检验犯第二类错误的概率 $\\beta = (\\quad)$ (用标准正态分布函数表示).\nA. $\\Phi(1)$  \nB. $\\Phi(5) - \\Phi(1)$  \nC. $\\Phi(2)$  \nD. $1 - \\Phi(2)$  \n### 填空题\n\n11\\. 当 $x \\to 0$ 时, 若 $1 - \\frac{n+1}{1 + e^x + e^{2x} + \\cdots + e^{nx}}$ 与 $\\sin x$ 为等价无穷小, 则自然数 n = ___.\n\n12\\. 设 $f(x)=\\frac{1}{x+\\sqrt{1+x^2}}$, 其反函数记作 $f^{-1}(x)$, 则 $\\int_{0}^{+\\infty}f^{-1}(x)dx$.\n\n13\\. 设 $l$ 为曲线 $c:x^2+2xy-2y^3=1$ 在点 $(1,1)$ 处沿着 $x$ 增大方向的切向量, 则函数 $f(x,y)=\\frac{xy-2x^2}{1+x^2+y^2}$ 在 $(1,1)$ 沿方向 $l$ 的方向导数为 ___.\n\n14\\. $I=\\iint_{\\Sigma}sin^2x dy dz+sin^2z dz dx+sin^2z dx dy=$ ___.\n\n15\\. 设 $A$ 是 3 阶实对称矩阵、$a=(-a,4,a+1)^T$ 与 $\\beta=(a+1,a-3,3)^T$ 分别是齐次线性方程组 $(A-2E)x=0$ 与 $(A+3E)x=0$ 的解, 其中 $E$ 为 3 阶单位阵, 则 $a=$ ___.\n\n16\\. 设随机变量 $X\\sim E(2), Y\\sim P(2)$, 且 $X$ 与 $Y$ 相互独立. 记 $Z=X^2\\cdot2^Y$, 则 $X$ 与 $Z$ 的协方差 $Cov(X\\setminus Z)=$ ___.\n"}
+
+## tool · 2026-11-12T01:42:55Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-12T01:43:05Z
+
+
+
+
+## tool · 2026-11-12T01:43:14Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{
+  "type": "input_image",
+  "image_url": "images/5ecf96b29522575e6a0713bea3ac6d2a0bff30e5cc3e547aa9075a797ffe13c0.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/89f2a8fa5e322b5423eb163b6968c13f775fc372b1fe751d53269dbb7ef4f743.png",
+  "detail": "high"
+}
+{
+  "type": "input_image",
+  "image_url": "images/41b94cecfe6e2bb93e8b0f72d2e873151329d23e4c6f87ccda45cf7f14ceb863.png",
+  "detail": "high"
+}
+{"chunk_id":"3d7ecc","wall_time_seconds":0.000010542,"exit_code":0,"original_token_count":1009,"output":"## 24 超越十套卷· 卷四\n\n### 选择题\n\n1\\. 设函数 $y = y(x)$ 在点 x = 0 附近由方程 $2x - \\int_{0}^{y} e^{-t^2} dt = xy$ 所确定，且 $y(x) = \\lambda_1 x + \\lambda_2 x^2 + o(x^2)$ ($x \\to 0$)，则 $\\lambda_1, \\lambda_2) = (\\quad)$.\nA. (2,2)  \nB. (2, -2)  \nC. (2, 4)  \nD. (2, -4)  \n\n2\\. 设 $f(x, y) = \\begin{cases} \\frac{xy}{(x^2 + y^2)^p}, & x^2 + y^2 \\neq 0, \\\\ 0, & x^2 + y^2 = 0, \\end{cases}$ $g(x, y) = \\begin{cases} \\frac{1}{(xy)^q} \\sin x, & x y \\neq 0, \\\\ 0, & x y = 0, \\end{cases}$ $f(x, y)$ 和 $g(x, y)$ 在 (0, 0) 点连续的一个充分条件为 (\\quad).\nA. p < 1, q < 1  \nB. p < 1, q > 1  \nC. p > 1, q < 1  \nD. p > 1, q > 1  \n\n3\\. 设 0 < x < 1，则下列结论中正确的是 (\\quad).\nA. $\\frac{\\arcsin x^2}{x^2} < \\frac{\\arcsin x}{x} < \\left(\\frac{\\arcsin x}{x}\\right)^2$  \nB. $\\frac{\\arcsin x}{x} < \\left(\\frac{\\arcsin x}{x}\\right)^2 < \\frac{\\arcsin x^2}{x^2}$  \nC. $\\frac{\\arcsin x}{x} < \\frac{\\arcsin x^2}{x^2} < \\left(\\frac{\\arcsin x}{x}\\right)^2$  \nD. $\\left(\\frac{\\arcsin x}{x}\\right)^2 < \\frac{\\arcsin x}{x} < \\frac{\\arcsin x^2}{x^2}$  \n\n4\\. 设 $f(x) = \\begin{cases} 1, & -1 < x \\leq 0, \\\\ x^2, & 0 < x \\leq 1, \\end{cases}$ 在 $[-1, 1]$ 的傅里叶级数为 $\\frac{a_0}{2} + \\sum_{n=1}^{\\infty} a_n \\cos n \\pi x + b_n \\sin n \\pi x$，则系数 $a_2, b_2$ 满足 (\\quad).\nA. $a_2 = b_2 = \\frac{1}{2\\pi}$  \nB. $a_2 = b_2 = \\frac{1}{2\\pi^2}$  \nC. $a_2 = -\\frac{1}{2\\pi^2}, b_2 = \\frac{1}{2\\pi}$  \nD. $a_2 = \\frac{1}{2\\pi^2}, b_2 = -\\frac{1}{2\\pi}$  \n\n5\\. 设 A 是 4 \\times 3 的矩阵, $B = \\begin{cases} t & 0 & 2 \\\\ 0 & 2 & 0 \\\\ 1 & 0 & 3 \\end{cases}$，且秩 $r(A) = 2, r(AB - A) = 1$，则必有 (\\quad).\nA. B 可逆, B - E 可逆  \nB.\nC.\nD. B 可逆, B - E 可逆  \n\n6\\. 设 $A$ 为 4 阶矩阵, $|A| = 0$, $B$ 为 $4 \\times 3$ 的列满秩矩阵, $2AB + B = O$, 则 $|A + E| = (\\quad)$.\nA. $-1$  \nB. $0$  \nC. $1$  \nD. $2$  \n\n7\\. 设 $A$ 为 $3 \\times 4$ 实矩阵, $\\lambda$ 是 $AA^T$ 仅有的非零单特征值, 对应的特征向量为 $\\alpha = (1, -1, 1)^T$, $k_1, k_2$ 为任意常数, 则方程组 $A^T x = 0$ 的通解可为 (\\quad).\nA. $k_1(1, 1, 0)^T + k_2(1, -1, 0)^T$  \nB. $k_1(-1, 1, 0)^T + k_2(0, 1, 1)^T$  \nC. $k_1(1, 1, 0)^T + k_2(0, 1, 1)^T$  \nD. $k_1(1, 1, 0)^T + k_2(1, 0, 1)^T$  \n\n8\\. 设随机变量 $X \\sim E(1)$, $Y = \\text{sgn}(X-1)$, 则 $P\\{X < 2 \\mid Y = 1\\} = (\\quad)$.\nA. $\\frac{\\text{e}^2 - 1}{\\text{e}^2}$  \nB. $\\frac{1 + \\text{e}}{\\text{e}^2 + 1}$  \nC. $\\frac{\\text{e} - 1}{\\text{e}^2 + 1}$  \nD. $\\frac{\\text{e} - 1}{\\text{e}}$  \n\n9\\. 设总体 $X \\sim N(0, \\pi)$, $X_1, X_2, \\cdots, X_n$ 为来自总体 $X$ 的样本, 以 $|X_i|$ 为半径作圆, 所得各圆的面积和记为 $S$, 则由中心极限定理知 $S$ 近似服从 (\\quad).\nA. $\\chi^2(100)$  \nB. $t(100)$  \nC. $N(100\\pi^2, 200\\pi^4)$  \nD. $N(100\\pi, 200\\pi^2)$  \n\n10\\. 设 $X_1, X_2, \\cdots, X_n$ 为来自总体 $X \\sim N(2, \\sigma^2)$ 的简单随机样本, 若 $\\hat{\\sigma} = c \\sum_{i=1}^{n} |2X_i - 4|$ 是 $\\sigma$ 的无偏估计, 则 $c = (\\quad)$.\nA. $\\frac{4}{n\\sqrt{2\\pi}}$  \nB. $\\frac{\\sqrt{2\\pi}}{4n}$  \nC. $\\frac{\\sqrt{2\\pi}}{n}$  \nD. $\\frac{\\sqrt{2\\pi}}{2n}$  \n\n### 填空题\n\n11\\. $\\lim_{x \\to 0} \\frac{\\sqrt{\\cos x} - \\sqrt[3]{-\\cos x}}{\\ln(1+x^2)} = $ ___.\n\n12\\. 心形线 $r = 1 + \\cos\\theta$ 在点 $\\theta = \\frac{2\\pi}{3}$ 处的法线方程为 ____.\n\n13\\. 设曲面 $\\Sigma$ 的方程为 $x^2 + y^2 + z^2 = 2az$ ($a > 0$)，则积分 $I = \\iint_{\\Sigma} (x^2 + y^2 + z^2) dS =$ ___.\n\n14\\. 曲面 $2x^2 + 2y^2 + 3z^2 = 13$ 在点 $P_0$ 处的切平面 $\\pi$ 过点 (3, 1, 1) 且与直线 $\\begin{cases} x + 2y + z = 5, \\\\ x + 2y + 2z = 6 \\end{cases}$ 平行，则切平面 $\\pi$ 的方程为 ___.\n\n15\\. 已知 $A$ 为 3 阶可逆矩阵，且 $A^2 + 2A = O$，3 阶矩阵 $B$ 满足 $2A^{-1}B = A^* + B$，则 $|B| =$ ___.\n\n16\\. 设随机变量 $X \\sim \\begin{pmatrix} 0 & 1 \\\\ 1 - p & p \\end{pmatrix}$，$p \\in [\\frac{1}{3}, \\frac{2}{3}]$，$X_1$ 为来自总体 $X$ 的样本，$x_1$ 为样本值，则 $p$ 的极大似然估计值为 ___(用 $x_1$ 表示)。\n"}

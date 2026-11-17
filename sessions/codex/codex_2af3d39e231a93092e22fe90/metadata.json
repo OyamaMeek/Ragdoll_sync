@@ -1,0 +1,58 @@
+{
+  "created" : 1794044121710,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/07/rollout-2026-11-07T17-33-36-01a1b55b-3702-7c32-8099-1f95fc6d6c56.jsonl.zst",
+    "/Users/oyamahappa/.codex/sessions/2026/11/07/rollout-2026-11-07T17-35-21-01a1b55c-d230-7453-aa2d-736d137d2caf.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:2af3d39e231a93092e22fe90",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1b55b-3702-7c32-8099-1f95fc6d6c56",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "将 Clawd 加入 Codex 伙伴",
+  "updated" : 1794044164369,
+  "usage" : [
+    {
+      "cacheRead" : 106112,
+      "cacheWrite" : 0,
+      "id" : "resp_06d2193cad351866016aeef0dea48087d0ac6ab9149dc06bb0",
+      "input" : 1923,
+      "model" : "gpt-6.1-sol",
+      "output" : 96,
+      "time" : 1794044129937
+    },
+    {
+      "cacheRead" : 107904,
+      "cacheWrite" : 0,
+      "id" : "resp_06d2193cad351866016aeef0e2c3cc87d0874de0717b5e943a",
+      "input" : 3484,
+      "model" : "gpt-6.1-sol",
+      "output" : 258,
+      "time" : 1794044137406
+    },
+    {
+      "cacheRead" : 111488,
+      "cacheWrite" : 0,
+      "id" : "resp_06d2193cad351866016aeef0f9751887d0b59698c3dfedf95b",
+      "input" : 351,
+      "model" : "gpt-6.1-sol",
+      "output" : 89,
+      "time" : 1794044157321
+    },
+    {
+      "cacheRead" : 111744,
+      "cacheWrite" : 0,
+      "id" : "resp_06d2193cad351866016aeef0fe671487d0ad8fb2465b79a052",
+      "input" : 2084,
+      "model" : "gpt-6.1-sol",
+      "output" : 148,
+      "time" : 1794044164351
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "created" : 1794841567278,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Volumes-SamsungSSD990PRO-GitHub-Ragdoll-.agent-tests-b64ce1ed-d463-456d-b4f4-f92cc1590294--/3c3eb0da-7771-425e-81bb-9f5b020210ee/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:b8df07cd63feeea07d03c6fe",
+  "messages" : [
+
+  ],
+  "nativeID" : "3c3eb0da-7771-425e-81bb-9f5b020210ee",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/tests/b64ce1ed-d463-456d-b4f4-f92cc1590294",
+  "provider" : "deepseek-official",
+  "source" : "dsh",
+  "title" : "Remember the code RAGDOLL_CHECK_1729. Re",
+  "updated" : 1794841572909,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "16",
+      "input" : 82727,
+      "model" : "deepseek-v4-flash",
+      "output" : 2,
+      "time" : 1794841569758
+    },
+    {
+      "cacheRead" : 82560,
+      "cacheWrite" : 0,
+      "id" : "27",
+      "input" : 188,
+      "model" : "deepseek-v4-flash",
+      "output" : 38,
+      "time" : 1794841572908
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

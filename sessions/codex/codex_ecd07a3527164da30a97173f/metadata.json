@@ -1,0 +1,102 @@
+{
+  "created" : 1792389984456,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/10/19/rollout-2026-10-19T14-06-24-01a152c4-b022-7a60-ba37-962f2834f40e.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ecd07a3527164da30a97173f",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a152c4-b022-7a60-ba37-962f2834f40e",
+  "project" : "/Users/oyamahappa/Documents/GitHub/local-question-bank",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1792390175553,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbfcb80e0fcfaab016ad5b36804188191b6901541ce0c44c8",
+      "input" : 22873,
+      "model" : "codex-auto-review",
+      "output" : 267,
+      "time" : 1792389994708
+    },
+    {
+      "cacheRead" : 28672,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbfcb80e0fcfaab016ad5b3a81cb48191a9fbc60b4bfe7cec",
+      "input" : 5865,
+      "model" : "codex-auto-review",
+      "output" : 168,
+      "time" : 1792390057901
+    },
+    {
+      "cacheRead" : 34304,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbfcb80e0fcfaab016ad5b3adff28819193c0b44eb391a43c",
+      "input" : 1072,
+      "model" : "codex-auto-review",
+      "output" : 398,
+      "time" : 1792390065573
+    },
+    {
+      "cacheRead" : 35200,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbfcb80e0fcfaab016ad5b3b6b4288191a7bd8c6288e5c52d",
+      "input" : 1724,
+      "model" : "codex-auto-review",
+      "output" : 168,
+      "time" : 1792390072488
+    },
+    {
+      "cacheRead" : 36736,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbfcb80e0fcfaab016ad5b3d83df08191b8c231651cf34de7",
+      "input" : 2269,
+      "model" : "codex-auto-review",
+      "output" : 140,
+      "time" : 1792390107371
+    },
+    {
+      "cacheRead" : 38784,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbfcb80e0fcfaab016ad5b3e5a2148191a535631522bfcfcd",
+      "input" : 2289,
+      "model" : "codex-auto-review",
+      "output" : 101,
+      "time" : 1792390120294
+    },
+    {
+      "cacheRead" : 40832,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbfcb80e0fcfaab016ad5b3f8454481919d0f674d44777071",
+      "input" : 1372,
+      "model" : "codex-auto-review",
+      "output" : 155,
+      "time" : 1792390138010
+    },
+    {
+      "cacheRead" : 41984,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbfcb80e0fcfaab016ad5b40b2b888191b9ff3b271e7bab87",
+      "input" : 3516,
+      "model" : "codex-auto-review",
+      "output" : 208,
+      "time" : 1792390157539
+    },
+    {
+      "cacheRead" : 45312,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbfcb80e0fcfaab016ad5b41dc5fc819185d6a412ea624eea",
+      "input" : 2810,
+      "model" : "codex-auto-review",
+      "output" : 98,
+      "time" : 1792390175547
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

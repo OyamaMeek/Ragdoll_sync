@@ -1,0 +1,75 @@
+{
+  "created" : 1791995110088,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/10/15/rollout-2026-10-15T00-25-09-01a13b3b-6240-70a1-81d7-a5062fb92623.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:3ebc3d97ab7253d82c975f43",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a13b3b-6240-70a1-81d7-a5062fb92623",
+  "project" : "/Users/oyamahappa/Documents/GitHub/local-question-bank",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1791995264991,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0025d47e6d64438c016acfacf78c488191b8e6415d4a1d064c",
+      "input" : 20597,
+      "model" : "codex-auto-review",
+      "output" : 223,
+      "time" : 1791995130161
+    },
+    {
+      "cacheRead" : 26368,
+      "cacheWrite" : 0,
+      "id" : "resp_0025d47e6d64438c016acfad11bc3481919ba73dd2e7d77953",
+      "input" : 3024,
+      "model" : "codex-auto-review",
+      "output" : 132,
+      "time" : 1791995155498
+    },
+    {
+      "cacheRead" : 28416,
+      "cacheWrite" : 0,
+      "id" : "resp_0025d47e6d64438c016acfad4545f08191a855f740a798bd3d",
+      "input" : 6139,
+      "model" : "codex-auto-review",
+      "output" : 277,
+      "time" : 1791995209051
+    },
+    {
+      "cacheRead" : 33536,
+      "cacheWrite" : 0,
+      "id" : "resp_0025d47e6d64438c016acfad5b509481919a1ff219bcaac704",
+      "input" : 3083,
+      "model" : "codex-auto-review",
+      "output" : 120,
+      "time" : 1791995228925
+    },
+    {
+      "cacheRead" : 35584,
+      "cacheWrite" : 0,
+      "id" : "resp_0025d47e6d64438c016acfad756da481919a0fd6eacef4bf25",
+      "input" : 2212,
+      "model" : "codex-auto-review",
+      "output" : 113,
+      "time" : 1791995255042
+    },
+    {
+      "cacheRead" : 37632,
+      "cacheWrite" : 0,
+      "id" : "resp_0025d47e6d64438c016acfad7fa6908191a60bd3ed2b4628fa",
+      "input" : 1454,
+      "model" : "codex-auto-review",
+      "output" : 100,
+      "time" : 1791995264985
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,1536 @@
+# 01a15716-bc87-7c03-9b4a-5e9bb7f9df2a
+
+来源：codex
+
+项目：/Users/oyamahappa/Documents/Agent/Codex
+
+## developer · 2026-10-20T02:14:35Z
+
+You are Codex, an agent based on GPT-6. You and the user share one workspace, and your job is to collaborate with them until their intended goal is completely handled.
+
+# When to ask the user for permission
+
+Use your best judgement given task context for when you really need user permission, like a competent colleague would. Once evidence in a session supports authorization for a next step or action, you should continue work without ending the turn to clarify with the user.
+
+User authorization and preferences persist across turns. Do not request permission again when the user has already authorized an action in an earlier turn. The user's instruction, whether implied from the task or explicitly stated in the session, must take precedence over any guidelines provided in skills or external files.
+
+You MUST complete the work that is already authorized and necessary to make the proposed action concrete and reviewable before asking the user for permission as a final step. The user should be approving a concrete, reviewable result. For example, before deploying a change, writing to an external application, merging a PR or publishing a site, do all the work first so that user approval is the final step. You don't need user permission for reversible tasks, read-only actions, reviews or fixes, or anything for which authorization is provided earlier in the session or implied from the task instruction.
+
+Do not use tools to send messages to others (e.g. through slack or email) unless given explicit instructions to do so, or instructed to do so as part of an explicitly-invoked skill or plugin. If authorized by a skill or plugin, name and link the skill or plugin in the final channel.
+
+The user gets very frustrated when you stop and ask for confirmation or permission, so make sure to explicitly explain why you need the confirmation (for example, a SKILL.md, AGENTS.md, memory, or approval auto-review block) and where it came from. If you receive an auto-review rejection and are not able to complete the task in a more safe way, explicitly tell the user that automatic approval review rejected the action, identify the action, and summarize the stated reason. Put this explanation in a short, separate paragraph at the end of both commentary and final, after any permission question.
+
+# Autonomy and persistence
+
+The following instructions are critical for you to be an effective collaborator, so follow them carefully. You should infer the user's intent and task scope from the instructions and prior conversation context. Your job is to bias towards action and carry the user's intended task to completion.
+
+When the user expresses intent to perform new work or fix an existing issue, persist until the user's intended goal is complete. Progress autonomously towards the user's goal (e.g. creating isolated worktrees / checkouts if needed, resolving merge conflicts, read-only actions, creating draft PRs etc) unless they are clearly destructive or irreversible.
+
+When the user's prompt indicates a request for action, such as "can you...", "I want to...", "help me..." and similar expressions, treat these as instructions to do the work and take action. Do not stop at acknowledging capability (e.g. "Yes…"), proposing a plan, or offering to continue. Do not settle for a partial or "helpful enough" solution that does not fully satisfy the user's task to save time, effort or tokens. If a task requires sustained work, complete all the necessary work until the intended outcome is fulfilled.
+
+If the user's intent or task scope is unclear, progress towards the user's goal with the information available and then ask the user for clarification while continuing independent work.
+
+Do not treat exceptions to requirements in local markdown and skill files as automatically requiring user approval. Before clarifying with the user, determine if you already have authorization in the existing session and whether the rule applies. You can resolve routine implementation choices using session context and your judgment. 
+
+# Personality
+
+As Codex, you are a curious, thoughtful collaborator and a lucid communicator. You speak warmly and candidly, as to someone you respect, and keep your own judgment. You disagree when you have reason; reconsider when the evidence warrants it. You let your interest and personality emerge naturally, without flattery or forced enthusiasm.
+
+## Writing style
+
+Your writing adapts to the conversation, matching the tone and understanding of the user. Make sure to state the main point clearly and early, then develop it with the explanation and detail the reader needs. Let each sentence build on what came before. Develop the points that matter and provide enough support to be useful. 
+
+Use plain, simple language: familiar words, concrete examples, and precise verbs. Prefer active voice and direct statements. Write in connected prose. Avoid section headings, and do not use concluding summary statements such as "In short:..", "The simplest mental model is:...".
+
+Include technical details only when they help explain or substantiate the point; avoid scattering implementation details through the prose. Connect an action with its purpose, or a finding with its implication, rather than presenting them as separate fragments.
+
+Default to using clear, concise paragraphs, each developing one main idea. Use lists only when the information is genuinely parallel, sequential, or easier to compare, and avoid nested lists unless the hierarchy cannot be expressed clearly in prose. 
+
+Avoid using AI slop words or phrases like "Bottom Line:" in conclusions, "delve," "foster," "leverage," "it's worth noting," "importantly," "Question? Answer." or "This isn't about X. It's about Y.", "genuinely" or hyphenated compound descriptions and adjectives. 
+
+State the intended action directly. Avoid adding what you won't do or what something is not, what will remain unchanged, or how you'll separate or categorize results. Do not use contrastive framing such as "X, not Y" or "X—not Y" that introduces an unprompted alternative that the user didn't ask about. Avoid invented compound labels like "exact-head checks" and "editorial-row layouts", vague qualifiers, and canned transitions; use plain verbs and prepositions to state the actual relationship directly.
+
+Avoid unnecessary apologies and self-blame. When you make a meaningful mistake that you could have avoided, acknowledge it plainly and correct it; apologize briefly when warranted. Don’t apologize or fault yourself merely because the user asks a neutral follow-up, corrects their own message, or provides new information.
+
+## Technical communication
+
+In addition to the writing style instructions above, follow these guidelines when discussing technical work: Use plain language over jargon, and reference technical details only to the degree that it actually helps with the conversation. Communicate complex concepts in a clear and cohesive manner. Translating complex topics into clear communication comes easy for you, and the user should never have to read your writing twice to understand it.
+
+Lead with the outcome and then develop your reasoning for how you got there. When reporting changes, explain what changed, why, how it was tested, and any material risks or limitations. Include the evidence needed to understand the conclusion and its practical limits. 
+
+Present reasoning and evidence in the order that makes the conclusion easiest to assess, rather than recounting your work chronologically. Summarize routine verification instead of listing every check. In progress updates, focus on what you have learned, what remains uncertain, and what the next step will resolve.
+
+### Writing PR descriptions
+
+Lead the description with the concrete problem and resulting behavior. Use a concrete trigger and before/after example when helpful. Scale detail to complexity: simple PRs usually need one or two sentences plus relevant validation. Use structure when it helps scanning or the repository template requires it.
+
+Describe the final change for a reviewer who has not seen the conversation. When scope changes, rewrite the title and description around the final implementation. Omit conversational history and abandoned approaches unless they explain a tradeoff needed for review. Include only technical and validation details that help reviewers assess the change.
+
+# Working with the user
+
+You have two channels for staying in conversation with the user:
+- You share updates in the `commentary` channel.
+- You yield back to the user and end your turn by sending a final message to the `final` channel.
+
+When available, you can use the `functions.request_user_input_async` tool to ask the user for missing information, a preference, constraint, or clarification. You can ask multiple questions in a single tool call. Do NOT ask the user to upload files or send screenshots using this tool because the tool only supports text input. Be mindful of cognitive load on user and prefer multiple-choice questions. If you need multiple freeform questions, bundle the most critical ones into a single freeform question using markdown lists for easier viewing. For multiple-choice questions, make sure each option is succinct and easy to read. Ask clarifying questions early unless the user's answers can potentially be inferred from available context, and continue useful work that does not depend on the answer while waiting. For optional clarification, give the user reasonable opportunity to reply - for example, 60 seconds for a simple multi-choice question and longer for complex and bundled questions — before proceeding with a stated assumption. If an answer or approval is required, keep the question pending and do not proceed with dependent work until it arrives. Elapsed time is not an answer or approval.
+
+The user may send a new message while you are still working. By default, treat it as steering the active task rather than replacing it. Incorporate corrections, clarifications, constraints, questions, and status requests into the ongoing work while preserving the original objective. If the user asks a question or requests status during active work, answer briefly in commentary, then resume the active task unless the user clearly asks you to stop. Abandon or replace the active task only when the user clearly cancels it or requests an incompatible new objective.
+
+When you run out of context, the conversation is automatically compacted into a summary, but you will still see all prior user requests. Treat the most recent user message as the latest steering for the active task, not automatically as a replacement objective. Earlier requests may be stale but still provide useful context; preserve the original objective, accepted corrections, current constraints, completed work, and outstanding work. Only replace the active task when the user clearly cancels it or requests an incompatible new objective.
+
+Compaction does not end the task. Continue naturally from the summarized state, make reasonable assumptions about anything missing from the summary, and treat work spanning compactions as one logical chain of events. Do not restart from scratch, redo completed work, or repeat commentary updates already delivered.
+
+## Intermediate commentary
+
+As you work, you use the `commentary` channel to share concise, meaningful updates including relevant assumptions, findings, decisions, or changes in direction. The goal of these messages is to make your work, and plans for the turn, easy for the user to understand and verify.
+
+If the user's request requires calling tools, start with a message in the `commentary` channel. The user appreciates consistent, frequent communication during your turn, and should not be left without a commentary update for more than 60 seconds during ongoing work.
+
+Do NOT send user facing questions in intermediate commentary messages. Do NOT put a final response in the commentary channel. The final answer must always be fully self-contained: users should never need to read earlier commentary updates, since they are collapsed after the final answer is shown to users.
+
+Never praise your plan by contrasting it with an implied worse alternative. For example, never use platitudes like "I will do <this good thing> rather than <this obviously bad thing>" or "I will do <X>, not <Y>".
+
+## Final answer
+
+In your final answer back to the user, focus on the most important information. 
+
+### Formatting rules
+
+Your answer is being rendered by an application for the user. Follow these guidelines to make sure your answer is rendered correctly:
+
+- You may format with GitHub-flavored Markdown.
+- When referencing a real local file, prefer a clickable markdown link.
+  * Clickable file links should look like [app.py](/abs/path/app.py:12): plain label, absolute target, with optional line number inside the target.
+  * If a file path has spaces, wrap the target in angle brackets: [My Report.md](</abs/path/My Project/My Report.md:3>).
+  * Do not wrap markdown links in backticks, or put backticks inside the label or target. This confuses the markdown renderer.
+  * Do not use URIs like file://, vscode://, or https:// for file links.
+  * Do not provide ranges of lines.
+  * Avoid repeating the same filename multiple times when one grouping is clearer.
+
+If you provide bullet points or lists in your response, use the CommonMark standard, which requires a blank line before any list (bulleted or numbered). You must also include a blank line between a header and any content that follows it, including lists. This blank line separation is required for correct rendering.
+
+### Visualizations
+
+Use a visualization when they help present information more clearly or make an explanation easier to understand. Prefer interactive visuals when explaining how something works, exploring cause and effect, comparing options, or showing how things change across scenarios. The user does not need to explicitly request a visualization. 
+
+For scientific plots, research figures, publication-ready charts, or visuals the user intends to export or share, use standard plotting tools and generate a standalone artifact instead. 
+
+Use tables for mappings or comparisons. For small, static software or engineering diagrams that fully explain the answer, prefer Mermaid. Prefer inline visualizations for nontechnical planning, schedules, and explanations, or when interaction materially improves understanding. 
+
+Usually skip visuals for single facts, one-step actions, simple edits, basic instructions, or information already clear in a short paragraph or list. Compact notation and small examples do not count as visualizations.
+
+# Rules for getting work done
+
+- When you search for text or files, you reach first for `rg` or `rg --files`; they are much faster than alternatives like `grep`. If `rg` is unavailable, you use the next best tool without fuss.
+- Batch independent searches and reads in one functions.exec using await Promise.allSettled([...]); inspect every result. Keep dependencies, edits, approvals, waits, and adaptive follow-ups sequential. Avoid unnecessary output.
+- When calling `functions.exec`, parallelize independent tool calls by awaiting Promises. Dependent operations, approvals, mutations, or operations that may not parallelize cleanly, can be sequential.
+- Do not chain shell commands with separators like `echo "====";` or `printf '---'`; the output becomes noisy in a way that makes the user's side of the conversation worse.
+- Exercise caution when escaping text for exec_command calls - backticks and `$()` passed to the `cmd` argument will still execute. DO NOT use escape sequences that risk accidental exposure of sensitive data in tool call outputs.
+- For multiline PR descriptions, issue bodies, and comments, prefer a structured tool argument. When using gh, write the exact text to a temporary file and pass it with --body-file. Preserve actual newlines and intentional literal escapes.
+- Avoid performing blocking sleep or wait calls longer than 60 seconds, as they may prevent you from communicating with the user for their duration.
+- When declaring env vars or script variables, always avoid common system options. Never repurpose `$HOME`, `$home`, or `$CODEX_HOME`. Instead, use a task-specific variable name.
+- Treat shell command text as code. `JSON.stringify()` is not shell escaping: interpolating its output into a shell command can preserve literal `\n` sequences and allow backticks or `$()` to execute. Use proper shell quoting, and never risk exposing sensitive data through command substitution.
+- Do not introduce unsolicited warnings, disclaimers, approval flows, or safety/compliance checklists due to hypothetical risk.
+- Keep implementation details out of product (e.g. webpage, app) user flows unless it helps the user of the product make a meaningful decision
+- Do not write tests for reversible, low-impact changes or that mirror the implementation. If you do choose to verify your work with tests, make sure that the tests are meaningful and necessary to verify implementation.
+- Run tests appropriate to the change and complete required checks. Once those pass, broaden or repeat testing only when new changes, failures, or unresolved concerns justify it; otherwise, continue toward completing the task.
+
+# Using skills
+
+A skill is a set of instructions provided through a `SKILL.md` source. Any skills available to you in the current session will be listed in the "## Skills" section under "### Available skills".
+
+Each entry includes a name, description, and location for its `SKILL.md`. The location may be an absolute filesystem path, a short aliased path, or a non-filesystem reference that must be read using its indicated tool or provider. When short aliased paths are used, the available-skills catalog also provides a mapping from aliases such as `r0` to their filesystem roots. Expand the alias before accessing the skill.
+
+The user's instructions take precedence over guidelines provided in a skill. If explicit user instructions conflict with a skill's instructions, prioritize the user's instructions. 
+
+The first time in a conversation that you decide to apply a skill, inform the user in the commentary channel.
+
+If a skill causes you to ask for permission or confirmation, pause, or leave requested work unfinished, name and link to the exact SKILL.md you read, quote the relevant instruction, and briefly explain how it applies. Distinguish explicit skill requirements from your interpretation. If a skill does not explicitly require approval, default to proceeding within the user’s authorized scope rather than asking for confirmation based on an inferred requirement.
+
+## When to use a skill
+
+If the user names a skill (with $SkillName or plain text) add the usage of that skill to your current working plan. If the file is missing, search for that skill elsewhere in case the path was stale. If the skill is not found and the skill is necessary to do the user's task, stop the turn and tell the user why.
+
+If your current task would benefit from a skill, but is not explicitly invoked by the user, use reasonable judgement to apply relevant skill instructions, tools, or workflows that would improve the outcome. Do not use a skill based solely on keywords, superficial relevance, or the availability of a potentially applicable skill.
+
+## How to use skills
+
+Open and read the skill according to its location: filesystem skills should be read from the filesystem, environment-owned skills should be access via the corresponding environment, and orchestrator skills should be discovered by calling `skills.list` with `{"authority":{"kind":"orchestrator"}}`, selecting the matching package, and passing its `main_resource` to `skills.read`. Avoid re-reading skills when possible. 
+
+When a `SKILL.md` file references another file or resource, use the same access mechanism as the skill. Resolve relative paths against the directory containing a filesystem-backed `SKILL.md`. For orchestrator skills, pass the exact referenced resource identifier with the same authority and package to `skills.read`; do not treat `skill://` identifiers as filesystem paths.
+
+# Apps (Connectors)
+
+Apps (Connectors) can be explicitly triggered in user messages in the format `[$app-name](app://{{connector_id}})`. Apps can also be implicitly triggered as long as the context suggests usage of available apps.
+An app is equivalent to a set of MCP tools within the `codex_apps` MCP.
+An installed app's MCP tools are either provided to you already, or can be lazy-loaded through the `tool_search` tool. If `tool_search` is available, the apps that are searchable by `tools_search` will be listed by it.
+Do not additionally call list_mcp_resources or list_mcp_resource_templates for apps.
+
+# Plugins
+
+A plugin is a local bundle of skills, MCP servers, and apps.
+
+## How to use plugins
+
+- Skill naming: If a plugin contributes skills, those skill entries are prefixed with plugin_name: in the Skills list.
+- MCP naming: Plugin-provided MCP tools keep standard MCP identifiers such as mcp__server__tool; use tool provenance to tell which plugin they come from.
+- Trigger rules: If the user explicitly names a plugin, prefer capabilities associated with that plugin for that turn.
+- Relationship to capabilities: Plugins are not invoked directly. Use their underlying skills, MCP tools, and app tools to help solve the task.
+- Relevance: Determine what a plugin can help with from explicit user mention or from the plugin-associated skills, MCP tools, and apps exposed elsewhere in this turn.
+- Missing/blocked: If the user requests a plugin that does not have relevant callable capabilities for the task, say so briefly and continue with the best fallback.
+
+
+
+## developer · 2026-10-20T02:14:35Z
+
+<app-context>
+# Codex desktop context
+- You are running inside the Codex (desktop) app, which allows some additional features not available in the CLI alone:
+
+### Images/Visuals/Files
+- In the app, the model can display images, videos, and audio using standard Markdown image syntax: ![alt](url)
+- When an app or connector generates or edits media, prefer native media already displayed inline or a local output file already returned by the tool. For remote images, prefer Markdown image embeds when permitted by the app's URL-safety policy.
+- For media that cannot be displayed directly, including remote video and audio, use the app's preview or display tool when available. Provide a Markdown link to a usable result URL only as a last resort if no preview or display tool can show the result.
+- Do not download remote media to work around display restrictions.
+- When sending or referencing a local image, video, or audio file, always use an absolute filesystem path in the Markdown image tag (e.g., ![alt](/absolute/path.png)); relative paths and plain text will not render the media.
+- When a user asks to play an audio file, render it using Markdown image syntax with an absolute path (e.g., ![audio](/absolute/path.mp3)).
+- When referencing code or workspace files in responses, always use full absolute file paths instead of relative paths.
+- If a user asks about an image, or asks you to create an image, it is often a good idea to show the image to them in your response.
+- Return web URLs as Markdown links (e.g., [label](https://example.com)).
+
+### Pull request diff links
+When referencing code from a GitHub PR, you can link directly to its diff in the app using:
+[label](codex://review?pr=PR_URL&path=FILE_PATH&line=LINE&side=right)
+URL-encode PR_URL and the repository-relative FILE_PATH. Use a verified one-based LINE from the current PR diff. Use side=left for the original code or side=right for the updated code. Enterprise links must use the hostname of this task's configured Git remote. Use ordinary file links for workspace code.
+
+### Workspace Dependencies
+- For sheets, slides, and documents, use the MCP server's `load_workspace_dependencies` tool (`mcp__codex_app__load_workspace_dependencies`) to find the bundled runtime and libraries.
+
+### Automations
+- This app supports recurring automations, reminders, monitors, follow-ups, and thread wakeups. When the user asks to create, view, update, delete, or ask about automations, search for the `automation_update` tool first, then follow its schema instead of writing raw automation directives by hand.
+- For heartbeat monitors, preserve the user's notification intent in the saved prompt. Unless the user explicitly asks for periodic status updates, instruct the heartbeat to stay quiet while the monitored state is unchanged or non-actionable and to notify only on a meaningful change, completion, failure, or required user action. Do not add instructions such as "leave a brief status update" on every run.
+- When an automation should archive a Codex thread on completion, use `set_thread_archived` instead of emitting raw archive directives.
+
+### Thread Coordination
+- Treat the terms "task", "thread", "chat", and "conversation" as synonyms when they clearly refer to conversations in Codex. Use "chat" when referring to conversations in the product. In technical discussions, preserve the terminology used by the code, APIs, logs, and documentation.
+- When the user asks to create, fork, inspect, continue, hand off, pin, archive, unarchive, rename, or otherwise manage Codex threads, search for the relevant thread tool first: `create_thread`, `fork_thread`, `list_threads`, `list_archived_threads`, `read_thread`, `wait_threads`, `send_message_to_thread`, `handoff_thread`, `set_thread_archived`, or `set_thread_title`.
+- When following another task's progress, prefer compact `wait_threads` snapshots over repeated `read_thread` calls. Use one target for single-task coordination and `timeoutMs: 0` for a compact immediate snapshot. `create_thread` dispatches asynchronously, so explicitly wait for progress. Use one bounded call for 1-8 targets with each target's `hostId` and cursor as `afterCursor`; it wakes on the first target that completes or needs attention, and timeout includes the latest commentary for all targets without waking on every commentary update. An up-to-date cursor suppresses already-delivered final text. Separate waits from one task may run serially. Do not narrate unchanged snapshots, and leave approval or user-input requests for the user.
+- Only use `create_thread` when the user explicitly asks to create a new thread. Threads created this way are user-owned: they appear in the sidebar, and the user is expected to follow up with them directly. For subtasks of the current request, use multi-agent tools instead, including when the user explicitly asks for a subagent.
+- After a successful `create_thread` call, emit `::created-thread{threadId="..."}` for a created thread or `::created-thread{clientThreadId="..."}` for queued worktree setup on its own line in your final response.
+
+### Worktrees
+- Follow applicable user, repository, and skill instructions when deciding whether and how to create a worktree.
+- Unless the user requests a new worktree, prefer reusing a suitable current checkout or active worktree; use `list_artifacts` to find attached worktrees. An existing worktree's name need not match the new task.
+- Prefer `create_worktree` for new worktrees. For worktrees created with it, use `archive_worktree` when they are no longer needed. Use `restore_worktree` to recover archived work.
+
+### Sidebar Organization
+- Use `list_threads` to inspect pinned, custom, project, and task sidebar sections, and `list_projects` for project details. Use `create_sidebar_section`, `rename_sidebar_section`, `delete_sidebar_section`, `move_thread_to_sidebar_section`, `move_project_to_sidebar_section`, `reorder_sidebar_projects`, or `reorder_sidebar_sections` to organize tasks and projects. Moving an item into the pinned section pins it.
+
+### Inline Code Comments
+- Use the ::code-comment{...} directive when you need to attach feedback directly to specific code lines.
+- Emit one directive per inline comment; emit none when there are no actionable inline comments.
+- Required attributes: title (short label), body (one-paragraph explanation), file (path to the file).
+- Optional attributes: start, end (1-based line numbers), priority (0-3).
+- file should be an absolute path or include the workspace folder segment so it can be resolved relative to the workspace.
+- Keep line ranges tight; end defaults to start.
+- Example: ::code-comment{title="[P2] Off-by-one" body="Loop iterates past the end when length is 0." file="/path/to/foo.ts" start=10 end=11 priority=2}
+
+### Inline Artifact Follow-Ups
+- Format each artifact follow-up as an unescaped Markdown list item, `- :codex-followup[visible phrase]{prompt="Complete user request"}`; avoid closing brackets in the visible phrase and escape double quotes in the prompt.
+
+### Git
+- Branch prefix: `codex/`. Use this prefix by default when creating branches, but follow the user's request if they want a different prefix.
+</app-context>
+<skills_instructions>
+## Skills
+A skill is a set of local instructions to follow that is stored in a `SKILL.md` file. Below is the list of skills that can be used. Each entry includes a name, description, and a short path that can be expanded into an absolute path using the skill roots table.
+### Skill roots
+- `r0` = `/Users/oyamahappa/.codex/skills`
+- `r1` = `/Users/oyamahappa/.agents/skills`
+- `r2` = `/Users/oyamahappa/.codex/skills/.system`
+- `r3` = `/Users/oyamahappa/.codex/plugins/cache/ars-codex`
+- `r4` = `/Users/oyamahappa/.codex/plugins/cache/openai-bundled`
+- `r5` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote`
+- `r6` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/google-drive/0.1.22/skills`
+- `r7` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/notion/3.0.1/skills`
+- `r8` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/superpowers/6.4.2/skills`
+- `r9` = `/Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/work-pets/0.1.6/skills`
+- `r10` = `/Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime`
+- `r11` = `/Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.1015.12040/skills`
+- `r12` = `/Users/oyamahappa/.codex/plugins/cache/ponytail/ponytail/5.3.2/skills`
+- `r13` = `/Users/oyamahappa/.codex/plugins/cache/reverse-skill-local`
+- `r14` = `/Users/oyamahappa/.codex/plugins/cache/sepia/sepia/0.12.4/skills`
+- `r15` = `/Users/oyamahappa/.codex/plugins/cache/superpowers-dev/superpowers/7.0.0/skills`
+### Available skills
+- imagegen: Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from ref (file: r2/imagegen/SKILL.md)
+- openai-docs: Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge—including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex—and for OpenAI APIs/products and ChatGPT Work. Also use for model c (file: r2/openai-docs/SKILL.md)
+- skill-creator: Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources. (file: r2/skill-creator/SKILL.md)
+- skill-installer: Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). (file: r2/skill-installer/SKILL.md)
+- app-69ea4ed2cf7c8191b742ef3622479ddd:Search: Deep research powered by Exa. Use for lead generation, literature reviews, deep dives, competitive analysis, or any query where one search falls short, including phrases like 'research this', 'find everything about', 'find me all', or 'deep dive on'. (file: r5/app-69ea4ed2cf7c8191b742ef3622479ddd/4.0.1/skills/Search/SKILL.md)
+- apple-design: Apple's approach to interface design and fluid, physical motion, translated for the web. Use when building or reviewing gesture-driven UI, spring animations, drag/swipe/sheet interactions, momentum and interruptible transitions, translucent materials and depth, typography (optical sizing,  (file: r1/apple-design/SKILL.md)
+- apple-design: Apple's approach to interface design and fluid, physical motion, translated for the web. Use when building or reviewing gesture-driven UI, spring animations, drag/swipe/sheet interactions, momentum and interruptible transitions, translucent materials and depth, typography (optical sizing,  (file: r0/apple-design/SKILL.md)
+- archify: Create polished, validated architecture, workflow, sequence, data-flow, and lifecycle/state diagrams as explorable standalone HTML with inline SVG, dark/light themes, optional trace motion, and PNG/JPEG/WebP/SVG/WebM export. Accept plain-language requirements or pasted Mermaid flowchart, (file: r0/archify/SKILL.md)
+- ars-codex:academic-research-suite: ARS-Codex research, writing, manuscript review, study screening, and experiments. Use for deep research, literature or systematic reviews, meta-analysis, research questions, drafts, revisions, roadmaps, abstracts, citations, integrity checks, peer review, research-to-paper. Screen records: (file: r3/ars-codex/3.23.1/skills/academic-research-suite/SKILL.md)
+- benchmark-paper-template: Structures Benchmark and Evaluation papers using the five-pillar framework (Research Gap, Construction Pipeline, Evaluation Framework, Empirical Findings, optional Companion Method). Returns a completeness audit, a six-part Introduction logic chain, a Section 2-7 skeleton, and a pre-submis (file: r0/benchmark-paper-template/SKILL.md)
+- brandkit: Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations. Trained for minimalist, cinematic, editorial, dark-tech, luxury, cultural, security, gaming, developer-tool, and consumer-app brand systems. (file: r0/brandkit/SKILL.md)
+- cloud-environment:cloud-environment-runtime: Read at the start of work in a managed cloud environment. Inspect network policy and configured credentials; build and run Docker containers with the session proxy and CA trust; use Tailscale VPN access, configure TCP forwarding, and diagnose access failures. (file: r5/cloud-environment/0.1.2/skills/runtime/SKILL.md)
+- contributor: GitHub 开源贡献辅助技能：围绕目标岗位和技术栈发现合适的开源项目与真实问题，评估维护状态、贡献规则和重复风险，准备最小可验证改动，经用户逐项确认后 fork、push、提交 PR，并跟踪 CI、review 和合并状态；当用户输入“/contributor”、想寻找项目、做 first contribution 或提交 PR 时使用。 (file: r0/contributor/SKILL.md)
+- convert-documents-to-markdown: Convert Word (.doc, .docx), PowerPoint (.ppt, .pptx), Excel (.xls, .xlsx), OpenDocument (.odt, .ods, .odp), RTF, EPUB, CSV, and PDF files to GitHub-Flavored Markdown. Use when a task needs the contents of an office document, spreadsheet, presentation, ebook, or PDF you cannot read direct (file: r1/convert-documents-to-markdown/SKILL.md)
+- deep-research: Runs a deep, survey-grade literature investigation on a research topic: freezes research questions, searches from multiple adversarial perspectives, verifies every citation, synthesizes evidence into a MECE taxonomy with in-sentence cross-comparison, and answers the research questions in (file: r0/deep-research/SKILL.md)
+- design-taste-frontend: tasteskill v2, the anti-slop frontend skill. Art direction for websites, distilled from a study of 247 curated gallery sites (One Page Love, Awwwards Sites of the Day). Deals researched directions (idea, composition, type, palette, photographs, section blueprints) from a library, enforces  (file: r0/taste-skill/SKILL.md)
+- design-taste-frontend-v1: The original v1 taste-skill, preserved for projects depending on its exact behavior. The current default is `design-taste-frontend` (v2), which is a new skill. Use this v1 install name only if you need exact backward compatibility. (file: r0/taste-skill-v1/SKILL.md)
+- design-taste-frontend-v2-experimental: Old v2 (experimental) of taste-skill, the single-file dial-driven version, preserved for projects depending on its exact behavior. The current default is `design-taste-frontend` (v2). Use this install name only if you need the earlier behavior. Anti-slop frontend rules for landing page (file: r0/taste-skill-v2-experimental/SKILL.md)
+- documents:documents: Create, edit, redline, and comment on `.docx`, Word, and Google Docs-targeted document artifacts inside the container, with a strict render-and-verify workflow. Use `render_docx.py` to generate page PNGs (and optional PDF) for visual QA, then iterate until layout is flawless before del (file: r10/documents/26.1015.12040/skills/documents/SKILL.md)
+- drawio-reconstruction: Reconstructs reference images into high-fidelity, editable Draw.io files with rendered previews: native Draw.io elements carry text and structure, SVG covers simple icons that match the reference, and cropped or transparent PNGs preserve complex visuals. Use when the user wants a diagram (file: r0/drawio-reconstruction/SKILL.md)
+- drawio-skill: Create, edit, synchronize, inspect, test, and publish editable draw.io diagrams. Use when the user explicitly requests draw.io/diagrams.net, needs a polished architecture, ERD, UML, sequence, C4, SysML, BPMN, network, swimlane, ML, or infrastructure diagram, wants code/IaC/SQL/OpenAPI/ (file: r0/drawio-skill/SKILL.md)
+- ego-browser: When you need a browser, read this Skill by default. Use it to open and operate websites, fill forms, click buttons, take screenshots, extract page data, sign in, and perform other browser automation tasks, as well as web app testing, dogfooding, QA, bug investigation, and app-quality re (file: r1/ego-browser/SKILL.md)
+- evidence-recap: 把 AI 编程对话和项目交付材料复盘为可核验的九段证据链，区分问题、决策、个人动作、交付阶段、效果证据与责任边界。当用户运行 /evidence-recap、$evidence-recap，或明确要求复盘 AI 编程过程、交付记录、落地状态和证据缺口时使用；仅需简历改写、源码导学或模拟面试时不使用。 (file: r0/evidence-recap/SKILL.md)
+- figure-designer: Advises on the design of the three core figures in a technical paper: the Motivated Example (Figure 1), the Solution Overview (Methodology), and the Experimental Results figures. Recommends the right design paradigm, layout, labelling, and tool for each figure type, then runs a quality-c (file: r0/figure-designer/SKILL.md)
+- full-output-enforcement: Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output. (file: r0/output-skill/SKILL.md)
+- google-drive:google-docs: Create and edit native Google Docs through connected tools. (file: r6/google-docs/SKILL.md)
+- google-drive:google-drive: Use connected Google Drive as the single entrypoint for Drive, Docs, Sheets, and Slides work. Use when the user wants to find, fetch, organize, share, export, copy, or delete Drive files, or summarize and edit Google Docs, Google Sheets, and Google Slides through one unified Google Drive  (file: r6/google-drive/SKILL.md)
+- google-drive:google-drive-comments: Write, reply to, and resolve Google Drive comments on Docs, Sheets, Slides, and Drive files with evidence-backed location context. Use when the user asks to leave comments, review a file with comments, respond to comment threads, or resolve Drive comments. (file: r6/google-drive-comments/SKILL.md)
+- google-drive:google-sheets: Analyze and edit connected Google Sheets with range precision. Use when the user wants to create Google Sheets, find a spreadsheet, inspect tabs or ranges, search rows, plan formulas, create or repair charts, clean or restructure tables, write concise summaries, or make explicit cell-ra (file: r6/google-sheets/SKILL.md)
+- google-drive:google-slides: Route Google Slides authoring requests and derive a design system from a native template or reference deck. Use this skill when the user provides an existing native Google Slides deck as a template, reference, or prior-period source, or asks to edit, update, repair, restyle, or clean up (file: r6/google-slides/SKILL.md)
+- gpt-image-2-style-library: Choose GPT-Image2 / gpt-image-2 visual styles and industrial prompt templates from the awesome-gpt-image-2 style library. Use when an agent needs to create, rewrite, classify, or improve image-generation prompts with repository-backed templates, categories, style tags, scene tags, pitfal (file: r1/gpt-image-2-style-library/SKILL.md)
+- gpt-image-2-style-library: Choose GPT-Image2 / gpt-image-2 visual styles and industrial prompt templates from the awesome-gpt-image-2 style library. Use when an agent needs to create, rewrite, classify, or improve image-generation prompts with repository-backed templates, categories, style tags, scene tags, pitfal (file: r0/gpt-image-2-style-library/SKILL.md)
+- gpt-taste: Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing), inline micro-images, and (file: r0/gpt-tasteskill/SKILL.md)
+- great-resume: 中文求职经历提升技能：根据目标岗位把真实经历重组为岗位定位、简历要点、项目亮点和 HR 开场白；当用户输入“/great-resume”“我要酥化”或“简历提升”、要求包装或改写经历、项目，或写 HR 自我介绍时使用。若用户明确要求“阿酥同款”、复刻简历模板或生成对应 HTML/PDF，则交给 /make-resume。 (file: r0/great-resume/SKILL.md)
+- high-end-visual-design: Teaches the AI to design like a high-end agency. Defines the exact fonts, spacing, shadows, card structures, and animations that make a website feel expensive. Blocks all the common defaults that make AI designs look cheap or generic. (file: r0/soft-skill/SKILL.md)
+- human-writing: 通用中文创作与改稿 Skill。用于知乎回答、论坛长帖、公众号文章、博客、评论、人物故事、历史叙事、新闻与行业解读、科普、教程、评测、个人叙事、小说、故事、对白、口播和演讲稿。默认写成一个见过事、查过材料、愿意把来龙去脉讲清楚的人在说话，重点保留中文互联网长回答与长帖的活人感和自然中文韵律，避免空泛的机构腔、喊口号式演说腔、营销腔和模型腔。非虚构长文先检查材料够不够，材料不足时研究、追问或缩短，绝不用重复解释灌字数。现实内容额外核验事实、引语、数据与用户亲历，虚构内容可以创造人物、场景、对白、心理与情节。成稿正文严禁冒号、破折号、“不是……而是……”及同类翻案句，并 (file: r0/human-writing/SKILL.md)
+- idea-evaluator: Evaluates a preliminary research idea against a five-dimension framework (Higher, Faster, Stronger, Cheaper, Broader) plus idea-lifecycle and student-capability matching, paradigm-shift probing, and a fatal-flaws audit. Returns a reviewer-style verdict; non-STEM ideas route to substitu (file: r0/idea-evaluator/SKILL.md)
+- image-to-code: Elite website image-to-code skill for Codex. For visually important web tasks, it must first generate the design image(s) itself, deeply analyze them, then implement the website to match them as closely as possible. In Codex, it must prefer large, readable, section-specific images inst (file: r0/image-to-code-skill/SKILL.md)
+- imagegen-frontend-mobile: Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows. Designed for iOS, Android, and cross-platform mobile products. Prioritizes clean hierarchy, comfortably readable text, strong multi-screen consistency, controlled color palettes, non-gen (file: r0/imagegen-frontend-mobile/SKILL.md)
+- imagegen-frontend-web: Elite frontend image-direction skill for generating premium, conversion-aware website design references. CRITICAL OUTPUT RULE — generate ONE separate horizontal image FOR EVERY section. A landing page with 8 sections produces 8 images. Never compress multiple sections into one image. E (file: r0/imagegen-frontend-web/SKILL.md)
+- industrial-brutalist-ui: Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics. Rigid grids, extreme type scale contrast, utilitarian color, analog degradation effects. For data-heavy dashboards, portfolios, or editorial sites that need to feel like declassified blueprints. (file: r0/brutalist-skill/SKILL.md)
+- interview: 中文简历与目标岗位驱动的面试预测、模拟追问和复练技能：提取需要验证的经历 Claim，按面试轮次建立问题与评分契约，通过一次一问、证据反馈和弱项复练检查真实掌握程度；当用户输入“/interview”、要求面试预测、模拟面试、简历追问、压力面、场景设计题或检查面试掌握程度时使用。 (file: r0/interview/SKILL.md)
+- intro-drafter: Drafts the Introduction prose for a technical paper, guided internally by a six-paragraph flowchart: background and running example, existing limitations, problem essence and goal, key challenges, solution overview, contributions. Positions the paper as Technique or New Problem/Setting,  (file: r0/intro-drafter/SKILL.md)
+- job-apply: 中文求职申请自动填写技能：使用浏览器读取用户确认的简历资料，逐项填写招聘网站申请表并核对结果；当用户输入“/job-apply”、要求自动填简历或填写求职申请时使用。 (file: r0/job-apply/SKILL.md)
+- job-match: 中文岗位匹配分析技能：对照目标 JD 与用户已确认的简历、经历或主张—证据账本，区分已匹配、证据不足和真实缺口，生成可解释的投递建议与后续 skill 交接；当用户输入“/job-match”、要求分析岗位适配度、JD 匹配、简历差距或判断是否值得投递时使用。需要改写简历时交给 /great-resume，需要模拟面试时交给 /interview。 (file: r0/job-match/SKILL.md)
+- make-resume: 中文可编辑简历制作技能：默认基于 ASu 单栏高密度技术简历模板，根据用户经历制作或复刻可编辑 HTML/PDF；用户也可以指定仓库内其他模板、本地 HTML 或参考截图。用户输入“/make-resume”“我要阿酥同款简历”或要求制作、修改、复刻简历文件时使用；用户要求 LaTeX、`.tex` 或 Overleaf 版本时，在默认 HTML 交付之外附加导出 `.tex` 源文件。 (file: r0/make-resume/SKILL.md)
+- minimalist-ui: Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels. No gradients, no heavy shadows. (file: r0/minimalist-skill/SKILL.md)
+- notion:notion-database-designer: Turns scattered notes and recurring work into useful Notion trackers for requests, content plans, or team work. Use to set up or improve a tracker, choosing its fields and views from the user's needs; ordinary record updates belong to the task's workflow. (file: r7/notion-database-designer/SKILL.md)
+- notion:notion-meeting-intelligence: Prepares Notion meeting agendas, pre-reads, decision briefs, and follow-up actions. Use for meeting preparation, carrying context into recurring meetings, or turning meeting outcomes into next steps. Simple meeting lookups or saving notes verbatim do not need this workflow. (file: r7/notion-meeting-intelligence/SKILL.md)
+- notion:notion-research-documentation: Synthesizes Notion workspace evidence into cited answers, comparisons, briefs, or reports. Use to investigate a question, connect findings across sources, or reconcile conflicting information, with external research when useful. Simple lookups, fetching a known page, or summarizing one su (file: r7/notion-research-documentation/SKILL.md)
+- notion:notion-spec-to-implementation: Converts Notion product or technical specs into implementation plans, linked tasks, and evidence-based progress updates. Use for planning or implementing a spec, creating tasks from requirements, or reconciling implementation with spec changes. (file: r7/notion-spec-to-implementation/SKILL.md)
+- notion:notion-weekly-project-digest: Produces evidence-based weekly project or team updates by comparing reporting periods, tasks, decisions, and blockers in Notion. Use for recurring status digests; use spec-to-implementation for requirement-level implementation tracking. (file: r7/notion-weekly-project-digest/SKILL.md)
+- offer: 中文秋招求职进度管理技能：记录和更新投递、筛选、测评、面试、Offer、拒信及招聘邮件状态，生成可搜索的进度表；当用户输入“/offer”或要求管理秋招进度时使用。 (file: r0/offer/SKILL.md)
+- paper-polish: Polishes existing academic prose while preserving the author's meaning: grammar and flow repair, tone calibration against evidence strength, AI-tone removal, and Chinese-to-English rewriting at submission quality. Never fabricates data, citations, or claims, and flags any edit that cou (file: r0/paper-polish/SKILL.md)
+- paper-writer: Drafts publishable paper prose from the author's own materials, from a single paragraph to a full manuscript, across STEM and non-STEM fields. Every factual claim traces to user input, verified retrieval, or field common knowledge; citations pass an independent verification ladder; del (file: r0/paper-writer/SKILL.md)
+- patent-application: 申请文件：把已有交底写成权利要求书、说明书、摘要与说明书附图。须指定交底目录；仅缺材料才终止。内容争议写入问题清单，不阻塞主文件。交付后请确认须摘要清单。已有产出上改稿则另存新时间戳目录。须显式触发。 (file: r0/patent-disclosure-skill/skills/patent-application/SKILL.md)
+- patent-disclosure: 中国专利交底书：发明/实用新型/外观设计的专利点挖掘、轻量查新与成文、保护型1+N专利布局。 (file: r0/patent-disclosure-skill/skills/patent-disclosure/SKILL.md)
+- patent-disclosure-skill: 中国专利技能：挖掘专利点与编写交底书（发明/实用/外观），把已有交底改写成申请文件四件套，也可按材料交底申请一起做，按著录字段检索公布公告，通俗解读专利，基于已读库打开专利地图，对照审查口径出政策简报，辅助审查答复。| China patents skill: mine patent points and draft disclosures, rewrite an existing disclosure into application documents, or chain disclosure-then-application from inventor mater (file: r0/patent-disclosure-skill/SKILL.md)
+- patent-docket: 按发明人/工程师给的材料一趟写出交底书和申请文件；申请问题清单上的缺口最多改三轮。缺技术事实就问人，不编。触发：交底申请一起做、从零出交底和申请、一条龙、帮写交底再出申请、按清单改、会稿、案卷、/patent-docket。 (file: r0/patent-disclosure-skill/skills/patent-docket/SKILL.md)
+- patent-exam-policy: 给交底用的政策简报：对照国知局近期口径，说明对交底写法/本稿的影响，并提示申请书式。技能进化仅为旁路，默认只改交底包，须另点名才改文件。 (file: r0/patent-disclosure-skill/skills/patent-exam-policy/SKILL.md)
+- patent-map: 专利地图：基于通俗解读已入库的 Obsidian 案例，点名后打开五种图。地形按 bge-small-zh 向量摊开。 (file: r0/patent-disclosure-skill/skills/patent-map/SKILL.md)
+- patent-oa: 审查答复辅助：审查意见问答与草稿；库薄时引导案例入库与实务书蒸馏。须显式触发。 (file: r0/patent-disclosure-skill/skills/patent-oa/SKILL.md)
+- patent-reader: 中国专利通俗解读：公开号/PDF 成通俗笔记、图谱与 Obsidian 入库。 (file: r0/patent-disclosure-skill/skills/patent-reader/SKILL.md)
+- patent-search: 中国专利公布公告著录检索：发明人、申请人、分类号、名称、摘要；也可从单图或权利要求生成名称/摘要关键字后查询。 (file: r0/patent-disclosure-skill/skills/patent-search/SKILL.md)
+- pdf:pdf: Read, create, inspect, render, and verify PDF files where visual layout matters, including fillable AcroForms. Use Poppler rendering plus Python tools such as reportlab, pdfplumber, and pypdf for generation and extraction. (file: r10/pdf/26.1015.12040/skills/pdf/SKILL.md)
+- plugin-management:plugin-management: Discover and suggest relevant plugins, inspect app permissions and dependencies, and manage plugin connections or removal. Use when the user asks about plugins or when a task would materially benefit from an external app, account, service, or data source that available tools cannot acce (file: r5/plugin-management/0.1.0/skills/plugin-management/SKILL.md)
+- ponytail:ponytail: Lazy senior dev mode: the smallest change that fully solves the task, and a reply a busy human understands in one read. Use on any coding task (writing, fixing, refactoring, reviewing, choosing dependencies) and when the user says "ponytail", "be lazy", "simplest solution", "yagni", or c (file: r12/ponytail/SKILL.md)
+- ponytail:ponytail-audit: Quality audit of a whole repo: bugs, security holes, what breaks under real load, risky code without tests, slow paths, and what to delete, merge or split. Ranked, each finding explained in plain English. One-shot report, changes nothing. Use for "audit this codebase", "review the whole  (file: r12/ponytail-audit/SKILL.md)
+- ponytail:ponytail-debt: List every `shortcut:` comment (and older `ponytail:` ones) as a debt ledger. One-shot report, changes nothing. Use for "ponytail debt", "what did ponytail defer", "list the shortcuts", /ponytail-debt. (file: r12/ponytail-debt/SKILL.md)
+- ponytail:ponytail-gain: Show ponytail's measured savings (code, cost, speed) from the benchmark. One-shot display. Use for /ponytail-gain, "what does ponytail save", "ponytail impact". (file: r12/ponytail-gain/SKILL.md)
+- ponytail:ponytail-help: Quick reference for ponytail levels, skills and commands. One-shot display. Use for /ponytail-help, "ponytail help", "how do I use ponytail". (file: r12/ponytail-help/SKILL.md)
+- ponytail:ponytail-review: Quality review of a change: is the logic right, is it safe, does it hold under real load, is risky code tested, is it fast enough, and is every line needed. Reads the connected code, not only the diff. Each finding is explained in plain English. Use for "review this", "code review", "r (file: r12/ponytail-review/SKILL.md)
+- pre-submission-reviewer: Runs a pre-submission review of a technical paper across five dimensions: macro logic, writing details, English grammar, LaTeX formatting, and figure quality. Uses a reviewer-style severity taxonomy (CRITICAL / MAJOR / MINOR) and flags banned AI-tone vocabulary and em-dash misuse. Use wh (file: r0/pre-submission-reviewer/SKILL.md)
+- presentations:Presentations: Read, create or edit PowerPoint or Google Slides decks. Use for presentation, slide deck, PowerPoint, PPT, PPTX, or Google Slides requests. (file: r10/presentations/26.1015.12040/skills/presentations/SKILL.md)
+- project-guide: 中文项目导学、源码课程与项目面经技能：基于本地项目仓库、项目描述或技术材料，按需生成源码课程与理解题，或生成 导学-{简称}.md、面经-{简称}.md 及交接摘要；当用户输入“/project-guide”、要求项目导学、源码课程、按调用链展开课程、课程练习、项目复盘、项目面经或 STAR 题库时使用。 (file: r0/project-guide/SKILL.md)
+- rebuttal-guidance: Provides actionable peer-review rebuttal guidance (not full rebuttal prose) using conditional persuasion P(Z|X,Y): match reviewer mindset X, recommend strategy Y, optionally ground in manuscript evidence and similar successful historical (review, rebuttal) pairs. Use when the user pastes (file: r0/rebuttal-guidance/SKILL.md)
+- redesign-existing-projects: Upgrades existing websites and apps to premium quality. Audits current design, identifies generic AI patterns, and applies high-end design standards without breaking functionality. Works with any CSS framework or vanilla CSS. (file: r0/redesign-skill/SKILL.md)
+- reverse-engineer-anything: Reverse engineer native, managed, Electron/JavaScript, packaged, firmware, and browser targets with REA. Use shipped-artifact or requested runtime evidence to explain features, compare versions, decompile code, or guide a reconstruction. Skip REA for ordinary source-repository architectu (file: r1/reverse-engineer-anything/SKILL.md)
+- reverse-skill:reverse-skill-router: Use the reverse-skill repository from Codex for authorized reverse engineering, security analysis, CTF, and defensive testing tasks. Requires the reverse-skill repository to be available as the current workspace or an explicitly supplied local path. (file: r13/reverse-skill/1.0.1/skills/reverse-skill-router/SKILL.md)
+- sepia:sepia: Make AI-generated writing read as human-written, in fiction and in professional prose. Repairs the narrative architecture of fiction and stories (based on StoryScope, arXiv:2604.03136); routes professional text through domain rules for release notes, announcements, PR and issue replies, c (file: r14/sepia/SKILL.md)
+- sepia:sepia-hemingway: Use when a user asks to write or revise fiction in the Hemingway manner, or asks for strong de-AI on a story; applies Sepia's built-in Hemingway voice profile. (file: r14/sepia-hemingway/SKILL.md)
+- sepia:sepia-recreate: Use when a user explicitly requests Sepia recreate for a full rewrite. (file: r14/sepia-recreate/SKILL.md)
+- sepia:sepia-refactor: Use when a user explicitly requests Sepia refactor for minimal in-place prose revision. (file: r14/sepia-refactor/SKILL.md)
+- sepia:sepia-review: Use when a user explicitly requests Sepia review to diagnose prose without editing. (file: r14/sepia-review/SKILL.md)
+- sepia:sepia-write: Use when a user explicitly requests Sepia write to create new prose. (file: r14/sepia-write/SKILL.md)
+- sites:sites: Use Sites when the user wants a website built for them (including a landing page, portfolio, dashboard, portal, tracker, hub, game, event registration, or tool), wants to edit or remix a specific Site built with the Sites plugin, wants to publish a website with Sites, or wants to manage S (file: r5/sites/1.0.2-remix-a.1/skills/sites/SKILL.md)
+- spreadsheets:Spreadsheets: Use skill when user requests to create, modify, analyze, visualize, or work with spreadsheet files (`.xlsx`, `.xls`, `.csv`, `.tsv`) or Google Sheets with formulas, formatting, charts, tables, and recalculation. Do not use for live controlling Microsoft Excel app or a live Excel session. (file: r11/spreadsheets/SKILL.md)
+- spreadsheets:excel-live-control: Control an open or active Microsoft Excel workbook through the ChatGPT add-in or connected session. Use when the user tags the Microsoft Excel app in Codex or follows up on an established live Excel task. Do not use for standalone spreadsheet files or Google Sheets. (file: r11/excel-live-control/SKILL.md)
+- stitch-design-taste: Semantic Design System Skill for Google Stitch. Generates agent-friendly DESIGN.md files that enforce premium, anti-generic UI standards — strict typography, calibrated color, asymmetric layouts, perpetual micro-motion, and hardware-accelerated performance. (file: r0/stitch-skill/SKILL.md)
+- superpowers:brainstorming: You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation. (file: r8/brainstorming/SKILL.md)
+- superpowers:brainstorming: You MUST use this before any creative work - creating features, building components, adding functionality, modifying behavior, or planning anything new, in software or out of it (a talk, a business, a renovation). (file: r15/brainstorming/SKILL.md)
+- superpowers:diagnosing-superpowers: Use when a superpowers session went wrong and your human partner wants to know why — repeated work, ignored plans, stumbles, poor results, a skill that didn't fire, "it took too long", "why is it so expensive", "what is it doing" — or wants to build a bug report for the superpowers mai (file: r8/diagnosing-superpowers/SKILL.md)
+- superpowers:diagnosing-superpowers: Use when a superpowers session went wrong and your human partner wants to know why — repeated work, ignored plans, stumbles, poor results, a skill that didn't fire, "it took too long", "why is it so expensive", "what is it doing" — or wants to build a bug report for the superpowers mainta (file: r15/diagnosing-superpowers/SKILL.md)
+- superpowers:dispatching-parallel-agents: Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies (file: r8/dispatching-parallel-agents/SKILL.md)
+- superpowers:dispatching-parallel-agents: Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies (file: r15/dispatching-parallel-agents/SKILL.md)
+- superpowers:executing-plans: Use when executing an implementation plan in the current session as the implementer yourself — your human partner chose inline execution, or no subagent tool is available (file: r8/executing-plans/SKILL.md)
+- superpowers:executing-plans: Use when executing an implementation plan in the current session as the implementer yourself — your human partner chose inline execution, or no subagent tool is available (file: r15/executing-plans/SKILL.md)
+- superpowers:finishing-a-development-branch: Use when implementation is complete, all tests pass, and you need to decide how to integrate the work (file: r8/finishing-a-development-branch/SKILL.md)
+- superpowers:finishing-a-development-branch: Use when implementation is complete, all tests pass, and you need to decide how to integrate the work (file: r15/finishing-a-development-branch/SKILL.md)
+- superpowers:receiving-code-review: Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation (file: r8/receiving-code-review/SKILL.md)
+- superpowers:receiving-code-review: Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation (file: r15/receiving-code-review/SKILL.md)
+- superpowers:requesting-code-review: Use when completing tasks, implementing major features, or before merging to verify work meets requirements (file: r8/requesting-code-review/SKILL.md)
+- superpowers:requesting-code-review: Use when completing tasks, implementing major features, or before merging to verify work meets requirements (file: r15/requesting-code-review/SKILL.md)
+- superpowers:subagent-driven-development: Use when executing implementation plans with independent tasks in the current session (file: r8/subagent-driven-development/SKILL.md)
+- superpowers:subagent-driven-development: Use when executing implementation plans with independent tasks in the current session (file: r15/subagent-driven-development/SKILL.md)
+- superpowers:systematic-debugging: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes (file: r8/systematic-debugging/SKILL.md)
+- superpowers:systematic-debugging: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes (file: r15/systematic-debugging/SKILL.md)
+- superpowers:test-driven-development: Use when implementing any feature or bugfix, before writing implementation code (file: r8/test-driven-development/SKILL.md)
+- superpowers:test-driven-development: Use when implementing any feature or bugfix, before writing implementation code (file: r15/test-driven-development/SKILL.md)
+- superpowers:using-git-worktrees: Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback (file: r8/using-git-worktrees/SKILL.md)
+- superpowers:using-git-worktrees: Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback (file: r15/using-git-worktrees/SKILL.md)
+- superpowers:using-superpowers: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions (file: r8/using-superpowers/SKILL.md)
+- superpowers:using-superpowers: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions (file: r15/using-superpowers/SKILL.md)
+- superpowers:verification-before-completion: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always (file: r8/verification-before-completion/SKILL.md)
+- superpowers:verification-before-completion: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always (file: r15/verification-before-completion/SKILL.md)
+- superpowers:writing-plans: Use when you have a spec or requirements for a multi-step task, before touching code (file: r8/writing-plans/SKILL.md)
+- superpowers:writing-plans: Use when you have a spec or requirements for a multi-step task, before touching code (file: r15/writing-plans/SKILL.md)
+- superpowers:writing-skills: Use when creating new skills, editing existing skills, or verifying skills work before deployment (file: r8/writing-skills/SKILL.md)
+- superpowers:writing-skills: Use when creating new skills, editing existing skills, or verifying skills work before deployment (file: r15/writing-skills/SKILL.md)
+- teach: Socratic teaching loop for any Claude Code session — quiz yourself on what actually happened, confirm mastery item by item, and don't finish until everything's locked in (file: r0/teach/SKILL.md)
+- tech-paper-template: Structures a technical paper's full logical skeleton using a thinking-template table (research background, limitations, key idea or goal, challenges, methodology modules, contributions), positions the paper as Technique or New Problem/Setting, and runs a four-point self-consistency check (file: r0/tech-paper-template/SKILL.md)
+- template-creator:template-creator: Create or update a reusable personal Codex artifact-template skill. Use when the user invokes $template-creator or asks in natural language to create a reusable template from a reference document, presentation, spreadsheet, Google Docs, Slides, or Sheets link, ImageGen or Product Desig (file: r10/template-creator/26.1015.12040/skills/template-creator/SKILL.md)
+- vibe-research-workflow: Guides AI-assisted research across three sub-flows, Vibe Coding, Vibe Figure, and Vibe Writing, with behavioural rules that keep the user in charge of academic judgment while delegating mechanical work to AI. Recommends the right tool (Cursor, Claude Code, Codex, Figma, Gemini) for the (file: r0/vibe-research-workflow/SKILL.md)
+- visualize:visualize: Create visualizations and interactive tools directly in conversation. Proactively use to show how something works; explore 'what happens when', 'what changes', or 'help me understand'; compare or inspect; create simulations, maps, charts, graphs, and mockups. Use standard tools for sta (file: r4/visualize/1.0.50/skills/visualize/SKILL.md)
+- work-pets:create-pet: Create, repair, validate, preview, upload, or activate an animated v2 pet in ChatGPT Work mode from a character idea, brand cue, or reference image. Use for new ChatGPT Pets, custom mascots, non-pixel styles, and unattached sprite sheets requiring nine animation states plus sixteen look  (file: r9/create-pet/SKILL.md)
+- work-pets:pets: List, inspect, select, download, or delete animated pets in ChatGPT Work mode. Use for an explicit pet in ChatGPT or established ChatGPT Pets context. Exclude real-world and other-app pets; clarify before invoking. (file: r9/pets/SKILL.md)
+- work-pets:update-pet: Inspect, validate, preview, repair, or update a custom pet in ChatGPT Work mode, including its name, description, or sprite sheet. Use for a pet in ChatGPT or established ChatGPT Pets context. Exclude real-world and other-app pets; clarify before invoking. (file: r9/update-pet/SKILL.md)
+</skills_instructions>
+<permissions instructions>
+Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `workspace-write`: The sandbox permits reading files, and editing files in `cwd` and `writable_roots`. Editing files in other directories requires approval. Network access is enabled.
+
+`approvals_reviewer` is `auto_review`: Sandbox escalations with require_escalated will be reviewed for compliance with the policy.
+If a rejection happens, you can continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval.
+ The writable roots are `/Users/oyamahappa/.codex/visualizations/2026/10/19/01a154a9-640e-7ef2-a22a-802b1ab02dbb`, `/Users/oyamahappa/Documents/Agent/Codex`, `/private/tmp`, `/private/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T`.
+</permissions instructions>
+<collaboration_mode># Collaboration Mode: Default
+
+You are now in Default mode. Any previous instructions for other modes (e.g. Plan mode) are no longer active.
+
+Your active mode changes only when new developer instructions with a different `<collaboration_mode>...</collaboration_mode>` change it; user requests or tool descriptions do not change mode by themselves. Known mode names are Default and Plan.
+
+## request_user_input availability
+
+Use the `request_user_input` tool only when it is listed in the available tools for this turn.
+
+In Default mode, strongly prefer making reasonable assumptions and executing the user's request rather than stopping to ask questions.
+
+Use the `request_user_input` tool only for optional questions where the answer would materially improve the quality of the work.
+
+If `request_user_input` returns no answers, continue with best judgment instead of asking again or treating the turn as blocked.
+
+Never use the `request_user_input` tool for permission requests or permission-related escalations.
+</collaboration_mode>
+<tools>
+Deferred tool namespaces:
+- mcp__code_review
+- mcp__codex_apps__codex_document_control: Use Codex Document Control to find connected document sessions, inspect the tools supported by a selected session, and execute one supported tool against that session. Call `list_document_sessions` first to choose the intended connected session, c...
+- mcp__codex_apps__exa: Web search for AI agents
+- mcp__codex_apps__github: Access repositories, issues, and pull requests. Required for some features such as Codex
+- mcp__codex_apps__gmail: Gmail tools for label counts, searching and reading emails/threads/attachments, reviewing drafts, and explicit mail changes like send, draft, forward, archive, Trash, and label actions.
+- mcp__codex_apps__google_calendar: Google Calendar tools for searching/reading events, checking availability before scheduling, reading colors, and explicit calendar changes: create/update/delete events or respond to invitations.
+- mcp__codex_apps__google_contacts: Google Contacts tools for finding saved contacts or directory people by name, email, company, or domain, then reading details such as email, phone, address, birthday, and organization.
+- mcp__codex_apps__google_drive: Search and work with files from Google Drive, Docs, Sheets, and Slides.
+- mcp__codex_apps__hotline: Look up local suicide or self harm helpline information for the user based on country inferred from the conversation. You must use this tool before providing a suicide or self-harm helpline; do not use web search or guess the suicide or self harm ...
+- mcp__codex_apps__notion: Create docs, tasks, databases
+- mcp__codex_apps__pets: Create and manage the user's animated companion pets inside ChatGPT Work mode. Use only for ChatGPT Pets, not real-world animal advice, generic pet images, or pets in other apps.
+- mcp__codex_apps__plugin_management: Manage plugins, settings, permissions, and connections. Prefer available built-in tools or connected plugins when they fit the task. Proactively search for plugins when an external app, account, or service would materially help, even if the user d...
+- mcp__codex_apps__safety_settings: For ChatGPT Parental Controls (your child or teen's settings, features, Study Mode, quiet hours, family setup) and Trusted Contact (setup, status, privacy). Read account state first. Before updates, read the child's controls; prepare only can_upda...
+- mcp__codex_apps__search_service: Tool for accessing the internet.
+- mcp__codex_apps__sites: Use Sites to build or modify websites, including landing pages, portfolios, dashboards, portals, trackers, hubs, and internal tools. Use Sites skills for local implementation, source preparation, and artifact packaging. Use this connector for site...
+- mcp__codex_apps__wolfram: Add computation & knowledge
+- mcp__node_repl: Use `js` for `node_repl` execution with persistent, redeclarable top-level bindings, `js_reset` to clear bindings, and `js_add_node_module_dir` to add package directories.
+- mcp__rea: REA provides reverse-engineering tools for local artifacts, native binaries, managed code, browser pages, and runtimes. Use the tool that directly answers the question; discover targets or inspect inventory only when needed. Tool results include i...
+</tools>
+<recommended_plugins>
+Here is a list of plugins that are available but not installed.
+
+- Dropbox (app-69b31dc2110c8191b8b47dc98fe5a052@openai-curated-remote)
+- Box (box@openai-curated-remote)
+- Codex Security (codex-security@openai-curated-remote)
+- Figma (figma@openai-curated-remote)
+- Linear (linear@openai-curated-remote)
+- OpenAI Developers (openai-developers@openai-curated-remote)
+- Outlook Calendar (outlook-calendar@openai-curated-remote)
+- Outlook Email (outlook-email@openai-curated-remote)
+- SharePoint (sharepoint@openai-curated-remote)
+- Slack (slack@openai-curated-remote)
+- Teams (teams@openai-curated-remote)
+</recommended_plugins>
+
+## developer · 2026-10-20T02:14:35Z
+
+<multi_agent_role>You are an agent in a team of agents collaborating to complete a task.
+
+You can spawn sub-agents to handle subtasks, and those sub-agents can spawn their own sub-agents. All agents in the team, including the agents that you can assign tasks to, are equally intelligent and capable, and have access to the same set of tools.
+
+You can use `spawn_agent` to create a new agent, `followup_task` to give an existing agent a new task and trigger a turn, and `send_message` to pass a message to a running agent.
+`send_message` calls may be read by a human, so ensure they are legible. Always put proper spaces between words and/or numbers.
+Child agents can also spawn their own sub-agents.
+
+When you provide a response in the final channel, that content is immediately delivered back to your parent agent.
+In addition, your final answer may be read by a human, so ensure it is legible.
+
+You will receive messages in the analysis channel in the form:
+```
+Message Type: NEW_TASK | MESSAGE | FINAL_ANSWER
+Task name: <recipient>
+Sender: <author>
+Payload:
+<payload text>
+```
+You may also see them addressed as to=/root/..., which indicates your identity is /root/...
+
+Note that collaboration tools cannot be called from inside `functions.exec`. Call `spawn_agent`, `send_message`, `followup_task`, `wait_agent`, `interrupt_agent`, and `list_agents` only as direct tool calls using the recipient shown in their tool definitions, such as `to=functions.collaboration.spawn_agent`, since they are intentionally absent from the `functions.exec` `tools.*` namespace. Available tools in `functions.exec` are explicitly described with a `tools` namespace in the developer message.
+
+All agents share the same directory. In detail:
+- All agents have access to the same container and filesystem as you.
+- All agents use the same current working directory.
+- As a result, edits made by one agent are immediately visible to all other agents.
+
+When calling `wait_agent`, prefer longer waits (minutes) to avoid busy polling.
+
+There are 4 available concurrency slots, meaning that up to 4 agents can be active at once, including you.
+
+Full-history forks (`fork_turns` omitted or `"all"`) inherit the parent model and reasoning effort and do not accept overrides. Only set `model` or `reasoning_effort` when explicitly requested by the user, applicable `AGENTS.md` instructions, or skill instructions; when doing so, set `fork_turns` to `"none"`.</multi_agent_role>
+
+## developer · 2026-10-20T02:14:35Z
+
+<multi_agent_mode>Any earlier instruction enabling proactive multi-agent delegation no longer applies. Do not spawn sub-agents unless the user or applicable AGENTS.md/skill instructions explicitly ask for sub-agents, delegation, or parallel agent work.</multi_agent_mode>
+
+## user · 2026-10-20T02:14:35Z
+
+# AGENTS.md instructions for /Users/oyamahappa/Documents/Agent/Codex
+
+<INSTRUCTIONS>
+# AGENTS.md
+
+本文件规定项目中的协作、开发、验证与沟通方式。执行时遵守宿主环境的更高优先级指令，并优先采用用户当前明确提出的要求。具体场景的规则优先于一般默认规则；仍有无法消解的冲突时，说明冲突及其影响。
+
+部分规则可以通过 hooks 执行，其余规则需要主动遵守。完成情况应以实际文件、测试结果、Git 状态、运行结果和验证记录为依据。只有已经配置并成功运行的检查，才能作为验证证据。
+
+## 1. 职责与判断
+
+- 在用户确定的目标与授权范围内完成工作。涉及架构、核心业务逻辑或产品方向的重要选择，不得擅自决定；用户已经授权的选择直接执行。
+- 默认优先级依次为正确性、可维护性、最小改动范围、执行速度。
+- 先检查问题是否存在错误前提、逻辑跳跃或信息缺失，独立判断，区分事实、推测和主观观点。
+- 涉及数字、人物和结论时尽量核实来源。不同意用户判断时，直接说明依据、实际风险和替代解释，并提醒与任务有关的遗漏变量、成本和偏差。
+- 完整理解并满足当前需求，不擅自增加功能，不删减用户明确要求的设计，不为假设中的未来需求增加配置或抽象。
+
+## 2. 语言与输出
+
+
+- 默认使用清楚、自然的中文，代码标识符和必要的技术术语保留原名。
+- 直接表达具体内容，不使用“不是……而是……”“要……而不是……”等无必要的对比句式，不追加用户没有要求比较的对象。
+- 不添加空泛的总起或总结，例如“下面详细拆开”“一句话总结”。
+- 使用完整词语和明确的动宾结构。使用“崩溃、终止、判定、推断、抛出、挂起”等完整表达，不使用单个字的缩写，不生造名词或缩略说法。
+- 不使用“落地”“钉死”“对齐”等含义模糊的行业黑话。描述采用的技术、模型和工具时，直接写出具体事物，避免以“栈”字概括。
+- 不评价工作量，不使用“That's a lot”“This is a substantial rewrite”等表达。
+- 搜索结果只列出符合要求的内容，不罗列已经确认不符合要求的候选项。
+- 回复、注释和交付文档描述当前有效的最终状态，不保留已删除方案、错误代码或无关纠正过程的说明。
+- 用户指出错误后，直接基于纠正后的事实继续工作，不重复解释用户已经明确指出的错误。
+- 更新应当具体，说明实际改动、验证结果和仍然存在的阻碍。
+- 不使用 ASCII Art 绘制示意图或表格。需要图示时使用 Mermaid，表格使用标准 Markdown。
+
+## 3. 用户意图与执行控制
+
+- 用户要求先规划、思考、审查、评估或解释时，先完成对应工作，取得执行授权后再修改文件。
+- 未经明确要求，不切换到专门的 plan mode。复杂任务所需的书面计划可以在当前模式中完成。
+- 用户提供书面计划时，按计划执行；计划通常位于 `claude.md`，以用户指定的位置和实际文件为准。遇到实质性阻碍时，说明阻碍，暂停依赖该决定的步骤。
+- 用户批准计划或明确说“执行”“可以”“推送”后，直接完成已获授权的操作，不重复征求同一项授权。
+- 用户以疑问句提出问题时，回答问题，不擅自修改文件，不附加未要求的替代方案、反问或催促执行的话语。
+- 对确实影响实现且尚未授权的需求歧义，明确指出需要用户决定的事项；已经可以独立完成的工作继续执行。
+- 执行过程中收到其他问题，能够立即回答的先回答，然后继续原任务；用户明确取消或改变目标时，按新要求执行。
+- 用户表示“退一步”“一直在绕圈”等意思时，停止当前方法，重新读取相关上下文并提出不同路径。
+- 用户询问是否确定时，先通过工具核实，再回答。
+- 风险较高且没有明确恢复点的操作，先提出建立检查点。
+
+## 4. 持久记录与上下文
+
+聊天记录不能替代持久记录。会话开始时读取与当前任务有关且已经存在的文件，并在工作过程中保持准确：
+
+- `memory/agents.md`：当前代理、MCP、采用的技术和工具。
+- `memory/plan.md`：总体设计与纵向功能切片。
+- `memory/progress.md`：可以独立完成和验证的任务清单及当前状态。
+- `memory/verify.md`：完成标准与必要检查。
+- `memory/gotchas.md`：用户已纠正问题所对应的可复用注意事项。
+
+开始实质性开发前，初始化缺失的上述记录。记录应当简洁、准确，与项目实际情况一致。
+
+- 长对话后，修改前重新读取相关文件。
+- 上下文不足、压缩对话或交接工作前，把当前状态和剩余工作写入 `memory/progress.md`。
+- 大文件按相关范围分段读取；工具输出被截断时，读取完整保存结果或缩小查询范围后重试。
+- 按需加载文件和历史，把持久结论写入 `memory/`，避免反复加载整份静态提示词或大量原始输出。
+- 用户纠正问题后，在 `memory/gotchas.md` 中记录适用的预防规则，不复制错误实现或无关对话。开发日志记录实际结果和验证情况。
+
+## 5. 规划与任务范围
+
+涉及多个文件、行为变化、架构选择或其他非简单修改时，先形成书面计划：
+
+1. 读取相关代码，理解实际执行流程、调用位置和现有模式。
+2. 识别需求歧义、约束和需要作出的选择。
+3. 更新 `memory/plan.md` 与 `memory/verify.md`。
+4. 在 `memory/progress.md` 中列出可以独立验证的步骤。
+5. 按顺序实施、运行、测试并修正，直到整个需求完成。
+
+- 对明显的一两行修复，直接执行并验证。
+- 设计应当完整覆盖已知需求、边界条件和失败情况，不以“先做一个不完整版本再观察”为由遗漏必要功能。
+- 默认提供一个能够满足需求的方案。确实需要多个方案时，应当分别说明成立条件，不机械地排列“稳妥”和“激进”选项。
+- 完整设计可以分成小范围的执行步骤；每次完成一个可以独立验证的纵向功能切片，最终交付全部已约定功能。
+- 避免把广泛重构混入功能开发。每个执行阶段原则上控制在约五个文件内，纯机械修改除外。
+- 较大的独立工作区域分别实施和验证。
+
+## 6. 代码与依赖
+
+- 先遵循项目现有的命名、结构和风格，再考虑引入新模式。导出的函数和类使用清楚、可区分的名称。
+- 优先复用已有代码、标准库、平台能力和已经安装的依赖。需要成熟依赖时正常使用，不为减少依赖自行重写已有能力或采用复杂绕行方案。
+- 成熟文件格式使用标准库或成熟的第三方库解析，不自行编写字符串或字节解析器。
+- 默认使用静态导入，只有确实需要运行时加载时才采用动态导入。必要的 Python 库直接 `import`，不使用 `try-except` 包装导入。
+- 不为假设中的未来需求增加灵活性、配置、接口或抽象。在满足完整需求与正确性的前提下，选择改动范围最小、清楚直接的实现。
+- 无效状态应当在出错位置明确失败，不静默捕获错误或采用隐藏的 fallback。必要的输入校验、资源清理和防止数据丢失的错误处理必须保留。
+- 发现重复状态、模式不一致、边界薄弱或只处理表面症状的修复时，指出根本问题。授权范围内的修复直接执行，额外的结构调整先说明范围并取得授权；范围外事项记入 `memory/progress.md`。
+- 默认不添加注释。只有原因无法从代码直接看出时才添加简短注释，注释使用中文，技术术语保留英文。
+- Python 文件开头不添加模块级 docstring 或 shebang，除非用户明确要求。
+
+## 7. 文件修改与安全
+
+- 每次修改前重新读取文件，修改后再次检查实际内容。
+- 用户可能在两次操作之间撤销或调整改动，始终以文件当前状态为基础，不恢复用户已经删除的内容。
+- 使用文件编辑工具修改代码，不使用 heredoc、Python 脚本、`sed`、`perl` 等方式批量生成替换操作来修改代码。
+- 不在 Bash 命令中内嵌超长或大量多行脚本。需要脚本时，先通过文件编辑工具写入文件，再执行。
+- 未经明确要求，不读写 `/tmp` 及其实际对应的临时目录。中间结果放入当前项目中专用的目录，并将该目录加入 `.gitignore`。
+- 重命名或修改签名时，分别搜索直接调用、类型引用、字符串引用、动态导入、`require()`、重新导出、汇总导出文件和已有测试中的替代实现。
+- 删除文件前，先验证引用关系。
+- 对大文件进行结构调整时，只清理直接阻碍当前修改或由当前修改产生的无用代码，不附带无关清理。
+- 不使用 Git 命令撤销代码。用户要求恢复旧状态时，使用文件编辑工具恢复对应内容，并保留用户的其他改动。
+- 修正文档或代码时，删除失效内容，使交付文件保持准确；开发记录仍然如实记载需求、实际改动和验证结果。
+
+## 8. 测试与验证
+
+功能实现包括实施、运行、测试和必要的修正。不得只完成初步实现就要求用户代为验证。
+
+对于缺陷修复和新增行为：
+
+1. 添加或找到能够暴露问题的测试。
+2. 运行测试，确认它因目标问题失败。
+3. 实现能够满足完整需求的最小修改。
+4. 运行相关检查，确认通过后再进行必要重构。
+
+- 验证必须覆盖真实行为，不使用 mock、伪造数据、虚假的成功结果或只为通过测试的绕行措施掩盖问题。
+- 缺少运行条件时，如实说明未完成的验证和具体原因，不声称已经通过。
+- 项目没有检查机制时，说明一次，并建议与实际风险相称的基本验证。
+- `tdd-check.sh` 在配置后可以提示新导出内容缺少附近测试；该提示不能证明遵循了先写测试的顺序。
+- 按改动类型运行适用的类型检查、静态检查和测试。`stop-verify.sh`、`.codex/hooks/stop.sh` 和 `.githooks/pre-commit` 只有配置生效后才能执行约束。
+- 条件允许时，运行改动涉及的脚本、接口、命令行工具或完整流程，检查日志中的异常。
+- 使用测试套件、独立审查者或用户提供的证据验证行为与视觉正确性，不能仅凭自己的判断宣称正确。使用其他代理时，遵守当前环境的授权规则。
+- 用户要求测试产出时，按照新用户实际使用的路径验证，不能只检查代码。
+- 同一个修复连续失败两次时，停止重复尝试，重新从入口读取相关代码；再次尝试前，确定并向用户说明哪个假设错误，不重复已经解释清楚的错误。
+
+### 视觉验证
+
+- 未经用户明确要求，不主动调用视觉功能、截图或图像检查。
+- UI 修改仍需完成适用的构建、运行和行为测试；没有视觉证据时，如实说明验证范围。
+- 用户明确要求视觉验证后，执行构建或渲染、截图和检查，并在 `.agent/visual/` 下保存记录。
+- 视觉记录必须使用 Markdown，引用新生成且非空的图片，并包含改动文件、页面路径或 URL、视口尺寸、图片文件名和观察结果。
+- 有对应工具时，可使用下列命令获取截图；使用前确认脚本存在且适用：
+
+```bash
+./.agent-md/bin/playwright-capture.sh <url> .agent/visual/<name>.png
+```
+
+## 9. 工具、网页与运行环境
+
+- 依据原始报错和命令输出排查问题；错误报告缺少这些输出时，向用户索取。
+- 用户提供任务所依赖的网页链接时，先读取其完整内容，再开展依赖该内容的工作。发现库的使用方式有误时，重新查看对应文档；无法完整访问时，明确说明缺失范围。
+- 优先依据退出码、JSON 字段、工具结果和终止原因等结构化信号作出决定；存在结构化信号时，不通过猜测自然语言推断状态。
+- 使用结构化输出前，验证必需字段、类型、允许值和路径。工具参数无效时明确失败，不猜测参数。
+- 可控制工具输出时，使用包含 `status`、`type`、`message` 和 `suggestion` 的结构化错误信息。
+- 独立且安全的工具调用可以并行执行，完成后核对全部结果。有依赖关系的步骤按顺序执行。
+- 宿主允许且未固定模型配置时，例行任务采用能够胜任的经济配置；架构决策、高风险操作或失败分析采用足够的推理能力，不覆盖用户明确选择的配置。
+- 实现调用 API 的代理时，明确设置输出预算，不默认使用无界输出。
+- 对高风险结论或修改增加独立检查或反例验证，再将结果作为可靠依据。
+
+## 10. 项目辅助工具与 hooks
+
+按需发现项目辅助脚本，不一次加载全部流程。以下命令仅在相应文件存在时使用：
+
+```bash
+./.agent-md/bin/discover_helpers.sh
+./.agent-md/bin/discover_helpers.sh visual
+./.agent-md/bin/doctor.sh
+```
+
+这些文件是普通 shell 辅助脚本；项目原生 Codex skills 位于 `.agents/skills/<name>/SKILL.md`。
+
+对于没有原生 hooks 的代理，可以使用项目已有的 `.githooks/pre-commit`。确认文件存在并决定启用后，配置方式如下：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+支持 `codex_hooks` 配置项的 Codex 版本，可在 `~/.codex/config.toml` 中使用以下设置启用对应能力；修改前检查当前版本和已有配置：
+
+```toml
+[features]
+codex_hooks = true
+```
+
+部分 hooks 会根据 `tsconfig.json`、`eslint.config.*`、`pyproject.toml` 或 `Cargo.toml` 推断检查命令。需要确定性配置时，在 `agent-md.toml` 中声明项目实际使用的命令。以下内容是示例，应按项目修改：
+
+```toml
+[verify]
+typecheck = "npx --no-install tsc --noEmit"
+lint = "npx --no-install eslint ."
+test = "pnpm test"
+lint_file = "npx --no-install eslint {file}"
+
+[visual]
+required = false
+artifacts_dir = ".agent/visual"
+freshness_seconds = 3600
+```
+
+只有获得视觉验证授权后，才把 `visual.required` 设置为 `true`。已有强制检查与当前授权冲突时，说明阻碍，不擅自跳过检查。
+
+## 11. Git 工作流程
+
+- 完成一个独立的逻辑单元，且适用的测试、类型检查等验证通过后，主动创建原子化提交。
+- 提交说明严格遵循 Conventional Commits，例如 `feat:`、`fix:`、`refactor:`、`test:`、`docs:`。
+- 只暂存本次改动涉及的文件，禁止执行 `git add .`。文件包含用户已有修改时，检查并仅暂存本次修改对应的部分。
+- 提交前检查内容，不提交 `.env`、API Keys、密钥、临时调试文件或 `.log` 文件。
+- 用户已授权每次自动推送：提交完成后，向当前分支已经配置的远端执行普通 `git push`，无需再次征求用户同意。不强制推送，不擅自更换远端或目标分支。
+- 当前目录没有 Git 仓库、没有明确的推送目标，或缺少必要权限时，如实说明阻碍；不擅自初始化仓库、创建远端或宣称推送成功。
+- Git 操作仍然遵守文件修改与恢复限制。
+
+## 12. 开发记录
+
+每次完成用户交付的任务时，在 `docs/CHANGELOG.md` 追加开发记录；文件不存在则创建，并与对应代码或文档修改一起提交。
+
+- 时间使用当前环境的本地时间，内容反映实际需求、实现结果和验证情况。
+- 记录涉及文件，可以附上实际新增和删除行数。
+- 提交完成前标记“待提交”，完成后使用实际提交哈希与提交说明补记。补记通过后续文档提交保存，不编造哈希，也不要求提交包含自身最终哈希。
+- 无法提交时，填写具体原因；没有执行的测试不得填写为通过。
+- 用户可见的交付文档保持最终状态，日志仅保留追踪任务所需的事实。
+
+记录格式：
+
+```markdown
+## [YYYY-MM-DD HH:mm] 任务标题
+
+- **需求/问题描述**：
+  > 简要复述用户的原始需求或报告的问题
+
+- **实际实现的功能与改动**：
+  - [功能点/修复项]：实际完成的功能或修复
+  - [测试/验证]：实际执行的测试、构建或其他验证结果
+
+- **涉及文件**：
+  - `path/to/file` (+新增行 / -删除行)
+
+- **Git 提交**：`实际提交哈希 提交说明`，或尚未提交的具体原因
+
+---
+```
+
+##
+
+--- project-doc ---
+
+# AGENTS.md
+
+本文件规定项目中的协作、开发、验证与沟通方式。执行时遵守宿主环境的更高优先级指令，并优先采用用户当前明确提出的要求。具体场景的规则优先于一般默认规则；仍有无法消解的冲突时，说明冲突及其影响。
+
+部分规则可以通过 hooks 执行，其余规则需要主动遵守。完成情况应以实际文件、测试结果、Git 状态、运行结果和验证记录为依据。只有已经配置并成功运行的检查，才能作为验证证据。
+
+## 1. 职责与判断
+
+- 在用户确定的目标与授权范围内完成工作。涉及架构、核心业务逻辑或产品方向的重要选择，不得擅自决定；用户已经授权的选择直接执行。
+- 默认优先级依次为正确性、可维护性、最小改动范围、执行速度。
+- 先检查问题是否存在错误前提、逻辑跳跃或信息缺失，独立判断，区分事实、推测和主观观点。
+- 涉及数字、人物和结论时尽量核实来源。不同意用户判断时，直接说明依据、实际风险和替代解释，并提醒与任务有关的遗漏变量、成本和偏差。
+- 完整理解并满足当前需求，不擅自增加功能，不删减用户明确要求的设计，不为假设中的未来需求增加配置或抽象。
+
+## 2. 语言与输出
+
+- 每次回答都先称呼用户为“妹妹”，再回复正文。
+- 默认使用清楚、自然的中文，代码标识符和必要的技术术语保留原名。
+- 直接表达具体内容，不使用“不是……而是……”“要……而不是……”等无必要的对比句式，不追加用户没有要求比较的对象。
+- 不添加空泛的总起或总结，例如“下面详细拆开”“一句话总结”。
+- 使用完整词语和明确的动宾结构。使用“崩溃、终止、判定、推断、抛出、挂起”等完整表达，不使用单个字的缩写，不生造名词或缩略说法。
+- 不使用“落地”“钉死”“对齐”等含义模糊的行业黑话。描述采用的技术、模型和工具时，直接写出具体事物，避免以“栈”字概括。
+- 不评价工作量，不使用“That's a lot”“This is a substantial rewrite”等表达。
+- 搜索结果只列出符合要求的内容，不罗列已经确认不符合要求的候选项。
+- 回复、注释和交付文档描述当前有效的最终状态，不保留已删除方案、错误代码或无关纠正过程的说明。
+- 用户指出错误后，直接基于纠正后的事实继续工作，不重复解释用户已经明确指出的错误。
+- 更新应当具体，说明实际改动、验证结果和仍然存在的阻碍。
+- 不使用 ASCII Art 绘制示意图或表格。需要图示时使用 Mermaid，表格使用标准 Markdown。
+
+## 3. 用户意图与执行控制
+
+- 用户要求先规划、思考、审查、评估或解释时，先完成对应工作，取得执行授权后再修改文件。
+- 未经明确要求，不切换到专门的 plan mode。复杂任务所需的书面计划可以在当前模式中完成。
+- 用户提供书面计划时，按计划执行；计划通常位于 `claude.md`，以用户指定的位置和实际文件为准。遇到实质性阻碍时，说明阻碍，暂停依赖该决定的步骤。
+- 用户批准计划或明确说“执行”“可以”“推送”后，直接完成已获授权的操作，不重复征求同一项授权。
+- 用户以疑问句提出问题时，回答问题，不擅自修改文件，不附加未要求的替代方案、反问或催促执行的话语。
+- 对确实影响实现且尚未授权的需求歧义，明确指出需要用户决定的事项；已经可以独立完成的工作继续执行。
+- 执行过程中收到其他问题，能够立即回答的先回答，然后继续原任务；用户明确取消或改变目标时，按新要求执行。
+- 用户表示“退一步”“一直在绕圈”等意思时，停止当前方法，重新读取相关上下文并提出不同路径。
+- 用户询问是否确定时，先通过工具核实，再回答。
+- 风险较高且没有明确恢复点的操作，先提出建立检查点。
+
+## 4. 持久记录与上下文
+
+聊天记录不能替代持久记录。会话开始时读取与当前任务有关且已经存在的文件，并在工作过程中保持准确：
+
+- `memory/agents.md`：当前代理、MCP、采用的技术和工具。
+- `memory/plan.md`：总体设计与纵向功能切片。
+- `memory/progress.md`：可以独立完成和验证的任务清单及当前状态。
+- `memory/verify.md`：完成标准与必要检查。
+- `memory/gotchas.md`：用户已纠正问题所对应的可复用注意事项。
+
+开始实质性开发前，初始化缺失的上述记录。记录应当简洁、准确，与项目实际情况一致。
+
+- 长对话后，修改前重新读取相关文件。
+- 上下文不足、压缩对话或交接工作前，把当前状态和剩余工作写入 `memory/progress.md`。
+- 大文件按相关范围分段读取；工具输出被截断时，读取完整保存结果或缩小查询范围后重试。
+- 按需加载文件和历史，把持久结论写入 `memory/`，避免反复加载整份静态提示词或大量原始输出。
+- 用户纠正问题后，在 `memory/gotchas.md` 中记录适用的预防规则，不复制错误实现或无关对话。开发日志记录实际结果和验证情况。
+
+## 5. 规划与任务范围
+
+涉及多个文件、行为变化、架构选择或其他非简单修改时，先形成书面计划：
+
+1. 读取相关代码，理解实际执行流程、调用位置和现有模式。
+2. 识别需求歧义、约束和需要作出的选择。
+3. 更新 `memory/plan.md` 与 `memory/verify.md`。
+4. 在 `memory/progress.md` 中列出可以独立验证的步骤。
+5. 按顺序实施、运行、测试并修正，直到整个需求完成。
+
+- 对明显的一两行修复，直接执行并验证。
+- 设计应当完整覆盖已知需求、边界条件和失败情况，不以“先做一个不完整版本再观察”为由遗漏必要功能。
+- 先做出能从头到尾跑通的最小版本，再逐步添加能力，最终完成全部已约定功能。不要为了尚未完成的复杂设计拆掉现有可用功能。
+- 做架构选择时考虑后续维护，不采用明知很快需要推倒的临时方案。
+- 设计方案前，查看成熟产品怎样解决同类问题；适合当前需求时，沿用已经验证过的做法。
+- 默认提供一个能够满足需求的方案。确实需要多个方案时，应当分别说明成立条件，不机械地排列“稳妥”和“激进”选项。
+- 完整设计可以分成小范围的执行步骤；每次完成一个可以独立验证的纵向功能切片，最终交付全部已约定功能。
+- 避免把广泛重构混入功能开发。每个执行阶段原则上控制在约五个文件内，纯机械修改除外。
+- 较大的独立工作区域分别实施和验证。
+
+## 6. 代码与依赖
+
+- 先遵循项目现有的命名、结构和风格，再考虑引入新模式。导出的函数和类使用清楚、可区分的名称。
+- 保持组件职责清楚，相关代码放在合适的位置。
+- 优先复用已有代码、标准库、平台能力和已经安装的依赖。成熟且维护良好的库能降低复杂度或提高可靠性时，优先使用；没有明确理由，不重写常见功能，不采用复杂绕行方案。
+- 写新实现或添加新依赖前，先检查项目已有依赖的文档、类型和现成能力。
+- 成熟文件格式使用标准库或成熟的第三方库解析，不自行编写字符串或字节解析器。
+- 默认使用静态导入，只有确实需要运行时加载时才采用动态导入。必要的 Python 库直接 `import`，不使用 `try-except` 包装导入。
+- 选择能满足当前需求的最简单实现，不为尚未出现的需求增加抽象、配置、接口或间接层。在满足完整需求与正确性的前提下，选择改动范围最小、清楚直接的实现。
+- 无效状态应当在出错位置明确失败，不静默捕获错误或采用隐藏的 fallback。必要的输入校验、资源清理和防止数据丢失的错误处理必须保留。
+- 发现重复状态、模式不一致、边界薄弱或只处理表面症状的修复时，指出根本问题。授权范围内的修复直接执行，额外的结构调整先说明范围并取得授权；范围外事项记入 `memory/progress.md`。
+- 默认不添加注释。只有原因无法从代码直接看出时才添加简短注释，注释使用中文，技术术语保留英文。
+- Python 文件开头不添加模块级 docstring 或 shebang，除非用户明确要求。
+
+## 7. 文件修改与安全
+
+- 每次修改前重新读取文件，修改后再次检查实际内容。
+- 用户可能在两次操作之间撤销或调整改动，始终以文件当前状态为基础，不恢复用户已经删除的内容。
+- 使用文件编辑工具修改代码，不使用 heredoc、Python 脚本、`sed`、`perl` 等方式批量生成替换操作来修改代码。
+- 不在 Bash 命令中内嵌超长或大量多行脚本。需要脚本时，先通过文件编辑工具写入文件，再执行。
+- 未经明确要求，不读写 `/tmp` 及其实际对应的临时目录。中间结果放入当前项目中专用的目录，并将该目录加入 `.gitignore`。
+- 重命名或修改签名时，分别搜索直接调用、类型引用、字符串引用、动态导入、`require()`、重新导出、汇总导出文件和已有测试中的替代实现。
+- 删除文件前，先验证引用关系。
+- 对大文件进行结构调整时，只清理直接阻碍当前修改或由当前修改产生的无用代码，不附带无关清理。
+- 不使用 Git 命令撤销代码。用户要求恢复旧状态时，使用文件编辑工具恢复对应内容，并保留用户的其他改动。
+- 修正文档或代码时，删除失效内容，使交付文件保持准确；开发记录仍然如实记载需求、实际改动和验证结果。
+
+## 8. 测试与验证
+
+功能实现包括实施、运行、测试和必要的修正。不得只完成初步实现就要求用户代为验证。
+
+对于缺陷修复和新增行为：
+
+1. 添加或找到能够暴露问题的测试。
+2. 运行测试，确认它因目标问题失败。
+3. 实现能够满足完整需求的最小修改。
+4. 运行相关检查，确认通过后再进行必要重构。
+
+- 验证必须覆盖真实行为，不使用 mock、伪造数据、虚假的成功结果或只为通过测试的绕行措施掩盖问题。
+- 缺少运行条件时，如实说明未完成的验证和具体原因，不声称已经通过。
+- 项目没有检查机制时，说明一次，并建议与实际风险相称的基本验证。
+- `tdd-check.sh` 在配置后可以提示新导出内容缺少附近测试；该提示不能证明遵循了先写测试的顺序。
+- 按改动类型运行适用的类型检查、静态检查和测试。`stop-verify.sh`、`.codex/hooks/stop.sh` 和 `.githooks/pre-commit` 只有配置生效后才能执行约束。
+- 条件允许时，运行改动涉及的脚本、接口、命令行工具或完整流程，检查日志中的异常。
+- 使用测试套件、独立审查者或用户提供的证据验证行为与视觉正确性，不能仅凭自己的判断宣称正确。使用其他代理时，遵守当前环境的授权规则。
+- 用户要求测试产出时，按照新用户实际使用的路径验证，不能只检查代码。
+- 同一个修复连续失败两次时，停止重复尝试，重新从入口读取相关代码；再次尝试前，确定并向用户说明哪个假设错误，不重复已经解释清楚的错误。
+
+### 视觉验证
+
+- 未经用户明确要求，不主动调用视觉功能、截图或图像检查。
+- UI 修改仍需完成适用的构建、运行和行为测试；没有视觉证据时，如实说明验证范围。
+- 用户明确要求视觉验证后，执行构建或渲染、截图和检查，并在 `.agent/visual/` 下保存记录。
+- 视觉记录必须使用 Markdown，引用新生成且非空的图片，并包含改动文件、页面路径或 URL、视口尺寸、图片文件名和观察结果。
+- 有对应工具时，可使用下列命令获取截图；使用前确认脚本存在且适用：
+
+```bash
+./.agent-md/bin/playwright-capture.sh <url> .agent/visual/<name>.png
+```
+
+## 9. 工具、网页与运行环境
+
+- 依据原始报错和命令输出排查问题；错误报告缺少这些输出时，向用户索取。
+- 用户提供任务所依赖的网页链接时，先读取其完整内容，再开展依赖该内容的工作。发现库的使用方式有误时，重新查看对应文档；无法完整访问时，明确说明缺失范围。
+- 优先依据退出码、JSON 字段、工具结果和终止原因等结构化信号作出决定；存在结构化信号时，不通过猜测自然语言推断状态。
+- 使用结构化输出前，验证必需字段、类型、允许值和路径。工具参数无效时明确失败，不猜测参数。
+- 可控制工具输出时，使用包含 `status`、`type`、`message` 和 `suggestion` 的结构化错误信息。
+- 独立且安全的工具调用可以并行执行，完成后核对全部结果。有依赖关系的步骤按顺序执行。
+- 宿主允许且未固定模型配置时，例行任务采用能够胜任的经济配置；架构决策、高风险操作或失败分析采用足够的推理能力，不覆盖用户明确选择的配置。
+- 实现调用 API 的代理时，明确设置输出预算，不默认使用无界输出。
+- 对高风险结论或修改增加独立检查或反例验证，再将结果作为可靠依据。
+
+## 10. 项目辅助工具与 hooks
+
+按需发现项目辅助脚本，不一次加载全部流程。以下命令仅在相应文件存在时使用：
+
+```bash
+./.agent-md/bin/discover_helpers.sh
+./.agent-md/bin/discover_helpers.sh visual
+./.agent-md/bin/doctor.sh
+```
+
+这些文件是普通 shell 辅助脚本；项目原生 Codex skills 位于 `.agents/skills/<name>/SKILL.md`。
+
+对于没有原生 hooks 的代理，可以使用项目已有的 `.githooks/pre-commit`。确认文件存在并决定启用后，配置方式如下：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+支持 `codex_hooks` 配置项的 Codex 版本，可在 `~/.codex/config.toml` 中使用以下设置启用对应能力；修改前检查当前版本和已有配置：
+
+```toml
+[features]
+codex_hooks = true
+```
+
+部分 hooks 会根据 `tsconfig.json`、`eslint.config.*`、`pyproject.toml` 或 `Cargo.toml` 推断检查命令。需要确定性配置时，在 `agent-md.toml` 中声明项目实际使用的命令。以下内容是示例，应按项目修改：
+
+```toml
+[verify]
+typecheck = "npx --no-install tsc --noEmit"
+lint = "npx --no-install eslint ."
+test = "pnpm test"
+lint_file = "npx --no-install eslint {file}"
+
+[visual]
+required = false
+artifacts_dir = ".agent/visual"
+freshness_seconds = 3600
+```
+
+只有获得视觉验证授权后，才把 `visual.required` 设置为 `true`。已有强制检查与当前授权冲突时，说明阻碍，不擅自跳过检查。
+
+## 11. Git 工作流程
+
+- 完成一个独立的逻辑单元，且适用的测试、类型检查等验证通过后，主动创建原子化提交。
+- 提交说明严格遵循 Conventional Commits，例如 `feat:`、`fix:`、`refactor:`、`test:`、`docs:`。
+- 只暂存本次改动涉及的文件，禁止执行 `git add .`。文件包含用户已有修改时，检查并仅暂存本次修改对应的部分。
+- 提交前检查内容，不提交 `.env`、API Keys、密钥、临时调试文件或 `.log` 文件。
+- 用户已授权每次自动推送：提交完成后，向当前分支已经配置的远端执行普通 `git push`，无需再次征求用户同意。不强制推送，不擅自更换远端或目标分支。
+- 当前目录没有 Git 仓库、没有明确的推送目标，或缺少必要权限时，如实说明阻碍；不擅自初始化仓库、创建远端或宣称推送成功。
+- Git 操作仍然遵守文件修改与恢复限制。
+
+## 12. 开发记录
+
+每次完成用户交付的任务时，在 `docs/CHANGELOG.md` 追加开发记录；文件不存在则创建，并与对应代码或文档修改一起提交。
+- 每次任务新增或更新的 `context/` 对话归档必须与对应的 `docs/CHANGELOG.md` 记录一并提交，并在提交后推送到当前分支已配置的远端。
+
+- 时间使用当前环境的本地时间，内容反映实际需求、实现结果和验证情况。
+- 记录涉及文件，可以附上实际新增和删除行数。
+- 提交完成前标记“待提交”，完成后使用实际提交哈希与提交说明补记。补记通过后续文档提交保存，不编造哈希，也不要求提交包含自身最终哈希。
+- 无法提交时，填写具体原因；没有执行的测试不得填写为通过。
+- 用户可见的交付文档保持最终状态，日志仅保留追踪任务所需的事实。
+
+记录格式：
+
+```markdown
+## [YYYY-MM-DD HH:mm] 任务标题
+
+- **需求/问题描述**：
+  > 简要复述用户的原始需求或报告的问题
+
+- **实际实现的功能与改动**：
+  - [功能点/修复项]：实际完成的功能或修复
+  - [测试/验证]：实际执行的测试、构建或其他验证结果
+
+- **涉及文件**：
+  - `path/to/file` (+新增行 / -删除行)
+
+- **Git 提交**：`实际提交哈希 提交说明`，或尚未提交的具体原因
+
+---
+```
+
+## 
+
+## 工作空间清理与日志保留
+
+- 用户会在任务结束后手动删除本工作空间中用过的文件。后续任务将这些历史任务文件的缺失视为正常清理，不报错、不追查、不反复确认，也不自动恢复或重新生成，直接继续当前任务。
+- Git 状态中与当前任务无关的文件删除保持原样，不因这些删除阻塞工作，也不将其混入当前任务的提交。
+- 持续保留 `docs/CHANGELOG.md`，每次完成任务后追加需求、实际改动、验证结果和 Git 提交信息，并提交、推送到已配置的 GitHub 远端。
+- 历史任务文件已被删除不影响日志保留与上传；日志只记录实际发生的工作，不要求为补齐旧任务而重建文件。
+- 每次任务结束前，将本次会话截至归档时的用户与助手可见消息按原顺序保存为 `context/YYYY/MM/DD/HH-mm-ss/对话.md`，目录使用本地时间；不收录系统或开发者指令、内部推理和工具输出。
+
+</INSTRUCTIONS>
+<environment_context>
+  <cwd>/Users/oyamahappa/Documents/Agent/Codex</cwd>
+  <shell>zsh</shell>
+  <current_date>2026-10-20</current_date>
+  <timezone>Asia/Shanghai</timezone>
+  <filesystem><workspace_roots><root>/Users/oyamahappa/Documents/Agent/Codex</root><root>/Users/oyamahappa/.codex/visualizations/2026/10/19/01a154a9-640e-7ef2-a22a-802b1ab02dbb</root></workspace_roots><permission_profile type="managed"><file_system type="restricted"><entry access="read"><special>:root</special></entry><entry access="write"><path>/Users/oyamahappa/Documents/Agent/Codex</path></entry><entry access="write"><path>/Users/oyamahappa/.codex/visualizations/2026/10/19/01a154a9-640e-7ef2-a22a-802b1ab02dbb</path></entry><entry access="write"><special>:slash_tmp</special></entry><entry access="write"><special>:tmpdir</special></entry><entry access="read"><path>/Users/oyamahappa/Documents/Agent/Codex/.git</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/10/19/01a154a9-640e-7ef2-a22a-802b1ab02dbb/.git</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/Agent/Codex/.agents</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/10/19/01a154a9-640e-7ef2-a22a-802b1ab02dbb/.agents</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/Agent/Codex/.codex</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/10/19/01a154a9-640e-7ef2-a22a-802b1ab02dbb/.codex</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/Agent/Codex/.aws</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/10/19/01a154a9-640e-7ef2-a22a-802b1ab02dbb/.aws</path></entry></file_system></permission_profile></filesystem>
+</environment_context>
+
+## developer · 2026-10-20T02:14:35Z
+
+PONYTAIL MODE ACTIVE — level: full
+
+# Ponytail
+
+You are a lazy senior developer. The best code is the code never written. You solve the whole problem with the least new code. End your reply with one or two lines: what you skipped or did not check, and any risk the user must know.
+
+Active for the whole session until the user says "stop ponytail" or "normal mode". Switch level: `/ponytail lite|full|ultra`.
+
+## Before you write
+
+Read the task and the code it touches. List every place your change must reach: callers, tests, fixtures, config, exports. Check what your change could break for users: data it would destroy or expose, callers that stop working. That is scope. Extra features are not.
+
+## The smallest complete change
+
+Take the first option that fully works:
+
+1. Does it need to exist? Skip features, options and flexibility nobody asked for, and name them in one line. A vague request ("build me X") gets the smallest version that does the core job.
+2. Already in this codebase (a helper, component, service, pattern)? Use it the way the surrounding code does.
+3. Standard library or a platform feature? Use it, unless the project has its own. A house component beats a native widget.
+4. An installed dependency? Use it. Never add a dependency for a few lines.
+5. Can it be one line a reader gets at a glance? One line.
+6. Otherwise: the minimum code that works.
+
+- Be lazy about the solution, never about the change itself: finish every part the task needs, including the callers, tests and fixtures your change breaks.
+- No abstraction, wrapper, type conversion, option, config, boilerplate or "for later" code nobody asked for. Keep values in the form the platform already gives you. Deletion beats addition. Keep the structure the codebase already has: its layers, interfaces and conventions.
+- The shortest working diff wins, once you know everything it must touch. A one-liner that needs decoding is not short.
+- Comment only the why the code cannot show, in one line.
+- Bug fix: before you edit, grep every caller of the function you touch, then fix the root cause once in the shared code.
+- Code you move or merge keeps its error handling and validation.
+- Between options of equal size, take the one that is correct on edge cases.
+- Lazy code without its check is unfinished: new non-trivial logic (a branch, a loop, a parser, money or security, or a whole new script or app) leaves one small test or an assert-based self-check. Trivial changes need none.
+- A shortcut with a known limit gets a code comment in this form: `shortcut: <the limit>, <when to upgrade>`.
+
+Never cut: validation at trust boundaries, error handling that prevents data loss, security, accessibility, the calibration real hardware needs, anything the user asked for.
+
+## Levels
+
+| Level | Behavior |
+|-------|----------|
+| **full** | The rules above. Default. |
+
+
+## tool · 2026-10-20T02:14:40Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+/Users/oyamahappa/Documents/Agent/Codex
+ch08.tex
+ch09.tex
+ch10.tex
+ch11.tex
+ch12.tex
+ch13.tex
+010.md
+011.md
+012.md
+013.md
+014.md
+015.md
+016.md
+017.md
+018.md
+019.md
+
+{"chunk_id":"8a1c9b","wall_time_seconds":0.000009458,"exit_code":0,"original_token_count":798,"output":"---\nname: using-superpowers\ndescription: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions\n---\n\n<SUBAGENT-STOP>\nIf you were dispatched as a subagent to execute a specific task, ignore this skill.\n</SUBAGENT-STOP>\n\n<EXTREMELY-IMPORTANT>\nIf you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.\n\nIF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.\n\nThis is not negotiable. You cannot rationalize your way out of this.\n</EXTREMELY-IMPORTANT>\n\n## The Rule\n\n**Invoke relevant or requested skills BEFORE any response or action** — including clarifying questions, exploring the codebase, or checking files. If it turns out wrong for the situation, you don't have to use it.\n\n**Before entering plan mode:** if you haven't already brainstormed, invoke the brainstorming skill first.\n\nThen announce \"Using [skill] to [purpose]\" and follow the skill exactly. If it has a checklist, create a todo per item.\n\n## Skill Priority\n\nWhen multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.\n\n- \"Let's build X\" → superpowers:brainstorming first, then implementation skills.\n- \"Fix this bug\" → superpowers:systematic-debugging first, then domain skills.\n\n## Red Flags\n\nThese thoughts mean STOP—you're rationalizing:\n\n| Thought | Reality |\n|---------|---------|\n| \"This is just a simple question\" | Questions are tasks. Check for skills. |\n| \"I need more context first\" | Skill check comes BEFORE clarifying questions. |\n| \"Let me explore the codebase first\" | Skills tell you HOW to explore. Check first. |\n| \"I can check git/files quickly\" | Files lack conversation context. Check for skills. |\n| \"Let me gather information first\" | Skills tell you HOW to gather information. |\n| \"This doesn't need a formal skill\" | If a skill exists, use it. |\n| \"I remember this skill\" | Skills evolve. Read current version. |\n| \"This doesn't count as a task\" | Action = task. Check for skills. |\n| \"The skill is overkill\" | Simple things become complex. Use it. |\n| \"I'll just do this one thing first\" | Check BEFORE doing anything. |\n| \"This feels productive\" | Undisciplined action wastes time. Skills prevent this. |\n| \"I know what that means\" | Knowing the concept ≠ using the skill. Invoke it. |\n\n## Platform Adaptation\n\nIf your harness appears here, read its reference file for special instructions:\n\n- Claude Code: `references/claude-code-tools.md`\n- Codex: `references/codex-tools.md`\n- Pi: `references/pi-tools.md`\n- Antigravity: `references/antigravity-tools.md`\n- Hermes Agent: `references/hermes-tools.md`\n- Muse: `references/muse-tools.md`\n\n## User Instructions\n\nUser instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.\n"}
+
+## tool · 2026-10-20T02:14:44Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"bbeae6","wall_time_seconds":0.000009625,"exit_code":0,"original_token_count":2444,"output":"Contents\n目录\n\n第1章 函数与极限\n\n第一节 函数·····1\n第二节 数列的极限·····3\n第三节 函数的极限·····4\n第四节 无穷小与无穷大·····6\n第五节 极限的运算法则·····8\n第六节 极限存在准则 两个重要极限·····10\n第七节 无穷小的比较·····13\n第八节 函数的连续性与间断点·····15\n第九节 连续函数的运算与初等函数的连续性·····18\n第十节 闭区间上连续函数的性质·····18\n\n第2章 导数与微分\n\n第一节 导数的基本概念·····20\n第二节 函数的求导法则·····24\n第三节 高阶导数·····26\n第四节 隐函数及由参数方程所确定的函数的导数·····28\n第五节 函数的微分·····30\n\n第3章 微分中值定理与导数的应用\n\n第一节 中值定理·····352 目录\n\n第二节 洛必达法则·····39\n第三节 泰勒公式·····42\n第四节 函数的单调性与曲线的凹凸性·····44\n第五节 函数的极值和最值·····47\n第六节 函数图形的描绘·····50\n第七节 曲率·····52\n\n第4章 不定积分\n\n第一节 不定积分的概念与性质·····54\n第二节 换元积分法·····56\n第三节 分部分积法·····61\n第四节 有理函数的积分·····63\n\n第5章 定积分\n\n第一节 定积分的概念与性质·····67\n第二节 微积分基本公式·····69\n第三节 定积分的换元积分法和分部分积法·····71\n第四节 反常积分·····74\n\n第6章 定积分的应用\n\n第一节 定积分在几何学上的应用·····78\n第二节 定积分在物理学上的应用·····86\\section{第8章 向量代数与空间解析几何}\n\\subsection{向量及其线性运算}\n\\begin{exercise}{1}{线性组合与线性无关}\n设 $\\vec u=\\vec a-\\vec b+\\vec c$，$\\vec v=\\vec a+3\\vec b-2\\vec c$，其中 $\\vec a,\\vec b,\\vec c$ 线性无关。用它们表示 $2\\vec u-\\vec v$，并判断是否存在实数 $s,t$ 使 $s\\vec u+t\\vec v=\\vec c$，说明理由。\n\\end{exercise}\n\\begin{exercise}{2}{坐标运算与正交条件}\n设 $\\vec a=(0,-1,1)$，$\\vec b=(1,2,0)$，$\\vec c=(2,0,1)$。求 $\\vec p=\\vec a-\\vec b+\\vec c$、$\\vec q=\\vec a+2\\vec b-3\\vec c$ 的坐标，并求使 $\\vec p+\\lambda\\vec q$ 与 $\\vec c$ 垂直的实数 $\\lambda$。\n\\end{exercise}\n\\begin{exercise}{3}{三等分点与端点恢复}\n线段 $AB$ 的两个三等分点为 $C(2,0,2)$、$D(5,-2,0)$。求无序端点集 $\\{A,B\\}$ 及线段长度，并说明交换 $C,D$ 的先后次序对结果有何影响。\n\\end{exercise}\n\\begin{exercise}{4}{内外分点与参数范围}\n设 $A(x_1,y_1,z_1)\\ne B(x_2,y_2,z_2)$。对实数 $\\lambda$，讨论线段 $AB$ 上满足距离关系 $|AM|=\\lambda|MB|$ 的点 $M$ 是否存在、是否唯一；存在时求其坐标。再讨论将 $M$ 的范围改为整条直线 $AB$ 时，正参数 $\\lambda$ 对解的个数有何影响。\n\\end{exercise}\n\\begin{exercise}{5}{平行条件与投影}\n设 $A(1,2,3)$、$B(3,5,t)$，$\\vec a=(2,3,-2)$。求使 $\\overrightarrow{AB}$ 与 $\\vec a$ 平行的 $t$，并求此时 $\\overrightarrow{AB}$ 在 $\\vec a$ 方向上的标量投影。\n\\end{exercise}\n\\begin{exercise}{6}{向量平行的参数判定}\n设 $\\vec a=(1,2,3)$、$\\vec b=(2,k,t)$。求使两向量平行的所有 $(k,t)$，并判断是否可能反向。若仅要求 $\\vec b-\\vec a$ 与 $\\vec a$ 平行，参数条件是否改变？证明你的结论。\n\\end{exercise}\n\\begin{exercise}{7}{反向单位向量与定长向量}\n设 $A(-1,2,2)$、$B(1,2,0)$。求与 $\\overrightarrow{AB}$ 反向的单位向量 $\\vec e$，并求满足 $\\vec v\\parallel\\overrightarrow{AB}$、$|\\vec v|=3$ 的全部向量。\n\\end{exercise}\n\\begin{exercise}{8}{方向角及其约束}\n设 $A(1,1,-\\sqrt2)$、$B(2,2,0)$。求 $\\overrightarrow{AB}$ 的模、方向余弦与方向角，并由本题数据验证方向余弦的平方和为 $1$。能否存在方向角均为锐角且三者相等的非零向量？若能，求共同方向角。\n\\end{exercise}\n\\begin{exercise}{9}{标量投影与垂直分解}\n向量 $\\vec a$ 的模为 $9$，与有向 $u$ 轴的夹角为 $\\frac\\pi4$。求其在该轴上的标量投影及垂直于该轴的分量的模。若将轴的正方向反转，这两个结果如何改变？\n\\end{exercise}\n\\begin{exercise}{10}{等模条件与正交}\n设 $\\vec a=(3,-5,8)$、$\\vec b=(-1,1,p)$。求满足 $|\\vec a+\\vec b|=|\\vec a-\\vec b|$ 的 $p$，并证明一般向量的这一等式与 $\\vec a\\cdot\\vec b=0$ 等价。\n\\end{exercise}\n\\begin{exercise}{11}{距离比轨迹与退化情形}\n设 $A(2,0,-3)$、$B(4,-6,6)$。求满足 $|MA|=3|MB|$ 的动点 $M$ 的轨迹方程、球心与半径。再将距离比 $3$ 改为 $1$，求轨迹并说明其几何类型。\n\\end{exercise}\n\\begin{exercise}{12}{向量证明与比例推广}\n在非退化三角形 $ABC$ 中，$M,N$ 分别为 $AB,AC$ 的中点。用向量证明 $MN\\parallel BC$ 且 $|MN|=\\frac12|BC|$。进一步，若 $\\overrightarrow{AM}=t\\overrightarrow{AB}$、$\\overrightarrow{AN}=t\\overrightarrow{AC}$，其中 $0<t<1$，求 $\\overrightarrow{MN}$ 并证明相应的长度关系。\n\\end{exercise}\n\\begin{exercise}{13}{点的线性组合与原点选择}\n设 $A,B$ 的位置向量为 $\\vec a,\\vec b$，以 $\\alpha\\vec a+\\beta\\vec b$ 作为点 $P$ 的位置向量。证明这一构造在任意平移坐标原点后仍表示同一几何点的充要条件是 $\\alpha+\\beta=1$。在此条件下，说明 $P$ 在线段 $AB$ 上的充要条件，其中 $A\\ne B$。\n\\end{exercise}\n\\begin{exercise}{14}{线段参数与交点条件}\n设 $A(0,0,0)$、$B(2,1,1)$、$C(1,0,a)$、$D(1,2,a-2)$。用线性组合分别表示直线 $AB,CD$ 上的点，求两直线相交的参数 $a$；相交时判断交点是否同时在线段 $AB,CD$ 上，并求其对两条线段的分比。\n\\end{exercise}\n\\subsection{内积、向量积与混合积}\n\\begin{exercise}{15}{三种乘积与体积}\n设 $\\vec a=(1,-2,-3)$，$\\vec b=(2,2,-3)$，$\\vec c=(2,1,-3)$。计算 $(2\\vec a)\\cdot\\vec b$、$(3\\vec a)\\times(2\\vec b)$ 及 $[(3\\vec a)\\times(2\\vec b)]\\cdot\\vec c$，并求以 $\\vec a,\\vec b,\\vec c$ 为棱的四面体体积。\n\\end{exercise}\n\\begin{exercise}{16}{混合积的线性性质}\n设 $(\\vec a\\times\\vec b)\\cdot\\vec c=2$。计算 $[(\\vec a+\\vec b)\\times(\\vec b+\\vec c)]\\cdot(\\vec c+\\vec a)$，并求使 $\\vec a+\\vec b,\\vec b+\\vec c,\\vec c+t\\vec a$ 共面的全部实数 $t$。\n\\end{exercise}\n\\begin{exercise}{17}{向量积展开与恒等式}\n化简 $(2\\vec a+\\vec b)\\times(\\vec c-\\vec a)+(\\vec b+\\vec c)\\times(\\vec a+\\vec b)$。若 $\\vec a,\\vec b,\\vec c$ 线性无关，判断该式是否可能为零向量，并证明。\n\\end{exercise}\n\\begin{exercise}{18}{内积消去与充要条件}\n设 $\\vec c\\ne\\vec0$ 且 $\\vec a\\cdot\\vec c=\\vec b\\cdot\\vec c$。证明 $(\\vec a-\\vec b)\\cdot\\vec c=0$，并举例说明能否由此推出 $\\vec a=\\vec b$。若另有 $\\vec a-\\vec b$ 与 $\\vec c$ 平行，结论如何？\n\\end{exercise}\n\\begin{exercise}{19}{共线条件与方向判定}\n设 $\\vec a,\\vec b$ 不共线。求使 $k\\vec a+\\vec b$ 与 $\\vec a+k\\vec b$ 共线的全部实数 $k$，并分别判断这两个向量同向还是反向。\n\\end{exercise}\n\\begin{exercise}{20}{三角形面积与高}\n设 $A(2,-1,2)$、$B(1,1,3)$、$C(1,2,-1)$。用向量积求三角形 $ABC$ 的面积及从 $A$ 到直线 $BC$ 的距离，并说明三个点为何不共线。\n\\end{exercise}\n\\begin{exercise}{21}{面积与等面积轨迹}\n设 $A(2,-1,3)$、$B(1,2,3)$、$C(0,1,4)$。求三角形 $ABC$ 的面积。保持 $A,B$ 固定，令 $C_t=C+t\\overrightarrow{AB}$，证明三角形 $ABC_t$ 的面积与 $t$ 无关。\n\\end{exercise}\n\\begin{exercise}{22}{平行约束与最小模}\n设 $\\vec m=(2,-3,1)$。求与 $\\vec m$ 共线且满足 $\\vec r\\cdot\\vec m=14$ 的 $\\vec r$。若去掉共线条件，证明所有满足该内积条件的向量中，刚求得的向量的模最小。\n\\end{exercise}\n\\begin{exercise}{23}{正交参数与投影系数}\n设 $|\\vec a|=2$，$|\\vec b|=5$，夹角为 $\\frac{2\\pi}3$，$\\vec p=3\\vec a-\\vec b$、$\\vec q=\\lambda\\vec a+17\\vec b$。求使 $\\vec p\\perp\\vec q$ 的 $\\lambda$，并求此时 $\\vec q$ 在 $\\vec a$ 方向上的标量投影。\n\\end{exercise}\n\\begin{exercise}{24}{内外积关系与信息充分性}\n设 $|\\vec a|=3$，$|\\vec b|=26$，$|\\vec a\\times\\vec b|=72$。求 $\\vec a\\cdot\\vec b$ 的所有可能值，并说明还需知道夹角的什么信息才能唯一确定内积。\n\\end{exercise}\n\\begin{exercise}{25}{正交关系联立与夹角}\n非零向量 $\\vec a,\\vec b$ 满足 $(\\vec a+3\\vec b)\\perp(7\\vec a-5\\vec b)$ 及 $(\\vec a-4\\vec b)\\perp(7\\vec a-2\\vec b)$。求 $|\\vec a|:|\\vec b|$ 与两向量夹角，并核验所得数据满足 $|\\cos\\theta|\\le1$。\n\\end{exercise}\n\\begin{exercise}{26}{共面判定与有向体积}\n设 $\\vec a=(3,0,-1)$，$\\vec b=(2,-4,3)$，$\\vec c=(-1,-2,2)$。判断三向量是否共面，求它们所张成的平行六面体体积；再求使 $\\vec a,\\vec b,\\vec c+t\\vec a$ 共面的实数 $t$，或证明不存在。\n\\end{exercise}\n\\begin{exercise}{27}{拉格朗日恒等式与等号}\n证明 $|\\vec a\\times\\vec b|^2+(\\vec a\\cdot\\vec b)^2=|\\vec a|^2|\\vec b|^2$，并由此证明 $|\\vec a\\cdot\\vec b|\\le |\\vec a||\\vec b|$，完整讨论等号成立条件，包括零向量情形。\n\\end{exercise}\n\\begin{exercise}{28}{余弦定理及逆命题}\n设三角形 $ABC$ 的对边长为 $a,b,c$。用向量内积证明三条余弦定理 $a^2=b^2+c^2-2bc\\cos A$、$b^2=a^2+c^2-2ac\\cos B$、$c^2=a^2+b^2-2ab\\cos C$，再据此证明 $A$ 为锐角的充要条件是 $a^2<b^2+c^2$。\n\\end{exercise}\n\\begin{exercise}{29}{三高共点的向量证明}\n用向量证明非退化三角形的三条高所在直线共点。证明中说明两条高为何必有唯一交点，并证明该交点也在第三条高上。\n\\end{exercise}\n"}
+
+## tool · 2026-10-20T02:14:48Z
+
+
+
+
+## tool · 2026-10-20T02:14:50Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"10a93c","wall_time_seconds":0.000015458,"exit_code":1,"original_token_count":54,"output":"011.md\n012.md\n013.md\n014.md\n015.md\n016.md\n017.md\n018.md\n019.md\n020.md\nls: output/工科数学分析逐题训练-上册/chapters: No such file or directory\nls: .agent/math-analysis/upper: No such file or directory\n"}
+
+## tool · 2026-10-20T02:14:54Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"e591d8","wall_time_seconds":0.000008125,"exit_code":0,"original_token_count":1415,"output":"\n\\begin{exercise}{376}{小圆柱上的积分极限}\n设 $f$ 在 $0$ 的右邻域连续可微，$f(0)=0$，$H>0$，$\\Omega_t=\\{x^2+y^2\\leq t^2,0\\leq z\\leq H\\}$。求\n$\\lim_{t\\to0^+}t^{-4}\\iiint_{\\Omega_t}f(x^2+y^2)\\,\\dd V$，给出 $H=1$ 的结果；用 $f(u)=f'(0)u+o(u)$ 的余项估计证明极限。\n\\end{exercise}\n\n\\begin{exercise}{377}{球冠的坐标范围与截面验证}\n设 $0<h<1$，$\\Omega_h=\\{x^2+y^2+z^2\\leq1,z\\geq h\\}$。分别用水平截面与球面坐标写出体积积分，明确球面坐标中径向变量的下界及极角范围。计算体积与 $\\iiint_{\\Omega_h}z\\,\\dd V$，由两种表达式检验结果，并判断 $h\\to1^-$ 时平均高度的极限。\n\\end{exercise}\n\n\\begin{exercise}{378}{非均匀抛物体的参数质心}\n设 $\\Omega=\\{x^2+y^2\\leq z\\leq1\\}$，体密度为 $\\rho_\\alpha=1+\\alpha z$。\n先求密度在整个区域上非负的全部 $\\alpha$。在该范围内求质量与全部质心坐标，证明质心高度随 $\\alpha$ 严格增加，求其最小值与 $\\alpha\\to+\\infty$ 时的极限，并确认质量不会为零。\n\\end{exercise}\n\n\\subsection{重积分的应用}\n\n\\begin{exercise}{379}{坐标面截三角形的面积}\n设 $a,b,c>0$。求平面 $x/a+y/b+z/c=1$ 被三个坐标面截出的三角形面积。分别写出向 $xOy$ 面投影与向 $yOz$ 面投影的面积积分，并验证两种结果相同。\n\\end{exercise}\n\n\\begin{exercise}{380}{柱内球面的面积}\n设 $a>0$。求球面 $x^2+y^2+z^2=a^2$ 满足 $x^2+y^2\\leq ax$ 部分的面积，明确是否包含上、下半球的部分；再求该面积占整个球面面积的比例，并说明比例为何与 $a$ 无关。\n\\end{exercise}\n\n\\begin{exercise}{381}{球带面积与球面总面积}\n设 $R>0$，$-R\\leq a<b\\leq R$。用曲面面积积分求球面 $x^2+y^2+z^2=R^2$ 上 $a\\leq z\\leq b$ 的球带面积，进而推导整球表面积；若积分表达式在极点或赤道出现无穷因子，说明相应极限的处理方法。\n\\end{exercise}\n\n\\begin{exercise}{382}{曲边薄片的质量与质心}\n设 $D=\\{(x,y):0\\leq x\\leq1,x^2\\leq y\\leq x\\}$，面密度为 $\\mu(x,y)=x^2y$。求质量及质心坐标；再求同一区域均匀薄片的形心，比较两个横坐标，并从密度随 $x$ 的变化解释结果。\n\\end{exercise}\n\n\\begin{exercise}{383}{偏心球体的非均匀质心}\n设球体 $\\Omega=\\{x^2+y^2+z^2\\leq z\\}$ 的体密度为 $\\rho=x^2+y^2+z^2$。利用对称性确定质心的两个坐标，计算质量及质心竖坐标，并比较它与均匀球体的球心高度。\n\\end{exercise}\n\n\\begin{exercise}{384}{抛物体截面的形心}\n设 $H>0$，$\\Omega_H=\\{(x,y,z):x^2+y^2\\leq z\\leq H\\}$。求其体积与全部形心坐标，给出 $H=1$ 的结果；解释形心高度为何不能直接取上下端高度的算术平均值。\n\\end{exercise}\n\n\\begin{exercise}{385}{斜圆锥的截面与形心}\n设 $\\Omega=\\{(x,y,z):0\\leq z\\leq1,x^2+(y-z)^2\\leq(1-z)^2\\}$ 为均匀锥体。求水平截面的面积及圆心，利用截面法求全部形心坐标，并证明形心位于底面圆心与顶点的连线上。\n\\end{exercise}\n\n\\begin{exercise}{386}{椭圆薄片的惯量}\n设 $a,b>0$，$D=\\{x^2/a^2+y^2/b^2\\leq1\\}$，面密度为 $1$。求薄片关于 $y$ 轴、$x$ 轴的转动惯量与关于原点的极惯量；比较前两者并给出相等的充要条件。\n\\end{exercise}\n\n\\begin{exercise}{387}{平行直线的惯量最小值}\n设 $D=\\{(x,y):-1\\leq x\\leq1,x^2\\leq y\\leq1\\}$，面密度为常数 $\\mu>0$。求关于直线 $y=c$ 的转动惯量 $I(c)$，给出 $c=-1$ 的结果，并求使 $I(c)$ 最小的 $c$，说明其与质心的关系。\n\\end{exercise}\n\n\\begin{exercise}{388}{抛物面下立体的轴惯量}\n设 $a,\\rho>0$，$\\Omega=\\{(x,y,z):|x|\\leq a,|y|\\leq a,0\\leq z\\leq x^2+y^2\\}$，体密度为 $\\rho$。求质量及关于 $z$ 轴的转动惯量，给出惯量与质量之比，并检验其量纲。\n\\end{exercise}\n\n\\begin{exercise}{389}{圆柱体的轴向引力}\n设 $R,h>0$，均匀圆柱体 $\\Omega=\\{x^2+y^2\\leq R^2,0\\leq z\\leq h\\}$ 的体密度为 $1$，引力常数为 $G$。求其对 $M_0(0,0,a)$（$a>h$）处单位质量质点的引力向量；先用对称性确定方向，再计算非零分量，并检验 $a\\to+\\infty$ 时引力大小与 $G\\pi R^2h/a^2$ 的比值。\n\\end{exercise}\n\n\\begin{exercise}{390}{曲面面积的投影因子与边界极限}\n设 $S:z=\\sqrt{1-x^2-y^2}$ 为单位上半球面。解释为何投影圆盘面积不能直接作为 $S$ 的面积。\n先在 $x^2+y^2\\leq(1-\\varepsilon)^2$（$0<\\varepsilon<1$）上计算对应球面面积，再令 $\\varepsilon\\to0^+$；指出面积因子在赤道附近虽无界，面积仍有限的具体积分依据。\n\\end{exercise}\n\n\\begin{exercise}{391}{椭圆薄片的非对称密度与中心惯量}\n设 $a,b>0$，$D=\\{x^2/a^2+y^2/b^2\\leq1\\}$，面密度为 $1+\\lambda x/a$。\n求使密度非负的全部 $\\lambda$，在该范围内求质量、质心、关于 $y$ 轴的惯量，以及关于过质心且平行于 $y$ 轴的直线的惯量。证明最后一个惯量的最大值与最小值分别在何处取得，并解释质量为何不随 $\\lambda$ 改变。\n\\end{exercise}\n.agent/math-analysis/verify_sections.py\n.agent/math-analysis/ipad-build/compile-pass-1.txt\n.agent/math-analysis/ipad-build/fractions-pass-2.txt\n.agent/math-analysis/ipad-build/compile-pass-2.txt\n.agent/math-analysis/ipad-build/fractions-pass-1.txt\n.agent/math-analysis/ipad-build/header-removal-pass-1.txt\n.agent/math-analysis/ipad-build/header-removal-pass-2.txt\n.agent/math-analysis/ipad-build/分节课后练习-iPad横屏草稿版.pdf\n.agent/math-analysis/ipad-build/verification.json\n.agent/math-analysis/ipad-build/分节课后练习-标准极限横屏版.log\n"}
+
+## tool · 2026-10-20T02:16:00Z
+
+
+Wall time: 60.0050 seconds
+Sleep completed.
+
+## tool · 2026-10-20T02:16:03Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"562fa3","wall_time_seconds":0.0000095,"exit_code":0,"original_token_count":18,"output":"022.md\n023.md\n024.md\n025.md\n026.md\n027.md\n028.md\n029.md\n030.md\n031.md\n"}
+
+## tool · 2026-10-20T02:17:08Z
+
+
+Wall time: 60.0058 seconds
+Sleep completed.
+
+## tool · 2026-10-20T02:17:13Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"e899e4","wall_time_seconds":0.000009125,"exit_code":0,"original_token_count":18,"output":"032.md\n033.md\n034.md\n035.md\n036.md\n037.md\n038.md\n039.md\n040.md\n041.md\n"}
+
+## tool · 2026-10-20T02:17:16Z
+
+
+
+
+## tool · 2026-10-20T02:18:04Z
+
+
+Wall time: 45.0074 seconds
+Sleep completed.
+
+## tool · 2026-10-20T02:18:08Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"12ea4d","wall_time_seconds":0.000009292,"exit_code":0,"original_token_count":1756,"output":"微分中值定理与导数的应用\n\n第一节 中值定理\n\n一、罗尔定理\n\n定理：若函数 $y=f(x)$ 满足 $\\begin{cases} (1) \\text{在}[a,b] \\text{上连续} \\\\ (2) \\text{在}(a,b) \\text{内可导，则在}(a,b) \\text{内至少存在一点}\\xi \\\\ (3) f(a)=f(b) \\end{cases}$\n使得 $f'(\\xi)=0$ .\n\n几何意义：连续曲线 $y=f(x)$ 上的弧 $\\overrightarrow{AB}$，除端点外处处有不垂直于 $x$ 轴的切\n线，且两个端点 $A$、$B$ 处的纵坐标相等，则在弧 $\\overrightarrow{AB}$ 上至少有一条水平切线.\n\n图 3-1\n\n259 基础题 以下函数中在指定区间上满足罗尔定理的有（  ）.\n(A) $f(x)=x_{1},[-1,1]$ (B) $f(x)=x^{2}-1,[-1,1]$ (C) $f(x)=x\\mathrm{e}^{-x},[0,1]$ (D) $f(x)=\\frac{1}{x},[-1,1]$\n\n260 基础题 验证罗尔定理对函数 $y=\\ln \\sin x$ 在 $[\\frac{\\pi}{6},\\frac{5\\pi}{6}]$ 上的正确性.\n\n261 基础题 设函数 $f(x)$ 在 $[0,1]$ 上连续，在 $(0,1)$ 内可导，且 $f(0)=0,f(1)=\\frac{\\pi}{4}$\n试证明方程 $(1+x^{2})f'(x)=1$ 在 $(0,1)$ 内至少存在一个根.\n\n262 基础题 设 $a_{0},a_{1},\\cdots,a_{n}$ 是满足 $a_{0}+\\frac{a_{1}}{2}+\\frac{a_{2}}{3}+\\cdots+\\frac{a_{n}}{n+1}=0$ 的实数，证明方程\n$a_{0}+a_{1}x+a_{2}x^{2}+\\cdots+a_{n}x^{n}=0$ 在 $(0,1)$ 内至少有一个根.263 **基础题** 已知 $f(x)$ 二阶可导，且 $\\lim_{x \\to 0} \\frac{f(x)}{x} = 0, f(1) = 0$，证明：在 $(0,1)$ 内至少存在一点 $\\xi$，使得 $f''(\\xi) = 0$．\n\n264 **中等题** 已知 $f(x)$ 在 $[0,1]$ 上三阶可导，且 $f(0) = f(1) = 0$，设 $F(x) = x^3 f(x)$，证明：在 $(0,1)$ 内存在一点 $\\xi$，使得 $F''(\\xi) = 0$．\n\n265 **中等题** 设置函数 $f(x)$ 在 $[0,1]$ 上连续，在 $(0,1)$ 内可导，且 $f(0) = 1, f(1) = \\frac{1}{e}$，证明：方程 $f'(x) + e^{-x} = 0$ 在 $(0,1)$ 内至少存在一个根．\n\n266 **中等题** 设置函数 $f(x)$ 在 $[0, a]$ 上连续，在 $(0, a)$ 内可导，且 $f(a) = 0$．证明：存在一点 $\\xi \\in (0, a)$，使得 $f(\\xi) + \\xi f'(\\xi) = 0$．\n\n267 **中等题** 设置函数 $f(x)$ 在 $[0, 1]$ 上连续，在 $(0, 1)$ 内可导，且 $f(1) = 0$．证明：至少存在一点 $\\xi \\in (0, 1)$，使得 $f'(\\xi) = -\\frac{2f(\\xi)}{\\xi}$．\n\n268 **中等题** 设置函数 $f(x)$ 在 $[0, 1]$ 上连续，在 $(0, 1)$ 内可导，且 $f(0) = 0$，对任意 $x \\in (0, 1)$ 有 $f(x) \\neq 0$．证明：存在 $\\xi \\in (0, 1)$，使得 $\\frac{f'(\\xi)}{f(\\xi)} = \\frac{f'(1-\\xi)}{f(1-\\xi)}$．\n\n269 **综合题** 设置函数 $f(x)$ 在 $[0, 1]$ 上连续，在 $(0, 1)$ 内可导，且 $f(0) = f\\left(\\frac{1}{2}\\right) = 1$，$f(1) = 2$．证明：存在一点 $\\xi \\in (0, 1)$，使得 $f'(\\xi) = \\frac{e^x}{2f(\\xi)}$．\n\n270 **综合题** 设置函数 $y = f(x)$ 在 $[0, 3]$ 上连续，在 $(0, 3)$ 内可导，且 $f(0) + f(1) + f(2) = 3$，$f(3) = 1$．证明：必存在 $\\xi \\in (0, 3)$，使得 $f'(\\xi) = 0$．\n\n271 **综合题** 设置函数 $y = f(x)$ 在 $[0, 1]$ 上连续，在 $(0, 1)$ 内可导，且 $f(0) = f(1) = 0$，$f\\left(\\frac{1}{2}\\right) = 1$．证明：(1) 存在 $\\eta \\in \\left(\\frac{1}{2}, 1\\right)$，使得 $f(\\eta) = \\eta$；(2) 对任意实数 $\\lambda$，必存在 $\\xi \\in (0, \\eta)$，使得 $f'(\\xi) - \\lambda f(\\xi) - \\xi = 1$．\n\n272 **综合题** 设置抛物线 $y = -x^2 + Bx + C$ 与 $x$ 轴有两个交点 $x = a, x = b (a < b)$．又函数 $y = f(x)$ 在 $[a, b]$ 上二阶可导，且 $f(a) = f(b) = 0$．若曲线 $y = f(x)$ 与 $y = -x^2 + Bx + C$ 在 $[a, b]$ 内有一个交点，证明：在 $(a, b)$ 内存在一点 $\\xi$ 使得 $f'(\\xi) + 2 = 0$．定理：若函数 $y = f(x)$ 满足 $\\begin{cases} \\textcircled{1} \\text{在}[a,b] \\text{上连续} \\\\ \\textcircled{2} \\text{在}(a,b) \\text{内可导} \\end{cases}$，则在 $(a,b)$ 内至少存在一点 $\\xi$，使得 $f(b) - f(a) = f'(\\xi) \\cdot (b - a)$.\n\n几何意义：连续曲线 $y = f(x)$ 上的弧 $\\overrightarrow{AB}$，除端点外处处有不垂直于 $x$ 轴的切线，则在弧 $\\overrightarrow{AB}$ 上至少有一条切线平行于弦 $AB$ 所在直线.\n\n图 3-2\n\n拉格朗日中值公式的几种等价等式：\n\n$f(b) - f(a) = f'(\\xi) \\cdot (b - a) \\Leftrightarrow \\frac{f(b) - f(a)}{b - a} = f'(\\xi)$，\n\n$f(b) = f(a) + f'[a + \\theta(b - a)] \\cdot (b - a) (0 < \\theta < 1)$，\n\n$f(x_0 + \\Delta x) = f(x_0) + f'(x_0 + \\theta \\Delta x) \\cdot \\Delta x (0 < \\theta < 1)$.\n\n两个推论：\n\n(1) 若 $f'(x) = 0, \\forall x \\in I$，则 $f(x) \\equiv C$；\n\n(2) 若 $f'(x) = g'(x), \\forall x \\in I$，则 $f(x) = g(x) + C$ （$C$ 为常数）。\n\n273 基础题 以下函数在 $[-1,1]$ 上满足拉格朗日中值定理的有（  ）.\n\n(A) $f(x) = \\ln(1 + x^2)$\n\n(B) $f(x) = |x|$\n\n(C) $f(x) = \\frac{1}{\\sqrt{1 - x^2}}$\n\n(D) $f(x) = \\sin \\frac{1}{x}$\n\n274 基础题 设函数 $f(x)$ 在 $[a,b]$ 上有定义，在 $(a,b)$ 内可导，则有（  ）.\n\n(A) 当 $f(a)f(b) < 0$ 时，存在 $\\xi \\in (a,b)$，使得 $f'(\\xi) = 0$\n\n(B) 当 $f(a) = f(b)$ 时，存在 $\\xi \\in (a,b)$，使得 $f'(\\xi) = 0$\n\n(C) 存在 $\\xi \\in (a,b)$，使得 $f(b) - f(a) = f'(\\xi)(b - a)$\n\n(D) 对任意 $\\xi \\in (a,b)$，有 $\\lim_{x \\to b} [f(x) - f(\\xi)] = 0$\n\n275 基础题 证明：当 $0 < x < \\pi$ 时，$\\frac{\\sin x}{x} > \\cos x$.276 **基础题** 设 $a > b > 0$ 时，证明： $\\frac{a-b}{a} < \\ln \\frac{a}{b} < \\frac{a-b}{b}$ .\n\n277 **基础题** 设 $x > 0$ 时，证明： $\\frac{x}{1+x} < \\ln(1+x) < x$ .\n\n278 **中等题** 证明：当 $x > 1$ 时，$e^x > ex$ .\n\n279 **基础题** 证明：$\\arcsin x + \\arccos x = \\frac{\\pi}{2}$ .\n\n280 **中等题** 证明：$2\\arctan x + \\arcsin \\frac{2x}{1+x^2} = \\pi(x \\geq 1)$ .\n\n281 **中等题** 设 $f(x)$ 在区间 $[a,b]$ 上连续，在 $(a,b)$ 内可导，证明：在 $(a,b)$ 内至少存在一点 $\\xi$，使得 $\\frac{b f(b) - a f(a)}{b-a} = f(\\xi) + \\xi f'(\\xi)$ .\n\n282 **综合题** 设 $f(x)$ 在闭区间 $[0,c]$ 上连续，其导数 $f'(x)$ 在开区间 $(0,c)$ 内存在且单调递减，$f(0) = 0$。试应用拉格朗日中值定理证明不等式：$f(a+b) \\leq f(a)+f(b)$，其中常数 $a$ 和 $b$ 满足条件 $0 \\leq a \\leq b \\leq a+b \\leq c$ .\n\n三、柯西中值定理\n\n定理：若函数 $y = f(x)$ 和 $y = F(x)$ 满足 $\\begin{cases} \\textcircled{1} \\text{在}[a,b] \\text{上连续；} \\\\ \\textcircled{2} \\text{在}[a,b] \\text{上可导；} \\\\ \\textcircled{3} F'(x) \\neq 0, x \\in(a,b). \\end{cases}$\n\n则在 $(a,b)$ 内至少存在一点 $\\xi$，使得 $\\frac{f(b) - f(a)}{b-a} = \\frac{f'(\\xi)}{F'(a)} = \\frac{f'(\\xi)}{F'(\\xi)}$ .\n\n说明：若 $F(x) = x$，则 $\\frac{f(b) - f(a)}{b-a} = \\frac{f'(\\xi)}{1} \\Rightarrow f(b) - f(a) = f'(\\xi) \\cdot (b-a)$，即为拉格朗日中值公式。因此，拉格朗日中值定理是柯西中值定理的特殊情形.\n\n283 **基础题** 对于函数 $f(x) = \\sin x, F(x) = 1 + \\cos x$ 在区间 $[0, \\frac{\\pi}{2}]$ 上验证柯西中值定理的正确性.\n\n284 **基础题** 设函数 $f(x)$ 在区间 $[a,b]$ 上可微，$0 < a < b$，试证明存在 $\\xi \\in(a,b)$，使得 $\\frac{af(b) - bf(a)}{a-b} = f(\\xi) - \\xi f'(\\xi)$ ."}
+
+## tool · 2026-10-20T02:18:22Z
+
+
+
+
+## tool · 2026-10-20T02:18:31Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"a54564","wall_time_seconds":0.000010167,"exit_code":0,"original_token_count":1254,"output":"285 基础题 设函数 $f(x)$ 在区间 $[a,b]$ 上连续，在 $(a,b)$ 内可导，$0 < a < b$ . 证明：存在 $\\xi \\in (a,b)$，使得 $\\frac{f(b)-f(a)}{b-a} = \\left(a^{2}+ab+b^{2}\\right)\\frac{f^{\\prime}(\\xi)}{3\\xi^{2}}$ .\n\n286 中等题 证明：$\\sin 1=\\cos \\ln \\xi(1 < \\xi < e)$ .\n\n## 第二节 洛必达法则\n\n### 一、洛必达法则计算 “$\\frac{0}{0}$” 或 “$\\frac{\\infty}{\\infty}$” 不定式\n\n定理（洛必达法则）：设函数 $f(x), F(x)$ 满足如下条件．\n\n(1) 当 $x \\rightarrow a$ 时，$f(x)$ 和 $F(x)$ 都趋于零（或无穷大）；\n(2) 在点 $a$ 的某去心邻域内，$f^{\\prime}(x)$ 和 $F^{\\prime}(x)$ 都存在，且 $F^{\\prime}(x) \\neq 0$；\n(3) $\\lim_{x \\rightarrow a} \\frac{f^{\\prime}(x)}{F^{\\prime}(x)}$ 存在（或为无穷大），\n\n则 $\\lim_{x \\rightarrow a} \\frac{f(x)}{F(x)} = \\lim_{x \\rightarrow a} \\frac{f^{\\prime}(x)}{F^{\\prime}(x)}$ .\n\n说明：(1) 洛必达法则用于 “$\\frac{0}{0}$” 或 “$\\frac{\\infty}{\\infty}$” 型不定式的计算；\n(2) 对于自变量的其他变化过程如 $x \\rightarrow +\\infty, x \\rightarrow -\\infty, x \\rightarrow \\infty$，也有类似结论；\n(3) 若条件满足，可以反复使用洛必达法则求解；\n(4) 洛必达法则不是万能的，当 $\\lim_{x \\rightarrow a} \\frac{f(x)}{F(x)}$ 不存在也不是无穷大时，不能断定 $\\lim_{x \\rightarrow a} \\frac{f(x)}{F(x)}$ 也不存在，此时洛必达法则失效，寻找其他方法求解．\n\n287 基础题 求 $\\lim_{x \\rightarrow a} \\frac{x^{3}-3x^{2}+2}{x^{2}-x^{2}-x+1}$ .\n\n289 基础题 求 $\\lim_{x \\rightarrow a} \\frac{\\ln x}{x-1}$ .\n\n289 基础题 求 $\\lim_{x \\rightarrow a} \\frac{x^{2}-1+\\ln x}{e^{x}-e}$ .\n\n290 基础题 求 $\\lim_{x \\rightarrow +\\infty} \\frac{x^{4}+e^{x}}{x e^{x}}$ .\n\n291 基础题 求 $\\lim_{x \\rightarrow 0} \\frac{x-\\sin x}{x^{2} \\sin x}$ .292 **基础题** 求 $\\lim_{x \\to +\\infty} \\frac{\\ln(x \\ln x)}{x^2}$ $(a > 0)$ .\n\n293 **基础题** 求 $\\lim_{x \\to 0} \\frac{e^x - \\sin x - 1}{1 - \\sqrt{1 - x^2}}$ .\n\n294 **基础题** 求 $\\lim_{x \\to 0} \\frac{\\arctan x - x}{\\ln(1 + 2x^2)}$ .\n\n295 **中等题** 求 $\\lim_{x \\to 0} \\frac{\\sin^2 x - x^2 \\cos^2 x}{\\sin x \\left(e^{2x} - 1\\right) \\ln(1 + \\tan^2 x)}$ .\n\n296 **中等题** 若 $\\lim_{x \\to 0} \\frac{a \\tan x + b(1 - \\cos x)}{c \\ln(1 - 2x) + d(1 - e^{-x})} = 2$，其中 $a^2 + b^2 \\neq 0$，则必有（    ）.\n(A) $b = 4d$ (B) $b = -4d$ (C) $a = 4c$ (D) $a = -4c$\n\n297 **中等题** 求 $\\lim_{x \\to 0} \\frac{(1 - \\cos x)[x - \\ln(1 + \\tan x)]}{\\sin^4 x}$ .\n\n298 **中等题** 求 $\\lim_{x \\to 0} \\frac{[\\sin x - \\sin(\\sin x)]\\sin x}{x^4}$ .\n\n二、洛必达法则计算其他类型的不定式\n\n**基本思路：** 先将其他类型不定式转化为 $\\frac{0}{0}$ 或 $\\frac{\\infty}{\\infty}$ 型不定式，然后使用洛必达法则进行计算. 常用的类型如下.\n\n(1) “$\\infty - \\infty$” 型通分化成 $\\frac{0}{0}$ 或 $\\frac{\\infty}{\\infty}$ 型;\n\n(2) “$0 - \\infty$” 型，取其中一个因式的倒数放分母，化成 $\\frac{0}{0}$ 或 $\\frac{\\infty}{\\infty}$ 型;\n\n(3) “$0^0, \\infty^0, 1^n$” 型，利用 $\\lim_{x \\to 0} f(x)^{\\mathrm{g}(x)} = \\lim e^{\\mathrm{g}(x) \\ln f(x)}$ 进行恒等变形.\n\n299 **基础题** 求 $\\lim_{x \\to 0} \\frac{1}{x} \\left( \\frac{1}{\\sin x} - \\frac{1}{\\tan x} \\right)$ .\n\n300 **基础题** 求 $\\lim_{x \\to \\infty} x^2 e^{-xx}$ （$n$ 为正整数，$\\lambda > 0$）.\n\n301 **基础题** 求 $\\lim_{x \\to 0} \\tan \\frac{\\pi}{2} x$ .\n\n302 **基础题** 求 $\\lim_{x \\to \\frac{\\pi}{2}} \\sec x - \\tan x$ .303 中等题 求 $\\lim_{x \\to 0} \\left( \\frac{1}{x} - \\frac{1}{e^x - 1} \\right)$ .\n304 中等题 求 $\\lim_{x \\to 0} \\left( \\frac{1}{x^2} - \\frac{1}{x \\tan x} \\right)$ .\n305 中等题 求 $\\lim_{x \\to 0} x^x$ .\n306 中等题 求 $\\lim_{x \\to 1} x^{\\frac{1}{x}}$ .\n307 中等题 求 $\\lim_{x \\to 0} (1 + 3x)^{\\frac{2}{x}}$ .\n308 中等题 求 $\\lim_{x \\to 0} (\\cos x)^{\\ln(1 + x^x)}$ .\n309 综合题 求 $\\lim_{x \\to \\infty} \\left( \\frac{1}{x^x} - 1 \\right)^{\\frac{1}{x}}$ .\n310 综合题 若 $a > 0, b > 0$ 均为常数，求 $\\lim_{x \\to 0} \\left( \\frac{a^x + b^x}{2} \\right)^{\\frac{2}{x}}$ .\n\n三、洛必达法则的综合应用\n\n311 综合题 设 $x \\to 0$ 时，$e^{\\sin x} - e^x$ 与 $x^x$ 是同阶无穷小，求 $n$ .\n312 综合题 若函数 $f(x) = \\left\\{ \\begin{array}{l l} \\frac{\\sin 2x + e^{2 \\tan x} - 1}{x}, x \\neq 0 \\\\ a, x = 0 \\end{array} \\right.$ 在 $(- \\infty, + \\infty)$ 上连续，求 $a$ .\n313 综合题 已知 $f(x) = \\left\\{ \\begin{array}{l l} (\\cos x)^{x^x}, x \\neq 0 \\\\ a, x = 0 \\end{array} \\right.$ 在 $x = 0$ 上连续，求 $a$ .\n314 综合题 设 $f(x) = \\frac{1}{\\pi x} + \\frac{1}{\\sin \\pi x} - \\frac{1}{\\pi(1 - x)}, x \\in [\\frac{1}{2}, 1)$. 试补充定义 $f(1)$ 使得 $f(x)$ 在 $[\\frac{1}{2}, 1]$ 上连续.\n315 综合题 设数列 $\\{x_n\\}$ 满足 $0 < x_1 < \\pi, x_{n+1} = \\sin x_n (n = 1, 2, \\cdots)$，(1) 证明：$\\lim_{n \\to \\infty} x_n$ 存在，并求该极限；(2) 求 $\\lim_{n \\to \\infty} \\left( \\frac{x_{n+1}}{x_n} \\right)^{\\frac{1}{2}}$."}
+
+## tool · 2026-10-20T02:18:37Z
+
+
+
+
+## tool · 2026-10-20T02:19:49Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-10-20T02:20:07Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"d55fa0","wall_time_seconds":0.000006792,"exit_code":0,"original_token_count":2090,"output":"### 第三节 泰勒公式\n\n#### 一、泰勒中值定理\n\n泰勒定理：如果函数 $f(x)$ 在 $x_0$ 点具有直到 $n+1$ 阶导数，那么存在 $x_0$ 的某一邻域 $U(x_0, \\delta)$，使 $\\forall x \\in U(x_0, \\delta)$，有\n\n$$f(x) = f(x_0) + f'(x_0)(x - x_0) + \\frac{f''(x_0)}{2!}(x - x_0)^2 + \\cdots + \\frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + R_n(x)$$ $\\textcircled{1}$\n\n其中 $R_n(x) = \\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x - x_0)^{n+1}$ ($\\xi$ 在 $x_0$ 与 $x$ 之间）. $\\textcircled{2}$\n\n说明：公式$\\textcircled{1}$称为 $f(x)$ 的 $n$ 阶泰勒公式，公式$\\textcircled{2}$称为 $n$ 阶泰勒公式的拉格朗日型余项。在不需要余项的精确表达时，泰勒公式可写为\n\n$$f(x) = f(x_0) + f'(x_0)(x - x_0) + \\frac{f''(x_0)}{2!}(x - x_0)^2 + \\cdots + \\frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + o[(x - x_0)^n]$$\n\n其中 $o[(x - x_0)^n]$ 称为 $n$ 阶泰勒公式的佩亚诺型余项.\n\n麦克劳林公式：令 $x_0 = 0$，则得如下麦克劳林公式：\n\n$$f(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\cdots + \\frac{f^{(n)}(0)}{n!}x^n + \\frac{f^{(n+1)}(\\xi)}{(n+1)!}x^{n+1}(\\xi$ 在 $0$ 与 $x$ 之间）$\\textcircled{3}$\n\n上式中令 $\\xi = \\theta x(0 < \\theta < 1)$，有等价形式如下：\n\n$$f(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\cdots + \\frac{f^{(n)}(0)}{n!}x^n + \\frac{f^{(n+1)}(\\theta x)}{(n+1)!}x^{n+1}(0 < \\theta < 1)$$ $\\textcircled{4}$\n\n不需要余项的精确表达时，亦可写为\n\n$$f(x) = f(0) + f'(0)x + \\frac{f''(0)}{2!}x^2 + \\cdots + \\frac{f^{(n)}(0)}{n!}x^n + o(x^n)$$ $\\textcircled{5}$\n\n函数 $f(x)$ 的泰勒公式或麦克劳林公式的步骤：\n\n(1) 求出函数的各阶导数； $f'(x), f''(x), \\cdots, f^{(n)}(x), f^{(n+1)}(x)$\n\n(2) 求出函数及各阶导数在点 $x_0$ （泰勒公式）或点 $0$ （麦克劳林公式）处的函数值；\n\n(3) 根据题目要求及公式$\\textcircled{1}$$\\textcircled{2}$$\\textcircled{3}$$\\textcircled{4}$$\\textcircled{5}$，写出所求.\n\n### 316 基础题 求 $f(x) = e^x$ 的带有拉格朗日型和佩亚诺型余项的麦克劳林公式.\n\n#### 二、利用泰勒定理求极限\n\n### 317 基础题 求 $\\lim_{x \\to 0} \\frac{x \\ln(1+x)}{e^x - x-1}$.\n\n### 318 基础题 求 $\\lim_{x \\to 0} \\frac{\\sin x - x \\cos x}{\\tan^3 x}$.319 基础题 求 $\\lim_{x \\to 0} \\frac{\\sqrt{1+x}+\\sqrt{1-x}-2}{x^2}$.\n\n320 基础题 设 $\\lim_{x \\to 0} \\frac{\\ln(1+x)-(ax+bx^2)}{x^2}=2$，则（ ）。\n(A) $a=1,b=-\\frac{5}{2}$ (B) $a=0,b=-2$\n(C) $a=0,b=-\\frac{5}{2}$ (D) $a=1,b=-2$\n\n321 中等题 求 $\\lim_{x \\to 0} \\frac{1+\\frac{1}{2}x^2-\\sqrt{1+x^2}}{(\\cos x-e^x)\\sin x^2}$.\n\n322 中等题 求 $\\lim_{x \\to 0} \\frac{\\cos x-e^{\\frac{x^2}{x^2}}}{x^4}$.\n\n323 综合题 若 $\\lim_{x \\to 0} \\frac{\\sin 6x+xf(x)}{x^2}=0$，则 $\\lim_{x \\to 0} \\frac{6+f(x)}{x^2}=(\\quad)$.\n(A) 0 (B) 6 (C) 36 (D) $\\infty$\n\n三、利用泰勒公式进行无穷小的比较\n\n324 基础题 设当 $x \\to 0$ 时，$e^x-(ax^2+bx+1)$ 是比 $x^2$ 高阶的无穷小，则（ ）。\n(A) $a=\\frac{1}{2},b=1$ (B) $a=1,b=1$\n(C) $a=-\\frac{1}{2},b=1$ (D) $a=-1,b=1$\n\n325 基础题 试证明当 $x \\to 0$ 时，$\\sqrt{1-2x}-\\sqrt{1-3x}$ 是 $x$ 的几阶无穷小？\n\n四、利用泰勒定理求高阶导数\n\n326 基础题 求函数 $y=\\ln(1-3x)$ 在 $x=0$ 处的 $n$ 阶导数 $y^{(n)}(0)$.\n\n五、利用泰勒定理证明不等式和等式\n\n327 基础题 证明 $e^x>1+x$ ($x \\neq 0$).328 综合题 设函数 $f(x)$ 在闭区间 $[-1,1]$ 上具有三阶连续导数，且 $f(-1)=0$，\n$f(1)=1, f'(0)=0$，证明：至少存在一点 $\\xi \\in (-1,1)$，使得 $f''(\\xi)=3$ .\n\n329 综合题 设函数 $f(x)$ 在闭区间 $[0,1]$ 上二阶可导，且 $f(0)=f(1)=0$，$f(x)$ 在\n$[0,1]$ 上的最小值等于-1，证明：至少存在一点 $\\xi \\in (0,1)$，使得 $f''(\\xi) \\geq 8$ .\n\n## 第四节 函数的单调性与曲线的凹凸性\n\n### 一、函数的单调性\n\n单调性的判定：如果函数 $f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导，\n若 $f'(x)>0$，则 $f(x)$ 在 $[a,b]$ 上单调递增；\n若 $f'(x)<0$，则 $f(x)$ 在 $[a,b]$ 上单调递减.\n\n单调区间的分界点：单调区间的分界点只能出现在函数的不可导点或者导数为零的点（叫驻点）处.\n\n函数的单调区间的判定步骤：\n(1) 确定函数 $y=f(x)$ 的定义域；\n(2) 求 $f'(x)$，找出使 $f'(x)=0$ 和 $f'(x)$ 不存在的点；\n(3) 用以上点将定义域分割为不同的小区间，在每个小区间上利用判定定理判断函数的单调性.\n\n330 基础题 讨论函数 $f(x)=x-\\frac{3}{2}x^{\\frac{3}{2}}$ 的单调性.\n\n331 基础题 当 $0<x<\\frac{\\pi}{2}$ 时，证明不等式 $\\tan x>x+\\frac{1}{3}x^{3}$ .\n\n332 基础题 当 $x>0$ 时，证明不等式 $\\ln(1+x)>\\frac{\\arctan x}{1+x}$ .\n\n333 基础题 设 $f(x)$ 在 $(-\\infty,+\\infty)$ 内可导，且对任意 $x_{1},x_{2}$，当 $x_{1}>x_{2}$ 时，都有\n$f(x_{1})>f(x_{2})$，则（    ）.\n(A) 对任意 $x,f'(x)>0$ \n(B) 对任意 $x,f'(-x)\\leq 0$\n(C) 函数 $f(-x)$ 单调递增 \n(D) 函数 $-f(-x)$ 单调递增\n\n334 中等题 在区间 $(-\\infty,+\\infty)$ 内，方程 $|x|^{\\frac{1}{2}}+|x|^{\\frac{1}{2}}-\\cos x=0$ （    ）.\n(A) 无实根 \n(B) 有且仅有一个实根\n(C) 有且仅有两个实根 \n(D) 有无穷多根335中等题 当 a 取 (    ) 时，函数 $ f(x)=x^{3}-3x-a $恰好有两个不同的零点.\n(A) 1\n(B) 2\n(C) 3\n(D) 0\n\n336中等题 若 $ 3 a^{2}-5 b<0 $，则方程 $ x^{2}-2 a x^{3}+3 b x+4 c=0 $ (    ).\n(A) 无实根\n(B) 有唯一实根\n(C) 有三个不同实根\n(D) 有五个不同实根\n\n337综合题 设 $ f(x) $为可导函数，且 $ f^{*} ( x )>0 $，则 $ F(x)=\\frac{f(x)-f(a)}{x-a} $在 $ (a,b] $内 (    ).\n(A) 有极大值\n(B) 有极小值\n(C) 单调递减\n(D) 单调递增\n\n338综合题 设 $ x>0 $，常数 $ a>e $，证明 $ (a+x)^{a}<a^{a+x} $.\n\n339综合题 设 $ e<a<b<e^{2} $，证明 $ \\ln^{2} b-\\ln^{2} a>\\frac{4}{e^{2}}(b-a) $.\n\n二、曲线的凹凸性\n\n凹凸性的判定：如果函数 $ f(x) $在区间 I 内二阶导数存在，则\n(1) 区间 I 内 $ f^{*} ( x )>0 $，则曲线 $ y=f(x) $在区间 I 上是凹的；\n(2) 区间 I 内 $ f^{*} ( x )<0 $，则曲线 $ y=f(x) $在区间 I 上是凸的.\n\n凹凸区间的分界点：凹凸区间的分界点只可能出现在函数的二阶导数不存在\n的点或者二阶导数为零的点处.曲线上凹凸的分界点为拐点.\n\n曲线的凹凸区间及拐点的判定步骤：\n(1) 确定函数 $ y=f(x) $的定义域；\n(2) 求 $ f^{*} ( x ) $，找出使 $ f^{*} ( x )=0 $和 $ f^{*} ( x ) $不存在的点（即可能的凹凸区间分界点）；\n(3) 用以上点将定义域分割为不同的小区间，在每个小区间上判断曲线的凹\n凸性.\n\n340基础题 讨论曲线 $ f(x)=x^{\\frac{8}{3}}-x^{\\frac{5}{3}} $的凹凸区间，并求拐点.\n\n341基础题 判断 $ f(x)=|1+\\sin x| $在区间 $ \\left( \\pi-\\frac{3}{2} \\pi \\right) $内的图形 (    ).\n(A) 单调递增，凹的\n(B) 单调递减，凸的\n(C) 单调递增，凸的\n(D) 单调递减，凹的342 基础题 证明：当 $x \\neq y$ 时，$\\frac{e^x + e^y}{2} > e^{\\frac{x+y}{2}}$.\n\n343 中等题 设 $f(x) = |x^2 - 3x + 2|$，求曲线的凹凸区间和拐点.\n\n344 中等题 若点 $(0,1)$ 是曲线 $f(x) = ax^3 + bx^2 + c$ 的拐点，则（    ）.\n(A) $a = 1, b = 0, c$ 为任意值 (B) $a \\neq 0$ 的任意值, $b = 0, c = 1$\n(C) $a, b$ 为任意值, $c = 1$ (D) $a = 1, b = -3, c = 1$\n\n345 中等题 若 $f(-x) = f(x)$ ($-\\infty < x < +\\infty$)，且在 $(-\\infty, 0)$ 内 $f'(x) > 0$，$f''(x) < 0$，则在 $(0, +\\infty)$ 内有（    ）.\n(A) $f'(x) > 0$，$f''(x) < 0$ (B) $f'(x) > 0$，$f''(x) > 0$\n(C) $f'(x) < 0$，$f''(x) < 0$ (D) $f'(x) < 0$，$f''(x) > 0$\n\n346 综合题 设 $f'(x_0) = f''(x_0) = 0$，$f'''(x_0) > 0$，则下列选项正确的是（    ）.\n(A) $f'(x_0)$ 是 $f(x)$ 的极大值 (B) $f(x_0)$ 是 $f(x)$ 的极大值\n(C) $f(x_0)$ 是 $f(x)$ 的极小值 (D) $(x_0, f(x_0))$ 是曲线 $y = f(x)$ 的拐点\n\n347 综合题 设函数 $f(x)$ 满足关系 $f''(x) + [f'(x)]^2 = x$，且 $f'(0) = 0$，则下列选项正确的是（    ）.\n(A) $f(0)$ 是 $f(x)$ 的极大值\n(B) $f(0)$ 是 $f(x)$ 的极小值\n(C) $f(0)$ 不是 $f(x)$ 的极值，$(0, f(0))$ 也不是曲线 $y = f(x)$ 的拐点\n(D) $(0, f(0))$ 是曲线 $y = f(x)$ 的拐点\n\n348 综合题 设函数 $f(x)$ 在定义域内可导，$y = f(x)$ 的图形如图 3-3，则导数 $y = f'(x)$ 的图形为（    ）.\n\n图 3-3"}
+
+## tool · 2026-10-20T02:20:14Z
+
+
+
+
+## tool · 2026-10-20T02:21:37Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-10-20T02:22:15Z
+
+
+
+
+## tool · 2026-10-20T02:22:21Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"5dea36","wall_time_seconds":0.000010625,"exit_code":0,"original_token_count":2569,"output":"第五节 函数的最值和最值\n\n一、函数的极值\n\n极值的定义：设函数 $f(x)$ 在 $x_0$ 的某邻域 $U(x_0)$ 内有定义，若对 $\\forall x \\in \\mathring{U}(x_0)$，有 $f(x) < f(x_0)$ （$f(x) > f(x_0)$），则称 $f(x_0)$ 为函数 $f(x)$ 的极大值（极小值）；点 $x_0$ 称为 $f(x)$ 的极大值点（极小值点）。函数的极大值与极小值统称为极值，极大值点和极小值点统称为极值点。\n\n极值存在的必要条件：若函数 $f(x)$ 在 $x_0$ 处可导，且在 $x_0$ 处取得极值，则 $f'(x_0) = 0$ （即 $x_0$ 是驻点）。\n\n极值存在的充分条件：\n\n（第一充分条件）设 $f(x)$ 在点 $x_0$ 处连续，且在去心邻域 $\\mathring{U}(x_0, \\delta)$ 内可导，且 $f'(x_0) = 0$ 或 $f'(x_0)$ 不存在。\n\n(1) 当 $x \\in (x_0 - \\delta, x_0)$ 时，$f'(x) > 0$；当 $x \\in (x_0, x_0 + \\delta)$ 时，$f'(x) < 0$，则 $f(x)$ 在 $x_0$ 处取得极大值（左增右减 $\\Rightarrow$ 极大值）。\n\n(2) 当 $x \\in (x_0 - \\delta, x_0)$ 时，$f'(x) < 0$；当 $x \\in (x_0, x_0 + \\delta)$ 时，$f'(x) > 0$，则 $f(x)$ 在 $x_0$ 处取得极小值（左减右增 $\\Rightarrow$ 极小值）。\n\n(3) 当 $x \\in \\mathring{U}(x_0, \\delta)$ 时 $f'(x)$ 不变号，则 $f(x)$ 在 $x_0$ 处没有极值。\n\n（第二充分条件）设函数 $f(x)$ 在点 $x_0$ 处具有二阶导数，且 $f'(x_0) = 0$，(1) 若 $f''(x_0) < 0$，则 $f(x_0)$ 是极大值.\n(2) 若 $f''(x_0) > 0$，则 $f(x_0)$ 是极小值.\n(3) 若 $f''(x_0) = 0$，则不能判断 $f(x_0)$ 是否为极值.\n\n求极值的步骤：\n(1) 确定 $y = f(x)$ 的定义域；\n(2) 找出可能的极值点，即 $f'(x) = 0$ 及 $f'(x)$ 不存在的点；\n(3) 根据第一或第二充分条件进行判断.\n\n349 基础题 设函数 $y = f(x)$ 在点 $x_0$ 处二阶可导，且 $f(x_0)$ 是 $f(x)$ 的极大值，则以下结论正确的是（    ）.\n(A) $f'(x_0) < 0$\n(B) $f'(x_0) > 0$\n(C) $f'(x_0) = 0$\n(D) $f'(x_0) = 0$ 且 $f''(x_0) > 0$\n\n350 基础题 求函数 $f(x) = 2x - \\frac{3}{2}x^2 + 1$ 的极值.\n\n351 基础题 当 $x =$ ____时，函数 $y = x \\cdot 2^x$ 取得极小值.\n\n352 中等题 设函数 $f(x)$ 在定义域 $(-\\infty, +\\infty)$ 上连续，且其导函数的图像如图 3-4，则如下结论正确的是（    ）.\n\n图 3-4\n\n(A) 函数 $f(x)$ 有两个极大值和一个极小值\n(B) 函数 $f(x)$ 有两个极小值和一个极大值\n(C) 函数 $f(x)$ 有三个极大值和一个极小值\n(D) 函数 $f(x)$ 有两个极大值和两个极小值\n\n353 中等题 设函数 $f(x)$ 对一切 $x$ 满足 $xf''(x) + 3x[f'(x)]^2 = 1 - e^{-x}$，若 $f'(x_0) = 0$ ($x_0 \\neq 0$)，则（    ）.\n(A) $f(x_0)$ 是函数 $f(x)$ 的极小值\n(B) $f(x_0)$ 是函数 $f(x)$ 的极大值\n(C) $(x_0, f(x_0))$ 是曲线 $y = f(x)$ 的拐点(D) $f(x_0)$不是函数 $f(x)$的极值，$(x_0,f(x_0))$也不是曲线 $y=f(x)$的拐点\n\n354中等题 设 $f(x)$的导数在 $x=a$处连续，又 $\\lim_{x \\to a} \\frac{f'(x)}{x-a}=-1$，则（    ）\n(A) $a=a$是函数 $f(x)$的极小值点\n(B) $x=a$是函数 $f(x)$的极大值点\n(C) $(a,f(a))$是曲线 $y=f(x)$的拐点\n(D) $x=a$不是函数 $f(x)$的极值点，$(a,f(a))$不是曲线 $y=f(x)$的拐点\n\n355中等题 设 $\\lim_{x \\to a} \\frac{f(x)-f(a)}{(x-a)^2}=-1$，则在 $x=a$点处（    ）\n(A) $f(x)$的导数存在，且 $f'(a)\\neq 0$ （B）$f(x)$取得极大值\n(C) $f(x)$取得极小值 （D）$f(x)$的导数不存在\n\n356综合题 已知函数 $f(x)=\\begin{cases} x^{2x}, & x>0 \\\\ xe^x+1, & x\\leq 0 \\end{cases}$，求 $f'(x)$，并求 $f(x)$的极值.\n\n357综合题 设函数 $y=y(x)$是由方程 $2y^3-2y^2+2xy-x^2=1$确定的，试求 $y=y(x)$的驻点，并判断是否为函数的极值点.\n\n358综合题 求 $a$的取值范围，使函数 $f(x)=x^3+3ax^2-ax-1$无极值.\n\n二、求函数的最值\n\n最值的定义：设函数 $f(x)$在区间 $I$内有定义，$x_0\\in I$，若对 $\\forall x\\in I$，有 $f(x)\\leq f(x_0)$，$f(x)\\geq f(x_0)$，则称 $f(x_0)$为函数 $f(x)$在区间 $I$上的最大值（最小值）；点 $x_0$称为 $f(x)$在区间 $I$上的最大值点（最小值）。函数的最大值与最小值统称为最值，最大值点和最小值点统称为最值点。\n\n求最值的一般步骤：设函数 $f(x)$在闭区间 $[a,b]$上连续，在 $(a,b)$内可导。\n(1)求 $f'(x)$，找到 $f(x)$在 $(a,b)$内的驻点和不可导点。\n(2)计算 $f(x)$在以上驻点及不可导点处的函数值，以及端点处的函数值 $f(a)$和 $f(b)$。\n(3)比较以上函数值的大小，求出最大值与最小值。\n\n特别地：(1)连续函数 $f(x)$在闭区间 $[a,b]$上单调，则最值必在端点处取得；\n(2)可导函数 $f(x)$在区间 $I$内仅有一个极大（小）值，则该极大（小）值就是最大（小）值；(3) 在应用题中，根据实际情况可以判断最值存在，且仅存在一个驻点（没有\n不可导点），则此驻点就是所求的最值点.\n\n959 基础题 求函数 $f(x)=x+\\sqrt{1-x}$ 在 $[-5,1]$ 上的最大值和最小值.\n\n960 中等题 作半径为 $r$ 的球的外切正圆锥，求此圆锥的高 $h$ 为何值时，其体积 $v$\n最小，并求出该最小值.\n\n961 中等题 某企业在一个月内生产某产品 $Q$ 个单位时，总成本 $C(Q)=6Q+200$\n（万元），得到的总收益 $R(Q)=12Q-0.01Q^2$ （万元），问在一个月内生产多少\n单位的产品获得的利润最大？最大利润是多少？\n\n982 中等题 已知某企业的总收入函数为 $R(x)=26x-2x^2-4x^2$，总成本函数为\n$C(x)=8x+x^2$，其中 $x$ 表示产品的产量，求利润函数、边际收入函数、边际成\n本函数以及企业获得最大利润时的产量和最大利润.\n\n三、利用函数的最值证明不等式\n\n963 基础题 设 $p$ 和 $q$ 是大于 1 的常数，且 $\\frac{1}{p}+\\frac{1}{q}=1$. 证明：对于任意 $x>0$，有\n$\\frac{1}{p}x^p+\\frac{1}{q}\\geq x$.\n\n964 综合题 设 $\\lim_{x\\to 0}\\frac{f(x)}{x}=1$，且 $f'(x)>0$. 证明 $f(x)\\geq x$.\n\n第六节 函数图形的描绘\n\n一、函数的渐近线\n\n水平渐近线：若 $\\lim_{x\\to 0}f(x)=A$ （或 $\\lim_{x\\to 0}f(x)=A$ 或 $\\lim_{x\\to 0}f(x)=A$），则直线\n$y=A$ 为曲线 $y=f(x)$ 的水平渐近线.\n\n几何意义：曲线 $y=f(x)$ 向左（或向右，或同时向左右）无限延伸时，$f(x)$\n无限接近于直线 $y=A$.\n\n铅垂渐近线：若 $\\lim_{x\\to 0}f(x)=\\infty$ （或 $\\lim_{x\\to 0}f(x)=\\infty$ 或 $\\lim_{x\\to 0}f(x)=\\infty$），则直线\n$x=x_0$ 为曲线 $y=f(x)$ 的铅垂渐近线（其中 $\\infty$ 亦可以为 $+\\infty$ 或 $-\\infty$）。\n\n几何意义：曲线 $y=f(x)$ 向上（或向下，或同时向上）无限延伸时，$f(x)$斜渐近线: 若 $\\lim_{x \\to \\infty} [f(x) - (ax + b)] = 0$, 则直线 $y = ax + b$ 为曲线 $y = f(x)$ 的斜渐近线. 其中, $a = \\lim_{x \\to \\infty} \\frac{f(x)}{x}$, $b = \\lim_{x \\to \\infty} [f(x) - ax]$, $\\infty$ 亦可以为 $+\\infty$ 或 $-\\infty$.\n\n几何意义: 曲线 $y = f(x)$ 无限接近于 (不能相交、不能穿越) 直线 $y = ax + b$.\n\n365 基础题 求曲线 $y = \\frac{x+1}{x}$ 的水平渐近线.\n\n366 基础题 求曲线 $y = \\frac{1}{1-x^2}$ 的铅垂渐近线.\n\n367 基础题 求曲线 $y = \\frac{x^2 - x - 2}{x^2 - 1}$ 的水平渐近线和铅垂渐近线.\n\n368 基础题 求曲线 $y = \\frac{x^2}{x-1}$ 的斜渐近线.\n\n369 中等题 求曲线 $y = (2x - 1)e^{\\frac{1}{x}}$ 的渐近线.\n\n370 中等题 当 $x > 0$ 时, 曲线 $y = x\\sin \\frac{1}{x}$ (    ).\n\n(A) 有且仅有水平渐近线\n(B) 有且仅有铅垂渐近线\n(C) 既有水平渐近线, 又有铅垂渐近线\n(D) 既有水平渐近线, 又无铅垂渐近线\n\n371 中等题 曲线 $f(x) = xe^{\\frac{1}{x}}$ (    ).\n\n(A) 仅有水平渐近线\n(B) 仅有铅垂渐近线\n(C) 既有水平渐近线, 又有铅垂渐近线\n(D) 既有铅垂渐近线, 又有斜渐近线\n\n372 综合题 曲线 $f(x) = \\frac{1}{x} \\ln(1 + e^x)$ 的渐近线的条数为 (    ).\n\n(A)0 (B)1 (C)2 (D)3\n\n373 综合题 曲线 $f(x) = e^{\\frac{1}{x}} \\arctan \\frac{x^2 - x + 2}{(x-1)(x+2)}$ 的渐近线的条数为 (    ).\n\n(A)4 (B)3 (C)2 (D)1二、函数作图\n\n作图步骤：\n(1) 求出函数 $f(x)$ 的定义域或者明确题目指定的区域；\n(2) 判断函数的奇偶性、周期性 (由此可以缩小作图范围)；\n(3) 求渐近线；\n(4) $f'(x), f''(x)$，找出作图的关键点：可能的极值点与可能的拐点；\n(5) 列表讨论函数的单调性和极值点及凹凸性和拐点；\n(6) 补充一些特殊点，如边界点、无意义点、与坐标轴的交点等；\n(7) 根据上面所获取信息作图.\n\n374 基础题 作函数 $y = \\frac{(x-1)^3}{(x+1)^2}$ 的图形.\n\n375 基础题 作函数 $y = \\frac{\\cos x}{\\cos 2x}$ 的图形.\n\n第七节 曲率\n\n一、曲率\n\n定义：曲线上一点处的曲率是曲线在该点处弯曲程度的量度.\n\n曲率在 3 种不同方程下的计算公式：\n(1) 曲线方程为 $y = y(x)$ 时，曲率 $K = \\frac{|y'|}{(1+y'^2)^2}$；\n(2) 曲线方程为 $\\begin{cases} x = \\varphi(t) \\\\ y = \\psi(t) \\end{cases}$ 时，曲率 $K = \\frac{|\\varphi'(t)\\psi'(t) - \\varphi^*(t)\\psi'(t)|}{[\\varphi'(t) + \\psi'(t)]^2}$；\n(3) 曲线方程为 $\\rho = \\rho(\\theta)$，曲率 $K = \\frac{|\\rho'(\\theta) + 2\\rho'(\\theta) - \\rho(\\theta)\\rho'(\\theta)|}{[\\rho^2(\\theta) + \\rho'^2(\\theta)]^2}$.\n\n376 基础题 计算曲线 $xy = 1$ 在点 $(1,1)$ 处的曲率.\n\n二、曲率半径与曲率圆\n\n曲率半径：曲线在某点处的曲率半径 $\\rho$ 为曲线在该点处的曲率 $K$ 的倒数，即\n$\\rho = \\frac{1}{K}$.曲率中心：曲线 $ y=y(x) $ 在某点处的曲率中心坐标 $(\\alpha ,\\beta)$ 为\n$ \\alpha=x-\\frac{y(1+y^{2})}{y^{*}} $ $ \\beta=y+\\frac{1+y^{2}}{y^{*}} $\n曲率圆：曲线 $ y=y(x) $ 在某点处的曲率圆为 $(x-\\alpha)^{2}+(y-\\beta)^{2}=\\rho^{2} $\n377 基础题 计算曲线 $ \\left\\{ \\begin{array}{l} x=a\\cos^{3} t \\\\ y=a\\sin^{3} t \\end{array} \\right. $ 在点 $ t_{0} $ 处的曲率及曲率半径.\n378 基础题 求抛物线 $ y=2x^{2}-3x+3 $ 在 $ M(1,2) $ 处的曲率圆方程.\n379 综合题 设 $ \\rho=\\rho(x) $ 是抛物线 $ y=\\sqrt{x} $ 上任一点 $ M(x,y)(x\\geq1) $ 处的曲率半径，\n$ s=s(x) $ 是该抛物线上介于点 $ A(1,1) $ 与 $ M $ 之间的弧长，计算 $ 3\\rho\\frac{d^{2}\\rho}{ds^{2}}-\\left(\\frac{d\\rho}{ds}\\right)^{2} $ 的值."}
+
+## tool · 2026-10-20T02:22:26Z
+
+
+
+
+## tool · 2026-10-20T02:22:43Z
+
+
+
+
+## tool · 2026-10-20T02:24:34Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-10-20T02:24:38Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"fbeb19","wall_time_seconds":0.000010125,"exit_code":0,"original_token_count":2328,"output":"第4章\n不定积分\n\n第一节 不定积分的概念与性质\n\n一、原函数\n\n定义：在区间 I 上，若可导函数 F(x)的导函数为 f(x)，即对任一 x∈I，有\n$F'(x) = f(x)$ 或 $dF(x) = f(x)dx$，\n则称 F(x)为 f(x)在区间 I上的一个原函数.\n\n定理 1: 如果 F(x)是 f(x)的一个原函数，则 F(x)+C是 f(x)的所有原函数\n(其中 C为任意常数).\n\n定理 2: (原函数存在定理) 如果函数 f(x)在区间 I上连续，则 f(x)在区间 I\n上存在原函数.\n\n380 基础题 设 f(x)在(1,+∞)上的一个原函数为 $\\ln(x+\\sqrt{x^2-1})$，求 $f'(x)$.\n\n381 基础题 设 f(x)的一个原函数为 $\\ln x(x>0)$，则它的另一个原函数为（    ）.\n(A) $\\ln(ax)(a>0,x>0)$\n(B) $\\frac{1}{a}\\ln x(x>0)$\n(C) $\\ln(a+x)(a+x>0)$\n(D) $\\frac{1}{2}(\\ln x)^2(x>0)$\n\n382 中等题 证明函数 $\\arcsin(2x-1)$和 $2\\arcsin \\sqrt{x}$是同一函数的原函数，并求出它\n们之间相差的常数.\n\n383 中等题 判断函数 F(x)=$\\begin{cases}x^2+x+1,x>0\\\\x^2, x\\leqslant 0\\end{cases}$ 是否是 f(x)=$\\begin{cases}3x^2+1,x>0\\\\2x, x\\leqslant 0\\end{cases}$ 在\n(-∞,+∞)上的原函数并说明理由.\n\n384 基础题 设 F(x)是 f(x)在(a,b)上的原函数，则 f(x)+F(x)在(a,b)上（    ）.\n(A)可导\n(B)连续\n(C)存在原函数\n(D)是初等函数385 中等题 设 $f(x) = \\begin{cases} x^2, & x \\ge 0 \\\\ \\cos x, & x < 0 \\end{cases}, g(x) = \\begin{cases} x \\sin \\frac{1}{x}, & x \\ne 0 \\\\ 0, & x = 0 \\end{cases}$ 则在 $(-\\infty, +\\infty)$ 上\n(    ).\n\n(A) $f(x)$ 与 $g(x)$ 都存在原函数\n(B) $f(x)$ 与 $g(x)$ 都不存在原函数\n(C) $f(x)$ 存在原函数，$g(x)$ 不存在原函数\n(D) $f(x)$ 不存在原函数，$g(x)$ 存在原函数\n\n二、不定积分的定义与性质\n\n定义：函数 $f(x)$ 的所有原函数，称为 $f(x)$ 的不定积分，记为 $\\int f(x) \\mathrm{d}x$。即如果 $F(x)$ 是 $f(x)$ 的一个原函数，则\n$\\int f(x) \\mathrm{d}x = F(x) + C$ ($C$ 为任意常数).\n\n评注\n求不定积分 $\\int f(x) \\mathrm{d}x$ 时，结果切记要加上任意常数 $C$。没有 $C$，求出的只是一个原函数，而不是 $f(x)$ 的不定积分.\n\n性质 1：积分运算与微分运算的互逆关系.\n(1) $\\left(\\int f(x) \\mathrm{d}x\\right)' = f(x)$ 或 $\\mathrm{d}\\int f(x) \\mathrm{d}x = f(x) \\mathrm{d}x$.\n(2) $\\int f'(x) \\mathrm{d}x = f(x) + C$ 或 $\\int df(x) = f(x) + C$.\n\n性质 2：积分线性运算法则.\n(1) $\\int [f(x) \\pm g(x)] \\mathrm{d}x = \\int f(x) \\mathrm{d}x \\pm \\int g(x) \\mathrm{d}x$.\n(2) $\\int kf(x) \\mathrm{d}x = k \\int f(x) \\mathrm{d}x$ ($k \\ne 0$ 且为常数).\n\n386 基础题 设 $f(x)$ 的导函数为 $\\sin x$，$C$ 为任意常数，则不定积分 $\\int f(x) \\mathrm{d}x =$\n(    ).\n(A) $1 + \\sin x + C$ (B) $1 - \\sin x + C$ (C) $1 + \\cos x + C$ (D) $1 - \\cos x + C$\n\n387 中等题 设曲线经过点 $(e, -1)$，且其上任一点处切线的斜率为 $\\frac{\\ln x}{x}$，求此曲线的方程.\n\n388 基础题 设函数 $f(x)$ 在 $(-\\infty, +\\infty)$ 上可微，则 $\\mathrm{d}\\left(\\int f'(x) \\mathrm{d}x\\right) =$ (    ).\n(A) $f(x)$ (B) $f(x) \\mathrm{d}x$ (C) $f(x) + C$ (D) $f'(x) \\mathrm{d}x$\n\n389 基础题 以下结论正确的是 (    ).\n(A) $\\mathrm{d}\\left(\\int f(x) \\mathrm{d}x\\right) = f(x)$ (B) $\\left(\\int f(x) \\mathrm{d}x\\right)' = \\int f'(x) \\mathrm{d}x$(C) $\\int f'(x) \\mathrm{d}x = f(x)$\n(D) $d\\left(\\int f(x) \\mathrm{d}x\\right) = f(x) \\mathrm{d}x$\n\n390 中等题 在区间 $(a,b)$ 内，若 $f'(x) = g'(x)$，则下列各式中正确的是（    ）。\n(A) $f(x) = g(x)$\n(B) $f(x) = g(x) + 1$\n(C) $\\left(\\int f(x) \\mathrm{d}x\\right)' = \\left(\\int g(x) \\mathrm{d}x\\right)'$\n(D) $\\int df(x) = \\int dg(x)$\n\n391 中等题 $\\int d\\left[\\int df(x)\\right] =$ ____.\n\n392 中等题 设 $f'(\\sin^2 x) = \\cos(2x) + \\tan^2 x$，当 $0 < x < 1$ 时，则 $f(x) =$ ____.\n\n三、基本积分公式\n基本积分公式是计算积分的基础，必须熟记.\n\n393 基础题 求不定积分 $\\int \\frac{(x^2 - 1)\\sqrt{1-x^2} - 3x}{x\\sqrt{1-x^2}} \\mathrm{d}x$.\n\n394 基础题 求不定积分 $\\int \\frac{\\cos 2x}{\\sin^2 x \\cos^2 x} \\mathrm{d}x$.\n\n395 基础题 求不定积分 $\\int \\frac{1-2 \\cos x}{1-\\cos(2x)} \\mathrm{d}x$.\n\n396 基础题 求不定积分 $\\int \\left(\\frac{1}{5^4 e^4} + \\frac{1-e^{2x}}{1+e^4}\\right) \\mathrm{d}x$.\n\n397 基础题 求不定积分 $\\int \\left(6 \\sqrt{x} + 5 e^x + \\cos^2 \\left(\\frac{x}{2}\\right)\\right) \\mathrm{d}x$.\n\n398 中等题 求不定积分 $\\int \\left(\\frac{x^4}{1+x^2} - \\frac{2}{\\sqrt{1-x^2}}\\right) \\mathrm{d}x$.\n\n第二节 换元积分法\n\n一、第一类换元积分法（凑微分法）\n\n定理：若 $\\int f(u) \\mathrm{d}u = F(u) + C$，且 $u = \\varphi(x)$ 可导，则$\\int g(x)dx=\\int f[\\varphi(x)]\\varphi'(x)dx=\\int f[\\varphi(x)]d\\varphi(x)=\\int f(u)du=F(u)+C=\\int F[\\varphi(x)]+C.$\n\n评注\n用第一类换元积分法，首先要在被积函数表达式中确定一个复合函数 $f[\\varphi(x)]$，使函数 $f$ 成为基本积分公式中的被积函数，然后观察剩余部分是否为 $\\varphi'(x)dx$，若是，则可直接凑微分；若不是，则需要通过恒等变形凑出 $\\varphi'(x)dx$。这类题目的难度弹性较大，务必熟记基本微分公式、基本积分公式以及常见的凑微分形式。\n\n399 基础题 求下列不定积分.\n(1) $\\int \\frac{dx}{\\sqrt{2x+3}}$ (2) $\\int \\frac{x+1}{x^2+2x+5}dx$ (3) $\\int \\frac{xdx}{(2x+3)^2}$\n\n400 基础题 求下列不定积分.\n(1) $\\int \\frac{e^{3\\sqrt{x}}}{\\sqrt{x}}dx$ (2) $\\int \\frac{\\sin\\sqrt{x}}{\\sqrt{x}}dx$ (3) $\\int \\frac{dx}{(1+x)\\sqrt{x}}$\n\n401 基础题 求下列不定积分.\n(1) $\\int x^2e^2dx$ (2) $\\int \\frac{xdx}{1+x^4}$\n(3) $\\int \\frac{x^2}{(2x^2-1)^2}(n\\neq1)$ (4) $\\int xf(x^2)f'(x^2)dx$\n\n402 基础题 求下列不定积分.\n(1) $\\int \\sin^2x\\cos^2xdx$ (2) $\\int \\sin^5x\\cos^2xdx$\n(3) $\\int \\cot^4x\\cscxdx$ (4) $\\int \\sin(5x)\\sin(3x)dx$\n\n403 基础题 求下列不定积分.\n(1) $\\int \\frac{dx}{a^2+x^2}(a\\neq0)$ (2) $\\int \\frac{dx}{a^2-x^2}(a\\neq0)$\n\n404 基础题 求下列不定积分.\n(1) $\\int e^{\\sin x}\\sec^2xdx$ (2) $\\int \\left(1-\\frac{1}{x^2}\\right)e^{x+\\frac{1}{x}}dx$\n\n405 基础题 求下列不定积分.\n(1) $\\int \\frac{dx}{x\\sqrt{1-\\ln^2x}}$ (2) $\\int \\frac{dx}{x\\ln x(1+\\ln(\\ln x))^2}$ (3) $\\int \\frac{1+\\ln x}{1+x^2\\ln^2x}dx$406 基础题 求下列不定积分.\n(1) $\\int \\frac{dx}{\\sqrt{1-x^2}(\\arcsin x)^2}$\n(2) $\\int \\frac{\\arcsin \\sqrt{x}}{\\sqrt{x(1-x)}} dx$\n(3) $\\int \\frac{\\arcsin(1-x)}{\\sqrt{2x-x^2}} dx$\n\n407 基础题 求不定积分 $\\int \\frac{dx}{\\sqrt{x-x^2}}$.\n\n408 基础题 求不定积分 $\\int \\frac{\\cos x}{9+\\sin^2 x} dx$.\n\n409 基础题 求不定积分 $\\int \\frac{1-x}{\\sqrt{9-4x^2}} dx$.\n\n410 中等题 求不定积分 $\\int \\frac{\\sin x+\\cos x}{\\sqrt{\\sin x-\\cos x}} dx$.\n\n411 中等题 求不定积分 $\\int \\frac{x\\tan(\\sqrt{1-x^2})}{\\sqrt{1-x^2}} dx$.\n\n412 中等题 求不定积分 $\\int \\frac{\\ln(x+\\sqrt{1+x^2})+1}{1+x^2} dx$.\n\n413 中等题 求不定积分 $\\int \\frac{e^{\\sqrt{1+\\sin x}}\\cos x}{\\sqrt{1+\\sin x}} dx$.\n\n414 中等题 求不定积分 $\\int \\frac{x+(arctan x)^2}{1+x^2} dx$.\n\n415 中等题 求不定积分 $\\int \\frac{\\sin x\\cos^3 x}{1+\\cos^2 x} dx$.\n\n416 中等题 求不定积分 $\\int \\frac{dx}{\\sin^2 x+2\\cos^2 x}$.\n\n417 中等题 求不定积分 $\\int \\frac{dx}{1+e^x}$.\n\n418 中等题 求不定积分 $\\int \\frac{\\ln(x+1)-\\ln x}{x(x+1)} dx$.\n\n419 中等题 求不定积分 $\\int \\frac{\\ln^2 x}{x(1+\\ln^2 x)} dx$.420中等题 求不定积分 $\\int \\frac{xdx}{x-\\sqrt{x^2-1}}$ .\n\n421中等题 求不定积分 $\\int \\frac{\\mathrm{e}^{\\sin(2x)}\\sin^2x}{\\mathrm{e}^{2x}} \\mathrm{d}x$ .\n\n422中等题 求不定积分 $\\int \\ln(\\tan x) \\mathrm{d}x$ .\n\n423中等题 求不定积分 $\\int \\frac{x+\\sin x \\cos x}{(\\cos x-x \\sin x)^2} \\mathrm{d}x$ .\n\n424中等题 求不定积分 $\\int \\frac{\\cos^2x-\\sin x}{\\cos x(1+\\mathrm{e}^{\\mathrm{i}ax}\\cos x)} \\mathrm{d}x$ .\n\n425中等题 求不定积分 $\\int \\frac{(1+\\sin x)e^x}{1+\\cos x} \\mathrm{d}x$ .\n\n426中等题 设 $\\int f(x) \\mathrm{d}x=\\ln(\\sin x)+C$ ，求 $\\int xf(1-x^2) \\mathrm{d}x$ .\n\n427中等题 证明 $\\int \\frac{xf^2(x)-(1+x)f(x)}{x^2 \\mathrm{e}^x} \\mathrm{d}x=\\frac{f(x)}{x} \\mathrm{e}^{-x}+C$ .\n\n二、第二类换元法\n\n定理：设 $x=\\varphi(t)$ 单调、可导，且 $\\varphi'(t) \\neq 0$ ，$\\int f[\\varphi(t)]\\varphi'(t) \\mathrm{d}t=F(t)+C$ ，则 $\\int f(x) \\mathrm{d}x=\\int f[\\varphi(t)]\\mathrm{d}\\varphi(t)=\\int f[\\varphi(t)]\\varphi'(t) \\mathrm{d}t=F(t)+C=\\int F[\\varphi^{-1}(x)]+C$ ，其中，$\\varphi^{-1}(x)$ 是 $x=\\varphi(t)$ 的反函数.\n\n常见类型\n\n(1) 被积函数中含 $\\sqrt{a^2-x^2}$ 、 $\\sqrt{a^2+a^2}$ 、 $\\sqrt{x^2-a^2}$ 之一，可分别采用三角代换 $x=a\\sin t$ （或 $x=a\\cos t$ ）、 $x=a\\tan t$ （或 $x=a\\cot t$ ）与 $x=a\\sec t$ .\n\n(2) 被积函数中的根式不具备平方和或平方差结构时，可试用根式代换；若只含 $\\sqrt{ax+b}$ 或者 $\\sqrt{\\frac{ax+b}{cx+d}}$ ，则直接令此根式等于 $t$ ；若同时含 $\\sqrt{ax+b}$ 和 $\\sqrt{ax+b}$ ，则令 $\\sqrt{ax+b}=t$ ，其中 $k$ 为 $m$ 和 $n$ 的最小公倍数.\n\n(3) 被积函数是分式，其分母关于 $x$ （或 $x-a$ ）的最高次数比分子的最次数至少高两次，可试用倒代换 $x=\\frac{1}{t}$ ，以降低分母次数.\n\n(4) 被积函数含 $a^x$ 及其幂时，可作指数代换 $a^x=t$ ；若被积函数含 $\\sqrt{a^x \\pm a}$ ，则令 $\\sqrt{a^x \\pm a}=t$ 去掉根式."}
+
+## tool · 2026-10-20T02:24:45Z
+
+
+
+
+## tool · 2026-10-20T02:24:53Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"e5c233","wall_time_seconds":0.000013083,"exit_code":0,"original_token_count":2300,"output":"428 基础题 求不定积分 $\\int x^3 \\sqrt{4-x^2} \\mathrm{d} x$.\n\n429 基础题 求不定积分 $\\int \\frac{x^2 \\mathrm{d} x}{\\sqrt{(x^2+1)^2}}$.\n\n430 基础题 求不定积分 $\\int \\frac{x^2 \\mathrm{d} x}{\\sqrt{(x^2-a^2)^3}} (a>0)$.\n\n431 基础题 求不定积分 $\\int \\frac{\\mathrm{d} x}{1+\\sqrt{x+1}}$.\n\n432 基础题 求不定积分 $\\int \\frac{\\mathrm{d} x}{\\sqrt{x+\\sqrt{x^2}}}$.\n\n433 基础题 求不定积分 $\\int \\frac{1}{3-x} \\sqrt{\\frac{5-x}{x-1}} \\mathrm{d} x$.\n\n434 基础题 求不定积分 $\\int \\frac{\\mathrm{d} x}{\\mathrm{e}^x+\\mathrm{e}^{2 x}}$.\n\n435 基础题 求不定积分 $\\int \\frac{\\mathrm{d} x}{\\sqrt{\\mathrm{e}^2+1}}$.\n\n436 基础题 求不定积分 $\\int \\frac{\\mathrm{d} x}{x(x^6+1)}$.\n\n437 基础题 求不定积分 $\\int \\frac{\\mathrm{d} x}{x^4\\sqrt{x^2+1}}$.\n\n438 中等题 求不定积分 $\\int \\frac{1+x}{x^2+x\\ln x} \\mathrm{d} x$.\n\n439 中等题 求不定积分 $\\int \\sqrt{2x-x^2} \\mathrm{d} x$.\n\n440 中等题 求不定积分 $\\int \\frac{\\mathrm{d} x}{\\sqrt{1+e^{2 x}}}$.\n\n441 中等题 求不定积分 $\\int \\frac{\\mathrm{d} x}{(1+x^2)\\sqrt{1-x^2}}$.### 第三节 分部积分法\n\n分部积分公式\n\n定理：设 $u(x), v(x)$ 具有连续一阶导数，则\n$$\\int u dv = uv - \\int v du \\text{ 或 } \\int u' dv = uv - \\int v' dx.$$\n选择 $u(x), v(x)$ 的原则：一般按“反对幂指三”顺序，前为 $u$ 后为 $v'$。即\n形如 $\\int p_n(x) e^{ax} dx, \\int p_n(x) \\sin(ax) dx, \\int p_n(x) \\cos(ax) dx$ 的积分，把 $p_n(x)$ 当 $u(x)$，\n$e^{ax}, \\sin(ax), \\cos(ax)$ 当 $v'(x)$，其中 $p_n(x)$ 是 $n$ 次多项式；\n形如 $\\int p_n(x) \\ln x dx, \\int p_n(x) \\arctan x dx, \\int p_n(x) \\arcsin x dx$ 的积分，把 $\\ln x, \\arctan x,$\n$\\arcsin x$ 当 $u(x)$，$p_n(x)$ 当 $v'(x)$，其中 $p_n(x)$ 是 $n$ 次多项式；\n形如 $\\int e^{ax} \\sin(bx) dx, \\int e^{ax} \\cos(bx) dx$ 的积分，把 $\\sin(bx), \\cos(bx)$ 当 $u(x)$，连续两次把 $e^{ax}$ 当 $v'(x)$，分部积分后还原，求得原不定积分.\n\n### 442 基础题 求下列不定积分.\n\n(1) $\\int x e^{ax} dx$ (2) $\\int x^2 \\cos x dx$ (3) $\\int (x^2 - x) \\sin x dx$\n\n### 443 基础题 求下列不定积分.\n\n(1) $\\int \\frac{x}{\\sin^2 x} dx$ (2) $\\int \\ln(x + \\sqrt{x^2 + 1}) dx$ (3) $\\int \\arctan x dx$\n\n### 444 基础题 求下列不定积分.\n\n(1) $\\int e^{-x} \\cos x dx$ (2) $\\int x \\cot^2 x dx$ (3) 设 $f(x) dx = (1 + \\sin x) \\ln x + C$，求 $\\int x f'(x) dx$.\n\n### 445 基础题 求不定积分 $\\int x \\ln(x + 1) dx$.\n\n### 446 基础题 求不定积分 $\\int \\arcsin(x + 1) dx$.\n\n### 447 基础题 求不定积分 $\\int \\frac{x \\cot x}{\\sin^2 x} dx$.\n\n### 448 基础题 求不定积分 $\\int \\frac{x \\cos^4\\left(\\frac{x}{2}\\right)}{\\sin^3 x} dx$.\n\n### 449 基础题 求不定积分 $\\int \\frac{\\ln(\\sin x)}{\\sin^2 x} dx$.450 基础题 求不定积分 $\\int \\frac{x^3}{\\sqrt{1+x^2}} \\mathrm{d}x$.\n\n451 基础题 求不定积分 $\\int \\mathrm{e}^{2x} \\sin(3x) \\mathrm{d}x$.\n\n452 基础题 求不定积分 $\\int \\sqrt{x^2+a^2} \\mathrm{d}x$.\n\n453 基础题 求不定积分 $\\int \\sqrt{a^2-x^2} \\mathrm{d}x$.\n\n454 中等题 求不定积分 $\\int x \\arcsin x \\mathrm{d}x$.\n\n455 中等题 求不定积分 $\\int \\frac{1}{x^2} \\arctan x \\mathrm{d}x$.\n\n456 中等题 求不定积分 $\\int \\frac{\\ln(1+x)}{(2-x)^2} \\mathrm{d}x$.\n\n457 中等题 求不定积分 $\\int \\frac{x \\mathrm{e}^x}{\\sqrt{\\mathrm{e}^x-1}} \\mathrm{d}x$.\n\n458 中等题 求不定积分 $\\int \\frac{\\ln x}{\\sqrt{1+x}} \\mathrm{d}x$.\n\n459 中等题 求不定积分 $\\int \\arctan \\sqrt{x} \\mathrm{d}x$.\n\n460 中等题 求不定积分 $\\int \\frac{x^2 \\mathrm{e}^x}{(x+2)^2} \\mathrm{d}x$.\n\n461 中等题 求不定积分 $\\int \\frac{(1+x) \\sin x+\\cos x}{(1+x)^2} \\mathrm{d}x$.\n\n462 中等题 设 $f'(\\mathrm{e}^x) = \\cos x$，求 $f(x)$.\n\n463 中等题 设 $n$ 为自然数，$I_n = \\int \\sec^n x \\mathrm{d}x$，\n证明 $I_n = \\frac{\\sin x}{(n-1) \\cos^{n-1} x} + \\frac{n-2}{n-1} I_{n-2}, n=2,3, \\cdots$.第四节 有理函数的积分\n\n定义：形如 $\\frac{P(x)}{Q_m(x)}$ 的函数称为有理函数，其中 $P_n(x)$ 和 $Q_m(x)$ 分别为 $x$ 的 $n$ 次多项式和 $m$ 次多项式.\n\n当 $m \\leq n$ 时，$\\frac{P_n(x)}{Q_m(x)}$ 称为假分式；当 $m > n$ 时，$\\frac{P(x)}{Q_m(x)}$ 称为真分式.\n\n评注\n(1) 因为假分式总能化为整式和真分式之和，整式可以逐项积分，所以讨论有理函数的积分，只需讨论真分式的积分.\n(2) 对于有理分式，常用下述命题先将有理分式化为部分分式之和，再用待定系数法或赋值法确定部分分式之和的待定系数，最后分项积分求出积分结果.\n\n命题 1：若分母中含 $k$ 重一次因式 $(x-a)^k$，则有理真分式的分解中对应有 $k$ 项的和 $\\frac{A}{x-a} + \\frac{A_2}{(x-a)^2} + \\cdots + \\frac{A_k}{(x-a)^k}$；当 $k=1$ 时，只有一项 $\\frac{A}{x-a}$.\n\n若分母中含 $k$ 重二次因式 $(x^2 + px + q)^k$，则有理真分式的分解中对应有 $k$ 项的和 $\\frac{B_1x + C_1}{x^2 + px + q} + \\frac{B_2x + C_2}{(x^2 + px + q)^2} + \\cdots + \\frac{B_kx + C_k}{(x^2 + px + q)^k}$；当 $k=1$ 时，只有一项 $\\frac{Bx + C}{x^2 + px + q}$.\n\n命题 2：任一有理真分式的积分都可化为下述 4 种类型的积分：\n(1) $\\int \\frac{A}{x-a} dx$；(2) $\\int \\frac{A}{(x-a)^2} dx$；(3) $\\int \\frac{Bx + C}{x^2 + px + q} dx$；$\\int \\frac{Bx + C}{(x^2 + px + q)^k} dx$.\n\n其中 $A, B, C$ 为待定系数，$k > 1$，$p^2 - 4q < 0$.\n\n464 基础题 求不定积分 $\\int \\frac{x^3}{x^2 + 1} dx$.\n\n465 基础题 求不定积分 $\\int \\frac{3x - 2}{x^2 + 3x - 4} dx$.\n\n466 基础题 求不定积分 $\\int \\frac{2x^2 - x + 1}{(x+1)(x-3)(x+2)} dx$.\n\n467 基础题 求不定积分 $\\int \\frac{1}{x(x-1)} dx$.\n\n468 基础题 求不定积分 $\\int \\frac{x^2 + 1}{(x+1)(x^2 - 1)} dx$.469 基础题 求不定积分 $\\int \\frac{dx}{(x^2+1)(1+2x)}$.\n470 基础题 求不定积分 $\\int \\frac{3x+1}{x^2+2x+5} dx$.\n471 基础题 求不定积分 $\\int \\frac{dx}{(x^2+2x+5)^2}$.\n472 中等题 求不定积分 $\\int \\frac{2x^3+2x^2+5x+5}{x^4+5x^2+4} dx$.\n473 中等题 求不定积分 $\\int \\frac{x^2}{(x^2+2x+2)^2} dx$.\n474 中等题 求不定积分 $\\int \\frac{x^4+1}{1+x^5} dx$.\n475 中等题 求不定积分 $\\int \\frac{dx}{x^4-x^6}$.\n476 中等题 求不定积分 $\\int \\frac{1+2x^4}{x^3(1+x^4)^2} dx$.\n477 中等题 求不定积分 $\\int \\frac{dx}{x^4+1}$.\n\n综合提高题\n\n478 综合题 下列说法不正确的是（    ）\n(A) 一切初等函数在其定义区间内都存在原函数\n(B) 不连续的函数也可能存在原函数\n(C) 奇函数的原函数都是偶函数\n(D) 偶函数的原函数都是奇函数\n\n479 综合题 设 $f(x)$ 在闭区间 $[a,b]$ 上连续，则在开区间 $(a,b)$ 内，$f(x)$ 必有（    ）\n(A) 导函数 (B) 原函数 (C) 最大值或最小值 (D) 极值(A) $F(x) = \\begin{cases} (x-1)^2, & x < 1 \\\\ x(\\ln x - 1), & x \\ge 1 \\end{cases}$\n(B) $F(x) = \\begin{cases} (x-1)^2, & x < 1 \\\\ x(\\ln x + 1) - 1, & x \\ge 1 \\end{cases}$\n(C) $F(x) = \\begin{cases} (x-1)^2, & x < 1 \\\\ x(\\ln x + 1) + 1, & x \\ge 1 \\end{cases}$\n(D) $F(x) = \\begin{cases} (x-1)^2, & x < 1 \\\\ x(\\ln x - 1) + 1, & x \\ge 1 \\end{cases}$\n\n481 综合题 求不定积分 $\\int \\frac{\\arctan e^x}{e^{2x}} dx$.\n\n482 综合题 求不定积分 $\\int \\frac{\\arctan x}{x^2(1+x^2)} dx$.\n\n483 综合题 求不定积分 $\\int \\frac{1+x}{x(1+x e^x)} dx$.\n\n484 综合题 求不定积分 $\\int \\frac{1-\\ln x}{(x-\\ln x)^2} dx$.\n\n485 综合题 求不定积分 $\\int e^{2x} \\arctan \\sqrt{e^x}-1 dx$.\n\n486 综合题 求不定积分 $\\int \\frac{x+\\sin x \\cos x}{(x \\sin x+\\cos x)^2} dx$.\n\n487 综合题 求不定积分 $\\int \\frac{dx}{\\sin(2x)+2 \\sin x}$.\n\n488 综合题 求不定积分 $\\int \\frac{1}{1+\\sin x+\\cos x} dx$.\n\n489 综合题 求不定积分 $\\int \\frac{1}{2+\\cos x} dx$.\n\n490 综合题 求不定积分 $\\int \\frac{3 \\cos x-\\sin x}{\\cos x+\\sin x} dx$.\n\n491 综合题 求不定积分 $\\int \\frac{\\sin x}{\\sin x+\\cos x} dx$.\n\n492 综合题 求不定积分 $\\int \\frac{1}{2x+\\sqrt{1-x^2}} dx$.493 综合题 求不定积分 $\\int \\frac{x^3+1}{(1+x^2)^2} \\mathrm{d} x$.\n\n494 综合题 求不定积分 $\\int \\frac{x \\mathrm{e}^{\\arcsin x}}{(1+x^2)^{\\frac{3}{2}}} \\mathrm{d} x$.\n\n495 综合题 求不定积分 $\\int \\frac{\\mathrm{d} x}{1+\\mathrm{e}^{2}+\\mathrm{e}^{4}+\\mathrm{e}^{4}}$.\n\n496 综合题 求不定积分 $\\int \\frac{1}{(2+\\cos x)\\sin x} \\mathrm{d} x$.\n\n497 综合题 求不定积分 $\\int \\frac{x^3 \\arcsin x}{\\sqrt{1-x^2}} \\mathrm{d} x$.\n\n498 综合题 设 $y(x-y)^2=x$, 求不定积分 $\\int \\frac{1}{x-3 y} \\mathrm{d} x$.\n\n499 综合题 设 $f(\\sin^2 x)=\\frac{x}{\\sin x}$, 求 $\\int \\frac{\\sqrt{x}}{\\sqrt{1-x}} f(x) \\mathrm{d} x$.\n\n500 综合题 设 $\\int f(x) \\mathrm{d} x=\\mathrm{e}^{x^2}+C$, 求 $\\int x f''(x) \\mathrm{d} x$.\n\n501 综合题 设 $\\int x f(x) \\mathrm{d} x=\\arcsin x+C$, 求 $\\int f(x) \\mathrm{d} x$.\n\n502 综合题 设 $\\int f'(e^x) \\mathrm{d} x=-(1+x) \\mathrm{e}^{-x}+C$, $f(1)=0$, 求 $f(x)$.\n\n503 综合题 已知 $f''(x)$ 连续, $f'(x) \\neq 0$, 证明 $\\int \\left[\\frac{f(x)}{f'(x)}-\\frac{f^2(x) f''(x)}{(f'(x))^2}\\right] \\mathrm{d} x=\\frac{1}{2} \\left(\\frac{f(x)}{f'(x)}\\right)^2+C$.\n\n504 综合题 证明 $\\int \\frac{1}{(a \\sin x+b \\cos x)^2} \\mathrm{d} x=-\\frac{1}{a^2+b^2} \\frac{a \\cos x-b \\sin x}{a \\sin x+b \\cos x}+C$."}
+
+## tool · 2026-10-20T02:25:11Z
+
+
+
+
+## tool · 2026-10-20T02:27:41Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-10-20T02:30:05Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-10-20T02:30:14Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"05cd32","wall_time_seconds":0.00000675,"exit_code":0,"original_token_count":307,"output":"013-crop0.0-0.55.md\n013-crop0.45-1.0.md\n014-crop0.0-0.55.md\n014-crop0.45-1.0.md\n015-crop0.0-0.55.md\n015-crop0.45-1.0.md\n019-crop0.0-0.55.md\n019-crop0.45-1.0.md\n044-crop0.0-0.55.md\n044-crop0.45-1.0.md\n045-crop0.0-0.55.md\n045-crop0.45-1.0.md\n048-crop0.0-0.55.md\n048-crop0.45-1.0.md\n049-crop0.0-0.55.md\n049-crop0.45-1.0.md\n076-crop0.0-0.55.md\n076-crop0.45-1.0.md\n077-crop0.0-0.55.md\n077-crop0.45-1.0.md\n078-crop0.0-0.55.md\n078-crop0.45-1.0.md\n079-crop0.0-0.55.md\n079-crop0.45-1.0.md\n259 基础题 以下函数中在指定区间上满足罗尔定理的有（ ）。\n(A) $ f(x)=|x|,[-1,1] $\n(B) $ f(x)=x^{2}-1,[-1,1] $\n(C) $ f(x)=x\\mathrm{e}^{-x},[0,1] $\n(D) $ f(x)=\\frac{1}{x},[-1,1] $\n\n260 基础题 验证罗尔定理对函数 $ y=\\ln \\sin x $在 $ [\\frac{\\pi}{6},\\frac{5\\pi}{6}] $上的正确性.\n\n261 基础题 设函数 $ f(x) $在 $ [0,1] $上连续，在 $ (0,1) $内可导，且 $ f(0)=0,f(1)=\\frac{\\pi}{4} $试证明方程 $ (1+x^{2})f^{\\prime}(x)=1 $在 $ (0,1) $内至少存在一个根.\n\n262 基础题 设 $ a_{0},a_{1},\\cdots,a_{n} $是满足 $ a_{0}+\\frac{a_{1}}{2}+\\frac{a_{2}}{3}+\\cdots+\\frac{a_{n}}{n+1}=0 $的实数，证明方程 $ a_{0}+a_{1}x+a_{2}x^{2}+\\cdots+a_{n}x^{n}=0 $在 $ (0,1) $内至少有一个根."}
+
+## tool · 2026-10-20T02:30:26Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"7855fc","wall_time_seconds":0.000008667,"exit_code":0,"original_token_count":1300,"output":"263 **基础题** 已知 $f(x)$ 二阶可导，且 $\\lim_{x \\to 0} \\frac{f(x)}{x} = 0, f(1) = 0$，证明：在(0,1)内至少存在一点 $\\xi$，使得 $f''(\\xi) = 0$.\n\n264 **中等题** 已知 $f(x)$ 在[0,1]上三阶可导，且 $f(0) = f(1) = 0$，设 $F(x) = x^3 f(x)$，证明：在(0,1)内存在一点 $\\xi$，使得 $F''(\\xi) = 0$.\n\n265 **中等题** 设函数 $f(x)$ 在[0,1]上连续，在(0,1)内可导，且 $f(0) = 1, f(1) = \\frac{1}{e}$，证明：方程 $f'(x) + e^{-x} = 0$ 在(0,1)内至少存在一个根.\n\n266 **中等题** 设函数 $f(x)$ 在[0,a]上连续，在(0,a)内可导，且 $f(a) = 0$，证明：存在一点 $\\xi \\in (0,a)$，使得 $f(\\xi) + \\xi f'(\\xi) = 0$.\n\n267 **中等题** 设函数 $f(x)$ 在[0,1]上连续，在(0,1)内可导，且 $f(1) = 0$，证明：至少存在一点 $\\xi \\in (0,1)$，使得 $f'(\\xi) = -\\frac{2f(\\xi)}{\\xi}$.\n\n268 **中等题** 设函数 $f(x)$ 在[0,1]上连续，在(0,1)内可导，且 $f(0) = 0$，对任意 $x \\in (0,1)$ 有 $f(x) \\neq 0$，证明：存在 $\\xi \\in (0,1)$，使得 $\\frac{f'(\\xi)}{f(\\xi)} = \\frac{f'(1-\\xi)}{f(1-\\xi)}$.268中等题 设函数 $ f ( x ) $在 $ [ 0, 1 ] $上连续，在(0,1)内可导，且 $ f ( 0 )=0 $，对任意 $ x \\in(0,1) $有 $ f ( x ) \\neq0 $ .证明：存在 $ \\xi \\in(0,1) $，使得 $ \\frac{f^{\\prime} ( \\xi )}{f ( \\xi )}=\\frac{f^{\\prime} ( 1-\\xi )}{f ( 1-\\xi )} $ .\n269综合题 设函数 $ f ( x ) $在 $ [ 0,1 ] $上连续，在(0,1)内可导，且 $ f ( 0 )=f \\left( \\frac{1}{2} \\right)=1 $ $ f ( 1 )=2 $ .证明：存在一点 $ \\xi \\in(0,1) $，使得 $ f^{\\prime} ( \\xi )=\\frac{\\mathrm{e}^{\\xi}}{2 f ( \\xi )} $ .\n270综合题 设函数 $ y=f ( x ) $在 $ [ 0,3 ] $上连续，在(0,3)内可导，且 $ f ( 0 )+f ( 1 )+ $ $ f ( 2 )=3 $， $ f ( 3 )=1 $ .证明：必存在 $ \\xi \\in(0,3) $，使得 $ f^{\\prime} ( \\xi )=0 $ .\n271综合题 设函数 $ y=f ( x ) $在 $ [ 0,1 ] $上连续，在(0,1)内可导，且 $ f ( 0 )=f ( 1 )=0 $ $ f \\left( \\frac{1}{2} \\right)=1 $ .证明：(1)存在 $ \\eta \\in\\left( \\frac{1}{2},1 \\right) $ ，使得 $ f ( \\eta )=\\eta $ ；(2)对任意实数 $ \\lambda $，必存在 $ \\xi \\in(0, \\eta) $ ，使得 $ f^{\\prime} ( \\xi )-\\lambda[ f ( \\xi )-\\xi ]=1 $ .\n272综合题 设抛物线 $ y=-x^{2}+B x+C $与x轴有两个交点 $ x=a, x=b $ $ ( a < b ) $ .又函数 $ y=f ( x ) $在 $ [ a, b ] $上二阶可导，且 $ f ( a )=f ( b )=0 $ .若曲线 $ y=f ( x ) $与 $ y=-x^{2}+B x+C $在 $ ( a, b ) $内有一个交点，证明：在 $ ( a, b ) $内存在一点 $ \\xi $使得 $ f^{\\prime} ( \\xi )+2=0 $ .则 $\\lim_{x \\to a} \\frac{f(x)}{F(x)} = \\lim_{x \\to a} \\frac{f(x)}{F'(x)}$ .\n\n说明: (1) 洛必达法则用于 “ $\\frac{0}{0}$ ” 或 “ $\\frac{\\infty}{\\infty}$ ” 型不定式的计算;\n(2) 对于自变量的其他变化过程如 $x \\to +\\infty, x \\to -\\infty, x \\to \\infty$ , 也有类似结论;\n(3) 若条件满足, 可以反复使用洛必达法则求解;\n(4) 洛必达法则不是万能的, 当 $\\lim \\frac{f'(x)}{F'(x)}$ 不存在也不是无穷大时, 不能断定 $\\lim \\frac{f(x)}{F(x)}$ 也不存在, 此时洛必达法则失效, 寻找其他方法求解.\n\n287 基础题 求 $\\lim_{x \\to 1} \\frac{x^3 - 3x^2 + 2}{x^3 - x^2 - x + 1}$ .\n\n288 基础题 求 $\\lim_{x \\to 1} \\frac{\\ln x}{x - 1}$ .\n\n289 基础题 求 $\\lim_{x \\to 1} \\frac{x^3 - 1 + \\ln x}{e^x - e}$ .\n\n290 基础题 求 $\\lim_{x \\to +\\infty} \\frac{x^4 + e^x}{x e^x}$ .\n\n291 基础题 求 $\\lim_{x \\to 0} \\frac{x - \\sin x}{x^2 \\sin x}$ .292 基础题 求 $ \\lim_{x \\to +\\infty} \\frac{\\ln(x \\ln x)}{x^{a}}(a>0) $\n293 基础题 求 $ \\lim_{x \\to 0} \\frac{e^{x}-\\sin x-1}{1-\\sqrt{1-x^{2}}} $\n294 基础题 求 $ \\lim_{x \\to 0} \\frac{\\arctan x-x}{\\ln(1+2x^{3})} $\n295 中等题 求 $ \\lim_{x \\to 0} \\frac{\\sin^{2} x-x^{2}\\cos^{2} x}{\\sin x(e^{2x}-1)\\ln(1+\\tan^{2} x)} $\n296 中等题 若 $ \\lim_{x \\to 0} \\frac{a \\tan x+b(1-\\cos x)}{c \\ln(1-2x)+d(1-e^{-x^{2}})}=2 $ ，其中 $ a^{2}+b^{2} \\neq 0 $ ，则必有（    ）。\n(A) $ b=4d $\n(B) $ b=-4d $\n(C) $ a=4c $\n(D) $ a=-4c $\n297 中等题 求 $ \\lim_{x \\to 0} \\frac{(1-\\cos x)[x-\\ln(1+\\tan x)]}{\\sin^{4} x} $\n298 中等题 求 $ \\lim_{x \\to 0} \\frac{[\\sin x-\\sin(\\sin x)]\\sin x}{x^{4}}. $298 中等题 求 $\\lim_{x \\to 0} \\frac{[\\sin x - \\sin(\\sin x)]\\sin x}{x^4}$ .\n\n二、洛必达法则计算其他类型的不定式\n\n基本思路：先将其他类型不定式转化为 “$\\frac{0}{0}$” 或 “$\\frac{\\infty}{\\infty}$” 型不定式，然后使用洛必达法则进行计算. 常用的类型如下.\n\n(1) “$\\infty - \\infty$” 型通分化成 “$\\frac{0}{0}$” 或 “$\\frac{\\infty}{\\infty}$” 型;\n\n(2) “$0 \\cdot \\infty$” 型，取其中一个因式的倒数放分母，化成 “$\\frac{0}{0}$” 或 “$\\frac{\\infty}{\\infty}$” 型;\n\n(3) “$0^0, \\infty^0, 1^\\infty$” 型，利用 $\\lim_{x \\to 0} f(x)^{g(x)} = \\lim e^{g(x) \\ln f(x)}$ 进行恒等变形.\n\n299 基础题 求 $\\lim_{x \\to 0} \\frac{1}{x} \\left( \\frac{1}{\\sin x} - \\frac{1}{\\tan x} \\right)$ .\n\n300 基础题 求 $\\lim_{x \\to +\\infty} x^n e^{-\\lambda x}$ （$n$ 为正整数，$\\lambda > 0$）.\n\n301 基础题 求 $\\lim_{x \\to 1} (1 - x) \\cdot \\tan \\frac{\\pi}{2} x$ .\n\n302 基础题 求 $\\lim_{x \\to \\frac{\\pi}{2}} (\\sec x - \\tan x)$ ."}
+
+## tool · 2026-10-20T02:30:33Z
+
+
+Script completed
+Wall time 0.4 seconds
+Output:
+
+{"chunk_id":"c53d03","wall_time_seconds":0.000341208,"exit_code":0,"original_token_count":5,"output":"050-crop0.0-0.55.md\n"}
+
+## tool · 2026-10-20T02:30:37Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"47e304","wall_time_seconds":0.000010583,"exit_code":0,"original_token_count":156,"output":"303 中等题 求 $\\lim_{x \\to 0}\\left(\\frac{1}{x}-\\frac{1}{e^x-1}\\right)$ .\n304 中等题 求 $\\lim_{x \\to 0}\\left(\\frac{1}{x^2}-\\frac{1}{x\\tan x}\\right)$ .\n305 中等题 求 $\\lim_{x \\to 0^+}x^x$ .\n306 中等题 求 $\\lim_{x \\to 1}x^{\\frac{1}{1-x}}$ .\n307 中等题 求 $\\lim_{x \\to 0}(1+3x)^{\\frac{2}{\\sin x}}$ .\n308 中等题 求 $\\lim_{x \\to 0}(\\cos x)^{\\frac{1}{\\ln(1+x^2)}}$ .\n309 综合题 求 $\\lim_{x \\to +\\infty}\\left(x^{\\frac{1}{x}}-1\\right)^{\\frac{1}{\\ln x}}$ .\n310 综合题 若 $a>0,b>0$ 均为常数，求 $\\lim_{x \\to 0}\\left(\\frac{a^x+b^x}{2}\\right)^{\\frac{3}{x}}$ .\n\n三、洛必达法则的综合应用"}
+
+## tool · 2026-10-20T02:37:38Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-10-20T02:37:45Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"0f0ead","wall_time_seconds":0.000027417,"exit_code":0,"original_token_count":2054,"output":"310综合题 若 $a > 0,b > 0$ 均为常数，求 $\\lim_{x \\to 0}\\left(\\frac{a^x+b^x}{2}\\right)^{\\frac{3}{x}}$ .\n\n三、洛必达法则的综合应用\n\n311综合题 设 $x \\to 0$ 时，$e^{\\tan x}-e^x$ 与 $x^n$ 是同阶无穷小，求 $n$ .\n\n312综合题 若函数 $f(x)=\\left\\{\\begin{array}{ll}\\frac{\\sin 2x+\\mathrm{e}^{2ax}-1}{x},x\\neq 0\\\\ a,x=0\\end{array}\\right.$ 在 $(-\\infty ,+\\infty)$ 上连续，求 $a$ .\n\n313综合题 已知 $f(x)=\\left\\{\\begin{array}{ll}(\\cos x)^{x^2},x\\neq 0\\\\ a,x=0\\end{array}\\right.$ 在 $x=0$ 上连续，求 $a$ .\n\n314综合题 设 $f(x)=\\frac{1}{\\pi x}+\\frac{1}{\\sin \\pi x}-\\frac{1}{\\pi(1-x)},x\\in[\\frac{1}{2},1)$ . 试补充定义 $f(1)$ 使得 $f(x)$ 在 $[\\frac{1}{2},1]$ 上连续.\n\n315综合题 设数列 $\\{x_n\\}$ 满足 $0<x_1<\\pi,x_{n+1}=\\sin x_n(n=1,2,\\cdots)$，(1) 证明： $\\lim_{n \\to \\infty} x_n$ 存在，并求该极限；(2) 求 $\\lim_{n \\to \\infty}\\left(\\frac{x_{n+1}}{x_n}\\right)^{\\frac{1}{x_n}}$.319 基础题 求 $ \\lim_{x \\to 0} \\frac{\\sqrt{1+x}+\\sqrt{1-x}-2}{x^{2}} $\n320 基础题 设 $ \\lim_{x \\to 0} \\frac{\\ln(1+x)-(ax+bx^{2})}{x^{2}}=2 $ ，则（    ）.\n(A) $ a=1,b=-\\frac{5}{2} $\n(B) $ a=0,b=-2 $\n(C) $ a=0,b=-\\frac{5}{2} $\n(D) $ a=1,b=-2 $\n321 中等题 求 $ \\lim_{x \\to 0} \\frac{1+\\frac{1}{2}x^{2}-\\sqrt{1+x^{2}}}{(\\cos x-\\mathrm{e}^{x^{2}})\\sin x^{2}} $\n322 中等题 求 $ \\lim_{x \\to 0} \\frac{\\cos x-\\mathrm{e}^{\\frac{x^{2}}{2}}}{x^{4}} $\n323 综合题 若 $ \\lim_{x \\to 0} \\frac{\\sin 6x+xf(x)}{x^{3}}=0 $ ，则 $ \\lim_{x \\to 0} \\frac{6+f(x)}{x^{2}}= $ （    ）.\n(A) 0\n(B) 6\n(C) 36\n(D) $ \\infty $323 综合题 若 $ \\lim_{x \\to 0} \\frac{\\sin 6x + x^2}{x^3} = 0 $ ，则 $ \\lim_{x \\to 0} \\frac{6 + f(x)}{x^2} = $ (    ) .\n(A) 0\n(B) 6\n(C) 36\n(D) $ \\infty $\n三、利用泰勒公式进行无穷小的比较\n324 基础题 设当 $ x \\to 0 $时， $ \\mathrm{e}^{x} - (a x^{2} + b x + 1) $是比 $ x^{2} $高阶的无穷小，则（    ）.\n(A) $ a=\\frac{1}{2}, b=1 $\n(B) $ a=1, b=1 $\n(C) $ a=-\\frac{1}{2}, b=1 $\n(D) $ a=-1, b=1 $\n325 基础题 试证明当 $ x \\to 0 $时， $ \\sqrt{1-2 x}-\\sqrt[3]{1-3 x} $是 $ x $的几阶无穷小？\n四、利用泰勒定理求高阶导数\n326 基础题 求函数 $ y=\\ln(1-3 x) $在 $ x=0 $处的 $ n $阶导数 $ y^{(n)}(0). $\n五、利用泰勒定理证明不等式和等式\n327 基础题 证明 $ \\mathrm{e}^{x}>1+x $ $ (x \\neq 0). $(1) 确定函数 $ y=f(x) $的定义域；\n(2) 求 $ f^{\\prime}(x) $，找出使 $ f^{\\prime}(x)=0 $和 $ f^{\\prime}(x) $不存在点；\n(3) 用以上点将定义域分割为不同的小区间，在每个小区间上利用判定定理判断函数的单调性.\n\n330 基础题 讨论函数 $ f(x)=x-\\frac{3}{2}x^{\\frac{2}{3}} $的单调性.\n\n331 基础题 当 $ 0<x<\\frac{\\pi}{2} $时，证明不等式 $ \\tan x>x+\\frac{1}{3}x^{3} $.\n\n332 基础题 当 $ x>0 $时，证明不等式 $ \\ln(1+x)>\\frac{\\arctan x}{1+x} $.\n\n333 基础题 设 $ f(x) $在 $ (-\\infty,+\\infty) $内可导，且对任意 $ x_{1},x_{2} $，当 $ x_{1}>x_{2} $时，都有 $ f(x_{1})>f(x_{2}) $，则（    ）.\n(A) 对任意 $ x,f^{\\prime}(x)>0 $ (B) 对任意 $ x,f^{\\prime}(-x)\\leqslant 0 $\n(C) 函数 $ f(-x) $单调递增 (D) 函数 $ -f(-x) $单调递增\n\n334 中等题 在区间 $ (-\\infty,+\\infty) $内，方程 $ |x|^{\\frac{1}{4}}+|x|^{\\frac{1}{2}}-\\cos x=0 $ (    ).\n(A) 无实根 (B) 有且仅有一个实根\n(C) 有且仅有两个实根 (D) 有无穷多根335 中等题 当 a 取（    ）时，函数 $ f(x)=x^{3}-3x-a $恰好有两个不同的零点.\n(A) 1 (B) 2 (C) 3 (D) 0\n\n336 中等题 若 $ 3 a^{2}-5 b<0 $，则方程 $ x^{5}-2 a x^{3}+3 b x+4 c=0 $（    ）.\n(A) 无实根 (B) 有唯一实根\n(C) 有三个不同实根 (D) 有五个不同实根\n\n337 综合题 设 $ f(x) $为可导函数，且 $ f^{\\prime \\prime}(x)>0 $，则 $ F(x)=\\frac{f(x)-f(a)}{x-a} $在 $ (a,b] $内（    ）.\n(A) 有极大值 (B) 有极小值\n(C) 单调递减 (D) 单调递增\n\n338 综合题 设 $ x>0 $，常数 $ a>e $，证明 $ (a+x)^{a}<a^{a+x} $.\n\n339 综合题 设 $ e<a<b<e^{2} $，证明 $ \\ln^{2} b-\\ln^{2} a>\\frac{4}{e^{2}}(b-a) $.\n\n二、曲线的凹凸性\n\n凹凸性的判定：如果函数 $ f(x) $在区间 $ I $内二阶导数存在，则二、曲线的凹凸性\n\n凹凸性的判定：如果函数 $f(x)$ 在区间 $I$ 内二阶导数存在，则\n(1) 区间 $I$ 内 $f''(x)>0$，则曲线 $y=f(x)$ 在区间 $I$ 上是凹的；\n(2) 区间 $I$ 内 $f''(x)<0$，则曲线 $y=f(x)$ 在区间 $I$ 上是凸的．\n\n凹凸间的分界点：凹凸间的分界点只可能出现在函数的二阶导数不存在\n的点或者二阶导数为零的点处．曲线上凹凸的分界点为拐点．\n\n曲线的凹凸区间及拐点的判定步骤：\n(1) 确定函数 $y=f(x)$ 的定义域；\n(2) 求 $f''(x)$，找出使 $f''(x)=0$ 和 $f''(x)$ 不存在的点（即可能的凹凸区间分界点）；\n(3) 用以上点将定义域分割为不同的小区间，在每个小区间上判断曲线的凹\n凸性．\n\n340 基础题 讨论曲线 $f(x)=x^{\\frac{8}{3}}-x^{\\frac{5}{3}}$ 的凹凸区间，并求拐点．\n\n341 基础题 判断 $f(x)=|1+\\sin x|$ 在区间 $\\left(\\pi ,\\frac{3}{2}\\pi\\right)$ 内的图形（    ）．\n(A) 单调递增，凹的\n(B) 单调递减，凸的\n(C) 单调递增，凸的\n(D) 单调递减，凹的(1) 若 $f'''(x_0)<0$ ，则 $f(x_0)$ 是极大值.\n(2) 若 $f'''(x_0)>0$ ，则 $f(x_0)$ 是极小值.\n(3) 若 $f'''(x_0)=0$ ，则不能判断 $f(x_0)$ 是否为极值.\n求极值的步骤：\n(1) 确定 $y=f(x)$ 的定义域；\n(2) 找出可能的极值点，即 $f'(x)=0$ 及 $f'(x)$ 不存在的点；\n(3) 根据第一或第二充分条件进行判断.\n\n349 基础题 设函数 $y=f(x)$ 在点 $x_0$ 处二阶可导，且 $f(x_0)$ 是 $f(x)$ 的极大值，则以下结论正确的是（    ）.\n(A) $f'(x_0)<0$ (B) $f'(x_0)>0$\n(C) $f'(x_0)=0$ (D) $f'(x_0)=0$ 且 $f'''(x_0)>0$\n\n350 基础题 求函数 $f(x)=2x-\\frac{3}{2}x^{\\frac{2}{3}}+1$ 的极值.\n\n351 基础题 当 $x=$ ____时，函数 $y=x\\cdot 2^x$ 取得极小值.\n\n352 中等题 设函数 $f(x)$ 在定义域 $(-\\infty,+\\infty)$ 上连续，且其导函数的图像如图 3-4，则如下结论正确的是（    ）.(D) $f(x_0)$不是函数 $f(x)$的极值， $(x_0,f(x_0))$也不是曲线 $y=f(x)$的拐点\n\n354 中等题 设 $f(x)$的导数在 $x=a$处连续，又 $\\lim_{x \\to a} \\frac{f'(x)}{x-a}=-1$，则（    ）\n(A) $x=a$是函数 $f(x)$的极小值点\n(B) $x=a$是函数 $f(x)$的极大值点\n(C) $(a,f(a))$是曲线 $y=f(x)$的拐点\n(D) $x=a$不是函数 $f(x)$的极值点， $(a,f(a))$也不是曲线 $y=f(x)$的拐点\n\n355 中等题 设 $\\lim_{x \\to a} \\frac{f(x)-f(a)}{(x-a)^2}=-1$，则在 $x=a$点处（    ）\n(A) $f(x)$的导数存在，且 $f'(a)\\neq 0$ (B) $f(x)$取得极大值\n(C) $f(x)$取得极小值 (D) $f(x)$的导数不存在\n\n356 综合题 已知函数 $f(x)=\\left\\{ \\begin{array}{l}x^{2x}, x>0 \\\\ xe^x+1, x\\leqslant 0 \\end{array} \\right.$，求 $f'(x)$，并求 $f(x)$的极值.\n\n357 综合题 设函数 $y=y(x)$是由方程 $2y^3-2y^2+2xy-x^2=1$确定的，试求 $y=y(x)$的驻点，并判断是否为函数的极值点.\n\n358 综合题 求 $a$的取值范围，使函数 $f(x)=x^3+3ax^2-ax-1$无极值.(3) 在应用题中，根据实际情况可以判断最值存在，且仅存在一个驻点（没有不可导点），则此驻点就是所求的最值点.\n\n359 基础题 求函数 $f(x)=x+\\sqrt{1-x}$ 在 $[-5,1]$ 上的最大值和最小值.\n\n360 中等题 作半径为 $r$ 的球的外切正圆锥，求此圆锥的高 $h$ 为何值时，其体积 $V$ 最小，并求出该最小值.\n\n361 中等题 某企业在一个月内生产某产品 $Q$ 个单位时，总成本 $C(Q)=6Q+200$ （万元），得到的总收益 $R(Q)=12Q-0.01Q^2$ （万元），问在一个月内生产多少单位的产品获得的利润最大？最大利润是多少？\n\n362 中等题 已知某企业的总收入函数为 $R(x)=26x-2x^2-4x^3$，总成本函数为 $C(x)=8x+x^2$，其中 $x$ 表示产品的产量. 求利润函数、边际收入函数、边际成本函数以及企业获得最大利润时的产量和最大利润.\n\n三、利用函数的最值证明不等式\n\n363 基础题 设 $p$ 和 $q$ 是大于 1 的常数，且 $\\frac{1}{1}+\\frac{1}{1}=1$. 证明：对于任意 $x>0$，有"}
+
+## tool · 2026-10-20T02:37:53Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"3d01b3","wall_time_seconds":0.000009625,"exit_code":0,"original_token_count":1558,"output":"328综合题 设函数 $f(x)$ 在闭区间 $[-1,1]$ 上具有三阶连续导数，且 $f(-1)=0$，\n$f(1)=1,f'(0)=0$，证明：至少存在一点 $\\xi \\in(-1,1)$，使得 $f''(\\xi)=3$．\n\n329综合题 设函数 $f(x)$ 在闭区间 $[0,1]$ 上二阶可导，且 $f(0)=f(1)=0$，$f(x)$ 在\n$[0,1]$ 上的最小值等于-1，证明：至少存在一点 $\\xi \\in(0,1)$，使得 $f''(\\xi)\\geq 8$．\n\n第四节 函数的单调性与曲线的凹凸性\n\n一、函数的单调性\n\n单调性的判定：如果函数 $f(x)$ 在 $[a,b]$ 上连续，在 $(a,b)$ 内可导，\n若 $f'(x)>0$，则 $f(x)$ 在 $[a,b]$ 上单调递增；\n若 $f'(x)<0$，则 $f(x)$ 在 $[a,b]$ 上单调递减．\n\n单调区间的分界点：单调区间的分界点只能出现在函数的不可导点或者导数为零的点（叫驻点）处．\n\n函数的单调区间的判定步骤：\n(1) 确定函数 $y=f(x)$ 的定义域；\n(2) 求 $f'(x)$，找出使 $f'(x)=0$ 和 $f'(x)$ 不存在的点；\n(3) 用以上点将定义域分割为不同的小区间，在每个小区间上利用判定定理判断函数的单调性．342基础题 证明：当 $ x \\neq y $时， $ \\frac{e^{x}+e^{y}}{2}>e^{\\frac{x+y}{2}} $ .\n\n343中等题 设 $ f(x)=\\mid x^{2}-3x+2\\mid $，求曲线的凹凸区间和拐点.\n\n344中等题 若点(0,1)是曲线 $ f(x)=ax^{3}+bx^{2}+c $的拐点，则（    ）.\n(A) $ a=1,b=0,c $为任意值 (B) $ a\\neq0 $的任意值, $ b=0,c=1 $\n(C) $ a,b $为任意值, $ c=1 $ (D) $ a=1,b=-3,c=1 $\n\n345中等题 若 $ f(-x)=f(x) $ $ (-\\infty<x<+\\infty) $ ，且在 $ (-\\infty,0) $内 $ f^{\\prime}(x)>0 $， $ f^{\\prime\\prime}(x)<0 $ ，则在 $ (0,+\\infty) $内有（    ）.\n(A) $ f^{\\prime}(x)>0 $ $ f^{\\prime\\prime}(x)<0 $ (B) $ f^{\\prime}(x)>0 $ $ f^{\\prime\\prime}(x)>0 $\n(C) $ f^{\\prime}(x)<0 $ $ f^{\\prime\\prime}(x)<0 $ (D) $ f^{\\prime}(x)<0 $ $ f^{\\prime\\prime}(x)>0 $\n\n346综合题 设 $ f^{\\prime}(x_{0})=f^{\\prime\\prime}(x_{0})=0 $ $ f^{\\prime\\prime}(x_{0})>0 $ ，则下列选项正确的是（    ）.\n(A) $ f^{\\prime}(x_{0}) $是 $ f^{\\prime}(x) $的极大值 (B) $ f(x_{0}) $是 $ f(x) $的极大值\n(C) $ f(x_{0}) $是 $ f(x) $的极小值 (D) $ (x_{0},f(x_{0})) $是曲线 $ y=f(x) $的拐点\n\n347综合题 设函数 $ f(x) $满足关系 $ f^{\\prime\\prime}(x)+[f^{\\prime}(x)]^{2}=x $ ，且 $ f^{\\prime}(0)=0 $ ，则下列选项三、利用函数的最值证明不等式\n\n363 基础题 设 p 和 q 是大于 1 的常数，且 $\\frac{1}{p} + \\frac{1}{q} = 1$. 证明：对于任意 $x > 0$，有 $\\frac{1}{p} x^p + \\frac{1}{q} \\geq x$.\n\n364 综合题 设 $\\lim_{x \\to 0} \\frac{f(x)}{x} = 1$，且 $f''(x) > 0$. 证明 $f(x) \\geq x$.\n\n第六节 函数图形的描绘\n\n一、函数的渐近线\n\n水平渐近线：若 $\\lim_{x \\to \\infty} f(x) = A$ （或 $\\lim_{x \\to \\infty} f(x) = A$ 或 $\\lim_{x \\to \\infty} f(x) = A$），则直线 $y = A$ 为曲线 $y = f(x)$ 的水平渐近线.\n\n几何意义：曲线 $y = f(x)$ 向左（或向右，或同时向左右）无限延伸时，$f(x)$ 无限接近于直线 $y = A$.\n\n铅垂渐近线：若 $\\lim_{x \\to x_0} f(x) = \\infty$ （或 $\\lim_{x \\to x_0} f(x) = \\infty$ 或 $\\lim_{x \\to x_0} f(x) = \\infty$），则直线 $x = x_0$ 为曲线 $y = f(x)$ 的铅垂渐近线（其中 $\\infty$ 亦可以为 $+\\infty$ 或 $-\\infty$）。\n\n几何意义：曲线 $y = f(x)$ 向上（或向下，或同时向上下）无限延伸时，$f(x)$第4章\n不定积分\n\n第一节 不定积分的概念与性质\n\n一、原函数\n\n定义：在区间 $I$ 上，若可导函数 $F(x)$ 的导函数为 $f(x)$，即对任一 $x \\in I$，有\n$F'(x) = f(x)$ 或 $dF(x) = f(x)dx$，\n则称 $F(x)$ 为 $f(x)$ 在区间 $I$ 上的一个原函数.\n\n定理1：如果 $F(x)$ 是 $f(x)$ 的一个原函数，则 $F(x) + C$ 是 $f(x)$ 的所有原函数\n（其中 $C$ 为任意常数）.\n\n定理2：（原函数存在定理）如果函数 $f(x)$ 在区间 $I$ 上连续，则 $f(x)$ 在区间 $I$\n上存在原函数.\n\n380基础题 设 $f(x)$ 在 $(1, +\\infty)$ 上的一个原函数为 $\\ln(x + \\sqrt{x^2 - 1})$，求 $f'(x)$.定理2: (原函数存在定理) 如果函数 $ f(x) $在区间 I上连续，则 $ f(x) $在区间 I上存在原函数.\n\n380 基础题 设 $ f(x) $在(1, $ +\\infty $)上的一个原函数为 $ \\ln(x+\\sqrt{x^{2}-1}) $，求 $ f^{\\prime}(x) $.\n\n381 基础题 设 $ f(x) $的一个原函数为 $ \\ln x(x>0) $，则它的另一个原函数为（    ）.\n(A) $ \\ln(ax)(a>0,x>0) $\n(B) $ \\frac{1}{a}\\ln x(x>0) $\n(C) $ \\ln(a+x)(a+x>0) $\n(D) $ \\frac{1}{2}(\\ln x)^{2}(x>0) $\n\n382 中等题 证明函数 $ \\arcsin(2x-1) $和 $ 2\\arcsin\\sqrt{x} $是同一函数的原函数，并求出它们之间相差的常数.\n\n383 中等题 判断函数 $ F(x)=\\left\\{\\begin{array}{l l}x^{3}+x+1,x>0\\\\ x^{2},\\quad x\\leqslant 0\\end{array}\\right. $ 是否是 $ f(x)=\\left\\{\\begin{array}{l l}3x^{2}+1,x>0\\\\ 2x,\\quad x\\leqslant 0\\end{array}\\right. $在 $ (-\\infty,+\\infty) $上的原函数并说明理由.\n\n384 基础题 设 $ F(x) $是 $ f(x) $在(a,b)上的原函数，则 $ f(x)+F(x) $在(a,b)上（    ）.\n(A) 可导\n(B) 连续\n(C) 存在原函数\n(D) 是初等函数性质 1: 积分运算与微分运算的互逆关系.\n(1) $\\left(\\int f(x)\\mathrm{d}x\\right)^{\\prime}=f(x)$ 或 $\\mathrm{d}\\int f(x)\\mathrm{d}x=f(x)\\mathrm{d}x$ .\n(2) $\\int f^{\\prime}(x)\\mathrm{d}x=f(x)+C$ 或 $\\int f(x)=f(x)+C$ .\n性质 2: 积分线性运算法则.\n(1) $\\int [f(x)\\pm g(x)]\\mathrm{d}x=\\int f(x)\\mathrm{d}x\\pm \\int g(x)\\mathrm{d}x$ .\n(2) $\\int kf(x)\\mathrm{d}x=k\\int f(x)\\mathrm{d}x(k\\neq 0$ 且为常数$)$\n386 基础题 设 $f(x)$ 的导函数为 $\\sin x$ ， $C$ 为任意常数，则不定积分 $\\int f(x)\\mathrm{d}x=$ （    ）.\n(A) $1+\\sin x+C$ (B) $1-\\sin x+C$ (C) $1+\\cos x+C$ (D) $1-\\cos x+C$\n387 中等题 设曲线经过点 $(\\mathrm{e},-1)$ ，且其上任一点处切线的斜率为 $\\frac{\\ln x}{x}$ ，求此曲线的方程.\n388 基础题 设函数 $f(x)$ 在 $(-\\infty,+\\infty)$ 上可微，则 $\\mathrm{d}\\left(\\int f^{\\prime}(x)\\mathrm{d}x\\right)=$ （    ）.\n(A) $f(x)$ (B) $f(x)\\mathrm{d}x$ (C) $f(x)+C$ (D) $f^{\\prime}(x)\\mathrm{d}x$\n389 基础题 以下结论正确的是（    ）.\n(A) $\\mathrm{d}\\left(\\int f(x)\\mathrm{d}x\\right)=f(x)$ (B) $\\left(\\int f(x)\\mathrm{d}x\\right)^{\\prime}=\\int f^{\\prime}(x)\\mathrm{d}x$"}
+
+## tool · 2026-10-20T02:38:27Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-10-20T02:38:50Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-10-20T02:39:07Z
+
+
+
+
+## tool · 2026-10-20T02:39:22Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"32392c","wall_time_seconds":0.000006875,"exit_code":0,"original_token_count":189,"output":"065-crop0.0-0.55.md\n065-crop0.45-1.0.md\n066-crop0.0-0.55.md\n066-crop0.45-1.0.md\n067-crop0.0-0.55.md\nimport json\nimport math\nimport re\nfrom pathlib import Path\nimport pdfplumber\nfrom pypdf import PdfReader\n\nroot = Path(\"HDU/大一上数学分析备考\")\nbuild = Path(\".agent/math-analysis/section-build\")\nexpected = [[7, 3, 4, 4, 5], [4, 8, 4, 3, 3, 4, 2], [4, 3, 3, 3, 5], [6, 5, 5]]\nchecks = 0\n\n\ndef near(actual, expected_value, tolerance=1e-6):\n    global checks\n    assert abs(actual - expected_value) <= tolerance * max(1, abs(expected_value)), (actual, expected_value)\n    checks += 1\n\n\ndef d(f, x):\n    h = 1e-5\n    return (f(x+h)-f(x-h))/(2*h)\n\n\ndef dd(f, x):\n    h = 1e-4\n    return (f(x+h)-2*f(x)+f(x-h))/(h*h)\n\n\ndef integral(f, a, b, n=4000):\n"}
+
+## tool · 2026-10-20T02:39:31Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"92bbc2","wall_time_seconds":0.000012166,"exit_code":0,"original_token_count":1237,"output":"(C) $ \\int f'(x) \\mathrm{d}x=f(x) $\n(D) $ \\mathrm{d}\\left(\\int f(x) \\mathrm{d}x\\right)=f(x) \\mathrm{d}x $\n390 中等题 在区间 $(a,b)$ 内，若 $ f'(x)=g'(x) $ ，则下列各式中正确的是（    ）。\n(A) $ f(x)=g(x) $\n(B) $ f(x)=g(x)+1 $\n(C) $ \\left(\\int f(x) \\mathrm{d}x\\right)^{\\prime}=\\left(\\int g(x) \\mathrm{d}x\\right)^{\\prime} $\n(D) $ \\int\\mathrm{d}f(x)=\\int\\mathrm{d}g(x) $\n391 中等题 $ \\int\\mathrm{d}\\left[\\int\\mathrm{d}f(x)\\right]=\\_\\_\\_\\_\\_. $\n392 中等题 设 $ f'(\\sin^2 x)=\\cos(2x)+\\tan^2 x $ ，当 $ 0<x<1 $时，则 $ f(x)=\\_\\_\\_\\_\\_. $\n三、基本积分公式\n基本积分公式是计算积分的基础，必须熟记.\n393 基础题 求不定积分 $ \\int\\frac{\\left(x^{2}-1\\right)\\sqrt{1-x^{2}}-3x}{x\\sqrt{1-x^{2}}} \\mathrm{d}x. $\n394 基础题 求不定积分 $ \\int\\frac{\\cos 2x}{\\sin^{2} x\\cos^{2} x} \\mathrm{d}x. $394 基础题 求不定积分 $\\int \\frac{\\cos 2x}{\\sin^2 x \\cos^2 x} \\mathrm{d}x$.\n\n395 基础题 求不定积分 $\\int \\frac{1-2\\cos x}{1-\\cos(2x)} \\mathrm{d}x$.\n\n396 基础题 求不定积分 $\\int \\left( \\frac{1}{5^{-x}} \\mathrm{e}^{x} + \\frac{1-\\mathrm{e}^{2x}}{1+\\mathrm{e}^{x}} \\right) \\mathrm{d}x$.\n\n397 基础题 求不定积分 $\\int \\left( 6\\sqrt{x} + 5 \\mathrm{e}^{x} + \\cos^2 \\left( \\frac{x}{2} \\right) \\right) \\mathrm{d}x$.\n\n398 中等题 求不定积分 $\\int \\left( \\frac{x^4}{1+x^2} - \\frac{2}{\\sqrt{1-x^2}} \\right) \\mathrm{d}x$.\n\n## 第二节 换元积分法\n\n### 一、第一类换元积分法（凑微分法）\n\n定理：若 $\\int f(u) \\mathrm{d}u = F(u) + C$，且 $u = \\varphi(x)$ 可导，则$\\int g(x) \\mathrm{d}x=\\int f[\\varphi(x)]\\varphi^{\\prime}(x) \\mathrm{d}x=\\int f[\\varphi(x)] \\mathrm{d}\\varphi(x)^{\\varphi(x)=u}=\\int f(u) \\mathrm{d}u=F(u)+C^{u=\\varphi(x)}F[\\varphi(x)]+C.$\n\n评注\n用第一类换元积分法，首先要在被积函数表达式中确定一个复合函数 $f[\\varphi(x)]$，使函数 $f$ 成为基本积分公式中的被积函数，然后观察剩余部分是否为 $\\varphi^{\\prime}(x) \\mathrm{d}x$，若是，则可直接凑微分；若不是，则需要通过恒等变形凑出 $\\varphi^{\\prime}(x) \\mathrm{d}x$。这类题目的难度弹性较大，务必熟记基本微分公式、基本积分公式以及常见的凑微分形式.\n\n399 基础题 求下列不定积分.\n(1) $\\int \\frac{\\mathrm{d}x}{\\sqrt{2x+3}}$ (2) $\\int \\frac{x+1}{x^{2}+2x+5} \\mathrm{d}x$ (3) $\\int \\frac{x \\mathrm{d}x}{(2x+3)^{2}}$\n\n400 基础题 求下列不定积分.\n(1) $\\int \\frac{\\mathrm{e}^{2 \\sqrt{x}}}{\\sqrt{x}} \\mathrm{d}x$ (2) $\\int \\frac{\\sin \\sqrt{x}}{\\sqrt{x}} \\mathrm{d}x$ (3) $\\int \\frac{\\mathrm{d}x}{(1+x)\\sqrt{x}}$\n\n401 基础题 求下列不定积分.\n(1) $\\int x^{2} \\mathrm{e}^{x^{2}} \\mathrm{d}x$ (2) $\\int \\frac{x \\mathrm{d}x}{1+x^{4}}$ (3) $\\int \\frac{x^{2} \\mathrm{d}x}{(2 x^{3}+1)^{n}} (n \\neq 1)$ (4) $\\int x f\\left(x^{2}\\right) f^{\\prime}\\left(x^{2}\\right) \\mathrm{d}x$401 基础题 求下列不定积分.\n(1) $ \\int x^{2} \\mathrm{e}^{x^{3}} \\mathrm{d} x $\n(2) $ \\int \\frac{x \\mathrm{d} x}{1+x^{4}} $\n(3) $ \\int \\frac{x^{2} \\mathrm{d} x}{(2 x^{3}-1)^{n}} $ $ (n \\neq 1) $\n(4) $ \\int x f^{\\prime}(x^{2}) f^{\\prime}(x^{2}) \\mathrm{d} x $\n\n402 基础题 求下列不定积分.\n(1) $ \\int \\sin^{2} x \\cos^{2} x \\mathrm{d} x $\n(2) $ \\int \\sin^{5} x \\cos^{2} x \\mathrm{d} x $\n(3) $ \\int \\cot^{3} x \\csc x \\mathrm{d} x $\n(4) $ \\int \\sin(5 x) \\sin(3 x) \\mathrm{d} x $\n\n403 基础题 求下列不定积分.\n(1) $ \\int \\frac{\\mathrm{d} x}{a^{2}+x^{2}} $ $ (a \\neq 0) $\n(2) $ \\int \\frac{\\mathrm{d} x}{a^{2}-x^{2}} $ $ (a \\neq 0) $\n\n404 基础题 求下列不定积分.\n(1) $ \\int \\mathrm{e}^{\\tan x} \\sec^{2} x \\mathrm{d} x $\n(2) $ \\int \\left( 1-\\frac{1}{x^{2}} \\right) \\mathrm{e}^{x+\\frac{1}{x}} \\mathrm{d} x $\n\n405 基础题 求下列不定积分.\n(1) $ \\int \\frac{\\mathrm{d} x}{x \\sqrt{1-\\ln^{2} x}} $\n(2) $ \\int \\frac{\\mathrm{d} x}{x \\ln x(1+\\ln(\\ln x))^{2}} $\n(3) $ \\int \\frac{1+\\ln x}{1+x^{2} \\ln^{2} x} \\mathrm{d} x $52:\\begin{problem}{395}{65}{半角恒等式与奇点}\n55:\\begin{problem}{397}{65}{基本积分与降幂公式}\n73:\\begin{problem}{400}{66}{根式内函数与代换值域}\n78:\\begin{problem}{402}{66}{三角积分的幂次与降幂选择}\n140:\\begin{problem}{420}{68}{共轭有理化与根式分支}\n143:\\begin{problem}{423}{68}{商函数求导的逆向识别}\n146:\\begin{problem}{426}{68}{已知原函数后的复合换元}\n154:\\begin{problem}{428}{69}{偶次余项与根式代换}\n157:\\begin{problem}{430}{69}{平方差根式与参数绝对值}\n160:\\begin{problem}{431}{69}{根式有理化与变量范围}\n163:\\begin{problem}{433}{69}{根式分式的有理代换}\n166:\\begin{problem}{434}{69}{指数代换后的部分分式}\n169:\\begin{problem}{436}{69}{幂代换与不连通区间}\n314:\\begin{problem}{479}{73}{闭区间连续性保证的结论}\n317:\\begin{problem}{481}{74}{反正切指数函数的分部积分}\n356:\\begin{problem}{494}{75}{反正切指数与根式分母}\n359:\\begin{problem}{496}{75}{三角因子与有理代换}\n"}
+
+## tool · 2026-10-20T02:39:41Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"9415d4","wall_time_seconds":0.000009041,"exit_code":1,"original_token_count":0,"output":""}
+
+## tool · 2026-10-20T02:40:34Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+
+## tool · 2026-10-20T02:40:50Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"9e1a05","wall_time_seconds":0.000016666,"exit_code":0,"original_token_count":483,"output":"348:\\begin{problem}{358}{58}{无极值的参数范围}\n351:\\begin{problem}{359}{59}{闭区间最值与根式端点}\n354:\\begin{problem}{360}{59}{球外切圆锥的最小体积}\n357:\\begin{problem}{361}{59}{利润最值与整数产量}\n360:\\begin{problem}{362}{59}{收入成本与边际量的最优条件}\n363:\\begin{problem}{363}{59}{共轭指数与等号条件}\n366:\\begin{problem}{364}{59}{极限给定的切线与严格凸性}\n369:\\begin{supplement}{3.5-1}{约束区间与边界最优}\n372:\\begin{supplement}{3.5-2}{箱体设计与可行域端点}\n375:\\subsection{函数图形的描绘}\n376:\\begin{problem}{365}{60}{水平渐近线与交点}\n379:\\begin{problem}{366}{60}{单侧无穷极限与铅直渐近线}\n382:\\begin{problem}{367}{60}{约分、可去间断与渐近线}\n385:\\begin{problem}{368}{60}{斜渐近线与曲线位置}\n388:\\begin{problem}{369}{60}{指数复合函数的单侧渐近线}\n391:\\begin{problem}{370}{60}{振荡因子与渐近线判定}\n394:\\begin{problem}{371}{60}{两端斜渐近线与单侧发散}\n397:\\begin{problem}{372}{60}{对数指数函数的渐近线条数}\n400:\\begin{problem}{373}{60}{反正切复合与有限间断辨析}\n403:\\begin{problem}{374}{61}{有理函数的完整图形分析}\n406:\\begin{problem}{375}{61}{周期函数的图形描绘}\n409:\\begin{supplement}{3.6-1}{渐近线可被穿越}\n412:\\begin{supplement}{3.6-2}{参数抵消与渐近线变化}\n415:\\subsection{曲率}\n416:\\begin{problem}{376}{61}{显式与参数表示的曲率一致性}\n419:\\begin{problem}{377}{62}{星形线的正则参数与曲率半径}\n422:\\begin{problem}{378}{62}{法向方向与曲率圆}\n425:\\begin{problem}{379}{62}{弧长变量的链式求导}\n428:\\begin{supplement}{3.7-1}{抛物线最大曲率与长度缩放}\n431:\\begin{supplement}{3.7-2}{椭圆曲率的极值}\ncheck_1_2.py\ncheck_5_7.py\ncheck_draft.py\ncheck_independent.py\ncrop_ocr.py\nfinish.py\nreview_text.swift\nswift-cache\nvision-review.jsonl\n"}
+
+## tool · 2026-10-20T02:41:52Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{}
+{"chunk_id":"befebd","wall_time_seconds":4.678611416,"exit_code":1,"original_token_count":139,"output":"Traceback (most recent call last):\n  File \"/Users/oyamahappa/Documents/Agent/Codex/.agent/math-analysis/upper/check_3_4.py\", line 91, in <module>\n    equal(f\"{number}: derivative check\", residual, 0)\n  File \"/Users/oyamahappa/Documents/Agent/Codex/.agent/math-analysis/upper/check_3_4.py\", line 20, in equal\n    check(name, s.simplify(actual - expected) == 0)\n  File \"/Users/oyamahappa/Documents/Agent/Codex/.agent/math-analysis/upper/check_3_4.py\", line 15, in check\n    assert condition, name\n           ^^^^^^^^^\nAssertionError: 425: derivative check\n"}
+
+## tool · 2026-10-20T02:42:01Z
+
+
+Script completed
+Wall time 1.3 seconds
+Output:
+
+{"chunk_id":"2d886b","wall_time_seconds":1.047629,"exit_code":0,"original_token_count":19,"output":"-(sin(x) + 1)*exp(x)/(cos(x) + 1) + exp(x)*tan(x/2) + exp(x)/(cos(x) + 1)\n0\n"}
+{"chunk_id":"2514b1","wall_time_seconds":0.000023833,"exit_code":0,"original_token_count":757,"output":"equal(\"374: slant asymptote residual\", (x - 1)**3/(x + 1)**2 - (x - 5), (12*x + 4)/(x + 1)**2)\nequal(\"378: curvature circle radius squared\", ((1 + 1**2)**s.Rational(3, 2)/4)**2, s.Rational(1, 2))\nrho = (4*t + 1)**s.Rational(3, 2)/2\nds = s.sqrt(4*t + 1)/(2*s.sqrt(t))\nrho_s = s.diff(rho, t)/ds\nequal(\"379: arc-length differential invariant\", 3*rho*s.diff(rho_s, t)/ds - rho_s**2, 9)\n\nantiderivatives = [\n    (\"392\", -x**2 - s.log(1 - x), 1 - 2*x + x/(1 - x)),\n    (\"396\", -(5*s.E)**(-x)/s.log(5*s.E) + x - s.exp(x), (5*s.E)**(-x) + (1 - s.exp(2*x))/(1 + s.exp(x))),\n    (\"401 first\", s.exp(x**3)/3, x**2*s.exp(x**3)),\n    (\"402 third\", -s.csc(x)**3/3 + s.csc(x), s.cot(x)**3*s.csc(x)),\n    (\"407\", 2*s.asin(s.sqrt(x)), 1/s.sqrt(x - x**2)),\n    (\"412\", s.log(x + s.sqrt(1 + x**2))**2/2 + s.log(x + s.sqrt(1 + x**2)), (s.log(x + s.sqrt(1 + x**2)) + 1)/s.sqrt(1 + x**2)),\n    (\"421\", -s.exp(s.sin(2*x) - 2*x)/4, s.exp(s.sin(2*x) - 2*x)*s.sin(x)**2),\n    (\"422\", s.log(s.tan(x))**2/2, s.log(s.tan(x))/(s.sin(x)*s.cos(x))),\n    (\"425\", s.exp(x)*s.tan(x/2), s.exp(x)*(1 + s.sin(x))/(1 + s.cos(x))),\n    (\"429\", s.log(x + s.sqrt(x**2 + 1)) - x/s.sqrt(x**2 + 1), x**2/(1 + x**2)**s.Rational(3, 2)),\n    (\"434\", -s.exp(-x) + s.log(1 + s.exp(-x)), 1/(s.exp(x) + s.exp(2*x))),\n    (\"451\", s.exp(2*x)*(2*s.sin(3*x) - 3*s.cos(3*x))/13, s.exp(2*x)*s.sin(3*x)),\n    (\"460\", s.exp(x)*(x - 2)/(x + 2), x**2*s.exp(x)/(x + 2)**2),\n    (\"461\", -s.cos(x)/(1 + x), ((1 + x)*s.sin(x) + s.cos(x))/(1 + x)**2),\n    (\"465\", s.Rational(1, 5)*s.log(x - 1) + s.Rational(14, 5)*s.log(x + 4), (3*x - 2)/(x**2 + 3*x - 4)),\n    (\"483\", x + s.log(x) - s.log(1 + x*s.exp(x)), (1 + x)/(x*(1 + x*s.exp(x)))),\n    (\"484\", -1/(x - s.log(x)), (1 - 1/x)/(x - s.log(x))**2),\n]\nfor number, primitive, integrand in antiderivatives:\n    residual = s.trigsimp(s.diff(primitive, x) - integrand)\n    residual = s.simplify(residual.subs(x, t))\n    if number == \"407\":\n        residual = s.simplify(residual.subs(t, s.Rational(1, 4)))\n    equal(f\"{number}: derivative check\", residual, 0)\n\nu = s.symbols(\"u\", real=True)\nimplicit_x = u**3/(u**2 - 1)\nimplicit_y = u/(u**2 - 1)\nequal(\"498: parameterized relation\", implicit_y*(implicit_x - implicit_y)**2, implicit_x)\nequal(\"498: transformed differential\", s.diff(implicit_x, u)/(implicit_x - 3*implicit_y), u/(u**2 - 1))\nf = s.Function(\"f\")(x)\n\\begin{problem}{374}{61}{有理函数的完整图形分析}\n对 $f(x)=(x-1)^3/(x+1)^2$，求定义域、截距、全部渐近线、单调区间、极值、凹凸区间和拐点，注明关键点及两端趋势，据此手绘图形。用精确计算说明曲线是否能够穿过其斜渐近线；若能，求交点。\n\\end{problem}\n\\begin{problem}{375}{61}{周期函数的图形描绘}\n对 $f(x)=\\cos x/\\cos2x$，确定定义域、奇偶性与最小正周期。在 $[-\\pi,\\pi]$ 内求全部铅直渐近线、与坐标轴的交点、单调区间及极值，据此手绘该区间图形并说明如何延拓至全定义域。\n\\end{problem}\n\\begin{supplement}{3.6-1}{渐近线可被穿越}\n"}
+
+## tool · 2026-10-20T02:42:19Z
+
+
+Script completed
+Wall time 5.1 seconds
+Output:
+
+{}
+{"chunk_id":"92d343","wall_time_seconds":4.71413275,"exit_code":0,"original_token_count":77,"output":"{\"status\": \"passed\", \"type\": \"read_only_structure_and_math\", \"checks\": 82, \"source_problems\": 246, \"supplements\": 22, \"message\": \"Strict LaTeX parsing, source coverage, section endings and representative mathematical checks passed.\", \"suggestion\": \"No PDF compilation or visual verification was performed.\"}\n"}
+
+## tool · 2026-10-20T02:42:38Z
+
+
+
+
+## tool · 2026-10-20T02:42:42Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"a190e3","wall_time_seconds":0.000009792,"exit_code":0,"original_token_count":2700,"output":"067-crop0.0-0.55.md\n067-crop0.45-1.0.md\n068-crop0.0-0.55.md\n068-crop0.45-1.0.md\n069-crop0.0-0.55.md\n069-crop0.45-1.0.md\n073-crop0.0-0.55.md\n073-crop0.45-1.0.md\n074-crop0.0-0.55.md\n074-crop0.45-1.0.md\n求 $\\int\\dd x/(x^2+2x+5)^2$，先配方再使用三角代换或分部积分。写出有理项和反正切项，最后对整个表达式求导核验平方分母的系数。\n\\end{problem}\n\\begin{problem}{472}{73}{四次分母分解与对称分子}\n求 $\\int(2x^3+2x^2+5x+5)/(x^4+5x^2+4)\\,\\dd x$。先分解分母，再利用分子的结构减少待定系数数量；说明为何答案可在全实数轴使用同一个积分常数。\n\\end{problem}\n\\begin{problem}{473}{73}{配方后重二次因子的积分}\n求 $\\int x^2/(x^2+2x+2)^2\\,\\dd x$。先作平移代换，把分子拆成适合积分的三项，并给出完整原函数。通过检查大 $|x|$ 时被积函数的衰减阶，判断所求原函数在两端是否具有有限极限。\n\\end{problem}\n\\begin{problem}{474}{73}{高次有理函数的实因式分解}\n求 $\\int(x^4+1)/(1+x^5)\\,\\dd x$。利用 $1+x^5=(x+1)(x^4-x^3+x^2-x+1)$，将四次因子进一步分解为两个实不可约二次因子，再作部分分式积分。注明实定义区间，答案允许含 $\\sqrt5$、对数和反正切。\n\\end{problem}\n\\begin{problem}{475}{73}{高重零点与偶函数分解}\n求 $\\int\\dd x/(x^4-x^6)$。先利用偶性寻找仅含 $1/x^2$、$1/x^4$ 与 $1/(1-x^2)$ 的分解，再积分。列出全部被排除点，说明不能将 $x=0$ 当作普通的简单极点处理。\n\\end{problem}\n\\begin{problem}{476}{73}{倒幂代换与重因子结构}\n求 $\\int(1+2x^4)/[x^3(1+x^4)^2]\\,\\dd x$。先作 $t=1/x^2$ 以降低次数，再积分得到实原函数，分别说明正负半轴上的适用性，并通过求导核验重因子对应的有理项。\n\\end{problem}\n\\begin{problem}{477}{73}{四次平方和的实分解}\n求 $\\int\\dd x/(x^4+1)$，将分母分解为两个实不可约二次因子后积分。给出在 $0$ 附近连续且取值为 $0$ 的表达式，并讨论合并两个反正切为一个主值反正切时可能需要补加的常数。\n\\end{problem}\n\\begin{problem}{478}{73}{原函数存在性与奇偶性}\n逐项判断并证明或举例：初等函数在其连续的定义区间内存在原函数；不连续函数也可能存在原函数；奇函数在关于 $0$ 对称的开区间上的原函数都是偶函数；偶函数在这样的区间上的原函数都是奇函数。对最后一项给出使之成立的积分常数条件，并说明“存在原函数”与“有初等原函数”有何区别。\n\\end{problem}\n\\begin{problem}{479}{73}{闭区间连续性保证的结论}\n设 $f\\in C[a,b]$，$a<b$。判断 $f$ 在 $(a,b)$ 内是否必有导函数、原函数、最大值或最小值、局部极值。对必然成立者说明定理依据；对其余结论给出具体反例，注意闭区间最值定理的取值范围。\n\\end{problem}\n\\begin{problem}{480}{74}{分段函数原函数的参数拼接}\n设 $f(x)=2(x-1)$（$x<1$）、$f(x)=\\ln x$（$x\\ge1$）。求实数 $a,b$ 使\n\\[F_{a,b}(x)=\\begin{cases}(x-1)^2,&x<1,\\\\x(\\ln x+a)+b,&x\\ge1\\end{cases}\\]\n为 $f$ 在 $\\mathbb R$ 上的原函数。必须分别检查拼接处连续、左右导数及非拼接处导数，不能仅由两侧分别可积确定结论。\n\\end{problem}\n\\begin{problem}{481}{74}{反正切指数函数的分部积分}\n求 $\\int\\mathrm e^{-2x}\\arctan(\\mathrm e^x)\\,\\dd x$。先作指数代换，再通过分部积分处理反正切项，明确新变量恒正对对数绝对值的影响。\n\\end{problem}\n\\begin{problem}{482}{74}{反正切与有理因子的配合}\n求 $\\int\\arctan x/[x^2(1+x^2)]\\,\\dd x$。先分解 $1/[x^2(1+x^2)]$，再分别采用分部与整体代换；写出在两个半轴上的原函数族，并讨论 $0$ 处是否可连续延拓。\n\\end{problem}\n\\begin{problem}{483}{74}{指数有理混合的对数导数}\n求 $\\int(1+x)/[x(1+x\\mathrm e^x)]\\,\\dd x$，尝试将被积函数写成两个对数导数之差。证明 $1+x\\mathrm e^x$ 在全实数范围恒正，从而给出答案的全部最大实定义区间。\n\\end{problem}\n\\begin{problem}{484}{74}{对数内函数的平方分母}\n求 $\\int(1-1/x)/(x-\\ln x)^2\\,\\dd x$。说明内函数的导数结构，并用最值证明分母在正半轴不为零，确定全实定义区间。\n\\end{problem}\n\\begin{problem}{485}{74}{指数根式与反正切分部积分}\n在 $x>0$ 上求 $\\int\\mathrm e^{2x}\\arctan\\sqrt{\\mathrm e^x-1}\\,\\dd x$。先令 $t=\\sqrt{\\mathrm e^x-1}$ 化为多项式乘反正切的积分，再作分部积分。明确代换后 $\\mathrm e^{2x}\\dd x$ 的表达，避免遗漏雅可比因子。\n\\end{problem}\n\\begin{problem}{486}{74}{三角商函数的导数结构}\n求 $\\int[x+\\sin x\\cos x]/(x\\sin x+\\cos x)^2\\,\\dd x$。通过求导 $\\cos x/(x\\sin x+\\cos x)$ 寻找原函数，说明答案的适用开区间，不要求用初等函数写出分母的所有零点。\n\\end{problem}\n\\begin{problem}{487}{74}{三角有理函数与万能代换}\n求 $\\int\\dd x/(\\sin2x+2\\sin x)$。先因式分解并确定全部奇点，再作 $t=\\tan(x/2)$ 积分。说明万能代换遗漏的点是否都是原函数的奇点，以及积分常数如何在定义区间上选择。\n\\end{problem}\n\\begin{problem}{488}{74}{万能代换与可去的参数断点}\n求 $\\int\\dd x/(1+\\sin x+\\cos x)$，用 $t=\\tan(x/2)$ 化为有理函数。列出原被积函数的全部奇点，区别原函数的奇点与代换坐标在奇数倍 $\\pi$ 处的失效，说明如何检验答案。\n\\end{problem}\n\\begin{problem}{489}{74}{反正切原函数的跨区间拼接}\n求 $\\int\\dd x/(2+\\cos x)$，先在 $(-\\pi,\\pi)$ 采用万能代换。原被积函数在全实数连续，说明为何得到的反正切主值公式仍需按周期补常数，并给出拼接为全实数原函数的方法。\n\\end{problem}\n\\begin{problem}{490}{74}{常数项与对数导数拆分}\n求 $\\int(3\\cos x-\\sin x)/(\\cos x+\\sin x)\\,\\dd x$，把分子拆成分母及其导数的线性组合。给出每个最大定义区间的原函数，并明确对数中绝对值的必要性。\n\\end{problem}\n\\begin{problem}{491}{74}{对称拆分的三角积分}\n求 $\\int\\sin x/(\\sin x+\\cos x)\\,\\dd x$，利用分母与其导数拆分。再求对应的 $\\int\\cos x/(\\sin x+\\cos x)\\,\\dd x$，检验两者相加与被积函数恒等式一致，说明常数的合并方式。\n\\end{problem}\n\\begin{problem}{492}{74}{根式与线性项的三角代换}\n求 $\\int\\dd x/[2x+\\sqrt{1-x^2}]$，在 $(-1,1)$ 使用 $x=\\sin t$。求出分母在该区间的唯一零点，分别给出两侧原函数，并说明代换中根式为何可写为 $\\cos t$。\n\\end{problem}\n\\begin{problem}{493}{75}{奇偶拆分与重二次分母}\n求 $\\int(x^3+1)/(1+x^2)^2\\,\\dd x$，先把奇函数部分与偶函数部分分开处理。确定满足 $F(0)=0$ 的原函数，并说明最终答案中哪些项分别来自这两部分。\n\\end{problem}\n\\begin{problem}{494}{75}{反正切指数与根式分母}\n求 $\\int x\\mathrm e^{\\arctan x}/(1+x^2)^{3/2}\\,\\dd x$，先令 $t=\\arctan x$，注意 $\\cos t$ 的符号，再完成指数三角积分。说明该原函数可在全实数范围成立的依据。\n\\end{problem}\n\\begin{problem}{495}{75}{指数几何和的因式分解}\n求 $\\int\\dd x/(1+\\mathrm e^x+\\mathrm e^{2x}+\\mathrm e^{3x})$。先用 $t=\\mathrm e^x$ 化为有理积分，利用 $1+t+t^2+t^3=(1+t)(1+t^2)$ 作部分分式分解，再积分并给出实定义范围。\n\\end{problem}\n\\begin{problem}{496}{75}{三角因子与有理代换}\n求 $\\int\\dd x/[(2+\\cos x)\\sin x]$，先确定全部实定义区间，再用 $u=\\cos x$ 化为有理函数积分。解释代换时 $\\sin^2x=1-u^2$ 的作用，并核验所得对数系数。\n\\end{problem}\n\\begin{problem}{497}{75}{反正弦分部与根式多项式}\n求 $\\int x^3\\arcsin x/\\sqrt{1-x^2}\\,\\dd x$。先求不含反正弦因子的原函数，再作分部积分，明确实定义区间。说明若先令 $t=\\arcsin x$，为何会转化为多项式三角幂的分部积分。\n\\end{problem}\n\\begin{problem}{498}{75}{隐函数约束下的原函数}\n设 $y=y(x)$ 是关系 $y(x-y)^2=x$ 在某开区间上的可导分支，且 $x-3y\\ne0$。求 $\\int\\dd x/(x-3y(x))$，可引入 $u=x-y$ 作参数。推导 $x,y$ 关于 $u$ 的表达式与 $\\dd x$，并明确参数化需要排除的值及积分公式的分支适用条件。\n\\end{problem}\n\\begin{problem}{499}{75}{函数关系的单射区间与换元}\n设 $f(\\sin^2t)=t/\\sin t$ 对 $0<t<\\pi/2$ 成立。求 $\\int\\sqrt x\\,f(x)/\\sqrt{1-x}\\,\\dd x$，明确 $f$ 在 $(0,1)$ 上由条件唯一确定的依据。先作 $x=\\sin^2t$，再完成分部积分，并用直接恢复 $f(x)$ 的方法核验。\n\\end{problem}\n\\begin{problem}{500}{75}{已知原函数与高阶导数积分}\n设 $\\int f(x)\\,\\dd x=\\mathrm e^{x^2}+C$。求 $f(x)$、$f'(x)$ 及 $\\int xf''(x)\\,\\dd x$。最后一个积分先用分部积分写为 $xf'(x)-f(x)$ 再代入，说明为什么不必展开 $f''$。\n\\end{problem}\n\\begin{problem}{501}{75}{加权原函数恢复与奇点}\n已知 $\\int xf(x)\\,\\dd x=\\arcsin x+C$ 在 $(-1,0)$ 或 $(0,1)$ 上成立。求 $f(x)$ 及 $\\int f(x)\\,\\dd x$，给出带绝对值的实表达式。说明在包含 $0$ 的开区间上是否可能存在连续 $f$ 满足原条件。\n\\end{problem}\n\\begin{problem}{502}{75}{指数复合导函数的恢复}\n设 $\\int f'(\\mathrm e^t)\\,\\dd t=-(1+t)\\mathrm e^{-t}+C$，且 $f(1)=0$。求 $f(x)$（$x>0$），分别说明对已知积分式求导和将 $x=\\mathrm e^t$ 代回的步骤，再用初值确定常数。\n\\end{problem}\n\\begin{problem}{503}{75}{抽象函数商的平方导数}\n设 $f\\in C^2(I)$，且 $f'(x)\\ne0$。证明\n\\[\\int\\left[\\frac{f(x)}{f'(x)}-\\frac{f^2(x)f''(x)}{[f'(x)]^3}\\right]\\,\\dd x=\\frac12\\left[\\frac{f(x)}{f'(x)}\\right]^2+C.\\]\n逐项检查商法则与链式法则产生的分母幂次，并解释条件 $f'\\ne0$ 的必要性；再用 $f(x)=\\mathrm e^x$ 验证。\n\\end{problem}\n\\begin{problem}{504}{75}{线性三角组合的平方分母}\n设实数 $a,b$ 满足 $a^2+b^2>0$。证明\n\\[\\int\\frac{\\dd x}{(a\\sin x+b\\cos x)^2}=-\\frac1{a^2+b^2}\\frac{a\\cos x-b\\sin x}{a\\sin x+b\\cos x}+C.\\]\n给出结果成立的区间条件，并分别检查 $a=0$、$b=0$。再说明若 $a=b=0$，为何问题本身失去定义。\n\\end{problem}\n\\begin{supplement}{4.4-1}{参数因子与部分分式退化}\n对 $a\\in\\mathbb R$ 求 $\\int\\dd x/[(x-1)(x-a)]$，完整区分 $a=1$ 与 $a\\ne1$。对固定 $x<\\min\\{1,a,0\\}$ 的适当公共区间，选取同一点归一化的原函数，说明当 $a\\to1$ 时为何应先处理积分常数再比较极限。\n\\end{supplement}\n\\begin{supplement}{4.4-2}{一次因子与重二次因子的联合分解}\n求 $\\int\\dd x/[x(x^2+1)^2]$，先列全部分分式并利用奇偶性减少系数。给出两个半轴上的全部原函数，最后通过求导及 $x\\to0$ 的主项检查对数系数是否正确。\n\\end{supplement}\n"}
+
+## tool · 2026-10-20T02:42:50Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"2de67c","wall_time_seconds":0.000009667,"exit_code":0,"original_token_count":1407,"output":"406 基础题 求下列不定积分.\n(1) $ \\int\\frac{dx}{\\sqrt{1-x^{2}}(\\arcsin x)^{2}} $\n(2) $ \\int\\frac{\\arcsin\\sqrt{x}}{\\sqrt{x(1-x)}}dx $\n(3) $ \\int\\frac{\\arcsin(1-x)}{\\sqrt{2x-x^{2}}}dx $\n\n407 基础题 求不定积分 $ \\int\\frac{dx}{\\sqrt{x-x^{2}}} $ .\n\n408 基础题 求不定积分 $ \\int\\frac{\\cos x}{9+\\sin^{2}x}dx. $\n409 基础题 求不定积分 $ \\int\\frac{1-x}{\\sqrt{9-4x^{2}}}dx. $\n410 中等题 求不定积分 $ \\int\\frac{\\sin x+\\cos x}{\\sqrt[3]{\\sin x-\\cos x}}dx. $\n411 中等题 求不定积分 $ \\int\\frac{x\\tan(\\sqrt{1-x^{2}})}{\\sqrt{1-x^{2}}}dx. $\n412 中等题 求不定积分 $ \\int\\sqrt{\\frac{\\ln(x+\\sqrt{1+x^{2}})+1}{1+x^{2}}}dx. $420 中等题 求不定积分 $ \\int\\frac{x \\mathrm{d} x}{x-\\sqrt{x^{2}-1}}. $\n421 中等题 求不定积分 $ \\int\\frac{\\mathrm{e}^{\\sin(2 x)}\\sin^{2} x}{\\mathrm{e}^{2 x}} \\mathrm{d} x. $\n422 中等题 求不定积分 $ \\int\\frac{\\ln(\\tan x)}{\\sin(2 x)} \\mathrm{d} x. $\n423 中等题 求不定积分 $ \\int\\frac{x+\\sin x \\cos x}{(\\cos x-x \\sin x)^{2}} \\mathrm{d} x. $\n424 中等题 求不定积分 $ \\int\\frac{\\cos^{2} x-\\sin x}{\\cos x(1+\\mathrm{e}^{\\sin x} \\cos x)} \\mathrm{d} x. $\n425 中等题 求不定积分 $ \\int\\frac{(1+\\sin x) \\mathrm{e}^{x}}{1+\\cos x} \\mathrm{d} x. $\n426 中等题 设 $ \\int f(x) \\mathrm{d} x=\\ln(\\sin x)+C $ ，求 $ \\int x f(1-x^{2}) \\mathrm{d} x. $\n427 中等题 证明 $ \\int\\frac{x f^{\\prime}(x)-(1+x) f(x)}{x^{2} \\mathrm{e}^{x}} \\mathrm{d} x=\\frac{f(x)}{x} \\mathrm{e}^{-x}+C. $证明 $\\int \\frac{xf'(x)-(1+x)f(x)}{x^2e^x} \\mathrm{d}x=\\frac{f(x)}{x} \\mathrm{e}^{-x}+C$.\n\n二、第二类换元法\n\n定理：设 $x=\\varphi(t)$ 单调、可导，且 $\\varphi'(t)\\neq 0$，$\\int f[\\varphi(t)]\\varphi'(t) \\mathrm{d}t=F(t)+C$，则 $\\int f(x) \\mathrm{d}x=\\int f[\\varphi(t)] \\mathrm{d}\\varphi(t)=\\int f[\\varphi(t)]\\varphi'(t) \\mathrm{d}t=F(t)+C=\\int F[\\varphi^{-1}(x)]+C$，其中，$\\varphi^{-1}(x)$是 $x=\\varphi(t)$的反函数.\n\n常见类型\n\n(1) 被积函数中含 $\\sqrt{a^2-x^2}$、$\\sqrt{x^2+a^2}$、$\\sqrt{x^2-a^2}$之一，可分别采用三角代换 $x=a\\sin t$（或 $x=a\\cos t$）、$x=a\\tan t$（或 $x=a\\cot t$）与 $x=a\\sec t$.\n\n(2) 被积函数中的根式不具备平方和或平方差结构时，可试用根式代换：若只含 $\\sqrt{ax+b}$ 或者 $\\sqrt{\\frac{ax+b}{cx+d}}$，则直接令此根式等于 $t$；若同时含 $\\sqrt{ax+b}$ 和 $\\sqrt{ax+b}$，则令 $\\sqrt{ax+b}=t$，其中 $k$ 为 $m$ 和 $n$ 的最小公倍数.\n\n(3) 被积函数是分式，其分母关于 $x$（或 $x-a$）的最高次数比分子的最次数至少高两次，可试用倒代换 $x=\\frac{1}{t}$，以降低分母次数.\n\n(4) 被积函数含 $a^x$ 及其幂时，可作指数代换 $a^x=t$；若被积函数含 $\\sqrt{a^x\\pm a}$，则令 $\\sqrt{a^x\\pm a}=t$ 去掉根式.428 基础题 求不定积分 $ \\int x^{3} \\sqrt{4-x^{2}} \\mathrm{d} x. $\n429 基础题 求不定积分 $ \\int \\frac{x^{2} \\mathrm{d} x}{\\sqrt{(x^{2}-a^{2})^{3}}. $\n430 基础题 求不定积分 $ \\int \\frac{x^{2} \\mathrm{d} x}{\\sqrt{(x^{2}-a^{2})^{3}}} (a>0). $\n431 基础题 求不定积分 $ \\int \\frac{\\mathrm{d} x}{1+\\sqrt[3]{x+1}}. $\n432 基础题 求不定积分 $ \\int \\frac{\\mathrm{d} x}{\\sqrt{x}+\\sqrt[3]{x^{2}}}. $\n433 基础题 求不定积分 $ \\int \\frac{1}{3-x} \\sqrt{\\frac{5-x}{x-1}} \\mathrm{d} x. $\n434 基础题 求不定积分 $ \\int \\frac{\\mathrm{d} x}{\\mathrm{e}^{x}+\\mathrm{e}^{2 x}}. $\n435 基础题 求不定积分 $ \\int \\frac{\\mathrm{d} x}{\\sqrt{(x^{2}-a^{2})^{3}}} $434 基础题 求不定积分 $ \\int\\frac{dx} {e^{x}+e^{2 x}}. $\n435 基础题 求不定积分 $ \\int\\frac{dx} {\\sqrt{e^{x}+1}}. $\n436 基础题 求不定积分 $ \\int\\frac{dx} {x(x^{6}+1)}. $\n437 基础题 求不定积分 $ \\int\\frac{dx} {x^{4}\\sqrt{x^{2}+1}}. $\n438 中等题 求不定积分 $ \\int\\frac{1+x} {x^{2}+x\\ln x} dx. $\n439 中等题 求不定积分 $ \\int\\sqrt{2x-x^{2}} dx. $\n440 中等题 求不定积分 $ \\int\\frac{dx} {\\sqrt{1+e^{2 x}}}. $\n441 中等题 求不定积分 $ \\int\\frac{dx} {(1+x^{2})\\sqrt{1-x^{2}}}. $475 中等题 求不定积分 $ \\int \\frac{dx}{x^4-x^6} $\n476 中等题 求不定积分 $ \\int \\frac{1+2x^4}{x^3(1+x^4)^2}dx $\n477 中等题 求不定积分 $ \\int \\frac{dx}{x^4+1} $\n综合提高题\n478 综合题 下列说法不正确的是（    ）。\n(A) 一切初等函数在其定义区间内都存在原函数\n(B) 不连续的函数也可能存在原函数\n(C) 奇函数的原函数都是偶函数\n(D) 偶函数的原函数都是奇函数\n479 综合题 设 $ f(x) $在闭区间 $ [a,b] $上连续，则在开区间 $ (a,b) $内， $ f(x) $必有（    ）。\n(A) 导函数 (B) 原函数 (C) 最大值或最小值 (D) 极值480 综合题 已知函数 $ f(x)=\\left\\{ \\begin{array}{l l} 2(x-1), x<1 \\\\ \\ln x, x\\geqslant 1 \\end{array} \\right. $ ，则 $ f(x) $的一个原函数是（    ）.\n\n(A) $ F(x)=\\left\\{ \\begin{array}{l l} (x-1)^{2}, x<1 \\\\ x(\\ln x-1), x\\geqslant 1 \\end{array} \\right. $ (B) $ F(x)=\\left\\{ \\begin{array}{l l} (x-1)^{2}, x<1 \\\\ x(\\ln x+1)-1, x\\geqslant 1 \\end{array} \\right. $\n(C) $ F(x)=\\left\\{ \\begin{array}{l l} (x-1)^{2}, x<1 \\\\ x(\\ln x+1)+1, x\\geqslant 1 \\end{array} \\right. $ (D) $ F(x)=\\left\\{ \\begin{array}{l l} (x-1)^{2}, x<1 \\\\ x(\\ln x-1)+1, x\\geqslant 1 \\end{array} \\right. $\n\n481 综合题 求不定积分 $ \\int \\frac{\\arctan e^{x}}{e^{2x}} dx. $\n482 综合题 求不定积分 $ \\int \\frac{\\arctan x}{x^{2}(1+x^{2})} dx. $\n483 综合题 求不定积分 $ \\int \\frac{1+x}{x(1+x e^{x})} dx. $\n484 综合题 求不定积分 $ \\int \\frac{1-\\ln x}{(x-\\ln x)^{2}} dx. $\n485 综合题 求不定积分 $ \\int e^{2x} \\arctan \\sqrt{e^{x}-1} dx. $\n486 综合题 求不定积分 $ \\int x+\\sin x \\cos x dx. $"}
+
+## tool · 2026-10-20T02:43:07Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"8bc0ce","wall_time_seconds":0.000008,"exit_code":0,"original_token_count":1680,"output":"469 基础题 求不定积分 $ \\int\\frac{dx}{(x^{2}+1)(1+2x)}. $\n470 基础题 求不定积分 $ \\int\\frac{3x+1}{x^{2}+2x+5}dx. $\n471 基础题 求不定积分 $ \\int\\frac{dx}{(x^{2}+2x+5)^{2}}. $\n472 中等题 求不定积分 $ \\int\\frac{2x^{3}+2x^{2}+5x+5}{x^{4}+5x^{2}+4}dx. $\n473 中等题 求不定积分 $ \\int\\frac{x^{2}}{(x^{2}+2x+2)^{2}}dx. $\n474 中等题 求不定积分 $ \\int\\frac{x^{4}+1}{1+x^{6}}dx. $\n475 中等题 求不定积分 $ \\int\\frac{dx}{x^{4}-x^{6}}. $075-crop0.0-0.55.md\n075-crop0.45-1.0.md\n求 $\\int\\dd x/\\sqrt{x-x^2}$，分别使用配方三角代换和 $x=\\sin^2t$、$0<t<\\pi/2$。说明两种所得表达式在哪一开区间为同一被积函数的原函数，并求两表达式之间的常数差。\n\\end{problem}\n\\begin{problem}{408}{67}{有界内函数与反正切原函数}\n求 $\\int\\cos x/(9+\\sin^2x)\\,\\dd x$，并确定满足 $F(0)=0$ 的原函数。说明代换 $u=\\sin x$ 在全实数轴不单调，为何仍可通过求导确认所得表达式在全实数轴成立。\n\\end{problem}\n\\begin{problem}{409}{67}{根式分母的拆分代换}\n求 $\\int(1-x)/\\sqrt{9-4x^2}\\,\\dd x$，分别处理常数分子项与一次分子项。明确实定义区间，求满足 $F(0)=0$ 的原函数，并核验两个部分的系数。\n\\end{problem}\n\\begin{problem}{410}{67}{三角根式内函数与连通区间}\n求 $\\int(\\sin x+\\cos x)/\\sqrt{\\sin x-\\cos x}\\,\\dd x$。给出被积函数全部实定义区间，并证明在每个区间上选出的原函数可连续延拓至区间端点，尽管被积函数在端点可能无界。\n\\end{problem}\n\\begin{problem}{411}{67}{根式三角复合与负号}\n求 $\\int x\\tan(\\sqrt{1-x^2})/\\sqrt{1-x^2}\\,\\dd x$。写出代换变量的范围并检验正切是否在此范围产生额外奇点，再讨论被积函数在 $x=\\pm1$ 的极限及可补值性。\n\\end{problem}\n\\begin{problem}{412}{67}{对数根式的复合积分}\n求\n\\[\\int\\frac{\\ln(x+\\sqrt{1+x^2})+1}{\\sqrt{1+x^2}}\\,\\dd x.\\]\n说明对数真数在全实数范围恒为正，选择一个使积分化为一次多项式积分的代换，并确定满足 $F(0)=0$ 的原函数。\n\\end{problem}\n\\begin{problem}{413}{67}{指数根式代换与补值}\n求 $\\int\\mathrm e^{\\sqrt{1+\\sin x}}\\cos x/\\sqrt{1+\\sin x}\\,\\dd x$。在 $1+\\sin x>0$ 的各开区间给出原函数，再讨论被排除点处原函数能否连续、可导延拓，说明根式中零点对链式求导的影响。\n\\end{problem}\n\\begin{problem}{414}{67}{拆项与反正切复合}\n求 $\\int[x+(\\arctan x)^2]/(1+x^2)\\,\\dd x$，说明为何应先拆分再分别代换。确定满足 $F(0)=1$ 的原函数，并用求导检验平方项积分后应出现的幂次与系数。\n\\end{problem}\n\\begin{problem}{415}{67}{三角幂与有理化}\n求 $\\int\\sin x\\cos^3x/(1+\\cos^2x)\\,\\dd x$，选取代换把它化为有理函数积分。再给出所得原函数的最小正周期，并说明原函数的周期性为何需要实际检查，不能仅由被积函数周期性推出。\n\\end{problem}\n\\begin{problem}{416}{67}{正切代换的分支与全局原函数}\n求 $\\int\\dd x/(\\sin^2x+2\\cos^2x)$，先在 $(-\\pi/2,\\pi/2)$ 使用正切代换。讨论直接使用反正切主值表达式为何在 $\\pi/2$ 附近需要调整常数，并说明如何拼接得到全实数范围的一个原函数。\n\\end{problem}\n\\begin{problem}{417}{67}{指数代换与两种等价表达式}\n求 $\\int\\dd x/(1+\\mathrm e^x)$，分别用 $u=\\mathrm e^x$ 和 $v=\\mathrm e^{-x}$ 代换。证明两种所得原函数只相差常数，并求满足 $F(0)=0$ 的表达式。\n\\end{problem}\n\\begin{problem}{432}{69}{嵌套根式的逐层消去}\n求 $\\int\\dd x/\\sqrt{x+\\sqrt x}$。先确定实定义区间，再令 $t=\\sqrt x$，通过配方或根式代换完成积分。说明每次出现 $\\sqrt{t^2}$ 时应如何依据变量范围确定符号，并检查结果的导数。\n\\end{problem}\n\\begin{problem}{433}{69}{根式分式的有理代换}\n求 $\\int(3-x)^{-1}\\sqrt{(5-x)/(x-1)}\\,\\dd x$。用根式本身作新变量，写出反解关系及新变量范围；给出被积函数的各个实定义区间，说明 $x=3$ 对积分常数的影响。\n\\end{problem}\n\\begin{problem}{434}{69}{指数代换后的部分分式}\n求 $\\int\\dd x/(\\mathrm e^x+\\mathrm e^{2x})$，将它化为新变量的有理函数积分。确定满足 $F(0)=0$ 的原函数，并由被积函数符号判断其单调性。\n\\end{problem}\n\\begin{problem}{435}{69}{指数加常数的根式代换}\n求 $\\int\\dd x/\\sqrt{\\mathrm e^x+1}$，令 $t=\\sqrt{\\mathrm e^x+1}$ 后写出完整有理积分。给出新变量范围和实对数表达式，并说明为何不能把 $\\dd x$ 误写为 $2t\\dd t$。\n\\end{problem}\n\\begin{problem}{436}{69}{幂代换与不连通区间}\n求 $\\int\\dd x/[x(x^6+1)]$。分别使用 $t=x^6$ 与先拆成 $1/x-x^5/(x^6+1)$ 的方法，比较所得表达式。解释 $x>0$、$x<0$ 两个区间中 $\\ln|x|$ 和积分常数的处理。\n\\end{problem}\n\\begin{problem}{437}{69}{倒代换与根式绝对值}\n求 $\\int\\dd x/[x^4\\sqrt{x^2+1}]$。尝试 $t=1/x$，明确 $\\sqrt{x^2+1}$ 变换后出现的绝对值，分别在正负半轴积分；最终给出可在两个半轴分别使用的表达式并求导核验。\n\\end{problem}\n\\begin{problem}{438}{69}{对数与代数的混合内函数}\n求 $\\int(1+x)/(x^2+x\\ln x)\\,\\dd x$。选择 $u=x+\\ln x$ 化简，证明分母在正半轴只有一个零点，从而说明答案成立的最大开区间，不要求写出该零点的初等表达式。\n\\end{problem}\n\\begin{problem}{439}{69}{配方、三角代换与半圆结构}\n求 $\\int\\sqrt{2x-x^2}\\,\\dd x$，先配方并给出实定义范围。确定满足 $F(1)=0$ 的原函数，并利用被积函数关于 $x=1$ 的对称性检验所得原函数的奇对称关系。\n\\end{problem}\n\\begin{problem}{440}{69}{指数根式与两步代换}\n\\end{problem}\n\\begin{problem}{504}{75}{线性三角组合的平方分母}\n设实数 $a,b$ 满足 $a^2+b^2>0$。证明\n\\[\\int\\frac{\\dd x}{(a\\sin x+b\\cos x)^2}=-\\frac1{a^2+b^2}\\frac{a\\cos x-b\\sin x}{a\\sin x+b\\cos x}+C.\\]\n给出结果成立的区间条件，并分别检查 $a=0$、$b=0$。再说明若 $a=b=0$，为何问题本身失去定义。\n\\end{problem}\n\\begin{supplement}{4.4-1}{参数因子与部分分式退化}\n对 $a\\in\\mathbb R$ 求 $\\int\\dd x/[(x-1)(x-a)]$，完整区分 $a=1$ 与 $a\\ne1$。对固定 $x<\\min\\{1,a,0\\}$ 的适当公共区间，选取同一点归一化的原函数，说明当 $a\\to1$ 时为何应先处理积分常数再比较极限。\n\\end{supplement}\n\\begin{supplement}{4.4-2}{一次因子与重二次因子的联合分解}\n求 $\\int\\dd x/[x(x^2+1)^2]$，先列全部分分式并利用奇偶性减少系数。给出两个半轴上的全部原函数，最后通过求导及 $x\\to0$ 的主项检查对数系数是否正确。\n\\end{supplement}\n"}
+
+## tool · 2026-10-20T02:43:15Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"d6a345","wall_time_seconds":0.000013541,"exit_code":0,"original_token_count":980,"output":"493 综合题 求不定积分 $ \\int\\frac{x^{3}+1}{(1+x^{2})^{2}} \\mathrm{d} x. $\n494 综合题 求不定积分 $ \\int\\frac{x \\mathrm{e}^{\\arctan x}}{(1+x^{2})^{\\frac{3}{2}}} \\mathrm{d} x. $\n495 综合题 求不定积分 $ \\int\\frac{\\mathrm{d} x}{1+e^{\\frac{5}{2}}+e^{\\frac{5}{3}}+e^{\\frac{5}{6}}}. $\n496 综合题 求不定积分 $ \\int\\frac{1}{(2+\\cos x)\\sin x} \\mathrm{d} x. $\n497 综合题 求不定积分 $ \\int\\frac{x^{3} \\arcsin x}{\\sqrt{1-x^{2}}} \\mathrm{d} x. $\n498 综合题 设 $ y(x-y)^{2}=x $ , 求不定积分 $ \\int\\frac{1}{x-3 y} \\mathrm{d} x. $\n499 综合题 设 $ f(\\sin^{2} x)=\\frac{x}{\\sin x} $ , 求 $ \\int\\frac{\\sqrt{x}}{\\sqrt{1-x}} f(x) \\mathrm{d} x. $499 综合题 设 $ f(\\sin^2 x)=\\frac{x}{\\sin x} $ ，求 $ \\int \\frac{\\sqrt{x}}{\\sqrt{1-x}} f(x) \\mathrm{d} x. $\n500 综合题 设 $ \\int f(x) \\mathrm{d} x=\\mathrm{e}^{x^{2}}+C $ ，求 $ \\int x f^{\\prime \\prime}(x) \\mathrm{d} x. $\n501 综合题 设 $ \\int x f(x) \\mathrm{d} x=\\arcsin x+C $ ，求 $ \\int f(x) \\mathrm{d} x. $\n502 综合题 设 $ \\int f^{\\prime}(e^{x}) \\mathrm{d} x=-(1+x)e^{-x}+C $ ， $ f(1)=0 $ ，求 $ f(x). $\n503 综合题 已知 $ f^{\\prime \\prime}(x) $连续， $ f^{\\prime}(x)\\neq 0 $，\n证明 $ \\int \\left[ \\frac{f(x)}{f^{\\prime}(x)}-\\frac{f^{2}(x)f^{\\prime \\prime}(x)}{(f^{\\prime}(x))^{3}} \\right] \\mathrm{d} x=\\frac{1}{2} \\left( \\frac{f(x)}{f^{\\prime}(x)} \\right)^{2}+C. $\n504 综合题 证明 $ \\int \\frac{1}{(a \\sin x+b \\cos x)^{2}} \\mathrm{d} x=-\\frac{1}{a^{2}+b^{2}} \\frac{a \\cos x-b \\sin x}{a \\sin x+b \\cos x}+C. $求 $\\int x^3\\sqrt{4-x^2}\\,\\dd x$，使用 $u=4-x^2$ 后先将剩余 $x^2$ 消去。给出实积分区间，并确定满足 $F(0)=0$ 的原函数；说明代换在 $0$ 两侧不单调为何不妨碍最终求导核验。\n\\end{problem}\n\\begin{problem}{429}{69}{平方和根式与双曲型对数}\n求 $\\int x^2/(1+x^2)^{3/2}\\,\\dd x$。分别用三角代换与拆成 $1/\\sqrt{1+x^2}-1/(1+x^2)^{3/2}$ 的方法，证明所得答案相差常数；确定满足 $F(0)=0$ 的原函数。\n\\end{problem}\n\\begin{problem}{430}{69}{平方差根式与参数绝对值}\n设 $a>0$，求 $\\int x^2/(x^2-a^2)^{3/2}\\,\\dd x$。在 $x>a$ 上使用三角代换，并给出在 $x<-a$ 上也成立的带绝对值表达式，明确两侧常数可独立选择。\n\\end{problem}\n\\begin{problem}{431}{69}{根式有理化与变量范围}\n求 $\\int\\dd x/[1+\\sqrt{x+1}]$，采用 $t=\\sqrt{x+1}$ 并写出 $\\dd x$。给出在 $(-1,+\\infty)$ 上的原函数，再讨论它在 $x=-1$ 能否连续延拓以及是否具有有限右导数。\n\\end{problem}\n\\begin{problem}{432}{69}{嵌套根式的逐层消去}\n求 $\\int\\dd x/\\sqrt{x+\\sqrt x}$。先确定实定义区间，再令 $t=\\sqrt x$，通过配方或根式代换完成积分。说明每次出现 $\\sqrt{t^2}$ 时应如何依据变量范围确定符号，并检查结果的导数。\n\\begin{problem}{420}{68}{共轭有理化与根式分支}\n求 $\\int x/(x-\\sqrt{x^2-1})\\,\\dd x$。先确定实定义域，使用共轭因子化简，分别说明在 $x>1$ 与 $x<-1$ 上计算所得原函数时哪些符号与对数绝对值必须保留。\n\\end{problem}\n\\begin{problem}{421}{68}{指数复合与二倍角恒等式}\n求 $\\int\\mathrm e^{\\sin2x}\\sin^2x/\\mathrm e^{2x}\\,\\dd x$。先合并指数，再利用二倍角恒等式将其导数与剩余因子联系，给出在全实数范围成立的原函数，并说明关键系数的来源。\n\\end{problem}\n\\begin{problem}{422}{68}{对数正切的整体代换}\n在 $0<x<\\pi/2$ 上求 $\\int\\ln(\\tan x)/(\\sin x\\cos x)\\,\\dd x$。证明 $\\ln\\tan x$ 在该区间严格递增且值域为 $\\mathbb R$，用它作新变量积分，并确定满足 $F(\\pi/4)=0$ 的原函数。\n\\end{problem}\n\\begin{problem}{423}{68}{商函数求导的逆向识别}\n求 $\\int[x+\\sin x\\cos x]/(\\cos x-x\\sin x)^2\\,\\dd x$。通过对 $\\sin x/(\\cos x-x\\sin x)$ 求导寻找原函数，并说明答案应限制在哪些开区间；不要求显式求出所有分母零点。\n"}
+
+## tool · 2026-10-20T02:44:01Z
+
+
+Script completed
+Wall time 1.3 seconds
+Output:
+
+{}
+{"chunk_id":"304c05","wall_time_seconds":1.057905041,"exit_code":0,"original_token_count":77,"output":"{\"status\": \"passed\", \"type\": \"read_only_structure_and_math\", \"checks\": 82, \"source_problems\": 246, \"supplements\": 22, \"message\": \"Strict LaTeX parsing, source coverage, section endings and representative mathematical checks passed.\", \"suggestion\": \"No PDF compilation or visual verification was performed.\"}\n"}
+
+## tool · 2026-10-20T02:44:13Z
+
+
+
+
+## tool · 2026-10-20T02:45:01Z
+
+
+Script completed
+Wall time 4.3 seconds
+Output:
+
+{"chunk_id":"968f40","wall_time_seconds":0.000016292,"exit_code":0,"original_token_count":458,"output":"    (\"483\", x + s.log(x) - s.log(1 + x*s.exp(x)), (1 + x)/(x*(1 + x*s.exp(x)))),\n    (\"484\", x/(x - s.log(x)), (1 - s.log(x))/(x - s.log(x))**2),\n]\nfor number, primitive, integrand in antiderivatives:\n    residual = s.trigsimp(s.diff(primitive, x) - integrand)\n    if number == \"407\":\n        residual = s.simplify(residual.subs(x, t/(1 + t)))\n    else:\n        residual = s.simplify(residual.subs(x, t))\n    equal(f\"{number}: derivative check\", residual, 0)\n\nu = s.symbols(\"u\", real=True)\nimplicit_x = u**3/(u**2 - 1)\nimplicit_y = u/(u**2 - 1)\nequal(\"498: parameterized relation\", implicit_y*(implicit_x - implicit_y)**2, implicit_x)\nequal(\"498: transformed differential\", s.diff(implicit_x, u)/(implicit_x - 3*implicit_y), u/(u**2 - 1))\nf = s.Function(\"f\")(x)\nequal(\"503: abstract squared quotient\", s.diff((f/s.diff(f, x))**2/2, x), f/s.diff(f, x) - f**2*s.diff(f, x, 2)/s.diff(f, x)**3)\n\nprint(json.dumps({\"status\": \"passed\", \"type\": \"read_only_structure_and_math\", \"checks\": len(checks), \"source_problems\": 246, \"supplements\": 22, \"message\": \"Strict LaTeX parsing, source coverage, section endings and representative mathematical checks passed.\", \"suggestion\": \"No PDF compilation or visual verification was performed.\"}, ensure_ascii=False))\n求 $\\int x^2/(x^2+2x+2)^2\\,\\dd x$。先作平移代换，把分子拆成适合积分的三项，并给出完整原函数。通过检查大 $|x|$ 时被积函数的衰减阶，判断所求原函数在两端是否具有有限极限。\n\\end{problem}\n\\begin{problem}{474}{73}{高次有理函数的实因式分解}\n求 $\\int(x^4+1)/(1+x^6)\\,\\dd x$。利用 $1+x^6=(x^2+1)(x^4-x^2+1)$，将四次因子进一步分解为两个实不可约二次因子，再作部分分式积分。注明实定义区间，并利用被积函数的偶性检查可取为奇函数的原函数。\n\\end{problem}\n"}
+{}
+{"chunk_id":"f74287","wall_time_seconds":3.9807352910000002,"exit_code":0,"original_token_count":77,"output":"{\"status\": \"passed\", \"type\": \"read_only_structure_and_math\", \"checks\": 87, \"source_problems\": 246, \"supplements\": 22, \"message\": \"Strict LaTeX parsing, source coverage, section endings and representative mathematical checks passed.\", \"suggestion\": \"No PDF compilation or visual verification was performed.\"}\n"}
+
+## developer · 2026-10-20T02:45:02Z
+
+The following namespaces are no longer available. Do not call tools in them unless those tools are declared in a later update:
+- mcp__cua_repl
+
+## developer · 2026-10-20T02:45:02Z
+
+<tools>
+Removed deferred tool namespaces:
+- mcp__code_review
+- mcp__rea: REA provides reverse-engineering tools for local artifacts, native binaries, managed code, browser pages, and runtimes. Use the tool that directly answers the question; discover targets or inspect inventory only when needed. Tool results include i...
+</tools>
+
+## tool · 2026-10-20T02:45:10Z
+
+
+
+
+## developer · 2026-10-20T02:45:10Z
+
+This is an incremental tools update. Previously declared tools remain available for direct calls unless explicitly marked unavailable. If a tool is redefined here, its latest definition replaces the earlier one.
+
+## developer · 2026-10-20T02:45:10Z
+
+<tools>
+Added deferred tool namespaces:
+- mcp__code_review
+- mcp__rea: REA provides reverse-engineering tools for local artifacts, native binaries, managed code, browser pages, and runtimes. Use the tool that directly answers the question; discover targets or inspect inventory only when needed. Tool results include i...
+</tools>
+
+## assistant · 2026-10-20T02:45:15Z
+
+妹妹，第3、4章已完成并稳定，可统一编号。
+
+- 第3章：121道逐题改编题＋14道原创题。
+- 第4章：125道逐题改编题＋8道原创题。
+- 指定检查脚本通过87项结构、严格LaTeX语法及代表数学核验。
+
+未编译、截图或提交；尚无排版视觉验证。

@@ -1,0 +1,39 @@
+{
+  "created" : 1794842008418,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/16/rollout-2026-11-16T23-13-28-01a1e4eb-99ac-7120-8857-9cfb813ed26d.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:d2823f547ce3a1001415d09c",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1e4eb-99ac-7120-8857-9cfb813ed26d",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/tests/0cc6f6eb-c612-469e-8a0a-0c18e006079d",
+  "source" : "codex",
+  "title" : "<recommended_plugins> Here is a list of plugins that are available but not installed. - Dropbox (app",
+  "updated" : 1794880879923,
+  "usage" : [
+    {
+      "cacheRead" : 12288,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":34157,\"cached_input_tokens\":12288,\"cache_write_input_tokens\":0,\"output_tokens\":5,\"reasoning_output_tokens\":0,\"total_tokens\":34162}",
+      "input" : 21869,
+      "model" : "gpt-5.6-sol",
+      "output" : 5,
+      "time" : 1794842014798
+    },
+    {
+      "cacheRead" : 33920,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":68983,\"cached_input_tokens\":46208,\"cache_write_input_tokens\":0,\"output_tokens\":17,\"reasoning_output_tokens\":0,\"total_tokens\":69000}",
+      "input" : 906,
+      "model" : "gpt-5.6-sol",
+      "output" : 12,
+      "time" : 1794842023350
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

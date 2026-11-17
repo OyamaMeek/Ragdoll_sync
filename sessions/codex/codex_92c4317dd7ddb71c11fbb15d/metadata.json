@@ -1,0 +1,94 @@
+{
+  "created" : 1792284876863,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-10-18T08-51-24-01a14c7d-ef1f-7ad1-bae0-43027dfee2b1.jsonl.zst",
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-10-18T08-54-36-01a14c80-e00c-7c63-9c22-53aa0f939bc6.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:92c4317dd7ddb71c11fbb15d",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a14c7d-ef1f-7ad1-bae0-43027dfee2b1",
+  "project" : "/Users/oyamahappa/Documents/GitHub/PrivateWork",
+  "source" : "codex",
+  "title" : "整理奶蛙转变计划",
+  "updated" : 1792284960559,
+  "usage" : [
+    {
+      "cacheRead" : 35840,
+      "cacheWrite" : 0,
+      "id" : "resp_0479ee70a9fe9ad7016ad418d163908191ba8ab85d2efb81a7",
+      "input" : 15842,
+      "model" : "gpt-6.1-sol",
+      "output" : 61,
+      "time" : 1792284883707
+    },
+    {
+      "cacheRead" : 51456,
+      "cacheWrite" : 0,
+      "id" : "resp_0479ee70a9fe9ad7016ad418d43fd88191a659d1fa11ebc4f7",
+      "input" : 3925,
+      "model" : "gpt-6.1-sol",
+      "output" : 58,
+      "time" : 1792284887025
+    },
+    {
+      "cacheRead" : 55168,
+      "cacheWrite" : 0,
+      "id" : "resp_0479ee70a9fe9ad7016ad418d799b08191bd6c8e262bfeb3d0",
+      "input" : 420,
+      "model" : "gpt-6.1-sol",
+      "output" : 91,
+      "time" : 1792284890906
+    },
+    {
+      "cacheRead" : 55424,
+      "cacheWrite" : 0,
+      "id" : "resp_0479ee70a9fe9ad7016ad418db88a8819180ab24615658e3cf",
+      "input" : 3758,
+      "model" : "gpt-6.1-sol",
+      "output" : 431,
+      "time" : 1792284900528
+    },
+    {
+      "cacheRead" : 59008,
+      "cacheWrite" : 0,
+      "id" : "resp_0479ee70a9fe9ad7016ad418e52730819194171735e64931f7",
+      "input" : 1957,
+      "model" : "gpt-6.1-sol",
+      "output" : 80,
+      "time" : 1792284903030
+    },
+    {
+      "cacheRead" : 60800,
+      "cacheWrite" : 0,
+      "id" : "resp_0479ee70a9fe9ad7016ad418e79dac8191ac9b0ef520aac9c9",
+      "input" : 4390,
+      "model" : "gpt-6.1-sol",
+      "output" : 513,
+      "time" : 1792284913291
+    },
+    {
+      "cacheRead" : 65024,
+      "cacheWrite" : 0,
+      "id" : "resp_0479ee70a9fe9ad7016ad4191a65248191844998a76c1b5a97",
+      "input" : 805,
+      "model" : "gpt-6.1-sol",
+      "output" : 109,
+      "time" : 1792284956877
+    },
+    {
+      "cacheRead" : 65664,
+      "cacheWrite" : 0,
+      "id" : "resp_0479ee70a9fe9ad7016ad4191d6500819181057fc7324c272d",
+      "input" : 2622,
+      "model" : "gpt-6.1-sol",
+      "output" : 138,
+      "time" : 1792284960547
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

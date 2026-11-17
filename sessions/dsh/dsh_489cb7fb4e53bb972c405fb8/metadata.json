@@ -1,0 +1,50 @@
+{
+  "created" : 1790610050389,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Obsidian-Happa--/0f258554-d3cf-4ed7-9ff6-efbf462c3dce/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:489cb7fb4e53bb972c405fb8",
+  "messages" : [
+
+  ],
+  "nativeID" : "0f258554-d3cf-4ed7-9ff6-efbf462c3dce",
+  "parentID" : "session-fd9154ab-8dc3-4add-a39c-b32ebab83182",
+  "project" : "/Users/oyamahappa/Documents/Obsidian/Happa",
+  "provider" : "openai",
+  "source" : "dsh",
+  "title" : "请基于以下 Obsidian Vault 盘点，",
+  "updated" : 1790610237361,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "14",
+      "input" : 8606,
+      "model" : "gpt-5.6-luna",
+      "output" : 3816,
+      "time" : 1790610121676
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "21",
+      "input" : 12456,
+      "model" : "gpt-5.6-luna",
+      "output" : 2058,
+      "time" : 1790610184730
+    },
+    {
+      "cacheRead" : 11776,
+      "cacheWrite" : 0,
+      "id" : "28",
+      "input" : 2765,
+      "model" : "gpt-5.6-luna",
+      "output" : 2735,
+      "time" : 1790610237359
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

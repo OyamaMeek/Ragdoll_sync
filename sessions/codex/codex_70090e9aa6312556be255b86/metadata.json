@@ -1,0 +1,84 @@
+{
+  "created" : 1791731541098,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/10/11/rollout-2026-10-11T23-12-20-01a12b85-a3d9-7210-862f-88bdc702ebc3.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:70090e9aa6312556be255b86",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a12b85-a3d9-7210-862f-88bdc702ebc3",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1791731742004,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_086f2243be768914016acba75c829c87d09d822147122e8b49",
+      "input" : 19127,
+      "model" : "codex-auto-review",
+      "output" : 230,
+      "time" : 1791731553203
+    },
+    {
+      "cacheRead" : 24320,
+      "cacheWrite" : 0,
+      "id" : "resp_086f2243be768914016acba7914bbc87d0903cc88c3a498098",
+      "input" : 4088,
+      "model" : "codex-auto-review",
+      "output" : 138,
+      "time" : 1791731605784
+    },
+    {
+      "cacheRead" : 27392,
+      "cacheWrite" : 0,
+      "id" : "resp_086f2243be768914016acba79fb16887d0be10e47da9279e8e",
+      "input" : 1676,
+      "model" : "codex-auto-review",
+      "output" : 108,
+      "time" : 1791731619537
+    },
+    {
+      "cacheRead" : 28416,
+      "cacheWrite" : 0,
+      "id" : "resp_086f2243be768914016acba7c85e5487d08336ab098788a091",
+      "input" : 6060,
+      "model" : "codex-auto-review",
+      "output" : 148,
+      "time" : 1791731660161
+    },
+    {
+      "cacheRead" : 33536,
+      "cacheWrite" : 0,
+      "id" : "resp_086f2243be768914016acba7f5872087d0868750a62a3ea211",
+      "input" : 4646,
+      "model" : "codex-auto-review",
+      "output" : 144,
+      "time" : 1791731704555
+    },
+    {
+      "cacheRead" : 37632,
+      "cacheWrite" : 0,
+      "id" : "resp_086f2243be768914016acba8020d9087d09dc1f93a9fff3fe5",
+      "input" : 1184,
+      "model" : "codex-auto-review",
+      "output" : 199,
+      "time" : 1791731720931
+    },
+    {
+      "cacheRead" : 38656,
+      "cacheWrite" : 0,
+      "id" : "resp_086f2243be768914016acba81b3d5887d0bb07bce91965ee75",
+      "input" : 1460,
+      "model" : "codex-auto-review",
+      "output" : 119,
+      "time" : 1791731741995
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

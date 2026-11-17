@@ -1,0 +1,76 @@
+{
+  "created" : 1793689430645,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Agent-DSH--/session-a1b0c3a5-5ab7-495e-81fc-4457ce2abfab/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:8cdbd280404308dc7d6f8380",
+  "messages" : [
+
+  ],
+  "nativeID" : "session-a1b0c3a5-5ab7-495e-81fc-4457ce2abfab",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "deepseek-account",
+  "source" : "dsh",
+  "title" : "改写算法时代文章",
+  "updated" : 1793718839041,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "20",
+      "input" : 56329,
+      "model" : "deepseek-v4-pro",
+      "output" : 192,
+      "time" : 1793689454165
+    },
+    {
+      "cacheRead" : 74880,
+      "cacheWrite" : 0,
+      "id" : "52",
+      "input" : 8223,
+      "model" : "deepseek-v4-pro",
+      "output" : 5729,
+      "time" : 1793690972397
+    },
+    {
+      "cacheRead" : 88832,
+      "cacheWrite" : 0,
+      "id" : "59",
+      "input" : 11696,
+      "model" : "deepseek-v4-pro",
+      "output" : 3737,
+      "time" : 1793691020443
+    },
+    {
+      "cacheRead" : 104192,
+      "cacheWrite" : 0,
+      "id" : "66",
+      "input" : 802,
+      "model" : "deepseek-v4-pro",
+      "output" : 658,
+      "time" : 1793691027474
+    },
+    {
+      "cacheRead" : 105600,
+      "cacheWrite" : 0,
+      "id" : "87",
+      "input" : 28023,
+      "model" : "deepseek-v4-pro",
+      "output" : 213,
+      "time" : 1793691032718
+    },
+    {
+      "cacheRead" : 133760,
+      "cacheWrite" : 0,
+      "id" : "94",
+      "input" : 104,
+      "model" : "deepseek-v4-pro",
+      "output" : 211,
+      "time" : 1793691039342
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

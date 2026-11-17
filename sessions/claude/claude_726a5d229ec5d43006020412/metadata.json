@@ -1,0 +1,30 @@
+{
+  "created" : 1793428803120,
+  "files" : [
+    "/Users/oyamahappa/.claude/projects/-Users-oyamahappa-Documents-Agent-Claude/9890ca78-6c7d-4347-865f-4ac038b848af.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:726a5d229ec5d43006020412",
+  "messages" : [
+
+  ],
+  "nativeID" : "9890ca78-6c7d-4347-865f-4ac038b848af",
+  "project" : "/Users/oyamahappa/Documents/Agent/Claude",
+  "source" : "claude",
+  "title" : "只回复 OK",
+  "updated" : 1793428803216,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "cbb7f23e-1b0d-42c6-bf73-2e308f6d4a8b",
+      "input" : 0,
+      "model" : "<synthetic>",
+      "output" : 0,
+      "time" : 1793428803216
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

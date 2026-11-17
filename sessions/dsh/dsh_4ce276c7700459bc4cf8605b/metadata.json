@@ -1,0 +1,31 @@
+{
+  "created" : 1790762185219,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Agent-DSH--/session-60c5fc74-d604-4df3-8452-2689fada2d1c/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:4ce276c7700459bc4cf8605b",
+  "messages" : [
+
+  ],
+  "nativeID" : "session-60c5fc74-d604-4df3-8452-2689fada2d1c",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "deepseek-account",
+  "source" : "dsh",
+  "title" : "{ \"type\": \"image\", \"attachment\": { \"attachmentId\": \"sha256:673e77ae0be0a56bc8a12957a0696891eaec6fc89",
+  "updated" : 1792151011192,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "16",
+      "input" : 12747,
+      "model" : "deepseek-flash",
+      "output" : 831,
+      "time" : 1790762667211
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "created" : 1794048706127,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-07T18-51-25-01a1b5a2-73e0-7b23-8a09-f90bf2b89ca8.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:dfe0dbb62e40c2facd636bd7",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1b5a2-73e0-7b23-8a09-f90bf2b89ca8",
+  "project" : "/Users/oyamahappa/Documents/GitHub/blind-spots",
+  "source" : "codex",
+  "title" : "讲解高阶导数莱布尼茨公式",
+  "updated" : 1794048919981,
+  "usage" : [
+    {
+      "cacheRead" : 13184,
+      "cacheWrite" : 0,
+      "id" : "resp_048ca26e72c8df5b016aef02c5d2e487d0b48013d3d48efdf6",
+      "input" : 23172,
+      "model" : "gpt-6.1-sol",
+      "output" : 159,
+      "time" : 1794048713942
+    },
+    {
+      "cacheRead" : 36352,
+      "cacheWrite" : 0,
+      "id" : "resp_048ca26e72c8df5b016aef02caedb887d0b3545b929d14d0b9",
+      "input" : 1062,
+      "model" : "gpt-6.1-sol",
+      "output" : 158,
+      "time" : 1794048719536
+    },
+    {
+      "cacheRead" : 37376,
+      "cacheWrite" : 0,
+      "id" : "resp_048ca26e72c8df5b016aef02d04e2487d084cfc7646e38265e",
+      "input" : 214,
+      "model" : "gpt-6.1-sol",
+      "output" : 98,
+      "time" : 1794048724509
+    },
+    {
+      "cacheRead" : 37504,
+      "cacheWrite" : 0,
+      "id" : "resp_048ca26e72c8df5b016aef02d55f8c87d0b7ee1a1457fc5012",
+      "input" : 6559,
+      "model" : "gpt-6.1-sol",
+      "output" : 123,
+      "time" : 1794048729908
+    },
+    {
+      "cacheRead" : 44032,
+      "cacheWrite" : 0,
+      "id" : "resp_048ca26e72c8df5b016aef03079c0087d0842fcfe21a794a50",
+      "input" : 177,
+      "model" : "gpt-6.1-sol",
+      "output" : 1063,
+      "time" : 1794048797823
+    },
+    {
+      "cacheRead" : 45056,
+      "cacheWrite" : 0,
+      "id" : "resp_048ca26e72c8df5b016aef038ac1d087d0a96c6a39f0abd993",
+      "input" : 924,
+      "model" : "gpt-6.1-sol",
+      "output" : 607,
+      "time" : 1794048919931
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

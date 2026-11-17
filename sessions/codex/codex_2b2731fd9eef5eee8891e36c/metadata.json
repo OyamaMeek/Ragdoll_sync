@@ -1,0 +1,66 @@
+{
+  "created" : 1793795775024,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-04T20-36-05-01a1a68f-3610-7e61-9f9f-91d4a8481177.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:2b2731fd9eef5eee8891e36c",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1a68f-3610-7e61-9f9f-91d4a8481177",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "查询为何没有 GPT-6.2 Astra",
+  "updated" : 1793795819871,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0298d040e794b3f8016aeb26c2b6c487d0ba9edcffb74fd3bb",
+      "input" : 25365,
+      "model" : "gpt-6.1-sol",
+      "output" : 86,
+      "time" : 1793795784295
+    },
+    {
+      "cacheRead" : 38272,
+      "cacheWrite" : 0,
+      "id" : "resp_0298d040e794b3f8016aeb26c8d88087d0b5fff2a5eeff5fcd",
+      "input" : 1900,
+      "model" : "gpt-6.1-sol",
+      "output" : 167,
+      "time" : 1793795792281
+    },
+    {
+      "cacheRead" : 40192,
+      "cacheWrite" : 0,
+      "id" : "resp_0298d040e794b3f8016aeb26d3c95087d0851aefa60498f686",
+      "input" : 611,
+      "model" : "gpt-6.1-sol",
+      "output" : 103,
+      "time" : 1793795800397
+    },
+    {
+      "cacheRead" : 40704,
+      "cacheWrite" : 0,
+      "id" : "resp_0298d040e794b3f8016aeb26dc360087d081518e68243bc0c1",
+      "input" : 8190,
+      "model" : "gpt-6.1-sol",
+      "output" : 119,
+      "time" : 1793795808627
+    },
+    {
+      "cacheRead" : 48896,
+      "cacheWrite" : 0,
+      "id" : "resp_0298d040e794b3f8016aeb26e467f487d08d2a253f3b8ea728",
+      "input" : 4211,
+      "model" : "gpt-6.1-sol",
+      "output" : 159,
+      "time" : 1793795819862
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

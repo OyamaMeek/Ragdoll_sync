@@ -1,0 +1,66 @@
+{
+  "created" : 1790260947757,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/09/24/rollout-2026-09-24T22-42-27-01a0d3de-2ab9-7511-b77d-9e761ef588bc.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:006eedaeda9db38e34e90f8c",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a0d3de-2ab9-7511-b77d-9e761ef588bc",
+  "project" : "/Users/oyamahappa/Documents/GitHub/local-question-bank",
+  "source" : "codex",
+  "title" : "把notion遵守规则默认写入这个文档写入agent.md <image name=[Image #1] path=\"/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40",
+  "updated" : 1790261021980,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_035488e5ee02d12b016ab536d72fe887d0af1021224480c888",
+      "input" : 16397,
+      "model" : "codex-auto-review",
+      "output" : 132,
+      "time" : 1790260954883
+    },
+    {
+      "cacheRead" : 20224,
+      "cacheWrite" : 0,
+      "id" : "resp_035488e5ee02d12b016ab536e9ae9087d0886bffe944705d1a",
+      "input" : 2992,
+      "model" : "codex-auto-review",
+      "output" : 130,
+      "time" : 1790260973445
+    },
+    {
+      "cacheRead" : 22272,
+      "cacheWrite" : 0,
+      "id" : "resp_035488e5ee02d12b016ab537069a4c87d0baae9f912e4c320b",
+      "input" : 2716,
+      "model" : "codex-auto-review",
+      "output" : 81,
+      "time" : 1790261001018
+    },
+    {
+      "cacheRead" : 24320,
+      "cacheWrite" : 0,
+      "id" : "resp_035488e5ee02d12b016ab53711a06c87d09001e8dee465732f",
+      "input" : 1362,
+      "model" : "codex-auto-review",
+      "output" : 65,
+      "time" : 1790261012111
+    },
+    {
+      "cacheRead" : 25344,
+      "cacheWrite" : 0,
+      "id" : "resp_035488e5ee02d12b016ab537195ce487d0a5b3bff8d14a487c",
+      "input" : 823,
+      "model" : "codex-auto-review",
+      "output" : 200,
+      "time" : 1790261021963
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

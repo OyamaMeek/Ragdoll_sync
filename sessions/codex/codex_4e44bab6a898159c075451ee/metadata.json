@@ -1,0 +1,75 @@
+{
+  "created" : 1791101537871,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/10/04/rollout-2026-10-04T16-12-17-01a105f8-8cab-7bb0-aa57-000df05800d7.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:4e44bab6a898159c075451ee",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a105f8-8cab-7bb0-aa57-000df05800d7",
+  "project" : "/Users/oyamahappa/Documents/Codex/2026-10-04/html-svg-2d",
+  "source" : "codex",
+  "title" : "创建鹈鹕骑车 SVG 动画",
+  "updated" : 1792937097581,
+  "usage" : [
+    {
+      "cacheRead" : 22400,
+      "cacheWrite" : 0,
+      "id" : "resp_0da3df2e8406ffc5016ac20a659df087d0bd836dd904c0aa8d",
+      "input" : 14673,
+      "model" : "gpt-6.1-sol",
+      "output" : 198,
+      "time" : 1791101549655
+    },
+    {
+      "cacheRead" : 36864,
+      "cacheWrite" : 0,
+      "id" : "resp_0da3df2e8406ffc5016ac20a6e49b487d095348b241c37801e",
+      "input" : 5229,
+      "model" : "gpt-6.1-sol",
+      "output" : 162,
+      "time" : 1791101557589
+    },
+    {
+      "cacheRead" : 41856,
+      "cacheWrite" : 0,
+      "id" : "resp_0da3df2e8406ffc5016ac20a7622c887d0bd74d3aaf017d545",
+      "input" : 600,
+      "model" : "gpt-6.1-sol",
+      "output" : 3860,
+      "time" : 1791101676231
+    },
+    {
+      "cacheRead" : 42240,
+      "cacheWrite" : 0,
+      "id" : "resp_0da3df2e8406ffc5016ac20aed724087d0a7ea58da2108eab9",
+      "input" : 4100,
+      "model" : "gpt-6.1-sol",
+      "output" : 330,
+      "time" : 1791101689884
+    },
+    {
+      "cacheRead" : 46208,
+      "cacheWrite" : 0,
+      "id" : "resp_0da3df2e8406ffc5016ac20afa904487d0b32cfe0c7dac2e2a",
+      "input" : 1123,
+      "model" : "gpt-6.1-sol",
+      "output" : 898,
+      "time" : 1791101719256
+    },
+    {
+      "cacheRead" : 47104,
+      "cacheWrite" : 0,
+      "id" : "resp_0da3df2e8406ffc5016ac20b18128487d080eae0d15fc3b8af",
+      "input" : 1552,
+      "model" : "gpt-6.1-sol",
+      "output" : 99,
+      "time" : 1791101725418
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

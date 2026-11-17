@@ -1,0 +1,165 @@
+{
+  "created" : 1793428533745,
+  "files" : [
+    "/Users/oyamahappa/.claude/projects/-Users-oyamahappa-Documents-Agent-Claude/73abeee9-6915-4b83-971e-94a3c5677930.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:c00240926bc38ce5a2a2bdfc",
+  "messages" : [
+
+  ],
+  "nativeID" : "73abeee9-6915-4b83-971e-94a3c5677930",
+  "project" : "/Users/oyamahappa/Documents/Agent/Claude",
+  "source" : "claude",
+  "title" : "Codex skill 重新安装",
+  "updated" : 1793428896677,
+  "usage" : [
+    {
+      "cacheRead" : 43271,
+      "cacheWrite" : 28970,
+      "id" : "msg_011CgZrKGiyKTrpnh8YH7VAN",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 812,
+      "time" : 1793428542280
+    },
+    {
+      "cacheRead" : 72241,
+      "cacheWrite" : 8245,
+      "id" : "msg_011CgZrKq8ddhigty18mFAXf",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 948,
+      "time" : 1793428551483
+    },
+    {
+      "cacheRead" : 80486,
+      "cacheWrite" : 4739,
+      "id" : "msg_011CgZrLWqov6uy4cHbbbPRN",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1800,
+      "time" : 1793428571125
+    },
+    {
+      "cacheRead" : 85225,
+      "cacheWrite" : 3800,
+      "id" : "msg_011CgZrMzj91BFLr3sPM42hG",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 2947,
+      "time" : 1793428596482
+    },
+    {
+      "cacheRead" : 89025,
+      "cacheWrite" : 4515,
+      "id" : "msg_011CgZrPyYWCAwsMQYhdYjX2",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1011,
+      "time" : 1793428607846
+    },
+    {
+      "cacheRead" : 93540,
+      "cacheWrite" : 3566,
+      "id" : "msg_011CgZrQnHcqKEagvHejZs2Z",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 3738,
+      "time" : 1793428645117
+    },
+    {
+      "cacheRead" : 97106,
+      "cacheWrite" : 10343,
+      "id" : "msg_011CgZrTYnLacLeJBW1zkKVE",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 4697,
+      "time" : 1793428693985
+    },
+    {
+      "cacheRead" : 107449,
+      "cacheWrite" : 8550,
+      "id" : "msg_011CgZrX2ypbmt75Jnk7xSsn",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 4779,
+      "time" : 1793428731997
+    },
+    {
+      "cacheRead" : 115999,
+      "cacheWrite" : 5949,
+      "id" : "msg_011CgZraXbbhUMjyrtTVxL6c",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 669,
+      "time" : 1793428748256
+    },
+    {
+      "cacheRead" : 121948,
+      "cacheWrite" : 12455,
+      "id" : "msg_011CgZrd6fzFkHt4hefaCLXw",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 2698,
+      "time" : 1793428800214
+    },
+    {
+      "cacheRead" : 134403,
+      "cacheWrite" : 3380,
+      "id" : "msg_011CgZrf9J42N3TZm3u4EaMs",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1910,
+      "time" : 1793428822260
+    },
+    {
+      "cacheRead" : 137783,
+      "cacheWrite" : 4579,
+      "id" : "msg_011CgZrgYSMtBvpyLCrBQghS",
+      "input" : 4,
+      "model" : "claude-opus-5-5",
+      "output" : 3128,
+      "time" : 1793428852802
+    },
+    {
+      "cacheRead" : 142362,
+      "cacheWrite" : 3835,
+      "id" : "msg_011CgZringvPZ214Vc9g8DgT",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1662,
+      "time" : 1793428867339
+    },
+    {
+      "cacheRead" : 146197,
+      "cacheWrite" : 1987,
+      "id" : "msg_011CgZrjpMfA4HT8suw4EV5X",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 404,
+      "time" : 1793428872142
+    },
+    {
+      "cacheRead" : 148184,
+      "cacheWrite" : 684,
+      "id" : "msg_011CgZrkWTRCicibsdcPLusD",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 152,
+      "time" : 1793428879887
+    },
+    {
+      "cacheRead" : 148868,
+      "cacheWrite" : 241,
+      "id" : "msg_011CgZrkrecJ8ZGBfgDWJoWv",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1118,
+      "time" : 1793428893354
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

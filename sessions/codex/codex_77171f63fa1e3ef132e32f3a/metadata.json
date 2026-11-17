@@ -1,0 +1,39 @@
+{
+  "created" : 1794230207089,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/09/rollout-2026-11-09T21-16-47-01a1c074-423b-7403-a643-dbd6170cda59.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:77171f63fa1e3ef132e32f3a",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1c074-423b-7403-a643-dbd6170cda59",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794230236886,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbcbbefc037e52d016af1c7c28e8087d09e5f5391f6676647",
+      "input" : 25194,
+      "model" : "codex-auto-review",
+      "output" : 208,
+      "time" : 1794230215594
+    },
+    {
+      "cacheRead" : 30976,
+      "cacheWrite" : 0,
+      "id" : "resp_0dbcbbefc037e52d016af1c7d7c2b487d08135ff841c5b6af0",
+      "input" : 1931,
+      "model" : "codex-auto-review",
+      "output" : 260,
+      "time" : 1794230236882
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

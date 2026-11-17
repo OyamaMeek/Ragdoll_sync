@@ -1,0 +1,84 @@
+{
+  "created" : 1790869520704,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/10/01/rollout-2026-10-01T23-45-20-01a0f824-40c5-7110-81c1-59e772632336.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:57f97b2d9fd3dd5bc693f95e",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a0f824-40c5-7110-81c1-59e772632336",
+  "project" : "/Users/oyamahappa/Documents/GitHub/local-question-bank",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1790873574778,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_067666029ecb7d84016abe80140ac087d08e28fa1c3a3ca18a",
+      "input" : 24601,
+      "model" : "codex-auto-review",
+      "output" : 216,
+      "time" : 1790869529416
+    },
+    {
+      "cacheRead" : 28416,
+      "cacheWrite" : 0,
+      "id" : "resp_067666029ecb7d84016abe84c6063c87d0a98d34b6a379e3b1",
+      "input" : 10074,
+      "model" : "codex-auto-review",
+      "output" : 168,
+      "time" : 1790870731078
+    },
+    {
+      "cacheRead" : 37632,
+      "cacheWrite" : 0,
+      "id" : "resp_067666029ecb7d84016abe8c17a97487d0951a68ee43c2f2fb",
+      "input" : 2779,
+      "model" : "codex-auto-review",
+      "output" : 133,
+      "time" : 1790872605067
+    },
+    {
+      "cacheRead" : 39680,
+      "cacheWrite" : 0,
+      "id" : "resp_067666029ecb7d84016abe8c24838c87d0ac27296ab46bde9c",
+      "input" : 1591,
+      "model" : "codex-auto-review",
+      "output" : 252,
+      "time" : 1790872620356
+    },
+    {
+      "cacheRead" : 39680,
+      "cacheWrite" : 0,
+      "id" : "resp_067666029ecb7d84016abe8fdac3a087d0a4853b6db4d9226d",
+      "input" : 3113,
+      "model" : "codex-auto-review",
+      "output" : 72,
+      "time" : 1790873565529
+    },
+    {
+      "cacheRead" : 41728,
+      "cacheWrite" : 0,
+      "id" : "resp_067666029ecb7d84016abe8fde965c87d08b00fae577ba8fee",
+      "input" : 1521,
+      "model" : "codex-auto-review",
+      "output" : 61,
+      "time" : 1790873571478
+    },
+    {
+      "cacheRead" : 42752,
+      "cacheWrite" : 0,
+      "id" : "resp_067666029ecb7d84016abe8fe40c6487d0bc4d2d4893cd3507",
+      "input" : 929,
+      "model" : "codex-auto-review",
+      "output" : 86,
+      "time" : 1790873574773
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "created" : 1793719436389,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/03/rollout-2026-11-03T23-23-56-01a1a202-8414-7bf1-9d2c-68680aa6f21f.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:30aa9378008102cd077601ce",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1a202-8414-7bf1-9d2c-68680aa6f21f",
+  "project" : "/Users/oyamahappa/Documents/GitHub/PrivateWork",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1793719869853,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_02607c90af3219d8016ae9fc8f8da08191bd7f5371a9935860",
+      "input" : 22676,
+      "model" : "codex-auto-review",
+      "output" : 353,
+      "time" : 1793719443151
+    },
+    {
+      "cacheRead" : 28416,
+      "cacheWrite" : 0,
+      "id" : "resp_02607c90af3219d8016ae9fc9ebf788191944f2068a75f5fa2",
+      "input" : 1543,
+      "model" : "codex-auto-review",
+      "output" : 119,
+      "time" : 1793719456730
+    },
+    {
+      "cacheRead" : 29824,
+      "cacheWrite" : 0,
+      "id" : "resp_02607c90af3219d8016ae9fe2fd49881918aaaca810cd88299",
+      "input" : 6886,
+      "model" : "codex-auto-review",
+      "output" : 144,
+      "time" : 1793719857915
+    },
+    {
+      "cacheRead" : 36480,
+      "cacheWrite" : 0,
+      "id" : "resp_02607c90af3219d8016ae9fe3c3be081918514872993d9c9de",
+      "input" : 1477,
+      "model" : "codex-auto-review",
+      "output" : 72,
+      "time" : 1793719869848
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

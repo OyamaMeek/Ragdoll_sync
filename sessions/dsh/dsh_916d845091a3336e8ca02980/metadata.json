@@ -1,0 +1,157 @@
+{
+  "created" : 1792476663587,
+  "files" : [
+    "/Users/oyamahappa/.dsh/sessions/--Users-oyamahappa-Documents-Agent-DSH--/session-99efd661-8466-477b-95dd-50872b49f320/session.v4.jsonl.zstd"
+  ],
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:916d845091a3336e8ca02980",
+  "messages" : [
+
+  ],
+  "nativeID" : "session-99efd661-8466-477b-95dd-50872b49f320",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "test261020",
+  "source" : "dsh",
+  "title" : "奶龙悠闲骑行SVG动画",
+  "updated" : 1792477441167,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "18",
+      "input" : 12451,
+      "model" : "gpt-6.1-sol",
+      "output" : 170,
+      "time" : 1792476725673
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "31",
+      "input" : 36275,
+      "model" : "gpt-6.1-sol",
+      "output" : 191,
+      "time" : 1792476734540
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "55",
+      "input" : 27701,
+      "model" : "gpt-6.1-sol",
+      "output" : 0,
+      "time" : 1792476748058
+    },
+    {
+      "cacheRead" : 12288,
+      "cacheWrite" : 0,
+      "id" : "60",
+      "input" : 23601,
+      "model" : "gpt-6.1-sol",
+      "output" : 111,
+      "time" : 1792476800444
+    },
+    {
+      "cacheRead" : 46904,
+      "cacheWrite" : 0,
+      "id" : "73",
+      "input" : 52433,
+      "model" : "gpt-6.1-sol",
+      "output" : 219,
+      "time" : 1792476810149
+    },
+    {
+      "cacheRead" : 52430,
+      "cacheWrite" : 0,
+      "id" : "84",
+      "input" : 59621,
+      "model" : "gpt-6.1-sol",
+      "output" : 1577,
+      "time" : 1792476846117
+    },
+    {
+      "cacheRead" : 59618,
+      "cacheWrite" : 0,
+      "id" : "107",
+      "input" : 62338,
+      "model" : "gpt-6.1-sol",
+      "output" : 247,
+      "time" : 1792476918342
+    },
+    {
+      "cacheRead" : 62335,
+      "cacheWrite" : 0,
+      "id" : "118",
+      "input" : 65068,
+      "model" : "gpt-6.1-sol",
+      "output" : 7636,
+      "time" : 1792477051464
+    },
+    {
+      "cacheRead" : 38656,
+      "cacheWrite" : 0,
+      "id" : "127",
+      "input" : 53622,
+      "model" : "gpt-6.1-sol",
+      "output" : 208,
+      "time" : 1792477120699
+    },
+    {
+      "cacheRead" : 53504,
+      "cacheWrite" : 0,
+      "id" : "136",
+      "input" : 55776,
+      "model" : "gpt-6.1-sol",
+      "output" : 1023,
+      "time" : 1792477199951
+    },
+    {
+      "cacheRead" : 55680,
+      "cacheWrite" : 0,
+      "id" : "145",
+      "input" : 57992,
+      "model" : "gpt-6.1-sol",
+      "output" : 214,
+      "time" : 1792477236236
+    },
+    {
+      "cacheRead" : 65065,
+      "cacheWrite" : 0,
+      "id" : "162",
+      "input" : 90434,
+      "model" : "gpt-6.1-sol",
+      "output" : 1126,
+      "time" : 1792477265494
+    },
+    {
+      "cacheRead" : 90431,
+      "cacheWrite" : 0,
+      "id" : "180",
+      "input" : 93945,
+      "model" : "gpt-6.1-sol",
+      "output" : 247,
+      "time" : 1792477359739
+    },
+    {
+      "cacheRead" : 70016,
+      "cacheWrite" : 0,
+      "id" : "187",
+      "input" : 70793,
+      "model" : "gpt-6.1-sol",
+      "output" : 494,
+      "time" : 1792477411824
+    },
+    {
+      "cacheRead" : 93942,
+      "cacheWrite" : 0,
+      "id" : "209",
+      "input" : 96612,
+      "model" : "gpt-6.1-sol",
+      "output" : 120,
+      "time" : 1792477441047
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

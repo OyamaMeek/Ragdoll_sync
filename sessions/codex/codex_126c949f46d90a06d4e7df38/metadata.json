@@ -1,0 +1,30 @@
+{
+  "created" : 1792831952007,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-10-24T16-52-26-01a16d1c-7cfa-7f52-a7b4-38730a44f365.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:126c949f46d90a06d4e7df38",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a16d1c-7cfa-7f52-a7b4-38730a44f365",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "判断 sizeof(char) == 1",
+  "updated" : 1792831969234,
+  "usage" : [
+    {
+      "cacheRead" : 23040,
+      "cacheWrite" : 0,
+      "id" : "resp_021540c0d80d09df016adc71d340a48191ab2fbefef2ddf070",
+      "input" : 25058,
+      "model" : "gpt-6.1-sol",
+      "output" : 333,
+      "time" : 1792831969221
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

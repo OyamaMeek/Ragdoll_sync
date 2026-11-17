@@ -1,0 +1,129 @@
+{
+  "created" : 1794817537276.1853,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/16/rollout-2026-11-16T16-25-29-01a1e376-15f4-7180-afb1-b422c512f556.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:945b8c1f5fd8572a7d14a935",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1e376-15f4-7180-afb1-b422c512f556",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/cpp-labs",
+  "source" : "codex",
+  "title" : "定义 is_prime 素数判断函数",
+  "updated" : 1794817796080,
+  "usage" : [
+    {
+      "cacheRead" : 13440,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabe0674f087d0a0d261e61946926c",
+      "input" : 17949,
+      "model" : "gpt-6.1-sol",
+      "output" : 261,
+      "time" : 1794817548928
+    },
+    {
+      "cacheRead" : 31488,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabe0fd61487d0b09b31f8cf4b6ce7",
+      "input" : 10099,
+      "model" : "gpt-6.1-sol",
+      "output" : 314,
+      "time" : 1794817560080
+    },
+    {
+      "cacheRead" : 41728,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabe1a87c087d09fc00d0c55793770",
+      "input" : 11991,
+      "model" : "gpt-6.1-sol",
+      "output" : 431,
+      "time" : 1794817579813
+    },
+    {
+      "cacheRead" : 54016,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabe2e44e887d0ab73ee765cac03e2",
+      "input" : 3949,
+      "model" : "gpt-6.1-sol",
+      "output" : 1156,
+      "time" : 1794817606095
+    },
+    {
+      "cacheRead" : 58880,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabe4b1a9087d0a11b0ddd66b0c145",
+      "input" : 1922,
+      "model" : "gpt-6.1-sol",
+      "output" : 379,
+      "time" : 1794817629552
+    },
+    {
+      "cacheRead" : 61056,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabe6616e087d0b4ca5440f96db5b9",
+      "input" : 732,
+      "model" : "gpt-6.1-sol",
+      "output" : 125,
+      "time" : 1794817645805
+    },
+    {
+      "cacheRead" : 61696,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabe71333487d0b9abc2f128def99b",
+      "input" : 2488,
+      "model" : "gpt-6.1-sol",
+      "output" : 870,
+      "time" : 1794817668647
+    },
+    {
+      "cacheRead" : 64896,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabe87274087d08a04f797948d0efe",
+      "input" : 2409,
+      "model" : "gpt-6.1-sol",
+      "output" : 273,
+      "time" : 1794817676354
+    },
+    {
+      "cacheRead" : 67456,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabeaabafc87d0a68f56465f9cbe5d",
+      "input" : 425,
+      "model" : "gpt-6.1-sol",
+      "output" : 98,
+      "time" : 1794817711678
+    },
+    {
+      "cacheRead" : 67840,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabeb21aa087d09ec8f145c27b1c50",
+      "input" : 842,
+      "model" : "gpt-6.1-sol",
+      "output" : 422,
+      "time" : 1794817733908
+    },
+    {
+      "cacheRead" : 13440,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabed3c59487d08156c8b3a8627a38",
+      "input" : 56312,
+      "model" : "gpt-6.1-sol",
+      "output" : 81,
+      "time" : 1794817791268
+    },
+    {
+      "cacheRead" : 69632,
+      "cacheWrite" : 0,
+      "id" : "resp_0d39a3ac8d285286016afabf01ae3087d09b58f9ee2a7d2629",
+      "input" : 322,
+      "model" : "gpt-6.1-sol",
+      "output" : 105,
+      "time" : 1794817795903
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

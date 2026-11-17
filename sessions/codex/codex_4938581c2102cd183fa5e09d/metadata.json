@@ -1,0 +1,39 @@
+{
+  "created" : 1794306464309,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-10T18-27-44-01a1c4ff-d9c5-7783-98a8-0ee427bd656e.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:4938581c2102cd183fa5e09d",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1c4ff-d9c5-7783-98a8-0ee427bd656e",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank",
+  "source" : "codex",
+  "title" : "01a1c4ff-d9c5-7783-98a8-0ee427bd656e",
+  "updated" : 1794306620371,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0e515d0512866e2c016af2f1a46c1487d09b04e5cdc73461ab",
+      "input" : 25069,
+      "model" : "gpt-6.1-sol",
+      "output" : 237,
+      "time" : 1794306474711
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_0e515d0512866e2c016af2f1ab3c7887d0be1bcd86ea97e644",
+      "input" : 51564,
+      "model" : "gpt-6.1-sol",
+      "output" : 7177,
+      "time" : 1794306619868
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

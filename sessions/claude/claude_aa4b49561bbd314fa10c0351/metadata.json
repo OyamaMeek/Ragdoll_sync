@@ -1,0 +1,84 @@
+{
+  "created" : 1793460860995,
+  "files" : [
+    "/Users/oyamahappa/.claude/projects/-Users-oyamahappa-Documents-Agent-Claude/2d72cf7a-32b6-40c1-81eb-9dbb1011ce57.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:aa4b49561bbd314fa10c0351",
+  "messages" : [
+
+  ],
+  "nativeID" : "2d72cf7a-32b6-40c1-81eb-9dbb1011ce57",
+  "project" : "/Users/oyamahappa/Documents/Agent/Claude",
+  "source" : "claude",
+  "title" : "删除此项",
+  "updated" : 1793460932651,
+  "usage" : [
+    {
+      "cacheRead" : 43271,
+      "cacheWrite" : 39710,
+      "id" : "msg_011CgaZQaxWXeGJ34JYnMYkh",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 613,
+      "time" : 1793460873785
+    },
+    {
+      "cacheRead" : 82981,
+      "cacheWrite" : 916,
+      "id" : "msg_011CgaZRGJcoFmmY5ooN3hsD",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 290,
+      "time" : 1793460880026
+    },
+    {
+      "cacheRead" : 83897,
+      "cacheWrite" : 503,
+      "id" : "msg_011CgaZSC6PULTeXEq9vSA3d",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 464,
+      "time" : 1793460893618
+    },
+    {
+      "cacheRead" : 84400,
+      "cacheWrite" : 1578,
+      "id" : "msg_011CgaZSkt7f8LraqxW72avw",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 594,
+      "time" : 1793460902454
+    },
+    {
+      "cacheRead" : 85978,
+      "cacheWrite" : 917,
+      "id" : "msg_011CgaZTDGcBdzLaEbqEPC4f",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 884,
+      "time" : 1793460910439
+    },
+    {
+      "cacheRead" : 86895,
+      "cacheWrite" : 1144,
+      "id" : "msg_011CgaZUAGoHwaxJBFBuJybc",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 486,
+      "time" : 1793460920084
+    },
+    {
+      "cacheRead" : 88039,
+      "cacheWrite" : 720,
+      "id" : "msg_011CgaZUtpQd3hxxuqBGTADh",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 302,
+      "time" : 1793460929383
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

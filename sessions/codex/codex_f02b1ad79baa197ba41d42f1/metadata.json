@@ -1,0 +1,30 @@
+{
+  "created" : 1794035716096,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/07/rollout-2026-11-07T15-15-16-01a1b4dc-8fba-7b61-8340-66c5a6a3f881.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:f02b1ad79baa197ba41d42f1",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1b4dc-8fba-7b61-8340-66c5a6a3f881",
+  "project" : "/Users/oyamahappa/Documents/Codex/2026-11-07/referenced-chatgpt-conversation-this-is-an",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794035725384,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_001a0f7c547a4c41016aeed008a60087d08e1a8f122e511171",
+      "input" : 15418,
+      "model" : "codex-auto-review",
+      "output" : 131,
+      "time" : 1794035725381
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

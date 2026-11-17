@@ -1,0 +1,408 @@
+{
+  "created" : 1794323367943,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-10T23-09-27-01a1c601-c7af-7ca3-89d5-ad7718f07e1a.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:c656540658635aee577a29aa",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1c601-c7af-7ca3-89d5-ad7718f07e1a",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank",
+  "source" : "codex",
+  "title" : "01a1c601-c7af-7ca3-89d5-ad7718f07e1a",
+  "updated" : 1794324109393,
+  "usage" : [
+    {
+      "cacheRead" : 12288,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af333ac5f4087d094caf17d1e2ee1c3",
+      "input" : 21110,
+      "model" : "gpt-6-luna",
+      "output" : 168,
+      "time" : 1794323378642
+    },
+    {
+      "cacheRead" : 33280,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af333b3425087d0ad88b60e88a6f68f",
+      "input" : 6982,
+      "model" : "gpt-6-luna",
+      "output" : 109,
+      "time" : 1794323384302
+    },
+    {
+      "cacheRead" : 40064,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af333b8b15087d098d76b922b2ad4c0",
+      "input" : 356,
+      "model" : "gpt-6-luna",
+      "output" : 4742,
+      "time" : 1794323472393
+    },
+    {
+      "cacheRead" : 40192,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33410e02c87d09285cef5e7f4f894",
+      "input" : 4994,
+      "model" : "gpt-6-luna",
+      "output" : 1404,
+      "time" : 1794323503479
+    },
+    {
+      "cacheRead" : 45056,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af3342fe15c87d0b4193e79fcaf08df",
+      "input" : 1907,
+      "model" : "gpt-6-luna",
+      "output" : 69,
+      "time" : 1794323511292
+    },
+    {
+      "cacheRead" : 46848,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33437bbf887d0b46fa0257da757f3",
+      "input" : 1551,
+      "model" : "gpt-6-luna",
+      "output" : 812,
+      "time" : 1794323529641
+    },
+    {
+      "cacheRead" : 48256,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af3344a129887d0a4d99526299efe07",
+      "input" : 1500,
+      "model" : "gpt-6-luna",
+      "output" : 839,
+      "time" : 1794323547957
+    },
+    {
+      "cacheRead" : 49536,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af3345ca53887d09dc24a29d6e586c9",
+      "input" : 1604,
+      "model" : "gpt-6-luna",
+      "output" : 141,
+      "time" : 1794323555151
+    },
+    {
+      "cacheRead" : 50944,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33463948087d0bfc6c976a606a1ff",
+      "input" : 853,
+      "model" : "gpt-6-luna",
+      "output" : 3975,
+      "time" : 1794323630678
+    },
+    {
+      "cacheRead" : 51584,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af334af220887d0a953ab06c0e4f13f",
+      "input" : 4212,
+      "model" : "gpt-6-luna",
+      "output" : 1431,
+      "time" : 1794323660426
+    },
+    {
+      "cacheRead" : 55680,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af334ccf84887d08381fc781457391c",
+      "input" : 1827,
+      "model" : "gpt-6-luna",
+      "output" : 93,
+      "time" : 1794323665376
+    },
+    {
+      "cacheRead" : 57344,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af334d1d6e887d09eaf3738842750cc",
+      "input" : 598,
+      "model" : "gpt-6-luna",
+      "output" : 73,
+      "time" : 1794323672391
+    },
+    {
+      "cacheRead" : 57728,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af334d8e39487d0a7a7b156809540e4",
+      "input" : 646,
+      "model" : "gpt-6-luna",
+      "output" : 419,
+      "time" : 1794323683952
+    },
+    {
+      "cacheRead" : 58240,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af334e46f1887d099aca41be9c35a2d",
+      "input" : 577,
+      "model" : "gpt-6-luna",
+      "output" : 488,
+      "time" : 1794323696088
+    },
+    {
+      "cacheRead" : 58624,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af334f08b9087d0ad7064503c5edc1f",
+      "input" : 705,
+      "model" : "gpt-6-luna",
+      "output" : 398,
+      "time" : 1794323705149
+    },
+    {
+      "cacheRead" : 59136,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af334f9c07887d08aba84fd6bb7acb1",
+      "input" : 615,
+      "model" : "gpt-6-luna",
+      "output" : 1625,
+      "time" : 1794323737146
+    },
+    {
+      "cacheRead" : 59520,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af3351997ac87d0b6990dff24410727",
+      "input" : 2090,
+      "model" : "gpt-6-luna",
+      "output" : 1835,
+      "time" : 1794323772229
+    },
+    {
+      "cacheRead" : 61440,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af3353cbbc887d08939d5ed52bb1f7d",
+      "input" : 2171,
+      "model" : "gpt-6-luna",
+      "output" : 184,
+      "time" : 1794323780031
+    },
+    {
+      "cacheRead" : 63488,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33544724887d0bda5824eaf7eb013",
+      "input" : 4722,
+      "model" : "gpt-6-luna",
+      "output" : 1298,
+      "time" : 1794323808744
+    },
+    {
+      "cacheRead" : 67968,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af335612c7087d09b31beceffa26100",
+      "input" : 1564,
+      "model" : "gpt-6-luna",
+      "output" : 754,
+      "time" : 1794323825527
+    },
+    {
+      "cacheRead" : 69376,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33571f64487d09015dc0858b32be1",
+      "input" : 1571,
+      "model" : "gpt-6-luna",
+      "output" : 1313,
+      "time" : 1794323852692
+    },
+    {
+      "cacheRead" : 70784,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af3358d1c8c87d08c147f1f04b464c6",
+      "input" : 1661,
+      "model" : "gpt-6-luna",
+      "output" : 108,
+      "time" : 1794323857804
+    },
+    {
+      "cacheRead" : 72320,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33592364487d0b7d63ab1e21fd5f8",
+      "input" : 1502,
+      "model" : "gpt-6-luna",
+      "output" : 1106,
+      "time" : 1794323880552
+    },
+    {
+      "cacheRead" : 73600,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af335a9058087d0a6d303d29a38daff",
+      "input" : 1352,
+      "model" : "gpt-6-luna",
+      "output" : 305,
+      "time" : 1794323891069
+    },
+    {
+      "cacheRead" : 74752,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af335b38b7c87d0875100cf5e7a53b6",
+      "input" : 1220,
+      "model" : "gpt-6-luna",
+      "output" : 565,
+      "time" : 1794323904063
+    },
+    {
+      "cacheRead" : 75776,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af335c0775c87d0b01a468ab0288def",
+      "input" : 1394,
+      "model" : "gpt-6-luna",
+      "output" : 143,
+      "time" : 1794323908193
+    },
+    {
+      "cacheRead" : 76928,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af335c4aa0087d0bd3a046ae5d6e8fb",
+      "input" : 432,
+      "model" : "gpt-6-luna",
+      "output" : 206,
+      "time" : 1794323914701
+    },
+    {
+      "cacheRead" : 77184,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af335cb20c087d0861216aee86ee5e8",
+      "input" : 406,
+      "model" : "gpt-6-luna",
+      "output" : 416,
+      "time" : 1794323925218
+    },
+    {
+      "cacheRead" : 77440,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af335d5b35887d0a2063e3559f2500a",
+      "input" : 703,
+      "model" : "gpt-6-luna",
+      "output" : 106,
+      "time" : 1794323930788
+    },
+    {
+      "cacheRead" : 77952,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af335db3c4c87d0b0de24e607c7a247",
+      "input" : 1154,
+      "model" : "gpt-6-luna",
+      "output" : 734,
+      "time" : 1794323946999
+    },
+    {
+      "cacheRead" : 78976,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af335eb87f487d0a37893b140c44f75",
+      "input" : 888,
+      "model" : "gpt-6-luna",
+      "output" : 527,
+      "time" : 1794323959712
+    },
+    {
+      "cacheRead" : 79744,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af335f8292087d0a1bb23d21a28e8b8",
+      "input" : 671,
+      "model" : "gpt-6-luna",
+      "output" : 996,
+      "time" : 1794323981403
+    },
+    {
+      "cacheRead" : 80256,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af3360dd04087d0b6b57da8a3319530",
+      "input" : 1179,
+      "model" : "gpt-6-luna",
+      "output" : 87,
+      "time" : 1794323987601
+    },
+    {
+      "cacheRead" : 81280,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33614037c87d0aa95d356681c26c1",
+      "input" : 789,
+      "model" : "gpt-6-luna",
+      "output" : 484,
+      "time" : 1794323999974
+    },
+    {
+      "cacheRead" : 81920,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af336205c5887d0bb4f89c2bef43b1f",
+      "input" : 876,
+      "model" : "gpt-6-luna",
+      "output" : 951,
+      "time" : 1794324021321
+    },
+    {
+      "cacheRead" : 82560,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33635bbfc87d09b22afadb68a1912",
+      "input" : 1211,
+      "model" : "gpt-6-luna",
+      "output" : 650,
+      "time" : 1794324035976
+    },
+    {
+      "cacheRead" : 83584,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af336447be487d0b2543e20e5017315",
+      "input" : 977,
+      "model" : "gpt-6-luna",
+      "output" : 114,
+      "time" : 1794324041378
+    },
+    {
+      "cacheRead" : 84352,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33649cd7487d0b6e329de7886ccf4",
+      "input" : 546,
+      "model" : "gpt-6-luna",
+      "output" : 513,
+      "time" : 1794324055334
+    },
+    {
+      "cacheRead" : 84736,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33657d17087d0933185159bc83eac",
+      "input" : 699,
+      "model" : "gpt-6-luna",
+      "output" : 743,
+      "time" : 1794324071810
+    },
+    {
+      "cacheRead" : 85248,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af336683a8c87d0af1f447f310b51b8",
+      "input" : 776,
+      "model" : "gpt-6-luna",
+      "output" : 699,
+      "time" : 1794324087492
+    },
+    {
+      "cacheRead" : 85888,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33677ea5c87d0b29b9f3cb3f149ed",
+      "input" : 859,
+      "model" : "gpt-6-luna",
+      "output" : 200,
+      "time" : 1794324094109
+    },
+    {
+      "cacheRead" : 86528,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af3367e8d5c87d0a17312e8f3f771e7",
+      "input" : 431,
+      "model" : "gpt-6-luna",
+      "output" : 176,
+      "time" : 1794324100503
+    },
+    {
+      "cacheRead" : 86784,
+      "cacheWrite" : 0,
+      "id" : "resp_0399634f77545049016af33684e60087d0a8d21f40211016ed",
+      "input" : 572,
+      "model" : "gpt-6-luna",
+      "output" : 329,
+      "time" : 1794324109377
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

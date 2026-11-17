@@ -1,0 +1,75 @@
+{
+  "created" : 1794044201199,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/07/rollout-2026-11-07T17-36-40-01a1b55e-07f2-7d03-84da-d2629bf08304.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:131ac10ebd959492507ba4af",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1b55e-07f2-7d03-84da-d2629bf08304",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "01a1b55e-07f2-7d03-84da-d2629bf08304",
+  "updated" : 1794044317083,
+  "usage" : [
+    {
+      "cacheRead" : 12288,
+      "cacheWrite" : 0,
+      "id" : "resp_0b05cb05640cc6d1016aeef12f54c087d0b5e4b59f6377b4c7",
+      "input" : 21748,
+      "model" : "gpt-6-luna",
+      "output" : 259,
+      "time" : 1794044212649
+    },
+    {
+      "cacheRead" : 33920,
+      "cacheWrite" : 0,
+      "id" : "resp_0b05cb05640cc6d1016aeef135742087d09a902597253750ef",
+      "input" : 9819,
+      "model" : "gpt-6-luna",
+      "output" : 251,
+      "time" : 1794044218683
+    },
+    {
+      "cacheRead" : 43520,
+      "cacheWrite" : 0,
+      "id" : "resp_0b05cb05640cc6d1016aeef13b60c887d0add0ace58b516eac",
+      "input" : 3890,
+      "model" : "gpt-6-luna",
+      "output" : 239,
+      "time" : 1794044225236
+    },
+    {
+      "cacheRead" : 47232,
+      "cacheWrite" : 0,
+      "id" : "resp_0b05cb05640cc6d1016aeef14274ec87d0b5a10fc64b5a204e",
+      "input" : 5833,
+      "model" : "gpt-6-luna",
+      "output" : 949,
+      "time" : 1794044245003
+    },
+    {
+      "cacheRead" : 52608,
+      "cacheWrite" : 0,
+      "id" : "resp_0b05cb05640cc6d1016aeef18e762887d0a2aa0fa32c495c70",
+      "input" : 1639,
+      "model" : "gpt-6-luna",
+      "output" : 184,
+      "time" : 1794044306381
+    },
+    {
+      "cacheRead" : 54016,
+      "cacheWrite" : 0,
+      "id" : "resp_0b05cb05640cc6d1016aeef193ab4087d093bc566debcf83df",
+      "input" : 2315,
+      "model" : "gpt-6-luna",
+      "output" : 485,
+      "time" : 1794044317069
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

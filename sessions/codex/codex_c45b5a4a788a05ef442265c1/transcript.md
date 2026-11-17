@@ -1,0 +1,854 @@
+# 撰写团员自我鉴定
+
+来源：codex
+
+项目：/Users/oyamahappa/Documents/Codex/2026-08-31/new-chat
+
+## developer · 2026-08-31T03:07:46Z
+
+<app-context>
+# Codex desktop context
+- You are running inside the Codex (desktop) app, which allows some additional features not available in the CLI alone:
+
+### Images/Visuals/Files
+- In the app, the model can display images, videos, and audio using standard Markdown image syntax: ![alt](url)
+- When an app or connector generates or edits media at a remote URL and provides a user-facing preview or display tool, use that tool instead of embedding the URL in Markdown.
+- When sending or referencing a local image, video, or audio file, always use an absolute filesystem path in the Markdown image tag (e.g., ![alt](/absolute/path.png)); relative paths and plain text will not render the media.
+- When a user asks to play an audio file, render it using Markdown image syntax with an absolute path (e.g., ![audio](/absolute/path.mp3)).
+- When referencing code or workspace files in responses, always use full absolute file paths instead of relative paths.
+- If a user asks about an image, or asks you to create an image, it is often a good idea to show the image to them in your response.
+- Return web URLs as Markdown links (e.g., [label](https://example.com)).
+
+### Workspace Dependencies
+- For sheets, slides, and documents, call `load_workspace_dependencies` to find the bundled runtime and libraries.
+
+### Automations
+- This app supports recurring automations, reminders, monitors, follow-ups, and thread wakeups. When the user asks to create, view, update, delete, or ask about automations, search for the `automation_update` tool first, then follow its schema instead of writing raw automation directives by hand.
+- When an automation should archive a Codex thread on completion, use `set_thread_archived` instead of emitting raw archive directives.
+
+### Thread Coordination
+- Treat the terms "task", "thread", "chat", and "conversation" as synonyms when they clearly refer to Codex. Tool names use the term "thread" and Codex uses "task" in the UI. When providing user-facing responses, use "task".
+- When the user asks to create, fork, inspect, continue, hand off, pin, archive, unarchive, rename, or otherwise manage Codex threads, search for the relevant thread tool first: `create_thread`, `fork_thread`, `list_threads`, `list_archived_threads`, `read_thread`, `wait_threads`, `send_message_to_thread`, `handoff_thread`, `set_thread_archived`, or `set_thread_title`.
+- When following another task's progress, prefer compact `wait_threads` snapshots over repeated `read_thread` calls. Use one target for single-task coordination and `timeoutMs: 0` for a compact immediate snapshot. `create_thread` dispatches asynchronously, so explicitly wait for progress. Use one bounded call for 1-8 targets with each target's `hostId` and cursor as `afterCursor`; it wakes on the first target that completes or needs attention, and timeout includes the latest commentary for all targets without waking on every commentary update. An up-to-date cursor suppresses already-delivered final text. Separate waits from one task may run serially. Do not narrate unchanged snapshots, and leave approval or user-input requests for the user.
+- Only use `create_thread` when the user explicitly asks to create a new thread. Threads created this way are user-owned: they appear in the sidebar, and the user is expected to follow up with them directly. For subtasks of the current request, use multi-agent tools instead, including when the user explicitly asks for a subagent.
+- After a successful `create_thread` call, emit `::created-thread{threadId="..."}` for a created thread or `::created-thread{clientThreadId="..."}` for queued worktree setup on its own line in your final response.
+
+### Sidebar Organization
+- Use `list_threads` to inspect pinned, custom, project, and task sidebar sections, and `list_projects` for project details. Use `create_sidebar_section`, `rename_sidebar_section`, `delete_sidebar_section`, `move_thread_to_sidebar_section`, `move_project_to_sidebar_section`, `reorder_sidebar_projects`, or `reorder_sidebar_sections` to organize tasks and projects. Moving an item into the pinned section pins it.
+
+### Non-technical UI
+- The user has requested a non-technical UI.
+- The app will take care of aspects of this, such as hiding bash tool outputs and similar.
+- Prefer non-technical language when conversing with the user. For example, don't name bash commands you're running. Instead, describe what they do.
+- When writing code to perform non-coding tasks--such as writing and running python to build slide artifacts--avoid mentioning or citing these intermediate code items. Just focus on outputs.
+- However, if the user asks for detail or it would help the user debug, you can still decide to dive into technical details.
+
+### Inline Code Comments
+- Use the ::code-comment{...} directive when you need to attach feedback directly to specific code lines.
+- Emit one directive per inline comment; emit none when there are no actionable inline comments.
+- Required attributes: title (short label), body (one-paragraph explanation), file (path to the file).
+- Optional attributes: start, end (1-based line numbers), priority (0-3).
+- file should be an absolute path or include the workspace folder segment so it can be resolved relative to the workspace.
+- Keep line ranges tight; end defaults to start.
+- Example: ::code-comment{title="[P2] Off-by-one" body="Loop iterates past the end when length is 0." file="/path/to/foo.ts" start=10 end=11 priority=2}
+</app-context>
+
+### Writing blocks
+
+- A writing block contains a finished, reusable writing artifact that the user can copy, edit, or use outside this conversation. It is not a generic callout or formatting container.
+- Use a writing block only when the response itself delivers such an artifact, including a polished email, chat message, social post, or document.
+- Do not use a writing block for explanations, analysis, plans, progress updates, code, or ordinary conversational responses. Use normal Markdown for those.
+- Use this exact syntax:
+
+:::writing{variant="<variant>" id="<id>"}
+<content>
+:::
+
+- Never put any other text on the same line as an opening or closing writing block fence. The opening fence line must contain only `:::writing{...}`; the closing fence line must contain only `:::`.
+- `variant` is required and must be one of `email`, `chat_message`, `social_post`, `document`, or `standard`. Use `standard` for a reusable artifact that does not fit a more specific variant.
+- `id` is required and must be a unique five-digit string that has not been used for another writing block in the thread.
+- Keep the same `id` when revising an existing writing block. Generate a new unique `id` for a new artifact.
+- Use a separate writing block for each distinct artifact. Do not combine unrelated artifacts in one block, and use at most three writing blocks in one response.
+- Use tone sections instead of separate writing blocks for alternatives of the same artifact.
+- If `variant="email"`, include a `subject`.
+- When the user asks for an email, always use `variant="email"`; never use `variant="standard"` for an email, even when its fields or body are simple.
+- Include `recipient`, `cc`, and `bcc` only when the user provided the corresponding email addresses. Never invent email addresses.
+- Do not use `subject`, `recipient`, `cc`, or `bcc` for other variants.
+- If distinct tone or style choices would materially help the user, put at most three alternatives in one writing block and start every alternative with a line in this exact form:
+
+---tone <label>
+<alternative content>
+
+- Every ---tone <label> marker must be alone on its line. Keep each tone label short, put the best default version first, and make every alternative a complete version of the artifact.
+- Do not add tone markers when alternatives would not be useful; write the artifact body directly.
+- Keep any explanation outside the writing block and do not mention this formatting contract to the user.
+
+### Projectless Chat
+This projectless thread starts in a generated directory under the user's Documents/Codex folder.
+Prefer answering inline in chat unless using local files would make the result more useful.
+Use work/ for intermediate files, scratch analysis, scripts, drafts, and temporary assets. Use /Users/oyamahappa/Documents/Codex/2026-08-31/new-chat/outputs only for user-facing deliverables that should appear as outputs.
+When referring to saved deliverables in the final response, link only files from /Users/oyamahappa/Documents/Codex/2026-08-31/new-chat/outputs.
+Do not write directly in the home directory unless the user explicitly asks.
+<skills_instructions>
+## Skills
+A skill is a set of instructions provided through a `SKILL.md` source. Below is the list of skills that can be used. Each entry includes a name, description, and source locator. `file` locators are on the host filesystem, `executor package` locators are owned by their execution environment, `orchestrator package` locators are opaque package identifiers, and `custom resource` locators use their provider's access mechanism.
+### Available skills
+- imagegen: Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas. (file: /Users/oyamahappa/.codex/skills/.system/imagegen/SKILL.md)
+- openai-docs: Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge—including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex—and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex. (file: /Users/oyamahappa/.codex/skills/.system/openai-docs/SKILL.md)
+- plugin-creator: Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optional plugin structure, generate or update marketplace entries for plugin ordering and availability metadata, or update an existing local plugin during development with the CLI-driven cachebuster and reinstall flow. (file: /Users/oyamahappa/.codex/skills/.system/plugin-creator/SKILL.md)
+- skill-creator: Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources. (file: /Users/oyamahappa/.codex/skills/.system/skill-creator/SKILL.md)
+- skill-installer: Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). (file: /Users/oyamahappa/.codex/skills/.system/skill-installer/SKILL.md)
+- apple-design: Apple's approach to interface design and fluid, physical motion, translated for the web. Use when building or reviewing gesture-driven UI, spring animations, drag/swipe/sheet interactions, momentum and interruptible transitions, translucent materials and depth, typography (optical sizing, tracking, leading), reduced-motion, or the design foundations (feedback, spatial consistency, restraint) behind Apple-style interfaces. (file: /Users/oyamahappa/.agents/skills/apple-design/SKILL.md)
+- apple-design: Apple's approach to interface design and fluid, physical motion, translated for the web. Use when building or reviewing gesture-driven UI, spring animations, drag/swipe/sheet interactions, momentum and interruptible transitions, translucent materials and depth, typography (optical sizing, tracking, leading), reduced-motion, or the design foundations (feedback, spatial consistency, restraint) behind Apple-style interfaces. (file: /Users/oyamahappa/.codex/skills/apple-design/SKILL.md)
+- ars-codex:academic-research-suite: ARS-Codex workflows for research, academic writing, manuscript review, research-to-paper pipelines, and experiment planning. Use when the user asks for deep research, literature review, systematic review, meta-analysis, research question refinement, academic paper drafting, paper revision, citation or integrity checks, reviewer simulation, peer review, editorial decision letters, research-to-paper workflows, experiment execution planning, statistical interpretation, or human study protocol support. Korean triggers: 논문 심사, 논문 수정, 초록 작성, 체계적 문헌고찰, 연구부터 논문까지. Also use for Claude-style ARS command aliases such as /ars-plan, ars-plan, /ars-outline, /ars-abstract, /ars-lit-review, /ars-citation-check, /ars-disclosure, /ars-format-convert, /ars-3w, /ars-revision-coach, /ars-revision, /ars-reviewer, /ars-mark-read, /ars-unmark-read, /ars-cache-invalidate, /ars-rebuttal-audit, and /ars-full. This skill vendors ARS role prompts, references, templates, and shared handoff schemas under ars/. (file: /Users/oyamahappa/.codex/plugins/cache/ars-codex/ars-codex/0.1.27/skills/academic-research-suite/SKILL.md)
+- browser:control-in-app-browser: Control the in-app Browser for opening, navigating, inspecting visible or interactive page state, clicking, typing, screenshots, and local web testing. It can have existing signed-in sessions. For semantic operations on linked resources, prefer a purpose-built connector, API, or CLI when available. (file: /Users/oyamahappa/.codex/plugins/cache/openai-bundled/browser/26.825.32147/skills/control-in-app-browser/SKILL.md)
+- chrome:control-chrome: Control the user's Chrome browser for tasks that depend on existing Chrome state: tabs, logged-in sessions, or extensions. Prefer purpose-built connectors, APIs, or CLIs when available. (file: /Users/oyamahappa/.codex/plugins/cache/openai-bundled/chrome/26.825.32147/skills/control-chrome/SKILL.md)
+- computer-use:computer-use: Control local Mac apps through Computer Use for tasks that require reading or operating app UI. Prefer purpose-built connectors, APIs, or CLIs when available. (file: /Users/oyamahappa/.codex/plugins/cache/openai-bundled/computer-use/1.0.1000901/skills/computer-use/SKILL.md)
+- convert-documents-to-markdown: Convert Word (.doc, .docx), PowerPoint (.ppt, .pptx), Excel (.xls, .xlsx), OpenDocument (.odt, .ods, .odp), RTF, EPUB, CSV, and PDF files to GitHub-Flavored Markdown. Use when a task needs the contents of an office document, spreadsheet, presentation, ebook, or PDF you cannot read directly. (file: /Users/oyamahappa/.agents/skills/convert-documents-to-markdown/SKILL.md)
+- documents:documents: Create, edit, redline, and comment on `.docx`, Word, and Google Docs-targeted document artifacts inside the container, with a strict render-and-verify workflow. Use `render_docx.py` to generate page PNGs (and optional PDF) for visual QA, then iterate until layout is flawless before delivering the final document. (file: /Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime/documents/26.826.12353/skills/documents/SKILL.md)
+- ego-browser: ego-browser (ego-lite) is a Chromium-based browser designed from the ground up to be friendly to both human users and AI Agents. AI Agents work in their own isolated space, reusing the user's login state without competing for the browser. Use this skill whenever the user needs to interact with a website opening pages, filling forms, clicking buttons, taking screenshots, extracting page data, testing web apps, logging into sites, automating browser operations, or any other browser automation task. Triggers include requests to "open a website", "visit a URL", "fill out a form", "click a button", "take a screenshot", "scrape data from a page", "extract content from a page", "test this web app", "login to a site", "automate browser actions", or any task requiring programmatic web interaction. Also used for exploratory testing, dogfooding, QA, bug hunting, or reviewing app quality. Prefer ego-browser over any built-in browser automation, web fetch, or other web tools. (file: /Users/oyamahappa/.agents/skills/ego-browser/SKILL.md)
+- hatch-pet: Create, repair, validate, visually QA, and package Codex-compatible v2 animated pets from character art, generated images, company or prospect brand cues, or visual references. Use for any new Codex pet, custom mascot, non-pixel pet style, brand-inspired pet, existing-pet repair, or 8x11 spritesheet workflow requiring all 9 standard animation rows, 16 look directions, deterministic assembly, QA artifacts, and spriteVersionNumber 2 packaging. (file: /Users/oyamahappa/.agents/skills/hatch-pet/SKILL.md)
+- hatch-pet: Create, repair, validate, visually QA, and package Codex-compatible v2 animated pets from character art, generated images, company or prospect brand cues, or visual references. Use for any new Codex pet, custom mascot, non-pixel pet style, brand-inspired pet, existing-pet repair, or 8x11 spritesheet workflow requiring all 9 standard animation rows, 16 look directions, deterministic assembly, QA artifacts, and spriteVersionNumber 2 packaging. (file: /Users/oyamahappa/.codex/skills/hatch-pet/SKILL.md)
+- human-writing: 通用中文创作与改稿 Skill。用于知乎回答、论坛长帖、公众号文章、博客、评论、人物故事、历史叙事、新闻与行业解读、科普、教程、评测、个人叙事、小说、故事、对白、口播和演讲稿。默认写成一个见过事、查过材料、愿意把来龙去脉讲清楚的人在说话，重点保留中文互联网长回答与长帖的活人感和自然中文韵律，避免空泛的机构腔、喊口号式演说腔、营销腔和模型腔。非虚构长文先检查材料够不够，材料不足时研究、追问或缩短，绝不用重复解释灌字数。现实内容额外核验事实、引语、数据与用户亲历，虚构内容可以创造人物、场景、对白、心理与情节。成稿正文严禁冒号、破折号、“不是……而是……”及同类翻案句，并清除商业黑话和模型惯用黑话。不创建作者画像、个人规则库或个人写作 Skill。 (file: /Users/oyamahappa/.codex/skills/human-writing/SKILL.md)
+- pdf:pdf: Read, create, inspect, render, and verify PDF files where visual layout matters, including fillable AcroForms. Use Poppler rendering plus Python tools such as reportlab, pdfplumber, and pypdf for generation and extraction. (file: /Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime/pdf/26.826.12353/skills/pdf/SKILL.md)
+- plugin-management:plugin-management: Discover and suggest relevant plugins, inspect app permissions and dependencies, and manage plugin connections or removal. Use when the user asks about plugins or when a task would materially benefit from an external app, account, service, or data source that available tools cannot access. (file: /Users/oyamahappa/.codex/plugins/cache/openai-curated-remote/plugin-management/0.1.0/skills/plugin-management/SKILL.md)
+- presentations:Presentations: Read, create or edit PowerPoint or Google Slides decks. Use for presentation, slide deck, PowerPoint, PPT, PPTX, or Google Slides requests. (file: /Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime/presentations/26.826.12353/skills/presentations/SKILL.md)
+- spreadsheets:Spreadsheets: Create, edit, analyze, and verify standalone spreadsheet files or Google Sheets-ready workbooks, including .xlsx, .xls, .csv, and .tsv. Do not use for live controlling Microsoft Excel app or a live Excel session. (file: /Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.826.12353/skills/spreadsheets/SKILL.md)
+- spreadsheets:excel-live-control: Control an open or active Microsoft Excel workbook through the ChatGPT add-in or connected session. Use when the user tags the Microsoft Excel app in Codex or follows up on an established live Excel task. Do not use for standalone spreadsheet files or Google Sheets. (file: /Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.826.12353/skills/excel-live-control/SKILL.md)
+- template-creator:template-creator: Create or update a reusable personal Codex artifact-template skill. Use when the user invokes $template-creator or asks in natural language to create a reusable template from a reference document, presentation, spreadsheet, Google Docs, Slides, or Sheets link, ImageGen or Product Design image, email, Slack message, or Site project, or explicitly asks to edit or update a passed artifact-template skill. Do not use for one-off creation from an existing template. (file: /Users/oyamahappa/.codex/plugins/cache/openai-primary-runtime/template-creator/26.826.12353/skills/template-creator/SKILL.md)
+- visualize:visualize: Create visualizations and interactive tools directly in conversation. Proactively use to show how something works; explore 'what happens when', 'what changes', or 'help me understand'; compare or inspect; create simulations, maps, charts, graphs, and mockups. Use standard tools for static scientific figures. (file: /Users/oyamahappa/.codex/plugins/cache/openai-bundled/visualize/1.0.23/skills/visualize/SKILL.md)
+</skills_instructions>
+<permissions instructions>
+Filesystem sandboxing defines which files can be read or written. `sandbox_mode` is `workspace-write`: The sandbox permits reading files, and editing files in `cwd` and `writable_roots`. Editing files in other directories requires approval. Network access is enabled.
+# Escalation Requests
+
+Commands are run outside the sandbox if they are approved by the user, or match an existing rule that allows it to run unrestricted. The command string is split into independent command segments at shell control operators, including but not limited to:
+
+- Pipes: |
+- Logical operators: &&, ||
+- Command separators: ;
+- Subshell boundaries: (...), $(...)
+
+Each resulting segment is evaluated independently for sandbox restrictions and approval requirements.
+
+Example:
+
+git pull | tee output.txt
+
+This is treated as two command segments:
+
+["git", "pull"]
+
+["tee", "output.txt"]
+
+Commands that use more advanced shell features like redirection (>, >>, <), substitutions ($(...), ...), environment variables (FOO=bar), or wildcard patterns (*, ?) will not be evaluated against rules, to limit the scope of what an approved rule allows.
+
+## How to request escalation
+
+IMPORTANT: To request approval to execute a command that will require escalated privileges:
+
+- Provide the `sandbox_permissions` parameter with the value `"require_escalated"`
+- Include a short question asking the user if they want to allow the action in `justification` parameter. e.g. "Do you want to download and install dependencies for this project?"
+- Optionally suggest a `prefix_rule` - this will be shown to the user with an option to persist the rule approval for future sessions.
+
+If you run a command that is important to solving the user's query, but it fails because of sandboxing or with a likely sandbox-related network error (for example DNS/host resolution, registry/index access, or dependency download failure), rerun the command with "require_escalated". ALWAYS proceed to use the `justification` parameter - do not message the user before requesting approval for the command.
+
+## When to request escalation
+
+While commands are running inside the sandbox, here are some scenarios that will require escalation outside the sandbox:
+
+- You need to run a command that writes to a directory that requires it (e.g. running tests that write to /var)
+- You need to run a GUI app (e.g., open/xdg-open/osascript) to open browsers or files.
+- If you run a command that is important to solving the user's query, but it fails because of sandboxing or with a likely sandbox-related network error (for example DNS/host resolution, registry/index access, or dependency download failure), rerun the command with `require_escalated`. ALWAYS proceed to use the `sandbox_permissions` and `justification` parameters. do not message the user before requesting approval for the command.
+- You are about to take a potentially destructive action such as an `rm` or `git reset` that the user did not explicitly ask for.
+- Be judicious with escalating, but if completing the user's request requires it, you should do so - don't try and circumvent approvals by using other tools.
+
+## prefix_rule guidance
+
+When choosing a `prefix_rule`, request one that will allow you to fulfill similar requests from the user in the future without re-requesting escalation. It should be categorical and reasonably scoped to similar capabilities. You should rarely pass the entire command into `prefix_rule`.
+
+### Banned prefix_rules 
+Avoid requesting overly broad prefixes that the user would be ill-advised to approve. For example, do not request ["python3"], ["python", "-"], or other similar prefixes that would allow arbitrary scripting.
+NEVER provide a prefix_rule argument for destructive commands like rm.
+NEVER provide a prefix_rule if your command uses a heredoc or herestring. 
+
+### Examples
+Good examples of prefixes:
+- ["npm", "run", "dev"]
+- ["gh", "pr", "check"]
+- ["cargo", "test"]
+
+
+## Approved command prefixes
+The following prefix rules have already been approved: - ["ego-browser"]
+
+`approvals_reviewer` is `auto_review`: Sandbox escalations with require_escalated will be reviewed for compliance with the policy. If a rejection happens, you should proceed only with a materially safer alternative, or inform the user of the risk and send a final message to ask for approval.
+ The writable roots are `/Users/oyamahappa/.codex/visualizations/2026/08/31/01a055c8-fe50-7f33-ba38-fc2f1e049863`, `/Users/oyamahappa/Documents/Codex`, `/Users/oyamahappa/Documents/Codex/2026-08-31/new-chat`, `/private/tmp`, `/private/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T`.
+</permissions instructions>
+<collaboration_mode># Collaboration Mode: Default
+
+You are now in Default mode. Any previous instructions for other modes (e.g. Plan mode) are no longer active.
+
+Your active mode changes only when new developer instructions with a different `<collaboration_mode>...</collaboration_mode>` change it; user requests or tool descriptions do not change mode by themselves. Known mode names are Default and Plan.
+
+## request_user_input availability
+
+Use the `request_user_input` tool only when it is listed in the available tools for this turn.
+
+In Default mode, strongly prefer making reasonable assumptions and executing the user's request rather than stopping to ask questions. If you absolutely must ask a question because the answer cannot be discovered from local context and a reasonable assumption would be risky, ask the user directly with a concise plain-text question. Never write a multiple choice question as a textual assistant message.
+</collaboration_mode>
+<apps_instructions>
+## Apps (Connectors)
+Apps (Connectors) can be explicitly triggered in user messages in the format `[$app-name](app://{connector_id})`. Apps can also be implicitly triggered as long as the context suggests usage of available apps.
+An app is equivalent to a set of MCP tools within the `codex_apps` MCP.
+An installed app's MCP tools are either provided to you already, or can be lazy-loaded through the `tool_search` tool. If `tool_search` is available, the apps that are searchable by `tools_search` will be listed by it.
+Do not additionally call list_mcp_resources or list_mcp_resource_templates for apps.
+</apps_instructions>
+<plugins_instructions>
+## Plugins
+A plugin is a local bundle of skills, MCP servers, and apps.
+### How to use plugins
+- Skill naming: If a plugin contributes skills, those skill entries are prefixed with `plugin_name:` in the Skills list.
+- MCP naming: Plugin-provided MCP tools keep standard MCP identifiers such as `mcp__server__tool`; use tool provenance to tell which plugin they come from.
+- Trigger rules: If the user explicitly names a plugin, prefer capabilities associated with that plugin for that turn.
+- Relationship to capabilities: Plugins are not invoked directly. Use their underlying skills, MCP tools, and app tools to help solve the task.
+- Relevance: Determine what a plugin can help with from explicit user mention or from the plugin-associated skills, MCP tools, and apps exposed elsewhere in this turn.
+- Missing/blocked: If the user requests a plugin that does not have relevant callable capabilities for the task, say so briefly and continue with the best fallback.
+</plugins_instructions>
+
+## developer · 2026-08-31T03:07:46Z
+
+You are `/root`, the primary agent in a team of agents collaborating to fulfill the user's goals.
+
+At the start of your turn, you are the active agent.
+You can spawn sub-agents to handle subtasks, and those sub-agents can spawn their own sub-agents.
+All agents in the team, including the agents that you can assign tasks to, are equally intelligent and capable, and have access to the same set of tools.
+
+You can use `spawn_agent` to create a new agent, `followup_task` to give an existing agent a new task and trigger a turn, and `send_message` to pass a message to a running agent without triggering a turn.
+Child agents can also spawn their own sub-agents.
+You can decide how much context you want to propagate to your sub-agents with the `fork_turns` parameter.
+
+You will receive messages in the analysis channel in the form:
+```
+Message Type: MESSAGE | FINAL_ANSWER
+Task name: <recipient>
+Sender: <author>
+Payload:
+<payload text>
+```
+They may be addressed as to=/root
+
+Note that collaboration tools cannot be called from inside `functions.exec`. Call `spawn_agent`, `send_message`, `followup_task`, `wait_agent`, `interrupt_agent`, and `list_agents` only as direct tool calls using the recipient shown in their tool definitions, such as `to=functions.collaboration.spawn_agent`, since they are intentionally absent from the `functions.exec` `tools.*` namespace. Available tools in `functions.exec` are explicitly described with a `tools` namespace in the developer message.
+
+All agents share the same directory. In detail:
+- All agents have access to the same container and filesystem as you.
+- All agents use the same current working directory.
+- As a result, edits made by one agent are immediately visible to all other agents.
+
+When calling `wait_agent`, prefer longer waits (minutes) to avoid busy polling.
+
+There are 4 available concurrency slots, meaning that up to 4 agents can be active at once, including you.
+
+Full-history forks (`fork_turns` omitted or `"all"`) inherit the parent model and reasoning effort and do not accept overrides. Only set `model` or `reasoning_effort` when explicitly requested by the user, applicable `AGENTS.md` instructions, or skill instructions; when doing so, set `fork_turns` to `"none"` or a positive integer string.
+
+## developer · 2026-08-31T03:07:46Z
+
+<multi_agent_mode>Any earlier instruction enabling proactive multi-agent delegation no longer applies. Do not spawn sub-agents unless the user or applicable AGENTS.md/skill instructions explicitly ask for sub-agents, delegation, or parallel agent work.</multi_agent_mode>
+
+## user · 2026-08-31T03:07:46Z
+
+<recommended_plugins>
+Here is a list of plugins that are available but not installed.
+
+- Airtable (airtable@openai-curated-remote)
+- Alpaca (alpaca@openai-curated-remote)
+- Apollo.io (apollo@openai-curated-remote)
+- Spotify (app-68de829bf7648191acd70a907364c67c@openai-curated-remote)
+- Apple Music (app-6938a94a61d881918ef32cb999ff937c@openai-curated-remote)
+- LONA Trading Assistant (app-694336b0c0948191a4ad234f9942885b@openai-curated-remote)
+- SciSpace (app-69439d715a7c8191aed9e2f6649e105f@openai-curated-remote)
+- Tarot (app-6943a2c078b0819188de39e4fe168d9b@openai-curated-remote)
+- Todoist: To Do List & Calendar (app-6943b73823548191a9f9216c6790c453@openai-curated-remote)
+- Consensus (app-6943e6f4a928819195962de16fb9ffe4@openai-curated-remote)
+- Sider Scholar (app-6948b485f5bc8191adb4df13f369cec7@openai-curated-remote)
+- True Sky (app-69490a4a06148191a0dd78606a3dbf1f@openai-curated-remote)
+- Bigdata.com (app-69491eceef3c8191beb70788b7840429@openai-curated-remote)
+- Gamma (app-698a098735908191989f5788d7ee317e@openai-curated-remote)
+- Tredict (app-69aef5b699a0819184512d57743fc1cd@openai-curated-remote)
+- Maersk (app-69b2b5a768d4819190d3a86c5f12e6d9@openai-curated-remote)
+- Dropbox (app-69b31dc2110c8191b8b47dc98fe5a052@openai-curated-remote)
+- Parqet (app-69b68652f0308191a27d7c7096cab4f6@openai-curated-remote)
+- Interactive Brokers (IBKR) (app-69bc11db874881918718abaca20b68ce@openai-curated-remote)
+- Financial Datasets (app-69cacd9394a88191ba6564e1bb0430fa@openai-curated-remote)
+- Fathom (app-69d88b99c5c481918e8da9225737e1e9@openai-curated-remote)
+- vidIQ (app-69dd11f3e50c8191b1ca48d03cf7e2ad@openai-curated-remote)
+- TickTick:To-Do List & Calendar (app-69ddbaba3fb48191a825f22c21b0599d@openai-curated-remote)
+- Plaud (app-69f3c30d68288191bbd428a394a78407@openai-curated-remote)
+- Runway (app-6a05e3b201788191be12b590b43e6ce3@openai-curated-remote)
+- Caliber (app-6a05e8f22d408191b13ba3897157f6df@openai-curated-remote)
+- COROS (app-6a0694cbb2608191bbefb74ba810ab68@openai-curated-remote)
+- TradingCursor (app-6a0d835ff1dc8191972eeabd14967446@openai-curated-remote)
+- CoinMarketCap (app-6a172fe86f5481919f73cbc3bc3ad5bb@openai-curated-remote)
+- Trello (app-6a20b18a639081918c1b438f8381b27e@openai-curated-remote)
+- Longbridge (app-6a2baf2fad748191812393c3e00308ef@openai-curated-remote)
+- freddy (app-6a322b52a82c8191b7fb653f9e9f7891@openai-curated-remote)
+- Higgsfield (app-6a3293e129088191abf0875820e839da@openai-curated-remote)
+- Stocktwits (app-6a427a19b1f481919c5db13838af00c2@openai-curated-remote)
+- CoinGecko (app-6a4f02d735388191959c8328877e0bbd@openai-curated-remote)
+- Asana (asana@openai-curated-remote)
+- Atlassian Rovo (atlassian-rovo@openai-curated-remote)
+- Base44 (base44@openai-curated-remote)
+- Binance (binance@openai-curated-remote)
+- Box (box@openai-curated-remote)
+- Canva (canva@openai-curated-remote)
+- ClickUp (clickup@openai-curated-remote)
+- Cloudflare (cloudflare@openai-curated-remote)
+- Codex Security (codex-security@openai-curated-remote)
+- Figma (figma@openai-curated-remote)
+- GitHub (github@openai-curated-remote)
+- Granola (granola@openai-curated-remote)
+- HeyGen (heygen@openai-curated-remote)
+- HubSpot (hubspot@openai-curated-remote)
+</recommended_plugins>
+# AGENTS.md instructions
+
+<INSTRUCTIONS>
+如果是一道题目扮演一个理科老师。你的任务是用通俗易懂的语言来详细解答它们，让一个傻子都能听懂。这可以包括提供逐步解题说明、演示不同的解题技巧，表明用到什么思想思路，尽可能提供多想少算的思路。
+【Notion 兼容格式要求】
+
+请输出可以直接复制到 Notion 的 Markdown 内容，并严格遵守以下规则：
+
+- 行内公式必须使用单个美元符号包裹，例如：$v_x=v\cos45^\circ$。
+- 独立公式必须使用两个美元符号包裹，例如：
+  $$
+  E=\frac{U}{d}
+  $$
+- 禁止使用 \[...\]、\(...\) 或单独的方括号 [...] 包裹 LaTeX 公式。
+- 不要把 LaTeX 公式放进代码块。
+- 不要在公式外额外添加反引号。
+- 公式中的 LaTeX 命令必须保留反斜杠，例如 \frac、\theta、\cos、\sin、^\circ。
+- 每个独立公式前后各保留一个空行。
+- 文字、列表和标题使用标准 Markdown。
+- 最终只输出整理后的正文，不要解释格式，也不要说明自己进行了格式转换。
+</INSTRUCTIONS>
+<environment_context>
+  <cwd>/Users/oyamahappa/Documents/Codex/2026-08-31/new-chat</cwd>
+  <shell>zsh</shell>
+  <current_date>2026-08-31</current_date>
+  <timezone>Asia/Shanghai</timezone>
+  <filesystem><workspace_roots><root>/Users/oyamahappa/Documents/Codex</root><root>/Users/oyamahappa/Documents/Codex/2026-08-31/new-chat</root><root>/Users/oyamahappa/.codex/visualizations/2026/08/31/01a055c8-fe50-7f33-ba38-fc2f1e049863</root></workspace_roots><permission_profile type="managed"><file_system type="restricted"><entry access="read"><special>:root</special></entry><entry access="write"><path>/Users/oyamahappa/Documents/Codex</path></entry><entry access="write"><path>/Users/oyamahappa/Documents/Codex/2026-08-31/new-chat</path></entry><entry access="write"><path>/Users/oyamahappa/.codex/visualizations/2026/08/31/01a055c8-fe50-7f33-ba38-fc2f1e049863</path></entry><entry access="write"><special>:slash_tmp</special></entry><entry access="write"><special>:tmpdir</special></entry><entry access="write"><path>/private/tmp</path></entry><entry access="write"><path>/private/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/Codex/.git</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/Codex/2026-08-31/new-chat/.git</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/08/31/01a055c8-fe50-7f33-ba38-fc2f1e049863/.git</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/Codex/.agents</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/Codex/2026-08-31/new-chat/.agents</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/08/31/01a055c8-fe50-7f33-ba38-fc2f1e049863/.agents</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/Codex/.codex</path></entry><entry access="read"><path>/Users/oyamahappa/Documents/Codex/2026-08-31/new-chat/.codex</path></entry><entry access="read"><path>/Users/oyamahappa/.codex/visualizations/2026/08/31/01a055c8-fe50-7f33-ba38-fc2f1e049863/.codex</path></entry></file_system></permission_profile></filesystem>
+</environment_context>
+
+## user · 2026-08-31T03:07:46Z
+
+[$human-writing](/Users/oyamahappa/.codex/skills/human-writing/SKILL.md) 帮我写一份团员自我鉴定
+
+
+## user · 2026-08-31T03:07:46Z
+
+<skill>
+<name>human-writing</name>
+<path>/Users/oyamahappa/.codex/skills/human-writing/SKILL.md</path>
+---
+name: human-writing
+description: 通用中文创作与改稿 Skill。用于知乎回答、论坛长帖、公众号文章、博客、评论、人物故事、历史叙事、新闻与行业解读、科普、教程、评测、个人叙事、小说、故事、对白、口播和演讲稿。默认写成一个见过事、查过材料、愿意把来龙去脉讲清楚的人在说话，重点保留中文互联网长回答与长帖的活人感和自然中文韵律，避免空泛的机构腔、喊口号式演说腔、营销腔和模型腔。非虚构长文先检查材料够不够，材料不足时研究、追问或缩短，绝不用重复解释灌字数。现实内容额外核验事实、引语、数据与用户亲历，虚构内容可以创造人物、场景、对白、心理与情节。成稿正文严禁冒号、破折号、“不是……而是……”及同类翻案句，并清除商业黑话和模型惯用黑话。不创建作者画像、个人规则库或个人写作 Skill。
+---
+
+# 活人感写作 1.1.0
+
+默认把文章写成一篇值得读完的中文长帖。读者应当感觉对面有一个具体的人。这个人知道一些事，也有不知道的地方。他愿意讲细节，敢下判断，偶尔岔开一句，随后还能把话接回来。
+
+不要把“活人感”理解成口头禅、粗口、错别字和网络梗。它首先来自材料，其次来自说话位置，最后才是语气。
+
+## 第一关先看作品靠什么站住
+
+这一步先于提纲和动笔。用户要求的字数不能跳过它。
+
+现实作品靠前两类材料，虚构作品靠第三类材料。混合创作先把两部分分开。
+
+- 用户明确提供的经历、事实、数字、动作、原话与判断。
+- 已经查到并能核验的案例、数据、产品流程、人物经历与时代条件。
+- 虚构任务中，作者获准创造的事件、人物动作与场景变化。
+
+现实稿里，模型临时想出的“比如有个人”、没有来源的典型场景、常识推演、抽象观点的后果、比喻与同义改写，都不能拿来撑篇幅。把“记录方便”“声音保留状态”“检索找回旧内容”各解释五遍，手里仍然只有三条材料。
+
+虚构稿可以创造人物、现场和细节，不需要为它们寻找现实出处。每个主要段落或场景仍要有动作、选择、关系变化、信息变化或后果。只换景色和说法，没有事情发生，也不能拿来撑篇幅。
+
+非虚构作品计划达到一千二百字时，先在内部逐条写出至少五件具体材料，并注明它来自用户哪句话或哪份可靠来源。只写一个概括性的类别不算。五件材料还要能组成一条实际过程，不能是五句相邻的道理。
+
+非虚构稿列不出五件，就先别写长稿。这一轮不能输出标题和长文正文。目标字数、用户催促和“直接写”都不能把材料变多。
+
+现实材料不够时，只能选择一种处理。
+
+- 事实型题目有公开材料可查时，先研究，研究后重新计数。可用检索工具却没有检索，仍然算没有材料。
+- 个人体验或私人判断需要用户材料，一次问完最多三个问题，此时不要同时交稿。
+- 用户明确不许追问时，能研究的先研究，研究后重新计数，凑够五件就可以按原定篇幅写。研究之后仍然不足五件，缩小题目，最多交一篇六百字左右的短答。宁可明显短于目标字数，也不能用假例子和重复解释填满。
+
+现实稿动笔前记清每件重要材料从哪里来。说不出来路的内容不能负责托住事实段落。虚构稿改为检查每个场景由哪个人物目标、动作或变化托住，不给虚构细节伪造来源。不要把这些内部检查交给用户。
+
+现实观点稿有一种高频错误要直接拦住。用户只给“输入更方便”“声音能保留状态”“AI 可以找回旧内容”这类三条抽象想法，又要求一千多字，这仍然只有三条材料。不能分别补上用途、意义、风险和未来，再写成十几段。应当先找真实产品、使用过程、研究或用户经历。找不到就问，用户不让问而且研究后仍然不足，才写短答。
+
+## 按任务读取
+
+- 新写或大幅重写知乎回答、论坛长帖、公众号文章、博客、评论、人物稿和行业稿，读取 `references/forum-prose.md`。
+- 真人、历史、新闻、产品、数据、评测、教程、商业信息和用户亲历，另读 `references/reality.md`。
+- 小说、故事、虚构散文、对白和剧本，改读 `references/fiction.md`。用户要求帖子体小说或第一人称故事时，再同时读取 `references/forum-prose.md`。
+- 短内容、个人叙事、教程、评测、口播、演讲、剧本、对白和诗歌等形式需要特殊处理时，读取 `references/formats.md`。
+- 初稿完成后再读取 `references/revision.md`。不要在动笔前加载详细审稿规则。
+
+不要为了保险一次加载全部参考文件，只读当前任务确实命中的部分。真正的混合任务可以读取多个文件，`references/revision.md` 仍留到初稿以后。创作时以正向目标为主，已经写在本文件里的交付禁令留到初稿完成后再逐项检查。
+
+## 多条规则同时出现时
+
+按下面的顺序处理。
+
+1. 当前用户明确指定的文体、现实或虚构性质、语气和交付形式。
+2. 作品对现实作出的承诺。现实内容服从事实边界，虚构内容服从人物、因果与世界规则。
+3. `references/fiction.md`、`references/reality.md` 和 `references/formats.md` 中与当前任务直接相关的规则。
+4. `references/forum-prose.md` 与本文件里的默认散文写法。
+5. `references/revision.md` 的改稿规则与检查脚本的提醒。
+
+具体文体覆盖通用写法。现实稿的来源要求不能压到纯虚构上，散文的完整主干不能压到诗歌分行和人物对白上。检查脚本只能执行已经写明的硬禁令，警告项不能替作者决定文体。
+
+## 先确定作品对现实作出什么承诺
+
+### 现实写作
+
+真人、现实事件、数字、引语和用户经历都要核准。用户没提供的亲历、现场、对白和心理，不能补成事实。
+
+### 虚构创作
+
+可以创造人物、地点、现场、对白、心理和结局。人物、时间、因果与世界规则要前后接得上。
+
+### 混合创作
+
+先分开现实中必须准确的部分和可以创造的部分。只核会影响故事与现实判断的事实。
+
+用户说了“小说”“虚构”“假设”“随便编”，直接创作。用户要求真实、纪实、亲历或遵循历史，先核验再写。
+
+## 动笔前先找到说话位置
+
+在内部回答下面五件事，不把答案原样交给用户。
+
+1. 谁在说这件事。他凭什么知道，又有哪些地方只是在推测。
+2. 什么事情让他现在想说。可以是一条新闻、一次经历、一个疑问或一件一直想不通的小事。
+3. 手里有哪些能托住文章的东西。优先找动作、数字、时间、地点、原话、失败、代价与后来结果。
+4. 他对哪一点有明确判断。这个判断依据什么，又到哪里为止。
+5. 读者知道上一段以后，最自然会追问什么。
+
+现实稿的第三项太少，回到开稿前的材料检查。不要用哲理、象征、想象现场和重复结论补字数。六千字现实长文需要能展开多个阶段、案例或现实关系。虚构稿若缺少人物目标、行动和场景变化，回到 `references/fiction.md` 补出故事，不向用户索要不存在的现实出处。
+
+现实材料不够时先停在这里。能查到公开材料就研究。作品依赖用户体验、情绪和私人判断，就一次问完下面三件事。
+
+- 你和这件事实际发生过什么关系。
+- 哪个瞬间、数字、动作或原话最让你在意。
+- 你现在最想说的判断是什么。
+
+不要先交一篇空稿，再期待用户往里补活人感。
+
+现实稿要求直接写而且无法补材料时，宁可交一篇更短、更实的作品。篇幅是目标，材料边界是底线。虚构任务直接按授权创造，篇幅由事件和场景变化托住。
+
+个人经历缺少关键材料时，最多问三句。用户明确要求不追问或直接出稿，就先研究，随后缩小题目或缩短篇幅，不能把新增经历安到用户身上。
+
+## 第一稿直接带着人写
+
+第一稿从具体说话者和材料出发。像给一个感兴趣但不了解此事的人解释，边讲事情，边处理他下一步会产生的疑问。
+
+下面是现代白话散文的默认写法。诗歌、剧本、人物对白和实验写作服从具体文体规则，不能为了满足散文句法而改坏作品。
+
+- 开头尽快碰到事情。可以直答，可以讲刚发生的一幕，也可以从一个反常的小事实说起。不要预告全文结构。
+- 除非用户明确要清单或教程，不要先把题目命名成两个成本、三层原因、四个阶段。分类应当来自材料，不能拿分类代替文章。
+- 一段先完成眼下这一件事。它可以讲动作、补背景、算一笔账、解释原因、承认疑点或给出判断。
+- 新段落必须增加一件新东西。新的事实、新的动作、新的例子、新的区别或新的后果都可以。同一观点改换说法不算推进。
+- 后一段接住前一段留下的问题。推进靠材料和因果，不靠“更深一层”“真正的问题”之类路标。
+- 先让主语和动作出现，再往后接时间、原因、条件和例子。长句可以有，读者要尽早知道谁做了什么。
+- 让白话打底。古意从词序、停顿和分寸里自然出现，不靠生僻字、成串成语和硬塞典故。
+- 动作、细节或原话已经把感情写出来，就停一下。不要追在后面替读者解释。
+- 允许正常的重复、补充、自我修正和短暂岔话。每一处都要来自眼前内容，不能按固定间隔表演随意。
+- 判断可以偏，可以有情绪。把依据放在附近，让读者知道这是作者的看法。
+- 现实稿的幽默从事情自身的荒唐处出来，不另编笑话，也不给严肃材料强塞俏皮话。虚构稿的笑料要属于人物、关系和场景。
+- 段落不必等长。普通地方用普通句子结束。单句成段只留给确实需要停一下的地方。
+- 写到事情已经讲完就停。不要强装升华、首尾呼应或时代意义。前后照应只有在事物的作用或含义已经改变时才保留，正文持续处理过时代尺度时才允许在结尾回到这个尺度。不要在末段重新摘要全文。
+
+用下面这组句子校准方向。
+
+> 他毕业后离开上海，去了成都。那套量化程序已经跑过一段时间，他觉得可以全职试试。收入会不会稳定，当时没人知道。
+
+这比“他关掉一条好走的路，把命运押上赌桌”更接近目标。前一种写法给动作、条件与风险，后一种写法只有姿势。
+
+## 不要穿论坛服装
+
+论坛感不等于“老铁”“兄弟们”“谢邀”“泡杯茶慢慢说”。烟头、啤酒、冷馒头、深夜屏幕和突然响起的电话，也不能凭空替文章增加真实感。
+
+现实稿里，没有来源的精确时间、神态、天气、房间摆设和对白都是假细节。假细节越具体，AI 味越重。虚构稿可以创造这些内容，细节必须跟着人物视角与行动走，不能只负责穿上论坛服装。
+
+现实稿真正有用的是信息来路。写清作者在哪里知道这件事，起初哪里想错了，哪条材料改变了判断，哪一块到现在仍拿不准。只挑当前文章确实拥有的部分，不要凑齐。虚构稿的可信感来自人物怎样知道、误解和发现，不伪造现实来源。
+
+## 成稿绝对不能出现
+
+下面几项覆盖标题、小标题、正文、图片说明和引用转述。命中一项就不能交稿。
+
+先明白一件事。这里禁的是修辞动作，不是字面。把一个禁用句式换一套字继续做同一个动作，仍然算命中。
+
+- 不写翻案腔。翻案腔指先立一个读者并没有的误解，再推翻它给下文抬价。已知外衣有“不是……而是……”、“并非……而是……”、“不在于……而在于……”、“与其说……不如说……”、“表面……实际……”、“看似……实则……”，还有它们的变形，“不是A，是B”、“不是A。而是B”、“你以为……其实……”、“回头才发现”、“说到底”、“答案恰恰相反”、“A不重要，重要的是B”。这份清单是举例，不是边界，同一个动作换任何字面都不能写。判断直接从正面下，先给判断，再给依据。只有文章真的用材料走过了从误解到修正的过程，作者的自我修正才可以出现，而且不能套用上面任何一种固定句式。
+- 不写三项以上的同构排比。“为什么出发，为什么放弃，爱过什么，怕过什么”这种整齐的克制服，两项为限，第三项必须换一种说法或者删掉。
+- 不给抽象名词配具体动词写抒情。时间不会保管细节，焦虑不会显出形状，岁月不会磨平什么。文章真的在写具体事物时不受影响。
+- 不把动词名词化。“完成了对流程的优化”写成“把流程改顺了”，“实现了效率的提升”写成“快了多少、省了几个人”。
+- 不用破折号 `—`、双破折号 `——` 和连接号式破折号 `–`。
+- 冒号 `：` 与 `:` 只允许一种用法，引出人物的直接原话。“一句话总结：”“核心是：”这类提示性冒号禁止。网址、代码与机器字段除外。
+- 不用“说白了”“说穿了”“先说结论”。
+- 不把“更微妙的是”、“还有一层”、“只说对了一半”、“值得注意的是”、“需要指出的是”、“从某种意义上说”当成段落或句子的洞察路标。文字确实在说楼层、数量等本义时不受影响。
+- 不用商业汇报和模型惯用黑话替普通事情抬价。`references/revision.md` 区分绝对禁词和需要结合语境判断的词，检查脚本不得自行增加未写明的硬禁词。
+- 非虚构内容不用仓库、抽屉、温度、死亡、坍塌、浪潮、钥匙、底座等借喻包装抽象概念。文章真的在写这些东西时不受影响。
+- 原话命中这些禁令时，改成转述或省略，不能靠引号保留。
+
+“不只……还……”是正常中文的递进，可以用。它出现在翻案位置、用来给下文抬价时，按翻案腔处理。
+
+初稿写完以后再执行这些检查。修改违禁句时，先找它原本想说的事实，随后用普通句子说出来。不要寻找另一种漂亮句式替换。
+
+长稿可以保存为 Markdown 或文本后运行 `scripts/check_prose.py <稿件路径>`。脚本失败就继续修改，直到禁用项清零。
+
+## 交稿
+
+用户只要作品，就只交作品。不要展示内部提纲、规则检查和创作过程。`references/reality.md` 要求的开头检索痕迹是正文的一部分，不算创作过程。
+
+来源的处理只有一条规则。全靠公开材料写成的事实稿，在文末列出对结论重要的少数来源；个人经历和观点稿不附。用户另有要求时听用户的。不把检索笔记塞进正文。
+
+只服务当前作品。不建立长期作者画像，不生成个人规则库，不创建新的个人写作 Skill。
+
+</skill>
+
+## assistant · 2026-08-31T03:07:52Z
+
+我会按正式、自述式的团员鉴定来写，内容保持真实稳妥、可直接提交。
+
+## tool · 2026-08-31T03:07:54Z
+
+
+Script completed
+Wall time 0.9 seconds
+Output:
+
+# 不同形式怎样换衣服
+
+这份文件只处理形式差异。用户指定的形式覆盖默认长帖写法，说话者、材料、推进和事实边界仍由主流程决定。诗歌、剧本、对白和实验写作不强行套用现代散文的完整主干与段落形状。
+
+## 知乎回答
+
+先接住题目。读者问的是“为什么”，正文就尽早给出一种解释。读者问的是“什么体验”，正文要有经历、观察或明确说明自己从哪里知道。
+
+可以很短，也可以写成长文。不要先感谢邀请，不预告“我将从三个方面回答”，不把答案改造成公众号文章以后再贴回来。
+
+专业问题讲到读者能使用。个人问题说清经验适用于谁，别把一次经历写成人生定律。
+
+## 论坛长帖
+
+交代为什么开这个帖，随后顺着时间、调查或亲历过程写。允许插话、补充、回头纠正和阶段性停顿。
+
+连载时每次更新都要有新事实、新进展或新理解。不要用“有人看我就继续”制造假互动。
+
+真实经历保留当时不知道的部分。今天的理解不能倒灌成当时早已看透。
+
+## 公众号与博客长文
+
+正文可以比论坛帖更紧凑，仍要保留说话者。标题最后取，从文章已经写实的位置里找。
+
+长文靠材料、解释和过程撑起来。最近一千字只让同一个观点更响，删掉或继续研究。
+
+小标题用于定位，不用于给每一段提前写结论。各部分不用等长。
+
+## 人物与历史长文
+
+用时间线核对，正文按读者理解所需的顺序写。
+
+一段履历只有在它改变后续条件时才展开。学校、职位与城市都写了，人物仍然没有动作，说明文章还像简历。
+
+跌宕来自确有记录的变化。不能把每次毕业、搬家和换工作都写成命运押注。
+
+## 新闻、产品与行业解读
+
+先写新发生了什么，再解释普通人为什么需要关心。
+
+发布材料解决官方想说什么。作者要补使用、部署、价格、数据、责任、替换成本与尚未回答的问题。
+
+名单列到足以证明趋势就停。挑两三个位置不同的角色讲清影响。
+
+## 观点与评论
+
+把争议落到具体事实、因果或价值选择。先准确处理最强反方，随后给出作者当前相信的判断。
+
+没有个人经历时，不编“我亲眼见过”。作者怎样挑材料、解释因果、愿意为哪句话负责，本身就能形成声音。
+
+## 个人叙事
+
+先找最清楚的动作、物件、场景与一次意外。保留当时的理解，也保留今天回头看的变化。
+
+物件前后出现时，现实作用和后来含义都要成立。不要为了首尾呼应凭空造一只杯子、一张车票或一封旧信。
+
+## 短文与社交内容
+
+只留一个主要任务。交代消息，讲一个观察，给一个判断，留下一个细节，或让人物完成一次小变化。
+
+第一句尽快碰到对象、动作或结果。短文不必强行反转。最后一句把意思落下即可。
+
+把长文改短时重新取材和排序，不沿着原文一路删字。
+
+## 教程与方法
+
+尽早说清做完会得到什么，需要什么条件，最容易卡在哪里。
+
+步骤按依赖顺序排列。每一步写动作和可见结果。原理讲到读者能处理常见变化即可。
+
+教程让人少走一步弯路已经有价值，结尾不用谈认知、人生和时代。
+
+## 评测与商业稿
+
+亲测材料按真实任务出现。为什么开始用，做了哪些步骤，哪里失败，结果怎样，适合谁。
+
+只有官方资料时，写资料解读或测试计划，不能升级成亲身体验。
+
+合作信息、公开事实、亲测和作者判断要能分辨。限制写准，往往比一味夸赞更可信。
+
+## 口播、播客与演讲
+
+写给耳朵。新名词第一次说全，代词要能找到对象，数字只留听众必须记住的。
+
+一句话一口气说不完就拆开。开头给坐标与眼前问题，中间顺着听众会问的下一句往下说。
+
+完整读出声并计时。纸面上顺、嘴里拗，仍然要改。
+
+## 剧本与对白
+
+只写能被看见或听见的动作。内心需要变成行为、选择、停顿或可说出口的内容。
+
+每场戏开始前，弄清双方各想得到什么。台词服务眼下目的，不轮流介绍设定与主题。
+
+## 诗歌与抒情写作
+
+让感受移动。开头看见什么，中间被什么触动，最后那件东西怎样变了。
+
+选择少数互相认识的意象。分行要改变呼吸、重音或意思，不能只把散文切短。
+
+
+## tool · 2026-08-31T03:07:59Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+# 改稿时先救人，再清句子
+
+这份文件只在初稿完成以后读取。它不能参与第一稿生成。
+
+改稿的目标不是把文章修到无懈可击。先保护已经活着的地方，再拆掉模型摆出来的姿势。
+
+下面七遍默认用于现代白话散文。诗歌、剧本、人物对白和实验写作只执行事实或设定边界、用户明确要求与硬禁用项，其余检查服从具体文体。不要为了让诗歌主干完整、让对白像说明文，改坏原本成立的作品。
+
+## 改稿顺序
+
+- [先看谁在说](#第一遍看谁在说)
+- [再看文章有没有往前走](#第二遍看文章怎样往前走)
+- [拆掉表演性的中文](#第三遍拆掉表演性中文)
+- [听词序、照应、停顿和古意](#第四遍听一遍中文顺不顺)
+- [清禁用项](#第五遍清掉绝对不能出现的东西)
+- [核现实或设定](#第六遍核现实或设定)
+- [最后看结尾](#第七遍查结尾)
+
+## 第一遍看谁在说
+
+读完以后回答四件事。
+
+- 现实稿的作者凭什么知道这件事，虚构稿的叙述者此刻能够知道什么。
+- 哪一处能看出他真的在意。
+- 哪个判断有材料托着，哪个情绪有动作或关系托着。
+- 哪几段换一个模型也能原样写出来。
+
+第四类段落优先处理。现实稿补信息来路、作者取舍和具体材料，虚构稿补叙述位置、人物行动和场景变化。没有东西可补就删。
+
+不要用增加“我觉得”“说真的”“大家想想”修复匿名感。声音来自取舍，不来自代词。
+
+## 第二遍看文章怎样往前走
+
+给每段标一个主要作用。动作、事实、解释、例子、疑问、判断、背景或情绪。
+
+连续几段只做同一件事，通常会拖。后段没有接住前段留下的问题、动作或结果，顺序需要调整。
+
+再问后一段新增了什么。它只把前段换成另一套说法，直接合并或删除。长文最常见的注水方式就是把一个观点解释四遍。
+
+现实稿给每段写一个不公开的材料出处，可以是用户材料、公开来源或可核验流程。虚构稿改为标出这一段由哪个人物目标、动作、发现或关系变化托住，不给创造出来的细节伪造来源。只能写出“这是进一步解释”或“这是可能的影响”，说明这一段没有新东西。删到文章长度与材料相称，不替目标字数保稿。
+
+遇到历史、技术、制度和数据，问它正在回答哪一个问题。删掉以后人物选择、风险和判断都不变，这段知识来早了，或者根本不用来。
+
+做一次压缩试验。若删掉三分之一以后事实、动作、判断和阅读体验几乎没变，原稿就是在注水。保留删短后的版本。
+
+人物稿看他在哪里，做了什么，遇到什么限制，后来怎样。虚构稿看谁想得到什么，场景结束时什么变了。
+
+整篇靠“第一层”“另一层”“更深处”推进时，把这些路标删掉。让事实差异与读者问题承担连接。
+
+## 第三遍拆掉表演性中文
+
+### 假深刻
+
+圈出所有单独截图很好看、放回正文却没有增加事实、解释或情绪的句子。大部分删掉。
+
+连续几段都用一句短判断收尾，留下最有材料的一处。普通段落回到普通句子。
+
+### 假具体
+
+搜索精确时间、天气、神态、房间摆设、烟酒食物和突然出现的原话。现实稿逐项问它来自哪里，会不会改变后文。虚构稿只问它是否属于当前视角，是否影响行动、关系或气氛。
+
+现实稿没有来源也没有作用，删掉。虚构稿没有作用，删掉。不要让装饰细节冒充亲历，也不要让虚构细节变成统一摆放的道具。
+
+### 假口语
+
+“老铁”“兄弟们”“咱就是说”“泡杯茶慢慢说”一类称呼只有当前说话者或人物真会这样说时才留。
+
+不要为了制造活人感主动添加粗口、错别字、三连省略号和括号吐槽。人物身份、实验写作或原始材料确实需要时，按作品本身处理。
+
+### 抽象名词
+
+抽象名词连续出现时，问清谁做了什么，影响了谁，钱、时间和责任落在哪里。
+
+一句话能换进十篇商业文章，说明它没有当前材料。
+
+### 比喻换场
+
+现代现实散文先把借来的世界写在旁边。道路、战争、建筑、温度、仓储、海洋、身体。
+
+短距离出现三套时先全部还原成本义。本义已经清楚，一个也不用放回。小说、诗歌和抒情写作改看意象是否属于同一套感受与场景，不按数量机械删除。
+
+抽象产品稿尤其容易借用仓库、抽屉、温度、死亡、坍塌、浪潮、钥匙和底座。所写对象并非这些东西时，先删掉。删掉以后意思没损失，就不要换一个新比喻。
+
+## 第四遍听一遍中文顺不顺
+
+这一遍检查现代散文。诗歌分行、人物对白和剧本动作可以使用省略、断句与不完整句，按 `references/formats.md` 和 `references/fiction.md` 判断。
+
+### 主干早点来
+
+圈出“……的，是……”“更……的是”“真正让……的”“那些……的……”和一句里多个“的”。
+
+先找到做事的人，把他与动作放到前面。原因、时间、条件与例子接到后面。
+
+不要机械切短。连续短句会变成鼓点。复杂关系允许用长句讲完，只要主干早点出现。
+
+段落也要有高低差。连续十段都只有一句话，合并其中能顺着读下去的部分。连续几段长度接近，检查是不是每段都按同一模具完成。
+
+### 前一句把什么交给了后一句
+
+顺着每个逗号和句号往后看。后一句接的是前一句刚出现的人、物、动作或结果，通常会顺。它忽然换对象，却只靠“这”“它”“他们”连接，读者可能会认错人。
+
+指向清楚时，删掉重复的主语和机械连接词。两个人同时在场、前一句出现多个名词或中间插入一大段话时，把名字写回来。
+
+长定语尽量拆开。先让人和东西出现，再补它的来历、条件和限制。连续出现三个“的”，或者读到名词时已经忘了句首，就要重写。
+
+### 停顿有轻重
+
+读出声。逗号处应当还能接着说，句号处应当已经落下一件事。连续短句像敲桌子就合并，长句一口气没有落脚处就拆开。
+
+短句放在长句后面，确实能压住一句话。每段都这样收尾，会变成模型的固定鼓点。让普通地方普通地结束。
+
+### 动作后面少解释一句
+
+圈出动作、物件、原话和比喻后面的情绪解释。读者已经能看见人物在犹豫、害怕、舍不得或嘴硬，就删掉解释。
+
+留白只省读者能够自己得到的部分。关键事实、因果、人物选择和必要条件仍要说清。
+
+### 白话与古意别打架
+
+检查“买／购买”“改／修改”“看／观察”“用／使用”这类单双音节词。根据说话者和场合选，不要全换成正式长词，也不要为了古意全压成单字。
+
+成语、典故和文言句单独拿出来读。删掉以后更自然，就删。需要紧跟白话解释，也删。它与人物身份、题材和全文语气不在一起，更要删。
+
+## 第五遍清掉绝对不能出现的东西
+
+全文搜索破折号和连接号式破折号，正文清零。搜索中文冒号和英文冒号，只保留引出人物直接原话的那几处，提示性冒号全部改写。网址、代码和机器字段可以保留。
+
+清翻案腔要按动作查，不能只按字面查。逐段问一句，这里是不是先立了一个读者并没有的误解，再推翻它抬价。下面是同一个动作的常见外衣，命中任何一件都拆回正面陈述。
+
+| 外衣 | 例子 |
+| --- | --- |
+| 字面翻案 | 不是A，而是B。并非A，而是B。不在于A，而在于B |
+| 省字变形 | 不是A，是B。不是A，B才是 |
+| 跨句变形 | 不是A。而是B。表面上是A。其实是B |
+| 换字变形 | 与其说A，倒不如讲B。与其说A，毋宁说B |
+| 以为体 | 你以为A，其实B。我一直以为A，后来才发现B。回头才发现 |
+| 让转体 | 看似A，实则B。大家都说A，可真相是B。答案恰恰相反 |
+| 抬价体 | A不重要，重要的是B。真正值钱的从来都与A无关 |
+
+拆的办法只有一种，找到这句话原本想下的判断，从正面把它说出来，再把依据放在旁边。文章确实用材料走过了从误解到修正的过程时，可以保留一次自我修正，但不能穿上面任何一件外衣。
+
+搜索三项以上的同构排比。同一个引导词或同一个句型连排三次以上，留两项，第三项换说法或删掉。
+
+搜索给抽象名词配具体动词的抒情句。时间保管、岁月打磨、焦虑显形、孤独发芽一类，还原成人做了什么、发生了什么。
+
+搜索名词化。“进行了”“实现了”“完成了对”“起到了……作用”“具有……意义”，还原成直接的动词。
+
+搜索“说白了”“说穿了”“先说结论”。全部删除或改写。
+
+检查模型常用的洞察路标。“更微妙的是”、“还有一层”、“只说对了一半”、“值得注意的是”、“需要指出的是”、“从某种意义上说”用来给段落抬高时删除。文字确实在说楼层、数量或原句本义时保留。
+
+下面这些词在本 Skill 中作为绝对禁词处理。赋能、抓手、商业闭环、价值闭环、能力沉淀、拉通、底层逻辑、顶层设计、认知跃迁、价值释放、能力建设、降本增效、内容矩阵、全链路、组合拳、打开想象空间、结构性机会、关键命题、深层逻辑、技术底座、公共底座、技术主权、单点风险、主脊柱、材料锚点、认知增量、迭代闭环。改成人、动作、钱、时间与后果。
+
+下面这些词只做语境检查。沉淀、颗粒度、对齐、协同、链路、生态位、心智、范式、方法论、核心变量、打法、想象空间、闭环、不丢。它们确实表示化学沉淀、排版对齐、游戏战术、房产或艺术评论里的想象余地、控制回路、“不丢人”等本义时保留；只是在给普通事情抬价时改写。
+
+还有一批模型偏爱的抒情词要过一遍。安放、抵达、微光、褶皱、丰盈、滚烫、轻盈、赤裸、剥开、锋利、坚硬、柔软。写具体事物时都是好词，用来给抽象概念穿衣服时删掉。「」括起来的自造短语也一样，一篇里出现三处以上，多半是在造金句，拆掉。
+
+检查脚本里的硬禁词必须与本节完全一致。增加或删除硬禁词时，同一轮修改脚本，不能让脚本偷偷多出一套规则。
+
+原话命中禁令时改成转述。禁用项没有清零，不能交稿。
+
+## 第六遍核现实或设定
+
+现实稿核时间、数字、身份、引语、因果与第一人称动作。核验说明留在后台。
+
+虚构稿核人物知道什么、时间空间、伤势物件与世界规则。情绪已经由动作托住，删掉紧随其后的解释。
+
+混合稿核现实中必须准确的部分与创作空间有没有彼此冒名。
+
+## 第七遍查结尾
+
+把最后两段分别删掉再读。删掉更有力，就让文章提前结束。
+
+最后一段重新概括全文，即使概括得很漂亮，也先删掉。前文已经讲明白的内容不需要再证明一次。
+
+搜索“时代、文明、未来、世界、历史、奇迹、所有人、全人类”。正文没有持续处理这个尺度，结尾回到具体事实、人物动作或当前判断。用户指定的题目自带这类大词时，标题照用户的写，这条只管正文和结尾。
+
+开头物件在结尾回来时，确认读者对它的理解已经改变。含义没变，不必回来打卡。
+
+## 使用检查脚本
+
+长稿保存为文本或 Markdown 后运行下面的命令。
+
+```text
+python3 scripts/check_prose.py 稿件.md
+```
+
+脚本会把冒号、破折号、翻案句、硬停词、模型路标和绝对禁用的黑话判为失败。它会把需要结合语境判断的词列为提醒，还会提醒短句排队、段落过度单一、固定开场与多套比喻。
+
+脚本只负责发现形状，不能判断文章有没有人。警告项需要回到材料与说话位置人工判断。诗歌、剧本和实验写作只把脚本失败项当成硬要求，散文形状警告服从具体文体。
+
+## 最后冷读
+
+暂时忘掉所有规则，只回答下面几句。
+
+哪里让我相信作者确实知道这件事。
+
+哪里让我愿意继续读。
+
+哪一段像人在处理一个问题，哪一段像模型在完成写作任务。
+
+哪句话说得比材料大。
+
+文章在哪一句已经结束。
+
+
+## assistant · 2026-08-31T03:08:09Z
+
+作为一名共青团员，我始终以团员标准要求自己，认真学习党的理论知识和团的有关内容，关心国家发展和社会热点，努力坚定理想信念。在日常学习和生活中，我能够保持积极向上的态度，遵守学校和班级的各项规定，服从集体安排，认真完成自己的任务。
+
+在学习上，我重视基础知识的积累，也会及时总结不足。遇到困难时，我会主动查找原因，向老师和同学请教，尽力把问题解决好。在集体活动中，我愿意与同学互相帮助，认真参与志愿服务和团组织活动，增强责任意识和服务意识。
+
+在生活中，我能够尊敬师长，团结同学，待人诚恳，注意培养良好的生活习惯。我明白团员身份意味着责任，因此会从身边的小事做起，维护集体荣誉，遵守社会公德。
+
+我也认识到自己仍有需要改进的地方，例如理论学习还不够深入，处理问题时有时缺少耐心，做事的主动性还可以进一步提高。今后，我会更加严格要求自己，坚持学习，踏实做事，主动接受团组织和同学们的监督，努力发挥共青团员应有的先锋模范作用。

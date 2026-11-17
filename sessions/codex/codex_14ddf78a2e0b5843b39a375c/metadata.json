@@ -1,0 +1,111 @@
+{
+  "created" : 1793081258412,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-10-27T14-07-29-01a17bf8-9074-7b43-8943-1b207257585f.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:14ddf78a2e0b5843b39a375c",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a17bf8-9074-7b43-8943-1b207257585f",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "Find dsh-purge-master 安装方法",
+  "updated" : 1793081373049,
+  "usage" : [
+    {
+      "cacheRead" : 23424,
+      "cacheWrite" : 0,
+      "id" : "resp_0a0ac7ff9acf6ad5016ae03facae388191a038ae906fb60549",
+      "input" : 25083,
+      "model" : "gpt-6.1-sol",
+      "output" : 216,
+      "time" : 1793081266128
+    },
+    {
+      "cacheRead" : 48512,
+      "cacheWrite" : 0,
+      "id" : "resp_0a0ac7ff9acf6ad5016ae03fb296508191add50024679189c0",
+      "input" : 1353,
+      "model" : "gpt-6.1-sol",
+      "output" : 134,
+      "time" : 1793081272042
+    },
+    {
+      "cacheRead" : 23424,
+      "cacheWrite" : 0,
+      "id" : "resp_0a0ac7ff9acf6ad5016ae03fb86b188191969ce0497d6122d9",
+      "input" : 38024,
+      "model" : "gpt-6.1-sol",
+      "output" : 245,
+      "time" : 1793081278230
+    },
+    {
+      "cacheRead" : 61312,
+      "cacheWrite" : 0,
+      "id" : "resp_0a0ac7ff9acf6ad5016ae03fbe97848191a138a595ea8740a2",
+      "input" : 9759,
+      "model" : "gpt-6.1-sol",
+      "output" : 339,
+      "time" : 1793081288398
+    },
+    {
+      "cacheRead" : 70912,
+      "cacheWrite" : 0,
+      "id" : "resp_0a0ac7ff9acf6ad5016ae03fcb4594819193ced9744383740a",
+      "input" : 12257,
+      "model" : "gpt-6.1-sol",
+      "output" : 543,
+      "time" : 1793081312240
+    },
+    {
+      "cacheRead" : 82944,
+      "cacheWrite" : 0,
+      "id" : "resp_0a0ac7ff9acf6ad5016ae03fe08dd08191a8cde64f66bb366b",
+      "input" : 1174,
+      "model" : "gpt-6.1-sol",
+      "output" : 999,
+      "time" : 1793081331579
+    },
+    {
+      "cacheRead" : 83968,
+      "cacheWrite" : 0,
+      "id" : "resp_0a0ac7ff9acf6ad5016ae03ff40e448191a4469b371b4f5c2e",
+      "input" : 1220,
+      "model" : "gpt-6.1-sol",
+      "output" : 147,
+      "time" : 1793081336268
+    },
+    {
+      "cacheRead" : 84992,
+      "cacheWrite" : 0,
+      "id" : "resp_0a0ac7ff9acf6ad5016ae03ff898148191b77e2406d595aee6",
+      "input" : 1175,
+      "model" : "gpt-6.1-sol",
+      "output" : 153,
+      "time" : 1793081340928
+    },
+    {
+      "cacheRead" : 86016,
+      "cacheWrite" : 0,
+      "id" : "resp_0a0ac7ff9acf6ad5016ae040022a48819190b80067772ee7b6",
+      "input" : 524,
+      "model" : "gpt-6.1-sol",
+      "output" : 346,
+      "time" : 1793081354708
+    },
+    {
+      "cacheRead" : 86400,
+      "cacheWrite" : 0,
+      "id" : "resp_0a0ac7ff9acf6ad5016ae0401720f0819197839c4cc52b860f",
+      "input" : 1165,
+      "model" : "gpt-6.1-sol",
+      "output" : 256,
+      "time" : 1793081373035
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

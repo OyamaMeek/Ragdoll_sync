@@ -1,0 +1,66 @@
+{
+  "created" : 1791104869806,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/10/04/rollout-2026-10-04T17-07-49-01a1062b-64b4-7081-8478-25da84434421.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:f0f6040aaf3a27c9f1ec563b",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1062b-64b4-7081-8478-25da84434421",
+  "project" : "/Users/oyamahappa/Documents/GitHub/YXYtools",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1791108295141,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_01052508b16bc308016ac21768e5f881919918591c10c0a825",
+      "input" : 21583,
+      "model" : "codex-auto-review",
+      "output" : 414,
+      "time" : 1791104878553
+    },
+    {
+      "cacheRead" : 25344,
+      "cacheWrite" : 0,
+      "id" : "resp_01052508b16bc308016ac2178e8ef88191bc1ef7c0610a370c",
+      "input" : 3145,
+      "model" : "codex-auto-review",
+      "output" : 124,
+      "time" : 1791104914128
+    },
+    {
+      "cacheRead" : 25344,
+      "cacheWrite" : 0,
+      "id" : "resp_01052508b16bc308016ac21fcb2ae48191b7e8a5bbe617138b",
+      "input" : 11704,
+      "model" : "codex-auto-review",
+      "output" : 336,
+      "time" : 1791107026682
+    },
+    {
+      "cacheRead" : 36608,
+      "cacheWrite" : 0,
+      "id" : "resp_01052508b16bc308016ac2249ecff081918730786f69a33a2b",
+      "input" : 13857,
+      "model" : "codex-auto-review",
+      "output" : 193,
+      "time" : 1791108259090
+    },
+    {
+      "cacheRead" : 49920,
+      "cacheWrite" : 0,
+      "id" : "resp_01052508b16bc308016ac224c4f8ec8191affdedd7e7b9cfaa",
+      "input" : 2597,
+      "model" : "codex-auto-review",
+      "output" : 78,
+      "time" : 1791108295133
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

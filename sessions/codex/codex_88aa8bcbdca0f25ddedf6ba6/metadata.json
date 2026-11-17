@@ -1,0 +1,57 @@
+{
+  "created" : 1793633349133,
+  "files" : [
+    "/Users/oyamahappa/.codex/archived_sessions/rollout-2026-11-02T23-28-51-01a19ce0-aaba-79f0-973d-fbc36f69e57c.jsonl.zst"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:88aa8bcbdca0f25ddedf6ba6",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a19ce0-aaba-79f0-973d-fbc36f69e57c",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "了解如何让 Copilot 主动补全代码",
+  "updated" : 1793633483098,
+  "usage" : [
+    {
+      "cacheRead" : 12928,
+      "cacheWrite" : 0,
+      "id" : "resp_06a44292d02b24a0016ae8ac4935bc81918d774b5df9eeb2ba",
+      "input" : 31978,
+      "model" : "gpt-6.1-sol",
+      "output" : 175,
+      "time" : 1793633359080
+    },
+    {
+      "cacheRead" : 44928,
+      "cacheWrite" : 0,
+      "id" : "resp_06a44292d02b24a0016ae8ac5490e081919586b67898c82ac4",
+      "input" : 8404,
+      "model" : "gpt-6.1-sol",
+      "output" : 158,
+      "time" : 1793633369597
+    },
+    {
+      "cacheRead" : 53376,
+      "cacheWrite" : 0,
+      "id" : "resp_06a44292d02b24a0016ae8ac5d85108191b3e97c0674cc329b",
+      "input" : 8304,
+      "model" : "gpt-6.1-sol",
+      "output" : 182,
+      "time" : 1793633381232
+    },
+    {
+      "cacheRead" : 61696,
+      "cacheWrite" : 0,
+      "id" : "resp_06a44292d02b24a0016ae8acbc42508191ba187dbb22323b2d",
+      "input" : 7030,
+      "model" : "gpt-6.1-sol",
+      "output" : 322,
+      "time" : 1793633483060
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
