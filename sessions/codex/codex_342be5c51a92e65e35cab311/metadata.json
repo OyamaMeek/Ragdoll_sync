@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "分析 README 差距",
-  "updated" : 1794920300594,
+  "updated" : 1794920371753,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -85,6 +85,33 @@
       "model" : "gpt-6.1-sol",
       "output" : 171,
       "time" : 1794920300590
+    },
+    {
+      "cacheRead" : 82432,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc4f6de86487d0844cb7715db2d86d",
+      "input" : 3286,
+      "model" : "gpt-6.1-sol",
+      "output" : 377,
+      "time" : 1794920314490
+    },
+    {
+      "cacheRead" : 86016,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc4f7ecc0887d08088400fa821aeda",
+      "input" : 2240,
+      "model" : "gpt-6.1-sol",
+      "output" : 1504,
+      "time" : 1794920356099
+    },
+    {
+      "cacheRead" : 89728,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc4fa56b6087d0a942da9f12ce3a4b",
+      "input" : 1490,
+      "model" : "gpt-6.1-sol",
+      "output" : 138,
+      "time" : 1794920363851
     }
   ],
   "warnings" : [
