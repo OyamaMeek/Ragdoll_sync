@@ -1,0 +1,48 @@
+{
+  "created" : 1794917015773.686,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/17/rollout-2026-11-17T20-03-35-01a1e964-1dc6-70e0-a088-c1aba2d19636.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:4d4ee60612a7efdb8ecb8386",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1e964-1dc6-70e0-a088-c1aba2d19636",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "添加 GitHub Release 自动发布 Action",
+  "updated" : 1794917059095,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc429ec64487d09da6869d8c8da755",
+      "input" : 27568,
+      "model" : "gpt-6.1-sol",
+      "output" : 259,
+      "time" : 1794917029417
+    },
+    {
+      "cacheRead" : 40704,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc42a6cc4087d083ddad70e4e0993e",
+      "input" : 1404,
+      "model" : "gpt-6.1-sol",
+      "output" : 216,
+      "time" : 1794917036865
+    },
+    {
+      "cacheRead" : 42112,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc42ae10b087d09f2e81a10af287c6",
+      "input" : 10456,
+      "model" : "gpt-6.1-sol",
+      "output" : 495,
+      "time" : 1794917053448
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
