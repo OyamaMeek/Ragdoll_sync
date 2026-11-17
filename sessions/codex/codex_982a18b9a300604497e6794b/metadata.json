@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "调整对话界面折叠与工具调用展示",
-  "updated" : 1794921941091,
+  "updated" : 1794922046416,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -148,6 +148,42 @@
       "model" : "gpt-6.1-sol",
       "output" : 276,
       "time" : 1794921927826
+    },
+    {
+      "cacheRead" : 127104,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc55d3215487d08a7aeeaba90a46f0",
+      "input" : 408,
+      "model" : "gpt-6.1-sol",
+      "output" : 530,
+      "time" : 1794921957107
+    },
+    {
+      "cacheRead" : 127872,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc55eab91087d0b0dce2a6bcdaccd2",
+      "input" : 3708,
+      "model" : "gpt-6.1-sol",
+      "output" : 1113,
+      "time" : 1794922003335
+    },
+    {
+      "cacheRead" : 132608,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc5614b02087d0becc867913396f5d",
+      "input" : 2638,
+      "model" : "gpt-6.1-sol",
+      "output" : 435,
+      "time" : 1794922018358
+    },
+    {
+      "cacheRead" : 135552,
+      "cacheWrite" : 0,
+      "id" : "resp_0463f44c23d097c4016afc56312a3087d0940acc9ee457d883",
+      "input" : 234,
+      "model" : "gpt-6.1-sol",
+      "output" : 267,
+      "time" : 1794922043682
     }
   ],
   "warnings" : [
