@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "分析 README 差距",
-  "updated" : 1794920723808,
+  "updated" : 1794920835455,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -175,6 +175,69 @@
       "model" : "gpt-6.1-sol",
       "output" : 149,
       "time" : 1794920723808
+    },
+    {
+      "cacheRead" : 122496,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc511d1adc87d0bac6189a8c66be5c",
+      "input" : 443,
+      "model" : "gpt-6.1-sol",
+      "output" : 73,
+      "time" : 1794920736674
+    },
+    {
+      "cacheRead" : 122880,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc5128c23487d093faf7206058a0ea",
+      "input" : 189,
+      "model" : "gpt-6.1-sol",
+      "output" : 99,
+      "time" : 1794920749741
+    },
+    {
+      "cacheRead" : 123136,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc512edf9c87d0985fc5ec6907323d",
+      "input" : 942,
+      "model" : "gpt-6.1-sol",
+      "output" : 362,
+      "time" : 1794920760696
+    },
+    {
+      "cacheRead" : 124416,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc5139d0d487d096bf4bb0f6631fe7",
+      "input" : 713,
+      "model" : "gpt-6.1-sol",
+      "output" : 108,
+      "time" : 1794920767326
+    },
+    {
+      "cacheRead" : 125184,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc5144dd2487d09d4c58442aefced3",
+      "input" : 145,
+      "model" : "gpt-6.1-sol",
+      "output" : 136,
+      "time" : 1794920778507
+    },
+    {
+      "cacheRead" : 125440,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc514c04c487d0ac46ead75f073ac3",
+      "input" : 175,
+      "model" : "gpt-6.1-sol",
+      "output" : 52,
+      "time" : 1794920783546
+    },
+    {
+      "cacheRead" : 125568,
+      "cacheWrite" : 0,
+      "id" : "resp_0703146f69b713ec016afc5150daec87d093073ac45d0e991b",
+      "input" : 185,
+      "model" : "gpt-6.1-sol",
+      "output" : 131,
+      "time" : 1794920789061
     }
   ],
   "warnings" : [

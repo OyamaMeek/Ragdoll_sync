@@ -1552,8 +1552,86 @@ Output:
 
 {"chunk_id":"14ff70","wall_time_seconds":0,"exit_code":128,"original_token_count":27,"output":"fatal: Unable to create '/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.git/index.lock': Operation not permitted\n"}
 
-## tool · 2026-11-17T13:05:22Z
+## tool · 2026-11-17T13:05:31Z
 
-exec
-text(await tools.exec_command({cmd:"git add README.md docs/USAGE.md docs/DEVELOPMENT.md docs/assets/ragdoll.svg docs/CHANGELOG.md memory/agents.md memory/plan.md memory/progress.md memory/verify.md && git diff --cached --check && git diff --cached --stat && git diff --cached --name-only && git commit -m \"docs(readme): present project features and getting started\"","sandbox_permissions":"require_escalated","justification":"按照项目已授权的 Git 工作流程，提交本次通过检查的 README、文档及标识资源。","prefix_rule":["git"],"max_output_tokens":2500}));
+
+Script completed
+Wall time 9.3 seconds
+Output:
+
+{"chunk_id":"f99928","wall_time_seconds":0.000008167,"exit_code":0,"original_token_count":221,"output":" README.md               | 105 +++++++++++++++++++++++++++++++++---------------\n docs/CHANGELOG.md       |  14 +++++++\n docs/DEVELOPMENT.md     |  85 +++++++++++++++++++++++++++++++++++++++\n docs/USAGE.md           |  67 ++++++++++++++++++++++++++++++\n docs/assets/ragdoll.svg |  11 +++++\n memory/agents.md        |   4 +-\n memory/plan.md          |   7 ++++\n memory/progress.md      |   8 ++++\n memory/verify.md        |   8 ++++\n 9 files changed, 274 insertions(+), 35 deletions(-)\nREADME.md\ndocs/CHANGELOG.md\ndocs/DEVELOPMENT.md\ndocs/USAGE.md\ndocs/assets/ragdoll.svg\nmemory/agents.md\nmemory/plan.md\nmemory/progress.md\nmemory/verify.md\n[main be4d3eb] docs(readme): present project features and getting started\n 9 files changed, 274 insertions(+), 35 deletions(-)\n create mode 100644 docs/DEVELOPMENT.md\n create mode 100644 docs/USAGE.md\n create mode 100644 docs/assets/ragdoll.svg\n"}
+
+## tool · 2026-11-17T13:05:43Z
+
+
+Script completed
+Wall time 7.6 seconds
+Output:
+
+{"chunk_id":"ba276c","wall_time_seconds":1.002309209,"session_id":49072,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T13:05:49Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"4b3bab","wall_time_seconds":0.000009458,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   4e5756e..be4d3eb  main -> main\n"}
+{"chunk_id":"6481e6","wall_time_seconds":0.000010292,"exit_code":0,"original_token_count":675,"output":"# 实施进度\n\n## README 项目首页（2026-11-17）\n\n- [x] 读取现有 README、功能源码、构建/发布流程和验证记录；GitHub API 确认当前暂无正式 Release，仓库没有图标及项目许可证文件。\n- [x] 确定按参考图使用居中标识、徽章、功能表格和导航，保留中文，细节分入使用与开发文档；记录范围及验证标准。\n- [x] 重写 README，添加居中猫咪 SVG、平台与 CI 徽章、导航及功能/来源表格，整理使用与开发文档；明确暂无 Release，保留签名、隐私和未验证能力说明。\n- [x] `xmllint --noout`、9 个引用文件/3 个章节目标检查及 `git diff --check` 通过；7 个外部入口与徽章均返回 HTTP 200，功能文案与源码及已有验证记录一致。追加开发记录，未执行应用测试、构建或视觉检查。\n- [ ] 创建原子提交、普通推送并记录实际提交哈希。\n\n## GitHub Actions 自动发布（2026-11-17）\n\n- **Git 提交**：`87fcafa chore(release): build macOS app and publish tagged releases`、`695e547 fix(build): use system grep for Node checksum verification`、`d6b1dbc test(migration): gate local dsh restore behind integration flag`、`127cf11 fix(release): install Codex for real migration tests`、`b57b930 test(migration): isolate dsh attachment integration subtest`、`2aa2f07 fix(release): serialize Swift tests on hosted runners`，均已普通推送至 `origin/main`；本条由后续文档提交补记验证结果和实际哈希。\n\n---\n\n## [2026-11-17 21:04] README 项目首页与文档整理\n\n- **需求/问题描述**：\n  > 参照用户提供的 GitHub README 截图，改善项目介绍的排版与阅读体验。\n- **实际实现的功能与改动**：\n  - 添加 README 专用猫咪 SVG、居中标题、简介、平台/技术/构建徽章与导航，使用表格展示功能和支持来源。\n  - 优先介绍功能、源码安装与首次使用；详细操作及开发/签名/测试/发布说明分别整理到使用指南和开发文档。\n  - 修正年度热力图与可选预算说明；通过 GitHub API 确认暂无正式 Release，保留签名、隐私和未验证能力的限制。\n  - SVG XML、9 个引用文件及 3 个章节目标、Git diff 格式检查通过；7 个外部入口与徽章均返回 HTTP 200。仅文档与标识资源变更，未执行应用测试、构建或截图/视觉检查。\n- **涉及文件**：`README.md`、`docs/assets/ragdoll.svg`、`docs/USAGE.md`、`docs/DEVELOPMENT.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：待提交。\n\n---\nbe4d3eb220cd5e033997e53e897166ef195e6e16\n"}
+
+## tool · 2026-11-17T13:06:00Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+{"chunk_id":"4949da","wall_time_seconds":0.000009333,"exit_code":0,"original_token_count":514,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\nindex 6c704d0..ece06f0 100644\n--- a/docs/CHANGELOG.md\n+++ b/docs/CHANGELOG.md\n@@ -256,6 +256,6 @@\n   - 修正年度热力图与可选预算说明；通过 GitHub API 确认暂无正式 Release，保留签名、隐私和未验证能力的限制。\n   - SVG XML、9 个引用文件及 3 个章节目标、Git diff 格式检查通过；7 个外部入口与徽章均返回 HTTP 200。仅文档与标识资源变更，未执行应用测试、构建或截图/视觉检查。\n - **涉及文件**：`README.md`、`docs/assets/ragdoll.svg`、`docs/USAGE.md`、`docs/DEVELOPMENT.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n-- **Git 提交**：待提交。\n+- **Git 提交**：`be4d3eb docs(readme): present project features and getting started`，已普通推送至 `origin/main`；本条由后续文档提交补记。\n \n ---\ndiff --git a/memory/progress.md b/memory/progress.md\nindex d0c767c..aae5e25 100644\n--- a/memory/progress.md\n+++ b/memory/progress.md\n@@ -6,7 +6,7 @@\n - [x] 确定按参考图使用居中标识、徽章、功能表格和导航，保留中文，细节分入使用与开发文档；记录范围及验证标准。\n - [x] 重写 README，添加居中猫咪 SVG、平台与 CI 徽章、导航及功能/来源表格，整理使用与开发文档；明确暂无 Release，保留签名、隐私和未验证能力说明。\n - [x] `xmllint --noout`、9 个引用文件/3 个章节目标检查及 `git diff --check` 通过；7 个外部入口与徽章均返回 HTTP 200，功能文案与源码及已有验证记录一致。追加开发记录，未执行应用测试、构建或视觉检查。\n-- [ ] 创建原子提交、普通推送并记录实际提交哈希。\n+- [x] `be4d3eb docs(readme): present project features and getting started` 已普通推送到 `origin/main`；实际提交哈希与结果通过后续文档提交补记。\n \n ## GitHub Actions 自动发布（2026-11-17）\n \n M docs/CHANGELOG.md\n M memory/progress.md\n"}
+
+## tool · 2026-11-17T13:06:11Z
+
+
+Script completed
+Wall time 4.9 seconds
+Output:
+
+{"chunk_id":"26beea","wall_time_seconds":1.002072375,"session_id":80665,"original_token_count":28,"output":"[main 66ea5d0] docs(readme): record verification and delivery\n 2 files changed, 2 insertions(+), 2 deletions(-)\n"}
+
+## tool · 2026-11-17T13:06:18Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"adcdd3","wall_time_seconds":0.0001365,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   be4d3eb..66ea5d0  main -> main\n"}
+{"chunk_id":"c69012","wall_time_seconds":1.002725833,"session_id":72516,"original_token_count":31,"output":"66ea5d0 docs(readme): record verification and delivery\nbe4d3eb docs(readme): present project features and getting started\n"}
+
+## tool · 2026-11-17T13:06:23Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"e4b7cd","wall_time_seconds":0.000013958,"exit_code":0,"original_token_count":15,"output":"66ea5d0338877255c5914dd7cd8f954fb8f97cc0\trefs/heads/main\n"}
+
+## assistant · 2026-11-17T13:06:29Z
+
+已按参考样式完成并推送：[查看 README](https://github.com/OyamaMeek/Ragdoll#readme)。
+
+- 居中猫咪标识、标题、徽章与导航。
+- 功能和支持来源改为分类表格。
+- 突出安装与首次使用，详细操作和开发说明移入独立文档。
+- 修正年度热力图等过期描述。
+
+链接、SVG 和格式检查通过，工作区干净。
+
+未进行截图或页面视觉检查；当前尚无正式 Release，已明确注明需从源码构建。
+
+## user · 2026-11-17T13:07:15Z
+
+把这个图标设置为我app的图标吧
 
