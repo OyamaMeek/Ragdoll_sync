@@ -1946,3 +1946,275 @@ Output:
 
 {"i":0,"result":{"status":"fulfilled","value":{"chunk_id":"0bac45","wall_time_seconds":0.000011125,"exit_code":0,"original_token_count":4788,"output":"import Foundation\nimport Darwin\n\npublic enum ServiceLeaseError: Error, LocalizedError {\n    case occupied\n    public var errorDescription: String? { \"另一个进程正在处理此目录\" }\n}\n\npublic final class ServiceLease: Sendable {\n    private let descriptor: Int32\n    public init(root: URL, name: String = \"service-lock\") throws {\n        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])\n        let descriptor = open(root.appendingPathComponent(name).path, O_CREAT | O_RDWR | O_NOFOLLOW, 0o600)\n        guard descriptor >= 0 else { throw POSIXError(POSIXErrorCode(rawValue: errno) ?? .EIO) }\n        guard flock(descriptor, LOCK_EX | LOCK_NB) == 0 else {\n            let code = errno; close(descriptor)\n            if code == EWOULDBLOCK { throw ServiceLeaseError.occupied }\n            throw POSIXError(POSIXErrorCode(rawValue: code) ?? .EIO)\n        }\n        let owner = Data(String(getpid()).utf8)\n        guard ftruncate(descriptor, 0) == 0, owner.withUnsafeBytes({ write(descriptor, $0.baseAddress, $0.count) }) == owner.count else {\n            let code = errno; flock(descriptor, LOCK_UN); close(descriptor); throw POSIXError(POSIXErrorCode(rawValue: code) ?? .EIO)\n        }\n        self.descriptor = descriptor\n    }\n    deinit { flock(descriptor, LOCK_UN); close(descriptor) }\n}\n\npublic struct ServiceStatus: Codable, Sendable {\n    public var pid: Int32 = getpid()\n    public var updated: Date = Date()\n    public var scan = \"等待扫描\"\n    public var archive = \"等待归档\"\n    public var sync = \"未启用远端推送\"\n    public var lastArchive: Date?\n    public init() {}\n}\n\npublic enum BackgroundService {\n    public static func isRunning(root: URL) throws -> Bool {\n        do { let lease = try ServiceLease(root: root); withExtendedLifetime(lease) {}; return false }\n        catch ServiceLeaseError.occupied { return true }\n    }\n    public static func ownerPID(root: URL) throws -> Int32? {\n        Int32(try String(contentsOf: root.appendingPathComponent(\"service-lock\"), encoding: .utf8))\n    }\n    public static func request(root: URL) throws {\n        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])\n        try Data(UUID().uuidString.utf8).write(to: root.appendingPathComponent(\"service-request\"), options: .atomic)\n    }\n    public static func requestPush(root: URL) throws {\n        try Data(\"pending\".utf8).write(to: root.appendingPathComponent(\"sync-pending\"), options: .atomic)\n        try Data(UUID().uuidString.utf8).write(to: root.appendingPathComponent(\"service-push-request\"), options: .atomic)\n    }\n    public static func status(root: URL) throws -> ServiceStatus? {\n        let path = root.appendingPathComponent(\"service-status.json\")\n        guard FileManager.default.fileExists(atPath: path.path) else { return nil }\n        return try JSONDecoder().decode(ServiceStatus.self, from: Data(contentsOf: path))\n    }\n}\n\npublic actor BackgroundWorker {\n    private let root: URL\n    private let store: Store\n    private let bridge = RuntimeBridge()\n    private var state = ServiceStatus()\n    private var dirtySince: Date?\n    private var lastDirty: Date?\n    private var generation = 0\n    private var needsScan = true\n    private var fatalFailure: String?\n    private var lastPush = Date.distantPast\n\n    public init(root: URL) throws {\n        self.root = root\n        store = try Store(path: root.appendingPathComponent(\"index.sqlite\").path)\n        if FileManager.default.fileExists(atPath: root.appendingPathComponent(\"archive-dirty\").path) { dirtySince = .distantPast; lastDirty = .distantPast }\n    }\n    private func publish() throws {\n        state.updated = Date()\n        try JSONEncoder().encode(state).write(to: root.appendingPathComponent(\"service-status.json\"), options: .atomic)\n    }\n    private func markDirty() throws {\n        dirtySince = dirtySince ?? Date(); lastDirty = Date(); generation += 1\n        try Data(\"pending\".utf8).write(to: root.appendingPathComponent(\"archive-dirty\"), options: .atomic)\n    }\n    private func receive(_ event: String, _ data: JSONValue) {\n        do {\ndiff --git a/Sources/Ragdoll/SettingsView.swift b/Sources/Ragdoll/SettingsView.swift\nindex 5dfb7fd..f86bd4b 100644\n--- a/Sources/Ragdoll/SettingsView.swift\n+++ b/Sources/Ragdoll/SettingsView.swift\n@@ -125,7 +125,7 @@ struct SettingsView: View {\n                         if model.archiving { ProgressView().controlSize(.small) }\n                         Button(\"立即归档\") { Task { await model.archiveNow() } }.buttonStyle(.borderedProminent).disabled(model.archiving || model.settings.archivePath.isEmpty)\n                     }\n-                    Text(\"自动保存采用 30 秒防抖，最长合并 5 分钟。源文件删除后保留已有归档；手工修改的归档文件会阻止自动覆盖。Git 需要已配置提交者姓名与邮箱。\").font(.caption).foregroundStyle(.secondary)\n+                    Text(\"Markdown 内嵌图片保存为独立文件并使用相对路径引用；超过 50 MiB 的原始文件无损压缩为 gzip。自动保存采用 30 秒防抖，最长合并 5 分钟。源文件删除后保留已有归档；手工修改会阻止自动覆盖。Git 需要已配置提交者姓名与邮箱。\").font(.caption).foregroundStyle(.secondary)\n                 }\n             }\n             Card {\ndiff --git a/Sources/RagdollCore/Archive.swift b/Sources/RagdollCore/Archive.swift\nindex 1aab5b7..1057e8d 100644\n--- a/Sources/RagdollCore/Archive.swift\n+++ b/Sources/RagdollCore/Archive.swift\n@@ -19,26 +19,37 @@ public enum Archive {\n         guard manifestURL.resolvingSymlinksInPath().path.hasPrefix(root.path + \"/\") else { throw failure(\"归档清单不能指向仓库外部\") }\n         let old = fm.fileExists(atPath: manifestURL.path) ? try JSONDecoder().decode([String: String].self, from: Data(contentsOf: manifestURL)) : [:]\n         let encoder = JSONEncoder(); encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]\n+        let inlineImages = try NSRegularExpression(pattern: \"data:image/([a-z0-9.+-]+);base64,([^\\\\s\\\"'<>\\\\)\\\\]\\\\}`]*)\", options: .caseInsensitive)\n         var desired: [String: Data] = [:]\n+        var replaced: [String] = []\n         for session in sessions {\n             let base = \"sessions/\\(safeName(session.source))/\\(safeName(session.id))\"\n             var metadata = session; metadata.messages = []\n             desired[base + \"/metadata.json\"] = try encoder.encode(metadata)\n-            let transcript = \"# \\(session.title)\\n\\n来源：\\(session.source)\\n\\n项目：\\(session.project)\\n\\n\" + session.messages.map { \"## \\($0.role) · \\(ISO8601DateFormatter().string(from: Date(timeIntervalSince1970: $0.time / 1000)))\\n\\n\\($0.text)\\n\" }.joined(separator: \"\\n\")\n-            let portable = session.files.enumerated().reduce(transcript) { text, entry in\n-                text.replacingOccurrences(of: URL(fileURLWithPath: entry.element).absoluteString, with: \"raw/\\(entry.offset)-\\(safeName(URL(fileURLWithPath: entry.element).lastPathComponent))\")\n+            var portable = session\n+            portable.messages = session.messages.map { message in\n+                var message = message\n+                message.text = extractImages(message.text, matching: inlineImages, base: base, files: &desired)\n+                return message\n             }\n-            desired[base + \"/transcript.md\"] = Data(portable.utf8)\n+            var transcript = \"# \\(session.title)\\n\\n来源：\\(session.source)\\n\\n项目：\\(session.project)\\n\\n\" + portable.messages.map { \"## \\($0.role) · \\(ISO8601DateFormatter().string(from: Date(timeIntervalSince1970: $0.time / 1000)))\\n\\n\\($0.text)\\n\" }.joined(separator: \"\\n\")\n             for (index, path) in session.files.enumerated() {\n                 let file = URL(fileURLWithPath: path)\n                 guard fm.fileExists(atPath: file.path) else { continue }\n                 let values = try file.resourceValues(forKeys: [.isRegularFileKey])\n                 guard values.isRegularFile == true else { throw failure(\"无法归档非普通文件：\\(path)\") }\n-                desired[base + \"/raw/\\(index)-\\(safeName(file.lastPathComponent))\"] = try Data(contentsOf: file)\n+                let raw = \"raw/\\(index)-\\(safeName(file.lastPathComponent))\", data = try Data(contentsOf: file)\n+                let compressed = data.count > 50 * 1024 * 1024 || old[base + \"/\" + raw + \".gz\"] != nil\n+                let saved = raw + (compressed ? \".gz\" : \"\")\n+                desired[base + \"/\" + saved] = compressed ? try gzip(data, root: root) : data\n+                if compressed && old[base + \"/\" + raw] != nil { replaced.append(base + \"/\" + raw) }\n+                transcript = transcript.replacingOccurrences(of: file.absoluteString, with: saved)\n             }\n-            if session.files.isEmpty { desired[base + \"/events.json\"] = try encoder.encode(session) }\n+            desired[base + \"/transcript.md\"] = Data(transcript.utf8)\n+            if session.files.isEmpty { desired[base + \"/events.json\"] = try encoder.encode(portable) }\n         }\n-        for (path, _) in desired {\n+        for (path, data) in desired where data.count > 100 * 1024 * 1024 { throw failure(\"归档文件超过 100 MiB，已保留本地数据：\\(path)\") }\n+        for path in Array(desired.keys) + replaced {\n             let destination = root.appendingPathComponent(path)\n             guard !destination.resolvingSymlinksInPath().path.hasPrefix(root.path + \"/.git/\") && destination.resolvingSymlinksInPath().path.hasPrefix(root.path + \"/\") else { throw failure(\"归档路径越界\") }\n             if fm.fileExists(atPath: destination.path) {\n@@ -46,7 +57,7 @@ public enum Archive {\n                 guard old[path] == digest else { throw failure(\"归档文件已被手动修改或不属于应用：\\(path)。请保留修改后选择其他归档目录，或恢复文件后重试。\") }\n             } else if old[path] != nil { throw failure(\"归档文件已被手动删除：\\(path)。请处理该删除后重试。\") }\n         }\n-        let managed = Array(desired.keys) + [\".ragdoll-manifest.json\"]\n+        let managed = Array(desired.keys) + replaced + [\".ragdoll-manifest.json\"]\n         let managedSet = Set(managed)\n         let staged = try gitData(root, [\"diff\", \"--cached\", \"--name-only\", \"-z\"]).split(separator: 0).map { String(decoding: $0, as: UTF8.self) }\n         for path in staged where managedSet.contains(path) {\n@@ -63,6 +74,10 @@ public enum Archive {\n             try data.write(to: destination, options: .atomic)\n             manifest[path] = digest; changed.append(path)\n         }\n+        for path in replaced {\n+            try fm.removeItem(at: root.appendingPathComponent(path))\n+            manifest.removeValue(forKey: path); changed.append(path)\n+        }\n         let manifestData = try encoder.encode(manifest)\n         let previousManifest = fm.fileExists(atPath: manifestURL.path) ? try Data(contentsOf: manifestURL) : nil\n         if previousManifest != manifestData {\n@@ -79,6 +94,33 @@ public enum Archive {\n         return ArchiveResult(files: changed.count, commit: try git(root, [\"rev-parse\", \"--short\", \"HEAD\"]))\n     }\n \n+    private static func extractImages(_ text: String, matching pattern: NSRegularExpression, base: String, files: inout [String: Data]) -> String {\n+        var pieces: [String] = [], start = text.startIndex\n+        for match in pattern.matches(in: text, range: NSRange(text.startIndex..., in: text)) {\n+            guard let range = Range(match.range, in: text), let mime = Range(match.range(at: 1), in: text), let payload = Range(match.range(at: 2), in: text),\n+                  let data = Data(base64Encoded: String(text[payload])), !data.isEmpty else { continue }\n+            let subtype = String(text[mime]).lowercased()\n+            let ext = subtype == \"svg+xml\" ? \"svg\" : subtype == \"jpeg\" ? \"jpg\" : safeName(subtype)\n+            let path = \"images/\\(hash(data)).\\(ext)\"\n+            files[base + \"/\" + path] = data\n+            pieces.append(String(text[start..<range.lowerBound])); pieces.append(path)\n+            start = range.upperBound\n+        }\n+        guard !pieces.isEmpty else { return text }\n+        pieces.append(String(text[start...])); return pieces.joined()\n+    }\n+    private static func gzip(_ data: Data, root: URL) throws -> Data {\n+        let directory = root.appendingPathComponent(\".ragdoll-compress-\\(UUID().uuidString)\")\n+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: false, attributes: [.posixPermissions: 0o700])\n+        defer { try? FileManager.default.removeItem(at: directory) }\n+        let source = directory.appendingPathComponent(\"source\")\n+        try data.write(to: source)\n+        let process = Process(); process.executableURL = URL(fileURLWithPath: \"/usr/bin/gzip\"); process.arguments = [\"-n\", \"-c\", source.path]\n+        let output = Pipe(); process.standardOutput = output; process.standardError = output\n+        try process.run(); let compressed = output.fileHandleForReading.readDataToEndOfFile(); process.waitUntilExit()\n+        guard process.terminationStatus == 0 else { throw failure(\"原始文件压缩失败，已保留本地数据\") }\n+        return compressed\n+    }\n     private static func safeName(_ value: String) -> String {\n         let allowed = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: \"._-\"))\n         let name = value.unicodeScalars.map { allowed.contains($0) ? String($0) : \"_\" }.joined()\nimport Foundation\nimport Testing\n@testable import RagdollCore\n\n@Test func archiveExtractsInlineImagesAndReusesRelativeFiles() throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    try git(root, [\"init\"]); try git(root, [\"config\", \"user.name\", \"Images\"]); try git(root, [\"config\", \"user.email\", \"images@localhost\"])\n    let encoded = \"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=\"\n    let image = try #require(Data(base64Encoded: encoded))\n    let url = \"data:image/png;base64,\\(encoded)\"\n    let session = Session(id: \"images\", source: \"codex\", title: \"Images\", messages: [\n        Message(role: \"user\", text: \"Before ![one](\\(url)) after\"),\n        Message(role: \"tool\", text: \"{\\\"image_url\\\":\\\"\\(url)\\\",\\\"text\\\":\\\"keep this\\\"}\")\n    ])\n    _ = try Archive.save([session], to: root)\n    let base = root.appendingPathComponent(\"sessions/codex/images\")\n    let images = try FileManager.default.contentsOfDirectory(at: base.appendingPathComponent(\"images\"), includingPropertiesForKeys: nil)\n    let saved = try #require(images.first)\n    #expect(images.count == 1)\n    #expect(saved.pathExtension == \"png\")\n    #expect(try Data(contentsOf: saved) == image)\n    let transcript = try String(contentsOf: base.appendingPathComponent(\"transcript.md\"), encoding: .utf8)\n    #expect(!transcript.contains(\"base64,\"))\n    #expect(transcript.contains(\"Before ![one](images/\\(saved.lastPathComponent)) after\"))\n    #expect(transcript.contains(\"keep this\"))\n    let events = try JSONDecoder().decode(Session.self, from: Data(contentsOf: base.appendingPathComponent(\"events.json\")))\n    #expect(!events.messages[1].text.contains(\"base64,\"))\n    #expect(events.messages[1].text.contains(\"images/\\(saved.lastPathComponent)\"))\n    #expect(session.messages[0].text.contains(url))\n    #expect(try Archive.save([session], to: root).commit == nil)\n    try Data(\"manual image edit\".utf8).write(to: saved)\n    #expect(throws: (any Error).self) { try Archive.save([session], to: root) }\n    #expect(try String(contentsOf: saved, encoding: .utf8) == \"manual image edit\")\n}\n\n@Test func archivePreservesMalformedImageExamplesAsOriginalText() throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    try git(root, [\"init\"]); try git(root, [\"config\", \"user.name\", \"Invalid\"]); try git(root, [\"config\", \"user.email\", \"invalid@localhost\"])\n    let session = Session(id: \"invalid\", source: \"codex\", title: \"Invalid\", messages: [Message(role: \"user\", text: \"![image](data:image/png;base64,%%%)\")])\n    _ = try Archive.save([session], to: root)\n    let transcript = try String(contentsOf: root.appendingPathComponent(\"sessions/codex/invalid/transcript.md\"), encoding: .utf8)\n    #expect(transcript.contains(session.messages[0].text))\n    #expect(try Archive.save([session], to: root).commit == nil)\n}\n\n@Test func archiveCompressesLargeRawFilesLosslesslyAndReplacesOnlyManagedCopies() throws {\n    let directory = try testDirectory(); defer { try? FileManager.default.removeItem(at: directory) }\n    let root = directory.appendingPathComponent(\"archive\"), source = directory.appendingPathComponent(\"source.log\")\n    try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)\n    try git(root, [\"init\"]); try git(root, [\"config\", \"user.name\", \"Raw\"]); try git(root, [\"config\", \"user.email\", \"raw@localhost\"])\n    try Data(\"original\".utf8).write(to: source)\n    let session = Session(id: \"large\", source: \"codex\", title: \"Large\", messages: [Message(role: \"user\", text: \"See \\(source.absoluteString)\")], files: [source.path])\n    _ = try Archive.save([session], to: root)\n    let original = Data(repeating: 0x61, count: 50 * 1024 * 1024 + 1)\n    try original.write(to: source)\n    let base = root.appendingPathComponent(\"sessions/codex/large\")\n    let raw = base.appendingPathComponent(\"raw/0-source.log\")\n    try Data(\"hand edited raw\".utf8).write(to: raw)\n    #expect(throws: (any Error).self) { try Archive.save([session], to: root) }\n    #expect(try String(contentsOf: raw, encoding: .utf8) == \"hand edited raw\")\n    try Data(\"original\".utf8).write(to: raw)\n    _ = try Archive.save([session], to: root)\n    let compressed = base.appendingPathComponent(\"raw/0-source.log.gz\")\n    let process = Process(); process.executableURL = URL(fileURLWithPath: \"/usr/bin/gzip\"); process.arguments = [\"-d\", \"-c\", compressed.path]\n    let output = Pipe(); process.standardOutput = output\n    try process.run(); let restored = output.fileHandleForReading.readDataToEndOfFile(); process.waitUntilExit()\n    try #require(process.terminationStatus == 0)\n    #expect(restored.elementsEqual(original))\n    #expect(try Data(contentsOf: source).elementsEqual(original))\n    #expect(!FileManager.default.fileExists(atPath: raw.path))\n    let transcript = try String(contentsOf: base.appendingPathComponent(\"transcript.md\"), encoding: .utf8)\n    #expect(transcript.contains(\"raw/0-source.log.gz\"))\n    let manifest = try JSONDecoder().decode([String: String].self, from: Data(contentsOf: root.appendingPathComponent(\".ragdoll-manifest.json\")))\n    #expect(manifest[\"sessions/codex/large/raw/0-source.log\"] == nil)\n    #expect(manifest[\"sessions/codex/large/raw/0-source.log.gz\"] != nil)\n    #expect(try Archive.save([session], to: root).commit == nil)\n    #expect(try !git(root, [\"ls-tree\", \"-r\", \"--name-only\", \"HEAD\"]).split(separator: \"\\n\").contains(\"sessions/codex/large/raw/0-source.log\"))\n}\n"}}}
 {"i":1,"result":{"status":"fulfilled","value":{"chunk_id":"4a931c","wall_time_seconds":0.071547458,"exit_code":0,"original_token_count":35,"output":"2026-11-17 14:42 CST\n-rw-r--r--  1 oyamahappa  staff     0B Nov 17 14:42 .agent/archive-images-live.log\n## main\n?? .ragdoll-archive-lock\n"}}}
+
+## tool · 2026-11-17T06:42:35Z
+
+
+Script completed
+Wall time 5.1 seconds
+Output:
+
+{"chunk_id":"4ab431","wall_time_seconds":5.001588458,"session_id":97729,"original_token_count":0,"output":""}
+{"chunk_id":"1b4d22","wall_time_seconds":0.000014916,"exit_code":0,"original_token_count":40,"output":"{\"pid\":14094,\"archive\":\"等待归档\",\"scan\":\"正在扫描\",\"updated\":816590527.87529,\"sync\":\"未启用远端推送\"}86b1e75 chore(archive): sync conversations\n"}
+
+## tool · 2026-11-17T06:43:01Z
+
+
+Script completed
+Wall time 5.3 seconds
+Output:
+
+{"chunk_id":"dc8bc3","wall_time_seconds":0.000015916,"exit_code":0,"original_token_count":973,"output":"# 实施进度\n\n## 图片独立归档与实际推送（2026-11-17）\n\n- [x] 确认应用 archiveRemote 为空，远端为空；用户明确同意公开上传。\n- [x] 两个超限文件来自同一会话：原始 JSONL 153,308,643 字节，Markdown 144,583,047 字节；工具返回内嵌 base64 图片。\n- [ ] 图片剥离、去重、相对引用、events.json 及大文件压缩回归先失败，再实现共享归档逻辑。\n- [ ] 验证图片和源日志完整、手工修改保护、重复归档、Swift 全部测试、release 打包。\n- [ ] 备份未上传的归档历史，处理历史超限对象，实际公开推送并启用自动推送，核对远端提交。\n- [ ] 更新开发记录、创建功能提交并普通推送源码。\n\n## 最近会话日期筛选（2026-11-17）\n\n- [x] 确认截图入口为首页最近会话“全部”，现有列表按 updated 倒序，保留来源、项目筛选和点击详情。\n- [x] 新增日期测试先因类型缺失编译失败；移除日期限制的反例运行确认两项测试、五个断言失败，覆盖今天、昨日、本周、本月、未来记录及 DST。\n- [x] 实现默认今天的菜单、按更新时间筛选及空状态；仅影响最近会话卡片。\n- [x] 最终全部 28 项 Swift 测试通过；release 打包、Apple Development 深度签名与助手自检通过，新版应用已启动并确认进程。未运行截图或窗口交互验证。\n# 验证标准\n\n## 图片独立归档与实际推送\n\n- Markdown 中不再内嵌 base64 图片，相对路径指向字节一致的独立图片；相同图片复用文件。没有源文件的 events.json 使用同样引用，原 Session 不变。\n- 只抽离可解码的图片，代码示例中的无效 data URL 保留原文；新图片遵循目录越界及手工修改保护。重复归档不产生空提交。\n- 超过 50 MiB 的源文件无损 gzip，解压字节与输入一致、输出确定；原始源文件不变。仅删除摘要和暂存均未被手工改动的被替换归档文件，其他历史归档保留。\n- 全部新归档文件不超过 100 MiB；运行真实 Git 测试、Swift 全部测试与 release 打包。本机归档按用户正常路径运行，推送后远端 SHA 与本地一致。\n- 公开推送已获明确授权；归档数据不得进入源码仓库。未执行截图、窗口交互或 Claude 测试。\n\n## 最近会话日期筛选\n\n- 默认今天，菜单仅今天、昨日、本周、本月；按本地自然日、周、月筛选 updated，起点包含、终点排除，未来会话不显示。\n- 筛选发生在最近六条截取之前，保留现有项目、来源及点击详情；无结果显示“该时段暂无会话”。其他首页统计和会话页面不受此菜单影响。\n  > 将首页最近会话“全部”改为今天、昨日、本周、本月。\n- **实际实现的功能与改动**：\n  - 右上角菜单默认今天，按本地自然日、周、月和会话最后更新时间筛选，排除未来记录；无结果显示“该时段暂无会话”。\n  - 先筛选后显示最近六条，保留项目、来源筛选及点击详情；日期菜单仅影响最近会话卡片。\n  - 日期限制移除的反例运行中，两项回归的五个断言失败；恢复后全部 28 项 Swift 测试通过，覆盖跨月、跨年、周首、无用量会话、未来记录和 DST。\n  - release 打包、Apple Development 深度签名与助手自检通过，新版应用已启动并确认进程；未执行截图或窗口交互验证。\n- **涉及文件**：`Sources/Ragdoll/DashboardView.swift`、`Tests/RagdollTests/DashboardTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：`621d8b0 feat(dashboard): filter recent sessions by calendar period`，已普通推送至 `origin/main`；本条由后续文档提交补记。\n\n---\n"}
+{}
+{"chunk_id":"8e6fe7","wall_time_seconds":5.002566875,"session_id":97729,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T06:43:12Z
+
+
+Script completed
+Wall time 3.5 seconds
+Output:
+
+{"chunk_id":"07c97a","wall_time_seconds":0.000009083,"exit_code":0,"original_token_count":314,"output":"14094 87710       01:05   0.0 307600 dist/Ragdoll.app/Contents/MacOS/RagdollService --data-dir /Users/oyamahappa/Library/Application Support/Ragdoll --once\n14095 14094       01:05   0.0  13504 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/Resources/runtime/node/bin/node /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/Resources/runtime/app/dist/main.mjs --data-dir /Users/oyamahappa/Library/Application Support/Ragdoll\n14234 14094       00:05  71.6  10272 /Applications/Xcode.app/Contents/Developer/usr/bin/git -C /Users/oyamahappa/Documents/GitHub/Ragdoll_sync add --pathspec-from-file=/Users/oyamahappa/Documents/GitHub/Ragdoll_sync/.git/ragdoll-pathspec-94593BA7-BB42-4CE0-8697-30ED092D5D31 --pathspec-file-nul\n14238 87710       00:00   0.0   2032 /bin/zsh -c ps -axo pid,ppid,etime,%cpu,rss,command | rg '14094|RagdollService|runtime/app/dist/main.mjs' && cat '/Users/oyamahappa/Library/Application Support/Ragdoll/service-status.json' && tail -5 .agent/archive-images-live.log\n14240 14238       00:00   0.0    224 rg 14094|RagdollService|runtime/app/dist/main.mjs\n{\"archive\":\"正在保存并提交\",\"sync\":\"未启用远端推送\",\"pid\":14094,\"updated\":816590558.035555,\"scan\":\"扫描完成 · 812 个变更\"}"}
+
+## tool · 2026-11-17T06:43:57Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+{"chunk_id":"8371da","wall_time_seconds":0.000016125,"exit_code":0,"original_token_count":0,"output":""}
+{"chunk_id":"41537c","wall_time_seconds":0.000011292,"exit_code":0,"original_token_count":47,"output":"{\"pid\":14094,\"scan\":\"扫描完成 · 812 个变更\",\"updated\":816590605.715652,\"sync\":\"未启用远端推送\",\"lastArchive\":816590605.715406,\"archive\":\"本地归档已提交 · 31fd0f8\"}"}
+
+## tool · 2026-11-17T06:44:05Z
+
+
+Script completed
+Wall time 0.9 seconds
+Output:
+
+{"chunk_id":"08e8da","wall_time_seconds":0.671814125,"exit_code":1,"original_token_count":105,"output":"node:internal/modules/run_main:111\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Embedded image: sessions/codex/codex_22c088ce6f2007956f33b40f/transcript.md\n    at file:///Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/verify-archive-images.mjs:32:12 {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n\nNode.js v26.13.0\n"}
+
+## tool · 2026-11-17T06:44:21Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"35661c","wall_time_seconds":0.000011542,"exit_code":0,"original_token_count":158,"output":"[\n  {\n    \"mime\": \"png\",\n    \"characters\": 171,\n    \"invalidCharacters\": [\n      \"…\"\n    ],\n    \"tailCodepoints\": [\n      104,\n      79,\n      106,\n      73,\n      52,\n      8230,\n      51,\n      54,\n      53,\n      55,\n      57,\n      56\n    ],\n    \"afterCodepoints\": [\n      32,\n      116,\n      111,\n      107\n    ]\n  },\n  {\n    \"mime\": \"png\",\n    \"characters\": 78,\n    \"invalidCharacters\": [],\n    \"tailCodepoints\": [\n      65,\n      65,\n      65,\n      66,\n      53,\n      113,\n      100,\n      87,\n      49,\n      107,\n      89,\n      122\n    ],\n    \"afterCodepoints\": [\n      34,\n      44,\n      34,\n      104\n    ]\n  }\n]\n"}
+
+## assistant · 2026-11-17T06:44:36Z
+
+本机 812 个会话已完成扫描，新版归档已生成。正在核对所有归档文件的摘要、图片文件名与内容是否一致，并验证大日志解压后是否与源文件完全相同；通过后再上传。
+
+
+## tool · 2026-11-17T06:44:41Z
+
+
+Script completed
+Wall time 1.3 seconds
+Output:
+
+{"chunk_id":"7e788b","wall_time_seconds":0.000009708,"exit_code":0,"original_token_count":164,"output":"  if (path.includes('/images/')) {\n    images++;\n    assert.equal(basename(path).split('.')[0], expected);\n  }\n  if (path.endsWith('/transcript.md')) {\n    transcripts++;\n    const text = await readFile(file, 'utf8');\n    assert.ok(!/data:image\\/[a-z0-9.+-]+;base64,[a-z0-9+/]{100}/i.test(text), `Embedded image: ${path}`);\n  }\n  if (path.includes('/raw/') && path.endsWith('.gz')) compressed++;\n}\nconst base = 'sessions/codex/codex_7c914b6065786d34aa83adcb';\nconst metadata = JSON.parse(await readFile(join(root, base, 'metadata.json'), 'utf8'));\nconst raw = Object.keys(manifest).find(path => path.startsWith(base + '/raw/0-') && path.endsWith('.gz'));\n"}
+{}
+{"chunk_id":"561986","wall_time_seconds":1.001144125,"session_id":89633,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T06:45:02Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"ed3c79","wall_time_seconds":0.000021833,"exit_code":0,"original_token_count":101,"output":"{\n  \"status\": \"ok\",\n  \"files\": 3776,\n  \"images\": 1394,\n  \"transcripts\": 785,\n  \"compressed\": 1,\n  \"largest\": {\n    \"path\": \"sessions/codex/codex_7c914b6065786d34aa83adcb/raw/0-rollout-2026-11-11T21-35-28-01a1cad2-17c8-72f0-ae3e-112b10912698.jsonl.gz\",\n    \"bytes\": 104436682\n  },\n  \"formerlyOversizeTranscriptBytes\": 1616677,\n  \"originalLogRoundTrip\": \"sha256 equal\"\n}\n## main\n?? .ragdoll-archive-lock\n"}
+
+## assistant · 2026-11-17T06:45:15Z
+
+完整性校验已通过：归档生成了 1,394 个独立图片文件，原来 137.9 MiB 的 Markdown 已缩小到约 1.54 MiB。原始日志压缩后为 99.6 MiB，解压后的 SHA-256 与源文件一致，当前归档没有超过 100 MiB 的文件。现在开始实际推送。
+
+
+## tool · 2026-11-17T06:45:27Z
+
+
+Script completed
+Wall time 7.4 seconds
+Output:
+
+{"chunk_id":"737cba","wall_time_seconds":1.001520375,"session_id":28824,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T06:45:40Z
+
+
+Script completed
+Wall time 5.2 seconds
+Output:
+
+{"chunk_id":"8ca611","wall_time_seconds":0.000014583,"exit_code":0,"original_token_count":759,"output":"104:public struct ArchiveRemote: Codable, Sendable, Equatable {\n105-    public var remote: String\n106-    public var branch: String\n107-    public init(remote: String = \"origin\", branch: String = \"main\") { self.remote = remote; self.branch = branch }\n108-}\n109-\n110-public struct Settings: Codable, Sendable {\n111-    public var locations: [Location] = []\nc75b3ede71069e3c2873564d40855e9fdb70eaa0 chore(archive): save conversations with separate images\n## main\n?? .ragdoll-archive-lock\n# 实施进度\n\n## 图片独立归档与实际推送（2026-11-17）\n\n- [x] 确认应用 archiveRemote 为空，远端为空；用户明确同意公开上传。\n- [x] 两个超限文件来自同一会话：原始 JSONL 153,308,643 字节，Markdown 144,583,047 字节；工具返回内嵌 base64 图片。\n- [x] 图片剥离、去重、相对引用、events.json 及大文件压缩回归先失败，已实现共享归档逻辑；无效图片示例保留原文。\n- [x] 图片和源日志完整、手工修改保护与重复归档回归通过；全部 31 项 Swift 测试、release 打包、Apple Development 签名和助手自检通过。\n- [x] 已退出旧版应用；未上传历史完整备份到 `.agent/archive-before-images.bundle` 并通过 bundle verify，应用数据库备份到 `.agent/archive-settings-before-images.sqlite`。新版打包 helper 正在对本机数据执行一次真实扫描与归档，暂未启用推送。\n- [ ] 备份未上传的归档历史，处理历史超限对象，实际公开推送并启用自动推送，核对远端提交。\n- [ ] 更新开发记录、创建功能提交并普通推送源码。\n\n## 最近会话日期筛选（2026-11-17）\n\n- [x] 确认截图入口为首页最近会话“全部”，现有列表按 updated 倒序，保留来源、项目筛选和点击详情。\n- [x] 新增日期测试先因类型缺失编译失败；移除日期限制的反例运行确认两项测试、五个断言失败，覆盖今天、昨日、本周、本月、未来记录及 DST。\n- [x] 实现默认今天的菜单、按更新时间筛选及空状态；仅影响最近会话卡片。\n- [x] 最终全部 28 项 Swift 测试通过；release 打包、Apple Development 深度签名与助手自检通过，新版应用已启动并确认进程。未运行截图或窗口交互验证。\n  - 日期限制移除的反例运行中，两项回归的五个断言失败；恢复后全部 28 项 Swift 测试通过，覆盖跨月、跨年、周首、无用量会话、未来记录和 DST。\n  - release 打包、Apple Development 深度签名与助手自检通过，新版应用已启动并确认进程；未执行截图或窗口交互验证。\n- **涉及文件**：`Sources/Ragdoll/DashboardView.swift`、`Tests/RagdollTests/DashboardTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：`621d8b0 feat(dashboard): filter recent sessions by calendar period`，已普通推送至 `origin/main`；本条由后续文档提交补记。\n\n---\n"}
+{"chunk_id":"0eb60f","wall_time_seconds":5.001658,"session_id":28824,"original_token_count":25,"output":"c75b3ede71069e3c2873564d40855e9fdb70eaa0 chore(archive): save conversations with separate images\n"}
+
+## tool · 2026-11-17T06:46:27Z
+
+
+Script completed
+Wall time 6.9 seconds
+Output:
+
+{"chunk_id":"b85f9e","wall_time_seconds":0.000009,"exit_code":0,"original_token_count":108,"output":"2026-11-17 14:46\n1\t1\tSources/Ragdoll/SettingsView.swift\n50\t8\tSources/RagdollCore/Archive.swift\n1\t1\tmemory/agents.md\n1\t0\tmemory/gotchas.md\n8\t0\tmemory/plan.md\n10\t0\tmemory/progress.md\n8\t0\tmemory/verify.md\n M Sources/Ragdoll/SettingsView.swift\n M Sources/RagdollCore/Archive.swift\n M memory/agents.md\n M memory/gotchas.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Tests/RagdollCoreTests/ArchiveImagesTests.swift\n"}
+{}
+{"chunk_id":"3f944d","wall_time_seconds":1.002250041,"session_id":54190,"original_token_count":201,"output":" Sources/Ragdoll/SettingsView.swift              |  2 +-\n Sources/RagdollCore/Archive.swift               | 58 +++++++++++++++---\n Tests/RagdollCoreTests/ArchiveImagesTests.swift | 78 +++++++++++++++++++++++++\n docs/CHANGELOG.md                               | 16 +++++\n memory/agents.md                                |  2 +-\n memory/gotchas.md                               |  1 +\n memory/plan.md                                  |  8 +++\n memory/progress.md                              | 12 ++++\n memory/verify.md                                |  9 +++\n 9 files changed, 176 insertions(+), 10 deletions(-)\n[main 287eec3] feat(archive): extract inline images into separate files\n 9 files changed, 176 insertions(+), 10 deletions(-)\n create mode 100644 Tests/RagdollCoreTests/ArchiveImagesTests.swift\n"}
+
+## tool · 2026-11-17T06:46:37Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"7423fd","wall_time_seconds":5.002241708,"session_id":28824,"original_token_count":0,"output":""}
+{"chunk_id":"d54f38","wall_time_seconds":0.00002325,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   9abfeb6..287eec3  main -> main\n"}
+
+## assistant · 2026-11-17T06:46:49Z
+
+应用代码已提交并推送到 `Ragdoll`，提交为 `287eec3`。会话归档正在单独上传到 `Ragdoll_sync`；我会等 Git 返回结果并核对远端提交，再报告上传完成。
+
+
+## tool · 2026-11-17T06:46:56Z
+
+
+Script completed
+Wall time 5.8 seconds
+Output:
+
+{"chunk_id":"48b3bd","wall_time_seconds":1.002292,"session_id":21970,"original_token_count":299,"output":"14748 87710       01:29   0.0   2224 /Applications/Xcode.app/Contents/Developer/usr/bin/git -C /Users/oyamahappa/Documents/GitHub/Ragdoll_sync push --porcelain -u origin main\n14771 14748       01:26   0.0   1776 /Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/git remote-https origin https://github.com/OyamaMeek/Ragdoll_sync.git\n14772 14771       01:26   0.5  48000 /Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/git-remote-https origin https://github.com/OyamaMeek/Ragdoll_sync.git\n14779 14772       01:24   0.0   2224 /Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/git send-pack --stateless-rpc --helper-status --thin --no-progress https://github.com/OyamaMeek/Ragdoll_sync.git/ --stdin\n14780 14779       01:24   0.0   2544 /Applications/Xcode.app/Contents/Developer/usr/libexec/git-core/git pack-objects --all-progress-implied --revs --stdout --thin --delta-base-offset -q\n15055 87710       00:00   0.0   2096 /bin/zsh -c ps -axo pid,ppid,etime,%cpu,rss,command | rg '[g]it.*Ragdoll_sync|[g]it-remote-https|[g]it pack-objects' && git -C /Users/oyamahappa/Documents/GitHub/Ragdoll_sync ls-remote --heads origin && git status --short --branch\n"}
+
+## tool · 2026-11-17T06:47:31Z
+
+
+Script completed
+Wall time 11.7 seconds
+Output:
+
+{"chunk_id":"a11e29","wall_time_seconds":0.000023209,"exit_code":0,"original_token_count":30,"output":"1\n{\"archivePath\":\"/Users/oyamahappa/Documents/GitHub/Ragdoll_sync\",\"archiveRemote\":{\"remote\":\"origin\",\"branch\":\"main\"}}\n"}
+{"chunk_id":"e5bea9","wall_time_seconds":0.000031375,"exit_code":0,"original_token_count":6,"output":"## main...origin/main\n"}
+{"chunk_id":"08496c","wall_time_seconds":5.003028333,"session_id":28824,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T06:47:44Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"6140bc","wall_time_seconds":0.000009208,"exit_code":0,"original_token_count":15,"output":",bytes_in,bytes_out,\ngit-remote-http.14772,5125,680525923,\n"}
+
+## assistant · 2026-11-17T06:48:08Z
+
+自动推送目标已保存为 `origin/main`。首次上传仍在传输，Git 进程已发送约 649 MiB；远端尚未确认提交完成，我会继续核对最终结果。
+
+
+## tool · 2026-11-17T06:48:39Z
+
+
+Wall time: 30.0155 seconds
+Sleep completed.
+
+## tool · 2026-11-17T06:48:51Z
+
+
+Script completed
+Wall time 6.2 seconds
+Output:
+
+{"chunk_id":"a370c2","wall_time_seconds":5.002376375,"session_id":28824,"original_token_count":0,"output":""}
+{"chunk_id":"cb70a3","wall_time_seconds":1.001542333,"session_id":83160,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T06:49:22Z
+
+
+Script completed
+Wall time 4.0 seconds
+Output:
+
+{"chunk_id":"982344","wall_time_seconds":0.000010291,"exit_code":0,"original_token_count":0,"output":""}
+{"chunk_id":"6f5714","wall_time_seconds":0.000075792,"exit_code":0,"original_token_count":6,"output":",bytes_in,bytes_out,\n"}
+
+## tool · 2026-11-17T06:49:27Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"e7eb93","wall_time_seconds":0.000016042,"exit_code":0,"original_token_count":146,"output":"remote: warning: See https://gh.io/lfs for more information.        \nremote: warning: File sessions/codex/codex_7c914b6065786d34aa83adcb/raw/0-rollout-2026-11-11T21-35-28-01a1cad2-17c8-72f0-ae3e-112b10912698.jsonl.gz is 99.60 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        \nremote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        \nTo https://github.com/OyamaMeek/Ragdoll_sync.git\n*\trefs/heads/main:refs/heads/main\t[new branch]\nbranch 'main' set up to track 'origin/main'.\nDone\n"}
+
+## tool · 2026-11-17T06:49:59Z
+
+
+Script completed
+Wall time 6.5 seconds
+Output:
+
+{"chunk_id":"a1442a","wall_time_seconds":1.001920958,"session_id":39003,"original_token_count":11,"output":"c75b3ede71069e3c2873564d40855e9fdb70eaa0\n"}
+
+## tool · 2026-11-17T06:50:08Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"608ae9","wall_time_seconds":0.000007625,"exit_code":0,"original_token_count":15,"output":"c75b3ede71069e3c2873564d40855e9fdb70eaa0\trefs/heads/main\n"}
+
+## assistant · 2026-11-17T06:50:14Z
+
+归档已实际上传成功，远端 `main` 与本地提交 `c75b3ed` 完全一致。新版 Ragdoll 已启动，自动推送目标为 `origin/main`；我再核对一次应用启动后的自动归档推送结果。
+
+
+## tool · 2026-11-17T06:50:41Z
+
+
+Script completed
+Wall time 0.6 seconds
+Output:
+
+{"chunk_id":"e5aa37","wall_time_seconds":0.000008708,"exit_code":0,"original_token_count":1020,"output":"- **Git 提交**：`621d8b0 feat(dashboard): filter recent sessions by calendar period`，已普通推送至 `origin/main`；本条由后续文档提交补记。\n\n---\n\n## [2026-11-17 14:46] 图片独立归档与远端推送\n\n- **需求/问题描述**：\n  > 归档没有上传；用户确认公开上传，并要求由应用把 Markdown 中的图片剥离为独立文件上传。\n- **实际实现的功能与改动**：\n  - GUI 与后台共用归档逻辑，将可解码的内嵌图片保存为按 SHA-256 命名的独立图片，通过相对路径引用；同一会话的重复图片复用文件，正文及图片字节保留。\n  - 无源文件的 events.json 同样使用图片引用；代码示例中的无效图片 URL 保留原文。图片继续受目录边界、清单摘要和手工修改保护约束。\n  - 超过 50 MiB 的原始日志以确定性 gzip 无损保存，更新正文中的源文件链接，仅替换未被手工修改或外部暂存的受管理副本；源文件不变，归档文件超过 100 MiB 时明确失败。\n  - 新增回归先因图片未抽离和日志未压缩失败；实现后全部 31 项 Swift 测试通过，release 打包、Apple Development 深度签名与助手自检通过。\n  - 新版打包 helper 完成本机 812 个会话扫描与归档；全量校验 3,776 个受管理文件摘要，包含 1,394 个独立图片与 785 份 Markdown。原超限 Markdown 从 144,583,047 字节缩小至 1,616,677 字节；原日志 gzip 为 104,436,682 字节，解压后 SHA-256 与源文件一致。\n  - 旧归档历史和数据库已建立本地恢复备份；当前公开远端的实际推送验证进行中。未运行截图、窗口交互或 Claude 测试。\n- **涉及文件**：`Sources/RagdollCore/Archive.swift`、`Sources/Ragdoll/SettingsView.swift`、`Tests/RagdollCoreTests/ArchiveImagesTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`memory/gotchas.md`、`docs/CHANGELOG.md`。\n- **Git 提交**：待提交。\n\n---\n# 实施进度\n\n## 图片独立归档与实际推送（2026-11-17）\n\n- [x] 确认应用 archiveRemote 为空，远端为空；用户明确同意公开上传。\n- [x] 两个超限文件来自同一会话：原始 JSONL 153,308,643 字节，Markdown 144,583,047 字节；工具返回内嵌 base64 图片。\n- [x] 图片剥离、去重、相对引用、events.json 及大文件压缩回归先失败，已实现共享归档逻辑；无效图片示例保留原文。\n- [x] 图片和源日志完整、手工修改保护与重复归档回归通过；全部 31 项 Swift 测试、release 打包、Apple Development 签名和助手自检通过。\n- [x] 未上传历史完整备份到 `.agent/archive-before-images.bundle` 并通过 bundle verify，应用数据库备份到 `.agent/archive-settings-before-images.sqlite`。新版打包 helper 完成 812 个会话扫描及实际归档。\n- [x] 全量核对 3,776 个受管理文件摘要、1,394 个独立图片和 785 份 Markdown；原超限 Markdown 降至 1,616,677 字节，源日志 gzip 为 104,436,682 字节，解压后 SHA-256 与源文件一致。最新树没有超限文件。\n- [x] 归档旧历史保留在本地 `archive-before-publish` 分支与 bundle；相同树创建首次上传提交 `c75b3ed`，正在普通推送至公开 `origin/main`。\n- [ ] 备份未上传的归档历史，处理历史超限对象，实际公开推送并启用自动推送，核对远端提交。\n- [ ] 更新开发记录、创建功能提交并普通推送源码。\n\n## 最近会话日期筛选（2026-11-17）\n\n- [x] 确认截图入口为首页最近会话“全部”，现有列表按 updated 倒序，保留来源、项目筛选和点击详情。\n- [x] 新增日期测试先因类型缺失编译失败；移除日期限制的反例运行确认两项测试、五个断言失败，覆盖今天、昨日、本周、本月、未来记录及 DST。\n- [x] 实现默认今天的菜单、按更新时间筛选及空状态；仅影响最近会话卡片。\n✔ Test run with 31 tests passed after 5.293 seconds.\n## main...origin/main\n"}
+{}
+{"chunk_id":"d14f94","wall_time_seconds":0.000009917,"exit_code":1,"original_token_count":56,"output":"c75b3ed 2026-11-17 14:45:29 +0800 chore(archive): save conversations with separate images\n{\"branch\":\"main\",\"remote\":\"origin\"}\nls: /Users/oyamahappa/Library/Application Support/Ragdoll/sync-pending: No such file or directory\n"}
+
+## tool · 2026-11-17T06:50:58Z
+
+
+Script completed
+Wall time 4.1 seconds
+Output:
+
+{"chunk_id":"605a1b","wall_time_seconds":0.00001,"exit_code":0,"original_token_count":961,"output":"\n    func launch() async {\n        guard !initialized else { return }; initialized = true\n        await bridge.setHandler { [weak self] event, data in await self?.receive(event, data) }\n        do {\n            try await bridge.start(dataDirectory: root)\n            let initial = try await bridge.request(\"initialize\")\n            if settings.locations.isEmpty { settings.locations = try initial[\"locations\"].decode([Location].self) }\n            let defaults = try initial[\"agents\"].decode([AgentConfig].self)\n            for agent in defaults where !settings.agents.contains(where: { $0.id == agent.id }) { settings.agents.append(agent) }\n            try saveSettings(); ready = true\n            if settings.backgroundEnabled == true { await setBackground(true) }\n            await refresh()\n            Task { [weak self] in\n                while !Task.isCancelled {\n                    try? await Task.sleep(for: .seconds(2)); guard let self else { return }\n                    self.pollBackground()\n                    do {\n                        let background = try BackgroundService.isRunning(root: self.root)\n                        if !background, Date().timeIntervalSince(self.lastRefresh) >= 60 { await self.refresh() }\n                        if self.settings.archiveRemote != nil, !background, !self.archiving, FileManager.default.fileExists(atPath: self.root.appendingPathComponent(\"sync-pending\").path), Date().timeIntervalSince(self.lastPushAttempt) >= 60 { await self.retryPush() }\n                    } catch { self.error = error.localizedDescription }\n                }\n            }\n        } catch { self.error = error.localizedDescription; status = \"启动失败\" }\n    }\n    func receive(_ event: String, _ data: JSONValue) {\n        do {\n            switch event {\n            case \"session\":\n                let session = try data.decode(Session.self)\n                if try store?.save(session) == true {\n        guard ready, !scanning, !archiving else { return }\n        do { if try BackgroundService.isRunning(root: root) { try BackgroundService.request(root: root); pollBackground(); return } }\n        catch { self.error = error.localizedDescription; return }\n        scanning = true; status = \"正在读取会话…\"\n        lastRefresh = Date()\n        do {\n            let lease = try ServiceLease(root: root)\n            defer { withExtendedLifetime(lease) {} }\n            let result = try await bridge.request(\"scan\", [\"locations\": try .encode(settings.locations)], timeout: 600)\n            try reload(); status = \"索引已更新 · 本次处理 \\(result[\"count\"].text) 个变更会话\"\n        } catch { self.error = error.localizedDescription; status = \"扫描失败，可重试\" }\n        scanning = false; scheduleArchive(markDirty: false)\n    }\n    private func scheduleReload() {\n        guard reloadTask == nil else { return }\n        reloadTask = Task { try? await Task.sleep(for: .milliseconds(300)); do { try reload() } catch { self.error = error.localizedDescription }; reloadTask = nil }\n    }\n    func reload() throws { sessions = try store?.list(query: query) ?? [] }\n    func select(_ id: String?) {\n        selectedID = id\n        do { selected = try id.flatMap { try store?.session($0) } }\n        catch { self.error = error.localizedDescription }\n    }\n    func saveSettings() throws { try store?.saveSettings(settings) }\n    func persistSettings() { do { try saveSettings() } catch { self.error = error.localizedDescription } }\n    private func hydrated(_ config: AgentConfig) throws -> AgentConfig {\n        var config = config; config.env = try Secrets.load(config.id).merging(config.env) { secret, _ in secret }; return config\n    }\n    func saveAgent(_ agent: AgentConfig) throws {\nc75b3ede71069e3c2873564d40855e9fdb70eaa0 chore(archive): save conversations with separate images\n"}
+{"chunk_id":"737f31","wall_time_seconds":0.000011084,"exit_code":0,"original_token_count":103,"output":"15505       00:57  19.0 303280 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/MacOS/Ragdoll\n15523       00:50   0.8 494352 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/Resources/runtime/node/bin/node /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/Resources/runtime/app/dist/main.mjs --data-dir /Users/oyamahappa/Library/Application Support/Ragdoll\n"}
+
+## tool · 2026-11-17T06:51:34Z
+
+
+Wall time: 20.0475 seconds
+Sleep completed.
+
+## tool · 2026-11-17T06:51:42Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"14cf6e","wall_time_seconds":1.00222025,"session_id":8424,"original_token_count":31,"output":"c75b3ede71069e3c2873564d40855e9fdb70eaa0 2026-11-17 14:45:29 +0800 chore(archive): save conversations with separate images\n"}
+
+## tool · 2026-11-17T06:52:15Z
+
+
+Script completed
+Wall time 3.3 seconds
+Output:
+
+{"chunk_id":"89640a","wall_time_seconds":0.000175292,"exit_code":0,"original_token_count":26,"output":"c75b3ede71069e3c2873564d40855e9fdb70eaa0\trefs/heads/main\n## main...origin/main\n?? .ragdoll-archive-lock\n"}
+{"chunk_id":"e8eba6","wall_time_seconds":0.0000155,"exit_code":0,"original_token_count":30,"output":"15505     1       02:14  19.4 268720 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/MacOS/Ragdoll\n"}
