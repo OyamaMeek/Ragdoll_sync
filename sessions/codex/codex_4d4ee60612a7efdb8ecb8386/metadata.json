@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794918969020,
+  "updated" : 1794919029732,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -868,6 +868,33 @@
       "model" : "gpt-6.1-sol",
       "output" : 40,
       "time" : 1794918969015
+    },
+    {
+      "cacheRead" : 196096,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4a3a0e7487d0b36aae315edc971c",
+      "input" : 358,
+      "model" : "gpt-6.1-sol",
+      "output" : 537,
+      "time" : 1794918991782
+    },
+    {
+      "cacheRead" : 196864,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4a58d6a087d0bee92fc269fce290",
+      "input" : 150,
+      "model" : "gpt-6.1-sol",
+      "output" : 142,
+      "time" : 1794919011898
+    },
+    {
+      "cacheRead" : 196992,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc4a64f91887d0ad4ce3e44a255883",
+      "input" : 222,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1794919021943
     }
   ],
   "warnings" : [

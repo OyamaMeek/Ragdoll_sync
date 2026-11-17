@@ -3111,3 +3111,37 @@ Wall time 0.0 seconds
 Output:
 
 {"chunk_id":"0d145e","wall_time_seconds":0.00001275,"exit_code":0,"original_token_count":166,"output":"[{\"id\":134040768754,\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Install Codex for migration tests\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build application\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Check runtime\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Test Swift\",\"status\":\"in_progress\",\"conclusion\":null}]}]\n"}
+
+## tool · 2026-11-17T12:36:39Z
+
+
+Wall time: 10.0076 seconds
+Sleep completed.
+
+## tool · 2026-11-17T12:36:51Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"cd8cb1","wall_time_seconds":1.001587375,"session_id":57695,"original_token_count":0,"output":""}
+
+## tool · 2026-11-17T12:37:01Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"a8965c","wall_time_seconds":0.000012583,"exit_code":0,"original_token_count":162,"output":"[{\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/checkout@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Run actions/setup-node@v7\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Prepare version\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Install Codex for migration tests\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build application\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Check runtime\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Test Swift\",\"status\":\"in_progress\",\"conclusion\":null}]}]\n"}
+
+## assistant · 2026-11-17T12:37:09Z
+
+Swift 测试步骤尚未结束，云端目前没有返回新的失败结果。后续打包和上传会等待它通过。
+
+
+## tool · 2026-11-17T12:37:09Z
+
+sleep
+{"duration_ms":45000}
