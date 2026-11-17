@@ -390,13 +390,41 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 2.5 seconds\nOutput:\n\n{}\n{\"chunk_id\":\"a43dfe\",\"wall_time_seconds\":1.002092459,\"session_id\":94411,\"original_token_count\":306,\"output\":\"README.md:51:Swift 验证包含真实助手的大消息传输回归；先安装 runtime 依赖并运行 `npm --prefix runtime run build`，再运行 `swift test`。助手检查使用 `npm --prefix runtime run typecheck`。真实连接和对话检查需要对应工具已经登录；需要本机 DeepSeek Harness 的迁移恢复测试与续聊测试统一通过 `RAGDOLL_MIGRATION_LIVE=dsh` 开启，云端构建默认跳过。实际执行记录见 [docs/VALIDATION.md](docs/VALIDATION.md)。按照用户要求，Claude 接入后续仅完成代码，不继续运行 Claude 测试。\\nmemory/plan.md:10:- 需要本机 DeepSeek Harness 的迁移恢复测试沿用已有 `RAGDOLL_MIGRATION_LIVE=dsh` 开关；云端无该应用时跳过，本机显式开启并执行真实测试。不安装第三方客户端或伪造成功结果。\\nruntime/test/migration.test.ts:122:  test(`migrated ${kind} conversation continues with the original context`, { skip: process.env.RAGDOLL_MIGRATION_LIVE !== kind, timeout: 180000 }, async () => {\\nruntime/test/migration.test.ts:166:test('Codex history becomes a dsh native conversation that the installed tool can resume', { skip: process.env.RAGDOLL_MIGRATION_LIVE !== 'dsh' }, async () => {\\n\"}\n{\"chunk_id\":\"28d33b\",\"wall_time_seconds\":1.001379417,\"session_id\":49855,\"original_token_count\":0,\"output\":\"\"}",
       "time" : 1794917813616
+    },
+    {
+      "id" : "call_b214d73f4a32478baf3b012da6ee59e3",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"82faba\",\"wall_time_seconds\":0.000013292,\"exit_code\":0,\"original_token_count\":55,\"output\":\"✔ Codex history becomes a dsh native conversation that the installed tool can resume (988.008875ms)\\nℹ tests 1\\nℹ suites 0\\nℹ pass 1\\nℹ fail 0\\nℹ cancelled 0\\nℹ skipped 0\\nℹ todo 0\\nℹ duration_ms 1181.527833\\n\"}\n{\"chunk_id\":\"5f1ce8\",\"wall_time_seconds\":0.000006209,\"exit_code\":0,\"original_token_count\":106,\"output\":\"[{\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null,\\\"steps\\\":[{\\\"name\\\":\\\"Set up job\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Run actions/checkout@v7\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Run actions/setup-node@v7\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Prepare version\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Build application\\\",\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null}]}]\\n\"}\n{\"chunk_id\":\"ecc3aa\",\"wall_time_seconds\":0.000014209,\"exit_code\":0,\"original_token_count\":1160,\"output\":\"﹣ Codex history becomes a dsh native conversation that the installed tool can resume (0.066459ms) # SKIP\\n✔ archive paths cannot escape installation root (1.045ms)\\n✔ registry packages require an exact version (0.695417ms)\\n✔ registry rejects invalid metadata before any installation (0.659208ms)\\nℹ tests 28\\nℹ suites 0\\nℹ pass 21\\nℹ fail 0\\nℹ cancelled 0\\nℹ skipped 7\\nℹ todo 0\\nℹ duration_ms 3380.627083\\n# 实施进度\\n\\n## GitHub Actions 自动发布（2026-11-17）\\n\\n- [x] 确认现有 ARM64 打包脚本、Node 26.13.0、macOS 15 最低版本，以及 main 跟踪 origin/main；仓库没有既有 workflow 或版本标签。\\n- [x] 添加标签发布与手动构建 workflow，补充版本号、下载校验、签名限制和手动运行说明。\\n- [x] actionlint 与全部 workflow shell 语法检查通过；实际执行版本准备步骤，验证有效标签、分支、无效标签和注入文本四种情况。\\n- [x] 本机 TypeScript 检查通过、允许的 Node 测试 22 项通过/6 项跳过、Swift 41 项通过；临时签名 release 打包、ZIP 解压后的权限/架构/深度签名/内置助手检查及 SHA-256 校验通过。\\n- [x] 配置提交 `87fcafa chore(release): build macOS app and publish tagged releases` 已普通推送至 origin/main；GitHub 已识别 workflow，并通过 API 触发手动构建。\\n- [ ] 首次云端运行 `44080690086` 在 Node 校验步骤因缺少 rg 退出（127）；改用系统 grep 后验证并重新推送、触发构建。不创建版本标签。\\n\\n## 启动时立即显示主界面（2026-11-17）\\n\\n- [x] 确认设置页使用 !archiveLoaded 判定，导致已配置仓库仍被全屏读取页遮挡；侧栏已经有状态小字。\\n- [x] 新回归先出现五个失败断言，覆盖首帧、加载期、失败后的页面判定和缓存保留。\\n# 验证标准\\n\\n## GitHub Actions 自动发布\\n\\n- `vX.Y.Z` 标签触发构建与 Release；普通分支推送不发布，手动分支运行仅上传 artifact；版本写入打包的 Info.plist。\\n- workflow 语法检查通过，打包前确认 ARM64；TypeScript、允许的 Node 测试、Swift 测试失败时不执行发布。\\n- ZIP 解压后 GUI、helper 与内置 Node 可执行，深度签名验证和内置助手自检通过；SHA-256 校验通过。\\n- 仅使用 GITHUB_TOKEN 的 contents: write 权限，发布验证远端标签存在；ZIP 与校验文件同时上传，不覆盖已有 Release。\\n- 提交后普通推送，尽可能实际触发远端手动构建并核对结果。未触发的标签发布不得记为已实测；不运行 Claude 测试、视觉检查、证书导入或 Apple 公证。\\n- 本机已通过：actionlint、全部 workflow shell 语法、四种版本准备场景、TypeScript、允许的 Node 测试 22 项（另 6 项跳过）、Swift 41 项、临时签名 release 打包，以及 ZIP 解压后的权限/架构/签名/内置助手和 SHA-256 校验。远端运行结果待推送后补记。\\n\\n## 启动时立即显示主界面\\n\\n- **Git 提交**：`0fe88f7 fix(dashboard): show calendar labels for session dates`，已普通推送至 `origin/main`；本条由后续文档提交补记。\\n\\n---\\n\\n## [2026-11-17 20:09] GitHub Actions 自动编译发布\\n\\n- **需求/问题描述**：\\n  > 设置一个 action 自动编译发布到 GitHub Release。\\n- **实际实现的功能与改动**：\\n  - 推送 `vX.Y.Z` 标签后，在 macOS 15 ARM64 runner 复用现有脚本生成应用，写入版本与构建编号，通过检查后发布 ZIP 和 SHA-256 校验文件。\\n  - 手动分支运行只保存 Actions artifact，手动标签运行发布 Release；使用内置 GITHUB_TOKEN，不覆盖已有 Release，无需新增密钥。\\n  - README 和发布说明明确 macOS 15+、Apple Silicon、临时签名、未公证及独立后台服务的有效签名要求。Node 校验使用系统 grep，避免依赖 CI 未安装的 rg。\\n  - 本机 actionlint、workflow shell 语法与四种版本准备场景通过；TypeScript 检查通过，Node 22 项通过/6 项跳过，Swift 41 项通过；release 打包、ZIP 解压后的权限/架构/深度签名/内置助手及 SHA-256 校验通过。\\n  - 未运行 Claude 测试、截图或 Apple 公证。远端手动构建结果将在推送后补记；未创建版本标签或发布新版本。\\n- **涉及文件**：`.github/workflows/release.yml`、`scripts/build.sh`、`README.md`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\\n- **Git 提交**：`87fcafa chore(release): build macOS app and publish tagged releases`，已普通推送至 `origin/main`；云端兼容修正待提交。\\n\\n---\\n\"}",
+      "time" : 1794917823523
+    },
+    {
+      "id" : "330",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "我还确认了一项测试依赖本机安装的 DeepSeek Harness，已让它沿用项目现有的 `RAGDOLL_MIGRATION_LIVE=dsh` 开关。该测试在本机显式开启后通过；云端默认跳过这类需要外部客户端的集成测试，其余检查照常执行。\n",
+      "time" : 1794917830231
+    },
+    {
+      "id" : "call_5035d012ed494989b7d15c0d77190d50",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 7.8 seconds\nOutput:\n\n{}\n{\"chunk_id\":\"f8b674\",\"wall_time_seconds\":1.001121959,\"session_id\":6939,\"original_token_count\":646,\"output\":\" README.md                      | 2 +-\\n docs/CHANGELOG.md              | 7 ++++---\\n memory/plan.md                 | 1 +\\n memory/progress.md             | 6 ++++--\\n memory/verify.md               | 2 +-\\n runtime/test/migration.test.ts | 2 +-\\n 6 files changed, 12 insertions(+), 8 deletions(-)\\ndiff --git a/README.md b/README.md\\nindex 35c122d..2b001ca 100644\\n--- a/README.md\\n+++ b/README.md\\n@@ -48,6 +48,6 @@ CI 构建使用临时签名，未经 Apple 公证，首次打开可能受到 Gat\\n \\n ## 验证\\n \\n-Swift 验证包含真实助手的大消息传输回归；先安装 runtime 依赖并运行 `npm --prefix runtime run build`，再运行 `swift test`。助手检查使用 `npm --prefix runtime run typecheck`。真实连接和对话检查需要对应工具已经登录。实际执行记录见 [docs/VALIDATION.md](docs/VALIDATION.md)。按照用户要求，Claude 接入后续仅完成代码，不继续运行 Claude 测试。\\n+Swift 验证包含真实助手的大消息传输回归；先安装 runtime 依赖并运行 `npm --prefix runtime run build`，再运行 `swift test`。助手检查使用 `npm --prefix runtime run typecheck`。真实连接和对话检查需要对应工具已经登录；需要本机 DeepSeek Harness 的迁移恢复测试与续聊测试统一通过 `RAGDOLL_MIGRATION_LIVE=dsh` 开启，云端构建默认跳过。实际执行记录见 [docs/VALIDATION.md](docs/VALIDATION.md)。按照用户要求，Claude 接入后续仅完成代码，不继续运行 Claude 测试。\\n \\n 本项目读取 `references` 中的格式与实现思路。参考项目不随应用源码提交，样本出处见 [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md)。\\ndiff --git a/runtime/test/migration.test.ts b/runtime/test/migration.test.ts\\nindex db0a490..c71100c 100644\\n--- a/runtime/test/migration.test.ts\\n+++ b/runtime/test/migration.test.ts\\n@@ -163,7 +163,7 @@ test('migration refuses malformed raw input before publishing target history', a\\n   } finally { await rm(root, { recursive: true, force: true }); }\\n });\\n \\n-test('Codex history becomes a dsh native conversation that the installed tool can resume', async () => {\\n+test('Codex history becomes a dsh native conversation that the installed tool can resume', { skip: process.env.RAGDOLL_MIGRATION_LIVE !== 'dsh' }, async () => {\\n   const root = resolve(import.meta.dirname, '../../.agent/tests', randomUUID());\\n   await mkdir(root, { recursive: true });\\n   const path = await sourceFile(root);\\n[main d6b1dbc] test(migration): gate local dsh restore behind integration flag\\n 6 files changed, 12 insertions(+), 8 deletions(-)\\n\"}\n{\"chunk_id\":\"34f10c\",\"wall_time_seconds\":1.000961833,\"session_id\":42044,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794917863768
+    },
+    {
+      "id" : "call_c23e2d043fd34edc9e2bc5bbc953c70e",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"91f8cf\",\"wall_time_seconds\":0.000026125,\"exit_code\":0,\"original_token_count\":20,\"output\":\"To https://github.com/OyamaMeek/Ragdoll.git\\n   695e547..d6b1dbc  main -> main\\n\"}\n{\"chunk_id\":\"0da29b\",\"wall_time_seconds\":0.000012459,\"exit_code\":0,\"original_token_count\":7,\"output\":\"{\\\"status\\\":202,\\\"body\\\":{}}\\n\"}\n{\"chunk_id\":\"6ce81b\",\"wall_time_seconds\":1.000644667,\"session_id\":76486,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794917873176
     }
   ],
   "nativeID" : "01a1e964-1dc6-70e0-a088-c1aba2d19636",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加 GitHub Release 自动发布 Action",
-  "updated" : 1794917821740,
+  "updated" : 1794917875044,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -748,6 +776,33 @@
       "model" : "gpt-6.1-sol",
       "output" : 1226,
       "time" : 1794917811428
+    },
+    {
+      "cacheRead" : 140032,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc45b6d94887d0b7ea07a0057f9547",
+      "input" : 539,
+      "model" : "gpt-6.1-sol",
+      "output" : 236,
+      "time" : 1794917823521
+    },
+    {
+      "cacheRead" : 140672,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc45c0ca0c87d0a13a41a6362cbd37",
+      "input" : 1784,
+      "model" : "gpt-6.1-sol",
+      "output" : 1473,
+      "time" : 1794917856405
+    },
+    {
+      "cacheRead" : 143744,
+      "cacheWrite" : 0,
+      "id" : "resp_01ca255af47402f2016afc45e8f47c87d0a1411df1ab447340",
+      "input" : 983,
+      "model" : "gpt-6.1-sol",
+      "output" : 178,
+      "time" : 1794917873056
     }
   ],
   "warnings" : [
