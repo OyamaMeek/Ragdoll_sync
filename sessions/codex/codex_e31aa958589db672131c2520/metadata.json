@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "改为显示今天、昨日、本周和本月",
-  "updated" : 1794904272045,
+  "updated" : 1794904393401,
   "usage" : [
     {
       "cacheRead" : 13056,
@@ -292,6 +292,51 @@
       "model" : "gpt-6.1-sol",
       "output" : 650,
       "time" : 1794904247060
+    },
+    {
+      "cacheRead" : 115712,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc10b7d1fc87d0b6f6460465044c1b",
+      "input" : 3607,
+      "model" : "gpt-6.1-sol",
+      "output" : 3349,
+      "time" : 1794904318366
+    },
+    {
+      "cacheRead" : 122496,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc1108457c87d0a3134ae5c4ff701f",
+      "input" : 1359,
+      "model" : "gpt-6.1-sol",
+      "output" : 220,
+      "time" : 1794904337415
+    },
+    {
+      "cacheRead" : 123904,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc11125bc887d0bdc7963feb206c0d",
+      "input" : 2813,
+      "model" : "gpt-6.1-sol",
+      "output" : 1047,
+      "time" : 1794904362247
+    },
+    {
+      "cacheRead" : 127616,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc1130f16487d0b552705484abd827",
+      "input" : 345,
+      "model" : "gpt-6.1-sol",
+      "output" : 224,
+      "time" : 1794904377298
+    },
+    {
+      "cacheRead" : 128000,
+      "cacheWrite" : 0,
+      "id" : "resp_0c179e03bc690ae1016afc1139ebe487d0b2eeea4384571f5c",
+      "input" : 2289,
+      "model" : "gpt-6.1-sol",
+      "output" : 652,
+      "time" : 1794904393401
     }
   ],
   "warnings" : [

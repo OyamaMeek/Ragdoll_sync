@@ -12,7 +12,7 @@
   "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
   "source" : "codex",
   "title" : "是否应该填写 key",
-  "updated" : 1794904282297,
+  "updated" : 1794904380952,
   "usage" : [
     {
       "cacheRead" : 13440,
@@ -67,6 +67,51 @@
       "model" : "gpt-6.1-sol",
       "output" : 280,
       "time" : 1794904274743
+    },
+    {
+      "cacheRead" : 47104,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc10f6d73487d0984b57cab325594b",
+      "input" : 291,
+      "model" : "gpt-6.1-sol",
+      "output" : 1065,
+      "time" : 1794904335441
+    },
+    {
+      "cacheRead" : 48256,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc1110380887d093f3759924f2036e",
+      "input" : 817,
+      "model" : "gpt-6.1-sol",
+      "output" : 77,
+      "time" : 1794904344783
+    },
+    {
+      "cacheRead" : 49024,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc111f59ac87d0a3fc933bf9b67699",
+      "input" : 239,
+      "model" : "gpt-6.1-sol",
+      "output" : 282,
+      "time" : 1794904359825
+    },
+    {
+      "cacheRead" : 49408,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc1128902087d09e666886d6db44f0",
+      "input" : 656,
+      "model" : "gpt-6.1-sol",
+      "output" : 589,
+      "time" : 1794904376911
+    },
+    {
+      "cacheRead" : 50432,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc1139916c87d091dd9f4b5c7cb3eb",
+      "input" : 921,
+      "model" : "gpt-6.1-sol",
+      "output" : 74,
+      "time" : 1794904380924
     }
   ],
   "warnings" : [
