@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "改造对话界面为 Cherry Studio 风格",
-  "updated" : 1794970580515,
+  "updated" : 1794970835528,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -148,6 +148,105 @@
       "model" : "gpt-6.2-sol",
       "output" : 1134,
       "time" : 1794970576306
+    },
+    {
+      "cacheRead" : 104704,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd13d138e487d0a173af7d1d02b1c2",
+      "input" : 1222,
+      "model" : "gpt-6.2-sol",
+      "output" : 3693,
+      "time" : 1794970659420
+    },
+    {
+      "cacheRead" : 105728,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd14248e1087d09b7fd239719726cb",
+      "input" : 3915,
+      "model" : "gpt-6.2-sol",
+      "output" : 1414,
+      "time" : 1794970692439
+    },
+    {
+      "cacheRead" : 109568,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1445571887d094a6765fadb3c256",
+      "input" : 1513,
+      "model" : "gpt-6.2-sol",
+      "output" : 259,
+      "time" : 1794970700188
+    },
+    {
+      "cacheRead" : 110848,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1453740887d0922a03b6b38ad871",
+      "input" : 2908,
+      "model" : "gpt-6.2-sol",
+      "output" : 258,
+      "time" : 1794970717137
+    },
+    {
+      "cacheRead" : 113664,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd145df2dc87d089cf5596690200e6",
+      "input" : 818,
+      "model" : "gpt-6.2-sol",
+      "output" : 190,
+      "time" : 1794970723943
+    },
+    {
+      "cacheRead" : 114432,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1464d24487d0bd3d4451f26a95eb",
+      "input" : 264,
+      "model" : "gpt-6.2-sol",
+      "output" : 228,
+      "time" : 1794970730969
+    },
+    {
+      "cacheRead" : 12160,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd147021e487d0964667269e904393",
+      "input" : 102961,
+      "model" : "gpt-6.2-sol",
+      "output" : 140,
+      "time" : 1794970742205
+    },
+    {
+      "cacheRead" : 114944,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1477061c87d0b9ff2cb725bb3218",
+      "input" : 4934,
+      "model" : "gpt-6.2-sol",
+      "output" : 340,
+      "time" : 1794970753102
+    },
+    {
+      "cacheRead" : 119808,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1483616887d0b4a8349358f03af3",
+      "input" : 3089,
+      "model" : "gpt-6.2-sol",
+      "output" : 848,
+      "time" : 1794970777947
+    },
+    {
+      "cacheRead" : 122624,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd149b160c87d09b15b728676c4380",
+      "input" : 4250,
+      "model" : "gpt-6.2-sol",
+      "output" : 723,
+      "time" : 1794970798068
+    },
+    {
+      "cacheRead" : 126720,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd14b4728c87d0b868218aa6a3d0b3",
+      "input" : 2290,
+      "model" : "gpt-6.2-sol",
+      "output" : 810,
+      "time" : 1794970828015
     }
   ],
   "warnings" : [
