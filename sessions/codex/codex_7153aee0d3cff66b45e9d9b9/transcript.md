@@ -3536,3 +3536,31 @@ Wall time 0.1 seconds
 Output:
 
 {}
+
+## tool · 2026-11-18T03:54:31Z
+
+
+Script completed
+Wall time 0.8 seconds
+Output:
+
+{"chunk_id":"a8ea3f","wall_time_seconds":0.000008042,"exit_code":0,"original_token_count":142,"output":"21 | }\n\n/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/Tests/RagdollTests/ComposerTests.swift:20:19: error: value of type 'AppModel' has no member 'composerSelections'\n18 | \n19 |     model.composerSelections[\"first\", default: .init()].model = \"second-model\"\n20 |     #expect(model.composerSelections[\"first\"]?.effort == \"\")\n   |                   `- error: value of type 'AppModel' has no member 'composerSelections'\n21 | }\n22 | \nerror: fatalError\nruntime/test/migration.test.ts:133:    target.env = { ...target.env, [kind === 'codex' ? 'CODEX_HOME' : 'DSH_HOME']: home };\n"}
+{"chunk_id":"58f375","wall_time_seconds":0.668943459,"exit_code":0,"original_token_count":53,"output":"✔ real Codex app-server initializes and lists models without sending a prompt (411.35375ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 653.914125\n"}
+
+## tool · 2026-11-18T03:55:12Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-18T03:55:54Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
