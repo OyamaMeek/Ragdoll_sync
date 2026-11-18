@@ -12,9 +12,62 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "改造对话界面为 Cherry Studio 风格",
-  "updated" : 1794970323471,
+  "updated" : 1794970381515,
   "usage" : [
-
+    {
+      "cacheRead" : 12160,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd12d568b487d0a91ed24fb1453a88",
+      "input" : 39552,
+      "model" : "gpt-6.2-sol",
+      "output" : 253,
+      "time" : 1794970332231
+    },
+    {
+      "cacheRead" : 50432,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd12de0de487d097595e8d449d18ca",
+      "input" : 7426,
+      "model" : "gpt-6.2-sol",
+      "output" : 257,
+      "time" : 1794970340143
+    },
+    {
+      "cacheRead" : 57600,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd12e5350887d09cf6cbc6df8789cd",
+      "input" : 11227,
+      "model" : "gpt-6.2-sol",
+      "output" : 207,
+      "time" : 1794970346374
+    },
+    {
+      "cacheRead" : 68608,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd12eb4b5c87d08eb159f0f9a80046",
+      "input" : 10871,
+      "model" : "gpt-6.2-sol",
+      "output" : 159,
+      "time" : 1794970351941
+    },
+    {
+      "cacheRead" : 79360,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd12f14e7487d09c82c483a43161ac",
+      "input" : 5101,
+      "model" : "gpt-6.2-sol",
+      "output" : 157,
+      "time" : 1794970358130
+    },
+    {
+      "cacheRead" : 84224,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd12f7076087d09108b0304551e827",
+      "input" : 4438,
+      "model" : "gpt-6.2-sol",
+      "output" : 179,
+      "time" : 1794970363311
+    }
   ],
   "warnings" : [
 
