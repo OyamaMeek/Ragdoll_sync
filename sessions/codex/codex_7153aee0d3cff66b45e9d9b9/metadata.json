@@ -1,0 +1,30 @@
+{
+  "created" : 1794973772078.1199,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/18/rollout-2026-11-18T11-49-31-01a1ecc6-2675-7d61-b184-0d621ad5e14f.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:7153aee0d3cff66b45e9d9b9",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1ecc6-2675-7d61-b184-0d621ad5e14f",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "添加模型选择功能",
+  "updated" : 1794973789372,
+  "usage" : [
+    {
+      "cacheRead" : 12160,
+      "cacheWrite" : 0,
+      "id" : "resp_08cb7e26d4cf1edd016afd2055d5dc87d097cd36120a8b5a33",
+      "input" : 34774,
+      "model" : "gpt-6.2-sol",
+      "output" : 210,
+      "time" : 1794973788959
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
