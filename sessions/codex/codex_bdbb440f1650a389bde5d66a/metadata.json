@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "改造对话界面为 Cherry Studio 风格",
-  "updated" : 1794971705682,
+  "updated" : 1794971792940,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -868,6 +868,69 @@
       "model" : "gpt-6.2-sol",
       "output" : 138,
       "time" : 1794971705682
+    },
+    {
+      "cacheRead" : 168960,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd183e1a1c87d084e480ca87444ff1",
+      "input" : 303,
+      "model" : "gpt-6.2-sol",
+      "output" : 170,
+      "time" : 1794971715307
+    },
+    {
+      "cacheRead" : 169216,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1849744887d0ba33ced2d6e57998",
+      "input" : 280,
+      "model" : "gpt-6.2-sol",
+      "output" : 652,
+      "time" : 1794971739851
+    },
+    {
+      "cacheRead" : 169216,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1860adcc87d0913e67dd8014a9b7",
+      "input" : 1137,
+      "model" : "gpt-6.2-sol",
+      "output" : 81,
+      "time" : 1794971747714
+    },
+    {
+      "cacheRead" : 170240,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd18649cec87d08bdb38233ee5c893",
+      "input" : 265,
+      "model" : "gpt-6.2-sol",
+      "output" : 222,
+      "time" : 1794971756781
+    },
+    {
+      "cacheRead" : 170240,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1873096c87d0bf9fe08fa8f16a8c",
+      "input" : 545,
+      "model" : "gpt-6.2-sol",
+      "output" : 130,
+      "time" : 1794971770954
+    },
+    {
+      "cacheRead" : 170496,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd187bd83887d09ddb5213c174a2ba",
+      "input" : 1165,
+      "model" : "gpt-6.2-sol",
+      "output" : 51,
+      "time" : 1794971774402
+    },
+    {
+      "cacheRead" : 171520,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd187f5d9487d0ba5dbb9795d2c415",
+      "input" : 947,
+      "model" : "gpt-6.2-sol",
+      "output" : 442,
+      "time" : 1794971787568
     }
   ],
   "warnings" : [
