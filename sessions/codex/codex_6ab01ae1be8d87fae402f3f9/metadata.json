@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "Guardian review",
-  "updated" : 1794974382893,
+  "updated" : 1794974523800,
   "usage" : [
     {
       "cacheRead" : 5888,
@@ -67,6 +67,33 @@
       "model" : "codex-auto-review",
       "output" : 90,
       "time" : 1794974382886
+    },
+    {
+      "cacheRead" : 47872,
+      "cacheWrite" : 0,
+      "id" : "resp_0ab413db1eec8857016afd22dd854487d0bf9d1ff81b6229e6",
+      "input" : 2194,
+      "model" : "codex-auto-review",
+      "output" : 77,
+      "time" : 1794974431876
+    },
+    {
+      "cacheRead" : 49920,
+      "cacheWrite" : 0,
+      "id" : "resp_0ab413db1eec8857016afd22e8078887d0ad6cbf9091470a75",
+      "input" : 1238,
+      "model" : "codex-auto-review",
+      "output" : 76,
+      "time" : 1794974441793
+    },
+    {
+      "cacheRead" : 50944,
+      "cacheWrite" : 0,
+      "id" : "resp_0ab413db1eec8857016afd2301df4087d0b1ece71df87c5d96",
+      "input" : 2028,
+      "model" : "codex-auto-review",
+      "output" : 114,
+      "time" : 1794974468476
     }
   ],
   "warnings" : [
