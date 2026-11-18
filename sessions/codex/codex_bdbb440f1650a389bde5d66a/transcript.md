@@ -2198,3 +2198,45 @@ Wall time 4.4 seconds
 Output:
 
 {"chunk_id":"237ac4","wall_time_seconds":0.000010958,"exit_code":1,"original_token_count":9,"output":"FAIL 窗口存在\nFAIL 窗口存在\n"}
+
+## tool · 2026-11-18T03:14:19Z
+
+
+Script completed
+Wall time 4.2 seconds
+Output:
+
+{"chunk_id":"37ff05","wall_time_seconds":0.000009959,"exit_code":0,"original_token_count":60,"output":"43754 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.chat-preview.app/Contents/MacOS/Ragdoll\n  PID STAT ELAPSED COMMAND\n43754 S      00:25 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.chat-preview.app/Contents/MacOS/Ragdoll\n"}
+
+## tool · 2026-11-18T03:14:40Z
+
+
+Script completed
+Wall time 3.1 seconds
+Output:
+
+{"chunk_id":"ad36a0","wall_time_seconds":0.000008833,"exit_code":1,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T03:14:50Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"a510fd","wall_time_seconds":1.003382625,"session_id":49506,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T03:15:00Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"1ac402","wall_time_seconds":0.000008792,"exit_code":0,"original_token_count":20,"output":".agent/chat-preview-smoke/RagdollChatSmoke.app: replacing existing signature\n"}
+
+## tool · 2026-11-18T03:15:05Z
+
+exec
+text(await tools.exec_command({cmd:"open -g -n --env \"RAGDOLL_DATA_DIR=$PWD/.agent/chat-preview-smoke/fixture\" \"$PWD/.agent/chat-preview-smoke/RagdollChatSmoke.app\" && pgrep -fn 'RagdollChatSmoke\\.app/Contents/MacOS/Ragdoll$'",sandbox_permissions:"require_escalated",justification:"可以启动使用独立标识的测试窗口吗？这能避开当前 Ragdoll 的窗口恢复状态，仍只读取测试索引。",yield_time_ms:1000,max_output_tokens:1500}))
+
