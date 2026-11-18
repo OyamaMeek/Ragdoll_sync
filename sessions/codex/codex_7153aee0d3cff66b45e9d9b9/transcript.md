@@ -3915,3 +3915,188 @@ Output:
 {"chunk_id":"3d0815","wall_time_seconds":0.0000085,"exit_code":0,"original_token_count":1,"output":"5\n"}
 {"chunk_id":"2880ce","wall_time_seconds":1.002505625,"session_id":81497,"original_token_count":0,"output":""}
 {"chunk_id":"fb4065","wall_time_seconds":0.000007541,"exit_code":0,"original_token_count":353,"output":"4958 Nov 18 11:57:37 2026\n◇ Passing 1 argument kind → \"history\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"corrupt\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n✔ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) passed after 0.979 seconds.\n◇ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() started.\n✔ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItTests/RagdollCoreTests/BackgroundServiceTests.swift:6:@Test(arguments: [\"missing\", \"history\", \"corrupt\"]) func backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_ kind: String) async throws {\nTests/RagdollCoreTests/BackgroundServiceTests.swift:38:@Test func backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() throws {\nTests/RagdollCoreTests/BackgroundServiceTests.swift:46:@Test func backgroundServiceOwnsOneDataDirectoryAndPreservesNewRequests() throws {\nTests/RagdollCoreTests/BackgroundServiceTests.swift:63:@Test func backgroundServiceArchivesFromItsOwnProcess() async throws {\nTests/RagdollCoreTests/BackgroundServiceTests.swift:108:@Test(arguments: [\"runtime\", \"index\"]) func backgroundServiceExitsOnFatalDependencyFailure(_ kind: String) async throws {\nTests/RagdollCoreTests/BackgroundServiceTests.swift:139:@Test func backgroundServiceContinuesAfterItsLauncherReturns() async throws {\n"}
+
+## tool · 2026-11-18T03:58:37Z
+
+
+Script completed
+Wall time 0.4 seconds
+Output:
+
+{"chunk_id":"29e3e3","wall_time_seconds":0.000009292,"exit_code":0,"original_token_count":3576,"output":"import Foundation\nimport Testing\nimport Darwin\n@testable import RagdollCore\n\n@Test(arguments: [\"missing\", \"history\", \"corrupt\"]) func backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_ kind: String) async throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    let store = try Store(path: root.appendingPathComponent(\"index.sqlite\").path), archive = root.appendingPathComponent(\"archive\")\n    let source = root.appendingPathComponent(\"source/sessions\")\n    try FileManager.default.createDirectory(at: source, withIntermediateDirectories: true)\n    try Data(\"{\\\"type\\\":\\\"session_meta\\\",\\\"payload\\\":{\\\"id\\\":\\\"local-new\\\"}}\\n\".utf8).write(to: source.appendingPathComponent(\"new.jsonl\"))\n    var settings = Settings(); settings.locations = [Location(source: \"codex\", path: source.deletingLastPathComponent().path)]\n    if kind != \"missing\" {\n        try Archive.prepare(archive)\n        try git(archive, [\"config\", \"user.name\", \"First\"]); try git(archive, [\"config\", \"user.email\", \"first@localhost\"])\n        _ = try Archive.save([Session(id: \"archived-only\", source: \"codex\", title: \"Archived\", messages: [Message(role: \"user\", text: \"ARCHIVED_ONLY_1729\")])], to: archive)\n        settings.archivePath = archive.path\n        if kind == \"corrupt\" { try Data(\"broken\".utf8).write(to: archive.appendingPathComponent(\".ragdoll-manifest.json\")) }\n    }\n    try store.saveSettings(settings)\n    let project = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()\n    let process = Process(); process.executableURL = project.appendingPathComponent(\".build/debug/RagdollService\"); process.arguments = [\"--data-dir\", root.path, \"--once\"]\n    process.standardOutput = FileHandle.nullDevice; process.standardError = FileHandle.nullDevice\n    try process.run(); defer { if process.isRunning { process.terminate(); process.waitUntilExit() } }\n    let deadline = Date().addingTimeInterval(20)\n    while process.isRunning && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\n    #expect(!process.isRunning)\n    if !process.isRunning { #expect(process.terminationStatus == (kind == \"corrupt\" ? 1 : 0)) }\n    if kind == \"history\" {\n        #expect(try store.list(query: \"ARCHIVED_ONLY_1729\").count == 1)\n        #expect(try store.list().count == 2)\n        let restored = try Store(path: root.appendingPathComponent(\"restored.sqlite\").path)\n        #expect(try await Archive.restore(from: archive, into: restored, bridge: RuntimeBridge()) == 2)\n    } else { #expect(try store.list().isEmpty) }\n    if kind == \"corrupt\" { #expect(try String(contentsOf: archive.appendingPathComponent(\".ragdoll-manifest.json\"), encoding: .utf8) == \"broken\") }\n}\n\n@Test func backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    let other = root.appendingPathComponent(\"other\")\n    try Data(\"unrelated file\".utf8).write(to: other)\n    try FileManager.default.createSymbolicLink(at: root.appendingPathComponent(\"service-lock\"), withDestinationURL: other)\n    #expect(throws: (any Error).self) { try BackgroundService.isRunning(root: root) }\n}\n\n@Test func backgroundServiceOwnsOneDataDirectoryAndPreservesNewRequests() throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    var first: ServiceLease? = try ServiceLease(root: root)\n    #expect(try BackgroundService.isRunning(root: root))\n    #expect(throws: (any Error).self) { try ServiceLease(root: root) }\n    try BackgroundService.request(root: root)\n    let old = try Data(contentsOf: root.appendingPathComponent(\"service-request\"))\n    try BackgroundService.request(root: root)\n    #expect(try Data(contentsOf: root.appendingPathComponent(\"service-request\")) != old)\n    first = nil\n    #expect(try !BackgroundService.isRunning(root: root))\n    let second = try ServiceLease(root: root)\n    let occupied = try BackgroundService.isRunning(root: root)\n    withExtendedLifetime(second) { #expect(occupied) }\n    _ = first\n}\n\n@Test func backgroundServiceArchivesFromItsOwnProcess() async throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    let source = root.appendingPathComponent(\"source/sessions\"), archive = root.appendingPathComponent(\"archive\")\n    try FileManager.default.createDirectory(at: source, withIntermediateDirectories: true)\n    try FileManager.default.createDirectory(at: archive, withIntermediateDirectories: true)\n    try git(archive, [\"init\"]); try git(archive, [\"config\", \"user.name\", \"Background\"]); try git(archive, [\"config\", \"user.email\", \"background@localhost\"])\n    let raw = \"{\\\"type\\\":\\\"session_meta\\\",\\\"payload\\\":{\\\"id\\\":\\\"background-check\\\"}}\\n{\\\"type\\\":\\\"response_item\\\",\\\"payload\\\":{\\\"type\\\":\\\"message\\\",\\\"role\\\":\\\"user\\\",\\\"content\\\":[{\\\"type\\\":\\\"input_text\\\",\\\"text\\\":\\\"SERVICE_NATIVE_1729\\\"}]}}\\n\"\n    try Data(raw.utf8).write(to: source.appendingPathComponent(\"session.jsonl\"))\n    let store = try Store(path: root.appendingPathComponent(\"index.sqlite\").path)\n    let remote = root.appendingPathComponent(\"remote.git\")\n    try git(archive, [\"remote\", \"add\", \"origin\", remote.path])\n    var settings = Settings(); settings.locations = [Location(source: \"codex\", path: source.deletingLastPathComponent().path)]; settings.archivePath = archive.path; settings.archiveRemote = ArchiveRemote(remote: \"origin\", branch: \"archive\")\n    try store.saveSettings(settings)\n    let project = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()\n    let executable = project.appendingPathComponent(\".build/debug/RagdollService\")\n    let process = Process(); process.executableURL = executable; process.arguments = [\"--data-dir\", root.path, \"--once\"]\n    process.standardOutput = FileHandle.nullDevice; process.standardError = FileHandle.nullDevice\n    try process.run()\n    let deadline = Date().addingTimeInterval(20)\n    while process.isRunning && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\n    if process.isRunning { process.terminate(); Issue.record(\"独立服务未在期限内完成\"); return }\n    #expect(process.terminationStatus == 0)\n    #expect(try store.list(query: \"SERVICE_NATIVE_1729\").count == 1)\n    let restoredStore = try Store(path: root.appendingPathComponent(\"restored.sqlite\").path)\n    #expect(try await Archive.restore(from: archive, into: restoredStore, bridge: RuntimeBridge()) == 1)\n    #expect(try restoredStore.list(query: \"SERVICE_NATIVE_1729\").count == 1)\n    #expect(try git(archive, [\"log\", \"-1\", \"--format=%s\"]) == \"chore(archive): sync conversations\")\n    #expect(FileManager.default.fileExists(atPath: root.appendingPathComponent(\"sync-pending\").path))\n    let head = try git(archive, [\"rev-parse\", \"HEAD\"])\n    let transcript = try #require(FileManager.default.enumerator(at: archive, includingPropertiesForKeys: nil)?.compactMap { $0 as? URL }.first { $0.lastPathComponent == \"transcript.md\" })\n    try Data(\"hand edited\".utf8).write(to: transcript)\n    try git(root, [\"init\", \"--bare\", remote.path])\n    let retry = Process(); retry.executableURL = executable; retry.arguments = [\"--data-dir\", root.path, \"--once\"]\n    retry.standardOutput = FileHandle.nullDevice; retry.standardError = FileHandle.nullDevice\n    try retry.run()\n    let retryDeadline = Date().addingTimeInterval(20)\n    while retry.isRunning && Date() < retryDeadline { try await Task.sleep(for: .milliseconds(50)) }\n    if retry.isRunning { retry.terminate(); Issue.record(\"服务重启未完成\"); return }\n    #expect(retry.terminationStatus == 1)\n    #expect(try git(archive, [\"rev-parse\", \"HEAD\"]) == head)\n    #expect(try git(remote, [\"rev-parse\", \"refs/heads/archive\"]) == head)\n    #expect(!FileManager.default.fileExists(atPath: root.appendingPathComponent(\"sync-pending\").path))\n    #expect(try String(contentsOf: transcript, encoding: .utf8) == \"hand edited\")\n}\n\n@Test(arguments: [\"runtime\", \"index\"]) func backgroundServiceExitsOnFatalDependencyFailure(_ kind: String) async throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    let store = try Store(path: root.appendingPathComponent(\"index.sqlite\").path)\n    let source = root.appendingPathComponent(\"source/sessions\")\n    try FileManager.default.createDirectory(at: source, withIntermediateDirectories: true)\n    let archive = root.appendingPathComponent(\"archive\")\n    try Archive.prepare(archive)\n    var settings = Settings(); settings.backgroundEnabled = true; settings.archivePath = archive.path; settings.locations = [Location(source: \"codex\", path: source.deletingLastPathComponent().path)]; try store.saveSettings(settings)\n    let project = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()\n    let process = Process(); process.executableURL = project.appendingPathComponent(\".build/debug/RagdollService\"); process.arguments = [\"--data-dir\", root.path]\n    process.standardOutput = FileHandle.nullDevice; process.standardError = FileHandle.nullDevice\n    try process.run(); defer { if process.isRunning { process.terminate(); process.waitUntilExit() } }\n    let deadline = Date().addingTimeInterval(10)\n    while try BackgroundService.status(root: root) == nil && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\n    if kind == \"runtime\" {\n        let children = Process(); children.executableURL = URL(fileURLWithPath: \"/usr/bin/pgrep\"); children.arguments = [\"-P\", String(process.processIdentifier)]\n        let output = Pipe(); children.standardOutput = output\n        try children.run(); let data = output.fileHandleForReading.readDataToEndOfFile(); children.waitUntilExit()\n        let pid = try #require(Int32(String(decoding: data, as: UTF8.self).trimmingCharacters(in: .whitespacesAndNewlines)))\n        kill(pid, SIGKILL)\n    } else {\n        let sqlite = Process(); sqlite.executableURL = URL(fileURLWithPath: \"/usr/bin/sqlite3\"); sqlite.arguments = [root.appendingPathComponent(\"index.sqlite\").path, \"DROP TABLE sessions\"]\n        try sqlite.run(); sqlite.waitUntilExit(); #expect(sqlite.terminationStatus == 0)\n        try Data(\"{\\\"type\\\":\\\"session_meta\\\",\\\"payload\\\":{\\\"id\\\":\\\"index-failure\\\"}}\\n\".utf8).write(to: source.appendingPathComponent(\"one.jsonl\"))\n        try BackgroundService.request(root: root)\n    }\n    while process.isRunning && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\n    #expect(!process.isRunning)\n    if !process.isRunning { #expect(process.terminationStatus != 0); #expect(try !BackgroundService.isRunning(root: root)) }\n}\n\n@Test func backgroundServiceContinuesAfterItsLauncherReturns() async throws {\n    let root = try testDirectory(); defer { try? FileManager.default.removeItem(at: root) }\n    let source = root.appendingPathComponent(\"source/sessions\"), archive = root.appendingPathComponent(\"archive\")\n    try FileManager.default.createDirectory(at: source, withIntermediateDirectories: true)\n    try FileManager.default.createDirectory(at: archive, withIntermediateDirectories: true)\n    try git(archive, [\"init\"]); try git(archive, [\"config\", \"user.name\", \"Service\"]); try git(archive, [\"config\", \"user.email\", \"service@localhost\"])\n    let store = try Store(path: root.appendingPathComponent(\"index.sqlite\").path)\n    var settings = Settings(); settings.locations = [Location(source: \"codex\", path: source.deletingLastPathComponent().path)]; settings.archivePath = archive.path; settings.backgroundEnabled = true\n    try store.saveSettings(settings); try BackgroundService.request(root: root)\n    let project = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()\n    let process = Process(); process.executableURL = project.appendingPathComponent(\".build/debug/RagdollService\"); process.arguments = [\"--data-dir\", root.path]\n    process.standardOutput = FileHandle.nullDevice; process.standardError = FileHandle.nullDevice\n    try process.run(); defer { if process.isRunning { process.terminate(); process.waitUntilExit() } }\n    let deadline = Date().addingTimeInterval(20)\n    while (try BackgroundService.status(root: root)?.lastArchive) == nil && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\n    #expect(try BackgroundService.isRunning(root: root))\n    let raw = \"{\\\"type\\\":\\\"session_meta\\\",\\\"payload\\\":{\\\"id\\\":\\\"late\\\"}}\\n{\\\"type\\\":\\\"response_item\\\",\\\"payload\\\":{\\\"type\\\":\\\"message\\\",\\\"role\\\":\\\"user\\\",\\\"content\\\":[{\\\"type\\\":\\\"input_text\\\",\\\"text\\\":\\\"AFTER_LAUNCH_1729\\\"}]}}\\n\"\n    try Data(raw.utf8).write(to: source.appendingPathComponent(\"late.jsonl\")); try BackgroundService.request(root: root)\n    while try store.list(query: \"AFTER_LAUNCH_1729\").isEmpty && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\n    #expect(try store.list(query: \"AFTER_LAUNCH_1729\").count == 1)\n    let newRecord = archive.appendingPathComponent(\"sessions/codex\")\n    while !FileManager.default.fileExists(atPath: newRecord.path) && Date() < deadline { try await Task.sleep(for: .milliseconds(50)) }\n    #expect(FileManager.default.fileExists(atPath: newRecord.path))\n    #expect(process.isRunning)\n}\n11:58:36\n✔ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() passed after 0.511 seconds.\n◇ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() started.\n✔ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() passed after 0.003 seconds.\n◇ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) started.\n◇ Passing 1 argument kind → \"missing\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"history\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"corrupt\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n✔ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) passed after 0.979 seconds.\n◇ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() started.\n✔ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingIt"}
+{"chunk_id":"8bbaa7","wall_time_seconds":0.375830083,"exit_code":0,"original_token_count":123,"output":"dist/Ragdoll.model-preview.app: replacing existing signature\n{\"status\":\"ok\",\"version\":\"0.1.0\",\"node\":\"v26.13.0\",\"agents\":[{\"id\":\"native-codex\",\"name\":\"Codex\",\"kind\":\"codex\",\"command\":\"codex\",\"args\":[],\"env\":{}},{\"id\":\"native-claude\",\"name\":\"Claude Code\",\"kind\":\"claude\",\"command\":\"claude\",\"args\":[],\"env\":{}},{\"id\":\"native-dsh\",\"name\":\"DeepSeek Harness\",\"kind\":\"dsh\",\"command\":\"/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh\",\"args\":[\"--profile\",\"sdk\"],\"env\":{}}]}\n"}
+
+## tool · 2026-11-18T03:58:44Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+import SwiftUI
+import RagdollCore
+
+enum Page: String, CaseIterable, Identifiable {
+    case home = "首页", sessions = "会话", chat = "对话", settings = "设置"
+    var id: String { rawValue }
+    var icon: String {
+        switch self { case .home: "square.grid.2x2"; case .sessions: "clock.arrow.circlepath"; case .chat: "bubble.left.and.bubble.right"; case .settings: "slider.horizontal.3" }
+    }
+}
+
+struct RootView: View {
+    @EnvironmentObject var model: AppModel
+    @State private var page: Page? = .home
+    @State private var showingStatus = false
+    var body: some View {
+        Group {
+            if model.needsArchiveSetup {
+                VStack(spacing: 20) {
+                    Image(systemName: "externaldrive.badge.checkmark").font(.system(size: 42)).foregroundStyle(.blue)
+                    Text("设置 Git 数据仓库").font(.largeTitle.bold())
+                    Text("请选择保存会话的专用 Git 仓库，也可以选择空目录创建仓库。\n每次打开会先读取仓库历史，再检查本机新增数据并自动归档。").multilineTextAlignment(.center).foregroundStyle(.secondary)
+                    Button("选择或创建 Git 仓库…") { model.chooseArchive() }.buttonStyle(.borderedProminent).disabled(model.loadingArchive)
+                    Text("本地提交需要 Git 已配置姓名与邮箱；远端自动推送可在设置中配置。").font(.caption).foregroundStyle(.secondary)
+                }.padding(40).frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else { content }
+        }
+        .alert("操作未完成", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {
+            Button("好", role: .cancel) { model.error = nil }
+        } message: { Text(model.error ?? "") }
+        .sheet(item: Binding(get: { model.approvals.first }, set: { _ in })) { request in ApprovalView(request: request).environmentObject(model) }
+    }
+    private var content: some View {
+        let chat = page == .chat
+        return NavigationSplitView {
+            Group {
+                if chat {
+                    VStack(spacing: 6) {
+                        ForEach(Page.allCases) { item in
+                            Button { page = item } label: {
+                                Image(systemName: item.icon).font(.system(size: 16, weight: .medium))
+                                    .foregroundStyle(page == item ? Color.accentColor : Color.secondary)
+                                    .frame(width: 36, height: 34)
+                                    .background(page == item ? Color.accentColor.opacity(0.12) : .clear, in: RoundedRectangle(cornerRadius: 9))
+                                    .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain).help(item.rawValue).accessibilityLabel(item.rawValue)
+                            .accessibilityAddTraits(page == item ? .isSelected : [])
+                        }
+                        Spacer()
+                        Button { showingStatus.toggle() } label: {
+                            Circle().fill(model.ready ? .green : .orange).frame(width: 7, height: 7)
+                                .frame(width: 36, height: 34).contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("本地状态").help(model.status)
+                        .popover(isPresented: $showingStatus, arrowEdge: .trailing) {
+                            statusDetails.frame(width: 200, alignment: .leading).padding(16)
+                        }
+                    }.padding(.vertical, 12).frame(maxWidth: .infinity)
+                } else {
+                    VStack(alignment: .leading, spacing: 16) {
+                        HStack(spacing: 10) {
+                            Image(systemName: "square.stack.3d.up.fill").font(.title2).foregroundStyle(.blue)
+                            VStack(alignment: .leading, spacing: 2) { Text("Ragdoll").font(.title3.bold()); Text("LOCAL CONVERSATIONS").font(.system(size: 8, weight: .semibold, design: .monospaced)).foregroundStyle(.secondary).tracking(1) }
+                        }.padding(.horizontal, 16).padding(.top, 20)
+                        List(Page.allCases, selection: $page) { item in Label(item.rawValue, systemImage: item.icon).tag(item).padding(.vertical, 5) }.listStyle(.sidebar)
+                        statusDetails.padding(16)
+                    }
+                }
+            }
+            .navigationSplitViewColumnWidth(min: chat ? 56 : 180, ideal: chat ? 56 : 210, max: chat ? 56 : 260)
+        } detail: {
+            Group {
+                switch page ?? .home {
+                case .home: DashboardView { page = .sessions }
+                case .sessions: ConversationView(canCreate: false)
+                case .chat: ConversationView(canCreate: true)
+                case .settings: SettingsView()
+                }
+            }
+            .toolbar {
+                ToolbarItem { if model.scanning { ProgressView().controlSize(.small) } else { Button { Task { await model.refresh() } } label: { Image(systemName: "arrow.clockwise") }.help("刷新本地会话").disabled(!model.ready) } }
+                ToolbarItem { Button { model.importDesktop() } label: { Image(systemName: "square.and.arrow.down") }.help("导入 Claude 官方导出包").disabled(!model.ready) }
+            }
+        }
+    }
+    private var statusDetails: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Circle().fill(model.ready ? .green : .orange).frame(width: 6, height: 6)
+                Text(model.loadingArchive ? "正在读取" : model.ready ? "本地运行" : "未连接").font(.caption)
+            }
+            Text(model.status).font(.caption2).foregroundStyle(.secondary).lineLimit(3)
+            if !model.archiveLoaded && !model.loadingArchive {
+                Button("重新读取仓库") { Task { await model.launch() } }.font(.caption2).buttonStyle(.link)
+            }
+            Text("\(model.sessions.count) 个会话").font(.caption.monospacedDigit()).foregroundStyle(.secondary)
+        }
+    }
+}
+
+struct Card<Content: View>: View {
+    @ViewBuilder var content: Content
+    var body: some View { content.padding(20).frame(maxWidth: .infinity, alignment: .leading).background(.background, in: RoundedRectangle(cornerRadius: 16)).overlay(RoundedRectangle(cornerRadius: 16).stroke(.primary.opacity(0.07))) }
+}
+
+func sourceName(_ source: String) -> String {
+    switch source { case "codex": "Codex"; case "claude": "Claude Code"; case "dsh": "DeepSeek Harness"; case "desktop": "Claude 聊天"; case "acp": "ACP"; default: source }
+}
+
+func compact(_ value: Int) -> String { value.formatted(.number.notation(.compactName)) }
+func money(_ value: Double) -> String { value.formatted(.currency(code: "USD")) }
+## main...origin/main
+ M Package.swift
+ M Sources/Ragdoll/AgentOptionsView.swift
+ M Sources/Ragdoll/AppModel.swift
+ M Sources/Ragdoll/ConversationView.swift
+ M Tests/RagdollTests/ConversationTests.swift
+ M docs/CHANGELOG.md
+ M memory/agents.md
+ M memory/plan.md
+ M memory/progress.md
+ M memory/verify.md
+ M runtime/src/agents.ts
+ M runtime/src/main.ts
+ M runtime/test/integration.test.ts
+?? Sources/Ragdoll/Resources/
+?? Tests/RagdollTests/ComposerTests.swift
+@@ -1,6 +1,8 @@
+@@ -81,7 +83,7 @@ struct ConversationView: View {
+@@ -149,7 +151,7 @@ struct ConversationView: View {
+@@ -168,6 +170,8 @@ struct ConversationView: View {
+@@ -194,6 +198,15 @@ struct ConversationView: View {
+@@ -225,23 +238,25 @@ extension Message {
+@@ -263,7 +278,14 @@ struct MessageView: View {
+@@ -289,6 +311,7 @@ struct NewChatView: View {
+@@ -299,19 +322,19 @@ struct NewChatView: View {
+
+
+## tool · 2026-11-18T03:59:02Z
+
+
+Script completed
+Wall time 3.9 seconds
+Output:
+
+{"chunk_id":"b92c8e","wall_time_seconds":0.000013625,"exit_code":0,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T03:59:29Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-18T03:59:53Z
+
+
+Script completed
+Wall time 14.5 seconds
+Output:
+
+{"chunk_id":"6d78e0","wall_time_seconds":1.002235125,"session_id":56481,"original_token_count":0,"output":""}
+{"chunk_id":"6ee57f","wall_time_seconds":0.000010166,"exit_code":0,"original_token_count":62,"output":"51417 47896    02:22 Ss   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-test\n52235     1    00:40 S    /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.model-preview.app/Contents/MacOS/Ragdoll\n"}

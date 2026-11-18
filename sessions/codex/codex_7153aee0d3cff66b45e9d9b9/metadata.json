@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加模型选择功能",
-  "updated" : 1794974314042,
+  "updated" : 1794974396843,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -292,6 +292,51 @@
       "model" : "gpt-6.2-sol",
       "output" : 552,
       "time" : 1794974310280
+    },
+    {
+      "cacheRead" : 122496,
+      "cacheWrite" : 0,
+      "id" : "resp_08cb7e26d4cf1edd016afd2268271c87d0b62bf287e3083185",
+      "input" : 1154,
+      "model" : "gpt-6.2-sol",
+      "output" : 176,
+      "time" : 1794974317363
+    },
+    {
+      "cacheRead" : 123520,
+      "cacheWrite" : 0,
+      "id" : "resp_08cb7e26d4cf1edd016afd226e82a487d08af6d619d6e7b15d",
+      "input" : 4325,
+      "model" : "gpt-6.2-sol",
+      "output" : 143,
+      "time" : 1794974324693
+    },
+    {
+      "cacheRead" : 127616,
+      "cacheWrite" : 0,
+      "id" : "resp_08cb7e26d4cf1edd016afd2275b3bc87d09a0eec9022337240",
+      "input" : 2203,
+      "model" : "gpt-6.2-sol",
+      "output" : 389,
+      "time" : 1794974338581
+    },
+    {
+      "cacheRead" : 129664,
+      "cacheWrite" : 0,
+      "id" : "resp_08cb7e26d4cf1edd016afd22871f6887d08d4ab2a870d0a5ca",
+      "input" : 602,
+      "model" : "gpt-6.2-sol",
+      "output" : 1093,
+      "time" : 1794974369935
+    },
+    {
+      "cacheRead" : 129920,
+      "cacheWrite" : 0,
+      "id" : "resp_08cb7e26d4cf1edd016afd22a2d82887d09ce95be30392697b",
+      "input" : 1463,
+      "model" : "gpt-6.2-sol",
+      "output" : 319,
+      "time" : 1794974379027
     }
   ],
   "warnings" : [
