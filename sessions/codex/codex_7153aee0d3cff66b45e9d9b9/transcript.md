@@ -4405,12 +4405,345 @@ Test Suite 'Selected tests' passed at 2026-11-18 12:03:30.437.
 
 已在隔离预览里实测：打开历史会话后，可以直接加载模型清单、选模型和推理强度，再切回默认。Swift 的 50 项测试已分两轮通过，我会再用仓库默认构建目录跑一遍完整测试。
 
-## tool · 2026-11-18T04:04:24Z
+## tool · 2026-11-18T04:04:36Z
 
-exec
-const r=await Promise.allSettled([
-tools.exec_command({cmd:"env CODEX_HOME=\"$PWD/.agent/model-codex-home\" CLANG_MODULE_CACHE_PATH=\"$PWD/.cache/clang\" SWIFT_MODULECACHE_PATH=\"$PWD/.cache/swift-modules\" swift test --disable-sandbox --cache-path .cache/swift --config-path .cache/swift-config --security-path .cache/swift-security --no-parallel > .agent/model-swift-final.log 2>&1",sandbox_permissions:"require_escalated",justification:"是否允许在仓库默认构建目录做一次完整 Swift 验证？此前分开运行的 50 项均已通过。",yield_time_ms:1000}),
-tools.exec_command({cmd:"pgrep -f '^/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll\\.model-preview\\.app/Contents/MacOS/Ragdoll$' | xargs -n 1 kill -TERM","sandbox_permissions":"require_escalated",justification:"是否允许关闭刚完成检查的隔离预览进程？用户打开预览包时将使用常规应用数据目录。",yield_time_ms:1000}),
-tools.exec_command({cmd:"git diff --check && git log -1 --format='%h %s' && git status --short && rg 'pass|fail|skipped' .agent/model-node-tests.log | tail -n 3",max_output_tokens:2000})
-]);for(const x of r)text(x.value)
 
+Script completed
+Wall time 12.5 seconds
+Output:
+
+{"chunk_id":"d91b04","wall_time_seconds":1.001584333,"session_id":47925,"original_token_count":0,"output":""}
+{"chunk_id":"8b2485","wall_time_seconds":0.000010917,"exit_code":0,"original_token_count":0,"output":""}
+{"chunk_id":"6b357b","wall_time_seconds":0.00001,"exit_code":0,"original_token_count":132,"output":"ebe6623 docs(chat): record workspace verification\n M Package.swift\n M Sources/Ragdoll/AgentOptionsView.swift\n M Sources/Ragdoll/AppModel.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n M runtime/src/agents.ts\n M runtime/src/main.ts\n M runtime/test/integration.test.ts\n?? Sources/Ragdoll/Resources/\n?? Tests/RagdollTests/ComposerTests.swift\nℹ pass 22\nℹ fail 0\nℹ skipped 7\n"}
+
+## tool · 2026-11-18T04:04:41Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+[0/1] Planning build
+Building for debugging...
+[0/6] Write swift-version--58304C5D6DBC2206.txt
+Build complete! (1.49s)
+@@ -317,6 +317,20 @@
+ M Package.swift
+ M Sources/Ragdoll/AgentOptionsView.swift
+ M Sources/Ragdoll/AppModel.swift
+ M Sources/Ragdoll/ConversationView.swift
+ M Tests/RagdollTests/ConversationTests.swift
+ M docs/CHANGELOG.md
+ M memory/agents.md
+ M memory/plan.md
+ M memory/progress.md
+ M memory/verify.md
+ M runtime/src/agents.ts
+ M runtime/src/main.ts
+ M runtime/test/integration.test.ts
+2026-11-18 12:04
+
+
+## tool · 2026-11-18T04:05:01Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-18T04:05:10Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+diff --git a/Sources/Ragdoll/ConversationView.swift b/Sources/Ragdoll/ConversationView.swift
+@@ -1,6 +1,8 @@
+@@ -81,7 +83,7 @@ struct ConversationView: View {
+@@ -149,7 +151,7 @@ struct ConversationView: View {
+@@ -168,6 +170,8 @@ struct ConversationView: View {
+@@ -194,6 +198,15 @@ struct ConversationView: View {
+@@ -225,23 +238,25 @@ extension Message {
+@@ -263,7 +278,14 @@ struct MessageView: View {
+@@ -289,6 +311,7 @@ struct NewChatView: View {
+@@ -299,19 +322,19 @@ struct NewChatView: View {
+diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md
+@@ -317,6 +317,20 @@
++## [2026-11-17 22:04] 按会话来源显示助手品牌头像
+@@ -329,3 +343,16 @@
++## [2026-11-18 12:04] 输入框模型与推理强度选择
+diff --git a/memory/plan.md b/memory/plan.md
+@@ -1,5 +1,12 @@
++## 助手品牌头像
+@@ -150,3 +157,10 @@
++## 输入框模型选择
+diff --git a/memory/progress.md b/memory/progress.md
+@@ -1,5 +1,15 @@
++## 助手品牌头像（2026-11-17）
+@@ -195,3 +205,11 @@
++## 输入框模型选择（2026-11-18）
+diff --git a/memory/verify.md b/memory/verify.md
+@@ -1,5 +1,13 @@
++## 助手品牌头像
+@@ -152,3 +160,10 @@
++## 输入框模型选择
+118:✔ Test run with 50 tests passed after 20.293 seconds.
+
+
+## tool · 2026-11-18T04:05:23Z
+
+
+Script completed
+Wall time 5.3 seconds
+Output:
+
+{"chunk_id":"f76af0","wall_time_seconds":0.000009958,"exit_code":0,"original_token_count":164,"output":" Sources/Ragdoll/AgentOptionsView.swift | 131 +++++++++++++++++++++++++++++++--\n Sources/Ragdoll/AppModel.swift         |  56 +++++++++++---\n Sources/Ragdoll/ConversationView.swift |  11 ++-\n Tests/RagdollTests/ComposerTests.swift |  21 ++++++\n docs/CHANGELOG.md                      |  13 ++++\n memory/plan.md                         |   7 ++\n memory/progress.md                     |   8 ++\n memory/verify.md                       |   7 ++\n runtime/src/agents.ts                  |  43 +++++++++--\n runtime/src/main.ts                    |   6 +-\n runtime/test/integration.test.ts       |  17 ++++-\n 11 files changed, 292 insertions(+), 28 deletions(-)\n"}
+
+## tool · 2026-11-18T04:05:30Z
+
+
+Script completed
+Wall time 0.7 seconds
+Output:
+
+diff --git a/Sources/Ragdoll/ConversationView.swift b/Sources/Ragdoll/ConversationView.swift
+index 4ee04e4..5f64ded 100644
+--- a/Sources/Ragdoll/ConversationView.swift
++++ b/Sources/Ragdoll/ConversationView.swift
+@@ -149,7 +149,7 @@ struct ConversationView: View {
+                 .buttonStyle(.borderless).disabled(model.running.contains(session.id) || !model.ready)
+             if session.source != "desktop" {
+                 Button("恢复会话", systemImage: "arrow.counterclockwise") { Task { await model.resumeSelected() } }
+-                    .disabled(model.running.contains(session.id))
++                    .disabled(sending || model.running.contains(session.id))
+             }
+         }.padding(.horizontal, 20).padding(.vertical, 12)
+     }
+@@ -168,6 +168,8 @@ struct ConversationView: View {
+                 Text(session.projectName).font(.caption).foregroundStyle(.secondary)
+                 Spacer()
+                 AgentOptionsView(session: session, prompt: $prompt)
++                    .id(session.id)
++                    .disabled(sending)
+                 if sending || model.running.contains(session.id) {
+                     Button { Task { await model.stop(); sending = false } } label: {
+                         Image(systemName: "stop.fill").frame(width: 22, height: 22)
+@@ -289,6 +291,7 @@ struct NewChatView: View {
+     let project: String
+     @State private var agentID = ""
+     @State private var cwd = ""
++    @State private var initialModel = ""
+     @State private var starting = false
+     var body: some View {
+         VStack(alignment: .leading, spacing: 22) {
+@@ -299,19 +302,19 @@ struct NewChatView: View {
+                     ForEach(model.settings.agents) { agent in Text("\(agent.name) · \(agent.kind == "acp" ? "ACP" : "原生")").tag(agent.id) }
+                 }
+                 HStack { TextField("工作目录", text: $cwd); Button("选择…") { if let path = model.chooseProject() { cwd = path } } }
+-                if model.settings.agents.first(where: { $0.id == agentID })?.kind != "acp" { TextField("模型（留空使用默认值）", text: $model.composerModel) }
++                if model.settings.agents.first(where: { $0.id == agentID })?.kind != "acp" { TextField("模型（留空使用默认值）", text: $initialModel) }
+                 else { Text("创建后可选择 Agent 提供的模型与权限选项").font(.caption).foregroundStyle(.secondary) }
+             }
+             HStack { Button("取消") { dismiss() }.keyboardShortcut(.cancelAction); Spacer(); if starting { ProgressView().controlSize(.small) }; Button("创建对话") {
+                 guard let agent = model.settings.agents.first(where: { $0.id == agentID }) else { return }
+                 starting = true
+-                Task { let created = await model.startChat(agent: agent, cwd: cwd); starting = false; if created { dismiss() } }
++                Task { let created = await model.startChat(agent: agent, cwd: cwd, model: initialModel); starting = false; if created { dismiss() } }
+             }.buttonStyle(.borderedProminent).disabled(starting || cwd.isEmpty || agentID.isEmpty) }
+         }.padding(28).frame(width: 540).onAppear {
+             agentID = model.settings.agents.first?.id ?? ""
+             cwd = project.isEmpty ? FileManager.default.homeDirectoryForCurrentUser.path : project
+         }
+-        .onChange(of: agentID) { _, _ in model.composerModel = "" }
++        .onChange(of: agentID) { _, _ in initialModel = "" }
+     }
+ }
+ 
+diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md
+index 27b5bf9..eb26ff2 100644
+--- a/docs/CHANGELOG.md
++++ b/docs/CHANGELOG.md
+@@ -329,3 +329,16 @@
+ - **Git 提交**：`6bbd748 feat(chat): organize conversations by project`、`7a576f8 fix(chat): prefill the selected project on first open`。
+ 
+ ---
++
++## [2026-11-18 12:04] 输入框模型与推理强度选择
++
++- **需求**
++  > 在会话输入框右下角提供模型与推理强度选择。
++- **改动**
++  - 历史会话和对话的 Codex 输入框提供原生模型弹层。打开时按会话的 Agent、工作目录和 Codex home 读取实际清单。
++  - 各会话保留独立选择。切换模型后清除原强度覆写，按新模型提供的档位显示。发送时把模型和强度传入 Codex，选择默认时恢复会话默认值。
++  - 50 项 Swift 测试、22 项 Node 测试、TypeScript 检查、release 构建、预览签名和助手自检通过。隔离预览验证了历史会话恢复前选择模型、推理强度和默认项。未发送生成请求或截图。
++- **涉及文件** `Sources/Ragdoll/AgentOptionsView.swift`、`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/ConversationView.swift`、`Tests/RagdollTests/ComposerTests.swift`、`runtime/src/agents.ts`、`runtime/src/main.ts`、`runtime/test/integration.test.ts`、`memory/`、`docs/CHANGELOG.md`。
++- **Git 提交** 待提交。
++
++---
+diff --git a/memory/plan.md b/memory/plan.md
+index 45a7725..791c65d 100644
+--- a/memory/plan.md
++++ b/memory/plan.md
+@@ -150,3 +150,10 @@
+ - 聊天区使用紧凑标题、居中消息列和底部输入框，沿用系统浅色和深色外观。保留历史会话的平铺列表、搜索与筛选，以及恢复、迁移、附件、Agent 选项和发送/停止入口。
+ - 范围为主导航、对话视图、项目侧栏及其回归、使用说明与任务记录。复用现有索引和 Agent 调用。
+ - 先运行分组失败回归，再接入 SwiftUI。验证 Swift 测试及 release 构建，使用单独预览包启动检查，最后独立提交并普通推送。
++
++## 输入框模型选择
++
++- 历史会话与对话共用原生 Codex 模型弹层。按实际 Agent、工作目录和 Codex home 读取清单，点击时加载，无需先恢复会话或发送消息。
++- 按会话保存本次运行中的选择。模型可恢复默认，推理强度由当前模型声明，换模型清除上一模型的强度。把选择传给 Codex 当前轮次，并让默认选项恢复原会话默认值。
++- 范围：AgentOptionsView、AppModel、共用输入框和新建表单的模型值传递、runtime 路由与 Codex 协议、回归及记录。其他 Agent 沿用原有入口。
++- 先运行失败回归，再验证真实 Codex 目录、Swift/Node 测试与发布构建。
+diff --git a/memory/progress.md b/memory/progress.md
+index 087a5c5..178a9f8 100644
+--- a/memory/progress.md
++++ b/memory/progress.md
+@@ -195,3 +195,11 @@
+ - [x] 项目侧栏、紧凑导航和聊天区已接入。49 项 Swift 测试、release 构建、预览签名、助手自检和隔离启动通过。
+ - [x] 隔离预览用 macOS 辅助功能检查了 56 点导航、项目展开折叠、选择会话、搜索空结果和清除搜索。确认从项目首次打开新建表单时预填完整路径，取消后可进入历史会话页。
+ - [x] 独立编译暂存内容并通过项目分组回归。本轮代码提交为 `6bbd748` 和 `7a576f8`，保留既有头像改动的待提交状态。
++
++## 输入框模型选择（2026-11-18）
++
++- [x] 确认两页共用 AgentOptionsView，现有清单只在恢复后可用，模型值由所有会话共享。读取本机 Codex 生成的模型清单、配置读取和逐轮推理强度定义。
++- [x] Swift 先因缺少按会话选择而编译失败，真实 Codex 回归先因读取结果缺少有效模型设置而失败。已接入选择与逐轮请求。
++- [x] TypeScript 类型检查、允许的 Node 测试（22 项通过，7 项跳过）、release 构建、预览签名和助手自检通过。
++- [x] 50 项 Swift 测试通过。隔离预览通过辅助功能验证在历史会话恢复前打开真实模型清单、选择模型、设置推理强度和切回默认。
++- [ ] 提交并普通推送。
+diff --git a/memory/verify.md b/memory/verify.md
+index 289f26b..f6180ef 100644
+--- a/memory/verify.md
++++ b/memory/verify.md
+@@ -152,3 +152,10 @@
+ - 查询先由原索引搜索与筛选，再用于项目分组。搜索展示全部命中项。普通浏览能折叠项目及选择子会话，从项目新建时预填真实路径。
+ - 保留历史入口和对话操作。运行项目 Swift 测试、release 构建、预览包签名、助手自检和启动检查。
+ - 最终 49 项 Swift 测试、release 构建、临时签名及助手自检通过。隔离预览窗口验证项目展开折叠、选择子会话、消息输入及恢复和迁移入口、搜索空结果、清除搜索、首次新建预填完整路径和返回历史会话。未截图或调用原生 Agent 发送消息。
++
++## 输入框模型选择
++
++- 历史 Codex 会话打开弹层可读取实际模型；列表含默认项与当前选择，切换模型后仅显示该模型支持的推理强度。
++- 保留会话独立选择，选回默认时恢复原有效设置。检查 Codex 逐轮请求，避免把强度发送给其他 Agent。
++- 运行目标回归、全部 Swift 测试、TypeScript 检查、允许的 Node 测试、发布构建和预览启动检查。
++- 已通过 50 项 Swift 测试、22 项 Node 测试、类型检查和 release 构建。隔离预览签名、内置助手自检及模型和推理强度交互通过。使用真实 Codex app-server 验证模型清单和逐轮参数解析，未发送生成请求或截图。
+
+## main...origin/main
+ M Package.swift
+M  Sources/Ragdoll/AgentOptionsView.swift
+M  Sources/Ragdoll/AppModel.swift
+MM Sources/Ragdoll/ConversationView.swift
+A  Tests/RagdollTests/ComposerTests.swift
+ M Tests/RagdollTests/ConversationTests.swift
+MM docs/CHANGELOG.md
+ M memory/agents.md
+MM memory/plan.md
+MM memory/progress.md
+MM memory/verify.md
+M  runtime/src/agents.ts
+M  runtime/src/main.ts
+M  runtime/test/integration.test.ts
+?? Sources/Ragdoll/Resources/
+✔ Test run with 50 tests passed after 20.293 seconds.
+✔ real Codex app-server initializes and lists models without sending a prompt (217.299333ms)
+ℹ pass 22
+ℹ fail 0
+已在历史会话选择 GPT-5.6-Sol，推理强度控件 AXStaticText 可访问
+已在输入框选择推理强度 低
+已验证在恢复会话前加载清单、选模型和恢复默认
+
+
+## tool · 2026-11-18T04:05:41Z
+
+
+Script completed
+Wall time 4.5 seconds
+Output:
+
+{"chunk_id":"b7ddef","wall_time_seconds":0.000009542,"exit_code":0,"original_token_count":55,"output":"[main 0b52738] feat(chat): add Codex model and reasoning picker\n 11 files changed, 292 insertions(+), 28 deletions(-)\n create mode 100644 Tests/RagdollTests/ComposerTests.swift\n0b527384cb2ac9bcd7a32f8af024436bdb061277\n"}
+
+## tool · 2026-11-18T04:05:54Z
+
+
+Script completed
+Wall time 8.6 seconds
+Output:
+
+{"chunk_id":"e94b23","wall_time_seconds":1.002223916,"session_id":87043,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T04:06:01Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"12ceb4","wall_time_seconds":0.000016708,"exit_code":0,"original_token_count":34,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   ebe6623..0b52738  main -> main\n0b527384cb2ac9bcd7a32f8af024436bdb061277\trefs/heads/main\n"}
+{"chunk_id":"5be0db","wall_time_seconds":0.000009,"exit_code":0,"original_token_count":523,"output":"\n---\n\n## [2026-11-18 12:04] 输入框模型与推理强度选择\n\n- **需求**\n  > 在会话输入框右下角提供模型与推理强度选择。\n- **改动**\n  - 历史会话和对话的 Codex 输入框提供原生模型弹层。打开时按会话的 Agent、工作目录和 Codex home 读取实际清单。\n  - 各会话保留独立选择。切换模型后清除原强度覆写，按新模型提供的档位显示。发送时把模型和强度传入 Codex，选择默认时恢复会话默认值。\n  - 50 项 Swift 测试、22 项 Node 测试、TypeScript 检查、release 构建、预览签名和助手自检通过。隔离预览验证了历史会话恢复前选择模型、推理强度和默认项。未发送生成请求或截图。\n- **涉及文件** `Sources/Ragdoll/AgentOptionsView.swift`、`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/ConversationView.swift`、`Tests/RagdollTests/ComposerTests.swift`、`runtime/src/agents.ts`、`runtime/src/main.ts`、`runtime/test/integration.test.ts`、`memory/`、`docs/CHANGELOG.md`。\n- **Git 提交** 待提交。\n\n---\n\n## 输入框模型选择（2026-11-18）\n\n- [x] 确认两页共用 AgentOptionsView，现有清单只在恢复后可用，模型值由所有会话共享。读取本机 Codex 生成的模型清单、配置读取和逐轮推理强度定义。\n- [x] Swift 先因缺少按会话选择而编译失败，真实 Codex 回归先因读取结果缺少有效模型设置而失败。已接入选择与逐轮请求。\n- [x] TypeScript 类型检查、允许的 Node 测试（22 项通过，7 项跳过）、release 构建、预览签名和助手自检通过。\n- [x] 50 项 Swift 测试通过。隔离预览通过辅助功能验证在历史会话恢复前打开真实模型清单、选择模型、设置推理强度和切回默认。\n- [ ] 提交并普通推送。\n## main...origin/main\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Sources/Ragdoll/Resources/\n"}
+
+## tool · 2026-11-18T04:06:10Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-18T04:06:15Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md
+@@ -317,6 +317,20 @@
++## [2026-11-17 22:04] 按会话来源显示助手品牌头像
+@@ -332,13 +346,13 @@
++- **Git 提交** `0b52738 feat(chat): add Codex model and reasoning picker`，已推送至 `origin/main`。
+diff --git a/memory/progress.md b/memory/progress.md
+@@ -1,5 +1,15 @@
++## 助手品牌头像（2026-11-17）
+@@ -202,4 +212,4 @@
++- [x] `0b52738 feat(chat): add Codex model and reasoning picker` 已普通推送至 `origin/main`，并核对远端提交。
+
+
+## tool · 2026-11-18T04:06:25Z
+
+
+Script completed
+Wall time 3.9 seconds
+Output:
+
+{"chunk_id":"b972dc","wall_time_seconds":0.000010125,"exit_code":0,"original_token_count":579,"output":" docs/CHANGELOG.md  | 6 +++---\n memory/progress.md | 2 +-\n 2 files changed, 4 insertions(+), 4 deletions(-)\ndiff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\nindex eb26ff2..74a5620 100644\n--- a/docs/CHANGELOG.md\n+++ b/docs/CHANGELOG.md\n@@ -332,13 +332,13 @@\n \n ## [2026-11-18 12:04] 输入框模型与推理强度选择\n \n-- **需求**\n+- **需求/问题描述**\n   > 在会话输入框右下角提供模型与推理强度选择。\n-- **改动**\n+- **实际实现的功能与改动**\n   - 历史会话和对话的 Codex 输入框提供原生模型弹层。打开时按会话的 Agent、工作目录和 Codex home 读取实际清单。\n   - 各会话保留独立选择。切换模型后清除原强度覆写，按新模型提供的档位显示。发送时把模型和强度传入 Codex，选择默认时恢复会话默认值。\n   - 50 项 Swift 测试、22 项 Node 测试、TypeScript 检查、release 构建、预览签名和助手自检通过。隔离预览验证了历史会话恢复前选择模型、推理强度和默认项。未发送生成请求或截图。\n - **涉及文件** `Sources/Ragdoll/AgentOptionsView.swift`、`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/ConversationView.swift`、`Tests/RagdollTests/ComposerTests.swift`、`runtime/src/agents.ts`、`runtime/src/main.ts`、`runtime/test/integration.test.ts`、`memory/`、`docs/CHANGELOG.md`。\n-- **Git 提交** 待提交。\n+- **Git 提交** `0b52738 feat(chat): add Codex model and reasoning picker`，已推送至 `origin/main`。\n \n ---\ndiff --git a/memory/progress.md b/memory/progress.md\nindex 178a9f8..a76879d 100644\n--- a/memory/progress.md\n+++ b/memory/progress.md\n@@ -202,4 +202,4 @@\n - [x] Swift 先因缺少按会话选择而编译失败，真实 Codex 回归先因读取结果缺少有效模型设置而失败。已接入选择与逐轮请求。\n - [x] TypeScript 类型检查、允许的 Node 测试（22 项通过，7 项跳过）、release 构建、预览签名和助手自检通过。\n - [x] 50 项 Swift 测试通过。隔离预览通过辅助功能验证在历史会话恢复前打开真实模型清单、选择模型、设置推理强度和切回默认。\n-- [ ] 提交并普通推送。\n+- [x] `0b52738 feat(chat): add Codex model and reasoning picker` 已普通推送至 `origin/main`，并核对远端提交。\n"}
+
+## tool · 2026-11-18T04:06:34Z
+
+
+Script completed
+Wall time 4.4 seconds
+Output:
+
+{"chunk_id":"fc239d","wall_time_seconds":1.00270775,"session_id":57863,"original_token_count":28,"output":"[main 64dbed1] docs(chat): record model picker verification\n 2 files changed, 4 insertions(+), 4 deletions(-)\n"}
+
+## tool · 2026-11-18T04:06:42Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"d10c3e","wall_time_seconds":0.000028,"exit_code":0,"original_token_count":99,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   0b52738..64dbed1  main -> main\n64dbed11f50baf9882786f8bbf29a5f2ca116feb\trefs/heads/main\n## main...origin/main\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Sources/Ragdoll/Resources/\n"}
+
+## assistant · 2026-11-18T04:06:48Z
+
+Codex 会话输入框右下角的「默认模型」现在可以点击。弹层会列出当前可用的模型，并显示所选模型支持的推理强度。历史会话无需先点「恢复会话」就能选择。每个会话在应用运行期间独立保留选择，也可以随时切回默认。
+
+[打开 macOS 预览](</Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.model-preview.app>)
+
+已在预览窗口实测切换模型、设置推理强度和恢复默认。50 项 Swift 测试、22 项 Node 测试及发布构建通过，代码已推送至 `origin/main`。
+
+实际模型回复和截图效果尚未验证。
