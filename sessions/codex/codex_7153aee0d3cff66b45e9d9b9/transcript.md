@@ -4219,12 +4219,198 @@ Output:
 
 {}
 
-## tool · 2026-11-18T04:02:03Z
+## tool · 2026-11-18T04:02:13Z
+
+
+Script completed
+Wall time 9.4 seconds
+Output:
+
+{"chunk_id":"90e514","wall_time_seconds":1.000744917,"session_id":37496,"original_token_count":0,"output":""}
+{"chunk_id":"f19402","wall_time_seconds":1.002981584,"session_id":88047,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T04:02:23Z
+
+
+Script completed
+Wall time 4.9 seconds
+Output:
+
+{"chunk_id":"9ac153","wall_time_seconds":1.002060666,"session_id":87138,"original_token_count":0,"output":""}
+{"chunk_id":"3a57ad","wall_time_seconds":0.000009792,"exit_code":0,"original_token_count":301,"output":"[0/1] Planning build\nBuilding for debugging...\n[0/9] Write sources\n[2/9] Write swift-version--58304C5D6DBC2206.txt\n[4/11] Emitting module Ragdoll\n[5/11] Compiling Ragdoll AppModel.swift\n[6/11] Compiling Ragdoll ConversationView.swift\n[7/11] Compiling Ragdoll AgentOptionsView.swift\n[8/16] Compiling Ragdoll SettingsView.swift\ndiff --git a/memory/plan.md b/memory/plan.md\n@@ -1,5 +1,12 @@\n+## 助手品牌头像\n@@ -150,3 +157,10 @@\n+## 输入框模型选择\ndiff --git a/memory/progress.md b/memory/progress.md\n@@ -1,5 +1,15 @@\n+## 助手品牌头像（2026-11-17）\n@@ -195,3 +205,10 @@\n+## 输入框模型选择（2026-11-18）\ndiff --git a/memory/verify.md b/memory/verify.md\n@@ -1,5 +1,13 @@\n+## 助手品牌头像\n@@ -152,3 +160,9 @@\n+## 输入框模型选择\n M Package.swift\n M Sources/Ragdoll/AgentOptionsView.swift\n M Sources/Ragdoll/AppModel.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n M runtime/src/agents.ts\n M runtime/src/main.ts\n M runtime/test/integration.test.ts\n?? Sources/Ragdoll/Resources/\n?? Tests/RagdollTests/ComposerTests.swift\n"}
+
+## tool · 2026-11-18T04:02:39Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"a4a0ce","wall_time_seconds":0.000008875,"exit_code":0,"original_token_count":570,"output":"已在历史会话选择 GPT-5.6-Sol，推理强度控件 AXStaticText 可访问\n已验证在恢复会话前加载清单、选模型和恢复默认\n✔ Test archiveRestoreRejectsMissingRepositoryAndUnsafeManifestPaths() passed after 0.028 seconds.\n◇ Test archiveRestoresLegacyRawLogsIncludingGzip(_:) started.\n◇ Passing 1 argument compressed → false to archiveRestoresLegacyRawLogsIncludingGzip(_:)\n◇ Passing 1 argument compressed → true to archiveRestoresLegacyRawLogsIncludingGzip(_:)\n✔ Test archiveRestoresLegacyRawLogsIncludingGzip(_:) passed after 0.609 seconds.\n◇ Test archiveRetainsCompleteLegacyTranscriptWithoutInventingMessageBoundaries() started.\n✔ Test archiveRetainsCompleteLegacyTranscriptWithoutInventingMessageBoundaries() passed after 0.088 seconds.\n◇ Test archiveSyncRefusesMultiplePushDestinationsBeforeUploading() started.\n✔ Test archiveSyncRefusesMultiplePushDestinationsBeforeUploading() passed after 0.138 seconds.\n◇ Test archiveSyncPreviewShowsTheDestinationWithoutCredentials() started.\n✔ Test archiveSyncPreviewShowsTheDestinationWithoutCredentials() passed after 0.095 seconds.\n◇ Test archiveSyncStopsAHangingPushAndPreservesItsLocalCommit() started.\n✔ Test archiveSyncStopsAHangingPushAndPreservesItsLocalCommit() passed after 0.324 seconds.\n◇ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() started.\n✔ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() passed after 0.447 seconds.\n◇ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() started.\n✔ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() passed after 0.003 seconds.\n◇ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) started.\n◇ Passing 1 argument kind → \"missing\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"history\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"corrupt\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n✔ Test backtotal 88\ndrwxr-xr-x  2 oyamahappa  staff     64 Nov 18 12:00 conversations\n-rw-r--r--  1 oyamahappa  staff  40960 Nov 18 12:02 index.sqlite\n-rw-------  1 oyamahappa  staff      5 Nov 18 12:02 service-lock\n"}
+{"chunk_id":"f7e894","wall_time_seconds":0.000006958,"exit_code":0,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T04:02:55Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-18T04:03:07Z
+
+
+Script completed
+Wall time 5.1 seconds
+Output:
+
+{"chunk_id":"6371c6","wall_time_seconds":1.001589875,"session_id":79218,"original_token_count":0,"output":""}
+{"chunk_id":"a0fd34","wall_time_seconds":0.000008416,"exit_code":0,"original_token_count":488,"output":"✔ Test conversationGroupsConsecutiveSystemPromptsInOrder() passed after 0.001 seconds.\n◇ Test conversationPaginationKeepsSystemPromptGroupsWhole() started.\n✔ Test conversationPaginationKeepsSystemPromptGroupsWhole() passed after 0.001 seconds.\n◇ Test recentSessionDatesShowCalendarLabelsInsteadOfElapsedTime() started.\n✔ Test recentSessionDatesShowCalendarLabelsInsteadOfElapsedTime() passed after 0.001 seconds.\n◇ Test recentSessionDateLabelsHandleCrossYearWeeksAndDaylightSaving() started.\n✔ Test recentSessionDateLabelsHandleCrossYearWeeksAndDaylightSaving() passed after 0.001 seconds.\n◇ Test activityGreensGetLighterInBothThemes() started.\n✔ Test activityGreensGetLighterInBothThemes() passed after 0.001 seconds.\n◇ Test activityTooltipUsesLocalDateAndCompactTokens() started.\n✔ Test activityTooltipUsesLocalDateAndCompactTokens() passed after 0.001 seconds.\n◇ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() started.\n✔ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() passed after 0.158 seconds.\n◇ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() started.\n✔ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() passed after 0.003 seconds.\n◇ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() started.\n✔ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() passed after 0.490 seconds.\n✔ Test run with 49 tests passed after 17.563 seconds.\n2026-11-18 12:03\n## main...origin/main\n M Package.swift\n M Sources/Ragdoll/AgentOptionsView.swift\n M Sources/Ragdoll/AppModel.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n M runtime/src/agents.ts\n M runtime/src/main.ts\n M runtime/test/integration.test.ts\n?? Sources/Ragdoll/Resources/\n?? Tests/RagdollTests/ComposerTests.swift\n"}
+
+## tool · 2026-11-18T04:03:28Z
+
+
+Script completed
+Wall time 5.2 seconds
+Output:
+
+{"chunk_id":"d06b4a","wall_time_seconds":1.002193583,"session_id":52805,"original_token_count":0,"output":""}
+{"chunk_id":"f0adc8","wall_time_seconds":0.000009708,"exit_code":0,"original_token_count":78,"output":"check/check.swift:25: Fatal error: 未找到模型弹层\n◇ Test composerKeepsModelSelectionPerSessionAndResetsEffortWhenModelChanges() started.\n✔ Test composerKeepsModelSelectionPerSessionAndResetsEffortWhenModelChanges() passed after 0.002 seconds.\n✔ Test run with 49 tests passed after 17.563 seconds.\n"}
+
+## tool · 2026-11-18T04:03:34Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-18T04:03:43Z
+
+
+Script completed
+Wall time 4.0 seconds
+Output:
+
+{"chunk_id":"96bfa2","wall_time_seconds":1.002204333,"session_id":82772,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T04:03:57Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+已在历史会话选择 GPT-5.6-Sol，推理强度控件 AXStaticText 可访问
+已在输入框选择推理强度 低
+已验证在恢复会话前加载清单、选模型和恢复默认
+[0/1] Planning build
+Building for debugging...
+[0/6] Write swift-version--58304C5D6DBC2206.txt
+Build complete! (1.32s)
+Test Suite 'Selected tests' started at 2026-11-18 12:03:30.436.
+Test Suite 'RagdollPackageTests.xctest' started at 2026-11-18 12:03:30.437.
+Test Suite 'RagdollPackageTests.xctest' passed at 2026-11-18 12:03:30.437.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'Selected tests' passed at 2026-11-18 12:03:30.437.
+	 Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+◇ Test run started.
+↳ Testing Library Version: 124.4
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Test backgroundServiceContinuesAfterItsLauncherReturns() started.
+✔ Test backgroundServiceContinuesAfterItsLauncherReturns() passed after 2.532 seconds.
+✔ Test run with 1 test passed after 2.532 seconds.
+  - 来源映射回归先因缺少实现编译失败；最终全部 48 项 Swift 测试通过（21.379 秒），release 构建及 Git diff 检查通过，包内三张图标与源文件逐字节一致。
+  - 更新并重启 `dist/Ragdoll.preview.app`，临时签名完整性和内置助手自检通过；原正式包 SHA-256 不变且签名完整性通过。未截图或验证实际窗口显示，未运行 Claude 接入测试；预览包不用于独立后台服务。
+- **涉及文件**：`Package.swift`、`Sources/Ragdoll/ConversationView.swift`、`Sources/Ragdoll/Resources/AssistantIcons/`、`Tests/RagdollTests/ConversationTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。
+- **Git 提交**：待提交。
+
+---
+
+## [2026-11-18 11:08] 改版对话工作区
+
+- **需求/问题描述**：
+  > 参考 Cherry Studio 的对话界面，左侧采用 Codex 的项目与子对话结构。
+- **实际实现的功能与改动**：
+  - 对话页使用紧凑导航，按完整工作目录组织对话。项目可折叠，搜索时展开命中项目，项目加号打开预填路径的新建表单。
+  - 聊天区使用紧凑标题、居中消息列、原生主题色和独立输入框，保留迁移、恢复、附件、Agent 选项、发送与停止。历史会话保留平铺列表。
+  - 49 项 Swift 测试、release 构建、临时签名及助手自检通过。使用隔离预览验证项目展开折叠、打开子会话、搜索空结果、清除搜索、首次打开新建表单预填完整工作目录，以及切换至历史会话。未截图或调用原生 Agent 发送消息。
+- **涉及文件**：`Sources/Ragdoll/RootView.swift`、`Sources/Ragdoll/ConversationView.swift`、`Sources/Ragdoll/ConversationProjectList.swift`、`Tests/RagdollTests/ConversationProjectTests.swift`、`docs/USAGE.md`、`docs/CHANGELOG.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`。
+- **Git 提交**：`6bbd748 feat(chat): organize conversations by project`、`7a576f8 fix(chat): prefill the selected project on first open`。
+
+---
+==> memory/progress.md <==
+- [x] 项目分组回归先因缺少分组入口编译失败，实现后通过真实 SQLite 索引检索。
+- [x] 项目侧栏、紧凑导航和聊天区已接入。49 项 Swift 测试、release 构建、预览签名、助手自检和隔离启动通过。
+- [x] 隔离预览用 macOS 辅助功能检查了 56 点导航、项目展开折叠、选择会话、搜索空结果和清除搜索。确认从项目首次打开新建表单时预填完整路径，取消后可进入历史会话页。
+- [x] 独立编译暂存内容并通过项目分组回归。本轮代码提交为 `6bbd748` 和 `7a576f8`，保留既有头像改动的待提交状态。
+
+## 输入框模型选择（2026-11-18）
+
+- [x] 确认两页共用 AgentOptionsView，现有清单只在恢复后可用，模型值由所有会话共享。读取本机 Codex 生成的模型清单、配置读取和逐轮推理强度定义。
+- [x] Swift 先因缺少按会话选择而编译失败，真实 Codex 回归先因读取结果缺少有效模型设置而失败。已接入选择与逐轮请求。
+- [x] TypeScript 类型检查、允许的 Node 测试（22 项通过，7 项跳过）、release 构建、预览签名和助手自检通过。
+- [ ] 完成 Swift 测试和预览交互，提交并普通推送。
+
+==> memory/verify.md <==
+
+- 按完整路径分组，区分同名目录，跨来源归在同一项目，按索引更新时间保持项目和会话顺序，无工作目录放在末尾。
+- 查询先由原索引搜索与筛选，再用于项目分组。搜索展示全部命中项。普通浏览能折叠项目及选择子会话，从项目新建时预填真实路径。
+- 保留历史入口和对话操作。运行项目 Swift 测试、release 构建、预览包签名、助手自检和启动检查。
+- 最终 49 项 Swift 测试、release 构建、临时签名及助手自检通过。隔离预览窗口验证项目展开折叠、选择子会话、消息输入及恢复和迁移入口、搜索空结果、清除搜索、首次新建预填完整路径和返回历史会话。未截图或调用原生 Agent 发送消息。
+
+## 输入框模型选择
+
+- 历史 Codex 会话打开弹层可读取实际模型；列表含默认项与当前选择，切换模型后仅显示该模型支持的推理强度。
+- 保留会话独立选择，选回默认时恢复原有效设置。检查 Codex 逐轮请求，避免把强度发送给其他 Agent。
+- 运行目标回归、全部 Swift 测试、TypeScript 检查、允许的 Node 测试、发布构建和预览启动检查。
+2026-11-18 12:03
+
+@@ -6,13 +6,19 @@ struct AgentOptionsView: View {
++            if session.source == "codex" {
+@@ -38,6 +44,121 @@ struct AgentOptionsView: View {
++    private func modelRow(_ name: String, id: String) -> some View {
++    private func effortLabel(_ effort: String) -> String {
+@@ -10,6 +10,13 @@ struct Approval: Identifiable {
+@@ -41,7 +48,7 @@ final class AppModel: ObservableObject {
+@@ -189,15 +196,19 @@ final class AppModel: ObservableObject {
++    @discardableResult func startChat(agent: AgentConfig, cwd: String, resume: Session? = nil, model: String = "") async -> Bool {
+@@ -205,17 +216,40 @@ final class AppModel: ObservableObject {
++    private func agent(for session: Session) -> AgentConfig? {
++    private func directory(for session: Session) -> String {
++    @discardableResult private func resume(_ session: Session, model: String) async -> Bool {
++        return await startChat(agent: agent, cwd: directory(for: session), resume: session, model: agent.kind == "codex" ? "" : model)
++    func loadCodexModels(for session: Session) async throws {
++        guard let config = agent(for: session), config.kind == "codex" else {
++            if selected.source == "codex" && !selection.effort.isEmpty { params["effort"] = .string(selection.effort) }
+@@ -40,10 +40,39 @@ interface AcpApp {
++  codexInfo?: Data;
++async function codexModelList(rpc: RpcProcess): Promise<Data> {
++export function codexTurnOptions(info: Data, model?: string, effort?: string): { model?: string; effort?: string } {
+@@ -236,8 +265,8 @@ export class Agents {
++        return { ...info, model: config.model ?? null, reasoningEffort: config.model_reasoning_effort ?? null, models: await codexModelList(rpc) };
+@@ -277,7 +306,9 @@ export class Agents {
++        const models = await codexModelList(rpc);
++        r.codexInfo = { model: info.model, reasoningEffort: info.reasoningEffort, models };
+@@ -338,11 +369,13 @@ export class Agents {
++    if (effort && !r.codexInfo) throw new Error('此 Agent 不支持选择 Codex 推理强度');
++    const codexOptions = r.codexInfo ? codexTurnOptions(r.codexInfo, model, effort) : {};
+@@ -374,7 +407,7 @@ export class Agents {
++        const result = object(await r.rpc!.request('turn/start', { threadId: r.session.nativeID, input: [{ type: 'text', text: withPaths }, ...files.filter(f => f.mime).map(f => ({ type: 'localImage', path: f.path }))], ...codexOptions }));
+
+
+## assistant · 2026-11-18T04:04:18Z
+
+已在隔离预览里实测：打开历史会话后，可以直接加载模型清单、选模型和推理强度，再切回默认。Swift 的 50 项测试已分两轮通过，我会再用仓库默认构建目录跑一遍完整测试。
+
+## tool · 2026-11-18T04:04:24Z
 
 exec
 const r=await Promise.allSettled([
-tools.exec_command({cmd:"env RAGDOLL_DATA_DIR=\"$PWD/.agent/model-smoke/data\" \"$PWD/dist/Ragdoll.model-preview.app/Contents/MacOS/Ragdoll\" > .agent/model-smoke/app.log 2>&1","sandbox_permissions":"require_escalated","justification":"是否允许直接运行隔离预览的可执行文件并收集启动输出？LaunchServices 启动的实例已退出，调用使用项目内的测试数据。",yield_time_ms:1000}),
-tools.exec_command({cmd:"kill -TERM 51537 && env CODEX_HOME=\"$PWD/.agent/model-codex-home\" CLANG_MODULE_CACHE_PATH=\"$PWD/.cache/clang\" SWIFT_MODULECACHE_PATH=\"$PWD/.cache/swift-modules\" swift test --disable-sandbox --cache-path .cache/swift --config-path .cache/swift-config --security-path .cache/swift-security --no-parallel --skip backgroundServiceContinuesAfterItsLauncherReturns > .agent/model-swift-verified.log 2>&1",
-sandbox_permissions:"require_escalated",justification:"是否允许结束本任务卡住的测试并运行其余 Swift 测试？采样确认现有后台服务测试停在 Foundation 的 waitUntilExit；其余测试会保留。",yield_time_ms:1000})
+tools.exec_command({cmd:"env CODEX_HOME=\"$PWD/.agent/model-codex-home\" CLANG_MODULE_CACHE_PATH=\"$PWD/.cache/clang\" SWIFT_MODULECACHE_PATH=\"$PWD/.cache/swift-modules\" swift test --disable-sandbox --cache-path .cache/swift --config-path .cache/swift-config --security-path .cache/swift-security --no-parallel > .agent/model-swift-final.log 2>&1",sandbox_permissions:"require_escalated",justification:"是否允许在仓库默认构建目录做一次完整 Swift 验证？此前分开运行的 50 项均已通过。",yield_time_ms:1000}),
+tools.exec_command({cmd:"pgrep -f '^/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll\\.model-preview\\.app/Contents/MacOS/Ragdoll$' | xargs -n 1 kill -TERM","sandbox_permissions":"require_escalated",justification:"是否允许关闭刚完成检查的隔离预览进程？用户打开预览包时将使用常规应用数据目录。",yield_time_ms:1000}),
+tools.exec_command({cmd:"git diff --check && git log -1 --format='%h %s' && git status --short && rg 'pass|fail|skipped' .agent/model-node-tests.log | tail -n 3",max_output_tokens:2000})
 ]);for(const x of r)text(x.value)
 
