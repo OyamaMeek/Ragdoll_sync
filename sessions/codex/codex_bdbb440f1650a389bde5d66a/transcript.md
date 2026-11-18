@@ -2058,3 +2058,143 @@ Wall time 0.1 seconds
 Output:
 
 {}
+
+## tool · 2026-11-18T03:11:23Z
+
+
+Script completed
+Wall time 6.9 seconds
+Output:
+
+{"chunk_id":"96f667","wall_time_seconds":0.000011959,"exit_code":0,"original_token_count":44,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   3b71494..6bbd748  main -> main\n6bbd748f7fb1c67dcf2f8229db2361520151622c\n6bbd748f7fb1c67dcf2f8229db2361520151622c\trefs/heads/main\n"}
+{"chunk_id":"c94623","wall_time_seconds":1.001672375,"session_id":6728,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T03:11:32Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"428248","wall_time_seconds":0.000012875,"exit_code":1,"original_token_count":18,"output":"PASS 点击项目加号\n AXSheet \nFAIL 工作目录预填完整路径\n"}
+
+## tool · 2026-11-18T03:11:48Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-18T03:12:04Z
+
+
+Script completed
+Wall time 7.6 seconds
+Output:
+
+{"chunk_id":"d2130a","wall_time_seconds":1.002239916,"session_id":24656,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T03:12:16Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"5526cf","wall_time_seconds":0.000009584,"exit_code":1,"original_token_count":36,"output":" AXSheet \nFIELD length=17 isHome=true isOtherProject=false\nFIELD length=0 isHome=false isOtherProject=false\nFAIL 工作目录预填完整路径\n"}
+
+## assistant · 2026-11-18T03:12:24Z
+
+实测发现，从项目加号第一次打开新建表单时，SwiftUI 仍用了默认的用户目录。我会让所选项目随表单一起传入，然后重新验证预填。
+
+## tool · 2026-11-18T03:12:26Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"64e7ce","wall_time_seconds":0.000008,"exit_code":0,"original_token_count":1133,"output":"import SwiftUI\nimport RagdollCore\n\nlet assistantIconBundle = Bundle.main.url(forResource: \"Ragdoll_Ragdoll\", withExtension: \"bundle\").flatMap { Bundle(url: $0) } ?? .module\n\nstruct ConversationView: View {\n    @EnvironmentObject var model: AppModel\n    var canCreate: Bool\n    @State private var newChat = false\n    @State private var newChatProject = \"\"\n    @State private var migrating = false\n    @State private var prompt = \"\"\n    @State private var messageLimit = 100\n    @State private var sending = false\n    @State private var attachments: [URL] = []\n    var body: some View {\n        let sessions = model.filtered\n        let selection = Binding(get: { model.selectedID }, set: { id in\n            DispatchQueue.main.async { model.select(id) }\n        })\n        HSplitView {\n                    if canCreate {\n                        Button(\"新建对话\") { createChat(in: model.project) }.buttonStyle(.borderedProminent)\n                    } else {\n                        Button(\"导入 Claude 聊天…\") { model.importDesktop() }\n                    }\n                }\n                .frame(minWidth: 550, maxWidth: .infinity, maxHeight: .infinity)\n                .background(Color(nsColor: .textBackgroundColor))\n            }\n        }\n        .navigationTitle(canCreate ? \"对话\" : \"会话\")\n        .onChange(of: model.selectedID) { _, _ in messageLimit = 100 }\n        .sheet(isPresented: $newChat) { NewChatView(project: newChatProject).environmentObject(model) }\n        .sheet(isPresented: $migrating) { if let session = model.selected { MigrationView(session: session).environmentObject(model) } }\n    }\n    private func createChat(in project: String) {\n        newChatProject = project\n        newChat = true\n    }\n    private func historyList(_ sessions: [Session], selection: Binding<String?>) -> some View {\n        List(selection: selection) {\n            ForEach(sessions) { session in\nstruct NewChatView: View {\n    @EnvironmentObject var model: AppModel\n    @Environment(\\.dismiss) var dismiss\n    let project: String\n    @State private var agentID = \"\"\n    @State private var cwd = \"\"\n    @State private var starting = false\n    var body: some View {\n        VStack(alignment: .leading, spacing: 22) {\n            Text(\"新建对话\").font(.title2.bold())\n            Text(\"选择原生工具或 ACP Agent，在本地项目中开始对话。\").foregroundStyle(.secondary)\n            Form {\n                Picker(\"Agent\", selection: $agentID) {\n                    ForEach(model.settings.agents) { agent in Text(\"\\(agent.name) · \\(agent.kind == \"acp\" ? \"ACP\" : \"原生\")\").tag(agent.id) }\n                }\n                HStack { TextField(\"工作目录\", text: $cwd); Button(\"选择…\") { if let path = model.chooseProject() { cwd = path } } }\n                if model.settings.agents.first(where: { $0.id == agentID })?.kind != \"acp\" { TextField(\"模型（留空使用默认值）\", text: $model.composerModel) }\n                else { Text(\"创建后可选择 Agent 提供的模型与权限选项\").font(.caption).foregroundStyle(.secondary) }\n            }\n            HStack { Button(\"取消\") { dismiss() }.keyboardShortcut(.cancelAction); Spacer(); if starting { ProgressView().controlSize(.small) }; Button(\"创建对话\") {\n                guard let agent = model.settings.agents.first(where: { $0.id == agentID }) else { return }\n                starting = true\n                Task { let created = await model.startChat(agent: agent, cwd: cwd); starting = false; if created { dismiss() } }\n            }.buttonStyle(.borderedProminent).disabled(starting || cwd.isEmpty || agentID.isEmpty) }\n        }.padding(28).frame(width: 540).onAppear {\n            agentID = model.settings.agents.first?.id ?? \"\"\n            cwd = project.isEmpty ? FileManager.default.homeDirectoryForCurrentUser.path : project\n        }\n        .onChange(of: agentID) { _, _ in model.composerModel = \"\" }\n    }\n}\n\nstruct ApprovalView: View {\n## main...origin/main\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Sources/Ragdoll/Resources/\ndiff --git a/Sources/Ragdoll/ConversationView.swift b/Sources/Ragdoll/ConversationView.swift\n@@ -1,6 +1,8 @@\n@@ -77,7 +79,7 @@ struct ConversationView: View {\n@@ -191,6 +193,15 @@ struct ConversationView: View {\n@@ -222,23 +233,25 @@ extension Message {\n@@ -260,7 +273,14 @@ struct MessageView: View {\n"}
+
+## tool · 2026-11-18T03:12:35Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-18T03:12:52Z
+
+
+Script completed
+Wall time 4.9 seconds
+Output:
+
+{"chunk_id":"343819","wall_time_seconds":1.001736417,"session_id":82837,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T03:13:09Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-18T03:13:24Z
+
+
+Script completed
+Wall time 5.8 seconds
+Output:
+
+{"chunk_id":"3027df","wall_time_seconds":0.000017542,"exit_code":0,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T03:13:29Z
+
+
+Script completed
+Wall time 1.7 seconds
+Output:
+
+{"chunk_id":"f38fd9","wall_time_seconds":1.646577541,"exit_code":0,"original_token_count":229,"output":"✔ Test activityTooltipUsesLocalDateAndCompactTokens() passed after 0.001 seconds.\n◇ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() started.\n✔ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() passed after 0.269 seconds.\n◇ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() started.\n✔ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() passed after 0.001 seconds.\n◇ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() started.\n✔ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() passed after 0.453 seconds.\n✔ Test run with 49 tests passed after 19.796 seconds.\n[0/1] Planning build\nBuilding for production...\n[0/4] Write sources\n[1/4] Write swift-version--58304C5D6DBC2206.txt\n[3/4] Compiling Ragdoll AgentOptionsView.swift\n[3/5] Write Objects.LinkFileList\n[4/5] Linking Ragdoll\nBuild complete! (10.52s)\n"}
+
+## tool · 2026-11-18T03:13:35Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"4abe30","wall_time_seconds":1.002188083,"session_id":44106,"original_token_count":15,"output":"dist/Ragdoll.chat-preview.app: replacing existing signature\n"}
+
+## tool · 2026-11-18T03:13:44Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"b2d7de","wall_time_seconds":0.00002275,"exit_code":0,"original_token_count":108,"output":"{\"status\":\"ok\",\"version\":\"0.1.0\",\"node\":\"v26.13.0\",\"agents\":[{\"id\":\"native-codex\",\"name\":\"Codex\",\"kind\":\"codex\",\"command\":\"codex\",\"args\":[],\"env\":{}},{\"id\":\"native-claude\",\"name\":\"Claude Code\",\"kind\":\"claude\",\"command\":\"claude\",\"args\":[],\"env\":{}},{\"id\":\"native-dsh\",\"name\":\"DeepSeek Harness\",\"kind\":\"dsh\",\"command\":\"/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh\",\"args\":[\"--profile\",\"sdk\"],\"env\":{}}]}\n"}
+
+## tool · 2026-11-18T03:13:54Z
+
+
+Script completed
+Wall time 4.9 seconds
+Output:
+
+{"chunk_id":"80a2de","wall_time_seconds":0.000010958,"exit_code":0,"original_token_count":2,"output":"43754\n"}
+
+## tool · 2026-11-18T03:14:06Z
+
+
+Script completed
+Wall time 4.4 seconds
+Output:
+
+{"chunk_id":"237ac4","wall_time_seconds":0.000010958,"exit_code":1,"original_token_count":9,"output":"FAIL 窗口存在\nFAIL 窗口存在\n"}

@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "改造对话界面为 Cherry Studio 风格",
-  "updated" : 1794971468776,
+  "updated" : 1794971646287,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -688,6 +688,141 @@
       "model" : "gpt-6.2-sol",
       "output" : 519,
       "time" : 1794971468772
+    },
+    {
+      "cacheRead" : 160256,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd174de3e887d0b304deb29eacd1d0",
+      "input" : 654,
+      "model" : "gpt-6.2-sol",
+      "output" : 219,
+      "time" : 1794971476963
+    },
+    {
+      "cacheRead" : 160768,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd175c543c87d0a3190e6039150b08",
+      "input" : 534,
+      "model" : "gpt-6.2-sol",
+      "output" : 219,
+      "time" : 1794971492348
+    },
+    {
+      "cacheRead" : 161024,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1765336087d0a3a10d8584654d24",
+      "input" : 569,
+      "model" : "gpt-6.2-sol",
+      "output" : 627,
+      "time" : 1794971508829
+    },
+    {
+      "cacheRead" : 137216,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1775cef487d0aec585028b5ed4d9",
+      "input" : 25028,
+      "model" : "gpt-6.2-sol",
+      "output" : 224,
+      "time" : 1794971516921
+    },
+    {
+      "cacheRead" : 162048,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17852f4487d09b804b9a3cf46a33",
+      "input" : 478,
+      "model" : "gpt-6.2-sol",
+      "output" : 343,
+      "time" : 1794971536272
+    },
+    {
+      "cacheRead" : 162304,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd179145c087d0bee279ba44c8dad0",
+      "input" : 656,
+      "model" : "gpt-6.2-sol",
+      "output" : 252,
+      "time" : 1794971546462
+    },
+    {
+      "cacheRead" : 162816,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd179b51a887d0b9ad005ab740d2f4",
+      "input" : 1629,
+      "model" : "gpt-6.2-sol",
+      "output" : 321,
+      "time" : 1794971555766
+    },
+    {
+      "cacheRead" : 164352,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17a49f1487d094efc7cd8bb7335b",
+      "input" : 438,
+      "model" : "gpt-6.2-sol",
+      "output" : 336,
+      "time" : 1794971568257
+    },
+    {
+      "cacheRead" : 164608,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17b5328487d080cb76d0a4f5b0af",
+      "input" : 574,
+      "model" : "gpt-6.2-sol",
+      "output" : 685,
+      "time" : 1794971589954
+    },
+    {
+      "cacheRead" : 165120,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17c6e3e487d08971518d636cc3e1",
+      "input" : 771,
+      "model" : "gpt-6.2-sol",
+      "output" : 268,
+      "time" : 1794971599077
+    },
+    {
+      "cacheRead" : 165632,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17d547bc87d0a5836a9253d587ad",
+      "input" : 583,
+      "model" : "gpt-6.2-sol",
+      "output" : 67,
+      "time" : 1794971608451
+    },
+    {
+      "cacheRead" : 166144,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17daa0c087d091d869fe7c429569",
+      "input" : 427,
+      "model" : "gpt-6.2-sol",
+      "output" : 124,
+      "time" : 1794971615070
+    },
+    {
+      "cacheRead" : 166400,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17e0d38c87d0b4a736c0fbc49e75",
+      "input" : 363,
+      "model" : "gpt-6.2-sol",
+      "output" : 180,
+      "time" : 1794971624298
+    },
+    {
+      "cacheRead" : 166656,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17e92dc087d09b6acb8b9b795ce0",
+      "input" : 487,
+      "model" : "gpt-6.2-sol",
+      "output" : 119,
+      "time" : 1794971629646
+    },
+    {
+      "cacheRead" : 166912,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17f3495087d0926d56e0256748b2",
+      "input" : 409,
+      "model" : "gpt-6.2-sol",
+      "output" : 167,
+      "time" : 1794971642264
     }
   ],
   "warnings" : [

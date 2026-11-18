@@ -614,13 +614,125 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{}",
       "time" : 1794971468774
+    },
+    {
+      "id" : "call_9907d1af3d324f60a97de3f34bd5a84d",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 6.9 seconds\nOutput:\n\n{\"chunk_id\":\"96f667\",\"wall_time_seconds\":0.000011959,\"exit_code\":0,\"original_token_count\":44,\"output\":\"To https://github.com/OyamaMeek/Ragdoll.git\\n   3b71494..6bbd748  main -> main\\n6bbd748f7fb1c67dcf2f8229db2361520151622c\\n6bbd748f7fb1c67dcf2f8229db2361520151622c\\trefs/heads/main\\n\"}\n{\"chunk_id\":\"c94623\",\"wall_time_seconds\":1.001672375,\"session_id\":6728,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794971483449
+    },
+    {
+      "id" : "call_39e6f18d9452449db09210604aa8df04",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"428248\",\"wall_time_seconds\":0.000012875,\"exit_code\":1,\"original_token_count\":18,\"output\":\"PASS 点击项目加号\\n AXSheet \\nFAIL 工作目录预填完整路径\\n\"}",
+      "time" : 1794971492351
+    },
+    {
+      "id" : "call_3569242d58e24245a57f84e73b99a836",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{}",
+      "time" : 1794971508831
+    },
+    {
+      "id" : "call_bdf7571f3a2447d1a94f05499a5ba517",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 7.6 seconds\nOutput:\n\n{\"chunk_id\":\"d2130a\",\"wall_time_seconds\":1.002239916,\"session_id\":24656,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794971524317
+    },
+    {
+      "id" : "call_005f8b8892794409a7ab552b1a601dbb",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"5526cf\",\"wall_time_seconds\":0.000009584,\"exit_code\":1,\"original_token_count\":36,\"output\":\" AXSheet \\nFIELD length=17 isHome=true isOtherProject=false\\nFIELD length=0 isHome=false isOtherProject=false\\nFAIL 工作目录预填完整路径\\n\"}",
+      "time" : 1794971536274
+    },
+    {
+      "id" : "565",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "实测发现，从项目加号第一次打开新建表单时，SwiftUI 仍用了默认的用户目录。我会让所选项目随表单一起传入，然后重新验证预填。",
+      "time" : 1794971544347
+    },
+    {
+      "id" : "call_2b057c570a6e4925b397f46e3df19e80",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"64e7ce\",\"wall_time_seconds\":0.000008,\"exit_code\":0,\"original_token_count\":1133,\"output\":\"import SwiftUI\\nimport RagdollCore\\n\\nlet assistantIconBundle = Bundle.main.url(forResource: \\\"Ragdoll_Ragdoll\\\", withExtension: \\\"bundle\\\").flatMap { Bundle(url: $0) } ?? .module\\n\\nstruct ConversationView: View {\\n    @EnvironmentObject var model: AppModel\\n    var canCreate: Bool\\n    @State private var newChat = false\\n    @State private var newChatProject = \\\"\\\"\\n    @State private var migrating = false\\n    @State private var prompt = \\\"\\\"\\n    @State private var messageLimit = 100\\n    @State private var sending = false\\n    @State private var attachments: [URL] = []\\n    var body: some View {\\n        let sessions = model.filtered\\n        let selection = Binding(get: { model.selectedID }, set: { id in\\n            DispatchQueue.main.async { model.select(id) }\\n        })\\n        HSplitView {\\n                    if canCreate {\\n                        Button(\\\"新建对话\\\") { createChat(in: model.project) }.buttonStyle(.borderedProminent)\\n                    } else {\\n                        Button(\\\"导入 Claude 聊天…\\\") { model.importDesktop() }\\n                    }\\n                }\\n                .frame(minWidth: 550, maxWidth: .infinity, maxHeight: .infinity)\\n                .background(Color(nsColor: .textBackgroundColor))\\n            }\\n        }\\n        .navigationTitle(canCreate ? \\\"对话\\\" : \\\"会话\\\")\\n        .onChange(of: model.selectedID) { _, _ in messageLimit = 100 }\\n        .sheet(isPresented: $newChat) { NewChatView(project: newChatProject).environmentObject(model) }\\n        .sheet(isPresented: $migrating) { if let session = model.selected { MigrationView(session: session).environmentObject(model) } }\\n    }\\n    private func createChat(in project: String) {\\n        newChatProject = project\\n        newChat = true\\n    }\\n    private func historyList(_ sessions: [Session], selection: Binding<String?>) -> some View {\\n        List(selection: selection) {\\n            ForEach(sessions) { session in\\nstruct NewChatView: View {\\n    @EnvironmentObject var model: AppModel\\n    @Environment(\\\\.dismiss) var dismiss\\n    let project: String\\n    @State private var agentID = \\\"\\\"\\n    @State private var cwd = \\\"\\\"\\n    @State private var starting = false\\n    var body: some View {\\n        VStack(alignment: .leading, spacing: 22) {\\n            Text(\\\"新建对话\\\").font(.title2.bold())\\n            Text(\\\"选择原生工具或 ACP Agent，在本地项目中开始对话。\\\").foregroundStyle(.secondary)\\n            Form {\\n                Picker(\\\"Agent\\\", selection: $agentID) {\\n                    ForEach(model.settings.agents) { agent in Text(\\\"\\\\(agent.name) · \\\\(agent.kind == \\\"acp\\\" ? \\\"ACP\\\" : \\\"原生\\\")\\\").tag(agent.id) }\\n                }\\n                HStack { TextField(\\\"工作目录\\\", text: $cwd); Button(\\\"选择…\\\") { if let path = model.chooseProject() { cwd = path } } }\\n                if model.settings.agents.first(where: { $0.id == agentID })?.kind != \\\"acp\\\" { TextField(\\\"模型（留空使用默认值）\\\", text: $model.composerModel) }\\n                else { Text(\\\"创建后可选择 Agent 提供的模型与权限选项\\\").font(.caption).foregroundStyle(.secondary) }\\n            }\\n            HStack { Button(\\\"取消\\\") { dismiss() }.keyboardShortcut(.cancelAction); Spacer(); if starting { ProgressView().controlSize(.small) }; Button(\\\"创建对话\\\") {\\n                guard let agent = model.settings.agents.first(where: { $0.id == agentID }) else { return }\\n                starting = true\\n                Task { let created = await model.startChat(agent: agent, cwd: cwd); starting = false; if created { dismiss() } }\\n            }.buttonStyle(.borderedProminent).disabled(starting || cwd.isEmpty || agentID.isEmpty) }\\n        }.padding(28).frame(width: 540).onAppear {\\n            agentID = model.settings.agents.first?.id ?? \\\"\\\"\\n            cwd = project.isEmpty ? FileManager.default.homeDirectoryForCurrentUser.path : project\\n        }\\n        .onChange(of: agentID) { _, _ in model.composerModel = \\\"\\\" }\\n    }\\n}\\n\\nstruct ApprovalView: View {\\n## main...origin/main\\n M Package.swift\\n M Sources/Ragdoll/ConversationView.swift\\n M Tests/RagdollTests/ConversationTests.swift\\n M docs/CHANGELOG.md\\n M memory/agents.md\\n M memory/plan.md\\n M memory/progress.md\\n M memory/verify.md\\n?? Sources/Ragdoll/Resources/\\ndiff --git a/Sources/Ragdoll/ConversationView.swift b/Sources/Ragdoll/ConversationView.swift\\n@@ -1,6 +1,8 @@\\n@@ -77,7 +79,7 @@ struct ConversationView: View {\\n@@ -191,6 +193,15 @@ struct ConversationView: View {\\n@@ -222,23 +233,25 @@ extension Message {\\n@@ -260,7 +273,14 @@ struct MessageView: View {\\n\"}",
+      "time" : 1794971546463
+    },
+    {
+      "id" : "call_a3a2e5c28cff4ec290816f80a6f7ed12",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{}",
+      "time" : 1794971555767
+    },
+    {
+      "id" : "call_7e77dd398607418da880091fb9cacb78",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 4.9 seconds\nOutput:\n\n{\"chunk_id\":\"343819\",\"wall_time_seconds\":1.001736417,\"session_id\":82837,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794971572272
+    },
+    {
+      "id" : "call_0d38a446681343c8844b89371074dddc",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{}",
+      "time" : 1794971589957
+    },
+    {
+      "id" : "call_c8e60f2737bd4660b8dcc08a858e12e2",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 5.8 seconds\nOutput:\n\n{\"chunk_id\":\"3027df\",\"wall_time_seconds\":0.000017542,\"exit_code\":0,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1794971604379
+    },
+    {
+      "id" : "call_a19ee651b58149bc8d81e6fbbd0d07db",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.7 seconds\nOutput:\n\n{\"chunk_id\":\"f38fd9\",\"wall_time_seconds\":1.646577541,\"exit_code\":0,\"original_token_count\":229,\"output\":\"✔ Test activityTooltipUsesLocalDateAndCompactTokens() passed after 0.001 seconds.\\n◇ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() started.\\n✔ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() passed after 0.269 seconds.\\n◇ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() started.\\n✔ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() passed after 0.001 seconds.\\n◇ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() started.\\n✔ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() passed after 0.453 seconds.\\n✔ Test run with 49 tests passed after 19.796 seconds.\\n[0/1] Planning build\\nBuilding for production...\\n[0/4] Write sources\\n[1/4] Write swift-version--58304C5D6DBC2206.txt\\n[3/4] Compiling Ragdoll AgentOptionsView.swift\\n[3/5] Write Objects.LinkFileList\\n[4/5] Linking Ragdoll\\nBuild complete! (10.52s)\\n\"}",
+      "time" : 1794971609687
+    },
+    {
+      "id" : "call_cfd311287ad74e8bb1f3c5372a05ad19",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"4abe30\",\"wall_time_seconds\":1.002188083,\"session_id\":44106,\"original_token_count\":15,\"output\":\"dist/Ragdoll.chat-preview.app: replacing existing signature\\n\"}",
+      "time" : 1794971615853
+    },
+    {
+      "id" : "call_fd918061049a4cd98307f07c2151efa4",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"b2d7de\",\"wall_time_seconds\":0.00002275,\"exit_code\":0,\"original_token_count\":108,\"output\":\"{\\\"status\\\":\\\"ok\\\",\\\"version\\\":\\\"0.1.0\\\",\\\"node\\\":\\\"v26.13.0\\\",\\\"agents\\\":[{\\\"id\\\":\\\"native-codex\\\",\\\"name\\\":\\\"Codex\\\",\\\"kind\\\":\\\"codex\\\",\\\"command\\\":\\\"codex\\\",\\\"args\\\":[],\\\"env\\\":{}},{\\\"id\\\":\\\"native-claude\\\",\\\"name\\\":\\\"Claude Code\\\",\\\"kind\\\":\\\"claude\\\",\\\"command\\\":\\\"claude\\\",\\\"args\\\":[],\\\"env\\\":{}},{\\\"id\\\":\\\"native-dsh\\\",\\\"name\\\":\\\"DeepSeek Harness\\\",\\\"kind\\\":\\\"dsh\\\",\\\"command\\\":\\\"/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh\\\",\\\"args\\\":[\\\"--profile\\\",\\\"sdk\\\"],\\\"env\\\":{}}]}\\n\"}",
+      "time" : 1794971624302
+    },
+    {
+      "id" : "call_b19cb7715797427082dc6766860c3ad3",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 4.9 seconds\nOutput:\n\n{\"chunk_id\":\"80a2de\",\"wall_time_seconds\":0.000010958,\"exit_code\":0,\"original_token_count\":2,\"output\":\"43754\\n\"}",
+      "time" : 1794971634370
+    },
+    {
+      "id" : "call_67092b24119b4a6bb2d3aab3067d9d22",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 4.4 seconds\nOutput:\n\n{\"chunk_id\":\"237ac4\",\"wall_time_seconds\":0.000010958,\"exit_code\":1,\"original_token_count\":9,\"output\":\"FAIL 窗口存在\\nFAIL 窗口存在\\n\"}",
+      "time" : 1794971646286
     }
   ],
   "nativeID" : "01a1ec91-6a06-7333-b447-58276e0edbc0",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "改造对话界面为 Cherry Studio 风格",
-  "updated" : 1794971468776,
+  "updated" : 1794971646287,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -1296,6 +1408,141 @@
       "model" : "gpt-6.2-sol",
       "output" : 519,
       "time" : 1794971468772
+    },
+    {
+      "cacheRead" : 160256,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd174de3e887d0b304deb29eacd1d0",
+      "input" : 654,
+      "model" : "gpt-6.2-sol",
+      "output" : 219,
+      "time" : 1794971476963
+    },
+    {
+      "cacheRead" : 160768,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd175c543c87d0a3190e6039150b08",
+      "input" : 534,
+      "model" : "gpt-6.2-sol",
+      "output" : 219,
+      "time" : 1794971492348
+    },
+    {
+      "cacheRead" : 161024,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1765336087d0a3a10d8584654d24",
+      "input" : 569,
+      "model" : "gpt-6.2-sol",
+      "output" : 627,
+      "time" : 1794971508829
+    },
+    {
+      "cacheRead" : 137216,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1775cef487d0aec585028b5ed4d9",
+      "input" : 25028,
+      "model" : "gpt-6.2-sol",
+      "output" : 224,
+      "time" : 1794971516921
+    },
+    {
+      "cacheRead" : 162048,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17852f4487d09b804b9a3cf46a33",
+      "input" : 478,
+      "model" : "gpt-6.2-sol",
+      "output" : 343,
+      "time" : 1794971536272
+    },
+    {
+      "cacheRead" : 162304,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd179145c087d0bee279ba44c8dad0",
+      "input" : 656,
+      "model" : "gpt-6.2-sol",
+      "output" : 252,
+      "time" : 1794971546462
+    },
+    {
+      "cacheRead" : 162816,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd179b51a887d0b9ad005ab740d2f4",
+      "input" : 1629,
+      "model" : "gpt-6.2-sol",
+      "output" : 321,
+      "time" : 1794971555766
+    },
+    {
+      "cacheRead" : 164352,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17a49f1487d094efc7cd8bb7335b",
+      "input" : 438,
+      "model" : "gpt-6.2-sol",
+      "output" : 336,
+      "time" : 1794971568257
+    },
+    {
+      "cacheRead" : 164608,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17b5328487d080cb76d0a4f5b0af",
+      "input" : 574,
+      "model" : "gpt-6.2-sol",
+      "output" : 685,
+      "time" : 1794971589954
+    },
+    {
+      "cacheRead" : 165120,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17c6e3e487d08971518d636cc3e1",
+      "input" : 771,
+      "model" : "gpt-6.2-sol",
+      "output" : 268,
+      "time" : 1794971599077
+    },
+    {
+      "cacheRead" : 165632,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17d547bc87d0a5836a9253d587ad",
+      "input" : 583,
+      "model" : "gpt-6.2-sol",
+      "output" : 67,
+      "time" : 1794971608451
+    },
+    {
+      "cacheRead" : 166144,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17daa0c087d091d869fe7c429569",
+      "input" : 427,
+      "model" : "gpt-6.2-sol",
+      "output" : 124,
+      "time" : 1794971615070
+    },
+    {
+      "cacheRead" : 166400,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17e0d38c87d0b4a736c0fbc49e75",
+      "input" : 363,
+      "model" : "gpt-6.2-sol",
+      "output" : 180,
+      "time" : 1794971624298
+    },
+    {
+      "cacheRead" : 166656,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17e92dc087d09b6acb8b9b795ce0",
+      "input" : 487,
+      "model" : "gpt-6.2-sol",
+      "output" : 119,
+      "time" : 1794971629646
+    },
+    {
+      "cacheRead" : 166912,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17f3495087d0926d56e0256748b2",
+      "input" : 409,
+      "model" : "gpt-6.2-sol",
+      "output" : 167,
+      "time" : 1794971642264
     }
   ],
   "warnings" : [
