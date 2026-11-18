@@ -3564,3 +3564,354 @@ Wall time 0.1 seconds
 Output:
 
 {}
+
+## tool · 2026-11-18T03:56:18Z
+
+
+Script completed
+Wall time 5.1 seconds
+Output:
+
+{"chunk_id":"38177e","wall_time_seconds":1.00175475,"session_id":40517,"original_token_count":0,"output":""}
+{"chunk_id":"a51ea3","wall_time_seconds":1.002013833,"session_id":96744,"original_token_count":58,"output":"\n> ragdoll-runtime@0.1.0 build\n> esbuild src/main.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/main.mjs\n\n\n  dist/main.mjs  101.3kb\n\n⚡ Done in 13ms\n\n> ragdoll-runtime@0.1.0 typecheck\n> tsc --noEmit\n\n"}
+{"chunk_id":"1884f6","wall_time_seconds":0.005273542,"exit_code":0,"original_token_count":398,"output":"runtime/test/integration.test.ts:91:      await agents.send(first.id, 'Remember the code RAGDOLL_CHECK_1729. Reply only OK. Do not inspect files or use any tools.', model);\nruntime/test/integration.test.ts:97:      await agents.send(first.id, 'Return only the code I asked you to remember. Do not use tools.', model);\nruntime/src/main.ts:87:    await agents.send(string(p.id), string(p.text), string(p.model) || undefined, p.attachments ?? [], p.effort);\nruntime/test/migration.test.ts:152:      await agents.send(session.id, 'Return only the secret code from our earlier conversation. Do not inspect files or use tools.', model);\nruntime/test/migration.test.ts:184:    await assert.rejects(agents.send(result.id, 'Reply only OK. Do not use tools.'), /no API key|MISSING_CREDENTIAL/);\nSources/Ragdoll/AppModel.swift:51:    @Published var composerSelections: [String: ComposerSelection] = [:]\nSources/Ragdoll/AppModel.swift:209:                composerSelections[session.id] = ComposerSelection(model: model)\nSources/Ragdoll/AppModel.swift:219:        await resume(selected, model: composerSelections[selected.id]?.model ?? \"\")\nSources/Ragdoll/AppModel.swift:244:        let selection = composerSelections[selected.id] ?? ComposerSelection()\nSources/Ragdoll/AgentOptionsView.swift:10:        $model.composerSelections[session.id, default: ComposerSelection()]\nSources/Ragdoll/ConversationView.swift:183:                        Task { if !(await model.send(text, attachments: files)) { if prompt.isEmpty { prompt = text }; if attachments.isEmpty { attachments = files } }; sending = false }\n"}
+
+## tool · 2026-11-18T03:56:34Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"83c968","wall_time_seconds":0.000010042,"exit_code":0,"original_token_count":372,"output":"[0/1] Planning build\nBuilding for debugging...\n[0/8] Write sources\n[1/8] Write swift-version--58304C5D6DBC2206.txt\n[3/10] Compiling Ragdoll AppModel.swift\n[4/10] Emitting module Ragdoll\n[5/10] Compiling Ragdoll ConversationView.swift\n[6/10] Compiling Ragdoll AgentOptionsView.swift\n/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/Sources/Ragdoll/AgentOptionsView.swift:10:34: error: subscript index of type '() -> ComposerSelection' in a key path must be Hashable\n  8 |     var info: JSONValue { model.conversationInfo[session.id] ?? .object([:]) }\n  9 |     private var selection: Binding<ComposerSelection> {\n 10 |         $model.composerSelections[session.id, default: ComposerSelection()]\n    |                                  `- error: subscript index of type '() -> ComposerSelection' in a key path must be Hashable\n 11 |     }\n 12 |     var body: some View {\n[7/15] Compiling Ragdoll RagdollApp.swift\n[8/15] Compiling Ragdoll RootView.swift\n[9/15] Compiling Ragdoll SettingsView.swift\n[10/15] Compiling Ragdoll MigrationView.swift\n[11/15] Compiling Ragdoll DashboardView.swift\nerror: fatalError\n1\t1\tPackage.swift\n123\t5\tSources/Ragdoll/AgentOptionsView.swift\n45\t11\tSources/Ragdoll/AppModel.swift\n31\t8\tSources/Ragdoll/ConversationView.swift\n22\t0\tTests/RagdollTests/ConversationTests.swift\n14\t0\tdocs/CHANGELOG.md\n2\t2\tmemory/agents.md\n14\t0\tmemory/plan.md\n16\t0\tmemory/progress.md\n14\t0\tmemory/verify.md\n37\t5\truntime/src/agents.ts\n5\t1\truntime/src/main.ts\n15\t2\truntime/test/integration.test.ts\n"}
+{"chunk_id":"47379f","wall_time_seconds":0.000012334,"exit_code":0,"original_token_count":0,"output":""}
+{"chunk_id":"508bf0","wall_time_seconds":0.00004025,"exit_code":1,"original_token_count":197,"output":"diff --git a/memory/plan.md b/memory/plan.md\n@@ -1,5 +1,19 @@\n+## 输入框模型选择\n+## 助手品牌头像\ndiff --git a/memory/progress.md b/memory/progress.md\n@@ -1,5 +1,21 @@\n+## 输入框模型选择（2026-11-18）\n+## 助手品牌头像（2026-11-17）\ndiff --git a/memory/verify.md b/memory/verify.md\n@@ -1,5 +1,19 @@\n+## 输入框模型选择\n+## 助手品牌头像\n@@ -1,6 +1,8 @@\n@@ -81,7 +83,7 @@ struct ConversationView: View {\n@@ -149,7 +151,7 @@ struct ConversationView: View {\n@@ -168,6 +170,8 @@ struct ConversationView: View {\n@@ -194,6 +198,15 @@ struct ConversationView: View {\n@@ -225,23 +238,25 @@ extension Message {\n@@ -263,7 +278,14 @@ struct MessageView: View {\n@@ -289,6 +311,7 @@ struct NewChatView: View {\n@@ -299,19 +322,19 @@ struct NewChatView: View {\n"}
+
+## tool · 2026-11-18T03:56:50Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## assistant · 2026-11-18T03:57:07Z
+
+Codex 的真实模型清单已通过验证，能读到每个模型支持的推理强度。输入框也已接入按会话保存的选择。接下来我会跑完整测试，并检查预览应用里的实际交互。
+
+## tool · 2026-11-18T03:57:21Z
+
+
+Script completed
+Wall time 7.0 seconds
+Output:
+
+{"chunk_id":"de209a","wall_time_seconds":1.001955542,"session_id":34270,"original_token_count":0,"output":""}
+{"chunk_id":"67666f","wall_time_seconds":1.002067334,"session_id":11692,"original_token_count":0,"output":""}
+{"chunk_id":"fb5a8a","wall_time_seconds":1.001550416,"session_id":69015,"original_token_count":58,"output":"\n> ragdoll-runtime@0.1.0 build\n> esbuild src/main.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/main.mjs\n\n\n  dist/main.mjs  101.3kb\n\n⚡ Done in 8ms\n\n> ragdoll-runtime@0.1.0 typecheck\n> tsc --noEmit\n\n"}
+{"chunk_id":"c5607a","wall_time_seconds":0.000017208,"exit_code":0,"original_token_count":1180,"output":"    press(require(find(\"AXButton\", \"清除搜索\"), \"清除搜索按钮存在\"), \"清除查询\")\n    expect(rows(projectOutline()).count == 4, \"清除搜索恢复项目\")\n\n    press(projectButtons(0)[1], \"从项目加号打开新建对话\")\n}\n\nif CommandLine.arguments[2] == \"form\" {\n    let buttons = descendants(window()).filter { (attribute($0, \"AXRole\") as String?) == \"AXButton\" }\n    let add = require(buttons.first { node in\n        [\"AXTitle\", \"AXDescription\", \"AXHelp\"].contains {\n            (attribute(node, $0) as String?)?.hasSuffix(\"中新建对话\") == true\n        }\n    }, \"项目新建按钮存在\")\n    expect(AXUIElementPerformAction(add, \"AXPress\" as CFString) == .success, \"点击项目加号\")\n    Thread.sleep(forTimeInterval: 0.8)\n    describe(window())\n    expect(verifiedDirectory, \"工作目录预填完整路径\")\n    let cancel = require(cancelButton, \"表单可取消\")\n    expect(AXUIElementPerformAction(cancel, \"AXPress\" as CFString) == .success, \"取消新建表单\")\n    Thread.sleep(forTimeInterval: 0.8)\n    let history = require(descendants(window()).first {\n        matches($0, role: \"AXButton\", text: \"会话\")\n    }, \"历史会话导航存在\")\n    expect(AXUIElementPerformAction(history, \"AXPress\" as CFString) == .success, \"切换到历史会话\")\n    Thread.sleep(forTimeInterval: 0.8)\n    expect(descendants(window()).contains { matches($0, role: \"AXStaticText\", text: \"历史会话\") }, \"历史会话列表仍可进入\")\n}\n\nif [\"exercise\", \"finish\"].contains(CommandLine.arguments[2]) {\n    func find(_ role: String, _ label: String) -> AXUIElement? {\n        descendants(window()).first { matches($0, role: role, text: label) }\n    }\n    func press(_ element: AXUIElement, _ message: String) {\n        expect(AXUIElementPerformAction(element, \"AXPress\" as CFString) == .success, message)\n        Thread.sleep(forTimeInterval: 0.45)\n    }\n    let testWindow = window()\n    let windowRole: String? = attribute(testWindow, \"AXRole\")\n    let sheets: [AXUIElement] = attribute(testWindow, \"AXSheets\") ?? []\n    let children: [AXUIElement] = attribute(testWindow, \"AXChildren\") ?? []\n    print(\"Window \\(windowRole ?? \"nil\"), sheets \\(sheets.count), children \\(children.map { (attribute($0, \"AXRole\") as String?) ?? \"nil\" })\")\n    let sheet = require(sheets.first ?? children.first { (attribute($0, \"AXRole\") as String?) == \"AXSheet\" }, \"新建对话表单存在\")\n    expect(descendants(sheet).contains { matches($0, role: \"AXStaticText\", text: \"工作目录\") }, \"工作目录标签存在\")\n    let directory = require(descendants(sheet).first { (attribute($0, \"AXRole\") as String?) == \"AXTextField\" }, \"工作目录字段存在\")\n    expect((attribute(directory, \"AXValue\") as String?) == CommandLine.arguments[3], \"工作目录已预填完整路径\")\n    press(require(descendants(sheet).first { matches($0, role: \"AXButton\", text: \"取消\") }, \"可取消\"), \"取消新建\")\n\n    press(require(find(\"AXButton\", \"会话\"), \"历史导航存在\"), \"切换到历史会话\")\n    expect(find(\"AXStaticText\", \"历史会话\") != nil, \"历史会话列表仍可进入\")\n}\n.bail on\nATTACH DATABASE 'file:../startup-smoke/index.sqlite?mode=ro' AS fixtures;\nWITH recent_projects AS (\n    SELECT project FROM fixtures.sessions\n    WHERE source = 'codex' AND project <> '' AND length(body) < 16000\n    GROUP BY project HAVING count(*) >= 2\n    ORDER BY max(updated) DESC LIMIT 2\n), recent_sessions AS (\n    SELECT *, row_number() OVER (PARTITION BY project ORDER BY updated DESC) AS ordinal\n    FROM fixtures.sessions\n    WHERE source = 'codex' AND length(body) < 16000 AND project IN recent_projects\n)\nINSERT OR IGNORE INTO sessions (id, source, native_id, title, project, updated, body, summary, search, canonical_id)\nSELECT id, source, native_id, title, project, updated, body, summary, search, canonical_id\nFROM recent_sessions WHERE ordinal <= 2;\nINSERT OR REPLACE INTO settings (id, body) VALUES (\n    1, json_object(\n        'archivePath', @archive,\n        'locations', json_array(json_object('source', 'codex', 'path', @source)),\n        'agents', json_array(),\n        'excludedProjects', json_array(),\n        'prices', json_object()\n    )\n);\nSELECT count(*) AS sessions, count(DISTINCT project) AS projects FROM sessions;\ntotal 88\ndrwxr-xr-x   5 oyamahappa  staff    160 Nov 18 11:16 .\ndrwxr-xr-x  18 oyamahappa  staff    576 Nov 18 11:17 ..\ndrwxr-xr-x   3 oyamahappa  staff     96 Nov 18 11:06 conversations\n-rw-r--r--   1 oyamahappa  staff  40960 Nov 18 11:16 index.sqlite\n-rw-------   1 oyamahappa  staff      5 Nov 18 11:18 service-lock\ndiff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\n@@ -317,6 +317,20 @@\n+## [2026-11-17 22:04] 按会话来源显示助手品牌头像\n"}
+
+## tool · 2026-11-18T03:57:36Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+[0/1] Planning build
+Building for debugging...
+[0/8] Write sources
+[1/8] Write swift-version--58304C5D6DBC2206.txt
+[3/8] Compiling Ragdoll AgentOptionsView.swift
+[4/8] Emitting module Ragdoll
+[5/10] Compiling Ragdoll SettingsView.swift
+[6/10] Compiling Ragdoll ConversationView.swift
+[6/11] Write Objects.LinkFileList
+[7/11] Linking Ragdoll
+[8/11] Applying Ragdoll
+[10/17] Compiling RagdollTests DashboardTests.swift
+[11/17] Compiling RagdollTests StartupTests.swift
+[12/17] Compiling RagdollTests ConversationProjectTests.swift
+[13/17] Compiling RagdollTests ComposerTests.swift
+[14/17] Emitting module RagdollTests
+[15/17] Compiling RagdollTests ConversationTests.swift
+[16/19] Compiling RagdollPackageTests runner.swift
+[17/19] Emitting module RagdollPackageTests
+[17/19] Write Objects.LinkFileList
+[18/19] Linking RagdollPackageTests
+Build complete! (6.16s)
+﹣ real dsh conversations persist and resume their native history (0.046125ms) # SKIP
+﹣ real dsh-acp conversations persist and resume their native history (0.03975ms) # SKIP
+✔ Codex scan reads saved titles per home, including archived sessions (26.515875ms)
+✔ Codex title changes invalidate only the matching incremental session (8.54025ms)
+✔ Codex missing title index uses the actual request and preserves messages (4.059792ms)
+✔ Codex title index reports damaged records and keeps valid titles (1.326833ms)
+✔ Codex cache writes are counted once inside total input (0.525417ms)
+✔ Codex canonical records take precedence over compatibility counters (0.925958ms)
+✔ dsh version selection reads the latest file only (2.579167ms)
+✔ dsh compressed logs expose messages and usage (3.964042ms)
+✔ native migration preserves complete tool records and leaves source unchanged (411.517708ms)
+▶ migration copies attachments and rejects a target history symlink before creating external directories
+  ﹣ attachments survive a second dsh migration (0.116875ms) # SKIP
+✔ migration copies attachments and rejects a target history symlink before creating external directories (177.601917ms)
+✔ migration requires explicit authorization for an external declared attachment (182.4695ms)
+✔ native migration requires raw history and retains configured home identity (152.952416ms)
+✔ native publication preserves an existing sidecar and existing target (1.721292ms)
+﹣ migrated codex conversation continues with the original context (0.1275ms) # SKIP
+﹣ migrated dsh conversation continues with the original context (0.03625ms) # SKIP
+✔ migration refuses malformed raw input before publishing target history (0.896667ms)
+﹣ Codex history becomes a dsh native conversation that the installed tool can resume (0.07975ms) # SKIP
+✔ archive paths cannot escape installation root (0.50925ms)
+✔ registry packages require an exact version (0.206208ms)
+✔ registry rejects invalid metadata before any installation (0.127625ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 7
+ℹ todo 0
+ℹ duration_ms 3600.262042
+.DS_Store
+references/
+.build/
+.cache/
+.agent/
+dist/
+node_modules/
+runtime/dist/
+*.xcuserstate
+xcuserdata/
+.swiftpm/
+*.log
+- 范围：Analytics 汇总及日期网格、DashboardView、AppModel 日期筛选、AnalyticsTests 与任务记录。ConversationView 的清除入口无需改动。
+- 顺序：先验证旧七日统计无法满足年度需求，再实现日汇总与网格测试，接入界面及筛选，运行 Swift 测试、release 打包和启动检查，提交并普通推送。
+
+## 对话工作区
+
+- “对话”页采用紧凑导航、项目侧栏和独立聊天区。按完整工作目录分组，沿用索引的更新时间顺序，无工作目录的会话单列。搜索自动展开命中项目，平时可折叠，从项目新建时预填工作目录。
+- 聊天区使用紧凑标题、居中消息列和底部输入框，沿用系统浅色和深色外观。保留历史会话的平铺列表、搜索与筛选，以及恢复、迁移、附件、Agent 选项和发送/停止入口。
+- 范围为主导航、对话视图、项目侧栏及其回归、使用说明与任务记录。复用现有索引和 Agent 调用。
+- 先运行分组失败回归，再接入 SwiftUI。验证 Swift 测试及 release 构建，使用单独预览包启动检查，最后独立提交并普通推送。
+- 系统隔离登录项注册、实际 launchd 启动及注销已确认；外置 SSD 测试数据的 TCC 访问未获授权，系统托管的完整归档流程未通过。不得将其记为全流程成功。
+- Claude、截图/视觉检查、注销后重新登录和公证分发仍未验证，详见 `docs/VALIDATION.md`。
+
+## 对话工作区
+
+- 按完整路径分组，区分同名目录，跨来源归在同一项目，按索引更新时间保持项目和会话顺序，无工作目录放在末尾。
+- 查询先由原索引搜索与筛选，再用于项目分组。搜索展示全部命中项。普通浏览能折叠项目及选择子会话，从项目新建时预填真实路径。
+- 保留历史入口和对话操作。运行项目 Swift 测试、release 构建、预览包签名、助手自检和启动检查。
+- 最终 49 项 Swift 测试、release 构建、临时签名及助手自检通过。隔离预览窗口验证项目展开折叠、选择子会话、消息输入及恢复和迁移入口、搜索空结果、清除搜索、首次新建预填完整路径和返回历史会话。未截图或调用原生 Agent 发送消息。
+
+## 对话工作区（2026-11-18）
+
+- [x] 确认主导航及共用 ConversationView 调用、索引搜索和按更新时间排序行为，读取本地 Cherry Studio 的设计说明。
+- [x] 项目分组回归先因缺少分组入口编译失败，实现后通过真实 SQLite 索引检索。
+- [x] 项目侧栏、紧凑导航和聊天区已接入。49 项 Swift 测试、release 构建、预览签名、助手自检和隔离启动通过。
+- [x] 隔离预览用 macOS 辅助功能检查了 56 点导航、项目展开折叠、选择会话、搜索空结果和清除搜索。确认从项目首次打开新建表单时预填完整路径，取消后可进入历史会话页。
+- [x] 独立编译暂存内容并通过项目分组回归。本轮代码提交为 `6bbd748` 和 `7a576f8`，保留既有头像改动的待提交状态。
+
+total 296
+drwxr-xr-x  4 oyamahappa  staff     128 Nov 17 21:27 GRDB_GRDB.bundle
+-rw-r--r--  1 oyamahappa  staff  149203 Nov 17 21:27 Ragdoll.icns
+drwxr-xr-x  7 oyamahappa  staff     224 Nov 18 11:00 Ragdoll_Ragdoll.bundle
+drwxr-xr-x  9 oyamahappa  staff     288 Nov 17 21:27 docs
+drwxr-xr-x  4 oyamahappa  staff     128 Nov 17 21:27 runtime
+com.oyamameek.ragdoll
+5
+
+
+## tool · 2026-11-18T03:57:41Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"efc0e1","wall_time_seconds":0.000009333,"exit_code":0,"original_token_count":649,"output":"✔ Test archiveSavesCompleteSnapshotEvenWhenSourceFilesExist() passed after 0.148 seconds.\n◇ Test archiveRestoresWithoutSourcesAndKeepsNewerLocalChanges() started.\n✔ Test archiveRestoresWithoutSourcesAndKeepsNewerLocalChanges() passed after 0.142 seconds.\n◇ Test archiveRestoreRejectsMissingRepositoryAndUnsafeManifestPaths() started.\n✔ Test archiveRestoreRejectsMissingRepositoryAndUnsafeManifestPaths() passed after 0.028 seconds.\n◇ Test archiveRestoresLegacyRawLogsIncludingGzip(_:) started.\n◇ Passing 1 argument compressed → false to archiveRestoresLegacyRawLogsIncludingGzip(_:)\n◇ Passing 1 argument compressed → true to archiveRestoresLegacyRawLogsIncludingGzip(_:)\n✔ Test archiveRestoresLegacyRawLogsIncludingGzip(_:) passed after 0.505 seconds.\n◇ Test archiveRetainsCompleteLegacyTranscriptWithoutInventingMessageBoundaries() started.\n✔ Test archiveRetainsCompleteLegacyTranscriptWithoutInventingMessageBoundaries() passed after 0.092 seconds.\n◇ Test archiveSyncRefusesMultiplePushDestinationsBeforeUploading() started.\n✔ Test archiveSyncRefusesMultiplePushDestinationsBeforeUploading() passed after 0.146 seconds.\n◇ Test archiveSyncPreviewShowsTheDestinationWithoutCredentials() started.\n✔ Test archiveSyncPreviewShowsTheDestinationWithoutCredentials() passed after 0.173 seconds.\n◇ Test archiveSyncStopsAHangingPushAndPreservesItsLocalCommit() started.\n✔ Test archiveSyncStopsAHangingPushAndPreservesItsLocalCommit() passed after 0.336 seconds.\n◇ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() started.\n✔ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() passed after 0.511 seconds.\n◇ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() started.\n✔ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() passed after 0.003 seconds.\n◇ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) started.\n◇ Passing 1 argument kind → \"missing\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"history\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"corrupt\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n✔ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) passed after 0.979 seconds.\n◇ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() started.\n✔ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItdrwxr-xr-x  12 oyamahappa  staff  384 Nov 18 11:17 .agent/chat-preview-smoke/archive/.git\n"}
+
+## tool · 2026-11-18T03:58:00Z
+
+
+Script completed
+Wall time 4.8 seconds
+Output:
+
+{"chunk_id":"deeaf2","wall_time_seconds":1.002194292,"session_id":20067,"original_token_count":0,"output":""}
+{"chunk_id":"606612","wall_time_seconds":0.000041792,"exit_code":0,"original_token_count":304,"output":"6:    public static func prepare(_ root: URL, sourceRoots: [String] = []) throws {\n20:    public static func restore(from root: URL, into store: Store, bridge: RuntimeBridge) async throws -> Int {\n◇ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() started.\n✔ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() passed after 0.511 seconds.\n◇ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() started.\n✔ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() passed after 0.003 seconds.\n◇ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) started.\n◇ Passing 1 argument kind → \"missing\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"history\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"corrupt\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n✔ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) passed after 0.979 seconds.\n◇ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() started.\n✔ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItcodex|5\n"}
+
+## tool · 2026-11-18T03:58:15Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+import Foundation
+import CryptoKit
+
+public struct ArchiveResult: Sendable { public var files: Int; public var commit: String? }
+public enum Archive {
+    public static func prepare(_ root: URL, sourceRoots: [String] = []) throws {
+        let root = root.standardizedFileURL.resolvingSymlinksInPath()
+        for path in sourceRoots where !path.isEmpty {
+            let source = URL(fileURLWithPath: path).standardizedFileURL.resolvingSymlinksInPath().path
+            guard root.path != source && !root.path.hasPrefix(source + "/") else { throw failure("归档目录不能放在源日志目录中") }
+        }
+        let fm = FileManager.default
+        try fm.createDirectory(at: root, withIntermediateDirectories: true)
+        if !fm.fileExists(atPath: root.appendingPathComponent(".git").path) {
+            _ = try git(root, ["init"])
+        }
+        guard try git(root, ["rev-parse", "--show-toplevel"]) == root.path else { throw failure("请选择 Git 仓库的根目录") }
+    }
+
+    public static func restore(from root: URL, into store: Store, bridge: RuntimeBridge) async throws -> Int {
+        let root = root.standardizedFileURL.resolvingSymlinksInPath(), fm = FileManager.default
+        guard fm.fileExists(atPath: root.appendingPathComponent(".git").path),
+              try git(root, ["rev-parse", "--show-toplevel"]) == root.path else { throw failure("归档仓库不存在或路径无效，请重新选择 Git 仓库") }
+        let lease = try ServiceLease(root: root, name: ".ragdoll-archive-lock")
+        defer { withExtendedLifetime(lease) {} }
+        let manifestURL = root.appendingPathComponent(".ragdoll-manifest.json")
+        guard manifestURL.resolvingSymlinksInPath().path == root.path + "/.ragdoll-manifest.json" else { throw failure("归档清单路径无效") }
+        guard fm.fileExists(atPath: manifestURL.path) else {
+            guard !fm.fileExists(atPath: root.appendingPathComponent("sessions").path) else { throw failure("归档缺少清单，已停止读取和写入") }
+            return 0
+        }
+        let manifest = try JSONDecoder().decode([String: String].self, from: Data(contentsOf: manifestURL))
+        for path in manifest.keys {
+            guard path.hasPrefix("sessions/"), !path.split(separator: "/").contains(where: { $0 == ".." || $0 == "." }),
+                  root.appendingPathComponent(path).resolvingSymlinksInPath().path.hasPrefix(root.path + "/sessions/") else { throw failure("归档清单路径越界：\(path)") }
+        }
+        func read(_ path: String) throws -> Data {
+            let data = try Data(contentsOf: root.appendingPathComponent(path))
+            guard manifest[path] == hash(data) else { throw failure("归档文件已变化，已停止读取和写入：\(path)") }
+            return data
+        }
+        let entries = manifest.keys.sorted(), paths = entries.filter { $0.hasSuffix("/metadata.json") }
+        for path in paths {
+            var session = try JSONDecoder().decode(Session.self, from: read(path))
+            let base = String(path.dropLast("metadata.json".count)), events = base + "events.json"
+            if manifest[events] != nil {
+                let snapshot = try JSONDecoder().decode(Session.self, from: read(events))
+                guard snapshot.id == session.id, snapshot.source == session.source else { throw failure("归档会话身份不一致：\(path)") }
+                session = snapshot
+            } else if ["codex", "claude", "dsh"].contains(session.source),
+    guard condition() else { print("FAIL " + message); exit(1) }
+    print("PASS " + message)
+}
+
+func require<T>(_ value: T?, _ message: String) -> T {
+    guard let value else { print("FAIL " + message); exit(1) }
+    return value
+}
+
+func rows(_ outline: AXUIElement) -> [AXUIElement] { attribute(outline, "AXRows") ?? [] }
+func width(_ node: AXUIElement) -> CGFloat? {
+    guard let value: AXValue = attribute(node, "AXSize") else { return nil }
+    var size = CGSize.zero
+    return AXValueGetValue(value, .cgSize, &size) ? size.width : nil
+}
+
+guard AXIsProcessTrusted(), let pid = pid_t(CommandLine.arguments[1]) else { exit(1) }
+let app = AXUIElementCreateApplication(pid)
+func window() -> AXUIElement { require((attribute(app, "AXWindows") as [AXUIElement]?)?.first, "窗口存在") }
+
+if CommandLine.arguments.count == 2 {
+    describe(window())
+    if expectedDirectory != nil {
+        expect(verifiedDirectory, "工作目录预填完整路径")
+        let cancel = require(cancelButton, "表单可取消")
+        expect(AXUIElementPerformAction(cancel, "AXPress" as CFString) == .success, "取消新建表单")
+        Thread.sleep(forTimeInterval: 0.6)
+        let history = require(descendants(window()).first {
+            matches($0, role: "AXButton", text: "会话")
+        }, "历史会话导航存在")
+        expect(AXUIElementPerformAction(history, "AXPress" as CFString) == .success, "切换到历史会话")
+        Thread.sleep(forTimeInterval: 0.6)
+        expect(descendants(window()).contains {
+            matches($0, role: "AXStaticText", text: "历史会话")
+        }, "历史会话列表仍可进入")
+    }
+    exit(0)
+}
+
+if CommandLine.arguments[2] == "chat" {
+    let outline = require(descendants(window()).first { (attribute($0, "AXRole") as String?) == "AXOutline" }, "导航列表存在")
+    let chat = require(rows(outline).first { row in
+        descendants(row).contains { matches($0, role: "AXStaticText", text: "对话") }
+    }, "导航包含对话")
+    expect(AXUIElementSetAttributeValue(outline, "AXSelectedRows" as CFString, [chat] as CFArray) == .success, "打开对话页")
+    Thread.sleep(forTimeInterval: 0.7)
+    let tree = descendants(window())
+    expect(tree.contains { matches($0, role: "AXButton", text: "本地状态") }, "紧凑导航可访问")
+    let split = require(tree.first { (attribute($0, "AXRole") as String?) == "AXSplitGroup" }, "导航分栏存在")
+    let children: [AXUIElement] = attribute(split, "AXChildren") ?? []
+    let navigation = require(children.first, "导航栏存在")
+    let navigationWidth = require(width(navigation), "可测量导航栏宽度")
+    print("导航栏宽度 \(navigationWidth)")
+    expect(navigationWidth <= 64, "对话导航收窄")
+    describe(window())
+}
+
+if CommandLine.arguments[2] == "exercise" {
+    func find(_ role: String, _ label: String) -> AXUIElement? {
+        descendants(window()).first { matches($0, role: role, text: label) }
+    }
+    func projectOutline() -> AXUIElement {
+        require(descendants(window()).first { (attribute($0, "AXRole") as String?) == "AXOutline" }, "项目列表存在")
+    }
+    func press(_ element: AXUIElement, _ message: String) {
+        expect(AXUIElementPerformAction(element, "AXPress" as CFString) == .success, message)
+        Thread.sleep(forTimeInterval: 0.45)
+    }
+    func projectButtons(_ index: Int) -> [AXUIElement] {
+        descendants(rows(projectOutline())[index]).filter { (attribute($0, "AXRole") as String?) == "AXButton" }
+    }
+
+    expect(rows(projectOutline()).count == 4, "两个项目且首个项目展开两条对话")
+    press(projectButtons(0)[0], "折叠项目")
+    expect(rows(projectOutline()).count == 2, "折叠后只显示两行项目")
+    press(projectButtons(0)[0], "展开项目")
+◇ Passing 1 argument compressed → false to archiveRestoresLegacyRawLogsIncludingGzip(_:)
+◇ Passing 1 argument compressed → true to archiveRestoresLegacyRawLogsIncludingGzip(_:)
+✔ Test archiveRestoresLegacyRawLogsIncludingGzip(_:) passed after 0.505 seconds.
+◇ Test archiveRetainsCompleteLegacyTranscriptWithoutInventingMessageBoundaries() started.
+✔ Test archiveRetainsCompleteLegacyTranscriptWithoutInventingMessageBoundaries() passed after 0.092 seconds.
+◇ Test archiveSyncRefusesMultiplePushDestinationsBeforeUploading() started.
+✔ Test archiveSyncRefusesMultiplePushDestinationsBeforeUploading() passed after 0.146 seconds.
+◇ Test archiveSyncPreviewShowsTheDestinationWithoutCredentials() started.
+✔ Test archiveSyncPreviewShowsTheDestinationWithoutCredentials() passed after 0.173 seconds.
+◇ Test archiveSyncStopsAHangingPushAndPreservesItsLocalCommit() started.
+✔ Test archiveSyncStopsAHangingPushAndPreservesItsLocalCommit() passed after 0.336 seconds.
+◇ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() started.
+✔ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() passed after 0.511 seconds.
+◇ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() started.
+✔ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() passed after 0.003 seconds.
+◇ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) started.
+◇ Passing 1 argument kind → "missing" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)
+◇ Passing 1 argument kind → "history" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)
+◇ Passing 1 argument kind → "corrupt" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)
+✔ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) passed after 0.979 seconds.
+◇ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() started.
+✔ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingIt[0/1] Planning build
+Building for production...
+[0/4] Write sources
+[1/4] Write swift-version--58304C5D6DBC2206.txt
+[3/4] Compiling Ragdoll AgentOptionsView.swift
+[3/5] Write Objects.LinkFileList
+[4/5] Linking Ragdoll
+Build complete! (10.81s)
+
+
+## tool · 2026-11-18T03:58:31Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"3d0815","wall_time_seconds":0.0000085,"exit_code":0,"original_token_count":1,"output":"5\n"}
+{"chunk_id":"2880ce","wall_time_seconds":1.002505625,"session_id":81497,"original_token_count":0,"output":""}
+{"chunk_id":"fb4065","wall_time_seconds":0.000007541,"exit_code":0,"original_token_count":353,"output":"4958 Nov 18 11:57:37 2026\n◇ Passing 1 argument kind → \"history\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"corrupt\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n✔ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) passed after 0.979 seconds.\n◇ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() started.\n✔ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItTests/RagdollCoreTests/BackgroundServiceTests.swift:6:@Test(arguments: [\"missing\", \"history\", \"corrupt\"]) func backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_ kind: String) async throws {\nTests/RagdollCoreTests/BackgroundServiceTests.swift:38:@Test func backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() throws {\nTests/RagdollCoreTests/BackgroundServiceTests.swift:46:@Test func backgroundServiceOwnsOneDataDirectoryAndPreservesNewRequests() throws {\nTests/RagdollCoreTests/BackgroundServiceTests.swift:63:@Test func backgroundServiceArchivesFromItsOwnProcess() async throws {\nTests/RagdollCoreTests/BackgroundServiceTests.swift:108:@Test(arguments: [\"runtime\", \"index\"]) func backgroundServiceExitsOnFatalDependencyFailure(_ kind: String) async throws {\nTests/RagdollCoreTests/BackgroundServiceTests.swift:139:@Test func backgroundServiceContinuesAfterItsLauncherReturns() async throws {\n"}
