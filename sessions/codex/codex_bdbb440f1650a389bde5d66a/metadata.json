@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "改造对话界面为 Cherry Studio 风格",
-  "updated" : 1794971251627,
+  "updated" : 1794971468776,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -562,6 +562,132 @@
       "model" : "gpt-6.2-sol",
       "output" : 495,
       "time" : 1794971251625
+    },
+    {
+      "cacheRead" : 150272,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1674a54487d0bfe82408a8bcc965",
+      "input" : 779,
+      "model" : "gpt-6.2-sol",
+      "output" : 144,
+      "time" : 1794971257925
+    },
+    {
+      "cacheRead" : 150784,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd167e203487d08374a775f8419a9e",
+      "input" : 514,
+      "model" : "gpt-6.2-sol",
+      "output" : 1272,
+      "time" : 1794971292540
+    },
+    {
+      "cacheRead" : 151040,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd169d8c1c87d0994299bba36f5791",
+      "input" : 1554,
+      "model" : "gpt-6.2-sol",
+      "output" : 915,
+      "time" : 1794971316280
+    },
+    {
+      "cacheRead" : 152320,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd16b579d087d0b1801006be6b2451",
+      "input" : 1263,
+      "model" : "gpt-6.2-sol",
+      "output" : 65,
+      "time" : 1794971321655
+    },
+    {
+      "cacheRead" : 153344,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd16ba8fec87d0ba53fe063b3edef0",
+      "input" : 446,
+      "model" : "gpt-6.2-sol",
+      "output" : 149,
+      "time" : 1794971328151
+    },
+    {
+      "cacheRead" : 153600,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd16c828e487d0859baea43e680e99",
+      "input" : 679,
+      "model" : "gpt-6.2-sol",
+      "output" : 657,
+      "time" : 1794971353224
+    },
+    {
+      "cacheRead" : 154112,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd16dfb34c87d08670494d7ffaaf7e",
+      "input" : 1548,
+      "model" : "gpt-6.2-sol",
+      "output" : 626,
+      "time" : 1794971375090
+    },
+    {
+      "cacheRead" : 155392,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd16f03b6487d0bbd9cab8fbce0bd0",
+      "input" : 918,
+      "model" : "gpt-6.2-sol",
+      "output" : 160,
+      "time" : 1794971381546
+    },
+    {
+      "cacheRead" : 156160,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd16fb6c2c87d0ad956ae80f8632ff",
+      "input" : 367,
+      "model" : "gpt-6.2-sol",
+      "output" : 149,
+      "time" : 1794971393189
+    },
+    {
+      "cacheRead" : 156416,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1707095c87d0a5e3b2f38108fee8",
+      "input" : 791,
+      "model" : "gpt-6.2-sol",
+      "output" : 404,
+      "time" : 1794971409370
+    },
+    {
+      "cacheRead" : 156928,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd171c291087d0b56f864b31284b5e",
+      "input" : 816,
+      "model" : "gpt-6.2-sol",
+      "output" : 280,
+      "time" : 1794971428245
+    },
+    {
+      "cacheRead" : 157696,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd17253ba487d0a3c1943d5793fb0f",
+      "input" : 2062,
+      "model" : "gpt-6.2-sol",
+      "output" : 326,
+      "time" : 1794971438409
+    },
+    {
+      "cacheRead" : 159488,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd1734685c87d09012c3aa3ecba19d",
+      "input" : 723,
+      "model" : "gpt-6.2-sol",
+      "output" : 98,
+      "time" : 1794971448163
+    },
+    {
+      "cacheRead" : 160000,
+      "cacheWrite" : 0,
+      "id" : "resp_0df9e3b8049e4fdc016afd173f900087d0baf7f9308978ce86",
+      "input" : 367,
+      "model" : "gpt-6.2-sol",
+      "output" : 519,
+      "time" : 1794971468772
     }
   ],
   "warnings" : [
