@@ -2977,3 +2977,515 @@ drwxr-xr-x   4 oyamahappa  staff         128 Nov 17 20:07 tools
 ## assistant · 2026-11-18T03:51:12Z
 
 我会用测试驱动开发（TDD）先覆盖两点：不同会话的选择互不影响，切换模型时清除上一模型的推理强度。界面沿用 Ragdoll 的原生控件。
+
+## tool · 2026-11-18T03:51:17Z
+
+
+Script completed
+Wall time 0.4 seconds
+Output:
+
+==> memory/plan.md <==
+# Ragdoll 实施计划
+
+## 助手品牌头像
+
+- 按会话 `nativeSource ?? source` 显示 Codex、Claude（含官方聊天导入）、DeepSeek 图标；未知 ACP 保留通用头像。复用现有 28 点头像布局，Codex 单色随系统主题，其他品牌保留原色。
+- 使用 Lobe Icons 的静态 PNG，随 Swift Package 资源打包并保留 MIT 许可，不增加依赖或网络加载。
+- 范围：ConversationView 的来源传递及头像、Package.swift、三张资源及许可、ConversationTests 和任务记录；无存储、协议、fixtures、配置和公开导出变更。
+- 先运行来源映射失败回归，再实现并验证资源加载、全部 Swift 测试、release 构建及预览包签名/助手自检；保留正式包，不截图或运行 Claude 接入测试。提交并普通推送。
+
+## 台前调度图标
+
+- 当前预览包的 Info.plist、ICNS 和 LaunchServices 登记正确；运行中应用与磁盘图标一致，隔离 AppKit 启动的 applicationIconImage 在 256 像素下也与包内资源一致。
+- 刷新现有预览包的 LaunchServices 登记并正常重启，处理旧进程和系统展示缓存的可能影响；无需修改图标、应用源码、调用方、测试、fixtures、配置、导出或依赖。
+- 范围仅为本机运行状态及任务记录。保留原证书签名正式包和现有预览包；不重启 Dock，不截图或运行 Claude 测试。
+- 核查正常启动进程及图标数据，记录实际显示尚未验证；提交文档并普通推送。
+
+## system prompt 总折叠项
+
+- 连续的系统提示词合并为默认收起的 `system prompt`，展开后保留逐条折叠；用户与助手之间的提示词按原位置独立成组。
+- 工具过滤后先分组再分页，每页 100 项，确保同一组提示词不会被截断。历史会话和对话复用实现。
+
+==> memory/progress.md <==
+# 实施进度
+
+## 助手品牌头像（2026-11-17）
+
+- [x] 确认助手头像共用 sparkles；会话已有 source/nativeSource，ACP 原生来源可直接复用。没有项目测试技能目录。
+- [x] 找到 Lobe Icons 静态 PNG 与 MIT 许可，确定本地资源和共用视图传递范围。
+- [x] 来源映射先因缺少 assistantIconName 编译失败；实现后全部 48 项 Swift 测试通过（21.115 秒），三张资源可解码，release 编译通过。
+- [x] 检查生成的 SwiftPM 资源访问器，补充从应用 Contents/Resources 优先加载、开发运行使用 .module 的路径，避免依赖原构建目录。
+- [x] 最终全部 48 项 Swift 测试通过（21.379 秒），release 构建通过；包内三张图标与源文件逐字节一致，临时签名完整性及内置助手自检通过。
+- [x] 正常退出旧预览并启动新预览（PID 69738）；原正式包 SHA-256 不变且签名完整性通过。未截图或验证窗口实际显示，未运行 Claude 接入测试；预览包不用于独立后台服务。
+- [ ] 提交并普通推送至 origin/main。
+
+## 台前调度图标（2026-11-17）
+
+- [x] 确认当前预览包的 ICNS 与源资源一致、LaunchServices 登记正确；运行中应用图标与包内资源一致。
+- [x] 隔离 AppKit 启动返回 256 像素快照；统一到 256 像素后，原有 applicationIconImage 与包内资源摘要完全一致，无需应用代码改动。最终源码全部 46 项 Swift 测试通过（20.269 秒）。
+- [x] 刷新预览包的 LaunchServices 登记并正常重启，旧进程已退出，新进程 64318 完成启动，图标摘要与资源一致；正式包和预览包深度签名完整性通过。台前调度实际显示未截图验证，尚不能确认用户所见异常已消失。
+- [x] `efdd80e docs(macos): record Stage Manager icon diagnostics` 已普通推送至 origin/main，远端 SHA 与本地一致；本条和开发记录由后续文档提交补记。
+
+## system prompt 总折叠项（2026-11-17）
+
+==> memory/verify.md <==
+# 验证标准
+
+## 助手品牌头像
+
+- 原生 Codex/Claude/dsh、Claude 官方聊天导入及带 nativeSource 的 ACP 使用对应品牌；未知 ACP/未知来源不误标品牌。
+- 三张 PNG 可由应用资源 Bundle 解码、尺寸非零；Codex 作为模板使用主文字色，Claude/DeepSeek 保留品牌色。
+- 所有 MessageView 调用传递品牌资源，用户头像和系统折叠保持现状。
+- 运行 Swift 测试、release 构建、资源打包、预览包签名及内置助手自检；不截图、不运行 Claude 接入测试，保留原正式包。
+- 已执行：来源回归先编译失败；最终 48 项 Swift 测试通过（21.379 秒），release 编译通过。预览包的三张资源与源文件一致，深度签名及助手自检通过，重启后进程运行；原正式包字节与签名保持完整。实际窗口显示未做视觉验证。
+
+## 台前调度图标
+
+- 图标资源与应用包内字节一致；LaunchServices 登记指向实际 ICNS；NSRunningApplication 图标与包内资源在相同尺寸下摘要一致。
+- 隔离 AppKit 应用正常启动后，以系统实际返回的 256 像素快照尺寸比较 applicationIconImage 和包内资源；不把不同尺寸/缩放路径的摘要差异判定为默认图标。
+- 刷新预览包登记并正常重启后，确认新进程运行且图标数据一致；应用源码和两个现有应用包无需修改。
+- 不执行截图或人工视觉检查，不运行 Claude 测试；台前调度实际显示仍需明确标记未验证。普通推送后核对远端 SHA。
+- 已执行：ICNS 字节、LaunchServices 登记、隔离启动的 256 像素摘要和重启后运行中图标检查通过；最终源码 46 项 Swift 测试通过（20.269 秒），两个现有应用包深度签名完整性通过。应用源码无改动，未重新打包；台前调度实际显示是否恢复仍未确认。
+
+## system prompt 总折叠项
+
+    let session = Session(id: "chat", source: "codex", title: "会话", messages: messages)
+    let groups = session.conversationGroups
+    #expect(groups.map(\.id) == ["system", "user", "later-system", "assistant"])
+    #expect(groups.map { $0.messages.map(\.id) } == [["system", "developer", "context"], ["user"], ["later-system"], ["assistant"]])
+    #expect(session.messages == messages)
+    #expect(Session(id: "empty", source: "codex", title: "空").conversationGroups.isEmpty)
+}
+
+@Test func conversationPaginationKeepsSystemPromptGroupsWhole() {
+    let prompts = (0..<105).map { Message(id: "system-\($0)", role: "system", text: "规则 \($0)") }
+    let users = (0..<100).map { Message(id: "user-\($0)", role: "user", text: "提问 \($0)") }
+    let session = Session(id: "chat", source: "codex", title: "会话", messages: prompts + users)
+    #expect(session.conversationGroups.count == 101)
+    #expect(session.conversationGroups.suffix(100).first?.id == "user-0")
+    #expect(session.conversationGroups.suffix(200).first?.messages == prompts)
+}
+import { spawn, execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { Readable, Writable } from 'node:stream';
+import { mkdir, writeFile, rename, appendFile, readdir, readFile, access } from 'node:fs/promises';
+import { join, dirname, extname, basename } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { homedir } from 'node:os';
+import { randomUUID } from 'node:crypto';
+import { query } from '@anthropic-ai/claude-agent-sdk';
+import type { Query, SDKUserMessage } from '@anthropic-ai/claude-agent-sdk';
+import { client as clientV1, ndJsonStream as streamV1 } from '@agentclientprotocol/sdk';
+import type { Stream } from '@agentclientprotocol/sdk';
+import { client as clientV2, ndJsonStream as streamV2 } from '@agentclientprotocol/sdk/experimental/v2';
+import { RpcProcess, childEnvironment } from './rpc.ts';
+import { ClientTools } from './client-tools.ts';
+import type { Ask } from './client-tools.ts';
+import { sessionKey, defaultLocations } from './logs.ts';
+import { object, string, content, number } from './types.ts';
+import { applyUpdate } from './acp-state.ts';
+import { createTerminalAuth } from './terminal-auth.ts';
+import type { Data, AgentConfig, Session } from './types.ts';
+
+export type Emit = (event: string, data: unknown) => void;
+interface AcpPeer {
+  request: (method: string, params?: unknown, timeout?: number) => Promise<unknown>;
+  notify: (method: string, params?: unknown) => Promise<void>;
+  close: () => Promise<void>;
+  version: number;
+  info: Data;
+  closed: Promise<void>;
+}
+interface AcpApp {
+  onRequest(method: '*', handler: (ctx: { method: string; params: unknown; signal: AbortSignal }) => Promise<unknown>): unknown;
+  onNotification(method: '*', handler: (ctx: { method: string; params: unknown }) => void): unknown;
+  connect(stream: Stream): { close(error?: unknown): void; closed: Promise<void>; agent: {
+    request<Response = unknown, Params = unknown>(method: string, params?: Params, options?: { signal: AbortSignal }): Promise<Response>;
+    notify(method: string, params?: unknown): Promise<void>;
+  } };
+}
+interface Running {
+  session: Session; agent: AgentConfig; busy: boolean; rpc?: RpcProcess; peer?: AcpPeer; claude?: Query;
+  turnID?: string; finish?: () => void; tools?: ClientTools; deltaID?: string; replaying?: boolean;
+  failure?: Error;
+  fail?: (error: Error) => void; importing?: boolean; hasActivity?: boolean; writeQueue?: Promise<void>;
+}
+
+export async function defaultAgents(): Promise<AgentConfig[]> {
+  const dshBundle = '/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh';
+  const dsh = await access(dshBundle).then(() => dshBundle, () => 'dsh');
+  return [
+    { id: 'native-codex', name: 'Codex', kind: 'codex', command: 'codex', args: [], env: {} },
+    { id: 'native-claude', name: 'Claude Code', kind: 'claude', command: 'claude', args: [], env: {} },
+    { id: 'native-dsh', name: 'DeepSeek Harness', kind: 'dsh', command: dsh, args: ['--profile', 'sdk'], env: {} },
+  ];
+}
+
+function validateConfig(value: unknown): AgentConfig {
+  const c = object(value);
+  if (!string(c.id) || !string(c.command) || !['codex', 'claude', 'dsh', 'acp'].includes(string(c.kind)) || !Array.isArray(c.args) || c.args.some(x => typeof x !== 'string')) throw new Error('Agent 配置无效');
+  for (const [name, value] of Object.entries(object(c.env))) if (!/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(name) || typeof value !== 'string') throw new Error('环境变量必须是有效名称和文本值');
+// GENERATED CODE! DO NOT MODIFY BY HAND!
+
+// This file was generated by [ts-rs](https://github.com/Aleph-Alpha/ts-rs). Do not edit this file manually.
+
+export type ConfigReadParams = { includeLayers?: boolean,
+/**
+ * Optional working directory to resolve project config layers. If specified,
+ * return the effective config as seen from that directory (i.e., including any
+ * project layers between `cwd` and the project/repo root).
+ */
+cwd?: string | null, };
+// GENERATED CODE! DO NOT MODIFY BY HAND!
+
+// This file was generated by [ts-rs](https://github.com/Aleph-Alpha/ts-rs). Do not edit this file manually.
+import type { ReasoningEffort } from "../ReasoningEffort";
+
+export type ReasoningEffortOption = { reasoningEffort: ReasoningEffort, description: string, };
+19:export type Config = {model: string | null, review_model: string | null, model_context_window: bigint | null, model_auto_compact_token_limit: bigint | null, model_auto_compact_token_limit_scope: AutoCompactTokenLimitScope | null, model_provider: string | null, approval_policy: AskForApproval | null, /**
+23:approvals_reviewer: ApprovalsReviewer | null, sandbox_mode: SandboxMode | null, sandbox_workspace_write: SandboxWorkspaceWrite | null, forced_chatgpt_workspace_id: ForcedChatgptWorkspaceIds | null, forced_login_method: ForcedLoginMethod | null, web_search: WebSearchMode | null, tools: ToolsV2 | null, instructions: string | null, developer_instructions: string | null, compact_prompt: string | null, model_reasoning_effort: ReasoningEffort | null, model_reasoning_summary: ReasoningSummary | null, model_verbosity: Verbosity | null, service_tier: string | null, analytics: AnalyticsConfig | null, desktop: { [key in string]?: JsonValue } | null} & ({ [key in string]?: number | string | boolean | Array<JsonValue> | { [key in string]?: JsonValue } | null });
+
+Sources/RagdollCore/RuntimeBridge.swift:4:    case object([String: JSONValue]), array([JSONValue]), string(String), number(Double), bool(Bool), null
+Sources/RagdollCore/RuntimeBridge.swift:26:    public var string: String { if case .string(let v) = self { return v }; return "" }
+Sources/RagdollCore/RuntimeBridge.swift:35:    public func decode<T: Decodable>(_ type: T.Type) throws -> T { try JSONDecoder().decode(type, from: JSONEncoder().encode(self)) }
+/opt/homebrew/bin/node
+total 2261664
+drwxr-xr-x  3 oyamahappa  staff          96 Nov 17 21:27 RagdollChatSmoke.app
+drwxr-xr-x  6 oyamahappa  staff         192 Nov 18 11:07 archive
+drwxr-xr-x  2 oyamahappa  staff          64 Nov 18 11:01 conversations
+-rw-r--r--  1 oyamahappa  staff        2421 Nov 18 11:17 docs-index.patch
+-rw-r--r--  1 oyamahappa  staff        9381 Nov 18 11:13 final-tests.log
+drwxr-xr-x  5 oyamahappa  staff         160 Nov 18 11:16 fixture
+-rw-r--r--  1 oyamahappa  staff         869 Nov 18 11:13 form-index.patch
+-rw-r--r--  1 oyamahappa  staff       19471 Nov 18 11:08 index.patch
+-rw-r--r--  1 oyamahappa  staff  1143218176 Nov 18 11:03 index.sqlite
+-rwxr-xr-x  1 oyamahappa  staff      124168 Nov 18 11:12 inspect
+-rw-r--r--  1 oyamahappa  staff       11021 Nov 18 11:11 inspect.swift
+-rw-r--r--  1 oyamahappa  staff        1157 Nov 18 11:03 seed.sql
+-rw-------  1 oyamahappa  staff           5 Nov 18 11:02 service-lock
+drwxr-xr-x  2 oyamahappa  staff          64 Nov 18 11:02 source
+-rw-r--r--  1 oyamahappa  staff         215 Nov 18 11:16 startup-sample.log
+-rw-r--r--  1 oyamahappa  staff       84570 Nov 18 11:16 startup.sample
+318M	dist/Ragdoll.app
+318M	dist/Ragdoll.chat-preview.app
+318M	dist/Ragdoll.preview.app
+
+
+## tool · 2026-11-18T03:51:31Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+public actor RuntimeBridge {
+    private var process: Process?
+    private var input: FileHandle?
+    private var serial = 0
+    private var pending: [String: CheckedContinuation<JSONValue, any Error>] = [:]
+    private var handler: (@Sendable (String, JSONValue) async -> Void)?
+    private var stderr = ""
+    public init() {}
+    public func setHandler(_ handler: @escaping @Sendable (String, JSONValue) async -> Void) { self.handler = handler }
+
+    public func start(dataDirectory: URL) throws {
+        guard process == nil else { return }
+        let resources = Bundle.main.resourceURL ?? URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+        let repo = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        let bundled = resources.appendingPathComponent("runtime")
+        let isBundled = FileManager.default.fileExists(atPath: bundled.appendingPathComponent("app/dist/main.mjs").path)
+        let script = isBundled ? bundled.appendingPathComponent("app/dist/main.mjs") : repo.appendingPathComponent("runtime/dist/main.mjs")
+        let node = isBundled ? bundled.appendingPathComponent("node/bin/node") : URL(fileURLWithPath: "/opt/homebrew/bin/node")
+        guard FileManager.default.fileExists(atPath: script.path), FileManager.default.isExecutableFile(atPath: node.path) else { throw failure("缺少 SDK 助手，请先运行构建脚本。") }
+        let p = Process(); p.executableURL = node; p.arguments = [script.path, "--data-dir", dataDirectory.path]
+        var environment = ProcessInfo.processInfo.environment
+        environment["PATH"] = node.deletingLastPathComponent().path + ":/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:" + (environment["PATH"] ?? "")
+        p.environment = environment
+        let stdin = Pipe(), stdout = Pipe(), errors = Pipe()
+        p.standardInput = stdin; p.standardOutput = stdout; p.standardError = errors
+        p.terminationHandler = { [weak self] p in Task { await self?.terminated(p.terminationStatus) } }
+        try p.run(); process = p; input = stdin.fileHandleForWriting
+        let reader = stdout.fileHandleForReading
+        Task.detached { [weak self] in
+            var pending = Data()
+            while true {
+                let chunk = reader.availableData
+                if chunk.isEmpty { break }
+                var start = chunk.startIndex
+                while let index = chunk[start...].firstIndex(of: 10) {
+                    pending.append(chunk[start..<index])
+                    await self?.receive(pending)
+                    pending = Data()
+                    start = chunk.index(after: index)
+                }
+                pending.append(chunk[start...])
+            }
+        }
+        let errorReader = errors.fileHandleForReading
+        Task.detached { [weak self] in
+            while true { let data = errorReader.availableData; if data.isEmpty { break }; await self?.errorOutput(String(decoding: data, as: UTF8.self)) }
+        }
+    }
+    public func request(_ method: String, _ params: [String: JSONValue] = [:], timeout: Double = 120) async throws -> JSONValue {
+        guard let input else { throw failure("SDK 助手尚未启动") }
+        serial += 1; let id = String(serial)
+        let message = try JSONEncoder().encode(JSONValue.object(["id": .string(id), "method": .string(method), "params": .object(params)])) + Data([10])
+        return try await withCheckedThrowingContinuation { continuation in
+            pending[id] = continuation
+            do { try input.write(contentsOf: message) }
+            catch { pending.removeValue(forKey: id)?.resume(throwing: error) }
+            if timeout > 0 { Task { try? await Task.sleep(for: .seconds(timeout)); timedOut(id, method) } }
+        }
+    }
+    private func timedOut(_ id: String, _ method: String) { pending.removeValue(forKey: id)?.resume(throwing: failure("助手请求超时：\(method)。运行中的操作不会自动重试。")) }
+    private func receive(_ data: Data) async {
+        do {
+            let message = try JSONDecoder().decode(JSONValue.self, from: data)
+            if !message["event"].string.isEmpty { await handler?(message["event"].string, message["data"]); return }
+            let id = message["id"].string
+            guard let continuation = pending.removeValue(forKey: id) else { return }
+            if message["error"] != .null { continuation.resume(throwing: failure(message["error"]["message"].string)) }
+            else { continuation.resume(returning: message["result"]) }
+        } catch { await handler?("warning", .string("助手返回无效数据：\(error.localizedDescription)")) }
+    }
+    private func errorOutput(_ text: String) { stderr = String((stderr + text).suffix(4000)) }
+    private func terminated(_ code: Int32) async {
+        process = nil; input = nil
+        let error = failure("SDK 助手已退出（\(code)）：\(stderr)")
+        for continuation in pending.values { continuation.resume(throwing: error) }; pending.removeAll()
+        await handler?("disconnected", .string(error.localizedDescription))
+    }
+    public func close() async {
+        _ = try? await request("shutdown", timeout: 5)
+        try? input?.close(); process?.terminate()
+    }
+    private func failure(_ message: String) -> NSError { NSError(domain: "Ragdoll.Runtime", code: 1, userInfo: [NSLocalizedDescriptionKey: message]) }
+}
+import AppKit
+import RagdollCore
+import Testing
+@testable import Ragdoll
+
+@Test func assistantIconResourcesDecodeFromAppBundle() throws {
+    for name in ["codex", "claude", "deepseek"] {
+        let url = try #require(assistantIconBundle.url(forResource: name, withExtension: "png"))
+        let image = try #require(NSImage(contentsOf: url))
+        #expect(image.size.width > 0 && image.size.height > 0)
+    }
+}
+import { spawn } from 'node:child_process';
+import type { ChildProcessWithoutNullStreams } from 'node:child_process';
+import { createInterface } from 'node:readline';
+import { object, string } from './types.ts';
+import type { Data } from './types.ts';
+
+export function childEnvironment(env: Record<string, string> = {}): NodeJS.ProcessEnv {
+  const result: NodeJS.ProcessEnv = { ...process.env, PATH: `${process.env.PATH || ''}:/opt/homebrew/bin:/usr/local/bin`, ...env };
+  delete result.ELECTRON_RUN_AS_NODE;
+  return result;
+}
+
+export class RpcProcess {
+  readonly child: ChildProcessWithoutNullStreams;
+  private serial = 0;
+  private pending = new Map<string, { resolve: (v: unknown) => void; reject: (e: Error) => void; timer?: NodeJS.Timeout }>();
+  private stderr = '';
+  onNotification: (method: string, params: Data) => void = () => {};
+  onRequest: (method: string, params: Data) => Promise<unknown> = async method => { throw new Error(`不支持代理请求：${method}`); };
+  onExit: (message: string) => void = () => {};
+  private stopped = false;
+
+  constructor(command: string, args: string[], cwd: string, env: Record<string, string> = {}) {
+    if (!command || command.includes('\0')) throw new Error('请设置有效程序路径');
+    this.child = spawn(command, args, { cwd, env: childEnvironment(env), stdio: 'pipe', detached: true });
+    this.child.stderr.on('data', data => { this.stderr = (this.stderr + String(data)).slice(-4000); });
+    this.child.on('error', error => this.fail(error));
+    this.child.on('exit', (code, signal) => {
+      this.fail(new Error(`代理进程已退出 (${code ?? signal})：${this.stderr}`));
+      if (!this.stopped) this.onExit(`代理进程已退出 (${code ?? signal})`);
+    });
+    const input = createInterface({ input: this.child.stdout });
+    input.on('line', line => {
+      let message: Data;
+      try { message = object(JSON.parse(line)); }
+      catch { this.fail(new Error('代理 stdout 包含无效 JSON-RPC 数据')); void this.close(); return; }
+      if ('method' in message) {
+        if ('id' in message) {
+          void this.onRequest(string(message.method), object(message.params)).then(
+            result => this.write({ jsonrpc: '2.0', id: message.id, result }),
+            error => this.write({ jsonrpc: '2.0', id: message.id, error: { code: -32603, message: String(error) } }),
+          );
+        } else this.onNotification(string(message.method), object(message.params));
+      } else if ('id' in message) {
+        const key = String(message.id), pending = this.pending.get(key);
+        if (!pending) return;
+        this.pending.delete(key); clearTimeout(pending.timer);
+        if (message.error) pending.reject(new Error(JSON.stringify(message.error)));
+        else pending.resolve(message.result);
+      }
+    });
+  }
+  private write(message: unknown): void {
+    if (this.child.stdin.destroyed) return;
+    this.child.stdin.write(JSON.stringify(message) + '\n');
+  }
+  request(method: string, params: unknown = {}, timeout = 30000): Promise<unknown> {
+    if (this.stopped) return Promise.reject(new Error('代理进程已经停止'));
+    const id = ++this.serial;
+    return new Promise((resolve, reject) => {
+      const timer = timeout > 0 ? setTimeout(() => { this.pending.delete(String(id)); reject(new Error(`代理请求超时：${method}`)); }, timeout) : undefined;
+      this.pending.set(String(id), { resolve, reject, timer });
+      this.write({ jsonrpc: '2.0', id, method, params });
+    });
+  }
+  notify(method: string, params: unknown = {}): void { this.write({ jsonrpc: '2.0', method, params }); }
+  private fail(error: Error): void {
+    for (const pending of this.pending.values()) { clearTimeout(pending.timer); pending.reject(error); }
+    this.pending.clear();
+  }
+  async close(): Promise<void> {
+    if (this.stopped) return;
+    this.stopped = true; this.child.stdin.end();
+    const pid = this.child.pid;
+    if (pid && this.child.exitCode === null && this.child.signalCode === null) {
+      try { process.kill(-pid, 'SIGTERM'); } catch { /* 进程已经退出。 */ }
+      const timer = setTimeout(() => { try { process.kill(-pid, 'SIGKILL'); } catch { /* 进程已经退出。 */ } }, 3000);
+      timer.unref();
+      await new Promise<void>(resolve => { if (this.child.exitCode !== null || this.child.signalCode !== null) resolve(); else this.child.once('exit', () => resolve()); });
+      clearTimeout(timer);
+    }
+    this.fail(new Error('执行已停止'));
+  }
+}
+- 原生会话与已确认来源的 ACP 会话按来源、home、会话 ID 关联，统计一次，保留两类原始记录。
+- 未执行视觉检查、Registry Python/登录交互/图片附件实测；详见 docs/VALIDATION.md。
+
+## 对话工作区（2026-11-18）
+
+- [x] 确认主导航及共用 ConversationView 调用、索引搜索和按更新时间排序行为，读取本地 Cherry Studio 的设计说明。
+- [x] 项目分组回归先因缺少分组入口编译失败，实现后通过真实 SQLite 索引检索。
+- [x] 项目侧栏、紧凑导航和聊天区已接入。49 项 Swift 测试、release 构建、预览签名、助手自检和隔离启动通过。
+- [x] 隔离预览用 macOS 辅助功能检查了 56 点导航、项目展开折叠、选择会话、搜索空结果和清除搜索。确认从项目首次打开新建表单时预填完整路径，取消后可进入历史会话页。
+- [x] 独立编译暂存内容并通过项目分组回归。本轮代码提交为 `6bbd748` 和 `7a576f8`，保留既有头像改动的待提交状态。
+
+
+## tool · 2026-11-18T03:52:02Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+
+## tool · 2026-11-18T03:52:09Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"8a14be","wall_time_seconds":1.002748542,"session_id":98464,"original_token_count":0,"output":""}
+{"chunk_id":"845177","wall_time_seconds":0.461694584,"exit_code":1,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T03:52:14Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+✖ real Codex app-server initializes and lists models without sending a prompt (206.95875ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 479.22225
+
+✖ failing tests:
+
+test at runtime/test/integration.test.ts:43:1
+✖ real Codex app-server initializes and lists models without sending a prompt (206.95875ms)
+  Error: 代理进程已退出 (1)：WARNING: proceeding, even though we could not create PATH aliases: Operation not permitted (os error 1)
+  Error: failed to initialize sqlite state runtime under /Users/oyamahappa/.codex: failed to initialize state runtime at /Users/oyamahappa/.codex
+  
+      at ChildProcess.<anonymous> (file:///Volumes/SamsungSSD990PRO/GitHub/Ragdoll/runtime/src/rpc.ts:29:17)
+      at ChildProcess.emit (node:events:514:20)
+      at ChildProcess._handle.onexit (node:internal/child_process:323:12)
+warning: /Users/oyamahappa/Library/org.swift.swiftpm/configuration is not accessible or not writable, disabling user-level cache features.
+warning: /Users/oyamahappa/Library/org.swift.swiftpm/security is not accessible or not writable, disabling user-level cache features.
+warning: /Users/oyamahappa/Library/Caches/org.swift.swiftpm is not accessible or not writable, disabling user-level cache features.
+warning: 'ragdoll': failed storing manifest for 'ragdoll' in cache: attempt to write a readonly database
+warning: 'grdb.swift': failed storing manifest for 'grdb.swift' in cache: attempt to write a readonly database
+error: Error Domain=NSCocoaErrorDomain Code=513 "You don’t have permission to save the file “output-file-map.json” in the folder “RagdollCore.build”." UserInfo={NSUserStringVariant=Folder, NSUnderlyingError=0x15081d5a0 {Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted"}, NSURL=file:///Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.build/arm64-apple-macosx/debug/RagdollCore.build/output-file-map.json}
+[0/1] Planning build
+error: You don’t have permission to save the file “output-file-map.json” in the folder “RagdollCore.build”.
+                            Image(systemName: agent.kind == "acp" ? "puzzlepiece.extension" : "cpu").font(.title2).foregroundStyle(.blue)
+                            VStack(alignment: .leading, spacing: 4) { Text(agent.name).font(.headline); Text("\(agent.kind == "acp" ? "ACP" : "原生接口")\(agent.version.map { " · \($0)" } ?? "")").font(.caption).foregroundStyle(.secondary) }
+                            Spacer()
+                            if model.busyAgents.contains(agent.id) { ProgressView().controlSize(.small) }
+                            Button("检测连接") { Task { await model.probe(agent) } }.disabled(model.busyAgents.contains(agent.id))
+                            Button("编辑") { editor = agent }
+                            if agent.kind == "codex" || agent.kind == "claude" { Button("登录…") { Task { await model.nativeLogin(agent) } } }
+                            if agent.kind == "acp" { Button("导入历史") { if let project = model.chooseProject() { Task { await model.listNative(agent, project: project); historyAgent = agent } } } }
+                            if agent.kind == "acp" { Button("移除", role: .destructive) { Task { await model.removeAgent(agent) } } }
+                        }
+                        Text(([agent.command] + agent.args).joined(separator: " ")).font(.system(size: 10, design: .monospaced)).foregroundStyle(.secondary).textSelection(.enabled)
+                        if let info = model.agentInfo[agent.id] {
+                            let methods = info["authMethods"].array.isEmpty ? info["auth"]["methods"].array : info["authMethods"].array
+                            if !methods.isEmpty {
+                                HStack {
+                                    Text("登录：").font(.caption)
+                                    ForEach(Array(methods.enumerated()), id: \.offset) { _, method in Button(method["name"].string) { Task { await model.authenticate(agent, methodID: method["methodId"].string.isEmpty ? method["id"].string : method["methodId"].string) } }.disabled(model.busyAgents.contains(agent.id)) }
+                                }
+                            }
+
+diff --git a/Package.swift b/Package.swift
+index ece6724..ce413e6 100644
+--- a/Package.swift
++++ b/Package.swift
+@@ -8,7 +8,7 @@ let package = Package(
+     dependencies: [.package(url: "https://github.com/groue/GRDB.swift.git", exact: "7.6.1")],
+     targets: [
+         .target(name: "RagdollCore", dependencies: [.product(name: "GRDB", package: "GRDB.swift")]),
+-        .executableTarget(name: "Ragdoll", dependencies: ["RagdollCore"]),
++        .executableTarget(name: "Ragdoll", dependencies: ["RagdollCore"], resources: [.process("Resources")]),
+         .executableTarget(name: "RagdollService", dependencies: ["RagdollCore"]),
+         .testTarget(name: "RagdollCoreTests", dependencies: ["RagdollCore"]),
+         .testTarget(name: "RagdollTests", dependencies: ["Ragdoll"])
+Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk5s1   1.8Ti   858Gi   1.0Ti    47%    2.0M   11G    0%   /Volumes/SamsungSSD990PRO
+zsh:1: operation not permitted: ps
+
+
+## tool · 2026-11-18T03:52:21Z
+
+
+Script completed
+Wall time 0.5 seconds
+Output:
+
+{"chunk_id":"eff724","wall_time_seconds":0.000009166,"exit_code":0,"original_token_count":125,"output":"drwxr-xr-x  57 oyamahappa  staff  1824 Nov 18 11:52 .agent\ndrwxr-xr-x  13 oyamahappa  staff   416 Nov 18 11:52 .build\ndrwxr-xr-x  39 oyamahappa  staff  1248 Nov 18 11:12 .build/arm64-apple-macosx/debug/RagdollCore.build\ndrwxr-xr-x  16 oyamahappa  staff   512 Nov 17 21:09 .cache\ndrwxr-xr-x  32 oyamahappa  staff  1024 Nov 16 22:39 .build/checkouts/GRDB.swift\ndrwxr-xr-x   4 oyamahappa  staff   128 Nov 16 22:39 .cache/swift\ndrwxr-xr-x  116 oyamahappa  staff  3712 Nov 17 21:27 runtime/node_modules\n"}
+{"chunk_id":"757066","wall_time_seconds":0.3070585,"exit_code":1,"original_token_count":252,"output":"✖ real Codex app-server initializes and lists models without sending a prompt (158.3855ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 378.25775\n\n✖ failing tests:\n\ntest at runtime/test/integration.test.ts:43:1\n✖ real Codex app-server initializes and lists models without sending a prompt (158.3855ms)\n  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n  \n    assert.ok('model' in result && 'reasoningEffort' in result)\n  \n      at TestContext.<anonymous> (file:///Volumes/SamsungSSD990PRO/GitHub/Ragdoll/runtime/test/integration.test.ts:49:12)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1409:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: false,\n    expected: true,\n    operator: '==',\n    diff: 'simple'\n  }\n"}
+
+## tool · 2026-11-18T03:52:27Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"da03b5","wall_time_seconds":1.001964667,"session_id":79035,"original_token_count":0,"output":""}
+
+## tool · 2026-11-18T03:53:00Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
