@@ -3420,3 +3420,219 @@ Wall time 6.4 seconds
 Output:
 
 {"chunk_id":"e694ac","wall_time_seconds":1.002385875,"session_id":58306,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T11:50:45Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"677626","wall_time_seconds":0.000244292,"exit_code":0,"original_token_count":762,"output":"[0/1] Planning build\nBuilding for debugging...\n[0/11] Write sources\n[2/11] Write swift-version--58304C5D6DBC2206.txt\n[4/15] Compiling RagdollCore ArchiveActivity.swift\n[5/15] Emitting module RagdollCore\n[6/15] Compiling RagdollCore BackgroundService.swift\n[7/15] Compiling RagdollCore Archive.swift\n[8/35] Compiling RagdollService ServiceMain.swift\n[9/35] Emitting module RagdollService\n[9/35] Write Objects.LinkFileList\n[11/35] Compiling Ragdoll RagdollApp.swift\n[12/35] Compiling Ragdoll MigrationView.swift\n[13/35] Compiling Ragdoll ConversationProjectList.swift\n[13/35] Linking RagdollService\n[14/35] Applying RagdollService\n[16/35] Compiling Ragdoll RootView.swift\n[17/35] Compiling RagdollCoreTests ArchiveReadTests.swift\n[18/35] Compiling Ragdoll SettingsView.swift\n[19/35] Compiling Ragdoll ConversationView.swift\n[20/35] Compiling RagdollCoreTests StoreArchiveTests.swift\n[21/35] Compiling RagdollCoreTests ArchiveSyncTests.swift\n[22/35] Compiling RagdollCoreTests BackgroundServiceTests.swift\n[23/35] Emitting module RagdollCoreTests\n[24/35] Compiling RagdollCoreTests ArchiveImagesTests.swift\n[25/35] Compiling RagdollCoreTests RuntimeBridgeTests.swift\n[26/35] Compiling RagdollCoreTests AnalyticsTests.swift\n[27/35] Emitting module Ragdoll\n[28/35] Compiling Ragdoll AgentOptionsView.swift\n[29/35] Compiling Ragdoll AppModel.swift\n[30/35] Compiling Ragdoll DashboardView.swift\n[30/35] Write Objects.LinkFileList\n[31/35] Linking Ragdoll\n[32/35] Applying Ragdoll\n[34/41] Compiling RagdollTests StartupTests.swift\n[35/41] Compiling RagdollTests ConversationTests.swift\n[36/41] Emitting module RagdollTests\n[37/41] Compiling RagdollTests ConversationProjectTests.swift\n[38/41] Compiling RagdollTests ComposerTests.swift\n[39/41] Compiling RagdollTests DashboardTests.swift\n[39/41] Write Objects.LinkFileList\n[40/41] Linking RagdollPackageTests\nBuild complete! (8.68s)\nTest Suite 'Selected tests' started at 2026-11-19 19:50:37.046.\nTest Suite 'RagdollPackageTests.xctest' started at 2026-11-19 19:50:37.047.\nTest Suite 'RagdollPackageTests.xctest' passed at 2026-11-19 19:50:37.047.\n\t Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds\nTest Suite 'Selected tests' passed at 2026-11-19 19:50:37.047.\n\t Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds\n◇ Test run started.\n↳ Testing Library Version: 124.4\n↳ Target Platform: arm64e-apple-macos14.0\n◇ Test archiveDoesNotStageExcludedProjects() started.\n◇ Test archivePreservesExistingReadmeAndItsExternalEdits() started.\n◇ Test archiveCommitsAndRefreshesActivityInRootReadme() started.\n◇ Test backgroundServiceArchivesFromItsOwnProcess() started.\n✔ Test archiveCommitsAndRefreshesActivityInRootReadme() passed after 0.459 seconds.\n✔ Test archiveDoesNotStageExcludedProjects() passed after 0.520 seconds.\n✔ Test archivePreservesExistingReadmeAndItsExternalEdits() passed after 0.528 seconds.\n✔ Test backgroundServiceArchivesFromItsOwnProcess() passed after 2.303 seconds.\n✔ Test run with 4 tests passed after 2.303 seconds.\n"}
+
+## tool · 2026-11-19T11:51:09Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+import Foundation
+import Testing
+import RagdollCore
+@testable import Ragdoll
+
+@Test @MainActor func configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() async throws {
+    let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent(".agent/tests/\(UUID().uuidString)")
+    try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: root) }
+    let store = try Store(path: root.appendingPathComponent("index.sqlite").path)
+    var settings = Settings(); settings.archivePath = root.appendingPathComponent("missing-repo").path
+    try store.saveSettings(settings)
+    let cached = Session(id: "cached", source: "codex", title: "Cached history")
+    try store.save(cached)
+    let model = AppModel(root: root)
+    #expect(!model.needsArchiveSetup)
+    #expect(model.sessions.map(\.id) == ["cached"])
+    model.loadingArchive = true
+    #expect(!model.needsArchiveSetup)
+    model.loadingArchive = false
+    await model.launch()
+    #expect(!model.needsArchiveSetup)
+    #expect(model.sessions.map(\.id) == ["cached"])
+    #expect(!model.ready)
+    #expect(!model.archiveLoaded)
+    #expect(model.error != nil)
+    await model.refresh(); await model.archiveNow()
+    #expect(!FileManager.default.fileExists(atPath: settings.archivePath))
+    await model.bridge.close()
+}
+
+@Test @MainActor func firstLaunchRequiresRepositoryBeforeScanningOrImporting() async throws {
+    let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent(".agent/tests/\(UUID().uuidString)")
+    defer { try? FileManager.default.removeItem(at: root) }
+    let model = AppModel(root: root)
+    await model.launch()
+    #expect(model.needsArchiveSetup)
+    #expect(!model.ready)
+    #expect(!model.scanning)
+    #expect(model.settings.locations.isEmpty)
+    #expect(model.sessions.isEmpty)
+    #expect(!FileManager.default.fileExists(atPath: root.appendingPathComponent("conversations").path))
+    await model.refresh()
+    #expect(!model.scanning)
+    await model.bridge.close()
+}
+
+@Test @MainActor func startupRestoresRepositoryBeforeScanningAndFailsClosed() async throws {
+    let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent(".agent/tests/\(UUID().uuidString)")
+    defer { try? FileManager.default.removeItem(at: root) }
+    let repo = root.appendingPathComponent("repo")
+    try Archive.prepare(repo)
+    let config = Process(); config.executableURL = URL(fileURLWithPath: "/usr/bin/git"); config.arguments = ["-C", repo.path, "config", "user.name", "Startup"]
+    try config.run(); config.waitUntilExit()
+    let email = Process(); email.executableURL = URL(fileURLWithPath: "/usr/bin/git"); email.arguments = ["-C", repo.path, "config", "user.email", "startup@localhost"]; try email.run(); email.waitUntilExit()
+    let archived = Session(id: "only-in-git", source: "codex", title: "Git history", messages: [Message(role: "user", text: "GIT_FIRST_1729")])
+    _ = try Archive.save([archived], to: repo)
+    let model = AppModel(root: root)
+    model.settings.locations = [Location(source: "codex", path: root.appendingPathComponent("empty-source").path)]
+    model.persistSettings()
+    await model.launch()
+    #expect(model.needsArchiveSetup)
+    await model.configureArchive(repo)
+    #expect(model.ready)
+    #expect(!model.needsArchiveSetup)
+    #expect(model.sessions.map(\.id) == ["only-in-git"])
+    model.select("only-in-git")
+    #expect(model.selected?.messages == archived.messages)
+    await model.archiveNow()
+    #expect(!model.archiving)
+    await model.bridge.close()
+    try Data("broken".utf8).write(to: repo.appendingPathComponent(".ragdoll-manifest.json"))
+    let failed = AppModel(root: root)
+    await failed.launch()
+    #expect(!failed.ready)
+    #expect(!failed.needsArchiveSetup)
+    #expect(failed.error != nil)
+    await failed.refresh(); await failed.archiveNow()
+    #expect(try String(contentsOf: repo.appendingPathComponent(".ragdoll-manifest.json"), encoding: .utf8) == "broken")
+    await failed.bridge.close()
+}
+        scanning = false; scheduleArchive(markDirty: false)
+    }
+    private func scheduleReload() {
+        guard reloadTask == nil else { return }
+        reloadTask = Task { try? await Task.sleep(for: .milliseconds(300)); do { try reload() } catch { self.error = error.localizedDescription }; reloadTask = nil }
+    }
+    func reload() throws { sessions = try store?.list(query: query) ?? [] }
+    func select(_ id: String?) {
+        selectedID = id
+        do { selected = try id.flatMap { try store?.session($0) } }
+        catch { self.error = error.localizedDescription }
+    }
+    func saveSettings() throws { try store?.saveSettings(settings) }
+    func persistSettings() {
+        do { try saveSettings(); scheduleArchive() }
+        catch { self.error = error.localizedDescription }
+    }
+    private func hydrated(_ config: AgentConfig) throws -> AgentConfig {
+        var config = config; config.env = try Secrets.load(config.id).merging(config.env) { secret, _ in secret }; return config
+                    Text(model.backgroundStatus).font(.caption)
+                    HStack {
+                        Button(model.settings.backgroundEnabled == true ? "停用后台服务" : "启用后台服务") { Task { await model.setBackground(model.settings.backgroundEnabled != true) } }
+                        Button("打开系统登录项") { SMAppService.openSystemSettingsLoginItems() }
+                    }
+                }
+            }
+            Card {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("排除项目").font(.headline)
+                    Text("取消选择的项目仍可浏览和统计，其后续变化不写入归档；已有归档不会删除。").font(.caption).foregroundStyle(.secondary)
+                    ForEach(model.projects, id: \.self) { project in
+                        Toggle(project, isOn: Binding(get: { !model.settings.excludedProjects.contains(project) }, set: { include in
+                            model.settings.excludedProjects.removeAll { $0 == project }; if !include { model.settings.excludedProjects.append(project) }; model.persistSettings()
+                        })).toggleStyle(.checkbox).font(.caption)
+                    }
+                }
+            }
+        }
+    }
+    var pricing: some View {
+        Card {
+            VStack(alignment: .leading, spacing: 14) {
+                Text("模型价格（USD / 百万 Token）").font(.headline)
+                Text("内置表记录官方标准价格和核实日期。可按实际提供方修正；没有精确匹配的模型显示未知。缓存时长、上下文长度、服务层级和历史调价可能影响估算。").font(.caption).foregroundStyle(.secondary)
+                TextEditor(text: $prices).font(.system(size: 11, design: .monospaced)).frame(minHeight: 400).border(.quaternary)
+                HStack { Spacer(); Button("保存价格表") {
+                    do {
+                        let result = try JSONDecoder().decode([String: Price].self, from: Data(prices.utf8))
+                        guard result.values.allSatisfy({ [$0.input, $0.output, $0.cacheRead, $0.cacheWrite].allSatisfy { $0.isFinite && $0 >= 0 } }) else { model.error = "价格必须是非负有限数字"; return }
+                        model.settings.prices = result; model.persistSettings()
+                    } catch { model.error = "价格表无效：\(error.localizedDescription)" }
+                }.buttonStyle(.borderedProminent) }
+            }
+        }
+    }
+}
+
+struct AgentEditor: View {
+    @EnvironmentObject var model: AppModel
+.DS_Store
+references/
+.build/
+.cache/
+.agent/
+dist/
+node_modules/
+runtime/dist/
+*.xcuserstate
+xcuserdata/
+.swiftpm/
+*.log
+
+## main...origin/main
+ M Package.swift
+ M Sources/Ragdoll/AppModel.swift
+ M Sources/Ragdoll/ConversationView.swift
+ M Sources/RagdollCore/Archive.swift
+ M Sources/RagdollCore/BackgroundService.swift
+ M Tests/RagdollCoreTests/BackgroundServiceTests.swift
+ M Tests/RagdollCoreTests/StoreArchiveTests.swift
+ M Tests/RagdollTests/ConversationTests.swift
+ M docs/CHANGELOG.md
+ M memory/agents.md
+ M memory/gotchas.md
+ M memory/plan.md
+ M memory/progress.md
+ M memory/verify.md
+?? Sources/Ragdoll/Resources/
+?? Sources/RagdollCore/ArchiveActivity.swift
+ Package.swift                                      |  2 +-
+ Sources/Ragdoll/AppModel.swift                     |  9 ++-
+ Sources/Ragdoll/ConversationView.swift             | 28 ++++++--
+ Sources/RagdollCore/Archive.swift                  | 79 +++++++++++++++++++---
+ Sources/RagdollCore/BackgroundService.swift        |  2 +-
+ .../RagdollCoreTests/BackgroundServiceTests.swift  |  1 +
+ Tests/RagdollCoreTests/StoreArchiveTests.swift     | 66 +++++++++++++++++-
+ Tests/RagdollTests/ConversationTests.swift         | 22 ++++++
+ docs/CHANGELOG.md                                  | 14 ++++
+ memory/agents.md                                   |  4 +-
+ memory/gotchas.md                                  |  1 +
+ memory/plan.md                                     | 12 ++++
+ memory/progress.md                                 | 16 +++++
+ memory/verify.md                                   | 13 ++++
+ 14 files changed, 246 insertions(+), 23 deletions(-)
+
+
+## assistant · 2026-11-19T11:51:20Z
+
+真实 Git 测试已确认 `README.md` 会随归档提交，已有正文和暂存修改得到保留。独立后台进程也已把报告推送到隔离的测试远端。我接着验证价格表变更后的更新，以及完整构建。
+
+## tool · 2026-11-19T11:52:08Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
