@@ -1,0 +1,48 @@
+{
+  "created" : 1795077580897.6943,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/19/rollout-2026-11-19T16-39-40-01a1f2f6-27f7-76b2-880e-9fbccf897a2a.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:be179fd11398f8f715c31944",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1f2f6-27f7-76b2-880e-9fbccf897a2a",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1795077621849,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_01914b14265abb44016afeb5cf89a087d0817748cd23d58d96",
+      "input" : 12630,
+      "model" : "codex-auto-review",
+      "output" : 175,
+      "time" : 1795077587389
+    },
+    {
+      "cacheRead" : 18304,
+      "cacheWrite" : 0,
+      "id" : "resp_01914b14265abb44016afeb5d8f72c87d0930590c18ea57074",
+      "input" : 904,
+      "model" : "codex-auto-review",
+      "output" : 209,
+      "time" : 1795077597951
+    },
+    {
+      "cacheRead" : 19072,
+      "cacheWrite" : 0,
+      "id" : "resp_01914b14265abb44016afeb5f0078887d0a00f975a1ad634ef",
+      "input" : 1683,
+      "model" : "codex-auto-review",
+      "output" : 123,
+      "time" : 1795077621843
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
