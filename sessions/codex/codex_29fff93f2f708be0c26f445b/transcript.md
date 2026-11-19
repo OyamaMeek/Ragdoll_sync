@@ -1927,3 +1927,220 @@ Wall time 0.2 seconds
 Output:
 
 {}
+
+## tool · 2026-11-19T06:32:58Z
+
+
+Script completed
+Wall time 0.5 seconds
+Output:
+
+{"chunk_id":"d9622b","wall_time_seconds":0.290719792,"exit_code":0,"original_token_count":12,"output":"133:Ran 130 tests in 0.215s\n135:OK (skipped=20)\n"}
+{"chunk_id":"439709","wall_time_seconds":0.065558291,"exit_code":0,"original_token_count":426,"output":"test_exam_keeps_selection_made_by_user_during_request (test_answering_integration.BrowserAnswerTests.test_exam_keeps_selection_made_by_user_during_request) ... ok\ntest_exam_mode_tracks_paper_in_same_tab_after_campus_timeout (test_answering_integration.BrowserAnswerTests.test_exam_mode_tracks_paper_in_same_tab_after_campus_timeout) ... ok\ntest_exam_rejects_multiple_answers_on_single_choice (test_answering_integration.BrowserAnswerTests.test_exam_rejects_multiple_answers_on_single_choice) ... ok\ntest_exam_waits_for_manually_opened_paper_and_saves_without_submitting (test_answering_integration.BrowserAnswerTests.test_exam_waits_for_manually_opened_paper_and_saves_without_submitting) ... ok\ntest_failed_authentication_keeps_fusion_question_open (test_answering_integration.BrowserAnswerTests.test_failed_authentication_keeps_fusion_question_open) ... ok\ntest_fusion_multiple_answers_are_selected_before_submit (test_answering_integration.BrowserAnswerTests.test_fusion_multiple_answers_are_selected_before_submit) ... ok\ntest_homework_saves_existing_selection_on_last_question_before_stashing (test_answering_integration.BrowserAnswerTests.test_homework_saves_existing_selection_on_last_question_before_stashing) ... ok\ntest_homework_tab_can_close_after_stash_confirmation (test_answering_integration.BrowserAnswerTests.test_homework_tab_can_close_after_stash_confirmation) ... ok\ntest_incomplete_homework_remains_open_for_manual_review (test_answering_integration.BrowserAnswerTests.test_incomplete_homework_remains_open_for_manual_review) ... ok\ntest_legacy_monitor_does_not_close_fusion_dialog (test_answering_integration.BrowserAnswerTests.test_legacy_monitor_does_not_close_fusion_dialog) ... "}
+
+## tool · 2026-11-19T06:33:07Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"6bc843","wall_time_seconds":0.00000775,"exit_code":1,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T06:33:12Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+2026-11-19 14:33:12
+test_exam_keeps_selection_made_by_user_during_request (test_answering_integration.BrowserAnswerTests.test_exam_keeps_selection_made_by_user_during_request) ... ok
+test_exam_mode_tracks_paper_in_same_tab_after_campus_timeout (test_answering_integration.BrowserAnswerTests.test_exam_mode_tracks_paper_in_same_tab_after_campus_timeout) ... ok
+test_exam_rejects_multiple_answers_on_single_choice (test_answering_integration.BrowserAnswerTests.test_exam_rejects_multiple_answers_on_single_choice) ... ok
+test_exam_waits_for_manually_opened_paper_and_saves_without_submitting (test_answering_integration.BrowserAnswerTests.test_exam_waits_for_manually_opened_paper_and_saves_without_submitting) ... ok
+test_failed_authentication_keeps_fusion_question_open (test_answering_integration.BrowserAnswerTests.test_failed_authentication_keeps_fusion_question_open) ... ok
+test_fusion_multiple_answers_are_selected_before_submit (test_answering_integration.BrowserAnswerTests.test_fusion_multiple_answers_are_selected_before_submit) ... ok
+test_homework_saves_existing_selection_on_last_question_before_stashing (test_answering_integration.BrowserAnswerTests.test_homework_saves_existing_selection_on_last_question_before_stashing) ... ok
+test_homework_tab_can_close_after_stash_confirmation (test_answering_integration.BrowserAnswerTests.test_homework_tab_can_close_after_stash_confirmation) ... ok
+test_incomplete_homework_remains_open_for_manual_review (test_answering_integration.BrowserAnswerTests.test_incomplete_homework_remains_open_for_manual_review) ... ok
+test_legacy_monitor_does_not_close_fusion_dialog (test_answering_integration.BrowserAnswerTests.test_legacy_monitor_does_not_close_fusion_dialog) ... ok
+test_legacy_question_uses_deepseek_answer_and_closes_dialog (test_answering_integration.BrowserAnswerTests.test_legacy_question_uses_deepseek_answer_and_closes_dialog) ... ok
+test_missing_key_keeps_fusion_question_open_without_request (test_answering_integration.BrowserAnswerTests.test_missing_key_keeps_fusion_question_open_without_request) ... ok
+test_unfinished_response_keeps_fusion_question_open (test_answering_integration.BrowserAnswerTests.test_unfinished_response_keeps_fusion_question_open) ... ok
+test_unsubmitted_homework_opens_once_in_order_after_list_refresh (test_answering_integration.BrowserAnswerTests.test_unsubmitted_homework_opens_once_in_order_after_list_refresh) ...  M README.md
+ M memory/plan.md
+ M memory/progress.md
+ M memory/verify.md
+ M modules/answering.py
+ M tests/test_answering_integration.py
+?? .DS_Store
+
+
+## tool · 2026-11-19T06:33:17Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"8906b0","wall_time_seconds":0.000019334,"exit_code":0,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T06:33:32Z
+
+
+Script completed
+Wall time 6.2 seconds
+Output:
+
+{"chunk_id":"f7c066","wall_time_seconds":1.001942125,"session_id":77102,"original_token_count":0,"output":""}
+{"chunk_id":"2f4238","wall_time_seconds":0.000009042,"exit_code":0,"original_token_count":516,"output":"23:test_valid_answers_append_to_markdown (test_answering_integration.DeepSeekHistoryTests.test_valid_answers_append_to_markdown) ... ok\n24:test_write_failure_warns_and_returns_valid_answer (test_answering_integration.DeepSeekHistoryTests.test_write_failure_warns_and_returns_valid_answer) ... ok\n133:Ran 130 tests in 81.412s\n135:OK (skipped=3)\n- [x] 接入逐份打开、去重和使用说明。全量测试 128 项，125 项通过、3 项跳过，最终版本通过作业列表 Chrome 回归测试。\n- [x] 功能提交 `d38bfcf` 已推送至 `origin/main`。\n\n## DeepSeek 答案本地记录\n\n- [x] 核对课中题、融合练习和作业考试的请求入口，以及本地运行目录。\n- [ ] 复现有效答案没有写入 Markdown，验证连续追加、无效答案与写入失败的行为。\n- [ ] 实现本地记录，更新使用说明，运行适用检查并提交推送。\n- 全量测试 128 项，125 项通过。线上 DeepSeek 与两项 Windows 专用用例跳过。最终版本的作业列表回归、Python 编译、CLI 帮助和差异检查通过。没有在登录后的真实作业列表中试跑。\n\n## DeepSeek 答案本地记录验证\n\n- 用本地 HTTP 服务和真实文件验证两次有效响应依次追加、中文内容与多选答案完整、API Key 未写入、无效响应不变更文件、写入失败时提示且仍返回有效选项。运行启用 Chrome 的全量测试和差异检查。\n  - 本地 Chrome 回归验证多份作业依次打开、列表重建后去重、暂存关闭标签页以及交卷边界。全量测试 128 项，125 项通过、3 项跳过。最终版本的作业列表回归、Python 编译、CLI 帮助和差异检查通过。未运行线上作业。\n\n- **涉及文件**\n  - `modules/exam_answering.py`、`Autovisor.py`、`README.md`、`tests/test_answering_integration.py`、`tests/fixtures/exam_paper.html`、`memory/`、`docs/CHANGELOG.md`\n\n- **Git 提交** `d38bfcf15451f05463e4a220358644bea35e8a5b feat(exam): open unsubmitted homework in order`，已推送 `origin/main`。\n\n---\n2026-11-19 14:33\n"}
+
+## assistant · 2026-11-19T06:33:36Z
+
+启用 Chrome 的全量测试已完成，127 项通过、3 项跳过。我正在复核最终版本的三条答题入口，随后提交并推送。
+
+## tool · 2026-11-19T06:33:39Z
+
+
+Script completed
+Wall time 1.9 seconds
+Output:
+
+{"chunk_id":"870d4a","wall_time_seconds":1.86727325,"exit_code":0,"original_token_count":8,"output":"8:Ran 5 tests in 7.960s\n10:OK\n"}
+
+## tool · 2026-11-19T06:33:59Z
+
+
+Script completed
+Wall time 0.3 seconds
+Output:
+
+{}
+{"chunk_id":"80cfc5","wall_time_seconds":0.000013791,"exit_code":0,"original_token_count":400,"output":"2\t0\tREADME.md\n16\t0\tdocs/CHANGELOG.md\n4\t0\tmemory/plan.md\n8\t0\tmemory/progress.md\n5\t0\tmemory/verify.md\n19\t1\tmodules/answering.py\n55\t9\ttests/test_answering_integration.py\n## main...origin/main\n M README.md\n M docs/CHANGELOG.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n M modules/answering.py\n M tests/test_answering_integration.py\n?? .DS_Store\n  - `modules/exam_answering.py`、`Autovisor.py`、`README.md`、`tests/test_answering_integration.py`、`tests/fixtures/exam_paper.html`、`memory/`、`docs/CHANGELOG.md`\n\n- **Git 提交** `d38bfcf15451f05463e4a220358644bea35e8a5b feat(exam): open unsubmitted homework in order`，已推送 `origin/main`。\n\n---\n\n## [2026-11-19 14:33] 保存 DeepSeek 答案到本地 Markdown\n\n- **需求/问题描述**\n  > 把每次调用 DeepSeek 的答案保存到本地 Markdown。\n\n- **实际实现的功能与改动**\n  - 课中题、融合练习和作业考试共用的 DeepSeek 入口将每次通过校验的答案追加到 `.autovisor/deepseek-answers.md`，每条包含时间、题目、选项和答案。写入失败时提示，已校验的答案仍可用于作答。\n  - 本地 HTTP 和真实文件验证连续追加、中文及多选答案、无效答案处理和写入失败。启用 Chrome 的全量测试共 130 项，127 项通过、3 项跳过。最终版本的 5 项专项回归、Python 编译、CLI 帮助和差异检查通过。线上 DeepSeek 请求未执行。\n\n- **涉及文件**\n  - `modules/answering.py`、`tests/test_answering_integration.py`、`README.md`、`memory/`、`docs/CHANGELOG.md`\n\n- **Git 提交** 待提交。\n\n---\n"}
+
+## tool · 2026-11-19T06:34:10Z
+
+
+Script completed
+Wall time 6.8 seconds
+Output:
+
+{"chunk_id":"1f5ca9","wall_time_seconds":0.000009833,"exit_code":0,"original_token_count":137,"output":" README.md                           |  2 ++\n docs/CHANGELOG.md                   | 16 ++++++++++\n memory/plan.md                      |  4 +++\n memory/progress.md                  |  8 +++++\n memory/verify.md                    |  5 +++\n modules/answering.py                | 20 +++++++++++-\n tests/test_answering_integration.py | 64 +++++++++++++++++++++++++++++++------\n 7 files changed, 109 insertions(+), 10 deletions(-)\n[main 4e0c684] feat(answering): save DeepSeek answers to Markdown\n 7 files changed, 109 insertions(+), 10 deletions(-)\n"}
+
+## tool · 2026-11-19T06:34:20Z
+
+
+Script completed
+Wall time 6.7 seconds
+Output:
+
+{"chunk_id":"30089c","wall_time_seconds":1.001254792,"session_id":53680,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T06:34:24Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"07b122","wall_time_seconds":0.000019,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Autovisor.git\n   c510821..4e0c684  main -> main\n"}
+
+## tool · 2026-11-19T06:34:29Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+4e0c6844cdfe0be1e53cbc8f389cf0553b101c03
+feat(answering): save DeepSeek answers to Markdown
+## main...origin/main
+?? .DS_Store
+- [x] 功能提交 `d38bfcf` 已推送至 `origin/main`。
+
+## DeepSeek 答案本地记录
+
+- [x] 核对课中题、融合练习和作业考试的请求入口，以及本地运行目录。
+- [x] 用本地 HTTP 回归测试复现缺少 Markdown 记录。
+- [x] 实现本地记录并更新使用说明。追加、无效答案处理和写入失败提示均通过验证。
+- [x] 启用 Chrome 的全量测试共 130 项，127 项通过、3 项跳过。最终版本的 5 项专项回归全部通过。
+- [ ] 提交并推送，补记功能提交哈希。
+  - 本地 HTTP 和真实文件验证连续追加、中文及多选答案、无效答案处理和写入失败。启用 Chrome 的全量测试共 130 项，127 项通过、3 项跳过。最终版本的 5 项专项回归、Python 编译、CLI 帮助和差异检查通过。线上 DeepSeek 请求未执行。
+
+- **涉及文件**
+  - `modules/answering.py`、`tests/test_answering_integration.py`、`README.md`、`memory/`、`docs/CHANGELOG.md`
+
+- **Git 提交** 待提交。
+
+---
+
+
+## tool · 2026-11-19T06:34:36Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md
+index 64ef05d..59aa8be 100644
+--- a/docs/CHANGELOG.md
++++ b/docs/CHANGELOG.md
+@@ -153,6 +153,6 @@
+ - **涉及文件**
+   - `modules/answering.py`、`tests/test_answering_integration.py`、`README.md`、`memory/`、`docs/CHANGELOG.md`
+ 
+-- **Git 提交** 待提交。
++- **Git 提交** `4e0c6844cdfe0be1e53cbc8f389cf0553b101c03 feat(answering): save DeepSeek answers to Markdown`，已推送 `origin/main`。
+ 
+ ---
+diff --git a/memory/progress.md b/memory/progress.md
+index c7efa2b..0ac8b03 100644
+--- a/memory/progress.md
++++ b/memory/progress.md
+@@ -48,4 +48,4 @@
+ - [x] 用本地 HTTP 回归测试复现缺少 Markdown 记录。
+ - [x] 实现本地记录并更新使用说明。追加、无效答案处理和写入失败提示均通过验证。
+ - [x] 启用 Chrome 的全量测试共 130 项，127 项通过、3 项跳过。最终版本的 5 项专项回归全部通过。
+-- [ ] 提交并推送，补记功能提交哈希。
++- [x] 功能提交 `4e0c684` 已推送至 `origin/main`，开发记录已补记提交哈希。
+## main...origin/main
+ M docs/CHANGELOG.md
+ M memory/progress.md
+?? .DS_Store
+
+
+## tool · 2026-11-19T06:34:44Z
+
+
+Script completed
+Wall time 4.3 seconds
+Output:
+
+{"chunk_id":"0cb625","wall_time_seconds":1.00154025,"session_id":46416,"original_token_count":28,"output":"[main 5a83fc4] docs: record DeepSeek answer history commit\n 2 files changed, 2 insertions(+), 2 deletions(-)\n"}
+
+## tool · 2026-11-19T06:34:46Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"79fbce","wall_time_seconds":0.00002025,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Autovisor.git\n   4e0c684..5a83fc4  main -> main\n"}
+
+## tool · 2026-11-19T06:34:50Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"364f6f","wall_time_seconds":0.000011292,"exit_code":0,"original_token_count":25,"output":"## main...origin/main\n?? .DS_Store\n0\t0\n.autovisor/deepseek-answers.md\n8:Ran 5 tests in 7.960s\n10:OK\n"}
+
+## assistant · 2026-11-19T06:34:54Z
+
+DeepSeek 每次返回通过校验的答案后，程序都会把时间、题目、选项和答案追加到 `.autovisor/deepseek-answers.md`。文件在首次保存时自动创建，适用于课中题、融合练习和作业考试。
+
+已推送到 `origin/main`。启用 Chrome 的测试共 127 项通过、3 项跳过，未调用线上 DeepSeek API。
