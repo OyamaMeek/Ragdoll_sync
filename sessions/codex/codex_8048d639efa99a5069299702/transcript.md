@@ -1652,3 +1652,82 @@ Wall time 0.0 seconds
 Output:
 
 {"chunk_id":"a7c73b","wall_time_seconds":0.0000265,"exit_code":1,"original_token_count":29,"output":"/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.staging.app: CSSMERR_TP_CERT_REVOKED\nIn architecture: arm64\n"}
+
+## tool · 2026-11-19T01:47:50Z
+
+
+Script completed
+Wall time 5.1 seconds
+Output:
+
+{"chunk_id":"2eb3a8","wall_time_seconds":1.5803145,"exit_code":0,"original_token_count":114,"output":"drwxr-xr-x  3 oyamahappa  staff  96 Nov 17 21:27 dist/Ragdoll.acp-model-preview.app\ndrwxr-xr-x@ 3 oyamahappa  staff  96 Nov 17 21:10 dist/Ragdoll.app\ndrwxr-xr-x  3 oyamahappa  staff  96 Nov 17 21:27 dist/Ragdoll.chat-preview.app\ndrwxr-xr-x  3 oyamahappa  staff  96 Nov 17 21:27 dist/Ragdoll.model-preview.app\ndrwxr-xr-x  3 oyamahappa  staff  96 Nov 17 21:27 dist/Ragdoll.preview.app\n.agent/chat-commit/scripts/build.sh\n.agent/chat-commit/scripts/dev.sh\n"}
+{"chunk_id":"3f86a4","wall_time_seconds":1.00234875,"session_id":12248,"original_token_count":0,"output":""}
+
+## assistant · 2026-11-19T01:47:59Z
+
+发布构建已编译成功，但原签名证书被系统判定为已撤销。我保留现有正式包，用临时签名单独生成预览包，并继续验证包内的模型查询。
+
+## tool · 2026-11-19T01:48:02Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"189c0e","wall_time_seconds":0.000009,"exit_code":0,"original_token_count":314,"output":"import assert from 'node:assert/strict';\nimport { spawn } from 'node:child_process';\nimport { once } from 'node:events';\nimport { createInterface } from 'node:readline';\n\nconst resources = './dist/Ragdoll.app/Contents/Resources/runtime';\nconst runtime = spawn(`${resources}/node/bin/node`, [\n  `${resources}/app/dist/main.mjs`, '--data-dir', '.agent/codex-models-smoke',\n], { stdio: ['pipe', 'pipe', 'inherit'] });\nconst exited = once(runtime, 'exit');\nconst lines = createInterface({ input: runtime.stdout })[Symbol.asyncIterator]();\nconst agent = { id: 'native-codex', kind: 'codex', command: 'codex', args: [], env: {} };\nconst cwd = process.cwd();\n\nasync function probe(id, configuration) {\n  runtime.stdin.write(JSON.stringify({ id, method: 'probe', params: { agent: configuration, cwd } }) + '\\n');\n  const entry = await lines.next();\n  assert.equal(entry.done, false);\n-rw-r--r--  1 oyamahappa  staff  105678 Nov 18 21:12 dist/Ragdoll.acp-model-preview.app/Contents/Resources/runtime/app/dist/main.mjs\n-rw-r--r--  1 oyamahappa  staff  106359 Nov 19 09:46 runtime/dist/main.mjs\nIdentifier=com.oyamameek.ragdoll.acp-model-preview\nSignature=adhoc\nTeamIdentifier=not set\nIdentifier=com.oyamameek.ragdoll\nSignature size=4784\nTeamIdentifier=456LQ85CZH\n"}
+
+## tool · 2026-11-19T01:48:09Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"5ef98a","wall_time_seconds":0.00000875,"exit_code":0,"original_token_count":118,"output":"  \"CFBundleDisplayName\" => \"Ragdoll\"\n  \"CFBundleExecutable\" => \"Ragdoll\"\n  \"CFBundleIconFile\" => \"Ragdoll.icns\"\n  \"CFBundleIdentifier\" => \"com.oyamameek.ragdoll.acp-model-preview\"\n  \"CFBundleName\" => \"Ragdoll\"\n  \"CFBundlePackageType\" => \"APPL\"\n  \"CFBundleShortVersionString\" => \"0.1.0\"\n  \"CFBundleVersion\" => \"1\"\nls: dist/Ragdoll.codex-model-preview.app: No such file or directory\ndrwxr-xr-x  7 oyamahappa  staff  224 Nov 17 22:01 .build/release/Ragdoll_Ragdoll.bundle\n"}
+
+## tool · 2026-11-19T01:48:14Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T01:48:24Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"feb215","wall_time_seconds":1.002068459,"session_id":40238,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T01:48:34Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"ca3128","wall_time_seconds":0.000005166,"exit_code":0,"original_token_count":125,"output":"dist/Ragdoll.codex-model-preview.app: replacing existing signature\n{\"status\":\"ok\",\"version\":\"0.1.0\",\"node\":\"v26.13.0\",\"agents\":[{\"id\":\"native-codex\",\"name\":\"Codex\",\"kind\":\"codex\",\"command\":\"codex\",\"args\":[],\"env\":{}},{\"id\":\"native-claude\",\"name\":\"Claude Code\",\"kind\":\"claude\",\"command\":\"claude\",\"args\":[],\"env\":{}},{\"id\":\"native-dsh\",\"name\":\"DeepSeek Harness\",\"kind\":\"dsh\",\"command\":\"/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh\",\"args\":[\"--profile\",\"sdk\"],\"env\":{}}]}\n"}
+{"chunk_id":"0f7c39","wall_time_seconds":0.000924667,"exit_code":0,"original_token_count":2369,"output":"[0/1] Planning build\nBuilding for debugging...\n[0/6] Write swift-version--58304C5D6DBC2206.txt\nBuild complete! (1.08s)\nTest Suite 'All tests' started at 2026-11-19 09:47:53.469.\nTest Suite 'All tests' passed at 2026-11-19 09:47:53.470.\n\t Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds\n◇ Test run started.\n↳ Testing Library Version: 124.4\n↳ Target Platform: arm64e-apple-macos14.0\n◇ Test costsAndBudgetUseKnownUsageOnly() started.\n✔ Test costsAndBudgetUseKnownUsageOnly() passed after 0.007 seconds.\n◇ Test heatmapUsesLocalCalendarAcrossDST() started.\n✔ Test heatmapUsesLocalCalendarAcrossDST() passed after 0.003 seconds.\n◇ Test heatmapWeeksCoverThePastYearWithoutFutureDays() started.\n✔ Test heatmapWeeksCoverThePastYearWithoutFutureDays() passed after 0.001 seconds.\n◇ Test historicalHeatmapIncludesLeapDayAndPadsPartialWeeks() started.\n✔ Test historicalHeatmapIncludesLeapDayAndPadsPartialWeeks() passed after 0.001 seconds.\n◇ Test inheritedProviderResponsesAreCountedOnce() started.\n✔ Test inheritedProviderResponsesAreCountedOnce() passed after 0.001 seconds.\n◇ Test archiveExtractsInlineImagesAndReusesRelativeFiles() started.\n✔ Test archiveExtractsInlineImagesAndReusesRelativeFiles() passed after 0.191 seconds.\n◇ Test archivePreservesMalformedImageExamplesAsOriginalText() started.\n✔ Test archivePreservesMalformedImageExamplesAsOriginalText() passed after 0.118 seconds.\n◇ Test archiveCompressesLargeRawFilesLosslesslyAndReplacesOnlyManagedCopies() started.\n✔ Test archiveCompressesLargeRawFilesLosslesslyAndReplacesOnlyManagedCopies() passed after 2.397 seconds.\n◇ Test archiveSavesCompleteSnapshotEvenWhenSourceFilesExist() started.\n✔ Test archiveSavesCompleteSnapshotEvenWhenSourceFilesExist() passed after 0.077 seconds.\n◇ Test archiveRestoresWithoutSourcesAndKeepsNewerLocalChanges() started.\n✔ Test archiveRestoresWithoutSourcesAndKeepsNewerLocalChanges() passed after 0.145 seconds.\n◇ Test archiveRestoreRejectsMissingRepositoryAndUnsafeManifestPaths() started.\n✔ Test archiveRestoreRejectsMissingRepositoryAndUnsafeManifestPaths() passed after 0.028 seconds.\n◇ Test archiveRestoresLegacyRawLogsIncludingGzip(_:) started.\n◇ Passing 1 argument compressed → false to archiveRestoresLegacyRawLogsIncludingGzip(_:)\n◇ Passing 1 argument compressed → true to archiveRestoresLegacyRawLogsIncludingGzip(_:)\n✔ Test archiveRestoresLegacyRawLogsIncludingGzip(_:) passed after 0.634 seconds.\n◇ Test archiveRetainsCompleteLegacyTranscriptWithoutInventingMessageBoundaries() started.\n✔ Test archiveRetainsCompleteLegacyTranscriptWithoutInventingMessageBoundaries() passed after 0.157 seconds.\n◇ Test archiveSyncRefusesMultiplePushDestinationsBeforeUploading() started.\n✔ Test archiveSyncRefusesMultiplePushDestinationsBeforeUploading() passed after 0.163 seconds.\n◇ Test archiveSyncPreviewShowsTheDestinationWithoutCredentials() started.\n✔ Test archiveSyncPreviewShowsTheDestinationWithoutCredentials() passed after 0.180 seconds.\n◇ Test archiveSyncStopsAHangingPushAndPreservesItsLocalCommit() started.\n✔ Test archiveSyncStopsAHangingPushAndPreservesItsLocalCommit() passed after 0.328 seconds.\n◇ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() started.\n✔ Test archiveSyncRetriesWithoutANewCommitAndRejectsDivergence() passed after 0.770 seconds.\n◇ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() started.\n✔ Test archiveSyncSettingsDecodeOlderRecordsAndMigrationSurvivesRefresh() passed after 0.004 seconds.\n◇ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) started.\n◇ Passing 1 argument kind → \"missing\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"history\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n◇ Passing 1 argument kind → \"corrupt\" to backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:)\n✔ Test backgroundServiceRequiresAndLoadsRepositoryBeforeScanning(_:) passed after 0.941 seconds.\n◇ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() started.\n✔ Test backgroundServiceReportsAnInvalidLockInsteadOfClaimingItIsRunning() passed after 0.001 seconds.\n◇ Test backgroundServiceOwnsOneDataDirectoryAndPreservesNewRequests() started.\n✔ Test backgroundServiceOwnsOneDataDirectoryAndPreservesNewRequests() passed after 0.002 seconds.\n◇ Test backgroundServiceArchivesFromItsOwnProcess() started.\n✔ Test backgroundServiceArchivesFromItsOwnProcess() passed after 0.732 seconds.\n◇ Test backgroundServiceExitsOnFatalDependencyFailure(_:) started.\n◇ Passing 1 argument kind → \"runtime\" to backgroundServiceExitsOnFatalDependencyFailure(_:)\n◇ Passing 1 argument kind → \"index\" to backgroundServiceExitsOnFatalDependencyFailure(_:)\n✔ Test backgroundServiceExitsOnFatalDependencyFailure(_:) passed after 4.614 seconds.\n◇ Test backgroundServiceContinuesAfterItsLauncherReturns() started.\n✔ Test backgroundServiceContinuesAfterItsLauncherReturns() passed after 2.490 seconds.\n◇ Test scanDeliversLargeUnicodeMessagesWithoutStalling() started.\n✔ Test scanDeliversLargeUnicodeMessagesWithoutStalling() passed after 0.628 seconds.\n◇ Test storePersistsAndSearchesActualMessages() started.\n✔ Test storePersistsAndSearchesActualMessages() passed after 0.003 seconds.\n◇ Test olderSourceDataCannotReplaceNewerRepositoryHistory() started.\n✔ Test olderSourceDataCannotReplaceNewerRepositoryHistory() passed after 0.002 seconds.\n◇ Test weeklyBudgetVisibilityDefaultsOffAndPersistsWithoutClearingAmount() started.\n✔ Test weeklyBudgetVisibilityDefaultsOffAndPersistsWithoutClearingAmount() passed after 0.006 seconds.\n◇ Test archiveCommitsOnlyManagedChangesAndProtectsEdits() started.\n✔ Test archiveCommitsOnlyManagedChangesAndProtectsEdits() passed after 0.129 seconds.\n◇ Test archiveCannotLiveInsideSourceHome() started.\n✔ Test archiveCannotLiveInsideSourceHome() passed after 0.001 seconds.\n◇ Test provenACPAliasesCountOnceAndPreserveRawSources() started.\n✔ Test provenACPAliasesCountOnceAndPreserveRawSources() passed after 0.002 seconds.\n◇ Test archivePreservesAnExternallyStagedManagedVersion() started.\n✔ Test archivePreservesAnExternallyStagedManagedVersion() passed after 0.098 seconds.\n◇ Test archiveDoesNotStageExcludedProjects() started.\n✔ Test archiveDoesNotStageExcludedProjects() passed after 0.140 seconds.\n◇ Test archiveHandlesPathListsBeyondSystemArgumentLimits() started.\n✔ Test archiveHandlesPathListsBeyondSystemArgumentLimits() passed after 4.497 seconds.\n◇ Test composerKeepsModelSelectionPerSessionAndResetsEffortWhenModelChanges() started.\n✔ Test composerKeepsModelSelectionPerSessionAndResetsEffortWhenModelChanges() passed after 0.002 seconds.\n◇ Test acpComposerUsesGroupedAgentModelsAndFallsBackToLegacyModels() started.\n✔ Test acpComposerUsesGroupedAgentModelsAndFallsBackToLegacyModels() passed after 0.001 seconds.\n◇ Test conversationProjectsGroupIndexedSessionsByFullPath() started.\n✔ Test conversationProjectsGroupIndexedSessionsByFullPath() passed after 0.001 seconds.\n◇ Test assistantIconResourcesDecodeFromAppBundle() started.\n✔ Test assistantIconResourcesDecodeFromAppBundle() passed after 0.016 seconds.\n◇ Test assistantIconsFollowNativeConversationSource() started.\n✔ Test assistantIconsFollowNativeConversationSource() passed after 0.001 seconds.\n◇ Test conversationHidesToolsWithoutRemovingHistory() started.\n✔ Test conversationHidesToolsWithoutRemovingHistory() passed after 0.001 seconds.\n◇ Test conversationPaginatesVisibleMessagesAfterHidingTools() started.\n✔ Test conversationPaginatesVisibleMessagesAfterHidingTools() passed after 0.001 seconds.\n◇ Test conversationFoldsInstructionsAndPreservesActualRequests() started.\n✔ Test conversationFoldsInstructionsAndPreservesActualRequests() passed after 0.001 seconds.\n◇ Test conversationGroupsConsecutiveSystemPromptsInOrder() started.\n✔ Test conversationGroupsConsecutiveSystemPromptsInOrder() passed after 0.001 seconds.\n◇ Test conversationPaginationKeepsSystemPromptGroupsWhole() started.\n✔ Test conversationPaginationKeepsSystemPromptGroupsWhole() passed after 0.001 seconds.\n◇ Test recentSessionDatesShowCalendarLabelsInsteadOfElapsedTime() started.\n✔ Test recentSessionDatesShowCalendarLabelsInsteadOfElapsedTime() passed after 0.004 seconds.\n◇ Test recentSessionDateLabelsHandleCrossYearWeeksAndDaylightSaving() started.\n✔ Test recentSessionDateLabelsHandleCrossYearWeeksAndDaylightSaving() passed after 0.001 seconds.\n◇ Test activityGreensGetLighterInBothThemes() started.\n✔ Test activityGreensGetLighterInBothThemes() passed after 0.001 seconds.\n◇ Test activityTooltipUsesLocalDateAndCompactTokens() started.\n✔ Test activityTooltipUsesLocalDateAndCompactTokens() passed after 0.001 seconds.\n◇ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() started.\n✔ Test configuredRepositoryShowsCachedInterfaceDuringLoadingAndAfterFailure() passed after 0.164 seconds.\n◇ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() started.\n✔ Test firstLaunchRequiresRepositoryBeforeScanningOrImporting() passed after 0.001 seconds.\n◇ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() started.\n✔ Test startupRestoresRepositoryBeforeScanningAndFailsClosed() passed after 0.434 seconds.\n✔ Test run with 51 tests passed after 20.134 seconds.\n"}
+{"chunk_id":"53c116","wall_time_seconds":0.000013125,"exit_code":0,"original_token_count":151,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\n@@ -317,6 +317,20 @@\n+## [2026-11-17 22:04] 按会话来源显示助手品牌头像\ndiff --git a/memory/plan.md b/memory/plan.md\n@@ -1,5 +1,12 @@\n+## 助手品牌头像\n@@ -163,3 +170,8 @@\n+## 原生 Codex 模型目录\ndiff --git a/memory/progress.md b/memory/progress.md\n@@ -1,5 +1,15 @@\n+## 助手品牌头像（2026-11-17）\n@@ -210,3 +220,9 @@\n+## 原生 Codex 模型目录（2026-11-19）\ndiff --git a/memory/verify.md b/memory/verify.md\n@@ -1,5 +1,13 @@\n+## 助手品牌头像\n@@ -165,3 +173,8 @@\n+## 原生 Codex 模型目录\n2026-11-19 09:48\n"}
+
+## tool · 2026-11-19T01:48:43Z
+
+
+Script completed
+Wall time 5.6 seconds
+Output:
+
+{"chunk_id":"0569c3","wall_time_seconds":1.001007292,"session_id":82269,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T01:48:48Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"acfa78","wall_time_seconds":0.000014166,"exit_code":0,"original_token_count":155,"output":"{\n  \"current\": {\n    \"userAgent\": \"Codex Desktop/0.169.0-alpha.11.1 (Mac OS 15.7.7; arm64) dumb (ragdoll; 0.1.0)\",\n    \"configured\": \"gpt-6.2-sol\",\n    \"models\": [\n      \"gpt-6.2-sol\",\n      \"gpt-6.2-astra\",\n      \"gpt-6.1-terra\",\n      \"gpt-6.1-sol\",\n      \"gpt-6-astra\",\n      \"gpt-6-sol\",\n      \"gpt-6-luna\",\n      \"gpt-5.6-sol\",\n      \"gpt-5.6-terra\",\n      \"gpt-5.6-luna\"\n    ]\n  },\n  \"terminal\": {\n    \"userAgent\": \"Codex Desktop/0.147.0 (Mac OS 15.7.7; arm64) dumb (ragdoll; 0.1.0)\",\n    \"configured\": \"gpt-6.2-sol\",\n    \"models\": [\n      \"gpt-5.6-sol\",\n      \"gpt-5.6-terra\",\n      \"gpt-5.6-luna\"\n    ]\n  }\n}\n"}
