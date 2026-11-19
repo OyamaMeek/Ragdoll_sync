@@ -1,0 +1,84 @@
+{
+  "created" : 1795071565437.4978,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/19/rollout-2026-11-19T14-59-24-01a1f29a-5bf2-7121-a6c2-e80d5372ca0d.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:f789a129d96101e04bfa6b02",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1f29a-5bf2-7121-a6c2-e80d5372ca0d",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
+  "source" : "codex",
+  "title" : "修复报错并逐个打开作业",
+  "updated" : 1795071622070,
+  "usage" : [
+    {
+      "cacheRead" : 14720,
+      "cacheWrite" : 0,
+      "id" : "resp_02be292a36897c06016afe9e542d5c87d0bcd8bcdbf35bf245",
+      "input" : 21619,
+      "model" : "gpt-6.2-sol",
+      "output" : 319,
+      "time" : 1795071580729
+    },
+    {
+      "cacheRead" : 35968,
+      "cacheWrite" : 0,
+      "id" : "resp_02be292a36897c06016afe9e5d833c87d0a70804492dffdf4e",
+      "input" : 3757,
+      "model" : "gpt-6.2-sol",
+      "output" : 179,
+      "time" : 1795071586847
+    },
+    {
+      "cacheRead" : 14720,
+      "cacheWrite" : 0,
+      "id" : "resp_02be292a36897c06016afe9e6372d087d093c5a2b6e7ce57c0",
+      "input" : 35197,
+      "model" : "gpt-6.2-sol",
+      "output" : 241,
+      "time" : 1795071593960
+    },
+    {
+      "cacheRead" : 49664,
+      "cacheWrite" : 0,
+      "id" : "resp_02be292a36897c06016afe9e6a91fc87d0b6aae393416235ac",
+      "input" : 3668,
+      "model" : "gpt-6.2-sol",
+      "output" : 244,
+      "time" : 1795071601544
+    },
+    {
+      "cacheRead" : 52992,
+      "cacheWrite" : 0,
+      "id" : "resp_02be292a36897c06016afe9e7224b087d0898039803742579a",
+      "input" : 3913,
+      "model" : "gpt-6.2-sol",
+      "output" : 285,
+      "time" : 1795071609698
+    },
+    {
+      "cacheRead" : 56576,
+      "cacheWrite" : 0,
+      "id" : "resp_02be292a36897c06016afe9e7a6d7c87d08ea9297e95755f9e",
+      "input" : 4590,
+      "model" : "gpt-6.2-sol",
+      "output" : 173,
+      "time" : 1795071615743
+    },
+    {
+      "cacheRead" : 60928,
+      "cacheWrite" : 0,
+      "id" : "resp_02be292a36897c06016afe9e80611c87d08cb61e6f9890de1b",
+      "input" : 6757,
+      "model" : "gpt-6.2-sol",
+      "output" : 175,
+      "time" : 1795071622009
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
