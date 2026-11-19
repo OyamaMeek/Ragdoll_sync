@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
   "source" : "codex",
   "title" : "Guardian review",
-  "updated" : 1795071885253,
+  "updated" : 1795072061282,
   "usage" : [
     {
       "cacheRead" : 5888,
@@ -40,6 +40,33 @@
       "model" : "codex-auto-review",
       "output" : 134,
       "time" : 1795071885245
+    },
+    {
+      "cacheRead" : 29568,
+      "cacheWrite" : 0,
+      "id" : "resp_09e697d84a310be3016afea0174c4c87d0a1391dec623150a9",
+      "input" : 6685,
+      "model" : "codex-auto-review",
+      "output" : 279,
+      "time" : 1795072029120
+    },
+    {
+      "cacheRead" : 36096,
+      "cacheWrite" : 0,
+      "id" : "resp_09e697d84a310be3016afea0213c8087d096b9012e2a1d4527",
+      "input" : 1038,
+      "model" : "codex-auto-review",
+      "output" : 189,
+      "time" : 1795072037493
+    },
+    {
+      "cacheRead" : 36992,
+      "cacheWrite" : 0,
+      "id" : "resp_09e697d84a310be3016afea038c69087d0b3dde7f31b4140f1",
+      "input" : 1612,
+      "model" : "codex-auto-review",
+      "output" : 140,
+      "time" : 1795072061276
     }
   ],
   "warnings" : [

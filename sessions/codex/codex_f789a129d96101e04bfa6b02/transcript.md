@@ -3041,3 +3041,246 @@ Wall time 5.0 seconds
 Output:
 
 {"chunk_id":"679d87","wall_time_seconds":5.001894167,"session_id":13113,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T07:05:33Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+3:test_live_deepseek_answers_a_text_question (test_answering.AnswerClientTests.test_live_deepseek_answers_a_text_question) ... skipped '需要显式启用 DeepSeek 服务测试'
+test_completed_homework_confirms_stash_after_saving_last_answer (test_answering_integration.BrowserAnswerTests.test_completed_homework_confirms_stash_after_saving_last_answer) ... ok
+test_exam_keeps_checked_answer_when_save_fails (test_answering_integration.BrowserAnswerTests.test_exam_keeps_checked_answer_when_save_fails) ... ok
+test_exam_keeps_platform_verification_open_while_waiting_for_questions (test_answering_integration.BrowserAnswerTests.test_exam_keeps_platform_verification_open_while_waiting_for_questions) ... ok
+test_exam_keeps_selection_made_by_user_during_request (test_answering_integration.BrowserAnswerTests.test_exam_keeps_selection_made_by_user_during_request) ... ok
+test_exam_mode_tracks_paper_in_same_tab_after_campus_timeout (test_answering_integration.BrowserAnswerTests.test_exam_mode_tracks_paper_in_same_tab_after_campus_timeout) ... 
+
+## tool · 2026-11-19T07:05:46Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"3fbc4a","wall_time_seconds":5.002233042,"session_id":13113,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T07:05:56Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+test_exam_mode_tracks_paper_in_same_tab_after_campus_timeout (test_answering_integration.BrowserAnswerTests.test_exam_mode_tracks_paper_in_same_tab_after_campus_timeout) ... ok
+test_exam_refreshes_only_once_when_questions_stay_blank (test_answering_integration.BrowserAnswerTests.test_exam_refreshes_only_once_when_questions_stay_blank) ... ok
+test_exam_rejects_multiple_answers_on_single_choice (test_answering_integration.BrowserAnswerTests.test_exam_rejects_multiple_answers_on_single_choice) ... ok
+test_exam_waits_for_manually_opened_paper_and_saves_without_submitting (test_answering_integration.BrowserAnswerTests.test_exam_waits_for_manually_opened_paper_and_saves_without_submitting) ... ok
+test_failed_authentication_keeps_fusion_question_open (test_answering_integration.BrowserAnswerTests.test_failed_authentication_keeps_fusion_question_open) ... ok
+test_fusion_multiple_answers_are_selected_before_submit (test_answering_integration.BrowserAnswerTests.test_fusion_multiple_answers_are_selected_before_submit) ... ok
+test_homework_saves_existing_selection_on_last_question_before_stashing (test_answering_integration.BrowserAnswerTests.test_homework_saves_existing_selection_on_last_question_before_stashing) ... ok
+test_homework_tab_can_close_after_stash_confirmation (test_answering_integration.BrowserAnswerTests.test_homework_tab_can_close_after_stash_confirmation) ... 2026-11-19 15:05
+
+
+## tool · 2026-11-19T07:06:08Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"064457","wall_time_seconds":5.002746209,"session_id":13113,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T07:06:14Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+3:test_live_deepseek_answers_a_text_question (test_answering.AnswerClientTests.test_live_deepseek_answers_a_text_question) ... skipped '需要显式启用 DeepSeek 服务测试'
+25:test_unsubmitted_homework_opens_once_in_order_after_list_refresh (test_answering_integration.BrowserAnswerTests.test_unsubmitted_homework_opens_once_in_order_after_list_refresh) ... 
+test_missing_key_keeps_fusion_question_open_without_request (test_answering_integration.BrowserAnswerTests.test_missing_key_keeps_fusion_question_open_without_request) ... ok
+test_unfinished_response_keeps_fusion_question_open (test_answering_integration.BrowserAnswerTests.test_unfinished_response_keeps_fusion_question_open) ... ok
+test_unsubmitted_homework_opens_once_in_order_after_list_refresh (test_answering_integration.BrowserAnswerTests.test_unsubmitted_homework_opens_once_in_order_after_list_refresh) ... 
+
+## tool · 2026-11-19T07:06:28Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"764d7b","wall_time_seconds":0.000007208,"exit_code":0,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T07:06:33Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+3:test_live_deepseek_answers_a_text_question (test_answering.AnswerClientTests.test_live_deepseek_answers_a_text_question) ... skipped '需要显式启用 DeepSeek 服务测试'
+25:test_unsubmitted_homework_opens_once_in_order_after_list_refresh (test_answering_integration.BrowserAnswerTests.test_unsubmitted_homework_opens_once_in_order_after_list_refresh) ... ok
+102:test_windows_asset_link_is_included_on_windows (test_updater.CheckForUpdateTests.test_windows_asset_link_is_included_on_windows) ... skipped 'Windows-only asset matching'
+111:test_untrusted_asset_url_is_ignored (test_updater.SslFallbackTests.test_untrusted_asset_url_is_ignored) ... skipped 'Windows-only asset matching'
+136:Ran 133 tests in 95.660s
+138:OK (skipped=3)
+  - 等待首题 15 秒超时后刷新当前试卷一次。平台验证和作答阶段的异常保留当前页面。自动刷新后仍未加载时，手动刷新让题目显示后可恢复。
+  - 本地日志中的作答异常对应点击后未检测到勾选状态，发生在保存步骤之前。未验证线上页面未显示勾选的原因。
+  - 启用 Chrome 的全量测试共 133 项，130 项通过、3 项跳过。Python 编译、CLI 帮助和差异检查通过。
+
+- **涉及文件**
+  - `modules/exam_answering.py`、`tests/test_answering_integration.py`、`README.md`、`memory/`、`docs/CHANGELOG.md`
+
+- **Git 提交** `c206f8711d75a32ddd19035e0e6442bf684cf13d fix(exam): reload when the first question fails to load`，已推送 `origin/main`。
+
+---
+- [x] 修复提交 `c206f87` 已推送至 `origin/main`，开发记录已补记提交哈希。
+
+## 作业选项识别与串行打开
+
+- [x] 核对运行日志、留存的公开前端和作业窗口调用链。
+- [x] 真实 Chrome 回归测试确认旧代码等待隐藏输入框勾选超时，并在第一份作业窗口尚未关闭时打开第二份。
+- [ ] 修复选项确认和作业窗口调度，验证现有保存流程。
+- [ ] 更新使用说明和开发记录，提交并推送。
+- 真 Chrome 回归测试复现首题空白时缺少刷新。修复后验证单次自动刷新、刷新后仍空白时手动刷新可恢复、平台验证保留、保存异常保留当前勾选，以及作业仍逐份打开。
+- 启用 Chrome 的全量测试共 133 项，130 项通过，线上 DeepSeek 和两项 Windows 专用测试跳过。Python 编译、CLI 帮助和差异检查通过。未运行线上试卷。
+
+## 作业选项识别与串行打开验证
+
+- 使用真实 Chrome 和本地页面复现单选、判断题只更新选项高亮时的答题超时，并验证已有选择得到保留、自动选择可保存。
+- 验证首份作业的空白窗口超时后仍可恢复导航和刷新，且窗口关闭前列表不会打开下一份。运行启用 Chrome 的全量测试和差异检查。
+2026-11-19 15:06
+
+
+## assistant · 2026-11-19T07:06:37Z
+
+全量测试完成，130 项通过，3 项跳过。使用说明已更新为“当前作业窗口关闭后才打开下一份”，我会提交并推送这次修复。
+
+## tool · 2026-11-19T07:06:52Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T07:06:56Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"9b23df","wall_time_seconds":0.000010833,"exit_code":0,"original_token_count":214,"output":" Autovisor.py                        |  6 +++-\n README.md                           |  4 +--\n docs/CHANGELOG.md                   | 19 +++++++++++++\n memory/gotchas.md                   |  1 +\n memory/plan.md                      |  5 ++++\n memory/progress.md                  |  8 ++++++\n memory/verify.md                    |  6 ++++\n modules/exam_answering.py           | 57 ++++++++++++++++++++++---------------\n tests/fixtures/exam_paper.html      | 23 +++++++++++----\n tests/test_answering_integration.py | 26 ++++++++++-------\n 10 files changed, 113 insertions(+), 42 deletions(-)\n## main...origin/main\n M Autovisor.py\n M README.md\n M docs/CHANGELOG.md\n M memory/gotchas.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n M modules/exam_answering.py\n M tests/fixtures/exam_paper.html\n M tests/test_answering_integration.py\n?? .DS_Store\n"}
+
+## tool · 2026-11-19T07:07:09Z
+
+
+Script completed
+Wall time 6.6 seconds
+Output:
+
+{"chunk_id":"29764b","wall_time_seconds":0.000010166,"exit_code":0,"original_token_count":177,"output":" Autovisor.py                        |  6 +++-\n README.md                           |  4 +--\n docs/CHANGELOG.md                   | 19 +++++++++++++\n memory/gotchas.md                   |  1 +\n memory/plan.md                      |  5 ++++\n memory/progress.md                  |  8 ++++++\n memory/verify.md                    |  6 ++++\n modules/exam_answering.py           | 57 ++++++++++++++++++++++---------------\n tests/fixtures/exam_paper.html      | 23 +++++++++++----\n tests/test_answering_integration.py | 26 ++++++++++-------\n 10 files changed, 113 insertions(+), 42 deletions(-)\n[main 103f560] fix(exam): wait for each homework window to close\n 10 files changed, 113 insertions(+), 42 deletions(-)\n"}
+
+## tool · 2026-11-19T07:07:18Z
+
+
+Script completed
+Wall time 6.0 seconds
+Output:
+
+{"chunk_id":"7941de","wall_time_seconds":1.002192917,"session_id":68357,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T07:07:21Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"bafa54","wall_time_seconds":0.000013083,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Autovisor.git\n   73b477e..103f560  main -> main\n"}
+
+## tool · 2026-11-19T07:07:25Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+103f560b1964006011b160907956b5df5f057be0 fix(exam): wait for each homework window to close
+- [x] 接入单次刷新并通过启用 Chrome 的全量测试。133 项中 130 项通过、3 项跳过。
+- [x] 修复提交 `c206f87` 已推送至 `origin/main`，开发记录已补记提交哈希。
+
+## 作业选项识别与串行打开
+
+- [x] 核对运行日志、留存的公开前端和作业窗口调用链。
+- [x] 真实 Chrome 回归测试确认旧代码等待隐藏输入框勾选超时，并在第一份作业窗口尚未关闭时打开第二份。
+- [x] 修复选项确认和作业窗口调度。全量测试 133 项，130 项通过、3 项跳过。
+- [x] 更新启动提示、使用说明和开发记录。
+- [ ] 提交并推送修复。
+  - 当前作业窗口未关闭时暂停打开下一份。空白窗口超时后仍继续监听，并区分未打开窗口和未进入答题页的提示。
+  - 真实 Chrome 专项回归 3 项全部通过。启用 Chrome 的全量测试 133 项，130 项通过、3 项跳过。Python 编译、CLI 帮助和差异检查通过。未运行线上试卷。
+
+- **涉及文件**
+  - `modules/exam_answering.py`、`Autovisor.py`、`README.md`
+  - `tests/fixtures/exam_paper.html`、`tests/test_answering_integration.py`
+  - `memory/`、`docs/CHANGELOG.md`
+
+- **Git 提交** 待提交。
+
+---
+## main...origin/main
+?? .DS_Store
+
+
+## tool · 2026-11-19T07:07:31Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T07:07:42Z
+
+
+Script completed
+Wall time 6.2 seconds
+Output:
+
+{"chunk_id":"8c5770","wall_time_seconds":1.001685167,"session_id":75245,"original_token_count":79,"output":" docs/CHANGELOG.md  | 2 +-\n memory/progress.md | 2 +-\n 2 files changed, 2 insertions(+), 2 deletions(-)\n docs/CHANGELOG.md  | 2 +-\n memory/progress.md | 2 +-\n 2 files changed, 2 insertions(+), 2 deletions(-)\n[main fbc4515] docs: record homework window fix commit\n 2 files changed, 2 insertions(+), 2 deletions(-)\n"}
+
+## tool · 2026-11-19T07:07:45Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"70b015","wall_time_seconds":0.000014625,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Autovisor.git\n   103f560..fbc4515  main -> main\n"}
+
+## tool · 2026-11-19T07:07:49Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+## main...origin/main
+?? .DS_Store
+0	0
+fbc4515 docs: record homework window fix commit
+103f560 fix(exam): wait for each homework window to close
+
+
+## assistant · 2026-11-19T07:07:54Z
+
+已修复作业答题时的选项确认超时，并推送到 `origin/main`（`103f560`）。单选题和判断题现在能识别页面高亮的已选答案，并继续保存。
+
+**每次只自动打开一份作业。** 当前作业即使加载超时或需要手动处理，程序也会等该窗口关闭后再打开下一份。
+
+启用 Chrome 的全量测试共 133 项，130 项通过、3 项跳过。未在登录后的智慧树真实作业中实测。
