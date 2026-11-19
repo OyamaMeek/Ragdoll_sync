@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
   "source" : "codex",
   "title" : "突出新增特性并发布",
-  "updated" : 1795077686444,
+  "updated" : 1795077750077,
   "usage" : [
     {
       "cacheRead" : 0,
@@ -184,6 +184,51 @@
       "model" : "gpt-6.2-sol",
       "output" : 505,
       "time" : 1795077686265
+    },
+    {
+      "cacheRead" : 58624,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb638864887d0bb08cbb906d880eb",
+      "input" : 1285,
+      "model" : "gpt-6.2-sol",
+      "output" : 39,
+      "time" : 1795077690652
+    },
+    {
+      "cacheRead" : 59648,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb63b486887d0a7d750ca5f17fa71",
+      "input" : 387,
+      "model" : "gpt-6.2-sol",
+      "output" : 285,
+      "time" : 1795077701008
+    },
+    {
+      "cacheRead" : 59904,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb64594bc87d0b6473464defa20ee",
+      "input" : 434,
+      "model" : "gpt-6.2-sol",
+      "output" : 203,
+      "time" : 1795077707711
+    },
+    {
+      "cacheRead" : 60160,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb64cbe8087d089d2f8a27b2ffb4d",
+      "input" : 655,
+      "model" : "gpt-6.2-sol",
+      "output" : 19,
+      "time" : 1795077710799
+    },
+    {
+      "cacheRead" : 60672,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb66da73887d08e00c2da2e274802",
+      "input" : 185,
+      "model" : "gpt-6.2-sol",
+      "output" : 183,
+      "time" : 1795077750013
     }
   ],
   "warnings" : [
