@@ -13,7 +13,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "按 DeepSeek v4.1 Flash 峰价显示股价",
-  "updated" : 1795081831735,
+  "updated" : 1795081893427,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -68,6 +68,51 @@
       "model" : "gpt-6.2-sol",
       "output" : 554,
       "time" : 1795081831732
+    },
+    {
+      "cacheRead" : 74496,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec668b94c87d0a555edb5643f750c",
+      "input" : 907,
+      "model" : "gpt-6.2-sol",
+      "output" : 296,
+      "time" : 1795081840109
+    },
+    {
+      "cacheRead" : 75264,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec671173487d0aaff80a44915c8d3",
+      "input" : 3671,
+      "model" : "gpt-6.2-sol",
+      "output" : 347,
+      "time" : 1795081851828
+    },
+    {
+      "cacheRead" : 78592,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec67cce9487d086479b942f280265",
+      "input" : 909,
+      "model" : "gpt-6.2-sol",
+      "output" : 277,
+      "time" : 1795081860654
+    },
+    {
+      "cacheRead" : 79360,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec689be9887d092657c1b02aa63ae",
+      "input" : 3854,
+      "model" : "gpt-6.2-sol",
+      "output" : 612,
+      "time" : 1795081880112
+    },
+    {
+      "cacheRead" : 82944,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec699714487d08fa10e76800acd5b",
+      "input" : 906,
+      "model" : "gpt-6.2-sol",
+      "output" : 487,
+      "time" : 1795081893426
     }
   ],
   "warnings" : [
