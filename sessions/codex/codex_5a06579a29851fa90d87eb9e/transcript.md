@@ -1483,7 +1483,26 @@ Output:
 {"status":"fulfilled","value":{"chunk_id":"f026f4","wall_time_seconds":0.000008125,"exit_code":0,"original_token_count":44,"output":"95ca090392aedd7f81f5b5783ddd701f56ce0105\trefs/heads/main\nec281a9508c3fb8afc05405e84e06e2a3bc55123\trefs/tags/3.19.2\n95ca090392aedd7f81f5b5783ddd701f56ce0105\trefs/tags/3.19.2^{}\n"}}
 {"status":"fulfilled","value":{"chunk_id":"8c19e5","wall_time_seconds":0.913528417,"exit_code":0,"original_token_count":154,"output":"{\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Checkout release tag\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Install uv\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Check version and test\",\"status\":\"in_progress\",\"conclusion\":null},{\"name\":\"Build and verify ZIP\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Publish GitHub Release\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Post Install uv\",\"status\":\"pending\",\"conclusion\":null},{\"name\":\"Post Checkout release tag\",\"status\":\"pending\",\"conclusion\":null}]}\n"}}
 
-## tool · 2026-11-19T08:53:00Z
+## tool · 2026-11-19T08:53:56Z
 
-sleep
-{"duration_ms":55000}
+
+Wall time: 55.0579 seconds
+Sleep completed.
+
+## tool · 2026-11-19T08:54:04Z
+
+
+Script running with cell ID g4:32
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T08:54:06Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"status":"fulfilled","value":{"chunk_id":"de0903","wall_time_seconds":1.002011417,"session_id":15002,"original_token_count":0,"output":""}}
+{"status":"fulfilled","value":{"chunk_id":"54f58d","wall_time_seconds":0.998633416,"exit_code":0,"original_token_count":35,"output":"{\"id\":44491268813,\"status\":\"completed\",\"conclusion\":\"success\",\"html_url\":\"https://github.com/OyamaMeek/Autovisor/actions/runs/44491268813\"}\n"}}

@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
   "source" : "codex",
   "title" : "更新 README 并发布",
-  "updated" : 1795078381004,
+  "updated" : 1795078446185,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -463,6 +463,24 @@
       "model" : "gpt-6.2-sol",
       "output" : 54,
       "time" : 1795078381004
+    },
+    {
+      "cacheRead" : 82304,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb924d90887d0a01eb306aa2b58fa",
+      "input" : 265,
+      "model" : "gpt-6.2-sol",
+      "output" : 250,
+      "time" : 1795078443272
+    },
+    {
+      "cacheRead" : 82560,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb92ce25487d0a97fbe883bfab8ac",
+      "input" : 289,
+      "model" : "gpt-6.2-sol",
+      "output" : 28,
+      "time" : 1795078446183
     }
   ],
   "warnings" : [
