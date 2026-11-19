@@ -2680,3 +2680,364 @@ Wall time 5.0 seconds
 Output:
 
 {"chunk_id":"30628d","wall_time_seconds":5.002075416,"session_id":2452,"original_token_count":97,"output":"FAIL\ntest_completed_homework_confirms_stash_after_saving_last_answer (test_answering_integration.BrowserAnswerTests.test_completed_homework_confirms_stash_after_saving_last_answer) ... ERROR\ntest_exam_waits_for_manually_opened_paper_and_saves_without_submitting (test_answering_integration.BrowserAnswerTests.test_exam_waits_for_manually_opened_paper_and_saves_without_submitting) ... "}
+
+## tool · 2026-11-19T07:03:07Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"1b4596","wall_time_seconds":0.000016709,"exit_code":1,"original_token_count":2024,"output":"ERROR\n\n======================================================================\nERROR: test_completed_homework_confirms_stash_after_saving_last_answer (test_answering_integration.BrowserAnswerTests.test_completed_homework_confirms_stash_after_saving_last_answer)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/runners.py\", line 119, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/base_events.py\", line 726, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/tests/test_answering_integration.py\", line 472, in test_completed_homework_confirms_stash_after_saving_last_answer\n    self.assertEqual(await fill_exam(self.page, \"key-for-test\"), (1, 0))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/modules/exam_answering.py\", line 118, in fill_exam\n    result, needs_manual = await _fill_current_question(page, cdp, selector, api_key)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/modules/exam_answering.py\", line 89, in _fill_current_question\n    await choice.locator(\"input:checked\").wait_for(state=\"attached\", timeout=2500)\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/async_api/_generated.py\", line 20268, in wait_for\n    await self._impl_obj.wait_for(timeout=to_milliseconds(timeout), state=state)\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_locator.py\", line 741, in wait_for\n    await self._frame.wait_for_selector(\n        self._selector, strict=True, timeout=timeout, state=state\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_frame.py\", line 394, in wait_for_selector\n    await self._channel.send(\n        \"waitForSelector\", self._timeout, locals_to_params(locals())\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 69, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 563, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TimeoutError: Locator.wait_for: Timeout 2500ms exceeded.\nCall log:\n  - waiting for locator(\".examPaper_box .examPaper_subject:has(> .subject_stem .subject_num [id^='anchor_'][id=\\\"anchor_0\\\"]):visible\").locator(\".subject_node .nodeLab:visible\").nth(1).locator(\"input:checked\")\n\n\n======================================================================\nERROR: test_exam_waits_for_manually_opened_paper_and_saves_without_submitting (test_answering_integration.BrowserAnswerTests.test_exam_waits_for_manually_opened_paper_and_saves_without_submitting)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/runners.py\", line 119, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/base_events.py\", line 726, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/tests/test_answering_integration.py\", line 450, in test_exam_waits_for_manually_opened_paper_and_saves_without_submitting\n    await paper.get_by_text(\"保存成功！\", exact=True).wait_for(timeout=12000)\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/async_api/_generated.py\", line 20268, in wait_for\n    await self._impl_obj.wait_for(timeout=to_milliseconds(timeout), state=state)\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_locator.py\", line 741, in wait_for\n    await self._frame.wait_for_selector(\n        self._selector, strict=True, timeout=timeout, state=state\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_frame.py\", line 394, in wait_for_selector\n    await self._channel.send(\n        \"waitForSelector\", self._timeout, locals_to_params(locals())\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 69, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 563, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TimeoutError: Locator.wait_for: Timeout 12000ms exceeded.\nCall log:\n  - waiting for get_by_text(\"保存成功！\", exact=True) to be visible\n    - waiting for\" https://onlineexamh5new.zhihuishu.com/stuExamWeb.html?highlight\" navigation to finish...\n    - navigated to \"https://onlineexamh5new.zhihuishu.com/stuExamWeb.html?highlight#/webExamList/dohomework/recruit/work/exam/course/school/0\"\n    28 × locator resolved to hidden <span hidden=\"\" id=\"notice\">保存成功！</span>\n\n\n======================================================================\nFAIL: test_unsubmitted_homework_opens_once_in_order_after_list_refresh (test_answering_integration.BrowserAnswerTests.test_unsubmitted_homework_opens_once_in_order_after_list_refresh)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/runners.py\", line 119, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/base_events.py\", line 726, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/tests/test_answering_integration.py\", line 334, in test_unsubmitted_homework_opens_once_in_order_after_list_refresh\n    self.assertEqual(await self.page.evaluate(\"opened\"), [[1, 0]])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: [[1, 0], [2, 1]] != [[1, 0]]\n\nFirst list contains 1 additional elements.\nFirst extra element 1:\n[2, 1]\n\n- [[1, 0], [2, 1]]\n+ [[1, 0]]\n\n----------------------------------------------------------------------\nRan 3 tests in 24.946s\n\nFAILED (failures=1, errors=2)\n\r\n\u001b[32m[INFO]\u001b[0m 等待首题加载超时，正在刷新当前试卷。              \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 本卷自动作答 1 题，待手动处理 0 题，请检查后自行交卷。  \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 本卷自动作答 1 题，待手动处理 0 题，请检查后自行交卷。  \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 请在在线学堂选择课程并进入作业考试。未提交的作业会逐个打开，答完后自动暂存，请核对后自行交卷。\n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[33m[WARN]\u001b[0m 题目加载或保存失败，请在浏览器检查当前试卷。          \n"}
+
+## tool · 2026-11-19T07:03:18Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+logger = Logger()
+PAPER_LOAD_TIMEOUT_MS = 15000
+QUESTION = ".examPaper_box .examPaper_subject"
+ANCHOR = "> .subject_stem .subject_num [id^='anchor_']"
+STEM = "> .subject_stem .subject_describe"
+KIND = "> .subject_stem .subject_type > span:first-child"
+CHOICES = ".subject_node .nodeLab:visible"
+OPTION_TEXT = ".node_detail"
+CHECKED = ".subject_node input:checked"
+MEDIA = "img:visible, canvas:visible, video:visible, audio:visible"
+
+
+def is_exam_paper_url(url: str) -> bool:
+    parsed = urlsplit(url)
+    route = parsed.fragment.split("?", 1)[0].split("/")
+    return (
+        parsed.scheme == "https"
+        and parsed.netloc == "onlineexamh5new.zhihuishu.com"
+        and parsed.path == "/stuExamWeb.html"
+        and route[:2] == ["", "webExamList"]
+        and ((len(route) == 9 and route[2] == "dohomework") or (len(route) == 8 and route[2] == "doexamination"))
+    question = page.locator(f"{selector}:visible")
+    if await question.locator(CHECKED).count():
+        return 0, 0
+    kind = (await question.locator(KIND).inner_text(timeout=2500)).strip("【】 \r\n")
+    if kind not in {"单选题", "多选题", "判断题"}:
+        return 0, 1
+    choices = question.locator(CHOICES)
+    content = choices.locator(OPTION_TEXT)
+    options = [text.strip() for text in await content.all_inner_texts()]
+    stem = await _read_stem(cdp, f"{selector} {STEM}")
+    if (
+        not stem or len(options) < 2 or len(options) != await choices.count()
+        or any(not option for option in options)
+        or any(category(char) == "Co" for char in stem + "".join(options))
+        or await question.locator(STEM).locator(MEDIA).count()
+        or await content.locator(MEDIA).count()
+    ):
+        return 0, 1
+
+    answers = await ask_deepseek(f"{kind}：{stem}", options, api_key)
+    if kind != "多选题" and len(answers) != 1:
+        raise AnswerError("单选题和判断题只允许填写一个选项")
+    if (
+        page.url != url or not await question.is_visible() or await question.locator(CHECKED).count()
+        or [text.strip() for text in await content.all_inner_texts()] != options
+        or await _read_stem(cdp, f"{selector} {STEM}") != stem
+    ):
+        raise AnswerError("等待 DeepSeek 期间题目或选择已变化")
+    if await has_visible_verification(page):
+        raise AnswerError("检测到平台验证，请在浏览器手动处理")
+    for index in answers:
+        choice = choices.nth(index)
+        await choice.click(timeout=2500)
+        await choice.locator("input:checked").wait_for(state="attached", timeout=2500)
+    selected = await choices.evaluate_all(
+        "rows => rows.flatMap((row, index) => row.querySelector('input:checked') ? [index] : [])"
+    )
+    if selected != sorted(answers):
+        raise AnswerError("页面选中状态与返回的答案不一致")
+    return 1, 0
+
+
+async def fill_exam(page: Page, api_key: str) -> tuple[int, int]:
+    url = page.url
+    if not is_exam_paper_url(url):
+        raise AnswerError("当前页面不是受支持的作业考试答题页")
+
+async def _open_next_homework(page: Page, attempted: set[tuple[str, tuple[str, ...], int]]) -> bool:
+    url = page.url
+    parsed = urlsplit(url)
+    if (
+        parsed.scheme != "https" or parsed.netloc != "onlineexamh5new.zhihuishu.com"
+        or parsed.path != "/stuExamWeb.html" or parsed.fragment.split("?", 1)[0] != "/webExamList"
+    ):
+        return False
+
+    unsubmitted = page.locator("#examStateTabWsj.cur:visible")
+    dialogs = page.locator(".el-message-box__wrapper:visible, .el-dialog__wrapper:visible")
+    if not await unsubmitted.is_visible() or await dialogs.count() or await has_visible_verification(page):
+        return False
+
+    cards = page.locator(".examItemWrap:visible").filter(has=page.locator('.percentage_number:text-is("作业")'))
+    occurrences = Counter()
+    for card in await cards.all():
+        details = await card.locator(".examTit .name, .examInfoList").all_text_contents()
+        identity = tuple(" ".join(text.split()) for text in details)
+        if not identity or not identity[0]:
+            continue
+        occurrences[identity] += 1
+        key = (url, identity, occurrences[identity])
+        if key in attempted:
+            continue
+        button = card.locator('a[title="开始答题"] .themeBg:visible')
+        if not await button.is_visible():
+            continue
+        if page.url != url or not await unsubmitted.is_visible():
+            return False
+        attempted.add(key)
+        try:
+            async with page.expect_popup(timeout=5000) as result:
+                await button.click(timeout=2500)
+            paper = await result.value
+            await paper.wait_for_url(lambda value: value not in {"", "about:blank"}, wait_until="commit", timeout=15000)
+        except PlaywrightError as exc:
+            logger.warn(f"作业「{identity[0]}」打开或加载失败，请在浏览器检查。", shift=True)
+            logger.debug(logger.summarize_exception(exc))
+        return True
+    return False
+
+
+async def watch_exam_pages(entry_page: Page, api_key: str) -> None:
+    pages = set()
+    handled = {}
+    reloaded = {}
+    attempted = set()
+
+    def track(page: Page) -> None:
+        pages.add(page)
+        page.on("popup", track)
+
+    track(entry_page)
+    while pages:
+        for page in tuple(pages):
+            if page.is_closed():
+                pages.discard(page)
+                handled.pop(page, None)
+                reloaded.pop(page, None)
+                continue
+            url = page.url
+            if not is_exam_paper_url(url):
+                handled.pop(page, None)
+                reloaded.pop(page, None)
+                continue
+            if handled.get(page) == url:
+                continue
+            try:
+                if await has_visible_verification(page):
+                    continue
+                question = page.locator(f"{QUESTION}:visible").first
+                if reloaded.get(page) == url:
+                    if not await question.is_visible():
+                        continue
+                else:
+                    try:
+                        await question.wait_for(timeout=PAPER_LOAD_TIMEOUT_MS)
+                    except PlaywrightTimeoutError:
+                        if await has_visible_verification(page) or page.url != url:
+                            continue
+                        if not await question.is_visible():
+                            reloaded[page] = url
+                            logger.info("等待首题加载超时，正在刷新当前试卷。", shift=True)
+                            await page.reload(wait_until="commit", timeout=PAPER_LOAD_TIMEOUT_MS)
+                            if page.url != url:
+                                continue
+                            await question.wait_for(timeout=PAPER_LOAD_TIMEOUT_MS)
+                if await has_visible_verification(page) or page.url != url:
+                    continue
+                handled[page] = url
+                filled, skipped = await fill_exam(page, api_key)
+                logger.info(f"本卷自动作答 {filled} 题，待手动处理 {skipped} 题，请检查后自行交卷。", shift=True)
+            except AnswerError as exc:
+                logger.warn(f"{exc}，请在浏览器手动处理当前试卷。", shift=True)
+            except PlaywrightError as exc:
+                if not page.is_closed():
+                    logger.warn("题目加载或保存失败，请在浏览器检查当前试卷。", shift=True)
+                    logger.debug(logger.summarize_exception(exc))
+        for page in tuple(pages):
+            if page.is_closed():
+                continue
+            try:
+                if await _open_next_homework(page, attempted):
+                    break
+            except PlaywrightError as exc:
+                if not page.is_closed():
+                    logger.debug_throttled("homework-list", logger.summarize_exception(exc))
+        if pages:
+            await asyncio.sleep(0.5)
+    remember_login_cookies(cookies)
+    async with async_playwright() as playwright:
+        session = await create_browser_session(playwright, config, cookies, logger)
+        try:
+            if not session.attached:
+                await ensure_login(session.context, session.page, cookies, config)
+            campus_url = "https://onlineweb.zhihuishu.com/onlinestuh5"
+            try:
+                await session.page.goto(campus_url, wait_until="commit", timeout=30000)
+            except TimeoutError as exc:
+                logger.warn(f"在线学堂打开超时，请在当前标签页手动打开 {campus_url}", shift=True)
+                logger.debug(logger.summarize_exception(exc))
+            logger.info("请在在线学堂选择课程并进入作业考试。未提交的作业会逐个打开，答完后自动暂存，请核对后自行交卷。", shift=True)
+            await watch_exam_pages(session.page, config.deepseek_api_key)
+        finally:
+            await session.close()
+
+
+填写自己的 DeepSeek API Key 后，根据运行方式启动。
+
+- macOS 源码运行 `./run_macos.sh --answer-exam`
+- Windows 发行版在 PowerShell 中运行 `./Autovisor.exe --answer-exam`
+- 其他源码运行方式使用 `uv run python Autovisor.py --answer-exam`
+
+在程序打开的在线学堂中选择课程，进入 **作业考试 → 未提交**。程序会按列表顺序逐个打开可作答的作业，同一轮运行中每份作业只自动打开一次。考试试卷仍由你手动打开。
+
+试卷首题在 15 秒内未加载时，程序会刷新当前试卷一次。程序从当前题开始填写没有选择的文本单选、多选和判断题，通过页面原有的 **下一题** 与 **保存** 逐题保存。作业页面显示完成率为 100% 时，程序会点击 **暂存作业** 并确认。遇到主观题、无法读取的内容、平台验证或作答出错时，请在浏览器处理。请核对答案后自行交卷。
+
+测试命令为 `uv run python -m unittest discover -s tests -v`。设置 `AUTOVISOR_TEST_BROWSER=1` 可运行真实 Chrome 和本地 HTTP 服务的答题测试。设置 `AUTOVISOR_TEST_DEEPSEEK=1` 和 `DEEPSEEK_API_KEY` 可另外测试一次真实 DeepSeek 请求，测试题为 `1 + 1`。
+                    </div></li>
+                </ul>
+                <script>
+                    const urls = {json.dumps([first, second])};
+                    const opened = [];
+                    const stashed = [];
+                    addEventListener('message', event => {{
+                        if (event.origin === location.origin && event.data.stashed) {{
+                            stashed.push(event.data);
+                            work.innerHTML = work.innerHTML;
+                        }}
+                    }});
+                    function openWork(index) {{
+                        opened.push([index, stashed.length]);
+                        const paper = window.open();
+                        setTimeout(() => {{ paper.location.href = urls[index - 1]; }}, index === 1 ? 1800 : 200);
+                    }}
+                </script>
+            ''',
+        ))
+        await self.page.goto(list_url)
+        load_timeout = patch("modules.exam_answering.PAPER_LOAD_TIMEOUT_MS", 1000)
+        load_timeout.start()
+        self.addCleanup(load_timeout.stop)
+        task = asyncio.create_task(watch_exam_pages(self.page, "key-for-test"))
+        try:
+            await asyncio.sleep(0.6)
+            self.assertEqual(await self.page.evaluate("opened"), [])
+            async with self.page.expect_popup(timeout=5000) as popup:
+                await self.page.locator("#examStateTabWsj").evaluate("tab => tab.classList.add('cur')")
+            paper = await popup.value
+            await asyncio.sleep(1.6)
+            self.assertEqual(await self.page.evaluate("opened"), [[1, 0]])
+            await self.page.wait_for_function("stashed.length === 1", timeout=7000)
+            await asyncio.sleep(1)
+            self.assertEqual(await self.page.evaluate("opened"), [[1, 0]])
+            await paper.close()
+            await self.page.wait_for_function("stashed.length === 2", timeout=7000)
+            self.assertEqual(await self.page.evaluate("stashed"), [
+                {"paper": "#/webExamList/dohomework/recruit/work/exam/course/school/0", "stashed": "2", "submitted": None},
+                {"paper": "#/webExamList/dohomework/recruit/work-two/exam/course/school/0", "stashed": "2", "submitted": None},
+            ])
+            await asyncio.sleep(0.6)
+            self.assertEqual(await self.page.evaluate("opened"), [[1, 0], [2, 1]])
+            self.assertEqual(len(first_loads), 2)
+        finally:
+            task.cancel()
+- [x] 用真实 Chrome 复现首次加载未渲染首题后未触发刷新。
+- [x] 接入单次刷新并通过启用 Chrome 的全量测试。133 项中 130 项通过、3 项跳过。
+- [x] 修复提交 `c206f87` 已推送至 `origin/main`，开发记录已补记提交哈希。
+
+## 作业选项识别与串行打开
+
+- [x] 核对运行日志、留存的公开前端和作业窗口调用链。
+- [ ] 用真实 Chrome 复现高亮选项未识别和作业窗口重叠。
+- [ ] 修复选项确认和作业窗口调度，验证现有保存流程。
+- [ ] 更新使用说明和开发记录，提交并推送。
+
+
+## tool · 2026-11-19T07:03:47Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T07:04:03Z
+
+
+Script completed
+Wall time 3.9 seconds
+Output:
+
+{"chunk_id":"84a9c5","wall_time_seconds":1.001929625,"session_id":5184,"original_token_count":46,"output":"test_unsubmitted_homework_opens_once_in_order_after_list_refresh (test_answering_integration.BrowserAnswerTests.test_unsubmitted_homework_opens_once_in_order_after_list_refresh) ... "}
+
+## tool · 2026-11-19T07:04:22Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T07:04:27Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"80c1d1","wall_time_seconds":0.00017675,"exit_code":0,"original_token_count":365,"output":"ok\ntest_completed_homework_confirms_stash_after_saving_last_answer (test_answering_integration.BrowserAnswerTests.test_completed_homework_confirms_stash_after_saving_last_answer) ... ok\ntest_exam_waits_for_manually_opened_paper_and_saves_without_submitting (test_answering_integration.BrowserAnswerTests.test_exam_waits_for_manually_opened_paper_and_saves_without_submitting) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 13.339s\n\nOK\n\r\n\u001b[33m[WARN]\u001b[0m 作业「单元测试」未能及时进入答题页，关闭当前窗口后才会打开下一份。\n\r\n\u001b[32m[INFO]\u001b[0m 等待首题加载超时，正在刷新当前试卷。              \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 本卷自动作答 1 题，待手动处理 0 题，请检查后自行交卷。  \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 本卷自动作答 1 题，待手动处理 0 题，请检查后自行交卷。  \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 请在在线学堂选择课程并进入作业考试。未提交的作业会逐个打开，答完后自动暂存，请核对后自行交卷。\n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 本卷自动作答 2 题，待手动处理 1 题，请检查后自行交卷。  \n"}
+
+## assistant · 2026-11-19T07:04:36Z
+
+三项 Chrome 回归测试已通过。单选和判断题能识别页面高亮并继续保存，第一份作业即使加载超时或暂存后仍开着，程序也会等它关闭才打开第二份。接下来我会按 verification-before-completion 技能运行全量测试。
+
+## tool · 2026-11-19T07:04:46Z
+
+
+Script completed
+Wall time 5.7 seconds
+Output:
+
+{"chunk_id":"138c40","wall_time_seconds":1.001784583,"session_id":13113,"original_token_count":0,"output":""}
+{"chunk_id":"9b441d","wall_time_seconds":0.07755875,"exit_code":0,"original_token_count":167,"output":"usage: Autovisor.py [-h] [--config CONFIG] [--check-browser]\n                    [--check-course URL] [--answer-exam]\n                    [--import-cookies PATH]\n\nAutovisor\n\noptions:\n  -h, --help            show this help message and exit\n  --config CONFIG       配置文件路径(默认使用程序目录下的 config.ini)\n  --check-browser       只检查 Chrome 启动和智慧树登录状态\n  --check-course URL    阻止进度上报和自动播放,只检查课程目录选择器\n  --answer-exam         开启智慧树作业考试答题模式\n  --import-cookies PATH\n                        从 Requests CookieJar JSON 安全导入未过期的智慧树 Cookie\n"}
+{"chunk_id":"520767","wall_time_seconds":0.000009208,"exit_code":1,"original_token_count":3550,"output":" Autovisor.py                        |  6 +++-\n README.md                           |  4 +--\n memory/plan.md                      |  5 ++++\n memory/progress.md                  |  7 +++++\n memory/verify.md                    |  5 ++++\n modules/exam_answering.py           | 57 ++++++++++++++++++++++---------------\n tests/fixtures/exam_paper.html      | 23 +++++++++++----\n tests/test_answering_integration.py | 26 ++++++++++-------\n 8 files changed, 91 insertions(+), 42 deletions(-)\ndiff --git a/modules/exam_answering.py b/modules/exam_answering.py\nindex 80b1756..f2daf63 100644\n--- a/modules/exam_answering.py\n+++ b/modules/exam_answering.py\n@@ -19,7 +19,7 @@ STEM = \"> .subject_stem .subject_describe\"\n KIND = \"> .subject_stem .subject_type > span:first-child\"\n CHOICES = \".subject_node .nodeLab:visible\"\n OPTION_TEXT = \".node_detail\"\n-CHECKED = \".subject_node input:checked\"\n+SELECTED_OPTION = f\"input:checked, {OPTION_TEXT}.onChecked\"\n MEDIA = \"img:visible, canvas:visible, video:visible, audio:visible\"\n \n \n@@ -54,12 +54,13 @@ async def _read_stem(cdp: CDPSession, selector: str) -> str:\n async def _fill_current_question(page: Page, cdp: CDPSession, selector: str, api_key: str) -> tuple[int, int]:\n     url = page.url\n     question = page.locator(f\"{selector}:visible\")\n-    if await question.locator(CHECKED).count():\n+    choices = question.locator(CHOICES)\n+    selected_choices = choices.filter(has=page.locator(SELECTED_OPTION))\n+    if await selected_choices.count():\n         return 0, 0\n     kind = (await question.locator(KIND).inner_text(timeout=2500)).strip(\"【】 \\r\\n\")\n     if kind not in {\"单选题\", \"多选题\", \"判断题\"}:\n         return 0, 1\n-    choices = question.locator(CHOICES)\n     content = choices.locator(OPTION_TEXT)\n     options = [text.strip() for text in await content.all_inner_texts()]\n     stem = await _read_stem(cdp, f\"{selector} {STEM}\")\n@@ -76,7 +77,7 @@ async def _fill_current_question(page: Page, cdp: CDPSession, selector: str, api\n     if kind != \"多选题\" and len(answers) != 1:\n         raise AnswerError(\"单选题和判断题只允许填写一个选项\")\n     if (\n-        page.url != url or not await question.is_visible() or await question.locator(CHECKED).count()\n+        page.url != url or not await question.is_visible() or await selected_choices.count()\n         or [text.strip() for text in await content.all_inner_texts()] != options\n         or await _read_stem(cdp, f\"{selector} {STEM}\") != stem\n     ):\n@@ -86,9 +87,10 @@ async def _fill_current_question(page: Page, cdp: CDPSession, selector: str, api\n     for index in answers:\n         choice = choices.nth(index)\n         await choice.click(timeout=2500)\n-        await choice.locator(\"input:checked\").wait_for(state=\"attached\", timeout=2500)\n+        await choice.locator(SELECTED_OPTION).first.wait_for(state=\"attached\", timeout=2500)\n     selected = await choices.evaluate_all(\n-        \"rows => rows.flatMap((row, index) => row.querySelector('input:checked') ? [index] : [])\"\n+        \"(rows, selector) => rows.flatMap((row, index) => row.querySelector(selector) ? [index] : [])\",\n+        SELECTED_OPTION,\n     )\n     if selected != sorted(answers):\n         raise AnswerError(\"页面选中状态与返回的答案不一致\")\n@@ -146,19 +148,19 @@ async def fill_exam(page: Page, api_key: str) -> tuple[int, int]:\n             await cdp.detach()\n \n \n-async def _open_next_homework(page: Page, attempted: set[tuple[str, tuple[str, ...], int]]) -> bool:\n+async def _open_next_homework(page: Page, attempted: set[tuple[str, tuple[str, ...], int]]) -> Page | None:\n     url = page.url\n     parsed = urlsplit(url)\n     if (\n         parsed.scheme != \"https\" or parsed.netloc != \"onlineexamh5new.zhihuishu.com\"\n         or parsed.path != \"/stuExamWeb.html\" or parsed.fragment.split(\"?\", 1)[0] != \"/webExamList\"\n     ):\n-        return False\n+        return None\n \n     unsubmitted = page.locator(\"#examStateTabWsj.cur:visible\")\n     dialogs = page.locator(\".el-message-box__wrapper:visible, .el-dialog__wrapper:visible\")\n     if not await unsubmitted.is_visible() or await dialogs.count() or await has_visible_verification(page):\n-        return False\n+        return None\n \n     cards = page.locator(\".examItemWrap:visible\").filter(has=page.locator('.percentage_number:text-is(\"作业\")'))\n     occurrences = Counter()\n@@ -175,18 +177,22 @@ async def _open_next_homework(page: Page, attempted: set[tuple[str, tuple[str, .\n         if not await button.is_visible():\n             continue\n         if page.url != url or not await unsubmitted.is_visible():\n-            return False\n+            return None\n         attempted.add(key)\n+        paper = None\n         try:\n             async with page.expect_popup(timeout=5000) as result:\n                 await button.click(timeout=2500)\n             paper = await result.value\n-            await paper.wait_for_url(lambda value: value not in {\"\", \"about:blank\"}, wait_until=\"commit\", timeout=15000)\n+            await paper.wait_for_url(is_exam_paper_url, wait_until=\"commit\", timeout=PAPER_LOAD_TIMEOUT_MS)\n         except PlaywrightError as exc:\n-            logger.warn(f\"作业「{identity[0]}」打开或加载失败，请在浏览器检查。\", shift=True)\n+            if paper is None:\n+                logger.warn(f\"作业「{identity[0]}」未打开答题窗口，请在浏览器检查作业列表。\", shift=True)\n+            elif not paper.is_closed():\n+                logger.warn(f\"作业「{identity[0]}」未能及时进入答题页，关闭当前窗口后才会打开下一份。\", shift=True)\n             logger.debug(logger.summarize_exception(exc))\n-        return True\n-    return False\n+        return paper\n+    return None\n \n \n async def watch_exam_pages(entry_page: Page, api_key: str) -> None:\n@@ -194,6 +200,7 @@ async def watch_exam_pages(entry_page: Page, api_key: str) -> None:\n     handled = {}\n     reloaded = {}\n     attempted = set()\n+    active_homework = None\n \n     def track(page: Page) -> None:\n         pages.add(page)\n@@ -245,14 +252,18 @@ async def watch_exam_pages(entry_page: Page, api_key: str) -> None:\n                 if not page.is_closed():\n                     logger.warn(\"题目加载或保存失败，请在浏览器检查当前试卷。\", shift=True)\n                     logger.debug(logger.summarize_exception(exc))\n-        for page in tuple(pages):\n-            if page.is_closed():\n-                continue\n-            try:\n-                if await _open_next_homework(page, attempted):\n-                    break\n-            except PlaywrightError as exc:\n-                if not page.is_closed():\n-                    logger.debug_throttled(\"homework-list\", logger.summarize_exception(exc))\n+        if (active_homework is None or active_homework.is_closed()) and not any(\n+            not page.is_closed() and is_exam_paper_url(page.url) for page in pages\n+        ):\n+            for page in tuple(pages):\n+                if page.is_closed():\n+                    continue\n+                try:\n+                    active_homework = await _open_next_homework(page, attempted)\n+                    if active_homework is not None:\n+                        break\n+                except PlaywrightError as exc:\n+                    if not page.is_closed():\n+                        logger.debug_throttled(\"homework-list\", logger.summarize_exception(exc))\n         if pages:\n             await asyncio.sleep(0.5)\ndiff --git a/tests/fixtures/exam_paper.html b/tests/fixtures/exam_paper.html\nindex ee21096..1e1137a 100644\n--- a/tests/fixtures/exam_paper.html\n+++ b/tests/fixtures/exam_paper.html\n@@ -17,7 +17,8 @@\n     <span id=\"notice\" hidden>保存成功！</span>\n </div>\n <script>\n-    const kind = new URLSearchParams(location.search).get('kind');\n+    const params = new URLSearchParams(location.search);\n+    const kind = params.get('kind');\n     const questions = kind === 'single' ? [\n         ['单选题', '1 + 1 等于几？', ['3', '2', '4']],\n     ] : [\n@@ -45,8 +46,18 @@\n                 type=\"${type === '多选题' ? 'checkbox' : 'radio'}\">\n                 <img class=\"flagChecked\" alt=\"选项图标\"><div class=\"node_detail\">${option}</div>`;\n             const input = row.querySelector('input');\n-            input.checked = kind !== 'single' && index === 0 && number === 0;\n-            row.onclick = () => input.checked = input.type === 'radio' || !input.checked;\n+            const selected = kind !== 'single' && index === 0 && number === 0;\n+            if (params.has('highlight') && input.type === 'radio') {\n+                const text = row.querySelector('.node_detail');\n+                text.classList.toggle('onChecked', selected);\n+                row.onclick = () => {\n+                    rows.querySelector('.onChecked')?.classList.remove('onChecked');\n+                    text.classList.add('onChecked');\n+                };\n+            } else {\n+                input.checked = selected;\n+                row.onclick = () => input.checked = input.type === 'radio' || !input.checked;\n+            }\n             rows.append(row);\n         }\n         document.getElementById('questions').append(question);\n@@ -60,7 +71,9 @@\n     next.hidden = pages.length === 1;\n     save.hidden = !next.hidden;\n     function recordAnswer() {\n-        const selected = [...pages[current].querySelectorAll('input:checked')].map(input => input.value);\n+        const selected = [...pages[current].querySelectorAll('.nodeLab')]\n+            .filter(row => row.querySelector('input:checked') || row.querySelector('.onChecked'))\n+            .map(row => row.querySelector('input').value);\n         document.body.dataset[`saved${current}`] = selected.join(',');\n         const answered = [...pages].filter((_, index) => document.body.dataset[`saved${index}`]).length;\n         document.getElementById('completion').textContent = Math.floor(100 * answered / pages.length);\n@@ -85,7 +98,7 @@\n                 stashed: document.body.dataset.stashed,\n                 submitted: document.body.dataset.submitted,\n             }, '*');\n-            window.close();\n+            if (!params.has('keepOpen')) window.close();\n         }\n     }\n </script>\ndiff --git a/tests/test_answering_integration.py b/tests/test_answering_integration.py\nindex 47bbdbd..e469e04 100644\n--- a/tests/test_answering_integration.py\n+++ b/tests/test_answering_integration.py\n@@ -11,7 +11,7 @@ from tempfile import TemporaryDirectory\n from types import SimpleNamespace\n from unittest.mock import patch\n \n-from playwright.async_api import TimeoutError, async_playwright\n+from playwright.async_api import async_playwright\n \n from Autovisor import run_exam_mode\n from modules.answering import AnswerError, answer_question, ask_deepseek\n@@ -263,8 +263,8 @@ class BrowserAnswerTests(_DeepSeekHTTPTestCase):\n \n     async def test_unsubmitted_homework_opens_once_in_order_after_list_refresh(self):\n         self.set_answers([2])\n-        first = await self._serve_exam(query=\"?kind=single&reload=1\")\n-        second = first.replace(\"/work/\", \"/work-two/\").replace(\"&reload=1\", \"\")\n+        first = await self._serve_exam(query=\"?kind=single&keepOpen\")\n+        second = first.replace(\"/work/\", \"/work-two/\").replace(\"&keepOpen\", \"\")\n         first_loads = []\n \n         async def serve_first_homework(route):\n@@ -311,7 +311,7 @@ class BrowserAnswerTests(_DeepSeekHTTPTestCase):\n                     function openWork(index) {{\n                         opened.push([index, stashed.length]);\n                         const paper = window.open();\n-                        setTimeout(() => {{ paper.location.href = urls[index - 1]; }}, 200);\n+                        setTimeout(() => {{ paper.location.href = urls[index - 1]; }}, index === 1 ? 1800 : 200);\n                     }}\n                 </script>\n             ''',\n@@ -324,11 +324,15 @@ class BrowserAnswerTests(_DeepSeekHTTPTestCase):\n         try:\n             await asyncio.sleep(0.6)\n             self.assertEqual(await self.page.evaluate(\"opened\"), [])\n-            await self.page.locator(\"#examStateTabWsj\").evaluate(\"tab => tab.classList.add('cur')\")\n-            try:\n-                await self.page.wait_for_function(\"opened.length >= 2\", timeout=7000)\n-            except TimeoutError:\n-                self.fail(\"脚本没有逐份打开未提交的作业\")\n+            async with self.page.expect_popup(timeout=5000) as popup:\n+                await self.page.locator(\"#examStateTabWsj\").evaluate(\"tab => tab.classList.add('cur')\")\n+            paper = await popup.value\n+            await asyncio.sleep(1.6)\n+            self.assertEqual(await self.page.evaluate(\"opened\"), [[1, 0]])\n+            await self.page.wait_for_function(\"stashed.length === 1\", timeout=7000)\n+            await asyncio.sleep(1)\n+            self.assertEqual(await self.page.evaluate(\"opened\"), [[1, 0]])\n+            await paper.close()\n             await self.page.wait_for_function(\"stashed.length === 2\", timeout=7000)\n             self.assertEqual(await self.page.evaluate(\"stashed\"), [\n                 {\"paper\": \"#/webExamList/dohomework/recruit/work/exam/course/school/0\", \"stashed\": \"2\", \"submitted\": None},\n@@ -411,7 +415,7 @@ class BrowserAnswerTests(_DeepSeekHTTPTestCase):\n                 await task\n \n     async def test_exam_waits_for_manually_opened_paper_and_saves_without_submitting(self):\n-        url = await self._serve_exam()\n+        url = await self._serve_exam(query=\"?highlight\")\n         statements = []\n \n         def reply(request):\n@@ -462,7 +466,7 @@ class BrowserAnswerTests(_DeepSeekHTTPTestCase):\n \n     async def test_completed_homework_confirms_stash_after_saving_last_answer(self):\n         self.set_answers([2])\n-        url = await self._serve_exam(query=\"?kind=single\")\n+        url = await self._serve_exam(query=\"?kind=single&highlight\")\n         await self.page.goto(url)\n \n         self.assertEqual(await fill_exam(self.page, \"key-for-test\"), (1, 0))\n## main...origin/main\n M Autovisor.py\n M README.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n M modules/exam_answering.py\n M tests/fixtures/exam_paper.html\n M tests/test_answering_integration.py\n?? .DS_Store\n"}
+
+## tool · 2026-11-19T07:05:00Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"5810c1","wall_time_seconds":0.000008709,"exit_code":1,"original_token_count":480,"output":"test_incomplete_question_fails_before_request (test_answering.AnswerClientTests.test_incomplete_question_fails_before_request) ... ok\ntest_invalid_key_cannot_be_used_as_an_authorization_header (test_answering.AnswerClientTests.test_invalid_key_cannot_be_used_as_an_authorization_header) ... ok\ntest_live_deepseek_answers_a_text_question (test_answering.AnswerClientTests.test_live_deepseek_answers_a_text_question) ... skipped '需要显式启用 DeepSeek 服务测试'\ntest_accepts_single_multiple_and_true_false_answers (test_answering.AnswerValidationTests.test_accepts_single_multiple_and_true_false_answers) ... ok\ntest_rejects_invalid_or_ambiguous_answers (test_answering.AnswerValidationTests.test_rejects_invalid_or_ambiguous_answers) ... ok\ntest_only_matches_active_papers_on_the_supported_site (test_answering.ExamUrlTests.test_only_matches_active_papers_on_the_supported_site) ... ok\ntest_changed_question_does_not_receive_stale_answer (test_answering_integration.BrowserAnswerTests.test_changed_question_does_not_receive_stale_answer) ... ok\ntest_completed_homework_confirms_stash_after_saving_last_answer (test_answering_integration.BrowserAnswerTests.test_completed_homework_confirms_stash_after_saving_last_answer) ... ok\ntest_exam_keeps_checked_answer_when_save_fails (test_answering_integration.BrowserAnswerTests.test_exam_keeps_checked_answer_when_save_fails) ... ok\ntest_exam_keeps_platform_verification_open_while_waiting_for_questions (test_answering_integration.BrowserAnswerTests.test_exam_keeps_platform_verification_open_while_waiting_for_questions) ... ok\ntest_exam_keeps_selection_made_by_user_during_request (test_answering_integration.BrowserAnswerTests.test_exam_keeps_selection_made_by_user_during_request) ... ok\ntest_exam_mode_tracks_paper_in_same_tab_after_campus_timeout (test_answering_integration.BrowserAnswerTests.test_exam_mode_tracks_paper_in_same_tab_after_campus_timeout) ... "}
+{"chunk_id":"bc7ff3","wall_time_seconds":0.000008708,"exit_code":0,"original_token_count":948,"output":"# 注意事项\n\n- DeepSeek JSON 输出可能为空，截断的响应也可能带有选项编号。只有正常结束且通过编号校验的答案才能用于点击和提交。\n- `enableAutoCaptcha` 控制登录滑块。自动答题从 `[deepseek]` 读取用户填写的 `api_key`。\n\n## DeepSeek 答案本地记录验证\n\n- 用本地 HTTP 服务和真实文件验证两次有效响应依次追加、中文内容与多选答案完整、API Key 未写入、无效响应不变更文件、写入失败时提示且仍返回有效选项。运行启用 Chrome 的全量测试和差异检查。\n- 启用 Chrome 的全量测试共 130 项，127 项通过，线上 DeepSeek 和两项 Windows 专用用例跳过。最终版本通过 5 项专项回归，覆盖本地 Markdown、普通课中题、融合练习和作业考试。Python 编译、CLI 帮助和差异检查通过。\n\n## 作业考试首题加载超时验证\n\n- 真 Chrome 回归测试复现首题空白时缺少刷新。修复后验证单次自动刷新、刷新后仍空白时手动刷新可恢复、平台验证保留、保存异常保留当前勾选，以及作业仍逐份打开。\n- 启用 Chrome 的全量测试共 133 项，130 项通过，线上 DeepSeek 和两项 Windows 专用测试跳过。Python 编译、CLI 帮助和差异检查通过。未运行线上试卷。\n\n## 作业选项识别与串行打开验证\n\n- 使用真实 Chrome 和本地页面复现单选、判断题只更新选项高亮时的答题超时，并验证已有选择得到保留、自动选择可保存。\n- 验证首份作业的空白窗口超时后仍可恢复导航和刷新，且窗口关闭前列表不会打开下一份。运行启用 Chrome 的全量测试和差异检查。\n## 作业考试首题加载超时\n\n- [x] 从本地日志确认作业标签页已打开，首题等待超时。作答阶段的 2.5 秒定位器等待超时对应点击后未检测到勾选，尚未进入保存步骤。\n- [x] 用真实 Chrome 复现首次加载未渲染首题后未触发刷新。\n- [x] 接入单次刷新并通过启用 Chrome 的全量测试。133 项中 130 项通过、3 项跳过。\n- [x] 修复提交 `c206f87` 已推送至 `origin/main`，开发记录已补记提交哈希。\n\n## 作业选项识别与串行打开\n\n- [x] 核对运行日志、留存的公开前端和作业窗口调用链。\n- [x] 真实 Chrome 回归测试确认旧代码等待隐藏输入框勾选超时，并在第一份作业窗口尚未关闭时打开第二份。\n- [ ] 修复选项确认和作业窗口调度，验证现有保存流程。\n- [ ] 更新使用说明和开发记录，提交并推送。\n\n- **Git 提交** `4e0c6844cdfe0be1e53cbc8f389cf0553b101c03 feat(answering): save DeepSeek answers to Markdown`，已推送 `origin/main`。\n\n---\n\n## [2026-11-19 14:55] 首题加载超时后刷新试卷\n\n- **需求/问题描述**\n  > 作业或试卷的题目加载不出来时需要重新加载，并核对日志里的保存失败提示。\n\n- **实际实现的功能与改动**\n  - 等待首题 15 秒超时后刷新当前试卷一次。平台验证和作答阶段的异常保留当前页面。自动刷新后仍未加载时，手动刷新让题目显示后可恢复。\n  - 本地日志中的作答异常对应点击后未检测到勾选状态，发生在保存步骤之前。未验证线上页面未显示勾选的原因。\n  - 启用 Chrome 的全量测试共 133 项，130 项通过、3 项跳过。Python 编译、CLI 帮助和差异检查通过。\n\n- **涉及文件**\n  - `modules/exam_answering.py`、`tests/test_answering_integration.py`、`README.md`、`memory/`、`docs/CHANGELOG.md`\n\n- **Git 提交** `c206f8711d75a32ddd19035e0e6442bf684cf13d fix(exam): reload when the first question fails to load`，已推送 `origin/main`。\n\n---\norigin\nrefs/heads/main\n2026-11-19 15:05\n"}
+
+## tool · 2026-11-19T07:05:11Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T07:05:27Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"679d87","wall_time_seconds":5.001894167,"session_id":13113,"original_token_count":0,"output":""}
