@@ -3375,3 +3375,21 @@ Wall time 7.4 seconds
 Output:
 
 {"chunk_id":"840bfb","wall_time_seconds":1.001786583,"session_id":88582,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T11:49:08Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T11:49:10Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"1efd52","wall_time_seconds":0.000023625,"exit_code":1,"original_token_count":663,"output":"[0/1] Planning build\nBuilding for debugging...\n[0/7] Write sources\n[1/7] Write swift-version--58304C5D6DBC2206.txt\n[3/6] Emitting module RagdollCoreTests\n[4/6] Compiling RagdollCoreTests StoreArchiveTests.swift\n[5/6] Compiling RagdollCoreTests BackgroundServiceTests.swift\n[6/10] Compiling RagdollCoreTests ArchiveReadTests.swift\n[7/10] Compiling RagdollCoreTests RuntimeBridgeTests.swift\n[8/10] Compiling RagdollCoreTests ArchiveImagesTests.swift\n[9/10] Compiling RagdollCoreTests ArchiveSyncTests.swift\n[9/11] Write Objects.LinkFileList\n[10/11] Linking RagdollPackageTests\nBuild complete! (3.45s)\nTest Suite 'Selected tests' started at 2026-11-19 19:48:25.869.\nTest Suite 'RagdollPackageTests.xctest' started at 2026-11-19 19:48:25.872.\nTest Suite 'RagdollPackageTests.xctest' passed at 2026-11-19 19:48:25.872.\n\t Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds\nTest Suite 'Selected tests' passed at 2026-11-19 19:48:25.872.\n\t Executed 0 tests, with 0 failures (0 unexpected) in 0.000 (0.003) seconds\n◇ Test run started.\n↳ Testing Library Version: 124.4\n↳ Target Platform: arm64e-apple-macos14.0\n◇ Test archivePreservesExistingReadmeAndItsExternalEdits() started.\n◇ Test archiveCommitsAndRefreshesActivityInRootReadme() started.\n✘ Test archiveCommitsAndRefreshesActivityInRootReadme() recorded an issue at StoreArchiveTests.swift:78:2: Caught error: Error Domain=fatal: path 'README.md' does not exist in 'HEAD'\n Code=128 \"(null)\"\n✘ Test archiveCommitsAndRefreshesActivityInRootReadme() failed after 0.102 seconds with 1 issue.\n✘ Test archivePreservesExistingReadmeAndItsExternalEdits() recorded an issue at StoreArchiveTests.swift:121:5: Expectation failed: (withReport → \"# 仓库说明\n\n手写内容。\n\").contains(\"Ragdoll 活动概览\")\n✘ Test archivePreservesExistingReadmeAndItsExternalEdits() recorded an issue at StoreArchiveTests.swift:127:5: Expectation failed: an error was expected but none was thrown and \"ArchiveResult(files: 4, commit: Optional(\"43db52b\"))\" was returned\n✘ Test archivePreservesExistingReadmeAndItsExternalEdits() recorded an issue at StoreArchiveTests.swift:134:5: Expectation failed: (refreshed → \"# 仓库说明\n\n新的手写内容。\n\").contains(\"会话更名\")\n✘ Test archivePreservesExistingReadmeAndItsExternalEdits() recorded an issue at StoreArchiveTests.swift:137:5: Expectation failed: an error was expected but none was thrown and \"ArchiveResult(files: 0, commit: nil)\" was returned\n✘ Test archivePreservesExistingReadmeAndItsExternalEdits() failed after 0.396 seconds with 4 issues.\n✘ Test run with 2 tests failed after 0.396 seconds with 5 issues.\n"}
