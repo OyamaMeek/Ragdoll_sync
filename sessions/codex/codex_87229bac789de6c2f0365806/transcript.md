@@ -1190,3 +1190,133 @@ Wall time 0.1 seconds
 Output:
 
 {"chunk_id":"74f474","wall_time_seconds":0.000009834,"exit_code":0,"original_token_count":1855,"output":"tests/test_login.py:19:class LoginUrlTests(unittest.TestCase):\ntests/test_login.py:20:    def test_recognizes_current_and_legacy_login_hosts(self):\ntests/test_login.py:24:    def test_rejects_authenticated_destination_hosts(self):\ntests/test_login.py:28:    def test_does_not_match_login_text_outside_the_hostname(self):\ntests/test_login.py:31:    def test_converts_opencv_point_to_display_coordinates(self):\ntests/test_login.py:37:    def test_browser_starts_maximized(self):\ntests/test_login.py:44:@unittest.skipUnless(os.environ.get(\"AUTOVISOR_TEST_BROWSER\") == \"1\", \"需要显式启用真实浏览器测试\")\ntests/test_login.py:45:class BrowserLoginTests(unittest.IsolatedAsyncioTestCase):\ntests/test_login.py:46:    async def test_configured_school_submits_student_form_and_old_config_submits_phone_form(self):\ntests/test_login.py:65:                <input name=\"agree\" value=\"yes\" type=\"checkbox\" class=\"el-checkbox__original\" hidden>\ntests/test_answering_integration.py:22:from modules.tasks import skip_questions\ntests/test_answering_integration.py:25:class _DeepSeekHandler(BaseHTTPRequestHandler):\ntests/test_answering_integration.py:43:class _DeepSeekHTTPTestCase(unittest.IsolatedAsyncioTestCase):\ntests/test_answering_integration.py:76:class DeepSeekHistoryTests(_DeepSeekHTTPTestCase):\ntests/test_answering_integration.py:77:    async def test_valid_answers_append_to_markdown(self):\ntests/test_answering_integration.py:99:    async def test_write_failure_warns_and_returns_valid_answer(self):\ntests/test_answering_integration.py:108:@unittest.skipUnless(os.environ.get(\"AUTOVISOR_TEST_BROWSER\") == \"1\", \"需要显式启用真实浏览器测试\")\ntests/test_answering_integration.py:109:class BrowserAnswerTests(_DeepSeekHTTPTestCase):\ntests/test_answering_integration.py:119:            <div class=\"ai-class-exercise-dialog\">\ntests/test_answering_integration.py:121:                <button class=\"option\" onclick=\"this.dataset.clicked='yes'\">2</button>\ntests/test_answering_integration.py:122:                <button class=\"option\" onclick=\"this.dataset.clicked='yes'\">3</button>\ntests/test_answering_integration.py:123:                <div class=\"el-dialog__footer\"><button class=\"el-button\"\ntests/test_answering_integration.py:127:        task = asyncio.create_task(FusionAdapter.skip_ai_exercise(self.page, api_key))\ntests/test_answering_integration.py:133:            await self.page.locator(\".ai-class-exercise-dialog\").evaluate(\"el => el.remove()\")\ntests/test_answering_integration.py:140:    async def test_missing_key_keeps_fusion_question_open_without_request(self):\ntests/test_answering_integration.py:144:    async def test_failed_authentication_keeps_fusion_question_open(self):\ntests/test_answering_integration.py:150:    async def test_unfinished_response_keeps_fusion_question_open(self):\ntests/test_answering_integration.py:156:    async def test_legacy_monitor_does_not_close_fusion_dialog(self):\ntests/test_answering_integration.py:158:            <div class=\"el-dialog ai-class-exercise-dialog\" tabindex=\"0\"\ntests/test_answering_integration.py:160:                <button class=\"option\">选项</button>\ntests/test_answering_integration.py:163:        task = asyncio.create_task(skip_questions(self.page, asyncio.Event(), \"\"))\ntests/test_answering_integration.py:166:            self.assertTrue(await self.page.locator(\".ai-class-exercise-dialog\").is_visible())\ntests/test_answering_integration.py:172:    async def test_legacy_question_uses_deepseek_answer_and_closes_dialog(self):\ntests/test_answering_integration.py:175:            <div class=\"el-dialog\" tabindex=\"0\" onkeydown=\"if(event.key==='Escape') this.hidden=true\">\ntests/test_answering_integration.py:176:                <div class=\"el-scrollbar__view\"><button class=\"number\">1</button></div>\ntests/test_answering_integration.py:178:                <button class=\"topic-item\" onclick=\"document.body.dataset.answer='1'\">3</button>\ntests/test_answering_integration.py:179:                <button class=\"topic-item\" onclick=\"document.body.dataset.answer='2'\">2</button>\ntests/test_answering_integration.py:180:                <button class=\"topic-item\" onclick=\"document.body.dataset.answer='3'\">5</button>\ntests/test_answering_integration.py:184:        task = asyncio.create_task(skip_questions(self.page, completed, \"key-for-test\"))\ntests/test_answering_integration.py:202:    async def test_fusion_multiple_answers_are_selected_before_submit(self):\ntests/test_answering_integration.py:205:            <div class=\"ai-class-exercise-dialog\">\ntests/test_answering_integration.py:207:                <label class=\"option\"><input type=\"checkbox\" value=\"1\">4</label>\ntests/test_answering_integration.py:208:                <label class=\"option\"><input type=\"checkbox\" value=\"2\">2</label>\ntests/test_answering_integration.py:209:                <label class=\"option\"><input type=\"checkbox\" value=\"3\">9</label>\ntests/test_answering_integration.py:210:                <label class=\"option\"><input type=\"checkbox\" value=\"4\">3</label>\ntests/test_answering_integration.py:211:                <div class=\"el-dialog__footer\"><button class=\"el-button\"\ntests/test_answering_integration.py:212:                    onclick=\"this.closest('.ai-class-exercise-dialog').hidden=true\">提交</button></div>\ntests/test_answering_integration.py:215:        self.assertTrue(await asyncio.wait_for(FusionAdapter.skip_ai_exercise(self.page, \"key-for-test\"), timeout=10))\ntests/test_answering_integration.py:220:        self.assertFalse(await self.page.locator(\".ai-class-exercise-dialog\").is_visible())\ntests/test_answering_integration.py:222:    async def test_changed_question_does_not_receive_stale_answer(self):\ntests/test_answering_integration.py:227:                <button class=\"option\" onclick=\"this.dataset.clicked='yes'\">2</button>\ntests/test_answering_integration.py:228:                <button class=\"option\" onclick=\"this.dataset.clicked='yes'\">3</button>\ntests/test_answering_integration.py:264:    async def test_unsubmitted_homework_opens_once_in_order_after_list_refresh(self):\ntests/test_answering_integration.py:284:                    <li><div class=\"examItemWrap\">\ntests/test_answering_integration.py:285:                        <span class=\"percentage_number\">作业</span>\ntests/test_answering_integration.py:286:                        <div class=\"examTit\"><span class=\"name\">单元测试</span></div>\ntests/test_answering_integration.py:287:                        <ul class=\"examInfoList\"><li>对应章节 第二章</li></ul>\ntests/test_answering_integration.py:288:                        <a title=\"开始答题\"><span class=\"themeBg\" onclick=\"openWork(1)\">开始答题</span></a>\ntests/test_answering_integration.py:290:                    <li><div class=\"examItemWrap\">\ntests/test_answering_integration.py:291:                        <span class=\"percentage_number\">作业</span>\n\u001b[32m[INFO]\u001b[0m i                               \n\r\n\u001b[33m[WARN]\u001b[0m w                               \n\r\n\u001b[31m[ERROR]\u001b[0m e                              \n\r\u001b[31m[ERROR]\u001b[0m 课时失败.                           \n\n===== 运行日志 =====\n\r\n\u001b[32m[INFO]\u001b[0m hello                           \n\r\u001b[32m[INFO]\u001b[0m 已保存登录凭证到: /Volumes/SamsungSSD990PRO/GitHub/Autovisor/data/cookies.json,下次可免密登录.\n\r\u001b[32m[INFO]\u001b[0m 已保存登录凭证到: /Volumes/SamsungSSD990PRO/GitHub/Autovisor/data/cookies.json,下次可免密登录.\n"}
+
+## tool · 2026-11-19T08:28:33Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"ea893e","wall_time_seconds":5.002071542,"session_id":24830,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T08:28:40Z
+
+
+Script completed
+Wall time 0.6 seconds
+Output:
+
+[{"status":"fulfilled","value":{"chunk_id":"4b1ef2","wall_time_seconds":0.443020625,"exit_code":0,"original_token_count":11,"output":"3:Ran 135 tests in 0.265s\n5:OK (skipped=25)\n"}},{"status":"fulfilled","value":{"chunk_id":"0d1dc6","wall_time_seconds":0.000009125,"exit_code":0,"original_token_count":113,"output":"      17 .autovisor/maintainer-tests.log\n..s.............. M .github/workflows/release.yml\n M .gitignore\n M Autovisor.py\n M README.md\n M build.py\n M config.ini.example\n M config.macos.ini.example\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n M modules/banner.py\n M modules/configs.py\n D modules/support.py\n D resources/QRcode.jpg\n D resources/markdown/donate.png\n M tests/test_config.py\n M tests/test_configs.py\n M tests/test_updater.py\n"}}]
+
+## tool · 2026-11-19T08:28:44Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"2c5e6e","wall_time_seconds":0.000010542,"exit_code":0,"original_token_count":90,"output":".autovisor/release-checks/unittest.log:138:Ran 135 tests in 101.299s\n.autovisor/release-checks/windows-job.log:397:release\tCheck version and test\t2026-11-19T08:10:10.8177880Z Ran 135 tests in 115.305s\n.autovisor/release-checks/windows-3.19.1-job.log:396:release\tCheck version and test\t2026-11-19T08:15:14.5225940Z Ran 135 tests in 102.904s\n2026-11-19 16:28\n"}
+
+## tool · 2026-11-19T08:28:53Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+[{"status":"fulfilled","value":{"chunk_id":"737965","wall_time_seconds":1.002066333,"session_id":79723,"original_token_count":0,"output":""}},{"status":"fulfilled","value":{"chunk_id":"76fbce","wall_time_seconds":0.000008,"exit_code":1,"original_token_count":0,"output":""}}]
+
+## tool · 2026-11-19T08:28:58Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+[{"status":"fulfilled","value":{"chunk_id":"fe2320","wall_time_seconds":0.000009416,"exit_code":0,"original_token_count":114,"output":"pyproject.toml:13:    \"pillow>=10,<13\",\n0\t1\t.github/workflows/release.yml\n0\t1\t.gitignore\n0\t2\tAutovisor.py\n3\t19\tREADME.md\n0\t1\tbuild.py\n0\t2\tconfig.ini.example\n0\t1\tconfig.macos.ini.example\n5\t0\tmemory/plan.md\n6\t0\tmemory/progress.md\n4\t0\tmemory/verify.md\n1\t5\tmodules/banner.py\n0\t1\tmodules/configs.py\n0\t16\tmodules/support.py\n-\t-\tresources/QRcode.jpg\n-\t-\tresources/markdown/donate.png\n1\t1\ttests/test_config.py\n3\t3\ttests/test_configs.py\n2\t2\ttests/test_updater.py\n"}},{"status":"fulfilled","value":{"chunk_id":"f5a7fd","wall_time_seconds":0.000012834,"exit_code":0,"original_token_count":15,"output":"4005b5b992595b919cc6f7f38856a50f2f853780\trefs/heads/main\n"}}]
+
+## tool · 2026-11-19T08:29:11Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+[{"status":"fulfilled","value":{"chunk_id":"eaa083","wall_time_seconds":0.000007875,"exit_code":0,"original_token_count":265,"output":"pyproject.toml:13:    \"pillow>=10,<13\",\n[build-system]\nrequires = [\"setuptools>=68\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"autovisor\"\ndynamic = [\"version\"]\ndescription = \"智慧树课程自动化工具\"\nreadme = \"README.md\"\nrequires-python = \">=3.10,<3.14\"\ndependencies = [\n    \"httpx>=0.28,<1\",\n    \"pillow>=10,<13\",\n    \"playwright>=1.49,<2\",\n    \"pygetwindow>=0.0.9; platform_system == 'Windows'\",\n    \"requests>=2.31,<3\",\n]\n\n[project.optional-dependencies]\ncaptcha = [\n    \"numpy>=2,<3\",\n    \"opencv-python>=4.10,<5\",\n]\ngui = [\n    \"sv-ttk>=2.6,<3\",\n]\n\n[tool.uv]\npackage = false\n\n[tool.setuptools.dynamic]\nversion = { attr = \"modules.version.__version__\" }\n\n[tool.setuptools]\npy-modules = []\n29:    { name = \"pillow\" },\n51:    { name = \"pillow\", specifier = \">=10,<13\" },\n414:name = \"pillow\"\n.autovisor/maintainer-uv-cache/CACHEDIR.TAG\n.autovisor/deepseek-test-env/CACHEDIR.TAG\n.autovisor/uv-cache/CACHEDIR.TAG\n.autovisor/release-checks/uv-cache/CACHEDIR.TAG\n.autovisor/release-checks/uv-cache/archive-v0/hFX2PLQsdzSslbNb/CACHEDIR.TAG\n"}},{"status":"fulfilled","value":{"chunk_id":"1531ca","wall_time_seconds":0.000016083,"exit_code":0,"original_token_count":206,"output":"\n===== 运行日志 =====\n\r\n\u001b[32m[INFO]\u001b[0m hello                           \n\r\u001b[32m[INFO]\u001b[0m 已保存登录凭证到: /Volumes/SamsungSSD990PRO/GitHub/Autovisor/data/cookies.json,下次可免密登录.\n\r\u001b[32m[INFO]\u001b[0m 已保存登录凭证到: /Volumes/SamsungSSD990PRO/GitHub/Autovisor/data/cookies.json,下次可免密登录.\n- 打包时在 PyInstaller 内嵌的解释器启用 UTF-8，使中文帮助可通过管道或重定向输出。\n\n## 项目维护者信息\n\n- 将 README 项目链接和启动署名统一为 `OyamaMeek`，移除原维护者的个人公告、博客、赞赏入口及旧仓库链接。保留 MIT 许可证要求的原始版权声明。\n- 从课程结束流程、配置模板、Windows 构建及其检查中移除赞赏码。旧配置中的赞赏选项由配置加载器忽略。\n2026-11-19 16:29\n"}}]
+
+## tool · 2026-11-19T08:29:19Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T08:29:24Z
+
+
+Script completed
+Wall time 0.6 seconds
+Output:
+
+[{"status":"fulfilled","value":{"chunk_id":"9564a9","wall_time_seconds":0.425082208,"exit_code":1,"original_token_count":145,"output":"error: No solution found when resolving dependencies for split (markers: python_full_version >= '3.12' and python_full_version < '3.14')\n  cause: Because httpx was not found in the cache and your project depends on httpx>=0.28,<1, we can conclude that your project's requirements are unsatisfiable.\n         And because your project requires autovisor[captcha], we can conclude that your project's requirements are unsatisfiable.\n\nhint: Packages were unavailable because the network was disabled. When the network is disabled, registry packages may only be read from the cache.\n"}},{"status":"fulfilled","value":{"chunk_id":"7ed084","wall_time_seconds":0.000022542,"exit_code":0,"original_token_count":12,"output":"3:Ran 135 tests in 101.313s\n5:OK (skipped=3)\n"}}]
+
+## tool · 2026-11-19T08:29:31Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"ddc561","wall_time_seconds":1.001927334,"session_id":63865,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T08:29:36Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+[{"status":"fulfilled","value":{"chunk_id":"b08e9c","wall_time_seconds":0.000011875,"exit_code":0,"original_token_count":75,"output":"Resolved 22 packages in 3.52s\nRemoved pillow v12.3.0\n pyproject.toml |  1 -\n uv.lock        | 54 ------------------------------------------------------\n 2 files changed, 55 deletions(-)\n-    { name = \"pillow\" },\n-    { name = \"pillow\", specifier = \">=10,<13\" },\n-name = \"pillow\"\n-version = \"12.3.0\"\n"}},{"status":"fulfilled","value":{"chunk_id":"fd395f","wall_time_seconds":0.000009375,"exit_code":0,"original_token_count":694,"output":"2026-11-19 16:29\n- [x] 核对现有 Windows 打包入口、上游发行包格式、当前仓库的标签和发行记录。\n- [x] 接入标签触发的 Windows 构建、解压验证与发布，同步版本及下载地址。\n- [x] 推送工作流提交和 `3.19.0` 标签。Windows 构建通过，中文帮助验证发现输出编码问题，Release 未创建。\n- [x] 在打包解释器启用 UTF-8 并更新版本号至 `3.19.1`。\n- [x] 推送 `3.19.1` 标签。Windows 工作流运行 `44485741541` 成功发布 ZIP，公开下载、SHA-256、ZIP 完整性和更新接口均已验证。\n\n## 项目维护者信息\n\n- [x] 找到旧署名、个人链接、赞赏资源及其配置和发行流程，核对许可证保留条款。\n- [x] 更新维护者信息，移除旧赞赏入口和构建引用。\n- [ ] 验证 CLI、配置兼容性和仓库引用，运行测试并提交推送。\n- 本地启用 Chrome 的全量测试 135 项，132 项通过，线上 DeepSeek 和两项 Windows 专用用例跳过。actionlint、依赖锁、PyInstaller 版本解析、源码 CLI 帮助、Python 语法和差异检查通过。\n- 首次 Windows 运行 135 项测试，131 项通过、4 项跳过。ZIP 构建和内容检查通过，解压后的程序在重定向标准输出时使用 CP1252，打印中文帮助时抛出 `UnicodeEncodeError`，因此未创建 Release。macOS 的 Apple Silicon 和 Intel 冒烟测试通过。\n- `3.19.1` 的 Windows 工作流运行 `44485741541` 通过，135 项测试中 131 项通过、4 项跳过，解压后的 `Autovisor.exe --help` 成功输出中文。对应的 macOS Apple Silicon 和 Intel 冒烟测试通过。\n- 从公开 Release 下载 ZIP，SHA-256 与 GitHub 一致，全部 ZIP 条目通过完整性检查，主程序确认为 Windows x86-64。配置模板未包含凭证，程序更新接口返回 `3.19.1`。\n\n## 维护者信息验证\n\n- 核对 CLI 署名、新旧配置读取、更新链接测试数据、赞赏资源和 Windows 打包引用。确认旧身份的文本只出现在 MIT 许可证，运行项目测试套件和差异检查。\n  - 在 PyInstaller 内嵌的解释器启用 UTF-8。`3.19.1` 已发布至 `OyamaMeek/Autovisor`。\n  - Windows Actions 运行 `44485741541` 成功，135 项测试中 131 项通过、4 项跳过，解压后的 `Autovisor.exe --help` 可输出中文。macOS Apple Silicon 和 Intel 冒烟测试通过。\n  - 从公开下载地址取回 ZIP，SHA-256 与 GitHub 一致，压缩包完整，主程序为 Windows x86-64。更新接口返回 `3.19.1`。\n\n- **涉及文件**\n  - `build.py`、`modules/version.py`、`README.md`、`memory/`、`docs/CHANGELOG.md`\n\n- **Git 提交** `f77b0eb80223208652db8987ad35b5b10fec507b fix(release): enable UTF-8 in the packaged runtime`，已推送 `origin/main`。\n\n---\n"}}]
+
+## assistant · 2026-11-19T08:29:43Z
+
+包含真实 Chrome 的测试已完成，135 项中 132 项通过、3 项跳过。Pillow 只用于显示已删除的赞赏码，我已从依赖中移除它，正在用新锁文件核对安装和启动。
+
+## tool · 2026-11-19T08:29:48Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"cb6dfb","wall_time_seconds":1.001657958,"session_id":54507,"original_token_count":60,"output":"Using CPython 3.13.18 interpreter at: .venv/bin/python\nCreating virtual environment at: .autovisor/maintainer-env\nResolved 22 packages in 15ms\nDownloading numpy (5.1MiB)\nDownloading playwright (40.2MiB)\nDownloading opencv-python (44.1MiB)\n"}
+
+## tool · 2026-11-19T08:29:59Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+[{"status":"fulfilled","value":{"chunk_id":"195759","wall_time_seconds":0.000017542,"exit_code":0,"original_token_count":153,"output":" Downloaded numpy\n Downloaded playwright\n Downloaded opencv-python\nPrepared 16 packages in 6.90s\nInstalled 16 packages in 21ms\n + anyio==4.14.2\n + certifi==2026.6.17\n + charset-normalizer==3.4.9\n + greenlet==3.5.3\n + h11==0.16.0\n + httpcore==1.0.9\n + httpx==0.28.1\n + idna==3.18\n + numpy==2.5.1\n + opencv-python==4.13.0.92\n + playwright==1.61.0\n + pyee==13.0.1\n + requests==2.34.2\n + sv-ttk==2.6.1\n + typing-extensions==4.16.0\n + urllib3==2.7.0\n4:Ran 135 tests in 0.318s\n6:OK (skipped=25)\n                    [--check-course URL] [--answer-exam]\n  --answer-exam         开启智慧树作业考试答题模式\n"}},{"status":"fulfilled","value":{"chunk_id":"fed7e0","wall_time_seconds":0.000008375,"exit_code":0,"original_token_count":13,"output":"2026-11-19 16:29\n0\t1\tpyproject.toml\n0\t54\tuv.lock\n"}}]
+
+## tool · 2026-11-19T08:30:19Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T08:30:27Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+[{"status":"fulfilled","value":{"chunk_id":"d87e5b","wall_time_seconds":1.002523375,"session_id":41427,"original_token_count":0,"output":""}},{"status":"fulfilled","value":{"chunk_id":"e44dbe","wall_time_seconds":0.000007709,"exit_code":0,"original_token_count":1337,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\nindex 47982e5..716f6de 100644\n--- a/docs/CHANGELOG.md\n+++ b/docs/CHANGELOG.md\n@@ -245,3 +245,22 @@\n - **Git 提交** `f77b0eb80223208652db8987ad35b5b10fec507b fix(release): enable UTF-8 in the packaged runtime`，已推送 `origin/main`。\n \n ---\n+\n+## [2026-11-19 16:29] 更新 Autovisor 维护者信息\n+\n+- **需求/问题描述**\n+  > 移除原作者的个人信息，将项目维护者署名改为 OyamaMeek。\n+\n+- **实际实现的功能与改动**\n+  - README 和启动界面显示 `OyamaMeek`。移除旧仓库链接、个人公告、博客和赞赏码，保留 MIT 许可证要求的原始版权声明。\n+  - 删除赞赏码显示逻辑、配置模板字段、Windows 打包引用和仅用于显示赞赏码的 Pillow 依赖。旧配置仍可读取。\n+  - 启用 Chrome 的全量测试 135 项，132 项通过、3 项跳过。更新锁文件后，独立环境的默认测试套件、CLI 启动与帮助、Python 编译、`actionlint` 和差异检查通过。本次未生成新的 Windows 发行包。\n+\n+- **涉及文件**\n+  - `README.md`、`Autovisor.py`、`modules/banner.py`、`modules/configs.py`、`modules/support.py`\n+  - `config.ini.example`、`config.macos.ini.example`、`resources/`、`.gitignore`、`build.py`、`.github/workflows/release.yml`\n+  - `pyproject.toml`、`uv.lock`、`tests/`、`memory/`、`docs/CHANGELOG.md`\n+\n+- **Git 提交** 待提交。\n+\n+---\ndiff --git a/memory/plan.md b/memory/plan.md\nindex 14bf565..e3381f4 100644\n--- a/memory/plan.md\n+++ b/memory/plan.md\n@@ -53,3 +53,8 @@\n - 使用 `modules/version.py` 维护版本号。下载和更新检查指向当前仓库 `OyamaMeek/Autovisor`。\n - 推送与代码版本相同的数字标签后，GitHub Actions 在 Windows x64 运行测试并复用 `build.py`。解压 ZIP 并运行程序帮助后，将 ZIP 和标签说明发布到 Release。\n - 打包时在 PyInstaller 内嵌的解释器启用 UTF-8，使中文帮助可通过管道或重定向输出。\n+\n+## 项目维护者信息\n+\n+- 将 README 项目链接和启动署名统一为 `OyamaMeek`，移除原维护者的个人公告、博客、赞赏入口及旧仓库链接。保留 MIT 许可证要求的原始版权声明。\n+- 从课程结束流程、配置模板、Windows 构建及其检查中移除赞赏码，并移除仅用于显示赞赏码的 Pillow 依赖。旧配置中的赞赏选项由配置加载器忽略。\ndiff --git a/memory/progress.md b/memory/progress.md\nindex ce87999..03900d2 100644\n--- a/memory/progress.md\n+++ b/memory/progress.md\n@@ -79,3 +79,10 @@\n - [x] 推送工作流提交和 `3.19.0` 标签。Windows 构建通过，中文帮助验证发现输出编码问题，Release 未创建。\n - [x] 在打包解释器启用 UTF-8 并更新版本号至 `3.19.1`。\n - [x] 推送 `3.19.1` 标签。Windows 工作流运行 `44485741541` 成功发布 ZIP，公开下载、SHA-256、ZIP 完整性和更新接口均已验证。\n+\n+## 项目维护者信息\n+\n+- [x] 找到旧署名、个人链接、赞赏资源及其配置和发行流程，核对许可证保留条款。\n+- [x] 更新维护者信息，移除旧赞赏入口和构建引用。\n+- [x] 验证 CLI、配置兼容性、仓库引用、锁定依赖和 Windows 工作流。启用 Chrome 的测试 135 项，132 项通过、3 项跳过。\n+- [ ] 提交并推送维护者信息更新。\ndiff --git a/memory/verify.md b/memory/verify.md\nindex 6809a58..69ca793 100644\n--- a/memory/verify.md\n+++ b/memory/verify.md\n@@ -90,3 +90,9 @@\n - 首次 Windows 运行 135 项测试，131 项通过、4 项跳过。ZIP 构建和内容检查通过，解压后的程序在重定向标准输出时使用 CP1252，打印中文帮助时抛出 `UnicodeEncodeError`，因此未创建 Release。macOS 的 Apple Silicon 和 Intel 冒烟测试通过。\n - `3.19.1` 的 Windows 工作流运行 `44485741541` 通过，135 项测试中 131 项通过、4 项跳过，解压后的 `Autovisor.exe --help` 成功输出中文。对应的 macOS Apple Silicon 和 Intel 冒烟测试通过。\n - 从公开 Release 下载 ZIP，SHA-256 与 GitHub 一致，全部 ZIP 条目通过完整性检查，主程序确认为 Windows x86-64。配置模板未包含凭证，程序更新接口返回 `3.19.1`。\n+\n+## 维护者信息验证\n+\n+- 核对 CLI 署名、新旧配置读取、更新链接测试数据、赞赏资源和 Windows 打包引用。确认旧身份的文本只出现在 MIT 许可证，运行项目测试套件和差异检查。\n+- CLI 实际启动显示 `维护者 OyamaMeek`。启用 Chrome 的全量测试 135 项，132 项通过、3 项跳过。移除 Pillow 后，锁定依赖安装和默认测试套件通过，110 项通过、25 项按条件跳过。\n+- 原作者姓名仅出现在许可证。Python 编译、CLI 帮助、`actionlint` 和差异检查通过。本次未构建新的 Windows 发行包。\n## main...origin/main\n M .github/workflows/release.yml\n M .gitignore\n M Autovisor.py\n M README.md\n M build.py\n M config.ini.example\n M config.macos.ini.example\n M docs/CHANGELOG.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n M modules/banner.py\n M modules/configs.py\n D modules/support.py\n M pyproject.toml\n D resources/QRcode.jpg\n D resources/markdown/donate.png\n M tests/test_config.py\n M tests/test_configs.py\n M tests/test_updater.py\n M uv.lock\n?? .DS_Store\n?? tests/.DS_Store\n"}}]
