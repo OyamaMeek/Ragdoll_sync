@@ -460,13 +460,41 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"de0903\",\"wall_time_seconds\":1.002011417,\"session_id\":15002,\"original_token_count\":0,\"output\":\"\"}}\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"54f58d\",\"wall_time_seconds\":0.998633416,\"exit_code\":0,\"original_token_count\":35,\"output\":\"{\\\"id\\\":44491268813,\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\",\\\"html_url\\\":\\\"https://github.com/OyamaMeek/Autovisor/actions/runs/44491268813\\\"}\\n\"}}",
       "time" : 1795078446184
+    },
+    {
+      "id" : "call_3b38ebf8abe1450e84ee10ed9225b7b2",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"fb0b58\",\"wall_time_seconds\":0.000007417,\"exit_code\":0,\"original_token_count\":84,\"output\":\"{\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null,\\\"steps\\\":[{\\\"name\\\":\\\"Set up job\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Checkout release tag\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Install uv\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Check version and test\\\",\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null}]}\\n\"}",
+      "time" : 1795078448612
+    },
+    {
+      "id" : "call_733e62c9463c442bb530599af50077a5",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nWall time: 50.0461 seconds\nSleep completed.",
+      "time" : 1795078502306
+    },
+    {
+      "id" : "call_109da7c500e446c78b0b992e2c118af9",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript running with cell ID g4:34\nWall time 1.0 seconds\nOutput:\n",
+      "time" : 1795078507841
+    },
+    {
+      "id" : "call_0984846485764028a5713eccda4fe6ee",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"a52852\",\"wall_time_seconds\":0.845768834,\"exit_code\":0,\"original_token_count\":145,\"output\":\"{\\\"id\\\":135447345017,\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null,\\\"steps\\\":[{\\\"name\\\":\\\"Set up job\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Checkout release tag\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Install uv\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Check version and test\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Build and verify ZIP\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Publish GitHub Release\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Post Install uv\\\",\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null}]}\\n\"}",
+      "time" : 1795078510038
     }
   ],
   "nativeID" : "01a1f2fc-ff19-7453-be6f-54907613784e",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
   "source" : "codex",
   "title" : "更新 README 并发布",
-  "updated" : 1795078446185,
+  "updated" : 1795078514704,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -935,6 +963,42 @@
       "model" : "gpt-6.2-sol",
       "output" : 28,
       "time" : 1795078446183
+    },
+    {
+      "cacheRead" : 82816,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb92ec87c87d089cc48c214106c9d",
+      "input" : 207,
+      "model" : "gpt-6.2-sol",
+      "output" : 39,
+      "time" : 1795078448612
+    },
+    {
+      "cacheRead" : 82816,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb931346c87d0995c45d0ee893907",
+      "input" : 386,
+      "model" : "gpt-6.2-sol",
+      "output" : 81,
+      "time" : 1795078452267
+    },
+    {
+      "cacheRead" : 83072,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb96702c487d0a99fa4a4dae269c9",
+      "input" : 234,
+      "model" : "gpt-6.2-sol",
+      "output" : 124,
+      "time" : 1795078506783
+    },
+    {
+      "cacheRead" : 83072,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb96c7e5087d0ab6078f222a4d89f",
+      "input" : 388,
+      "model" : "gpt-6.2-sol",
+      "output" : 28,
+      "time" : 1795078510037
     }
   ],
   "warnings" : [
