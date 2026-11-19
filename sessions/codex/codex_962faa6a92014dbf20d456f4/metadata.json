@@ -1,0 +1,165 @@
+{
+  "created" : 1795058430972.5747,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/19/rollout-2026-11-19T11-20-30-01a1f1d1-f3d9-71e1-bc40-982cd7d7dcfe.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:962faa6a92014dbf20d456f4",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1f1d1-f3d9-71e1-bc40-982cd7d7dcfe",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1795059841604,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6b01769487d090a2514e26624024",
+      "input" : 16260,
+      "model" : "codex-auto-review",
+      "output" : 179,
+      "time" : 1795058437072
+    },
+    {
+      "cacheRead" : 22016,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6b5b7af487d097d0c7862282a4f2",
+      "input" : 5630,
+      "model" : "codex-auto-review",
+      "output" : 180,
+      "time" : 1795058527241
+    },
+    {
+      "cacheRead" : 27520,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6b995c3087d0918a038647d2b9dd",
+      "input" : 4083,
+      "model" : "codex-auto-review",
+      "output" : 175,
+      "time" : 1795058589339
+    },
+    {
+      "cacheRead" : 31488,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6ba4ae3487d09f2a3708d06ce6ad",
+      "input" : 966,
+      "model" : "codex-auto-review",
+      "output" : 165,
+      "time" : 1795058599974
+    },
+    {
+      "cacheRead" : 32256,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6bac0a1087d0921285457ef62975",
+      "input" : 865,
+      "model" : "codex-auto-review",
+      "output" : 296,
+      "time" : 1795058609890
+    },
+    {
+      "cacheRead" : 32896,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6bc9df0487d0b673512c926d686e",
+      "input" : 2182,
+      "model" : "codex-auto-review",
+      "output" : 95,
+      "time" : 1795058635990
+    },
+    {
+      "cacheRead" : 34944,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6bd0a4fc87d0bb0b772eca758dfa",
+      "input" : 719,
+      "model" : "codex-auto-review",
+      "output" : 102,
+      "time" : 1795058642866
+    },
+    {
+      "cacheRead" : 35456,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6e2aabb087d0b77b66e0be9007e0",
+      "input" : 14087,
+      "model" : "codex-auto-review",
+      "output" : 113,
+      "time" : 1795059245982
+    },
+    {
+      "cacheRead" : 49408,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6e859ff487d0aff4ba949335f281",
+      "input" : 3163,
+      "model" : "codex-auto-review",
+      "output" : 93,
+      "time" : 1795059336910
+    },
+    {
+      "cacheRead" : 52352,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6f70400c87d083114d272ff88053",
+      "input" : 4847,
+      "model" : "codex-auto-review",
+      "output" : 106,
+      "time" : 1795059571573
+    },
+    {
+      "cacheRead" : 56960,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe6fd0bfc487d083b31e75a8bffb36",
+      "input" : 4443,
+      "model" : "codex-auto-review",
+      "output" : 93,
+      "time" : 1795059667646
+    },
+    {
+      "cacheRead" : 61184,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe7015495c87d082037e3ddf00a28b",
+      "input" : 1954,
+      "model" : "codex-auto-review",
+      "output" : 100,
+      "time" : 1795059735549
+    },
+    {
+      "cacheRead" : 62976,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe7054dde487d08ddb0e3555abbc02",
+      "input" : 4888,
+      "model" : "codex-auto-review",
+      "output" : 106,
+      "time" : 1795059799378
+    },
+    {
+      "cacheRead" : 67712,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe705cb01c87d099312f0321fca435",
+      "input" : 875,
+      "model" : "codex-auto-review",
+      "output" : 82,
+      "time" : 1795059807033
+    },
+    {
+      "cacheRead" : 68352,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe7063864087d0bc61d128ab86efcb",
+      "input" : 824,
+      "model" : "codex-auto-review",
+      "output" : 106,
+      "time" : 1795059813889
+    },
+    {
+      "cacheRead" : 68992,
+      "cacheWrite" : 0,
+      "id" : "resp_0d04c34ae6446ee6016afe707ed77487d09550255d4cf14d58",
+      "input" : 1835,
+      "model" : "codex-auto-review",
+      "output" : 100,
+      "time" : 1795059841599
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

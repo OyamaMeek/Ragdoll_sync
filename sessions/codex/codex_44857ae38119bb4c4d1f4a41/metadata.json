@@ -1,0 +1,66 @@
+{
+  "created" : 1795058607878.8516,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/19/rollout-2026-11-19T11-23-27-01a1f1d4-a4d1-75a3-94bf-e46ee40c5393.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:44857ae38119bb4c4d1f4a41",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1f1d4-a4d1-75a3-94bf-e46ee40c5393",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "检查证书的 App Group 权限",
+  "updated" : 1795058794541,
+  "usage" : [
+    {
+      "cacheRead" : 14720,
+      "cacheWrite" : 0,
+      "id" : "resp_054e24339785e0a3016afe6bb4204c87d0b360d08ef0bdde82",
+      "input" : 25088,
+      "model" : "gpt-6.2-sol",
+      "output" : 569,
+      "time" : 1795058625741
+    },
+    {
+      "cacheRead" : 39552,
+      "cacheWrite" : 0,
+      "id" : "resp_054e24339785e0a3016afe6bc5b30c87d0b6b315785f662426",
+      "input" : 6770,
+      "model" : "gpt-6.2-sol",
+      "output" : 64,
+      "time" : 1795058632167
+    },
+    {
+      "cacheRead" : 46208,
+      "cacheWrite" : 0,
+      "id" : "resp_054e24339785e0a3016afe6bcbb0f087d0b3eac4534da36407",
+      "input" : 427,
+      "model" : "gpt-6.2-sol",
+      "output" : 103,
+      "time" : 1795058639009
+    },
+    {
+      "cacheRead" : 46464,
+      "cacheWrite" : 0,
+      "id" : "resp_054e24339785e0a3016afe6bcfdcd087d0944be47f03e995ec",
+      "input" : 1818,
+      "model" : "gpt-6.2-sol",
+      "output" : 701,
+      "time" : 1795058656082
+    },
+    {
+      "cacheRead" : 48256,
+      "cacheWrite" : 0,
+      "id" : "resp_054e24339785e0a3016afe6c638e3087d09a773d95266633f0",
+      "input" : 1639,
+      "model" : "gpt-6.2-sol",
+      "output" : 242,
+      "time" : 1795058794490
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1879,3 +1879,31 @@ Output:
 
 {"chunk_id":"94cf42","wall_time_seconds":0.000009417,"exit_code":0,"original_token_count":562,"output":"behavior allows developers to set contraints for newer OS versions on the current OS version.\n.It Fl -extract-certificates Ar prefix\nWhen displaying a signature, extract the certificates in the embedded certificate chain\nand write them to individual files. The\n.Ar prefix\nargument is appended with numbers 0, 1, ... to form the filenames, which can be relative\nor absolute. Certificate 0 is the leaf (signing) certificate, and as many files are written\nas there are certificates in the signature. The files are in ASN.1 (DER) form.\nIf\n.Ar prefix\nis omitted, the default prefix is \"codesign\" in the current directory.\n.It Fl -file-list Ar path\nWhen signing or displaying a signature,\n.Nm\nwrites to the given path a list of\nfiles that may have been modified as part of the signing process. This is useful\nfor installer or patcher programs that need to know what was changed or what files\nare needed to make up the \"signature\" of a program. The file given is appended-to,\nwith one line per absolute path written. An argument of \"-\" (single dash) denotes standard\noutput.\nNote that the list may be\nsomewhat pessimistic - all files not listed are guaranteed to be unchanged by the\nsigning process, but some of the listed files may not actually have changed.\nAlso note that changes may have been made to extended attributes of these\nfiles.\n.It Fl -ignore-resources\nDuring static validation, do not validate the contents of the code's resources.\nIn effect, this will pass validation on code whose resources have been corrupted\n(or inappropriately signed). On large programs, it will also substantially speed\nup static validation, since all the resources will not be read into memory.\nObviously, the outcome of such a validation should be considered on its merits.\n.It Fl -keychain Ar filename\nDuring signing, only search for the signing identity in the keychain file\nspecified. This can be used to break any matching ties if you have multiple\nsimilarly-named identities in several keychains on the user's search list.\ndrwxr-xr-x  3 oyamahappa  staff  96 Nov 17 21:27 .agent/assistant-icons-previous.app\ndrwxr-xr-x  3 oyamahappa  staff  96 Nov 17 20:08 .agent/release-ci-local.app\n100644 eeb1005eb7b62fa8d04cec355672b960bcba1fdc 0\tscripts/build.sh\narm64\n"}
 {"chunk_id":"949984","wall_time_seconds":0.000008041,"exit_code":0,"original_token_count":53,"output":"34106 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.acp-model-preview.app/Contents/MacOS/Ragdoll\n38812 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.codex-model-preview.app/Contents/MacOS/Ragdoll\n"}
+
+## tool · 2026-11-19T01:54:31Z
+
+
+Script completed
+Wall time 3.1 seconds
+Output:
+
+{"chunk_id":"c8b873","wall_time_seconds":1.029910917,"exit_code":0,"original_token_count":91,"output":"Executable=/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/MacOS/Ragdoll\nsha1 Fingerprint=CF:68:83:4C:C5:5B:59:DD:7A:5E:73:B1:2E:BD:2B:15:F5:A8:FE:AC\nnotBefore=Oct 22 13:12:05 2026 GMT\nnotAfter=Oct 22 13:12:04 2027 GMT\n920D61DB9003EACBE45A91366B2DFD44B5B71DF8\n4FFAA7532D2F1C2859DB425DFB9F5F119F7FCD76\nCF68834CC55B59DD7A5E73B12EBD2B15F5A8FEAC\n"}
+{"chunk_id":"ca30c2","wall_time_seconds":0.033239583,"exit_code":0,"original_token_count":286,"output":"34106     1 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.acp-model-preview.app/Contents/MacOS/Ragdoll\n34109 34106 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.acp-model-preview.app/Contents/Resources/runtime/node/bin/node\n38812     1 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.codex-model-preview.app/Contents/MacOS/Ragdoll\n38816 38812 /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.codex-model-preview.app/Contents/Resources/runtime/node/bin/node\n39187 38812 /usr/bin/gzip\nSources/Ragdoll/AppModel.swift:69:        self.root = root ?? ProcessInfo.processInfo.environment[\"RAGDOLL_DATA_DIR\"].map { URL(fileURLWithPath: $0) } ?? FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(\"Library/Application Support/Ragdoll\")\n.agent/release-check/Ragdoll.app\n.agent/release-ci-local.app\n.agent/background-registration/ServiceCheck.app\n.agent/assistant-icons-previous.app\n.agent/chat-preview-smoke/RagdollChatSmoke.app\ndist/Ragdoll.model-preview.app\ndist/Ragdoll.codex-model-preview.app\ndist/Ragdoll.chat-preview.app\ndist/Ragdoll.acp-model-preview.app\ndist/Ragdoll.app\ndist/Ragdoll.preview.app\n"}
+
+## tool · 2026-11-19T01:55:01Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T01:55:14Z
+
+
+Script completed
+Wall time 7.5 seconds
+Output:
+
+{"chunk_id":"32279a","wall_time_seconds":1.002560667,"session_id":97033,"original_token_count":0,"output":""}
