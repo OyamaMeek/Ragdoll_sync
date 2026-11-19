@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "说明可用模型抓取方式",
-  "updated" : 1795052492255,
+  "updated" : 1795052620083,
   "usage" : [
     {
       "cacheRead" : 14720,
@@ -94,6 +94,69 @@
       "model" : "gpt-6.2-sol",
       "output" : 298,
       "time" : 1795052492238
+    },
+    {
+      "cacheRead" : 69760,
+      "cacheWrite" : 0,
+      "id" : "resp_091f20e71b638fe9016afe54053cfc87d08511ae13cd88700b",
+      "input" : 614,
+      "model" : "gpt-6.2-sol",
+      "output" : 502,
+      "time" : 1795052562063
+    },
+    {
+      "cacheRead" : 70272,
+      "cacheWrite" : 0,
+      "id" : "resp_091f20e71b638fe9016afe5413217087d0b5dba6d17e551058",
+      "input" : 7603,
+      "model" : "gpt-6.2-sol",
+      "output" : 325,
+      "time" : 1795052572282
+    },
+    {
+      "cacheRead" : 77696,
+      "cacheWrite" : 0,
+      "id" : "resp_091f20e71b638fe9016afe541d0f7c87d08404e38a83382e00",
+      "input" : 3956,
+      "model" : "gpt-6.2-sol",
+      "output" : 435,
+      "time" : 1795052585380
+    },
+    {
+      "cacheRead" : 81536,
+      "cacheWrite" : 0,
+      "id" : "resp_091f20e71b638fe9016afe542a140887d0abce16d58c477b7c",
+      "input" : 2432,
+      "model" : "gpt-6.2-sol",
+      "output" : 413,
+      "time" : 1795052596380
+    },
+    {
+      "cacheRead" : 83840,
+      "cacheWrite" : 0,
+      "id" : "resp_091f20e71b638fe9016afe5435503487d0b97540debcf7078d",
+      "input" : 4115,
+      "model" : "gpt-6.2-sol",
+      "output" : 207,
+      "time" : 1795052603927
+    },
+    {
+      "cacheRead" : 87680,
+      "cacheWrite" : 0,
+      "id" : "resp_091f20e71b638fe9016afe543cbe8087d088f5071d6968d37a",
+      "input" : 1480,
+      "model" : "gpt-6.2-sol",
+      "output" : 257,
+      "time" : 1795052612015
+    },
+    {
+      "cacheRead" : 88960,
+      "cacheWrite" : 0,
+      "id" : "resp_091f20e71b638fe9016afe5449cb9c87d0904a275ca079a06a",
+      "input" : 514,
+      "model" : "gpt-6.2-sol",
+      "output" : 39,
+      "time" : 1795052619686
     }
   ],
   "warnings" : [
