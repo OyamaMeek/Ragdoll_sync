@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
   "source" : "codex",
   "title" : "将原作者信息改为 OyamaMeek",
-  "updated" : 1795076788786,
+  "updated" : 1795076902745,
   "usage" : [
     {
       "cacheRead" : 6784,
@@ -85,6 +85,114 @@
       "model" : "gpt-6.2-sol",
       "output" : 85,
       "time" : 1795076786317
+    },
+    {
+      "cacheRead" : 68736,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb2b31cc087d09e7f8065d5dd62a2",
+      "input" : 619,
+      "model" : "gpt-6.2-sol",
+      "output" : 349,
+      "time" : 1795076795464
+    },
+    {
+      "cacheRead" : 69248,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb2bd610487d09baddcfdee18cdc0",
+      "input" : 2817,
+      "model" : "gpt-6.2-sol",
+      "output" : 516,
+      "time" : 1795076810877
+    },
+    {
+      "cacheRead" : 71808,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb2cce1cc87d0b534faf0b19e309e",
+      "input" : 1285,
+      "model" : "gpt-6.2-sol",
+      "output" : 161,
+      "time" : 1795076817530
+    },
+    {
+      "cacheRead" : 72832,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb2d26e1087d0add03f98d534f7b9",
+      "input" : 2010,
+      "model" : "gpt-6.2-sol",
+      "output" : 223,
+      "time" : 1795076824006
+    },
+    {
+      "cacheRead" : 74624,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb2d8e7f087d084075a7207f4f952",
+      "input" : 6165,
+      "model" : "gpt-6.2-sol",
+      "output" : 728,
+      "time" : 1795076841668
+    },
+    {
+      "cacheRead" : 80768,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb2f35dec87d082056143a82eca8c",
+      "input" : 937,
+      "model" : "gpt-6.2-sol",
+      "output" : 327,
+      "time" : 1795076859257
+    },
+    {
+      "cacheRead" : 81536,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb2fc255087d09fe711e4ec742339",
+      "input" : 1384,
+      "model" : "gpt-6.2-sol",
+      "output" : 250,
+      "time" : 1795076869148
+    },
+    {
+      "cacheRead" : 82816,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb30ac73c87d0a1bace0ec34f7f64",
+      "input" : 413,
+      "model" : "gpt-6.2-sol",
+      "output" : 203,
+      "time" : 1795076880118
+    },
+    {
+      "cacheRead" : 83072,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb310dfd887d0960e523be5fa0776",
+      "input" : 472,
+      "model" : "gpt-6.2-sol",
+      "output" : 153,
+      "time" : 1795076885293
+    },
+    {
+      "cacheRead" : 83328,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb31602d887d081d973fd6da880ce",
+      "input" : 393,
+      "model" : "gpt-6.2-sol",
+      "output" : 68,
+      "time" : 1795076888263
+    },
+    {
+      "cacheRead" : 83584,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb31e217487d0937b3643367438c1",
+      "input" : 263,
+      "model" : "gpt-6.2-sol",
+      "output" : 121,
+      "time" : 1795076897884
+    },
+    {
+      "cacheRead" : 83584,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb3229cd887d0a7636cb4f8ba1bad",
+      "input" : 455,
+      "model" : "gpt-6.2-sol",
+      "output" : 145,
+      "time" : 1795076902685
     }
   ],
   "warnings" : [
