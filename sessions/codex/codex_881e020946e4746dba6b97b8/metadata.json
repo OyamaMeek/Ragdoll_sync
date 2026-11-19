@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加仓库信息 README 自动生成",
-  "updated" : 1795089578970,
+  "updated" : 1795089661857,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -472,6 +472,33 @@
       "model" : "gpt-6.2-sol",
       "output" : 1874,
       "time" : 1795089570664
+    },
+    {
+      "cacheRead" : 151424,
+      "cacheWrite" : 0,
+      "id" : "resp_0947ea8344b2623a016afee4abb84c87d089bdff4b352963f2",
+      "input" : 4125,
+      "model" : "gpt-6.2-sol",
+      "output" : 861,
+      "time" : 1795089599704
+    },
+    {
+      "cacheRead" : 155520,
+      "cacheWrite" : 0,
+      "id" : "resp_0947ea8344b2623a016afee4c04fd087d08cc086d751fd8952",
+      "input" : 2637,
+      "model" : "gpt-6.2-sol",
+      "output" : 1968,
+      "time" : 1795089644702
+    },
+    {
+      "cacheRead" : 158080,
+      "cacheWrite" : 0,
+      "id" : "resp_0947ea8344b2623a016afee4ed62c887d0821559be136eb35f",
+      "input" : 2069,
+      "model" : "gpt-6.2-sol",
+      "output" : 578,
+      "time" : 1795089659270
     }
   ],
   "warnings" : [
