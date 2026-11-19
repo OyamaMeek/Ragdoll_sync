@@ -4039,3 +4039,54 @@ Script running with cell ID g10:44
 Wall time 1.0 seconds
 Output:
 
+
+## tool · 2026-11-19T12:01:09Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"049223","wall_time_seconds":1.001500125,"session_id":9901,"original_token_count":0,"output":""}
+{"chunk_id":"34088c","wall_time_seconds":0.000010167,"exit_code":0,"original_token_count":6,"output":"com.oyamameek.ragdoll\n"}
+
+## tool · 2026-11-19T12:01:12Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"1d3bca","wall_time_seconds":0.000012542,"exit_code":1,"original_token_count":14,"output":"归档仓库的分支、远端或工作区发生变化\n"}
+
+## tool · 2026-11-19T12:01:21Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"b0cc88","wall_time_seconds":1.001915333,"session_id":44955,"original_token_count":77,"output":"## main...origin/main [ahead 182]\n?? .ragdoll-archive-lock\n9c259ca59bcb35bee0e9e16f127381c3de58bdb4 chore(archive): sync conversations\n27e081a8de455e76e4f61bfa5f05104d3f015e2d chore(archive): sync conversations\nrefs/heads/main\nhttps://github.com/OyamaMeek/Ragdoll_sync.git\n.ragdoll-manifest.json\nsessions\n"}
+{"chunk_id":"a1ca92","wall_time_seconds":0.000008208,"exit_code":0,"original_token_count":47,"output":"2026-11-19 20:00:26 CST /Users/oyamahappa/Documents/GitHub/Ragdoll_sync/.ragdoll-archive-lock\n2026-11-19 20:01:19 CST /Users/oyamahappa/Library/Application Support/Ragdoll/service-lock\n\n"}
+
+## assistant · 2026-11-19T12:01:35Z
+
+确认了，`Ragdoll_sync` 正在同步会话，远端还没有 README。我会用已经在远端的会话记录生成报告，这次提交只包含 README、热力图和报告清单。
+
+## tool · 2026-11-19T12:01:37Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"2fbea3","wall_time_seconds":0.000009125,"exit_code":0,"original_token_count":1033,"output":"    process.waitUntilExit()\n    guard process.terminationStatus == 0 else { throw failure(\"Git 操作失败：\\(arguments[0])\") }\n    return data\n}\n\nfunc text(_ data: Data) -> String {\n    String(decoding: data, as: UTF8.self).trimmingCharacters(in: .whitespacesAndNewlines)\n}\n\nfunc hash(_ data: Data) -> String {\n    SHA256.hash(data: data).map { String(format: \"%02x\", $0) }.joined()\n}\n\nfunc run() throws {\n    let arguments = CommandLine.arguments\n    guard arguments.count == 6, [\"preview\", \"commit\"].contains(arguments[1]) else { throw failure(\"参数无效\") }\n    let commit = arguments[1] == \"commit\"\n    let repository = URL(fileURLWithPath: arguments[2], isDirectory: true)\n    let base = arguments[3]\n    let output = commit ? repository : URL(fileURLWithPath: arguments[5], isDirectory: true)\n    let lease = commit ? try ServiceLease(root: repository, name: \".ragdoll-archive-lock\") : nil\n    defer { withExtendedLifetime(lease) {} }\n    guard try text(git([\"rev-parse\", \"HEAD\"], at: repository)) == base,\n          try text(git([\"symbolic-ref\", \"HEAD\"], at: repository)) == \"refs/heads/main\",\n          try text(git([\"remote\", \"get-url\", \"--push\", \"--all\", \"origin\"], at: repository)) == \"https://github.com/OyamaMeek/Ragdoll_sync.git\",\n          try git([\"status\", \"--porcelain=v1\", \"--untracked-files=no\"], at: repository).isEmpty else {\n        throw failure(\"归档仓库的分支、远端或工作区发生变化\")\n    }\n\n    let decoder = JSONDecoder()\n    let settings = try decoder.decode(ReportSettings.self, from: Data(contentsOf: URL(fileURLWithPath: arguments[4])))\n    let tracked = try git([\"ls-tree\", \"-rz\", \"--name-only\", base, \"--\", \"sessions\"], at: repository)\n    let paths = Set(tracked.split(separator: 0).map { String(decoding: $0, as: UTF8.self) })\n    let archived = try paths.filter { $0.hasSuffix(\"/metadata.json\") }.sorted().map { path in\n        let session = try decoder.decode(Session.self, from: Data(contentsOf: repository.appendingPathComponent(path)))\n        let archivedPath = Archive.sessionPath(session)\n        guard path == archivedPath + \"/metadata.json\", paths.contains(archivedPath + \"/transcript.md\") else { throw failure(\"归档会话路径不一致\") }\n        return session\n    }\n    guard !archived.isEmpty else { throw failure(\"找不到已提交的归档会话\") }\n    let sessions = archived.filter { !settings.excludedProjects.contains($0.project) }\n    let readme = ArchiveActivity.readmePath\n    let chart = ArchiveActivity.chartPath\n    let manifest = ArchiveActivity.manifestPath\n    let names = [readme, chart, manifest]\n    let status = try git([\"status\", \"--porcelain=v1\", \"--untracked-files=all\", \"--ignored=matching\", \"--\"] + names, at: repository)\n    guard status.isEmpty, try git([\"ls-files\", \"--\"] + names, at: repository).isEmpty else { throw failure(\"归档报告文件已存在\") }\n    let activity = ArchiveActivity.render(sessions, prices: settings.prices)\n    let activityManifest = [readme: hash(activity.section), chart: hash(activity.chart), ArchiveActivity.sectionKey: hash(activity.section)]\n    let encoder = JSONEncoder()\n    encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]\n    for (name, data) in [(readme, activity.section), (chart, activity.chart), (manifest, try encoder.encode(activityManifest))] {\n        try data.write(to: output.appendingPathComponent(name), options: .withoutOverwriting)\n    }\n    if commit {\n        _ = try git([\"add\", \"--\"] + names, at: repository)\n        _ = try git([\"commit\", \"--only\", \"-m\", \"docs(archive): publish activity README\", \"--\"] + names, at: repository)\n        let diff = try text(git([\"diff\", \"--name-only\", base, \"HEAD\"], at: repository))\n        guard Set(diff.split(separator: \"\\n\").map(String.init)) == Set(names) else { throw failure(\"提交包含额外文件\") }\n        print(\"commit=\\(try text(git([\"rev-parse\", \"HEAD\"], at: repository)))\")\n    }\n    print(\"archived=\\(archived.count) reported=\\(sessions.count)\")\n}\n\ndo { try run() }\ncatch {\n    FileHandle.standardError.write(Data((error.localizedDescription + \"\\n\").utf8))\n    exit(1)\n}\noyamahappa\n"}
+
+## tool · 2026-11-19T12:02:06Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
