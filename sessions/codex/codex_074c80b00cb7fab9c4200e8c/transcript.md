@@ -1540,8 +1540,92 @@ Output:
 {"chunk_id":"5b25ef","wall_time_seconds":0.00001025,"exit_code":0,"original_token_count":79,"output":"-rw-r--r--  1 oyamahappa  staff  2592 Nov 19 09:55 scripts/build.sh\n100644 c76a3f582668ed748fca166706c7ed67ddfbe6f4 0\tscripts/build.sh\nREADME.md:63:bash scripts/build.sh\ndocs/DEVELOPMENT.md:16:bash scripts/build.sh\ndocs/DEVELOPMENT.md:36:CODE_SIGN_IDENTITY=\"你的有效 Apple 签名身份\" bash scripts/build.sh\n"}
 {"chunk_id":"26dd01","wall_time_seconds":0.000008667,"exit_code":0,"original_token_count":872,"output":"import SwiftUI\nimport RagdollCore\n\nenum Page: String, CaseIterable, Identifiable {\n    case home = \"首页\", sessions = \"会话\", chat = \"对话\", settings = \"设置\"\n    var id: String { rawValue }\n    var icon: String {\n        switch self { case .home: \"square.grid.2x2\"; case .sessions: \"clock.arrow.circlepath\"; case .chat: \"bubble.left.and.bubble.right\"; case .settings: \"slider.horizontal.3\" }\n    }\n}\n\nstruct RootView: View {\n    @EnvironmentObject var model: AppModel\n    @State private var page: Page? = .home\n    @State private var showingStatus = false\n    var body: some View {\n        Group {\n            if model.needsArchiveSetup {\n                VStack(spacing: 20) {\n                    Image(systemName: \"externaldrive.badge.checkmark\").font(.system(size: 42)).foregroundStyle(.blue)\n                    Text(\"设置 Git 数据仓库\").font(.largeTitle.bold())\n                    Text(\"请选择保存会话的专用 Git 仓库，也可以选择空目录创建仓库。\\n每次打开会先读取仓库历史，再检查本机新增数据并自动归档。\").multilineTextAlignment(.center).foregroundStyle(.secondary)\n                    Button(\"选择或创建 Git 仓库…\") { model.chooseArchive() }.buttonStyle(.borderedProminent).disabled(model.loadingArchive)\n                    Text(\"本地提交需要 Git 已配置姓名与邮箱；远端自动推送可在设置中配置。\").font(.caption).foregroundStyle(.secondary)\n                }.padding(40).frame(maxWidth: .infinity, maxHeight: .infinity)\n            } else { content }\n        }\n        .alert(\"操作未完成\", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {\n            Button(\"好\", role: .cancel) { model.error = nil }\n        } message: { Text(model.error ?? \"\") }\n        .sheet(item: Binding(get: { model.approvals.first }, set: { _ in })) { request in ApprovalView(request: request).environmentObject(model) }\n    }\n    private var content: some View {\n        let chat = page == .chat\n        return NavigationSplitView {\n            Group {\n                if chat {\n                    VStack(spacing: 6) {\n                        ForEach(Page.allCases) { item in\n                            Button { page = item } label: {\n                                Image(systemName: item.icon).font(.system(size: 16, weight: .medium))\n                                    .foregroundStyle(page == item ? Color.accentColor : Color.secondary)\n                                    .frame(width: 36, height: 34)\n                                    .background(page == item ? Color.accentColor.opacity(0.12) : .clear, in: RoundedRectangle(cornerRadius: 9))\n                                    .contentShape(Rectangle())\n                            }\n                            .buttonStyle(.plain).help(item.rawValue).accessibilityLabel(item.rawValue)\n                            .accessibilityAddTraits(page == item ? .isSelected : [])\n                        }\n                        Spacer()\ndrwxr-xr-x  17 oyamahappa  staff  544 Nov 19 17:52 .cache\n## main...origin/main\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\n M Sources/Ragdoll/DashboardView.swift\n M Sources/RagdollCore/Analytics.swift\n M Tests/RagdollCoreTests/AnalyticsTests.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M docs/USAGE.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Sources/Ragdoll/Resources/\n"}
 
-## tool · 2026-11-19T09:54:27Z
+## tool · 2026-11-19T09:54:32Z
+
+
+Script completed
+Wall time 4.9 seconds
+Output:
+
+{"chunk_id":"8d9d67","wall_time_seconds":1.002506166,"session_id":18411,"original_token_count":0,"output":""}
+
+## tool · 2026-11-19T09:55:00Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"76b649","wall_time_seconds":0.000024084,"exit_code":0,"original_token_count":368,"output":"[0/1] Planning build\nBuilding for production...\n[0/5] Write sources\n[2/5] Write swift-version--58304C5D6DBC2206.txt\n[4/6] Compiling RagdollCore Analytics.swift\n[5/9] Compiling RagdollService ServiceMain.swift\n[5/9] Write Objects.LinkFileList\n[6/9] Linking RagdollService\n[8/9] Compiling Ragdoll AgentOptionsView.swift\n[8/10] Write Objects.LinkFileList\n[9/10] Linking Ragdoll\nBuild complete! (14.35s)\n\nadded 118 packages, and audited 119 packages in 2s\n\n36 packages are looking for funding\n  run `npm fund` for details\n\nfound 0 vulnerabilities\n\n> ragdoll-runtime@0.1.0 build\n> esbuild src/main.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/main.mjs\n\n\n  dist/main.mjs  103.9kb\n\n⚡ Done in 5ms\n\nadded 112 packages, and audited 113 packages in 1s\n\n36 packages are looking for funding\n  run `npm fund` for details\n\nfound 0 vulnerabilities\n/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/.ragdoll-build.WlXJJw/Ragdoll.app: replacing existing signature\n{\"status\":\"ok\",\"version\":\"0.1.0\",\"node\":\"v26.13.0\",\"agents\":[{\"id\":\"native-codex\",\"name\":\"Codex\",\"kind\":\"codex\",\"command\":\"codex\",\"args\":[],\"env\":{}},{\"id\":\"native-claude\",\"name\":\"Claude Code\",\"kind\":\"claude\",\"command\":\"claude\",\"args\":[],\"env\":{}},{\"id\":\"native-dsh\",\"name\":\"DeepSeek Harness\",\"kind\":\"dsh\",\"command\":\"/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh\",\"args\":[\"--profile\",\"sdk\"],\"env\":{}}]}\nBuilt: /Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app\n"}
+{"chunk_id":"f4e89f","wall_time_seconds":0.000010334,"exit_code":0,"original_token_count":880,"output":"  > 模型选择器应自动读取当前 Codex 的可用模型。\n- **实际实现的功能与改动**\n  - 默认 Codex Agent 优先使用 ChatGPT 桌面版随附的 Codex，模型查询、会话新建与恢复、迁移共用同一个进程入口。保留显式命令和 PATH 配置。\n  - 真实 app-server 回归先失败后通过。预览包的内置运行时查询到 10 个模型，包含 `gpt-6.2-sol`，并验证显式配置。51 项 Swift 测试、21 项常规 Node 测试、1 项真实 Codex 回归、TypeScript 检查、发布编译及临时签名预览自检通过。按证书名称选取的签名身份被系统判定已撤销。\n- **涉及文件** `runtime/src/rpc.ts`、`runtime/src/agents.ts`、`runtime/src/migration.ts`、`runtime/test/integration.test.ts`、`memory/`、`docs/CHANGELOG.md`。\n- **Git 提交** `12cff7f fix(codex): use desktop model catalog`，已推送至 `origin/main`。\n\n---\n\n## [2026-11-19 09:57] 只保留一份 Ragdoll 应用包\n\n- **需求/问题描述**\n  > 本机只保留一份编译好的 Ragdoll 应用包。\n- **实际实现的功能与改动**\n  - 本地脚本完成签名和自检后更新 `dist/Ragdoll.app`，旧包仅在替换过程中用于恢复。历史应用包、验证副本及旧发布压缩包已移到废纸篓。\n  - 旧脚本实测留下历史包，新脚本实测签名失败时保留原包，重建成功后仍只保留一个应用包。按原包证书指纹签名，深度校验、自检和包内查询 10 个 Codex 模型均通过。\n- **涉及文件** `scripts/build.sh`、`memory/`、`docs/CHANGELOG.md`。\n- **Git 提交** `2894181 fix(build): keep a single app bundle`，已推送至 `origin/main`。\n\n---\n\n- [x] 确认 `dist` 有六份应用包，构建脚本也会额外保留旧包。按原正式包签名证书指纹选定签名身份。\n- [x] 旧脚本成功构建但留下额外应用包。修正后实测无效签名时现有包保持原签名摘要，临时目录被清理。\n- [x] 新版用原 Apple Development 身份签名，深度签名、自检与真实模型查询通过，返回 10 个模型。旧应用、验证副本和过期压缩包已移入废纸篓，重建后仍只保留 `dist/Ragdoll.app`。\n- [x] `2894181 fix(build): keep a single app bundle` 已普通推送至 `origin/main`。\n\n## DeepSeek V4.1 Flash 高峰价估算（2026-11-19）\n\n- [x] 核对 DeepSeek 官方高峰人民币单价，确认首页使用已筛选会话，汇总层已有请求去重和 Token 分类。\n- [ ] 运行新增回归，接入 Token 估价和可点击卡片。\n- [ ] 验证 Swift 测试、发布构建和应用运行，记录提交与推送结果。\n- 检查构建脚本语法、失败时保留旧包、成功时以 `dist/Ragdoll.app` 为唯一交付路径。\n- 验证正式包签名、包内运行时自检和真实模型目录，核对工作区内剩余 Ragdoll 应用包。\n- 已验证：旧脚本留下额外应用包，新脚本在无效签名时保留现有包，重建成功后只保留 `dist/Ragdoll.app`。原 Apple Development 签名、运行时自检和 10 项模型目录查询通过。\n\n## DeepSeek V4.1 Flash 高峰价估算\n\n- 验证历史与当天的输入、缓存读取、缓存写入及输出按高峰价折算。未知原模型单价的记录也计入，重复请求及未来记录排除。\n- 卡片默认隐藏估价，点击后显示人民币金额或暂无用量。沿用当前项目、来源筛选及现有总成本和预算。\n- 运行 Swift 测试、发布构建及可用的非视觉运行验证。\n2026-11-19 17:55\n"}
+
+## tool · 2026-11-19T09:55:14Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"2b5d21","wall_time_seconds":1.001665083,"session_id":41835,"original_token_count":0,"output":""}
+{"chunk_id":"a9c9fa","wall_time_seconds":0.653641541,"exit_code":1,"original_token_count":94,"output":"--prepared:/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/MacOS/RagdollService\n--validated:/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app/Contents/MacOS/RagdollService\ndist/Ragdoll.app: valid on disk\ndist/Ragdoll.app: satisfies its Designated Requirement\n.build/release/Ragdoll dist/Ragdoll.app/Contents/MacOS/Ragdoll differ: char 3314, line 1\n"}
+
+## tool · 2026-11-19T09:55:26Z
+
+
+Script completed
+Wall time 2.5 seconds
+Output:
+
+{"chunk_id":"bc727d","wall_time_seconds":2.299783167,"exit_code":0,"original_token_count":52,"output":"UUID: E20FD3FF-EECF-3ED5-9877-4993E71D2C48 (arm64) .build/release/Ragdoll\nUUID: E20FD3FF-EECF-3ED5-9877-4993E71D2C48 (arm64) dist/Ragdoll.app/Contents/MacOS/Ragdoll\nok\ndist/Ragdoll.app\nDeepSeek V4.1 Flash\n"}
+{"chunk_id":"2933ae","wall_time_seconds":0.000010875,"exit_code":0,"original_token_count":5,"output":"2026-11-19 17:55\n"}
+
+## tool · 2026-11-19T09:55:33Z
+
+
+Script completed
+Wall time 3.6 seconds
+Output:
+
+{"chunk_id":"16b699","wall_time_seconds":0.000030208,"exit_code":1,"original_token_count":1,"output":"^C"}
+
+## tool · 2026-11-19T09:55:52Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T09:55:56Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"4fd94c","wall_time_seconds":0.000010958,"exit_code":0,"original_token_count":276,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\n@@ -317,6 +317,20 @@\n+## [2026-11-17 22:04] 按会话来源显示助手品牌头像\n@@ -379,3 +393,15 @@\n+## [2026-11-19 17:55] 首页 DeepSeek V4.1 Flash 高峰价估算\ndiff --git a/memory/plan.md b/memory/plan.md\n@@ -1,5 +1,12 @@\n+## 助手品牌头像\n@@ -173,3 +180,9 @@\n+## DeepSeek V4.1 Flash 高峰价估算\ndiff --git a/memory/progress.md b/memory/progress.md\n@@ -1,5 +1,15 @@\n+## 助手品牌头像（2026-11-17）\n@@ -224,3 +234,10 @@\n+## DeepSeek V4.1 Flash 高峰价估算（2026-11-19）\ndiff --git a/memory/verify.md b/memory/verify.md\n@@ -1,5 +1,13 @@\n+## 助手品牌头像\n@@ -177,3 +185,9 @@\n+## DeepSeek V4.1 Flash 高峰价估算\n## main...origin/main\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\n M Sources/Ragdoll/DashboardView.swift\n M Sources/RagdollCore/Analytics.swift\n M Tests/RagdollCoreTests/AnalyticsTests.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M docs/USAGE.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Sources/Ragdoll/Resources/\n"}
+
+## tool · 2026-11-19T09:56:06Z
+
+
+Script completed
+Wall time 4.7 seconds
+Output:
+
+{"chunk_id":"edfe54","wall_time_seconds":0.000009917,"exit_code":0,"original_token_count":2455,"output":"Warning: truncated output (original token count: 2455)\nTotal output lines: 131\n\ndiff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\nindex 5ace18e..37f55c9 100644\n--- a/docs/CHANGELOG.md\n+++ b/docs/CHANGELOG.md\n@@ -317,6 +317,20 @@\n \n ---\n \n+## [2026-11-17 22:04] 按会话来源显示助手品牌头像\n+\n+- **需求/问题描述**：\n+  > 助手头像显示对应的 Codex、Claude 或 DeepSeek 图标，并自行查找图标资源。\n+- **实际实现的功能与改动**：\n+  - 原生 Codex、Claude Code、Claude 聊天导入及 DeepSeek Harness 使用对应品牌头像；带 nativeSource 的 ACP 复用原生品牌，未知来源保留通用头像。\n+  - Lobe Icons 三张 PNG 与 MIT 许可随应用本地打包；Codex 模板随文字颜色变化，Claude/DeepSeek 保留品牌色。应用优先读取 Contents/Resources 中的资源 Bundle，开发运行使用 SwiftPM Bundle。\n+  - 来源映射回归先因缺少实现编译失败；最终全部 48 项 Swift 测试通过（21.379 秒），release 构建及 Git diff 检查通过，包内三张图标与源文件逐字节一致。\n+  - 更新并重启 `dist/Ragdoll.preview.app`，临时签名完整性和内置助手自检通过；原正式包 SHA-256 不变且签名完整性通过。未截图或验证实际窗口显示，未运行 Claude 接入测试；预览包不用于独立后台服务。\n+- **涉及文件**：`Package.swift`、`Sources/Ragdoll/ConversationView.swift`、`Sources/Ragdoll/Resources/AssistantIcons/`、`Tests/RagdollTests/ConversationTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n+- **Git 提交**：待提交。\n+\n+---\n+\n ## [2026-11-18 11:08] 改版对话工作区\n \n - **需求/问题描述**：\n(1/2) Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]? @@ -379,3 +393,15 @@\n - **Git 提交** `2894181 fix(build): keep a single app bundle`，已推送至 `origin/main`。\n \n ---\n+\n+## [2026-11-19 17:55] 首页 DeepSeek V4.1 Flash 高峰价估算\n+\n+- **需求/问题描述**\n+  > 点击首页第二张卡片，按 DeepSeek V4…1455 tokens truncated…品牌。\n+- 三张 PNG 可由应用资源 Bundle 解码、尺寸非零；Codex 作为模板使用主文字色，Claude/DeepSeek 保留品牌色。\n+- 所有 MessageView 调用传递品牌资源，用户头像和系统折叠保持现状。\n+- 运行 Swift 测试、release 构建、资源打包、预览包签名及内置助手自检；不截图、不运行 Claude 接入测试，保留原正式包。\n+- 已执行：来源回归先编译失败；最终 48 项 Swift 测试通过（21.379 秒），release 编译通过。预览包的三张资源与源文件一致，深度签名及助手自检通过，重启后进程运行；原正式包字节与签名保持完整。实际窗口显示未做视觉验证。\n+\n ## 台前调度图标\n \n - 图标资源与应用包内字节一致；LaunchServices 登记指向实际 ICNS；NSRunningApplication 图标与包内资源在相同尺寸下摘要一致。\n(1/2) Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]? @@ -177,3 +185,9 @@\n - 检查构建脚本语法、失败时保留旧包、成功时以 `dist/Ragdoll.app` 为唯一交付路径。\n - 验证正式包签名、包内运行时自检和真实模型目录，核对工作区内剩余 Ragdoll 应用包。\n - 已验证：旧脚本留下额外应用包，新脚本在无效签名时保留现有包，重建成功后只保留 `dist/Ragdoll.app`。原 Apple Development 签名、运行时自检和 10 项模型目录查询通过。\n+\n+## DeepSeek V4.1 Flash 高峰价估算\n+\n+- 验证历史与当天的输入、缓存读取、缓存写入及输出按高峰价折算。未知原模型单价的记录也计入，重复请求及未来记录排除。\n+- 卡片默认隐藏估价，点击后显示人民币金额或暂无用量。沿用当前项目、来源筛选及现有总成本和预算。\n+- 已验证：新增回归通过，全部 52 项 Swift 测试通过。发布构建、深度签名、助手自检和隔离启动通过；尚未执行窗口点击或视觉检查。\n(2/2) Stage this hunk [y,n,q,a,d,K,g,/,e,?]? \n"}
+
+## tool · 2026-11-19T09:56:10Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"b2d14d","wall_time_seconds":0.000010125,"exit_code":0,"original_token_count":349,"output":" Sources/Ragdoll/DashboardView.swift         | 12 +++++++++++-\n Sources/RagdollCore/Analytics.swift         |  7 +++++++\n Tests/RagdollCoreTests/AnalyticsTests.swift | 20 ++++++++++++++++++++\n docs/CHANGELOG.md                           | 12 ++++++++++++\n docs/USAGE.md                               |  4 +++-\n memory/plan.md                              |  6 ++++++\n memory/progress.md                          |  7 +++++++\n memory/verify.md                            |  6 ++++++\n 8 files changed, 72 insertions(+), 2 deletions(-)\ndiff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\n@@ -379,3 +379,15 @@\n+## [2026-11-19 17:55] 首页 DeepSeek V4.1 Flash 高峰价估算\ndiff --git a/memory/plan.md b/memory/plan.md\n@@ -173,3 +173,9 @@\n+## DeepSeek V4.1 Flash 高峰价估算\ndiff --git a/memory/progress.md b/memory/progress.md\n@@ -224,3 +224,10 @@\n+## DeepSeek V4.1 Flash 高峰价估算（2026-11-19）\ndiff --git a/memory/verify.md b/memory/verify.md\n@@ -177,3 +177,9 @@\n+## DeepSeek V4.1 Flash 高峰价估算\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\nM  Sources/Ragdoll/DashboardView.swift\nM  Sources/RagdollCore/Analytics.swift\nM  Tests/RagdollCoreTests/AnalyticsTests.swift\n M Tests/RagdollTests/ConversationTests.swift\nMM docs/CHANGELOG.md\nM  docs/USAGE.md\n M memory/agents.md\nMM memory/plan.md\nMM memory/progress.md\nMM memory/verify.md\n?? Sources/Ragdoll/Resources/\n"}
+
+## tool · 2026-11-19T09:56:14Z
 
 exec
-text(await tools.exec_command({cmd:"env CODE_SIGN_IDENTITY=CF68834CC55B59DD7A5E73B12EBD2B15F5A8FEAC bash scripts/build.sh",sandbox_permissions:"require_escalated",justification:"是否允许按项目文档执行签名构建，并将新版应用写入 dist/Ragdoll.app？",yield_time_ms:1000,max_output_tokens:3500}));
+text(await tools.exec_command({cmd:"git commit -m 'feat(dashboard): estimate token costs at DeepSeek peak rates'",sandbox_permissions:"require_escalated",justification:"是否允许提交已验证的 DeepSeek 首页估价改动？暂存内容仅包含本次任务。",yield_time_ms:1000,max_output_tokens:1300}));
 
