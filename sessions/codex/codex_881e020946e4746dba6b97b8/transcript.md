@@ -3700,3 +3700,252 @@ Wall time 0.7 seconds
 Output:
 
 {"chunk_id":"edcb51","wall_time_seconds":0.493841667,"exit_code":0,"original_token_count":31,"output":"/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.agent/readme-package-smoke.TsG11Z\n/usr/bin/jq\n/usr/bin/sqlite3\ndist/Ragdoll.app\n"}
+
+## tool · 2026-11-19T11:53:53Z
+
+
+Script running with cell ID g10:27
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T11:53:59Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"c581f8","wall_time_seconds":0.487190333,"exit_code":0,"original_token_count":72,"output":"## Ragdoll 活动概览\n| 估算总成本 | 未知 | 0/1 条用量已定价 |\n| 总 Token | 110 | 0 个会话缺少用量 |\n| 会话 | 1 | 当前归档范围 |\n### 项目活动\n| 项目 | Token | 会话 | 估算成本 |\n### 最近会话\n| 会话 | 来源 | 项目 | 更新日期 |\n1\nok\n"}
+
+## tool · 2026-11-19T11:54:07Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+- **涉及文件** `scripts/build.sh`、`memory/`、`docs/CHANGELOG.md`。
+- **Git 提交** `2894181 fix(build): keep a single app bundle`，已推送至 `origin/main`。
+
+---
+
+## [2026-11-19 17:55] 首页 DeepSeek V4.1 Flash 高峰价估算
+
+- **需求/问题描述**
+  > 点击首页第二张卡片，按 DeepSeek V4.1 Flash 高峰价查看已记录 Token 的估价。
+- **实际实现的功能与改动**
+  - 估价覆盖当前项目和来源筛选下的全部已记录用量，按缓存命中输入、未命中输入和输出分类计算人民币金额。 [DeepSeek 官方价目](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/)
+  - 新增回归先因缺少估价属性编译失败，接入估价后 52 项 Swift 测试通过。发布构建、深度签名、包内自检及隔离启动通过。窗口点击和视觉尚未实测。
+- **涉及文件** `Sources/Ragdoll/DashboardView.swift`、`Sources/RagdollCore/Analytics.swift`、`Tests/RagdollCoreTests/AnalyticsTests.swift`、`docs/USAGE.md`、`memory/`、`docs/CHANGELOG.md`。
+- **Git 提交** `bc621f1 feat(dashboard): estimate token costs at DeepSeek peak rates`，已推送至 `origin/main`。
+
+---
+
+## [2026-11-19 18:03] 首页 DeepSeek 估价切换峰谷价
+
+- **需求/问题描述**
+  > 首页 DeepSeek 卡片默认按峰价显示，点击切到谷价，两档均按总 Token 用量计算。
+- **实际实现的功能与改动**
+  - 卡片显示人民币金额和当前档位，点击切换峰价与谷价。谷价是同一份总 Token 用量折算的峰价金额的一半。 [DeepSeek 官方价目](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/)
+  - 52 项 Swift 测试通过，回归覆盖两档金额和空用量。发布构建、深度签名、包内自检及隔离启动通过。尚未实测窗口点击或视觉效果。
+- **涉及文件** `Sources/Ragdoll/DashboardView.swift`、`Sources/RagdollCore/Analytics.swift`、`Tests/RagdollCoreTests/AnalyticsTests.swift`、`docs/USAGE.md`、`memory/`、`docs/CHANGELOG.md`。
+- **Git 提交** `c1d91f9 fix(dashboard): toggle DeepSeek peak and off-peak estimates`，已推送至 `origin/main`。
+
+---
+- [x] 回归因缺少估价属性编译失败。接入高峰计价与可点击首页卡片后，全部 52 项 Swift 测试通过。
+- [x] 发布构建、深度签名与助手自检通过。新版以隔离数据目录启动，SQLite 检查通过，`dist` 仅保留 `Ragdoll.app`。
+- [x] `bc621f1 feat(dashboard): estimate token costs at DeepSeek peak rates` 已推送至 `origin/main`。
+
+## DeepSeek V4.1 Flash 峰谷价切换（2026-11-19）
+
+- [x] 确认官方谷价为峰价的一半，峰谷估价复用首页「总 Token」汇总中的同一批用量。
+- [x] 回归先因缺少谷价属性编译失败。实现后 52 项 Swift 测试通过，450 万 Token 的峰价为 ¥13.04、谷价为 ¥6.52。
+- [x] 发布构建、深度签名、包内助手自检和隔离启动通过，`dist` 仅保留 `Ragdoll.app`。
+- [x] `c1d91f9 fix(dashboard): toggle DeepSeek peak and off-peak estimates` 已推送至 `origin/main`。
+
+## Git 归档活动 README（2026-11-19）
+
+- [x] 确认前台与后台共用归档写入，且两条路径在写入前应用排除项目设置。
+- [ ] 用真实 Git 仓库验证 README 生成、更新、文件保护及推送。
+- [ ] 完成 Swift 测试与发布编译，提交并推送源码。
+- 已验证：旧脚本留下额外应用包，新脚本在无效签名时保留现有包，重建成功后只保留 `dist/Ragdoll.app`。原 Apple Development 签名、运行时自检和 10 项模型目录查询通过。
+
+## DeepSeek V4.1 Flash 峰谷价估算
+
+- 验证历史与当天的输入、缓存读取、缓存写入及输出按高峰价折算。未知原模型单价的记录也计入，重复请求及未来记录排除。
+- 对同一份总 Token 验证两档金额，谷价是峰价一半。卡片默认显示峰价金额，每次点击切换金额及档位标签，空数据提示暂无用量。
+- 已验证：52 项 Swift 测试通过，回归覆盖 450 万 Token 对应的峰价 ¥13.04、谷价 ¥6.52 和空用量。签名构建、助手自检及隔离启动通过。尚未实测窗口点击或视觉效果。
+
+## Git 归档活动 README
+
+- 确认实际 Git 提交包含 Markdown 和可解析的热力图，数据与统计层一致，最近会话链接指向归档文件，未归档项目不进入报告。
+- 验证重复归档无空提交，变更后报告更新，手工编辑与暂存的原有 README 得到保留。使用独立后台进程与本地裸仓库验证归档、恢复和推送。
+2026-11-19 19:54
+
+## main...origin/main
+ M Package.swift
+ M Sources/Ragdoll/AppModel.swift
+ M Sources/Ragdoll/ConversationView.swift
+ M Sources/Ragdoll/SettingsView.swift
+ M Sources/RagdollCore/Archive.swift
+ M Sources/RagdollCore/BackgroundService.swift
+ M Tests/RagdollCoreTests/BackgroundServiceTests.swift
+ M Tests/RagdollCoreTests/StoreArchiveTests.swift
+ M Tests/RagdollTests/ConversationTests.swift
+ M docs/CHANGELOG.md
+ M docs/USAGE.md
+ M memory/agents.md
+ M memory/gotchas.md
+ M memory/plan.md
+ M memory/progress.md
+ M memory/verify.md
+?? Sources/Ragdoll/Resources/
+?? Sources/RagdollCore/ArchiveActivity.swift
+f19bd0a3e59ba6037cd7aaf1cb4f3a8a660d86fb
+f19bd0a3e59ba6037cd7aaf1cb4f3a8a660d86fb
+
+
+## tool · 2026-11-19T11:54:27Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T11:54:33Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"756449","wall_time_seconds":0.00160725,"exit_code":0,"original_token_count":307,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\n@@ -317,6 +317,20 @@\n+## [2026-11-17 22:04] 按会话来源显示助手品牌头像\n@@ -403,3 +417,16 @@\n+## [2026-11-19 19:54] 自动更新归档仓库 README\ndiff --git a/memory/plan.md b/memory/plan.md\n@@ -1,5 +1,12 @@\n+## 助手品牌头像\n@@ -179,3 +186,8 @@\n+## Git 归档活动 README\ndiff --git a/memory/progress.md b/memory/progress.md\n@@ -1,5 +1,15 @@\n+## 助手品牌头像（2026-11-17）\n@@ -238,3 +248,10 @@\n+## Git 归档活动 README（2026-11-19）\ndiff --git a/memory/verify.md b/memory/verify.md\n@@ -1,5 +1,13 @@\n+## 助手品牌头像\n@@ -183,3 +191,9 @@\n+## Git 归档活动 README\n Sources/Ragdoll/AppModel.swift                     | 12 +++-\n Sources/Ragdoll/SettingsView.swift                 |  4 +-\n Sources/RagdollCore/Archive.swift                  | 79 +++++++++++++++++++---\n Sources/RagdollCore/BackgroundService.swift        |  2 +-\n .../RagdollCoreTests/BackgroundServiceTests.swift  |  1 +\n Tests/RagdollCoreTests/StoreArchiveTests.swift     | 75 +++++++++++++++++++-\n docs/USAGE.md                                      |  4 ++\n memory/gotchas.md                                  |  1 +\n 8 files changed, 160 insertions(+), 18 deletions(-)\n"}
+
+## tool · 2026-11-19T11:54:40Z
+
+
+Script running with cell ID g10:31
+Wall time 1.0 seconds
+Output:
+
+
+## assistant · 2026-11-19T11:54:46Z
+
+54 项 Swift 测试已通过，签名后的应用也已构建。包内后台服务用隔离的 Codex 日志生成了 README 和热力图，并将两者推送到本地测试远端。现在提交并推送源码。
+
+## tool · 2026-11-19T11:54:47Z
+
+
+Script running with cell ID g10:31
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T11:54:52Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"346d49","wall_time_seconds":0.000014834,"exit_code":0,"original_token_count":2672,"output":"Warning: truncated output (original token count: 2672)\nTotal output lines: 131\n\ndiff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\nindex 590565c..5a6ce9b 100644\n--- a/docs/CHANGELOG.md\n+++ b/docs/CHANGELOG.md\n@@ -317,6 +317,20 @@\n \n ---\n \n+## [2026-11-17 22:04] 按会话来源显示助手品牌头像\n+\n+- **需求/问题描述**：\n+  > 助手头像显示对应的 Codex、Claude 或 DeepSeek 图标，并自行查找图标资源。\n+- **实际实现的功能与改动**：\n+  - 原生 Codex、Claude Code、Claude 聊天导入及 DeepSeek Harness 使用对应品牌头像；带 nativeSource 的 ACP 复用原生品牌，未知来源保留通用头像。\n+  - Lobe Icons 三张 PNG 与 MIT 许可随应用本地打包；Codex 模板随文字颜色变化，Claude/DeepSeek 保留品牌色。应用优先读取 Contents/Resources 中的资源 Bundle，开发运行使用 SwiftPM Bundle。\n+  - 来源映射回归先因缺少实现编译失败；最终全部 48 项 Swift 测试通过（21.379 秒），release 构建及 Git diff 检查通过，包内三张图标与源文件逐字节一致。\n+  - 更新并重启 `dist/Ragdoll.preview.app`，临时签名完整性和内置助手自检通过；原正式包 SHA-256 不变且签名完整性通过。未截图或验证实际窗口显示，未运行 Claude 接入测试；预览包不用于独立后台服务。\n+- **涉及文件**：`Package.swift`、`Sources/Ragdoll/ConversationView.swift`、`Sources/Ragdoll/Resources/AssistantIcons/`、`Tests/RagdollTests/ConversationTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n+- **Git 提交**：待提交。\n+\n+---\n+\n ## [2026-11-18 11:08] 改版对话工作区\n \n - **需求/问题描述**：\n(1/2) Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]? @@ -403,3 +417,16 @@\n - **Git 提交** `c1d91f9 fix(dashboard): toggle DeepSeek peak and off-peak estimates`，已推送至 `origin/main`。\n \n ---\n+\n+## [2026-11-19 19:54] 自动更新归档仓库 README\n+\n+- **需求/问题描述**\n+  > 自动在 Git 归档仓库的 `README.md` 展示首页活动信息，省去 DeepSeek 对比估价。\n+- **实际实现的功能与改动**\n+  - 前台和后台归档都更新根目录 README 中的活动区块及热力图，显示美元估算成本、Token、会话总数、项目活动和可打开归档文本的最近会话。统计沿用当前价格和项目排除设置。\n+  - 已有 README 的正文按原样保留，生成区块随归档提交并使用既有推送配置。暂存和未提交的人工修改受到保护。\n+  - 回归先因缺少 README 失败，完整 Swift 测试 54 项通过。发布构建、Apple Development 签名校验与包内运行时自检通过。签名包内独立服务在隔离环境读取一条 Codex 测试会话，生成 README 与热力图并推送至本地裸仓库，远端与本地提交一致。\n+- **涉及文件** `Sources/RagdollCore/Archive.swift`、`Sources/RagdollCore/ArchiveActivity.swift`、`Sources/RagdollCore/BackgroundService.swift`、`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/SettingsView.swift`、`Tests/RagdollCoreTests/`、`docs/USAGE.md`、`docs/CHANGELOG.md`、`memory/`。\n+- **Git 提交** 待提交。\n+\n+---\n(2/2) Stage this hunk [y,n,q,a,d,K,g,/,e,?]? \ndiff --git a/memory/plan.md b/memory/plan.md\nindex 163da00..11c8c54 100644\n--- a/memory/plan.md\n+++ b/memory/plan.md\n@@ -1,5 +1,12 @@\n # Ragdoll 实施计划\n \n+## 助手品牌头像\n+\n+- 按会话 `nativeSource ?? source` 显示 Codex、Claude（含官方聊天导入）、DeepSeek 图标；未知 ACP 保留通用头像。复用现有 28 点头像布局，Codex 单色随系统主题，其他品牌保留原色。\n+- 使用 Lobe Icons 的静态 PNG，随 Swift Package 资源打包并保留 MIT 许可，不增加依赖或网络加载。\n+- 范围：ConversationView 的来源传递及头像、Pack…772 tokens truncated…交并普通推送至 origin/main。\n+\n ## 台前调度图标（2026-11-17）\n \n - [x] 确认当前预览包的 ICNS 与源资源一致、LaunchServices 登记正确；运行中应用图标与包内资源一致。\n(1/2) Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]? @@ -238,3 +248,10 @@\n - [x] 回归先因缺少谷价属性编译失败。实现后 52 项 Swift 测试通过，450 万 Token 的峰价为 ¥13.04、谷价为 ¥6.52。\n - [x] 发布构建、深度签名、包内助手自检和隔离启动通过，`dist` 仅保留 `Ragdoll.app`。\n - [x] `c1d91f9 fix(dashboard): toggle DeepSeek peak and off-peak estimates` 已推送至 `origin/main`。\n+\n+## Git 归档活动 README（2026-11-19）\n+\n+- [x] 确认前台与后台共用归档写入，且两条路径在写入前应用排除项目设置。\n+- [x] 回归先因缺少 README 失败。完整 Swift 测试 54 项通过，覆盖真实 Git 上的 README 生成、更新、文件保护、恢复和推送。\n+- [x] 重新签名构建 `dist/Ragdoll.app`。包内独立后台进程从隔离数据生成 README，把 README 与热力图推送至本地裸仓库，远端与本地提交一致。\n+- [ ] 提交并推送源码。\n(2/2) Stage this hunk [y,n,q,a,d,K,g,/,e,?]? \ndiff --git a/memory/verify.md b/memory/verify.md\nindex 1e85526..7275693 100644\n--- a/memory/verify.md\n+++ b/memory/verify.md\n@@ -1,5 +1,13 @@\n # 验证标准\n \n+## 助手品牌头像\n+\n+- 原生 Codex/Claude/dsh、Claude 官方聊天导入及带 nativeSource 的 ACP 使用对应品牌；未知 ACP/未知来源不误标品牌。\n+- 三张 PNG 可由应用资源 Bundle 解码、尺寸非零；Codex 作为模板使用主文字色，Claude/DeepSeek 保留品牌色。\n+- 所有 MessageView 调用传递品牌资源，用户头像和系统折叠保持现状。\n+- 运行 Swift 测试、release 构建、资源打包、预览包签名及内置助手自检；不截图、不运行 Claude 接入测试，保留原正式包。\n+- 已执行：来源回归先编译失败；最终 48 项 Swift 测试通过（21.379 秒），release 编译通过。预览包的三张资源与源文件一致，深度签名及助手自检通过，重启后进程运行；原正式包字节与签名保持完整。实际窗口显示未做视觉验证。\n+\n ## 台前调度图标\n \n - 图标资源与应用包内字节一致；LaunchServices 登记指向实际 ICNS；NSRunningApplication 图标与包内资源在相同尺寸下摘要一致。\n(1/2) Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]? @@ -183,3 +191,9 @@\n - 验证历史与当天的输入、缓存读取、缓存写入及输出按高峰价折算。未知原模型单价的记录也计入，重复请求及未来记录排除。\n - 对同一份总 Token 验证两档金额，谷价是峰价一半。卡片默认显示峰价金额，每次点击切换金额及档位标签，空数据提示暂无用量。\n - 已验证：52 项 Swift 测试通过，回归覆盖 450 万 Token 对应的峰价 ¥13.04、谷价 ¥6.52 和空用量。签名构建、助手自检及隔离启动通过。尚未实测窗口点击或视觉效果。\n+\n+## Git 归档活动 README\n+\n+- 确认实际 Git 提交包含 Markdown 和可解析的热力图，数据与统计层一致，最近会话链接指向归档文件，未归档项目不进入报告。\n+- 验证重复归档无空提交，变更后报告更新，手工编辑与暂存的原有 README 得到保留。使用独立后台进程与本地裸仓库验证归档、恢复和推送。\n+- 已执行 54 项 Swift 测试、发布构建、深度签名校验、包内运行时自检。签名包内独立服务从隔离 Codex 日志生成一条会话及 110 Token 的报告，完成真实本地推送，远端同时包含 README 和热力图，SQLite `quick_check` 返回 `ok`。\n(2/2) Stage this hunk [y,n,q,a,d,K,g,/,e,?]? \n"}
+
+## tool · 2026-11-19T11:54:56Z
+
+
+Script completed
+Wall time 0.3 seconds
+Output:
+
+{"chunk_id":"84fb59","wall_time_seconds":0.000008958,"exit_code":0,"original_token_count":474,"output":"M\tSources/Ragdoll/AppModel.swift\nM\tSources/Ragdoll/SettingsView.swift\nM\tSources/RagdollCore/Archive.swift\nA\tSources/RagdollCore/ArchiveActivity.swift\nM\tSources/RagdollCore/BackgroundService.swift\nM\tTests/RagdollCoreTests/BackgroundServiceTests.swift\nM\tTests/RagdollCoreTests/StoreArchiveTests.swift\nM\tdocs/CHANGELOG.md\nM\tdocs/USAGE.md\nM\tmemory/gotchas.md\nM\tmemory/plan.md\nM\tmemory/progress.md\nM\tmemory/verify.md\ndiff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\n@@ -403,3 +403,16 @@\n+## [2026-11-19 19:54] 自动更新归档仓库 README\ndiff --git a/memory/plan.md b/memory/plan.md\n@@ -179,3 +179,8 @@\n+## Git 归档活动 README\ndiff --git a/memory/progress.md b/memory/progress.md\n@@ -238,3 +238,10 @@\n+## Git 归档活动 README（2026-11-19）\ndiff --git a/memory/verify.md b/memory/verify.md\n@@ -183,3 +183,9 @@\n+## Git 归档活动 README\n## main...origin/main\n M Package.swift\nM  Sources/Ragdoll/AppModel.swift\n M Sources/Ragdoll/ConversationView.swift\nM  Sources/Ragdoll/SettingsView.swift\nM  Sources/RagdollCore/Archive.swift\nA  Sources/RagdollCore/ArchiveActivity.swift\nM  Sources/RagdollCore/BackgroundService.swift\nM  Tests/RagdollCoreTests/BackgroundServiceTests.swift\nM  Tests/RagdollCoreTests/StoreArchiveTests.swift\n M Tests/RagdollTests/ConversationTests.swift\nMM docs/CHANGELOG.md\nM  docs/USAGE.md\n M memory/agents.md\nM  memory/gotchas.md\nMM memory/plan.md\nMM memory/progress.md\nMM memory/verify.md\n?? Sources/Ragdoll/Resources/\n9\t3\tSources/Ragdoll/AppModel.swift\n2\t2\tSources/Ragdoll/SettingsView.swift\n68\t11\tSources/RagdollCore/Archive.swift\n119\t0\tSources/RagdollCore/ArchiveActivity.swift\n1\t1\tSources/RagdollCore/BackgroundService.swift\n1\t0\tTests/RagdollCoreTests/BackgroundServiceTests.swift\n74\t1\tTests/RagdollCoreTests/StoreArchiveTests.swift\n13\t0\tdocs/CHANGELOG.md\n4\t0\tdocs/USAGE.md\n1\t0\tmemory/gotchas.md\n5\t0\tmemory/plan.md\n7\t0\tmemory/progress.md\n6\t0\tmemory/verify.md\n"}
+
+## tool · 2026-11-19T11:55:01Z
+
+
+Script running with cell ID g10:33
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T11:55:08Z
+
+
+Script running with cell ID g10:33
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T11:55:18Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"e82b4d","wall_time_seconds":1.002031125,"session_id":66077,"original_token_count":46,"output":"[main 51cb005] feat(archive): publish activity in repository README\n 13 files changed, 310 insertions(+), 18 deletions(-)\n create mode 100644 Sources/RagdollCore/ArchiveActivity.swift\n"}
+
+## tool · 2026-11-19T11:55:23Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"180da7","wall_time_seconds":0.000008167,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   05b1385..51cb005  main -> main\n"}
+{"chunk_id":"7d064d","wall_time_seconds":0.000008209,"exit_code":0,"original_token_count":709,"output":"- **实际实现的功能与改动**\n  - 卡片显示人民币金额和当前档位，点击切换峰价与谷价。谷价是同一份总 Token 用量折算的峰价金额的一半。 [DeepSeek 官方价目](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/)\n  - 52 项 Swift 测试通过，回归覆盖两档金额和空用量。发布构建、深度签名、包内自检及隔离启动通过。尚未实测窗口点击或视觉效果。\n- **涉及文件** `Sources/Ragdoll/DashboardView.swift`、`Sources/RagdollCore/Analytics.swift`、`Tests/RagdollCoreTests/AnalyticsTests.swift`、`docs/USAGE.md`、`memory/`、`docs/CHANGELOG.md`。\n- **Git 提交** `c1d91f9 fix(dashboard): toggle DeepSeek peak and off-peak estimates`，已推送至 `origin/main`。\n\n---\n\n## [2026-11-19 19:54] 自动更新归档仓库 README\n\n- **需求/问题描述**\n  > 自动在 Git 归档仓库的 `README.md` 展示首页活动信息，省去 DeepSeek 对比估价。\n- **实际实现的功能与改动**\n  - 前台和后台归档都更新根目录 README 中的活动区块及热力图，显示美元估算成本、Token、会话总数、项目活动和可打开归档文本的最近会话。统计沿用当前价格和项目排除设置。\n  - 已有 README 的正文按原样保留，生成区块随归档提交并使用既有推送配置。暂存和未提交的人工修改受到保护。\n  - 回归先因缺少 README 失败，完整 Swift 测试 54 项通过。发布构建、Apple Development 签名校验与包内运行时自检通过。签名包内独立服务在隔离环境读取一条 Codex 测试会话，生成 README 与热力图并推送至本地裸仓库，远端与本地提交一致。\n- **涉及文件** `Sources/RagdollCore/Archive.swift`、`Sources/RagdollCore/ArchiveActivity.swift`、`Sources/RagdollCore/BackgroundService.swift`、`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/SettingsView.swift`、`Tests/RagdollCoreTests/`、`docs/USAGE.md`、`docs/CHANGELOG.md`、`memory/`。\n- **Git 提交** 待提交。\n\n---\n- [x] 发布构建、深度签名、包内助手自检和隔离启动通过，`dist` 仅保留 `Ragdoll.app`。\n- [x] `c1d91f9 fix(dashboard): toggle DeepSeek peak and off-peak estimates` 已推送至 `origin/main`。\n\n## Git 归档活动 README（2026-11-19）\n\n- [x] 确认前台与后台共用归档写入，且两条路径在写入前应用排除项目设置。\n- [x] 回归先因缺少 README 失败。完整 Swift 测试 54 项通过，覆盖真实 Git 上的 README 生成、更新、文件保护、恢复和推送。\n- [x] 重新签名构建 `dist/Ragdoll.app`。包内独立后台进程从隔离数据生成 README，把 README 与热力图推送至本地裸仓库，远端与本地提交一致。\n- [ ] 提交并推送源码。\n51cb005 feat(archive): publish activity in repository README\n"}
+
+## tool · 2026-11-19T11:55:31Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T11:55:34Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"e4b484","wall_time_seconds":0.000009708,"exit_code":0,"original_token_count":732,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\n@@ -317,6 +317,20 @@\n+## [2026-11-17 22:04] 按会话来源显示助手品牌头像\n+- **需求/问题描述**：\n+  > 助手头像显示对应的 Codex、Claude 或 DeepSeek 图标，并自行查找图标资源。\n+- **实际实现的功能与改动**：\n+  - 原生 Codex、Claude Code、Claude 聊天导入及 DeepSeek Harness 使用对应品牌头像；带 nativeSource 的 ACP 复用原生品牌，未知来源保留通用头像。\n+  - Lobe Icons 三张 PNG 与 MIT 许可随应用本地打包；Codex 模板随文字颜色变化，Claude/DeepSeek 保留品牌色。应用优先读取 Contents/Resources 中的资源 Bundle，开发运行使用 SwiftPM Bundle。\n+  - 来源映射回归先因缺少实现编译失败；最终全部 48 项 Swift 测试通过（21.379 秒），release 构建及 Git diff 检查通过，包内三张图标与源文件逐字节一致。\n+  - 更新并重启 `dist/Ragdoll.preview.app`，临时签名完整性和内置助手自检通过；原正式包 SHA-256 不变且签名完整性通过。未截图或验证实际窗口显示，未运行 Claude 接入测试；预览包不用于独立后台服务。\n+- **涉及文件**：`Package.swift`、`Sources/Ragdoll/ConversationView.swift`、`Sources/Ragdoll/Resources/AssistantIcons/`、`Tests/RagdollTests/ConversationTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n+- **Git 提交**：待提交。\n+---\n@@ -413,6 +427,6 @@\n+- **Git 提交** `51cb005 feat(archive): publish activity in repository README`，已推送至 `origin/main`。\ndiff --git a/memory/progress.md b/memory/progress.md\n@@ -1,5 +1,15 @@\n+## 助手品牌头像（2026-11-17）\n+- [x] 确认助手头像共用 sparkles；会话已有 source/nativeSource，ACP 原生来源可直接复用。没有项目测试技能目录。\n+- [x] 找到 Lobe Icons 静态 PNG 与 MIT 许可，确定本地资源和共用视图传递范围。\n+- [x] 来源映射先因缺少 assistantIconName 编译失败；实现后全部 48 项 Swift 测试通过（21.115 秒），三张资源可解码，release 编译通过。\n+- [x] 检查生成的 SwiftPM 资源访问器，补充从应用 Contents/Resources 优先加载、开发运行使用 .module 的路径，避免依赖原构建目录。\n+- [x] 最终全部 48 项 Swift 测试通过（21.379 秒），release 构建通过；包内三张图标与源文件逐字节一致，临时签名完整性及内置助手自检通过。\n+- [x] 正常退出旧预览并启动新预览（PID 69738）；原正式包 SHA-256 不变且签名完整性通过。未截图或验证窗口实际显示，未运行 Claude 接入测试；预览包不用于独立后台服务。\n+- [ ] 提交并普通推送至 origin/main。\n@@ -244,4 +254,4 @@\n+- [x] `51cb005 feat(archive): publish activity in repository README` 已推送至 `origin/main`。\n"}
+
+## tool · 2026-11-19T11:55:40Z
+
+
+Script running with cell ID g10:37
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T11:55:48Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"3ed4c2","wall_time_seconds":1.00080975,"session_id":60767,"original_token_count":1276,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\nindex f7c0613..cad4d24 100644\n--- a/docs/CHANGELOG.md\n+++ b/docs/CHANGELOG.md\n@@ -317,6 +317,20 @@\n \n ---\n \n+## [2026-11-17 22:04] 按会话来源显示助手品牌头像\n+\n+- **需求/问题描述**：\n+  > 助手头像显示对应的 Codex、Claude 或 DeepSeek 图标，并自行查找图标资源。\n+- **实际实现的功能与改动**：\n+  - 原生 Codex、Claude Code、Claude 聊天导入及 DeepSeek Harness 使用对应品牌头像；带 nativeSource 的 ACP 复用原生品牌，未知来源保留通用头像。\n+  - Lobe Icons 三张 PNG 与 MIT 许可随应用本地打包；Codex 模板随文字颜色变化，Claude/DeepSeek 保留品牌色。应用优先读取 Contents/Resources 中的资源 Bundle，开发运行使用 SwiftPM Bundle。\n+  - 来源映射回归先因缺少实现编译失败；最终全部 48 项 Swift 测试通过（21.379 秒），release 构建及 Git diff 检查通过，包内三张图标与源文件逐字节一致。\n+  - 更新并重启 `dist/Ragdoll.preview.app`，临时签名完整性和内置助手自检通过；原正式包 SHA-256 不变且签名完整性通过。未截图或验证实际窗口显示，未运行 Claude 接入测试；预览包不用于独立后台服务。\n+- **涉及文件**：`Package.swift`、`Sources/Ragdoll/ConversationView.swift`、`Sources/Ragdoll/Resources/AssistantIcons/`、`Tests/RagdollTests/ConversationTests.swift`、`memory/agents.md`、`memory/plan.md`、`memory/progress.md`、`memory/verify.md`、`docs/CHANGELOG.md`。\n+- **Git 提交**：待提交。\n+\n+---\n+\n ## [2026-11-18 11:08] 改版对话工作区\n \n - **需求/问题描述**：\n(1/2) Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]? @@ -413,6 +427,6 @@\n   - 已有 README 的正文按原样保留，生成区块随归档提交并使用既有推送配置。暂存和未提交的人工修改受到保护。\n   - 回归先因缺少 README 失败，完整 Swift 测试 54 项通过。发布构建、Apple Development 签名校验与包内运行时自检通过。签名包内独立服务在隔离环境读取一条 Codex 测试会话，生成 README 与热力图并推送至本地裸仓库，远端与本地提交一致。\n - **涉及文件** `Sources/RagdollCore/Archive.swift`、`Sources/RagdollCore/ArchiveActivity.swift`、`Sources/RagdollCore/BackgroundService.swift`、`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/SettingsView.swift`、`Tests/RagdollCoreTests/`、`docs/USAGE.md`、`docs/CHANGELOG.md`、`memory/`。\n-- **Git 提交** 待提交。\n+- **Git 提交** `51cb005 feat(archive): publish activity in repository README`，已推送至 `origin/main`。\n \n ---\n(2/2) Stage this hunk [y,n,q,a,d,K,g,/,e,?]? \ndiff --git a/memory/progress.md b/memory/progress.md\nindex 26afd4a..cdb3f58 100644\n--- a/memory/progress.md\n+++ b/memory/progress.md\n@@ -1,5 +1,15 @@\n # 实施进度\n \n+## 助手品牌头像（2026-11-17）\n+\n+- [x] 确认助手头像共用 sparkles；会话已有 source/nativeSource，ACP 原生来源可直接复用。没有项目测试技能目录。\n+- [x] 找到 Lobe Icons 静态 PNG 与 MIT 许可，确定本地资源和共用视图传递范围。\n+- [x] 来源映射先因缺少 assistantIconName 编译失败；实现后全部 48 项 Swift 测试通过（21.115 秒），三张资源可解码，release 编译通过。\n+- [x] 检查生成的 SwiftPM 资源访问器，补充从应用 Contents/Resources 优先加载、开发运行使用 .module 的路径，避免依赖原构建目录。\n+- [x] 最终全部 48 项 Swift 测试通过（21.379 秒），release 构建通过；包内三张图标与源文件逐字节一致，临时签名完整性及内置助手自检通过。\n+- [x] 正常退出旧预览并启动新预览（PID 69738）；原正式包 SHA-256 不变且签名完整性通过。未截图或验证窗口实际显示，未运行 Claude 接入测试；预览包不用于独立后台服务。\n+- [ ] 提交并普通推送至 origin/main。\n+\n ## 台前调度图标（2026-11-17）\n \n - [x] 确认当前预览包的 ICNS 与源资源一致、LaunchServices 登记正确；运行中应用图标与包内资源一致。\n(1/2) Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]? @@ -244,4 +254,4 @@\n - [x] 确认前台与后台共用归档写入，且两条路径在写入前应用排除项目设置。\n - [x] 回归先因缺少 README 失败。完整 Swift 测试 54 项通过，覆盖真实 Git 上的 README 生成、更新、文件保护、恢复和推送。\n - [x] 重新签名构建 `dist/Ragdoll.app`。包内独立后台进程从隔离数据生成 README，把 README 与热力图推送至本地裸仓库，远端与本地提交一致。\n-- [ ] 提交并推送源码。\n+- [x] `51cb005 feat(archive): publish activity in repository README` 已推送至 `origin/main`。\n(2/2) Stage this hunk [y,n,q,a,d,K,g,/,e,?]? \n docs/CHANGELOG.md  | 2 +-\n memory/progress.md | 2 +-\n 2 files changed, 2 insertions(+), 2 deletions(-)\n1\t1\tdocs/CHANGELOG.md\n1\t1\tmemory/progress.md\n[main 2512b46] docs(archive): record README verification\n 2 files changed, 2 insertions(+), 2 deletions(-)\n"}
+
+## tool · 2026-11-19T11:55:52Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"6cac2b","wall_time_seconds":0.000007292,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   51cb005..2512b46  main -> main\n"}
+{"chunk_id":"f80fc8","wall_time_seconds":0.000008667,"exit_code":0,"original_token_count":93,"output":"## main...origin/main\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Sources/Ragdoll/Resources/\n2512b46 docs(archive): record README verification\n51cb005 feat(archive): publish activity in repository README\n"}
+
+## assistant · 2026-11-19T11:55:58Z
+
+Ragdoll 现在会在每次归档时，自动创建或更新归档仓库根目录的 `README.md`。报告显示美元估算成本、Token 总量、会话数、近一年热力图、项目活动和最近会话，省去 DeepSeek 对比估价。
+
+已有 README 正文会保留，活动区块随归档提交，并沿用现有的自动推送设置。
+
+已更新签名版 [Ragdoll.app](/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.app)，源码已推送至 `origin/main`。54 项 Swift 测试通过，生成和推送已在隔离 Git 仓库实测。GitHub 页面渲染尚未检查。
