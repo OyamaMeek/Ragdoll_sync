@@ -12,7 +12,7 @@
   "project" : "/Users/oyamahappa/Documents/GitHub/PrivateWork",
   "source" : "codex",
   "title" : "Guardian review",
-  "updated" : 1795085089670,
+  "updated" : 1795085342175,
   "usage" : [
     {
       "cacheRead" : 5888,
@@ -31,6 +31,33 @@
       "model" : "codex-auto-review",
       "output" : 198,
       "time" : 1795085089663
+    },
+    {
+      "cacheRead" : 26880,
+      "cacheWrite" : 0,
+      "id" : "resp_0f498e844e8347e9016afed3e96f0887d0b30c4fe95731e21f",
+      "input" : 5975,
+      "model" : "codex-auto-review",
+      "output" : 339,
+      "time" : 1795085296079
+    },
+    {
+      "cacheRead" : 32640,
+      "cacheWrite" : 0,
+      "id" : "resp_0f498e844e8347e9016afed4071c3487d08823da7b27b27ae2",
+      "input" : 2504,
+      "model" : "codex-auto-review",
+      "output" : 123,
+      "time" : 1795085322730
+    },
+    {
+      "cacheRead" : 34944,
+      "cacheWrite" : 0,
+      "id" : "resp_0f498e844e8347e9016afed41bbb8887d0bb7560e66e4d305b",
+      "input" : 1679,
+      "model" : "codex-auto-review",
+      "output" : 107,
+      "time" : 1795085342171
     }
   ],
   "warnings" : [
