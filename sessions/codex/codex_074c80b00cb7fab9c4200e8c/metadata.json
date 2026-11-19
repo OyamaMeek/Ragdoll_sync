@@ -13,7 +13,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "按 DeepSeek v4.1 Flash 峰价显示股价",
-  "updated" : 1795081893427,
+  "updated" : 1795082000532,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -113,6 +113,87 @@
       "model" : "gpt-6.2-sol",
       "output" : 487,
       "time" : 1795081893426
+    },
+    {
+      "cacheRead" : 83712,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6a6596487d0a304e89df5c8c5b7",
+      "input" : 649,
+      "model" : "gpt-6.2-sol",
+      "output" : 100,
+      "time" : 1795081897818
+    },
+    {
+      "cacheRead" : 84224,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6abeac487d0a11c1a99a91a8758",
+      "input" : 296,
+      "model" : "gpt-6.2-sol",
+      "output" : 392,
+      "time" : 1795081913722
+    },
+    {
+      "cacheRead" : 84224,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6bac70c87d0b2302c7d6460324d",
+      "input" : 1276,
+      "model" : "gpt-6.2-sol",
+      "output" : 339,
+      "time" : 1795081923635
+    },
+    {
+      "cacheRead" : 85248,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6c5beac87d0996acb7307a303bd",
+      "input" : 702,
+      "model" : "gpt-6.2-sol",
+      "output" : 327,
+      "time" : 1795081934116
+    },
+    {
+      "cacheRead" : 85760,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6cf3eb487d0895c96f307a7be14",
+      "input" : 954,
+      "model" : "gpt-6.2-sol",
+      "output" : 284,
+      "time" : 1795081944279
+    },
+    {
+      "cacheRead" : 86528,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6da4dfc87d0af3565903dfdd068",
+      "input" : 988,
+      "model" : "gpt-6.2-sol",
+      "output" : 292,
+      "time" : 1795081953883
+    },
+    {
+      "cacheRead" : 87296,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6ec356087d09ca7467b471d2392",
+      "input" : 571,
+      "model" : "gpt-6.2-sol",
+      "output" : 306,
+      "time" : 1795081972747
+    },
+    {
+      "cacheRead" : 87552,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6f5c50c87d087c6e95f66b85db2",
+      "input" : 1220,
+      "model" : "gpt-6.2-sol",
+      "output" : 671,
+      "time" : 1795081989444
+    },
+    {
+      "cacheRead" : 88576,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec706930087d0a6e5e4b3370a4a08",
+      "input" : 891,
+      "model" : "gpt-6.2-sol",
+      "output" : 201,
+      "time" : 1795081996497
     }
   ],
   "warnings" : [

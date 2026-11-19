@@ -146,13 +146,83 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{}",
       "time" : 1795081893427
+    },
+    {
+      "id" : "call_3bb81c7ab10e48c992e79dae4df759d5",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"5c5b26\",\"wall_time_seconds\":1.001957375,\"session_id\":33868,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1795081898976
+    },
+    {
+      "id" : "call_ed950e5b25784e5999bd2a1390635bd9",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"58fbd0\",\"wall_time_seconds\":0.000012375,\"exit_code\":1,\"original_token_count\":141,\"output\":\"error: Error Domain=NSCocoaErrorDomain Code=513 \\\"You don’t have permission to save the file “output-file-map.json” in the folder “RagdollCore.build”.\\\" UserInfo={NSUserStringVariant=Folder, NSURL=file:///Volumes/SamsungSSD990PRO/GitHub/Ragdoll/.build/arm64-apple-macosx/debug/RagdollCore.build/output-file-map.json, NSUnderlyingError=0x1298526b0 {Error Domain=NSPOSIXErrorDomain Code=1 \\\"Operation not permitted\\\"}}\\n[0/1] Planning build\\nerror: You don’t have permission to save the file “output-file-map.json” in the folder “RagdollCore.build”.\\n\"}\n{\"chunk_id\":\"80d558\",\"wall_time_seconds\":0.000016708,\"exit_code\":1,\"original_token_count\":315,\"output\":\" M Package.swift\\n M Sources/Ragdoll/ConversationView.swift\\n M Tests/RagdollCoreTests/AnalyticsTests.swift\\n M Tests/RagdollTests/ConversationTests.swift\\n M docs/CHANGELOG.md\\n M memory/agents.md\\n M memory/plan.md\\n M memory/progress.md\\n M memory/verify.md\\n?? Sources/Ragdoll/Resources/\\ndocs/USAGE.md:15:首页还显示项目用量、估算总成本与前 7 个完整自然日的成本。“设置 → 首页 → 显示每周预算”默认关闭，开启后展示滚动 168 小时预算及 80% / 100% 提醒。\\nSources/Ragdoll/DashboardView.swift:10:    @State private var hoveredDay: Date?\\nSources/Ragdoll/DashboardView.swift:29:                    metric(\\\"估算总成本\\\", value: stats.pricedEvents > 0 ? money(stats.cost) : \\\"未知\\\", note: \\\"\\\\(stats.pricedEvents)/\\\\(stats.events) 条用量已定价\\\", icon: \\\"dollarsign.circle\\\")\\nSources/Ragdoll/DashboardView.swift:30:                    metric(\\\"前 7 个完整自然日\\\", value: stats.pricedEvents > 0 ? money(stats.recentCost) : \\\"未知\\\", note: \\\"按本地日期统计\\\", icon: \\\"calendar\\\")\\nSources/RagdollCore/Analytics.swift:6:    public var recentCost = 0.0\\nSources/RagdollCore/Analytics.swift:25:public enum Analytics {\\nSources/RagdollCore/Analytics.swift:46:                result.tokens += usage.tokens\\n\"}",
+      "time" : 1795081913760
+    },
+    {
+      "id" : "call_b7ed12c39591403cb53a85c297236a94",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"8a2ecc\",\"wall_time_seconds\":1.001905541,\"session_id\":42879,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"c78642\",\"wall_time_seconds\":0.000008375,\"exit_code\":3,\"original_token_count\":23,\"output\":\"sysmon request failed with error: sysmond service not found\\npgrep: Cannot get process list\\n\"}",
+      "time" : 1795081924748
+    },
+    {
+      "id" : "call_ec76c9f1259e46e99a4ee4b7ba3098e1",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.4 seconds\nOutput:\n\n{\"chunk_id\":\"e2cf8c\",\"wall_time_seconds\":0.00001075,\"exit_code\":1,\"original_token_count\":129,\"output\":\"Fetching https://github.com/groue/GRDB.swift.git from cache\\nFetched https://github.com/groue/GRDB.swift.git from cache (1.61s)\\nComputing version for https://github.com/groue/GRDB.swift.git\\nComputed https://github.com/groue/GRDB.swift.git at 7.6.1 (2.40s)\\nCreating working copy for https://github.com/groue/GRDB.swift.git\\nWorking copy of https://github.com/groue/GRDB.swift.git resolved at 7.6.1\\nerror: You don’t have permission to save the file “output-file-map.json” in the folder “RagdollCore.build”.\\n\"}\n{\"chunk_id\":\"db23cf\",\"wall_time_seconds\":0.000008208,\"exit_code\":0,\"original_token_count\":128,\"output\":\"drwxr-xr-x  39 oyamahappa  staff  1248 Nov 19 09:47 .build/arm64-apple-macosx/debug/RagdollCore.build\\ndrwxr-xr-x  17 oyamahappa  staff   544 Nov 19 17:52 .cache\\nSources/Ragdoll/RagdollApp.swift:13:        .commands {\\nSources/Ragdoll/AppModel.swift:69:        self.root = root ?? ProcessInfo.processInfo.environment[\\\"RAGDOLL_DATA_DIR\\\"].map { URL(fileURLWithPath: $0) } ?? FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(\\\"Library/Application Support/Ragdoll\\\")\\n.cache/deepseek-estimate-swift\\n\"}\n{\"chunk_id\":\"d90f49\",\"wall_time_seconds\":0.239174542,\"exit_code\":0,\"original_token_count\":2,\"output\":\"false\\n\"}",
+      "time" : 1795081934325
+    },
+    {
+      "id" : "call_6a5e043fc8654564af3173eb92d9ab66",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"chunk_id\":\"adaa3d\",\"wall_time_seconds\":0.0000115,\"exit_code\":0,\"original_token_count\":272,\"output\":\"drwxr-xr-x  7 oyamahappa  staff  224 Nov 19 17:52 .cache/deepseek-estimate-swift\\ndrwxr-xr-x  3 oyamahappa  staff   96 Nov 19 17:52 .cache/deepseek-estimate-swift/arm64-apple-macosx/debug/RagdollCore.build\\ntotal 8\\n-rw-r--r--  1 oyamahappa  staff  - 189 Nov 19 17:52 module.modulemap\\nimport SwiftUI\\nimport AppKit\\nimport RagdollCore\\n\\n@main\\nstruct RagdollApp: App {\\n    @StateObject private var model = AppModel()\\n    var body: some Scene {\\n        WindowGroup {\\n            RootView().environmentObject(model).frame(minWidth: 1050, minHeight: 720).task { await model.launch() }\\n        }\\n        .defaultSize(width: 1380, height: 900)\\n        .commands {\\n            CommandGroup(after: .newItem) {\\n                Button(\\\"导入 Claude 导出包…\\\") { model.importDesktop() }.keyboardShortcut(\\\"i\\\", modifiers: [.command, .shift])\\n                Button(\\\"刷新会话\\\") { Task { await model.refresh() } }.keyboardShortcut(\\\"r\\\")\\n                Button(\\\"立即归档\\\") { Task { await model.archiveNow() } }.keyboardShortcut(\\\"s\\\", modifiers: [.command, .shift])\\n            }\\n        }\\n    }\\n}\\n\"}\n{\"chunk_id\":\"16ec19\",\"wall_time_seconds\":1.0019525,\"session_id\":78389,\"original_token_count\":88,\"output\":\"/Volumes/SamsungSSD990PRO/GitHub/Ragdoll\\n.git\\n## main...origin/main\\n M Package.swift\\n M Sources/Ragdoll/ConversationView.swift\\n M Tests/RagdollCoreTests/AnalyticsTests.swift\\n M Tests/RagdollTests/ConversationTests.swift\\n M docs/CHANGELOG.md\\n M memory/agents.md\\n M memory/plan.md\\n M memory/progress.md\\n M memory/verify.md\\n?? Sources/Ragdoll/Resources/\\n\"}",
+      "time" : 1795081945352
+    },
+    {
+      "id" : "141",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "计价回归已经写好，覆盖历史用量、未知模型、缓存分类和重复请求。SwiftPM 在写入构建文件时被沙箱拦住，我会按项目的本机构建流程复测，先确认回归确实因估价功能尚未实现而失败。",
+      "time" : 1795081951922
+    },
+    {
+      "id" : "call_a8d6f6987a4a42ea88f66ac1f514c60b",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 9.4 seconds\nOutput:\n\n{\"chunk_id\":\"c1a07e\",\"wall_time_seconds\":1.000598708,\"session_id\":2380,\"original_token_count\":0,\"output\":\"\"}",
+      "time" : 1795081963248
+    },
+    {
+      "id" : "call_6db0c63b7fdb4b15a77fc985381f1530",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"5ef4c8\",\"wall_time_seconds\":0.000022625,\"exit_code\":1,\"original_token_count\":315,\"output\":\"[0/1] Planning build\\nBuilding for debugging...\\n[0/7] Write sources\\n[1/7] Write swift-version--58304C5D6DBC2206.txt\\n[3/5] Emitting module RagdollCoreTests\\n[4/5] Compiling RagdollCoreTests AnalyticsTests.swift\\n/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/Tests/RagdollCoreTests/AnalyticsTests.swift:29:24: error: value of type 'Dashboard' has no member 'deepSeekFlashPeakCostCNY'\\n 27 |     let prices = [\\\"known\\\": Price(input: 10, output: 0)]\\n 28 |     let result = Analytics.summarize(sessions, prices: prices, budget: 10, now: now)\\n 29 |     #expect(abs(result.deepSeekFlashPeakCostCNY - 13.04) < 0.00001)\\n    |                        `- error: value of type 'Dashboard' has no member 'deepSeekFlashPeakCostCNY'\\n 30 |     #expect(result.events == 2)\\n 31 |     #expect(result.cost == 5)\\n\\n/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/Tests/RagdollCoreTests/AnalyticsTests.swift:35:19: error: value of type 'Dashboard' has no member 'deepSeekFlashPeakCostCNY'\\n 33 |     let empty = Analytics.summarize([], prices: prices, budget: nil, now: now)\\n 34 |     #expect(empty.events == 0)\\n 35 |     #expect(empty.deepSeekFlashPeakCostCNY == 0)\\n    |                   `- error: value of type 'Dashboard' has no member 'deepSeekFlashPeakCostCNY'\\n 36 | }\\n 37 | \\nerror: fatalError\\n\"}\n{\"chunk_id\":\"b0756d\",\"wall_time_seconds\":0.000008042,\"exit_code\":0,\"original_token_count\":15,\"output\":\"7b8f9a411a0e6b4c09778ba7187d17ceafbd17c6\\trefs/heads/main\\n\"}\n{\"chunk_id\":\"564416\",\"wall_time_seconds\":0.000008708,\"exit_code\":0,\"original_token_count\":39,\"output\":\"Tests/RagdollCoreTests/ArchiveSyncTests.swift:20:@Test func archiveSyncPreviewShowsTheDestinationWithoutCredentials() throws {\\n.\\n..\\n.DS_Store\\nRagdoll.app\\n\"}",
+      "time" : 1795081972797
+    },
+    {
+      "id" : "call_3dd1781ef9e246e3924cb0cd247a929c",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{}",
+      "time" : 1795081989546
+    },
+    {
+      "id" : "call_52838a1f234a4a98bdd000871b23fc1e",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 4.1 seconds\nOutput:\n\n{\"chunk_id\":\"2a4a4f\",\"wall_time_seconds\":1.002647958,\"session_id\":34346,\"original_token_count\":0,\"output\":\"\"}\n{\"chunk_id\":\"06cbf3\",\"wall_time_seconds\":0.000012792,\"exit_code\":0,\"original_token_count\":1703,\"output\":\"diff --git a/Sources/Ragdoll/DashboardView.swift b/Sources/Ragdoll/DashboardView.swift\\nindex 415049f..1531bd0 100644\\n--- a/Sources/Ragdoll/DashboardView.swift\\n+++ b/Sources/Ragdoll/DashboardView.swift\\n@@ -8,6 +8,7 @@ struct DashboardView: View {\\n     @State private var budget = \\\"\\\"\\n     @State private var heatmapYear = Calendar.current.component(.year, from: Date())\\n     @State private var hoveredDay: Date?\\n+    @State private var showDeepSeekEstimate = false\\n     var body: some View {\\n         let stats = model.dashboard\\n         ScrollView {\\n@@ -27,7 +28,16 @@ struct DashboardView: View {\\n                 }\\n                 HStack(spacing: 14) {\\n                     metric(\\\"估算总成本\\\", value: stats.pricedEvents > 0 ? money(stats.cost) : \\\"未知\\\", note: \\\"\\\\(stats.pricedEvents)/\\\\(stats.events) 条用量已定价\\\", icon: \\\"dollarsign.circle\\\")\\n-                    metric(\\\"前 7 个完整自然日\\\", value: stats.pricedEvents > 0 ? money(stats.recentCost) : \\\"未知\\\", note: \\\"按本地日期统计\\\", icon: \\\"calendar\\\")\\n+                    Button {\\n+                        showDeepSeekEstimate.toggle()\\n+                    } label: {\\n+                        let estimate = stats.events > 0 ? \\\"约 \\\\(stats.deepSeekFlashPeakCostCNY.formatted(.currency(code: \\\"CNY\\\")))\\\" : \\\"暂无用量\\\"\\n+                        metric(\\\"DeepSeek V4.1 Flash\\\", value: showDeepSeekEstimate ? estimate : \\\"查看估价\\\",\\n+                               note: \\\"高峰价 · 人民币\\\", icon: \\\"calculator\\\")\\n+                            .contentShape(Rectangle())\\n+                    }\\n+                    .buttonStyle(.plain)\\n+                    .accessibilityHint(showDeepSeekEstimate ? \\\"收起估价\\\" : \\\"显示估价\\\")\\n                     metric(\\\"总 Token\\\", value: compact(stats.tokens), note: \\\"\\\\(stats.missingUsageSessions) 个会话缺少用量\\\", icon: \\\"chart.bar.xaxis\\\")\\n                     metric(\\\"会话\\\", value: \\\"\\\\(stats.sessions)\\\", note: \\\"本地日志与导入记录\\\", icon: \\\"bubble.left.and.bubble.right\\\")\\n                 }\\ndiff --git a/Sources/RagdollCore/Analytics.swift b/Sources/RagdollCore/Analytics.swift\\nindex 52be4a6..e8fa823 100644\\n--- a/Sources/RagdollCore/Analytics.swift\\n+++ b/Sources/RagdollCore/Analytics.swift\\n@@ -5,6 +5,7 @@ public struct Dashboard: Sendable {\\n     public var cost = 0.0\\n     public var recentCost = 0.0\\n     public var weeklyCost = 0.0\\n+    public var deepSeekFlashPeakCostCNY = 0.0\\n     public var pricedEvents = 0\\n     public var events = 0\\n     public var sessions = 0\\n@@ -23,6 +24,11 @@ public struct ProjectTotal: Identifiable, Sendable {\\n }\\n \\n public enum Analytics {\\n+    private static let deepSeekFlashPeakPrice = Price(\\n+        input: 2, output: 8, cacheRead: 0.04, cacheWrite: 2,\\n+        reference: \\\"https://api-docs.deepseek.com/zh-cn/quick_start/pricing/\\\", date: \\\"2026-11-19\\\"\\n+    )\\n+\\n     public static func summarize(_ sessions: [Session], prices: [String: Price], budget: Double?, now: Date = Date(), calendar: Calendar = .current) -> Dashboard {\\n         var result = Dashboard()\\n         result.sessions = sessions.count\\n@@ -44,6 +50,7 @@ public enum Analytics {\\n                 guard date <= now else { continue }\\n                 result.events += 1\\n                 result.tokens += usage.tokens\\n+                result.deepSeekFlashPeakCostCNY += deepSeekFlashPeakPrice.cost(usage)\\n                 project.tokens += usage.tokens\\n                 if let price = prices[usage.model] {\\n                     let cost = price.cost(usage)\\ndiff --git a/Tests/RagdollCoreTests/AnalyticsTests.swift b/Tests/RagdollCoreTests/AnalyticsTests.swift\\nindex f6605b2..cca2ba0 100644\\n--- a/Tests/RagdollCoreTests/AnalyticsTests.swift\\n+++ b/Tests/RagdollCoreTests/AnalyticsTests.swift\\n@@ -15,6 +15,26 @@ import Testing\\n     #expect(result.alert == \\\"warning\\\")\\n }\\n \\n+@Test func deepSeekFlashPeakEstimateUsesAllRecordedTokenCategories() {\\n+    let now = Date(timeIntervalSince1970: 1_800_000_000)\\n+    let time = now.timeIntervalSince1970 * 1000\\n+    let historical = Usage(id: \\\"resp_peak\\\", time: time - 30 * 86_400_000, model: \\\"unknown\\\", input: 1_000_000,\\n+                           output: 1_000_000, cacheRead: 1_000_000, cacheWrite: 1_000_000)\\n+    let current = Usage(time: time, model: \\\"known\\\", input: 500_000, output: 0)\\n+    let future = Usage(time: time + 1000, model: \\\"known\\\", input: 1_000_000, output: 0)\\n+    let sessions = [Session(id: \\\"a\\\", source: \\\"codex\\\", title: \\\"Usage\\\", usage: [historical, current, future]),\\n+                    Session(id: \\\"b\\\", source: \\\"codex\\\", title: \\\"Duplicate\\\", usage: [historical])]\\n+    let prices = [\\\"known\\\": Price(input: 10, output: 0)]\\n+    let result = Analytics.summarize(sessions, prices: prices, budget: 10, now: now)\\n+    #expect(abs(result.deepSeekFlashPeakCostCNY - 13.04) < 0.00001)\\n+    #expect(result.events == 2)\\n+    #expect(result.cost == 5)\\n+    #expect(result.weeklyCost == 5)\\n+    let empty = Analytics.summarize([], prices: prices, budget: nil, now: now)\\n+    #expect(empty.events == 0)\\n+    #expect(empty.deepSeekFlashPeakCostCNY == 0)\\n+}\\n+\\n @Test func heatmapUsesLocalCalendarAcrossDST() {\\n     var calendar = Calendar(identifier: .gregorian)\\n     calendar.timeZone = TimeZone(identifier: \\\"America/New_York\\\")!\\ndiff --git a/docs/USAGE.md b/docs/USAGE.md\\nindex cc81d34..ad73e5f 100644\\n--- a/docs/USAGE.md\\n+++ b/docs/USAGE.md\\n@@ -12,7 +12,9 @@\\n \\n 年度热力图按本地自然日汇总 Token。当前年份显示过去一年，历史年份显示完整自然年；可切换年份、悬停查看每日用量、点击日期筛选会话，也可按项目和来源筛选。\\n \\n-首页还显示项目用量、估算总成本与前 7 个完整自然日的成本。“设置 → 首页 → 显示每周预算”默认关闭，开启后展示滚动 168 小时预算及 80% / 100% 提醒。\\n+首页显示项目用量与估算总成本。点击「DeepSeek V4.1 Flash」卡片，可以查看当前项目和来源筛选下全部已记录 Token 按高峰价折算的人民币估价。估算沿用本地记录的缓存命中情况。 [DeepSeek 官方价目](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/)\\n+\\n+「设置 → 首页 → 显示每周预算」默认关闭，开启后展示滚动 168 小时预算及 80% / 100% 提醒。\\n \\n 成本按当前模型单价估算，缺失价格或用量显示未知。缓存时长、长上下文、服务层级及历史调价会影响准确度。ACP 的上下文占用量不计入消费 Token。\\n \\n M Package.swift\\n M Sources/Ragdoll/ConversationView.swift\\n M Sources/Ragdoll/DashboardView.swift\\n M Sources/RagdollCore/Analytics.swift\\n M Tests/RagdollCoreTests/AnalyticsTests.swift\\n M Tests/RagdollTests/ConversationTests.swift\\n M docs/CHANGELOG.md\\n M docs/USAGE.md\\n M memory/agents.md\\n M memory/plan.md\\n M memory/progress.md\\n M memory/verify.md\\n?? Sources/Ragdoll/Resources/\\n\"}",
+      "time" : 1795082000531
     }
   ],
   "nativeID" : "01a1f335-d5c0-7b52-a209-d33c89e4141a",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "按 DeepSeek v4.1 Flash 峰价显示股价",
-  "updated" : 1795081893427,
+  "updated" : 1795082000532,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -252,6 +322,87 @@
       "model" : "gpt-6.2-sol",
       "output" : 487,
       "time" : 1795081893426
+    },
+    {
+      "cacheRead" : 83712,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6a6596487d0a304e89df5c8c5b7",
+      "input" : 649,
+      "model" : "gpt-6.2-sol",
+      "output" : 100,
+      "time" : 1795081897818
+    },
+    {
+      "cacheRead" : 84224,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6abeac487d0a11c1a99a91a8758",
+      "input" : 296,
+      "model" : "gpt-6.2-sol",
+      "output" : 392,
+      "time" : 1795081913722
+    },
+    {
+      "cacheRead" : 84224,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6bac70c87d0b2302c7d6460324d",
+      "input" : 1276,
+      "model" : "gpt-6.2-sol",
+      "output" : 339,
+      "time" : 1795081923635
+    },
+    {
+      "cacheRead" : 85248,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6c5beac87d0996acb7307a303bd",
+      "input" : 702,
+      "model" : "gpt-6.2-sol",
+      "output" : 327,
+      "time" : 1795081934116
+    },
+    {
+      "cacheRead" : 85760,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6cf3eb487d0895c96f307a7be14",
+      "input" : 954,
+      "model" : "gpt-6.2-sol",
+      "output" : 284,
+      "time" : 1795081944279
+    },
+    {
+      "cacheRead" : 86528,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6da4dfc87d0af3565903dfdd068",
+      "input" : 988,
+      "model" : "gpt-6.2-sol",
+      "output" : 292,
+      "time" : 1795081953883
+    },
+    {
+      "cacheRead" : 87296,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6ec356087d09ca7467b471d2392",
+      "input" : 571,
+      "model" : "gpt-6.2-sol",
+      "output" : 306,
+      "time" : 1795081972747
+    },
+    {
+      "cacheRead" : 87552,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6f5c50c87d087c6e95f66b85db2",
+      "input" : 1220,
+      "model" : "gpt-6.2-sol",
+      "output" : 671,
+      "time" : 1795081989444
+    },
+    {
+      "cacheRead" : 88576,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec706930087d0a6e5e4b3370a4a08",
+      "input" : 891,
+      "model" : "gpt-6.2-sol",
+      "output" : 201,
+      "time" : 1795081996497
     }
   ],
   "warnings" : [
