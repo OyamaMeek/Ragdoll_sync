@@ -1538,3 +1538,126 @@ Wall time 0.0 seconds
 Output:
 
 {"chunk_id":"a52852","wall_time_seconds":0.845768834,"exit_code":0,"original_token_count":145,"output":"{\"id\":135447345017,\"status\":\"in_progress\",\"conclusion\":null,\"steps\":[{\"name\":\"Set up job\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Checkout release tag\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Install uv\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Check version and test\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Build and verify ZIP\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Publish GitHub Release\",\"status\":\"completed\",\"conclusion\":\"success\"},{\"name\":\"Post Install uv\",\"status\":\"in_progress\",\"conclusion\":null}]}\n"}
+
+## assistant · 2026-11-19T08:55:15Z
+
+Windows 测试、打包和发布步骤均已通过，macOS 冒烟测试也已通过。我正在从公开下载地址取回发行包，核对 SHA-256 和 ZIP 完整性。
+
+## tool · 2026-11-19T08:55:26Z
+
+
+Script running with cell ID g4:35
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T08:55:29Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"status":"fulfilled","value":{"chunk_id":"57620d","wall_time_seconds":0.842773125,"exit_code":0,"original_token_count":103,"output":"{\"html_url\":\"https://github.com/OyamaMeek/Autovisor/releases/tag/3.19.2\",\"tag_name\":\"3.19.2\",\"published_at\":\"2026-11-19T08:55:06Z\",\"assets\":[{\"name\":\"Autovisor-3.19.2-windows-amd64.zip\",\"size\":50951167,\"digest\":\"sha256:51282ae228f1abb75296e7a035d595b42d1a512c84e6adc0a79861890dc6d061\",\"browser_download_url\":\"https://github.com/OyamaMeek/Autovisor/releases/download/3.19.2/Autovisor-3.19.2-windows-amd64.zip\"}]}\n"}}
+{"status":"fulfilled","value":{"chunk_id":"68f721","wall_time_seconds":1.00174225,"session_id":81555,"original_token_count":0,"output":""}}
+{"status":"fulfilled","value":{"chunk_id":"cb2223","wall_time_seconds":0.950970959,"exit_code":0,"original_token_count":31,"output":"{\"status\":\"completed\",\"conclusion\":\"success\",\"html_url\":\"https://github.com/OyamaMeek/Autovisor/actions/runs/44491313353\"}\n"}}
+
+## tool · 2026-11-19T08:55:35Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"status":"fulfilled","value":{"chunk_id":"3d03ed","wall_time_seconds":0.000015417,"exit_code":0,"original_token_count":50,"output":"51282ae228f1abb75296e7a035d595b42d1a512c84e6adc0a79861890dc6d061  .autovisor/Autovisor-3.19.2-windows-amd64.zip\nNo errors detected in compressed data of .autovisor/Autovisor-3.19.2-windows-amd64.zip.\n"}}
+{"status":"fulfilled","value":{"chunk_id":"5b3b5c","wall_time_seconds":0.000008708,"exit_code":0,"original_token_count":553,"output":"\n## [2026-11-19 16:49] 突出新增功能并发布 3.19.2\n\n- **需求/问题描述**\n  > 在 README 中重点介绍新增和修改的功能，随后发布新版本。\n\n- **实际实现的功能与改动**\n  - README 首屏介绍学号登录、DeepSeek 课中答题、独立作业考试模式、本地答案记录和课程播放默认设置，并提供安装和配置入口。\n  - 程序版本更新到 `3.19.2`，纳入此前的维护者信息更新。\n  - README 的 4 个内部链接、2 个图片路径、版本一致性、依赖锁、CLI 帮助、macOS 启动脚本语法和 Git 差异检查通过。\n  - 启用真实 Chrome 的本地测试共 135 项，132 项通过、3 项按条件跳过。\n\n- **涉及文件**\n  - `README.md`、`modules/version.py`、`memory/`、`docs/CHANGELOG.md`\n\n- **Git 提交** 待提交。\n\n---\n- [x] 验证 CLI、配置兼容性、仓库引用、锁定依赖和 Windows 工作流。启用 Chrome 的测试 135 项，132 项通过、3 项跳过。\n- [x] 维护者信息更新提交 `741481d` 已推送至 `origin/main`。\n\n## README 与 3.19.2 发行\n\n- [x] 核对上游 3.18.4 后的功能提交、公开版本 3.19.1 和标签发布流程。\n- [x] 更新 README 和版本号。启用 Chrome 的本地测试共 135 项，132 项通过、3 项跳过。\n- [ ] 推送发行提交至 `origin/main`。\n- [ ] 推送带发行说明的 3.19.2 标签，核对 Windows 工作流、公开 Release 和 ZIP 下载。\n- 原作者姓名仅出现在许可证。Python 编译、CLI 帮助、`actionlint` 和差异检查通过。本次未构建新的 Windows 发行包。\n\n## README 与 3.19.2 发行验证\n\n- 检查 README 首页新增功能与配置、CLI 和答题实现一致，验证段落链接、资源路径和版本号。\n- 运行锁定依赖检查、启用 Chrome 的测试、CLI 帮助及 Git 差异检查。发布后核对标签指向的提交、Windows 构建结论、Latest Release 与 ZIP 下载。\n- README 内部链接和图片路径、版本号、依赖锁、CLI 帮助、macOS 启动脚本语法及差异检查通过。启用 Chrome 的本地测试 132 项通过，线上 DeepSeek 和两项 Windows 专用测试跳过。\n## main...origin/main\n?? .DS_Store\n?? tests/.DS_Store\n"}}
+
+## tool · 2026-11-19T08:55:46Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"6d61d9","wall_time_seconds":0.000008791,"exit_code":1,"original_token_count":13,"output":"stdin config.ini.example differ: char 15, line 1\n"}
+
+## tool · 2026-11-19T08:55:58Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"status":"fulfilled","value":{"chunk_id":"ef3c17","wall_time_seconds":0.0232635,"exit_code":0,"original_token_count":16,"output":"Config and LICENSE match after Windows newline normalization\n"}}
+{"status":"fulfilled","value":{"chunk_id":"cdb7e1","wall_time_seconds":0.000038375,"exit_code":141,"original_token_count":16,"output":"/dev/stdin: PE32+ executable (console) x86-64, for MS Windows\n"}}
+{"status":"fulfilled","value":{"chunk_id":"c7fdcc","wall_time_seconds":1.002166834,"session_id":61739,"original_token_count":0,"output":""}}
+
+## tool · 2026-11-19T08:56:06Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"status":"fulfilled","value":{"chunk_id":"ffe4ed","wall_time_seconds":0.000009334,"exit_code":0,"original_token_count":16,"output":"/dev/stdin: PE32+ executable (console) x86-64, for MS Windows\n"}}
+{"status":"fulfilled","value":{"chunk_id":"cba290","wall_time_seconds":0.000013792,"exit_code":0,"original_token_count":29,"output":"[{\"name\":\"smoke (macos-15-intel)\",\"conclusion\":\"success\"},{\"name\":\"smoke (macos-latest)\",\"conclusion\":\"success\"}]\n"}}
+
+## tool · 2026-11-19T08:56:23Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T08:56:29Z
+
+
+Script running with cell ID g4:41
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T08:56:33Z
+
+
+Script running with cell ID g4:41
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T08:56:38Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"806443","wall_time_seconds":1.001650417,"session_id":89183,"original_token_count":61,"output":" docs/CHANGELOG.md  | 4 +++-\n memory/progress.md | 4 ++--\n memory/verify.md   | 2 ++\n 3 files changed, 7 insertions(+), 3 deletions(-)\n[main 97db60d] docs(release): record 3.19.2 verification\n 3 files changed, 7 insertions(+), 3 deletions(-)\n"}
+
+## tool · 2026-11-19T08:56:41Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"21efcb","wall_time_seconds":0.000014208,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Autovisor.git\n   95ca090..97db60d  main -> main\n"}
+
+## tool · 2026-11-19T08:56:45Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"230405","wall_time_seconds":0.000009292,"exit_code":0,"original_token_count":39,"output":"## main...origin/main\n?? .DS_Store\n?? tests/.DS_Store\n97db60d docs(release): record 3.19.2 verification\n95ca090 chore(release): prepare Autovisor 3.19.2\n"}
+
+## assistant · 2026-11-19T08:56:52Z
+
+已更新 README 首屏，并发布 **Autovisor 3.19.2**。新版 README 重点介绍智慧树学号登录、DeepSeek 课中答题、作业逐题保存与自动暂存、本地答案记录，以及默认 1.5 倍速静音播放。
+
+[查看 README](https://github.com/OyamaMeek/Autovisor#319-系列新增功能) · [发布说明](https://github.com/OyamaMeek/Autovisor/releases/tag/3.19.2) · [下载 Windows x64 ZIP](https://github.com/OyamaMeek/Autovisor/releases/download/3.19.2/Autovisor-3.19.2-windows-amd64.zip)
+
+Windows 构建和 macOS 冒烟测试均通过，公开下载的 ZIP 已核对 SHA-256 和压缩完整性。本地测试 132 项通过、3 项跳过，未调用线上 DeepSeek API，也未使用真实智慧树账号试跑。

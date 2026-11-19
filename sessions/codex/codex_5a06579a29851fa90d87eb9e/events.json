@@ -488,13 +488,111 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"a52852\",\"wall_time_seconds\":0.845768834,\"exit_code\":0,\"original_token_count\":145,\"output\":\"{\\\"id\\\":135447345017,\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null,\\\"steps\\\":[{\\\"name\\\":\\\"Set up job\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Checkout release tag\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Install uv\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Check version and test\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Build and verify ZIP\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Publish GitHub Release\\\",\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"Post Install uv\\\",\\\"status\\\":\\\"in_progress\\\",\\\"conclusion\\\":null}]}\\n\"}",
       "time" : 1795078510038
+    },
+    {
+      "id" : "372",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "Windows 测试、打包和发布步骤均已通过，macOS 冒烟测试也已通过。我正在从公开下载地址取回发行包，核对 SHA-256 和 ZIP 完整性。",
+      "time" : 1795078515906
+    },
+    {
+      "id" : "call_cc4a6471bf3e400791811a8587b2eb8d",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript running with cell ID g4:35\nWall time 1.0 seconds\nOutput:\n",
+      "time" : 1795078526167
+    },
+    {
+      "id" : "call_3d211e0509ef4ceeb76cc7e582a9d1e9",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"57620d\",\"wall_time_seconds\":0.842773125,\"exit_code\":0,\"original_token_count\":103,\"output\":\"{\\\"html_url\\\":\\\"https://github.com/OyamaMeek/Autovisor/releases/tag/3.19.2\\\",\\\"tag_name\\\":\\\"3.19.2\\\",\\\"published_at\\\":\\\"2026-11-19T08:55:06Z\\\",\\\"assets\\\":[{\\\"name\\\":\\\"Autovisor-3.19.2-windows-amd64.zip\\\",\\\"size\\\":50951167,\\\"digest\\\":\\\"sha256:51282ae228f1abb75296e7a035d595b42d1a512c84e6adc0a79861890dc6d061\\\",\\\"browser_download_url\\\":\\\"https://github.com/OyamaMeek/Autovisor/releases/download/3.19.2/Autovisor-3.19.2-windows-amd64.zip\\\"}]}\\n\"}}\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"68f721\",\"wall_time_seconds\":1.00174225,\"session_id\":81555,\"original_token_count\":0,\"output\":\"\"}}\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"cb2223\",\"wall_time_seconds\":0.950970959,\"exit_code\":0,\"original_token_count\":31,\"output\":\"{\\\"status\\\":\\\"completed\\\",\\\"conclusion\\\":\\\"success\\\",\\\"html_url\\\":\\\"https://github.com/OyamaMeek/Autovisor/actions/runs/44491313353\\\"}\\n\"}}",
+      "time" : 1795078529760
+    },
+    {
+      "id" : "call_098ed99397004ebe9531a3cba94c18c4",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"3d03ed\",\"wall_time_seconds\":0.000015417,\"exit_code\":0,\"original_token_count\":50,\"output\":\"51282ae228f1abb75296e7a035d595b42d1a512c84e6adc0a79861890dc6d061  .autovisor/Autovisor-3.19.2-windows-amd64.zip\\nNo errors detected in compressed data of .autovisor/Autovisor-3.19.2-windows-amd64.zip.\\n\"}}\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"5b3b5c\",\"wall_time_seconds\":0.000008708,\"exit_code\":0,\"original_token_count\":553,\"output\":\"\\n## [2026-11-19 16:49] 突出新增功能并发布 3.19.2\\n\\n- **需求/问题描述**\\n  > 在 README 中重点介绍新增和修改的功能，随后发布新版本。\\n\\n- **实际实现的功能与改动**\\n  - README 首屏介绍学号登录、DeepSeek 课中答题、独立作业考试模式、本地答案记录和课程播放默认设置，并提供安装和配置入口。\\n  - 程序版本更新到 `3.19.2`，纳入此前的维护者信息更新。\\n  - README 的 4 个内部链接、2 个图片路径、版本一致性、依赖锁、CLI 帮助、macOS 启动脚本语法和 Git 差异检查通过。\\n  - 启用真实 Chrome 的本地测试共 135 项，132 项通过、3 项按条件跳过。\\n\\n- **涉及文件**\\n  - `README.md`、`modules/version.py`、`memory/`、`docs/CHANGELOG.md`\\n\\n- **Git 提交** 待提交。\\n\\n---\\n- [x] 验证 CLI、配置兼容性、仓库引用、锁定依赖和 Windows 工作流。启用 Chrome 的测试 135 项，132 项通过、3 项跳过。\\n- [x] 维护者信息更新提交 `741481d` 已推送至 `origin/main`。\\n\\n## README 与 3.19.2 发行\\n\\n- [x] 核对上游 3.18.4 后的功能提交、公开版本 3.19.1 和标签发布流程。\\n- [x] 更新 README 和版本号。启用 Chrome 的本地测试共 135 项，132 项通过、3 项跳过。\\n- [ ] 推送发行提交至 `origin/main`。\\n- [ ] 推送带发行说明的 3.19.2 标签，核对 Windows 工作流、公开 Release 和 ZIP 下载。\\n- 原作者姓名仅出现在许可证。Python 编译、CLI 帮助、`actionlint` 和差异检查通过。本次未构建新的 Windows 发行包。\\n\\n## README 与 3.19.2 发行验证\\n\\n- 检查 README 首页新增功能与配置、CLI 和答题实现一致，验证段落链接、资源路径和版本号。\\n- 运行锁定依赖检查、启用 Chrome 的测试、CLI 帮助及 Git 差异检查。发布后核对标签指向的提交、Windows 构建结论、Latest Release 与 ZIP 下载。\\n- README 内部链接和图片路径、版本号、依赖锁、CLI 帮助、macOS 启动脚本语法及差异检查通过。启用 Chrome 的本地测试 132 项通过，线上 DeepSeek 和两项 Windows 专用测试跳过。\\n## main...origin/main\\n?? .DS_Store\\n?? tests/.DS_Store\\n\"}}",
+      "time" : 1795078535241
+    },
+    {
+      "id" : "call_309575cfba964647a275d06c6047c411",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.2 seconds\nOutput:\n\n{\"chunk_id\":\"6d61d9\",\"wall_time_seconds\":0.000008791,\"exit_code\":1,\"original_token_count\":13,\"output\":\"stdin config.ini.example differ: char 15, line 1\\n\"}",
+      "time" : 1795078546752
+    },
+    {
+      "id" : "call_ed4f8e16430b449f813afd72d6caed0a",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"ef3c17\",\"wall_time_seconds\":0.0232635,\"exit_code\":0,\"original_token_count\":16,\"output\":\"Config and LICENSE match after Windows newline normalization\\n\"}}\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"cdb7e1\",\"wall_time_seconds\":0.000038375,\"exit_code\":141,\"original_token_count\":16,\"output\":\"/dev/stdin: PE32+ executable (console) x86-64, for MS Windows\\n\"}}\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"c7fdcc\",\"wall_time_seconds\":1.002166834,\"session_id\":61739,\"original_token_count\":0,\"output\":\"\"}}",
+      "time" : 1795078558257
+    },
+    {
+      "id" : "call_40a4e13d628043d4b2b647bc28d2c482",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"ffe4ed\",\"wall_time_seconds\":0.000009334,\"exit_code\":0,\"original_token_count\":16,\"output\":\"/dev/stdin: PE32+ executable (console) x86-64, for MS Windows\\n\"}}\n{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"cba290\",\"wall_time_seconds\":0.000013792,\"exit_code\":0,\"original_token_count\":29,\"output\":\"[{\\\"name\\\":\\\"smoke (macos-15-intel)\\\",\\\"conclusion\\\":\\\"success\\\"},{\\\"name\\\":\\\"smoke (macos-latest)\\\",\\\"conclusion\\\":\\\"success\\\"}]\\n\"}}",
+      "time" : 1795078566205
+    },
+    {
+      "id" : "call_9a377a2d86334d4c9ac74e6a7e318cc8",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{}",
+      "time" : 1795078583426
+    },
+    {
+      "id" : "call_815c5cf020694589888b0feb8a713492",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript running with cell ID g4:41\nWall time 1.0 seconds\nOutput:\n",
+      "time" : 1795078589931
+    },
+    {
+      "id" : "call_1e4d3bf3f0c54941905cd94ee168b6bf",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript running with cell ID g4:41\nWall time 1.0 seconds\nOutput:\n",
+      "time" : 1795078593497
+    },
+    {
+      "id" : "call_f569a5ffb7464338b6bca87b64e50cef",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"806443\",\"wall_time_seconds\":1.001650417,\"session_id\":89183,\"original_token_count\":61,\"output\":\" docs/CHANGELOG.md  | 4 +++-\\n memory/progress.md | 4 ++--\\n memory/verify.md   | 2 ++\\n 3 files changed, 7 insertions(+), 3 deletions(-)\\n[main 97db60d] docs(release): record 3.19.2 verification\\n 3 files changed, 7 insertions(+), 3 deletions(-)\\n\"}",
+      "time" : 1795078598914
+    },
+    {
+      "id" : "call_94de1f2418eb4c0495df5a2472ef5526",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"21efcb\",\"wall_time_seconds\":0.000014208,\"exit_code\":0,\"original_token_count\":20,\"output\":\"To https://github.com/OyamaMeek/Autovisor.git\\n   95ca090..97db60d  main -> main\\n\"}",
+      "time" : 1795078601590
+    },
+    {
+      "id" : "call_41dc52e144e94cdaa69e1442ddf6a3af",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{\"chunk_id\":\"230405\",\"wall_time_seconds\":0.000009292,\"exit_code\":0,\"original_token_count\":39,\"output\":\"## main...origin/main\\n?? .DS_Store\\n?? tests/.DS_Store\\n97db60d docs(release): record 3.19.2 verification\\n95ca090 chore(release): prepare Autovisor 3.19.2\\n\"}",
+      "time" : 1795078605291
+    },
+    {
+      "id" : "448",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "已更新 README 首屏，并发布 **Autovisor 3.19.2**。新版 README 重点介绍智慧树学号登录、DeepSeek 课中答题、作业逐题保存与自动暂存、本地答案记录，以及默认 1.5 倍速静音播放。\n\n[查看 README](https://github.com/OyamaMeek/Autovisor#319-系列新增功能) · [发布说明](https://github.com/OyamaMeek/Autovisor/releases/tag/3.19.2) · [下载 Windows x64 ZIP](https://github.com/OyamaMeek/Autovisor/releases/download/3.19.2/Autovisor-3.19.2-windows-amd64.zip)\n\nWindows 构建和 macOS 冒烟测试均通过，公开下载的 ZIP 已核对 SHA-256 和压缩完整性。本地测试 132 项通过、3 项跳过，未调用线上 DeepSeek API，也未使用真实智慧树账号试跑。",
+      "time" : 1795078612027
     }
   ],
   "nativeID" : "01a1f2fc-ff19-7453-be6f-54907613784e",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
   "source" : "codex",
   "title" : "更新 README 并发布",
-  "updated" : 1795078514704,
+  "updated" : 1795078612101,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -999,6 +1097,123 @@
       "model" : "gpt-6.2-sol",
       "output" : 28,
       "time" : 1795078510037
+    },
+    {
+      "cacheRead" : 83328,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb96ea88c87d09ef93515bca7cd41",
+      "input" : 359,
+      "model" : "gpt-6.2-sol",
+      "output" : 627,
+      "time" : 1795078525188
+    },
+    {
+      "cacheRead" : 83584,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb97ecbd487d09aa651e2ff2984ab",
+      "input" : 760,
+      "model" : "gpt-6.2-sol",
+      "output" : 28,
+      "time" : 1795078529759
+    },
+    {
+      "cacheRead" : 84096,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb9825ca887d0a9c75dbc1afdbad9",
+      "input" : 618,
+      "model" : "gpt-6.2-sol",
+      "output" : 176,
+      "time" : 1795078535180
+    },
+    {
+      "cacheRead" : 84608,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb987db4087d08e76d278a7cf6b11",
+      "input" : 1144,
+      "model" : "gpt-6.2-sol",
+      "output" : 429,
+      "time" : 1795078546623
+    },
+    {
+      "cacheRead" : 85632,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb9935e9087d09f3e8d24ba3f6d83",
+      "input" : 620,
+      "model" : "gpt-6.2-sol",
+      "output" : 396,
+      "time" : 1795078557138
+    },
+    {
+      "cacheRead" : 86144,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb99eff0087d08d19c8cc2d96c179",
+      "input" : 677,
+      "model" : "gpt-6.2-sol",
+      "output" : 258,
+      "time" : 1795078566113
+    },
+    {
+      "cacheRead" : 86656,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb9a71a7c87d0a7006828fdccd038",
+      "input" : 586,
+      "model" : "gpt-6.2-sol",
+      "output" : 675,
+      "time" : 1795078583305
+    },
+    {
+      "cacheRead" : 87168,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb9b8942c87d0926f7deebaeab57a",
+      "input" : 773,
+      "model" : "gpt-6.2-sol",
+      "output" : 153,
+      "time" : 1795078588932
+    },
+    {
+      "cacheRead" : 87680,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb9be8a2c87d0b6966ea6b43ec69b",
+      "input" : 444,
+      "model" : "gpt-6.2-sol",
+      "output" : 49,
+      "time" : 1795078592580
+    },
+    {
+      "cacheRead" : 87936,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb9c21ff487d0b255c9ba6cf907a9",
+      "input" : 267,
+      "model" : "gpt-6.2-sol",
+      "output" : 168,
+      "time" : 1795078598912
+    },
+    {
+      "cacheRead" : 88192,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb9c7a1c887d081bcee111fa0f5b0",
+      "input" : 326,
+      "model" : "gpt-6.2-sol",
+      "output" : 39,
+      "time" : 1795078601589
+    },
+    {
+      "cacheRead" : 88448,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb9ca2b8087d0a94f66f116af2001",
+      "input" : 195,
+      "model" : "gpt-6.2-sol",
+      "output" : 63,
+      "time" : 1795078605290
+    },
+    {
+      "cacheRead" : 88448,
+      "cacheWrite" : 0,
+      "id" : "resp_029485d3ea6ebd9b016afeb9cde36087d095a3161bc8e82720",
+      "input" : 366,
+      "model" : "gpt-6.2-sol",
+      "output" : 223,
+      "time" : 1795078612070
     }
   ],
   "warnings" : [
