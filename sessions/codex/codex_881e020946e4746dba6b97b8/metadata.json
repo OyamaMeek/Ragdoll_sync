@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
   "source" : "codex",
   "title" : "添加仓库信息 README 自动生成",
-  "updated" : 1795088841322,
+  "updated" : 1795088900373,
   "usage" : [
     {
       "cacheRead" : 12160,
@@ -94,6 +94,51 @@
       "model" : "gpt-6.2-sol",
       "output" : 1829,
       "time" : 1795088841068
+    },
+    {
+      "cacheRead" : 88832,
+      "cacheWrite" : 0,
+      "id" : "resp_0947ea8344b2623a016afee1ca017887d0af751609da5e4c4a",
+      "input" : 2061,
+      "model" : "gpt-6.2-sol",
+      "output" : 60,
+      "time" : 1795088845078
+    },
+    {
+      "cacheRead" : 90624,
+      "cacheWrite" : 0,
+      "id" : "resp_0947ea8344b2623a016afee1ced42887d0a71786cc99188f1f",
+      "input" : 1344,
+      "model" : "gpt-6.2-sol",
+      "output" : 95,
+      "time" : 1795088850146
+    },
+    {
+      "cacheRead" : 91648,
+      "cacheWrite" : 0,
+      "id" : "resp_0947ea8344b2623a016afee1d3e17887d0834547d797ae50d2",
+      "input" : 559,
+      "model" : "gpt-6.2-sol",
+      "output" : 1208,
+      "time" : 1795088879470
+    },
+    {
+      "cacheRead" : 91904,
+      "cacheWrite" : 0,
+      "id" : "resp_0947ea8344b2623a016afee1f0459887d085cb35fee6560494",
+      "input" : 1719,
+      "model" : "gpt-6.2-sol",
+      "output" : 176,
+      "time" : 1795088885813
+    },
+    {
+      "cacheRead" : 93440,
+      "cacheWrite" : 0,
+      "id" : "resp_0947ea8344b2623a016afee1f67e7c87d0b0ccadbca06005f4",
+      "input" : 3548,
+      "model" : "gpt-6.2-sol",
+      "output" : 257,
+      "time" : 1795088892952
     }
   ],
   "warnings" : [
