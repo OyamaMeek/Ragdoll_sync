@@ -1,0 +1,76 @@
+{
+  "created" : 1795081754773.7834,
+  "files" : [
+    "/Users/oyamahappa/.codex/sessions/2026/11/19/rollout-2026-11-19T17-49-14-01a1f335-d5c0-7b52-a209-d33c89e4141a.jsonl",
+    "/Users/oyamahappa/.codex/sessions/2026/11/19/rollout-2026-11-19T17-49-41-01a1f336-3f16-7aa2-947b-45abe3705bdf.jsonl"
+  ],
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:074c80b00cb7fab9c4200e8c",
+  "messages" : [
+
+  ],
+  "nativeID" : "01a1f335-d5c0-7b52-a209-d33c89e4141a",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "按 DeepSeek v4.1 Flash 峰价显示股价",
+  "updated" : 1795081831735,
+  "usage" : [
+    {
+      "cacheRead" : 12160,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6222a7c87d0a68a17f9e5add1a8",
+      "input" : 33568,
+      "model" : "gpt-6.2-sol",
+      "output" : 315,
+      "time" : 1795081771660
+    },
+    {
+      "cacheRead" : 44672,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec62e08b487d0b8702cafcbaac658",
+      "input" : 4810,
+      "model" : "gpt-6.2-sol",
+      "output" : 192,
+      "time" : 1795081780997
+    },
+    {
+      "cacheRead" : 49152,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6363d8c87d0b78b194e2ba5e9a8",
+      "input" : 543,
+      "model" : "gpt-6.2-sol",
+      "output" : 295,
+      "time" : 1795081790698
+    },
+    {
+      "cacheRead" : 49408,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec642dd1887d08729bce3185493b0",
+      "input" : 11119,
+      "model" : "gpt-6.2-sol",
+      "output" : 222,
+      "time" : 1795081801199
+    },
+    {
+      "cacheRead" : 60416,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec64a320887d08805c8f123958487",
+      "input" : 6117,
+      "model" : "gpt-6.2-sol",
+      "output" : 265,
+      "time" : 1795081809118
+    },
+    {
+      "cacheRead" : 66304,
+      "cacheWrite" : 0,
+      "id" : "resp_0ea88c7df6867b61016afec6556dcc87d08b7d0a95f3e7d279",
+      "input" : 8435,
+      "model" : "gpt-6.2-sol",
+      "output" : 554,
+      "time" : 1795081831732
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
