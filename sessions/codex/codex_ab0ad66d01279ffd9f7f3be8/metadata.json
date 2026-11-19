@@ -12,7 +12,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
   "source" : "codex",
   "title" : "突出新增特性并发布",
-  "updated" : 1795077185482,
+  "updated" : 1795077429673,
   "usage" : [
     {
       "cacheRead" : 0,
@@ -22,6 +22,33 @@
       "model" : "gpt-6.2-sol",
       "output" : 102,
       "time" : 1795077185463
+    },
+    {
+      "cacheRead" : 32384,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb511e73087d08d10823dd4479a7b",
+      "input" : 206,
+      "model" : "gpt-6.2-sol",
+      "output" : 214,
+      "time" : 1795077400147
+    },
+    {
+      "cacheRead" : 32384,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb5196fc887d0b47c887ee0fb89da",
+      "input" : 669,
+      "model" : "gpt-6.2-sol",
+      "output" : 231,
+      "time" : 1795077407483
+    },
+    {
+      "cacheRead" : 32768,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb520386c87d0b3cff0e9c682cff3",
+      "input" : 10233,
+      "model" : "gpt-6.2-sol",
+      "output" : 363,
+      "time" : 1795077422447
     }
   ],
   "warnings" : [
