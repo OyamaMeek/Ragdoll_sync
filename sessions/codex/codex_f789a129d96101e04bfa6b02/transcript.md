@@ -1751,3 +1751,932 @@ Wall time 0.1 seconds
 Output:
 
 {"chunk_id":"2eca94","wall_time_seconds":0.000009833,"exit_code":0,"original_token_count":2219,"output":".autovisor/zhihuishu-homework.js: \"),n(\"br\")]):e._e(),e._v(\" \"),n(\"div\",{staticClass:\"subject_node\"},e._l(e.dataArr.questionOptions,function(t,i){return n(\"div\",{key:i,staticClass:\"nodeLab\",on:{click:function(n){n.stopPropagation(),e.handleClickCheck(t,n,e.checkboxVal,e.dataArr.eid)}}},[n(\"div\",{staticClass:\"label clearfix\"},[n(\"div\",{staticClass:\"fl\",staticStyle:{padding:\"10px 0\",\"margin-right\":\"0\"}},[n(\"input\",{directives:[{name:\"model\",rawName:\"v-model\",value:e.checkboxVal,expression:\"checkboxVal\"}],staticClass:\"mr30\",staticStyle:{display:\"none\"},attrs:{type:\"checkbox\",disabled:e.disabledFlag},domProps:{value:t.id,check\n.autovisor/zhihuishu-homework.js::e._e()]})],2)],2)]),e._v(\" \"),n(\"div\",{staticClass:\"subject_node\"},e._l(e.dataArr.questionOptions,function(t,i){return n(\"div\",{key:i,staticClass:\"nodeLab\",on:{click:function(n){n.stopPropagation(),e.handleClickCheck(t,e.dataArr.eid)}}},[n(\"div\",{staticClass:\"label clearfix\"},[n(\"div\",{staticClass:\"fl\",staticStyle:{padding:\"10px 0\"}},[n(\"input\",{directives:[{name:\"model\",rawName:\"v-model\",value:e.judges,expression:\"judges\"}],staticClass:\"mr30\",staticStyle:{display:\"none\"},attrs:{type:\"radio\",disabled:e.disabledFlag},domProps:{value:t.id,checked:e._q(e.judges,t.id)},on:{change:function(n){e\n.autovisor/zhihuishu-homework.js: \"),n(\"br\")]):e._e(),e._v(\" \"),n(\"div\",{staticClass:\"subject_node\"},e._l(e.dataArr.questionOptions,function(t,i){return n(\"div\",{key:i,staticClass:\"nodeLab nodeLab12\",on:{click:function(n){n.stopPropagation(),e.handleClickCheck(t,e.single,e.dataArr.eid)}}},[n(\"div\",{staticClass:\"label clearfix\"},[n(\"div\",{staticClass:\"fl ffff\",staticStyle:{padding:\"8px 0\"}},[n(\"input\",{directives:[{name:\"model\",rawName:\"v-model\",value:e.single,expression:\"single\"}],staticClass:\"mr30\",staticStyle:{display:\"none\"},attrs:{type:\"radio\",disabled:e.disabledFlag},domProps:{value:t.id,checked:e._q(e.single,t.id)},o\n.autovisor/zhihuishu-exam.js: \"),a(\"br\")]):e._e(),e._v(\" \"),a(\"div\",{staticClass:\"subject_node\"},e._l(e.dataArr.questionOptions,function(t,i){return a(\"div\",{key:i,staticClass:\"nodeLab\",on:{click:function(a){a.stopPropagation(),e.handleClickCheck(t,a,e.checkboxVal,e.dataArr.eid)}}},[a(\"div\",{staticClass:\"label clearfix\"},[a(\"div\",{staticClass:\"fl\",staticStyle:{padding:\"10px 0\",\"margin-right\":\"0\"}},[a(\"input\",{directives:[{name:\"model\",rawName:\"v-model\",value:e.checkboxVal,expression:\"checkboxVal\"}],staticClass:\"mr30\",staticStyle:{display:\"none\"},attrs:{type:\"checkbox\",disabled:e.disabledFlag},domProps:{value:t.id,checked:A\n.autovisor/zhihuishu-exam.js::e._e()]})],2)],2)]),e._v(\" \"),a(\"div\",{staticClass:\"subject_node\"},e._l(e.dataArr.questionOptions,function(t,i){return a(\"div\",{key:i,staticClass:\"nodeLab\",on:{click:function(a){a.stopPropagation(),e.handleClickCheck(t,e.dataArr.eid)}}},[a(\"div\",{staticClass:\"label clearfix\"},[a(\"div\",{staticClass:\"fl\",staticStyle:{padding:\"10px 0\"}},[a(\"input\",{directives:[{name:\"model\",rawName:\"v-model\",value:e.judges,expression:\"judges\"}],staticClass:\"mr30\",staticStyle:{display:\"none\"},attrs:{type:\"radio\",disabled:e.disabledFlag},domProps:{value:t.id,checked:e._q(e.judges,t.id)},on:{change:function(a){e.jud\n.autovisor/zhihuishu-exam.js: \"),a(\"br\")]):e._e(),e._v(\" \"),a(\"div\",{staticClass:\"subject_node\"},e._l(e.dataArr.questionOptions,function(t,i){return a(\"div\",{key:i,staticClass:\"nodeLab nodeLab12\",on:{click:function(a){a.stopPropagation(),e.handleClickCheck(t,e.single,e.dataArr.eid)}}},[a(\"div\",{staticClass:\"label clearfix\"},[a(\"div\",{staticClass:\"fl ffff\",staticStyle:{padding:\"8px 0\"}},[a(\"input\",{directives:[{name:\"model\",rawName:\"v-model\",value:e.single,expression:\"single\"}],staticClass:\"mr30\",staticStyle:{display:\"none\"},attrs:{type:\"radio\",disabled:e.disabledFlag},domProps:{value:t.id,checked:e._q(e.single,t.id)},on:{c\nporaryStorage:function(){var e=this;n.i(G.setTimeout)(function(){if(0!=e.clickFlag){var t={module:\"stuExamWeb\",projectTypeName:\"stuExamWeb 考试\",name:\"暂存作业时间\",data:r()({data:new Date,uuid:e.uuid})};e.saveLog(t),e.alreadyNum=n.i(v.b)(\"achieveCount\"+e.$route.params.stuExamId);e.$confirm(\"<div>你确定要暂存作业吗</div>\",\"提示\",{dangerouslyUseHTMLString:!0,closeOnClickModal:!1,confirmButtonText:\"确定\",cancelButtonText:\"取消\",type:\"warning\",iconClass:\"el-icon-doubt\"}).then(function(){var t=n.i(v.q)(\"stuExamAnswer\"+e.$route.params.stuExamId);\"\"!=t&&null!=t&&(console.log(t,\"当前cookie里面的值\"),e.saveData(t));var i={recruitId:e.$route.params.recruitId,examId:e.$route.params.examId,stuExamId:e.$route.params.stuExamId,achieveCount:e.alreadyNum};e.temporarySave(i)}).catch(function(){})}},500)},temporarySave:function(e){var t=this,n={module:\"stuExamWeb\",projectTypeName:\"stuExamWeb 考试\",name:\"暂存作业接口参数数据\",data:r()({data:r()(e),uuid:this.uuid})};this.saveLog(n),b.a.temporarySave(e).then(function(e){if(200==e.status){var n={module:\"stuExamWeb\",projectTypeName:\"stuExamWeb 考试\",name:\"暂存作业成功返回参数\",data:r()({data:r()(e),uuid:t.uuid})};if(t.saveLog(n),1==e.rt.statu)t.saveSuccess();else{t.$confirm(\"<div>网络异常，请稍后再试，错误代码0-697</div>\",\"提示\",{dangerouslyUseHTMLString:!0,showConfirmButton:!1,showClose:!1,showCancelButton:!1,closeOnClickModal:!1,confirmButtonText:\"确定\",cancelButtonText:\"取消\",confirmButtonClass:\"confirmButtonClass\",type:\"error\"}).then(function(){}).catch(function(){})}}}).catch(function(e){var n={module:\"stuExamWeb\",projectTypeName:\"stuExamWeb 考试\",name:\"暂存作业失败返回参数\",data:r()({data:r()(e),uuid:t.uuid})};t.saveLog(n)})},submitJob:function(){var e=this;n.i(G.setTimeout)(function(){if(0!=e.clickFlag){var t={module:\"s\neChangeRight?a(\"div\",{staticClass:\"examChartBox1 f2\"},[a(\"a\",{staticClass:\"commonBtn_green jobExamComBtn\"},[1==e.courseType||3==e.courseType?a(\"span\",{staticClass:\"themeBg\",on:{click:function(a){t.bindstateChangeLeft(e)}}},[t._v(\"开始答题\")]):t._e()]),t._v(\" \"),a(\"a\",{staticClass:\"commonBtn_green jobExamComBtn\"},[2==e.courseType?a(\"span\",{staticClass:\"themeBg\",on:{click:function(a){t.bindstateChangeLeftWei(e)}}},[t._v(\"开始答题\")]):t._e()]),t._v(\" \"),1==e.progressType?a(\"p\",{st\n.progressRule)+\"%才能参加期末考试\")])]):t._e()]):t._e(),t._v(\" \"),1==t.studentRoomExam.stateChangeRight2?a(\"div\",{staticClass:\"examChartBox1 f2\"},[a(\"a\",{staticClass:\"commonBtn_green jobExamComBtn\",attrs:{href:\"javascript:void(0)\",title:\"开始答题\"},on:{click:function(e){t.jobExamComPop(t.studentRoomExamprogressRuleData.progressRule)}}},[a(\"span\",{staticClass:\"themeBg on\"},[t._v(\"开始答题\")])]),t._v(\" \"),1==t.studentRoomExam.progressType?a(\"p\",{staticClass:\"examChartBox-redTip\",staticSt\neChangeRight?a(\"div\",{staticClass:\"examChartBox1 f2\"},[a(\"a\",{staticClass:\"commonBtn_green jobExamComBtn\"},[1==e.courseType||3==e.courseType?a(\"span\",{staticClass:\"themeBg\",on:{click:function(a){t.bindstateChangeLeft(e)}}},[t._v(\"开始答题\")]):t._e()]),t._v(\" \"),a(\"a\",{staticClass:\"commonBtn_green jobExamComBtn\"},[2==e.courseType?a(\"span\",{staticClass:\"themeBg\",on:{click:function(a){t.bindstateChangeLeftWei(e)}}},[t._v(\"开始答题\")]):t._e()]),t._v(\" \"),1==e.progressType?a(\"p\",{st\n.progressRule)+\"%才能参加期末考试\")])]):t._e()]):t._e(),t._v(\" \"),1==t.studentRoomExam.stateChangeRight2?a(\"div\",{staticClass:\"examChartBox1 f2\"},[a(\"a\",{staticClass:\"commonBtn_green jobExamComBtn\",attrs:{href:\"javascript:void(0)\",title:\"开始答题\"},on:{click:function(e){t.jobExamComPop(t.studentRoomExamprogressRuleData.progressRule)}}},[a(\"span\",{staticClass:\"themeBg on\"},[t._v(\"开始答题\")])]),t._v(\" \"),1==t.studentRoomExam.progressType?a(\"p\",{staticClass:\"examChartBox-redTip\",staticSt\n,t._v(\" \"),a(\"span\",{staticStyle:{color:\"#F94F17\"}},[t._v(t._s(e.endDate))])])])]),t._v(\" \"),a(\"div\",{staticClass:\"examChartBox1 ml30\"},[0==e.courseState?a(\"a\",{staticClass:\"commonBtn_green jobExamComBtn clearfloat\",attrs:{title:\"开始答题\"}},[a(\"span\",{staticClass:\"themeBg\",on:{click:function(a){t.goDohomework(e)}}},[t._v(\"开始答题\")])]):t._e(),t._v(\" \"),1==e.courseState?a(\"p\",[t._v(\"作业已超过截止时间\")]):t._e()])]):t._e(),t._v(\" \"),2==t.flag?a(\"div\",{staticClass:\"examItemWrap clearfix\ntTypeName:\"stuExamWeb 考试\",name:\"获取服务器时间 接口失败 currentTimeN\",uuid:e.uuid};e.journalCollector(a)})):e.erweimaFlag=0:e.$myConfirm()}).catch(function(t){e.$myConfirm();var a={module:\"stuExamWeb\",projectTypeName:\"stuExamWeb 考试\",name:\"点击开始答题，验证二维码是否输入正确接口 接口失败 codeImgIsRightN\",uuid:e.uuid};e.journalCollector(a)})}},hideDialog:function(){this.erweimaDialog=!1,clearInterval(this.timer)},initDom:function(){if(!document.getElementById(\"captchaYidunTest\")){var t=document.createElem\nlrwxr-xr-x  1 oyamahappa  staff  87 Nov 14 13:27 .venv/bin/python -> /Users/oyamahappa/.local/share/uv/python/cpython-3.13-macos-aarch64-none/bin/python3.13\n"}
+
+## tool · 2026-11-19T07:00:27Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+goDohomework:function(t){var e=this,n=window.open();c.a.currentTime().then(function(i){if(200==i.status){var o=a.i(s.C)(i.rt),r=a.i(s.C)(t.startTime);a.i(s.C)(t.endDate);if(r-o>0){n.close();var c="<div style='color:#f00'>作业开放时间为北京时间</br>"+t.startTime+",请耐心等待</div>";e.$confirm(c,"提示",{dangerouslyUseHTMLString:!0,showCancelButton:!1,closeOnClickModal:!1,confirmButtonText:"确定",cancelButtonText:"取消",confirmButtonClass:"el-button--sureButton",type:"warning"}).then(function(){}).catch(function(){})}else 1==t.reviewType?e.goAssessment(n):e.gotoDohomework(t,n)}else console.log("获取服务器时间出错")})},gotoDohomework:function(t,e){var a=this,n={module:"stuExamWeb",projectTypeName:"stuExamWeb 考试",name:"跳转至作业页面",data:r()({data:new Date,uuid:this.uuid,recruitId:this.courseObject.recruitId,stuExamId:t.id,examId:t.examId,courseId:t.courseId,schoolId:this.$store.state.schoolId,meetCourseType:t.meetCourseType})};this.saveLog(n);var i=this.$router.resolve({path:"/webExanList/dohomework",name:"doHomework",params:{recruitId:this.courseObject.recruitId,stuExamId:t.id,examId:t.examId,courseId:t.courseId,schoolId:this.$store.state.schoolId,meetCourseType:t.meetCourseType}}),o=i.href,s=this,c=setInterval(function(){e.closed&&(clearInterval(c),s.$emit("handleClickTest","0"),$("body,html").animate({scrollTop:a.lscrollTopNew},500))},500);this.lscrollTopNew=window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop||0,e.location.href=o},applyRework:function(t){var e=this;this.nowItem=t;var n={bizId:"200003",courseId:t.courseId,examId:t.examId};a.i(u.b)(n),c.a.currentTime().then(function(n){if(200==n.status){var i={module:"stuExamWeb",projectTypeName:"stuExamWeb 考试",name:"申请重做,服务器当前时间",data:r()({data:n.rt,uuid:e.uuid})};e.saveLog(i);a.i(s.C)(n.rt);if(a.i(s.C)(t.endDate)-a.i(s.C)(n.rt)<=0){e.$confirm("<div style='color:#f00;'>课程已结束，不能申请重做!</div>","提示",{dangerouslyUseHTMLString:!0,showCancelButton:!1,closeOnClickModal:!1,confirmButtonText:"确定",cancelButtonText:"取消",confirmButtonClass:"el-button--sureButton",type:"warning"}).then(function(){}).catch(function(){})}else{var o={recruitId:e.courseObject.recruitId,examId:t.examId};c.a.checkAnswers(o).then(function(a){console.log(a,"申请答案接口返回值");var n={module:"stuExamWeb",projectTypeName:"stuExamWeb 考试",name:"申请重做,是否查看过答案",data:r()({data:a.rt,uuid:e.uuid})};e.saveLog(n);var i=(a.rt,{examId:t.examId});c.a.getIsObject(i).then(function(a){console.log(a,"是否是主观题");var n=a.rt,i={recruitId:e.courseObject.recruitId,examId:t.examId};c.a.redoNum(i).then(function
+saveSuccess:function(){var e=this.$router.resolve({path:"/webExamList",name:"webExanList"});e.href;window.close()},initData:function(){this.resultArr=n.i(d.a)(this.score/this.totalScore*100),this.resultScore=n.i(d.b)(this.score/this.totalScore*100)},onNoticeDailogIsClose:function(){this.onlyShowOneDialog&&this.openDialog()}}),o()(i,"mounted",function(){}),o()(i,"beforeDestroy",function(){}),i)},800:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=n(49),a=n.n(i),o=n(29),r=n(68);t.default={data:function(){return{publishResouceDialog:!1,videoId:""}},mounted:function(){this.videoId=this.item.interfaceDataId,this.initUrl(this.item)},methods:{initUrl:function(e){this.getAudioUrl(e).then(function(t){document.getElementById(e.id).src=t,document.getElementById(e.id).load()})},playAudio:function(e){for(var t=document.getElementsByTagName("audio"),n=0;n<t.length;n++)t[n].paused||t[n].getAttribute("id")==e||t[n].pause()},switchSource
+UpdateName:function(e,t){var i=JSON.parse(n.i(m.u)("DEVICE_CODE")||"{}").deviceId||"",a=JSON.parse(n.i(m.u)("setGoErweimaObj")||"{}").examType||"",o={examId:this.$route.params.examId,recruitId:this.$route.params.recruitId,stuExamId:this.$route.params.stuExamId,eid:t,schoolId:this.$route.params.schoolId,deviceId:i,examType:a,fromType:3,answer:e.id,dataIds:"",questionType:14},r={stuExamAnswer:u()(o)},s=n.i(m.q)("stuExamAnswer"+this.$route.params.stuExamId);r.stuExamAnswer=""!=s&&null!=s?n.i(m.y)(o,s,this.$route.params.stuExamId):u()([o]),r.recruitId=this.$route.params.recruitId,this.judges=t,this.changeAnswerStatus(this.judges),this.answerDataTemp=r},saveData:function(){var e=this,t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:0,i=arguments.length>1&&void 0!==arguments[1]?arguments[1]:0,a=this.answerDataTemp;if(!a)return void this.$emit("saveSuccess",t,i);var o={module:"stuExamWeb",projectTypeName:"stuExamWeb 考试",name:"判断题保存答案参数信息",data:u()({data:a}),uuid:this.uuid,examId:this.$route.params.examId};this.saveLog(o),h.a.saveStudentAnswer(a).then(function(o){e.timeOut300=!0,e.errorCheckTag=!1;var r={module:"stuExamWeb",projectTypeName:"stuExamWeb 考试",name:"判断题保存答案成功信息",data:u()({data:o}),uuid:e.uuid,examId:e.$route.params.examId};if(e.saveLog(r),o.code&&-12==o.code)e.$message.closeAll(),e.yuDuninstance.instance&&e.yuDuninstance.instance.notHaveCloseTagPopup(),n.i(m.z)("stuExamAnswer"+e.$route.params.stuExamId,a.stuExamAnswer);else if(200==o.status)1==o.rt.statu?(e.$emit("saveSuccess",t,i),n.i(m.r)("stuExamAnswer"+e.$route.params.stuExamId)):(-10==o.rt.statu?e.$emit("captchaForAnswer"):-20==o.rt.statu&&e.$emit("disableForAnswer"),n.i(m.z)("stuExamAnswer"+e.$route.params.stuExamId,a.stuExamAnswer));else if(-1==o.status&&2!=o.msg||-3==o.status||401==o.status)e.$message.closeAll(),e.$message.error(o.msg);else if(-1==o.status&&2==o.msg)e.locInstance||(e.locInstance=new S.a),e.locInstance.open("backoff",function(t,i){var a=n.i(m.t)(e.$route.params.recruitId);e.$router.push({path:"/webExamList",name:"webExanList",query:{recruitId:a}})},function(e,t){console.log(e,t,"异常")});else if("试卷已提交,不能继续答题"==o.msg){n.i(m.r)("stuExamAnswer"+e.$route.params.stuExamId);var s=o.msg;e.$confirm(s,"提示",{dangerouslyUseHTMLString:!0,showConfirmButton:!1,showClose:!1,closeOnClickModal:!1,showCancelButt
+UpdateTaskName:function(e,t){var i=JSON.parse(n.i(m.u)("DEVICE_CODE")||"{}").deviceId||"",a=JSON.parse(n.i(m.u)("setGoErweimaObj")||"{}").examType||"",o={examId:this.$route.params.examId,recruitId:this.$route.params.recruitId,stuExamId:this.$route.params.stuExamId,eid:t,schoolId:this.$route.params.schoolId,deviceId:i,examType:a,fromType:3,answer:e.id,dataIds:"",questionType:1},r={stuExamAnswer:p()(o)},s=n.i(m.q)("stuExamAnswer"+this.$route.params.stuExamId);r.stuExamAnswer=""!=s&&null!=s?n.i(m.y)(o,s,this.$route.params.stuExamId):p()([o]),r.recruitId=this.$route.params.recruitId,this.newAnswerArr=JSON.parse(this.$refs.answerArr.value),this.single=t,this.changeAnswerStatus(this.single),this.answerDataTemp=r},saveData:function(){var e=this,t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:0,i=arguments.length>1&&void 0!==arguments[1]?arguments[1]:0,a=this.answerDataTemp;if(!a)return void this.$emit("saveSuccess",t,i);var o={module:"stuExamWeb",projectTypeName:"stuExamWeb 考试",name:"单选题保存答案参数信息",data:p()({data:a}),uuid:this.uuid,examId:this.$route.params.examId};this.saveLog(o),N.a.saveStudentAnswer(a).then(function(o){e.errorCheckTag=!1,e.timeOut300=!0;var r={module:"stuExamWeb",projectTypeName:"stuExamWeb 考试",name:"单选题保存答案成功信息",data:p()({data:o}),uuid:e.uuid,examId:e.$route.params.examId};if(e.saveLog(r),o.code&&-12==o.code)e.$message.closeAll(),e.yuDuninstance.instance&&e.yuDuninstance.instance.notHaveCloseTagPopup(),n.i(m.z)("stuExamAnswer"+e.$route.params.stuExamId,a.stuExamAnswer);else if(200==o.status)1==o.rt.statu?(e.$emit("saveSuccess",t,i),n.i(m.r)("stuExamAnswer"+e.$route.params.stuExamId)):(-10==o.rt.statu?e.$emit("captchaForAnswer"):-20==o.rt.statu&&e.$emit("disableForAnswer"),n
+saveSuccess:function(){var e=this.$router.resolve({path:"/webExamList",name:"webExanList"});e.href;window.close()},reload:function(){this.doFaQuestionnaireDialog=!1,this.$router.go(0)},saveLog:function(e){$.ajax({type:"get",async:!1,url:"//collector.zhihuishu.com/public/jsonp/collect",dataType:"jsonp",jsonp:"jsonpCallback",data:{json:r()({data:[e]})},success:function(e){}})},getOfficeViewUrl:function(e){var t="";return $.ajax({type:"get",async:!1,url:"https://newbase.zhihuishu.com/office/getOfficeViewUrl",data:{fileId:e},success:function(e){console.log(e,"res"),200==e.status&&(t=e.rt.url),console.log(t,"view1")}}),console.log(t,"view"),t}})}},948:function(e,t,n){t=e.exports=n(567)(!1),t.push([e.i,"img{max-width:100%}.changePopError .el-dialog__body{padding:0 30px 20px;box-sizing:border-box}.el-message-box .el-message-box__content{text-align:center}.el-message-box .el-message-box__content .img{background:url(//image.zhihuishu.com/zhs/ablecommons/demo/201907
+tests/test_login.py:44:@unittest.skipUnless(os.environ.get("AUTOVISOR_TEST_BROWSER") == "1", "需要显式启用真实浏览器测试")
+tests/test_answering_integration.py:108:@unittest.skipUnless(os.environ.get("AUTOVISOR_TEST_BROWSER") == "1", "需要显式启用真实浏览器测试")
+tests/test_answering.py:36:    @unittest.skipUnless(os.environ.get("AUTOVISOR_TEST_DEEPSEEK") == "1", "需要显式启用 DeepSeek 服务测试")
+
+
+## assistant · 2026-11-19T07:01:16Z
+
+本机日志显示，答题警告出现在点击选项后的勾选确认阶段。项目留存的智慧树前端显示，单选和判断题会用高亮样式标记已选项，脚本只检查了隐藏的输入框。作业调度也会在当前窗口仍开着时继续点下一份。我会用真实 Chrome 和本地页面分别复现这两个问题。
+
+## tool · 2026-11-19T07:01:22Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+---
+name: test-driven-development
+description: Use when implementing any feature or bugfix, before writing implementation code
+---
+
+# Test-Driven Development (TDD)
+
+## Overview
+
+Write the test first. Watch it fail. Write minimal code to pass.
+
+**Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
+
+**Violating the letter of the rules is violating the spirit of the rules.**
+
+## When to Use
+
+**Always:**
+- New features
+- Bug fixes
+- Refactoring
+- Behavior changes
+
+**Exceptions (ask your human partner):**
+- Throwaway prototypes
+- Generated code
+- Configuration files
+
+Thinking "skip TDD just this once"? Stop. That's rationalization.
+
+## The Iron Law
+
+```
+NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
+```
+
+Write code before the test? Delete it. Start over.
+
+**No exceptions:**
+- Don't keep it as "reference"
+- Don't "adapt" it while writing tests
+- Don't look at it
+- Delete means delete
+
+Implement fresh from tests. Period.
+
+## Red-Green-Refactor
+
+```dot
+digraph tdd_cycle {
+    rankdir=LR;
+    red [label="RED\nWrite failing test", shape=box, style=filled, fillcolor="#ffcccc"];
+    verify_red [label="Verify fails\ncorrectly", shape=diamond];
+    green [label="GREEN\nMinimal code", shape=box, style=filled, fillcolor="#ccffcc"];
+    verify_green [label="Verify passes\nAll green", shape=diamond];
+    refactor [label="REFACTOR\nClean up", shape=box, style=filled, fillcolor="#ccccff"];
+    next [label="Next", shape=ellipse];
+
+    red -> verify_red;
+    verify_red -> green [label="yes"];
+    verify_red -> red [label="wrong\nfailure"];
+    green -> verify_green;
+    verify_green -> refactor [label="yes"];
+    verify_green -> green [label="no"];
+    refactor -> verify_green [label="stay\ngreen"];
+    verify_green -> next;
+    next -> red;
+}
+```
+
+### RED - Write Failing Test
+
+Write one minimal test showing what should happen.
+
+<Good>
+```typescript
+test('retries failed operations 3 times', async () => {
+  let attempts = 0;
+  const operation = () => {
+    attempts++;
+    if (attempts < 3) throw new Error('fail');
+    return 'success';
+  };
+
+  const result = await retryOperation(operation);
+
+  expect(result).toBe('success');
+  expect(attempts).toBe(3);
+});
+```
+Clear name, tests real behavior, one thing
+</Good>
+
+<Bad>
+```typescript
+test('retry works', async () => {
+  const mock = jest.fn()
+    .mockRejectedValueOnce(new Error())
+    .mockRejectedValueOnce(new Error())
+    .mockResolvedValueOnce('success');
+  await retryOperation(mock);
+  expect(mock).toHaveBeenCalledTimes(3);
+});
+```
+Vague name, tests mock not code
+</Bad>
+
+**Requirements:**
+- One behavior
+- Clear name
+- Real code (no mocks unless unavoidable)
+
+### Verify RED - Watch It Fail
+
+**MANDATORY. Never skip.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test fails (not errors)
+- Failure message is expected
+- Fails because feature missing (not typos)
+
+**Test passes?** You're testing existing behavior. Fix test.
+
+**Test errors?** Fix error, re-run until it fails correctly.
+
+### GREEN - Minimal Code
+
+Write simplest code to pass the test.
+
+<Good>
+```typescript
+async function retryOperation<T>(fn: () => Promise<T>): Promise<T> {
+  for (let i = 0; i < 3; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (i === 2) throw e;
+    }
+  }
+  throw new Error('unreachable');
+}
+```
+Just enough to pass
+</Good>
+
+<Bad>
+```typescript
+async function retryOperation<T>(
+  fn: () => Promise<T>,
+  options?: {
+    maxRetries?: number;
+    backoff?: 'linear' | 'exponential';
+    onRetry?: (attempt: number) => void;
+  }
+): Promise<T> {
+  // YAGNI
+}
+```
+Over-engineered
+</Bad>
+
+Don't add features, refactor other code, or "improve" beyond the test.
+
+### Verify GREEN - Watch It Pass
+
+**MANDATORY.**
+
+```bash
+npm test path/to/test.test.ts
+```
+
+Confirm:
+- Test passes
+- Other tests still pass
+- Output pristine (no errors, warnings)
+
+**Test fails?** Fix code, not test.
+
+**Other tests fail?** Fix now.
+
+**"Other tests" means the project's suite, not just your file.** A
+green run of the test you wrote is not a green suite. Before you call
+the change done, run the project's test command (bare `pytest`,
+`npm test`, `cargo test` — whatever the repo uses) even when your task
+named only one test file. A scope statement in your task bounds the
+deliverable, not your verification. Any failure that run shows —
+including one you didn't cause — goes in your report by name; a red
+test you watched scroll past and didn't mention is a report falsified
+by omission.
+
+### REFACTOR - Clean Up
+
+After green only:
+- Remove duplication
+- Improve names
+- Extract helpers
+
+Keep tests green. Don't add behavior.
+
+### Repeat
+
+Next failing test for next feature.
+
+## Good Tests
+
+| Quality | Good | Bad |
+|---------|------|-----|
+| **Minimal** | One thing. "and" in name? Split it. | `test('validates email and domain and whitespace')` |
+| **Clear** | Name describes behavior | `test('test1')` |
+| **Shows intent** | Demonstrates desired API | Obscures what code should do |
+
+When writing or changing any test, read [writing-good-tests.md](writing-good-tests.md) for the rules that keep tests honest:
+- Name the production change that would make the test fail — before writing it
+- Assert on real behavior, never on mock behavior
+- Keep test-only code in test utilities, out of production classes
+- Understand a dependency's side effects before mocking it
+
+## Common Rationalizations
+
+| Excuse | Reality |
+|--------|---------|
+| "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
+| "I'll test after" | Tests written after pass immediately — which proves nothing. They may test the wrong thing, test the implementation instead of the behavior, or miss the edge case you forgot. You never watched it fail, so you never proved it can catch the bug. Test-first forces that failure. |
+| "Tests after achieve same goals (spirit not ritual)" | Tests-after answer "what does this do?"; tests-first answer "what should this do?" Tests written after are biased by the code you already wrote — you verify the cases you remembered, not the ones you'd have discovered. Coverage without proof the tests work. |
+| "Already manually tested" | Manual testing is ad-hoc: no record of what you covered, no way to re-run it when the code changes, easy to forget cases under pressure. "Worked when I tried it" ≠ comprehensive. Automated tests run the same way every time. |
+| "Deleting X hours is wasteful" | Sunk cost fallacy — that time is already spent either way. The real choice: rewrite with TDD (high confidence) vs. keep it and bolt tests on after (low confidence, likely bugs). Keeping code you can't trust is the waste. |
+| "Keep as reference, write tests first" | You'll adapt it. That's testing after. Delete means delete. |
+| "Need to explore first" | Fine. Throw away exploration, start with TDD. |
+| "Test hard = design unclear" | Listen to test. Hard to test = hard to use. |
+| "TDD will slow me down" | TDD IS the pragmatic path: catches bugs before commit, prevents regressions, lets you refactor without fear. "Pragmatic" shortcuts mean debugging in production — slower, not faster. |
+| "Manual test faster" | Manual doesn't prove edge cases. You'll re-test every change. |
+| "Existing code has no tests" | You're improving it. Add tests for existing code. |
+
+## Red Flags - STOP and Start Over
+
+- Code before test
+- Test after implementation
+- Test passes immediately
+- Can't explain why test failed
+- Tests added "later"
+- Rationalizing "just this once"
+- "I already manually tested it"
+- "Tests after achieve the same purpose"
+- "It's about spirit not ritual"
+- "Keep as reference" or "adapt existing code"
+- "Already spent X hours, deleting is wasteful"
+- "TDD is dogmatic, I'm being pragmatic"
+- "This is different because..."
+
+**All of these mean: Delete code. Start over with TDD.**
+
+## Example: Bug Fix
+
+**Bug:** Empty email accepted
+
+**RED**
+```typescript
+test('rejects empty email', async () => {
+  const result = await submitForm({ email: '' });
+  expect(result.error).toBe('Email required');
+});
+```
+
+**Verify RED**
+```bash
+$ npm test
+FAIL: expected 'Email required', got undefined
+```
+
+**GREEN**
+```typescript
+function submitForm(data: FormData) {
+  if (!data.email?.trim()) {
+    return { error: 'Email required' };
+  }
+  // ...
+}
+```
+
+**Verify GREEN**
+```bash
+$ npm test
+PASS
+```
+
+**REFACTOR**
+Extract validation for multiple fields if needed.
+
+## Verification Checklist
+
+Before marking work complete:
+
+- [ ] Every new function/method has a test
+- [ ] Watched each test fail before implementing
+- [ ] Each test failed for expected reason (feature missing, not typo)
+- [ ] Wrote minimal code to pass each test
+- [ ] All tests pass
+- [ ] Output pristine (no errors, warnings)
+- [ ] Tests use real code (mocks only if unavoidable)
+- [ ] Edge cases and errors covered
+
+Can't check all boxes? You skipped TDD. Start over.
+
+## When Stuck
+
+| Problem | Solution |
+|---------|----------|
+| Don't know how to test | Write wished-for API. Write assertion first. Ask your human partner. |
+| Test too complicated | Design too complicated. Simplify interface. |
+| Must mock everything | Code too coupled. Use dependency injection. |
+| Test setup huge | Extract helpers. Still complex? Simplify design. |
+
+## Debugging Integration
+
+Bug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix and prevents regression.
+
+Never fix bugs without a test.
+
+## Final Rule
+
+```
+Production code → test exists and failed first
+Otherwise → not TDD
+```
+
+No exceptions without your human partner's permission.
+
+---
+name: verification-before-completion
+description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
+---
+
+# Verification Before Completion
+
+## Overview
+
+**Core principle:** Evidence before claims, always.
+
+**Violating the letter of this rule is violating the spirit of this rule.**
+
+## The Iron Law
+
+```
+NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
+```
+
+If you haven't run the verification command in this message, you cannot claim it passes.
+
+## The Gate Function
+
+```
+BEFORE claiming any status or expressing satisfaction:
+
+1. IDENTIFY: What command proves this claim?
+2. RUN: Execute the FULL command (fresh, complete)
+3. READ: Full output, check exit code, count failures
+4. VERIFY: Does output confirm the claim?
+   - If NO: State actual status with evidence
+   - If YES: State claim WITH evidence
+5. ONLY THEN: Make the claim
+
+Skip any step = lying, not verifying
+```
+
+## Common Failures
+
+| Claim | Requires | Not Sufficient |
+|-------|----------|----------------|
+| Tests pass | Test command output: 0 failures | Previous run, "should pass" |
+| Linter clean | Linter output: 0 errors | Partial check, extrapolation |
+| Build succeeds | Build command: exit 0 | Linter passing, logs look good |
+| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
+| Regression test works | Red-green cycle verified | Test passes once |
+| Agent completed | VCS diff shows changes | Agent reports "success" |
+| Requirements met | Line-by-line checklist | Tests passing |
+
+## Red Flags - STOP
+
+- Using "should", "probably", "seems to"
+- Expressing satisfaction before verification ("Great!", "Perfect!", "Done!", etc.)
+- About to commit/push/PR without verification
+- Trusting agent success reports
+- Relying on partial verification
+- Thinking "just this once"
+- Tired and wanting work over
+- **ANY wording implying success without having run verification**
+
+## Rationalization Prevention
+
+| Excuse | Reality |
+|--------|---------|
+| "Should work now" | RUN the verification |
+| "I'm confident" | Confidence ≠ evidence |
+| "Just this once" | No exceptions |
+| "Linter passed" | Linter ≠ compiler |
+| "Agent said success" | Verify independently |
+| "I'm tired" | Exhaustion ≠ excuse |
+| "Partial check is enough" | Partial proves nothing |
+| "Different words so rule doesn't apply" | Spirit over letter |
+
+## Key Patterns
+
+**Tests:**
+```
+✅ [Run test command] [See: 34/34 pass] "All tests pass"
+❌ "Should pass now" / "Looks correct"
+```
+
+**Regression tests (TDD Red-Green):**
+```
+✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)
+❌ "I've written a regression test" (without red-green verification)
+```
+
+**Build:**
+```
+✅ [Run build] [See: exit 0] "Build passes"
+❌ "Linter passed" (linter doesn't check compilation)
+```
+
+**Requirements:**
+```
+✅ Re-read plan → Create checklist → Verify each → Report gaps or completion
+❌ "Tests pass, phase complete"
+```
+
+**Agent delegation:**
+```
+✅ Agent reports success → Check VCS diff → Verify changes → Report actual state
+❌ Trust agent report
+```
+
+## When To Apply
+
+**ALWAYS before:**
+- ANY variation of success/completion claims
+- ANY expression of satisfaction
+- ANY positive statement about work state
+- Committing, PR creation, task completion
+- Moving to next task
+- Delegating to agents
+
+**Rule applies to:**
+- Exact phrases
+- Paraphrases and synonyms
+- Implications of success
+- ANY communication suggesting completion/correctness
+
+        first_loads = []
+
+        async def serve_first_homework(route):
+            first_loads.append(route.request.url)
+            if len(first_loads) == 1:
+                await route.fulfill(content_type="text/html", body="<main>Loading</main>")
+            else:
+                await route.fallback()
+
+        await self.page.context.route(first.split("#", 1)[0], serve_first_homework)
+        list_url = "https://onlineexamh5new.zhihuishu.com/stuExamWeb.html#/webExamList?recruitId=recruit"
+        await self.page.route("**/stuExamWeb.html", lambda route: route.fulfill(
+            content_type="text/html; charset=utf-8",
+            body=f'''
+                <li id="examStateTabWsj">未提交</li>
+                <ul id="work">
+                    <li><div class="examItemWrap">
+                        <span class="percentage_number">作业</span>
+                        <div class="examTit"><span class="name">单元测试</span></div>
+                        <ul class="examInfoList"><li>对应章节 第二章</li></ul>
+                        <a title="开始答题"><span class="themeBg" onclick="openWork(1)">开始答题</span></a>
+                    </div></li>
+                    <li><div class="examItemWrap">
+                        <span class="percentage_number">作业</span>
+                        <div class="examTit"><span class="name">单元测试</span></div>
+                        <ul class="examInfoList"><li>对应章节 第三章</li></ul>
+                        <a title="开始答题"><span class="themeBg" onclick="openWork(2)">开始答题</span></a>
+                    </div></li>
+                    <li><div class="examItemWrap">
+                        <span class="percentage_number">考试</span>
+                        <a title="开始答题"><span class="themeBg" onclick="opened.push('exam')">开始答题</span></a>
+                    </div></li>
+                </ul>
+                <script>
+                    const urls = {json.dumps([first, second])};
+                    const opened = [];
+                    const stashed = [];
+                    addEventListener('message', event => {{
+                        if (event.origin === location.origin && event.data.stashed) {{
+                            stashed.push(event.data);
+                            work.innerHTML = work.innerHTML;
+                        }}
+                    }});
+                    function openWork(index) {{
+                        opened.push([index, stashed.length]);
+                        const paper = window.open();
+                        setTimeout(() => {{ paper.location.href = urls[index - 1]; }}, 200);
+                    }}
+                </script>
+            ''',
+        ))
+        await self.page.goto(list_url)
+        load_timeout = patch("modules.exam_answering.PAPER_LOAD_TIMEOUT_MS", 1000)
+        load_timeout.start()
+        self.addCleanup(load_timeout.stop)
+        task = asyncio.create_task(watch_exam_pages(self.page, "key-for-test"))
+        try:
+            await asyncio.sleep(0.6)
+            self.assertEqual(await self.page.evaluate("opened"), [])
+            await self.page.locator("#examStateTabWsj").evaluate("tab => tab.classList.add('cur')")
+            try:
+                await self.page.wait_for_function("opened.length >= 2", timeout=7000)
+            except TimeoutError:
+                self.fail("脚本没有逐份打开未提交的作业")
+            await self.page.wait_for_function("stashed.length === 2", timeout=7000)
+            self.assertEqual(await self.page.evaluate("stashed"), [
+                {"paper": "#/webExamList/dohomework/recruit/work/exam/course/school/0", "stashed": "2", "submitted": None},
+                {"paper": "#/webExamList/dohomework/recruit/work-two/exam/course/school/0", "stashed": "2", "submitted": None},
+            ])
+            await asyncio.sleep(0.6)
+            self.assertEqual(await self.page.evaluate("opened"), [[1, 0], [2, 1]])
+            self.assertEqual(len(first_loads), 2)
+        finally:
+            task.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await task
+
+    async def test_exam_refreshes_only_once_when_questions_stay_blank(self):
+                await task
+
+    async def test_exam_waits_for_manually_opened_paper_and_saves_without_submitting(self):
+        url = await self._serve_exam()
+        statements = []
+
+        def reply(request):
+            data = json.loads(request["messages"][1]["content"])
+            statements.append(data["question"])
+            answers = [1, 3] if "质数" in data["question"] and "多选题" in data["question"] else [2]
+            return {"choices": [{"finish_reason": "stop", "message": {"content": json.dumps({"answers": answers})}}]}
+
+        self.server.reply = reply
+        campus_url = "https://onlineweb.zhihuishu.com/onlinestuh5"
+        script_release = asyncio.Event()
+
+        async def hold_script(route):
+            await script_release.wait()
+            await route.fulfill(body="")
+
+        await self.page.route(campus_url + "/slow.js", hold_script)
+        await self.page.route(campus_url, lambda route: route.fulfill(
+            content_type="text/html; charset=utf-8",
+            body=f'<button onclick="window.open(\'{url}\')">开始答题</button>'
+                 f'<script src="{campus_url}/slow.js"></script>',
+        ))
+        task = self._start_exam_mode()
+        try:
+            start_button = self.page.get_by_role("button", name="开始答题")
+            await start_button.wait_for(timeout=5000)
+            self.assertEqual(await self.page.evaluate("document.readyState"), "loading")
+            self.assertFalse(self.server.request_received.is_set())
+            async with self.page.expect_popup(timeout=5000) as popup:
+                await start_button.click()
+            paper = await popup.value
+            await paper.get_by_text("保存成功！", exact=True).wait_for(timeout=12000)
+            body = paper.locator("body")
+            self.assertEqual(await body.get_attribute("data-saved0"), "1")
+            self.assertEqual(await body.get_attribute("data-saved1"), "1,3")
+            self.assertEqual(await body.get_attribute("data-saved2"), "")
+            self.assertEqual(await body.get_attribute("data-saved3"), "2")
+            self.assertIsNone(await body.get_attribute("data-submitted"))
+            self.assertEqual(len(statements), 2)
+            self.assertIn("选择所有质数", statements[0])
+            self.assertIn("九是质数", statements[1])
+        finally:
+            script_release.set()
+            await self.page.unroute_all(behavior="wait")
+            task.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await task
+
+    async def test_completed_homework_confirms_stash_after_saving_last_answer(self):
+        self.set_answers([2])
+        url = await self._serve_exam(query="?kind=single")
+        await self.page.goto(url)
+
+        self.assertEqual(await fill_exam(self.page, "key-for-test"), (1, 0))
+
+        body = self.page.locator("body")
+        self.assertEqual(await body.get_attribute("data-saved0"), "2")
+        self.assertEqual(await body.get_attribute("data-stashed"), "2")
+        self.assertIsNone(await body.get_attribute("data-submitted"))
+
+    async def test_homework_saves_existing_selection_on_last_question_before_stashing(self):
+        await self.page.goto(await self._serve_exam(query="?kind=single"))
+        await self.page.get_by_text("3", exact=True).click()
+
+        self.assertEqual(await fill_exam(self.page, "key-for-test"), (0, 0))
+
+        self.assertEqual(await self.page.locator("body").get_attribute("data-stashed"), "1")
+        self.assertFalse(self.server.request_received.is_set())
+
+    async def test_incomplete_homework_remains_open_for_manual_review(self):
+        self.set_answers([2])
+        await self.page.goto(await self._serve_exam())
+
+        self.assertEqual(await fill_exam(self.page, "key-for-test"), (2, 1))
+
+        self.assertIsNone(await self.page.locator("body").get_attribute("data-stashed"))
+- 用户选择课程并进入「未提交」列表后，复用该页的作业入口逐份打开并交由现有答题监听器处理。用卡片类型限定作业范围，按作业身份去重，等本份处理后再继续。
+- 以公开前端确认列表控件和弹窗行为，用本地 Chrome 回归测试验证调度、去重及与手动交卷流程的衔接。
+
+## DeepSeek 答案本地记录
+
+- 在三种答题流程共用的 `ask_deepseek` 中，将校验通过的答案连同时间、题目和选项追加到运行目录下的 `.autovisor/deepseek-answers.md`。写入失败时提示并返回已校验的答案。
+
+## 作业考试首题加载超时
+
+- 由试卷监听器等待首题，已进入原试卷但超时仍无题目时刷新同一个标签页一次。已开始作答或出现平台验证时保留页面供用户处理。
+## DeepSeek 答案本地记录验证
+
+- 用本地 HTTP 服务和真实文件验证两次有效响应依次追加、中文内容与多选答案完整、API Key 未写入、无效响应不变更文件、写入失败时提示且仍返回有效选项。运行启用 Chrome 的全量测试和差异检查。
+- 启用 Chrome 的全量测试共 130 项，127 项通过，线上 DeepSeek 和两项 Windows 专用用例跳过。最终版本通过 5 项专项回归，覆盖本地 Markdown、普通课中题、融合练习和作业考试。Python 编译、CLI 帮助和差异检查通过。
+
+## 作业考试首题加载超时验证
+
+- 真 Chrome 回归测试复现首题空白时缺少刷新。修复后验证单次自动刷新、刷新后仍空白时手动刷新可恢复、平台验证保留、保存异常保留当前勾选，以及作业仍逐份打开。
+- 启用 Chrome 的全量测试共 133 项，130 项通过，线上 DeepSeek 和两项 Windows 专用测试跳过。Python 编译、CLI 帮助和差异检查通过。未运行线上试卷。
+- [x] 用本地 HTTP 回归测试复现缺少 Markdown 记录。
+- [x] 实现本地记录并更新使用说明。追加、无效答案处理和写入失败提示均通过验证。
+- [x] 启用 Chrome 的全量测试共 130 项，127 项通过、3 项跳过。最终版本的 5 项专项回归全部通过。
+- [x] 功能提交 `4e0c684` 已推送至 `origin/main`，开发记录已补记提交哈希。
+
+## 作业考试首题加载超时
+
+- [x] 从本地日志确认作业标签页已打开，首题等待超时。作答阶段的 2.5 秒定位器等待超时对应点击后未检测到勾选，尚未进入保存步骤。
+- [x] 用真实 Chrome 复现首次加载未渲染首题后未触发刷新。
+- [x] 接入单次刷新并通过启用 Chrome 的全量测试。133 项中 130 项通过、3 项跳过。
+- [x] 修复提交 `c206f87` 已推送至 `origin/main`，开发记录已补记提交哈希。
+/Applications/Google Chrome.app
+
+
+## assistant · 2026-11-19T07:01:30Z
+
+我会用 test-driven-development 技能先写回归测试，覆盖页面已高亮但输入框未勾选，以及第一份作业尚未关闭时列表是否会打开第二份。
+
+## tool · 2026-11-19T07:01:32Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+# Writing Good Tests
+
+**Load this reference when:** writing or changing tests, adding mocks, or
+adding cleanup/helper methods for tests.
+
+## Overview
+
+A test exists to catch a specific break. Two principles govern everything
+here:
+
+```
+1. Every test names the break it catches
+2. Every test exercises the real thing
+```
+
+Strict TDD produces both naturally: a test written first and watched
+failing against real code has already proven it can fail, and only earns
+a mock when the real dependency proves slow or external.
+
+## Principle 1: Name the Break
+
+Before writing the test body, answer: **what production change should
+make this test fail — and is that change a bug or a decision?** A test
+earns its place by catching a wrong branch, missing side effect, wrong
+argument, boundary case, or broken contract.
+
+**Derive expectations independently.** Use literals and hand-checked
+fixtures; table-driven tests with literal `want` values are the preferred
+shape. An expectation computed by the code under test — or its helpers —
+passes no matter what that code does:
+
+```typescript
+// ❌ Mirror assertion: the same builder computes both sides — always true
+const expected = buildSearchQuery({ tag: 'urgent' });
+expect(buildSearchQuery({ tag: 'urgent' })).toBe(expected);
+
+// ✅ Hand-derived literal
+expect(buildSearchQuery({ tag: 'urgent' })).toBe('tag:"urgent"');
+```
+
+**No change detectors.** If only intentional decisions can fail a test —
+a constant's value, exact message wording, private structure — it fires
+on redesign and sleeps through bugs. Test the behavior that depends on
+the decision: not `expect(MAX_RETRIES).toBe(5)` but "a failing call is
+retried 5 times and the 6th attempt never happens."
+
+**Behavior, not text.** Asserting that a script, skill, or config
+contains an exact line proves only that the source is the source. Run
+scripts against controlled inputs and assert outputs, side effects, or
+exit codes. Documents that instruct agents are tested by the consuming
+agent's behavior (superpowers:writing-skills); prose for humans earns no
+test at all.
+
+**Your code, not the framework.** Test the contract your code makes at
+its boundaries — the route you register, the query you emit, the payload
+you produce. Upstream mechanics are their maintainers' tests to write
+(the classic: asserting your router invokes a registered handler — that
+is the framework's test, not yours). When upstream behavior genuinely
+surprised you, write one narrow characterization test naming the
+assumption. The same boundary applies inside your code: constructors,
+getters, constants, and trivial forwarding earn tests only when they
+validate, normalize, default, derive, enforce, or cause side effects —
+otherwise assert the first consumer-visible result that depends on them.
+
+### Gate Function
+
+```
+BEFORE writing the test body:
+  Name the production change that would make this test fail.
+
+  Cannot name one            → redesign around an observable behavior
+  "The source text changed"  → run the artifact and assert its effects
+  Only intentional decisions → change detector; test the behavior
+                               that depends on the decision
+
+  Confirm the expected value is derived without the code under test.
+  IF it reuses the code's logic or helpers:
+    Replace it with a literal or hand-checked fixture
+```
+
+## Principle 2: Exercise the Real Thing
+
+**The mock earns no assertions.** A mock assertion passes when the mock
+is present and fails when it is absent — it says nothing about the
+component. Assert the real component's behavior; if the mock is what you
+are checking, unmock it or delete the assertion.
+
+```typescript
+// ✅ Real behavior
+expect(screen.getByRole('navigation')).toBeInTheDocument();
+
+// ❌ Mock existence
+expect(screen.getByTestId('sidebar-mock')).toBeInTheDocument();
+```
+
+**your human partner's correction:** "Are we testing the behavior of a
+mock?"
+
+**Mock at the right level.** Learn every side effect of the real method
+before replacing it; mock the slow or external operation and keep what
+the test depends on real. When unsure, run the test against the real
+implementation first and observe what actually needs to happen.
+
+```typescript
+// ❌ The mock swallows the config write that duplicate detection reads
+vi.mock('ToolCatalog', () => ({
+  discoverAndCacheTools: vi.fn().mockResolvedValue(undefined)
+}));
+
+// ✅ Mock only the slow server startup; the config write stays real
+vi.mock('MCPServerManager');
+```
+
+**Make doubles specific.** When arguments, call counts, or ordering are
+part of the contract, assert them — a fake that accepts anything verifies
+nothing. Give each branch (success, error, malformed) its own fixture or
+spy, so the wrong branch cannot satisfy the expectation.
+
+**Mirror real data completely.** Mock the complete structure as it exists
+in reality — all documented fields — not just the ones your test reads.
+Partial mocks fail silently when downstream code reads an omitted field:
+the test passes while integration breaks.
+
+**Production classes carry production methods only.** Cleanup that only
+tests need lives in test utilities, never as a `destroy()` on the
+production class. Ask: is this method called only from tests? Does this
+class own this resource's lifecycle? Wrong answers → test utility.
+
+**Prefer real components over complex mocks.** When mock setup outgrows
+the test logic, mocks miss methods the real components have, or tests
+break when the mock changes, switch to an integration test with real
+components. **your human partner's question:** "Do we need to be using a
+mock here?"
+
+### Gate Function
+
+```
+BEFORE adding a mock or test helper:
+  List the real method's side effects; keep the ones the test
+  depends on real — mock the slow/external level below them.
+
+  Mock responses mirror the complete real structure.
+
+  A method only tests call lives in test utilities, not production.
+
+  About to assert on the mock itself?
+    Unmock it or delete the assertion.
+```
+
+## Tests Ship With the Implementation
+
+The TDD cycle — failing test, minimal implementation, refactor — is what
+"complete" means. Ship the tests the behavior needs and only those:
+trivial code and human prose earn none, and a test written to satisfy
+process costs maintenance forever.
+
+## The Mutation Check
+
+Before finishing, mentally mutate the production code; at least one test
+should fail for each realistic mutation:
+
+- Wrong constant or argument
+- Wrong branch handler
+- Missing state change or side effect
+- Empty or default return
+- Missing validation for zero, empty, nil, unauthorized, or malformed input
+
+A mutation nothing catches marks the behavior as unprotected — or the
+test as tautological.
+
+## Quick Reference
+
+| When you... | Do |
+|-------------|-----|
+| Write any test | Name the break it catches — a bug, not a decision |
+| Build an expected value | Derive it by hand; never with the code under test |
+| Test a script or document | Run it / pressure-test its consumer; never grep its text |
+| Reach for a dependency test | Test your boundary contract, not their documented mechanics |
+| Want to assert on a mocked element | Test the real component, or unmock it |
+| Are about to mock a method | Learn its side effects; mock the slow/external level |
+| Build a mock response | Mirror the real structure completely |
+| Need cleanup only tests use | Put it in test utilities |
+| Watch mock setup balloon | Switch to an integration test with real components |
+| Finish a test file | Run the mutation check |
+
+## Warning Signs
+
+- Setup and assertion share the same object, guaranteeing equality
+- The test can fail only through a panic, crash, or missing selector
+- The test fails on every intentional change, never on accidental breakage
+- Expected values are hidden behind loops, builders, or helpers
+- The test greps source text, or asserts a removed symbol stays removed
+- The test would still matter if only the framework remained
+- The test exists for coverage, checking no side effect or outcome
+- An assertion checks a `*-mock` test ID, or fails if you remove the mock
+- A method is called only from test files
+- Mock setup is more than half the test, or you can't explain why the mock is needed
+- Mocking "just to be safe"
+14:from playwright.async_api import TimeoutError, async_playwright
+330:            except TimeoutError:
+
+
+## tool · 2026-11-19T07:02:10Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T07:02:16Z
+
+
+Script completed
+Wall time 1.2 seconds
+Output:
+
+{"chunk_id":"cb1604","wall_time_seconds":1.001656875,"session_id":90937,"original_token_count":144,"output":"test_unsubmitted_homework_opens_once_in_order_after_list_refresh (test_answering_integration.BrowserAnswerTests.test_unsubmitted_homework_opens_once_in_order_after_list_refresh) ... ERROR\ntest_completed_homework_confirms_stash_after_saving_last_answer (test_answering_integration.BrowserAnswerTests.test_completed_homework_confirms_stash_after_saving_last_answer) ... ERROR\ntest_exam_waits_for_manually_opened_paper_and_saves_without_submitting (test_answering_integration.BrowserAnswerTests.test_exam_waits_for_manually_opened_paper_and_saves_without_submitting) ... ERROR\n"}
+
+## tool · 2026-11-19T07:02:21Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"09cac4","wall_time_seconds":0.00001025,"exit_code":1,"original_token_count":4611,"output":"Warning: truncated output (original token count: 4611)\nTotal output lines: 146\n\n\n======================================================================\nERROR: test_unsubmitted_homework_opens_once_in_order_after_list_refresh (test_answering_integration.BrowserAnswerTests.test_unsubmitted_homework_opens_once_in_order_after_list_refresh)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/runners.py\", line 119, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/base_events.py\", line 726, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/tests/test_answering_integration.py\", line 113, in asyncSetUp\n    self.browser = await self.playwright.chromium.launch(channel=\"chrome\", headless=True)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/async_api/_generated.py\", line 16546, in launch\n    await self._impl_obj.launch(\n    ...<17 lines>...\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_browser_type.py\", line 97, in launch\n    await self._channel.send(\n        \"launch\", TimeoutSettings.launch_timeout, params\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 69, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 563, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TargetClosedError: BrowserType.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/playwright_chromiumdev_profile-FfAHgG --remote-debugging-pipe --no-startup-window\n<launched> pid=81925\nCall log:\n  - <launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/playwright_chromiumdev_profile-FfAHgG --remote-debugging-pipe --no-startup-window\n  - <launched> pid=81925\n  - [pid=81925] <gracefully close start>\n  - [pid=81925] <kill>\n  - [pid=81925] <will force kill>\n  - [pid=81925] exception while trying to kill process: Error: kill EPERM\n  - [pid=81925] <process did exit: exitCode=null, signal=SIGABRT>\n  - [pid=81925] starting temporary directories cleanup\n  - [pid=81925] finished temporary directories cleanup\n  - [pid=81925] <gracefully close end>\n\n\n======================================================================\nERROR: test_completed_homework_confirms_stash_after_saving_last_answer (test_answering_integration.BrowserAnswerTests.test_completed_homework_confirms_stash_after_saving_last_answer)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/runners.py\", line 119, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/base_events.py\", line 726, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/tests/test_answering_integration.py\", line 113, in asyncSetUp\n    self.browser = await self.playwright.chromium.launch(channel=\"chrome\", headless=True)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/async_api/_generated.py\", line 16546, in launch\n    await self._impl_obj.launch(\n    ...<17 lines>...\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_browser_type.py\", line 97, in launch\n    await self._channel.send(\n        \"launch\", TimeoutSettings.launch_timeout, params\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 69, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 563, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TargetClosedError: BrowserType.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-back…311 tokens truncated…rTypes=4 --no-sandbox --user-data-dir=/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/playwright_chromiumdev_profile-qLmBAJ --remote-debugging-pipe --no-startup-window\n<launched> pid=81927\nCall log:\n  - <launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/playwright_chromiumdev_profile-qLmBAJ --remote-debugging-pipe --no-startup-window\n  - <launched> pid=81927\n  - [pid=81927] <gracefully close start>\n  - [pid=81927] <kill>\n  - [pid=81927] <will force kill>\n  - [pid=81927] exception while trying to kill process: Error: kill EPERM\n  - [pid=81927] <process did exit: exitCode=null, signal=SIGABRT>\n  - [pid=81927] starting temporary directories cleanup\n  - [pid=81927] finished temporary directories cleanup\n  - [pid=81927] <gracefully close end>\n\n\n======================================================================\nERROR: test_exam_waits_for_manually_opened_paper_and_saves_without_submitting (test_answering_integration.BrowserAnswerTests.test_exam_waits_for_manually_opened_paper_and_saves_without_submitting)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/runners.py\", line 119, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/base_events.py\", line 726, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/tests/test_answering_integration.py\", line 113, in asyncSetUp\n    self.browser = await self.playwright.chromium.launch(channel=\"chrome\", headless=True)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/async_api/_generated.py\", line 16546, in launch\n    await self._impl_obj.launch(\n    ...<17 lines>...\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_browser_type.py\", line 97, in launch\n    await self._channel.send(\n        \"launch\", TimeoutSettings.launch_timeout, params\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 69, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 563, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TargetClosedError: BrowserType.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/playwright_chromiumdev_profile-tQcyQi --remote-debugging-pipe --no-startup-window\n<launched> pid=81929\nCall log:\n  - <launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/playwright_chromiumdev_profile-tQcyQi --remote-debugging-pipe --no-startup-window\n  - <launched> pid=81929\n  - [pid=81929] <gracefully close start>\n  - [pid=81929] <kill>\n  - [pid=81929] <will force kill>\n  - [pid=81929] exception while trying to kill process: Error: kill EPERM\n  - [pid=81929] <process did exit: exitCode=null, signal=SIGABRT>\n  - [pid=81929] starting temporary directories cleanup\n  - [pid=81929] finished temporary directories cleanup\n  - [pid=81929] <gracefully close end>\n\n\n----------------------------------------------------------------------\nRan 3 tests in 0.976s\n\nFAILED (errors=3)\n"}
+
+## tool · 2026-11-19T07:02:35Z
+
+
+Script completed
+Wall time 8.0 seconds
+Output:
+
+{"chunk_id":"1177fb","wall_time_seconds":1.002216916,"session_id":2452,"original_token_count":46,"output":"test_unsubmitted_homework_opens_once_in_order_after_list_refresh (test_answering_integration.BrowserAnswerTests.test_unsubmitted_homework_opens_once_in_order_after_list_refresh) ... "}
+
+## tool · 2026-11-19T07:02:53Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"30628d","wall_time_seconds":5.002075416,"session_id":2452,"original_token_count":97,"output":"FAIL\ntest_completed_homework_confirms_stash_after_saving_last_answer (test_answering_integration.BrowserAnswerTests.test_completed_homework_confirms_stash_after_saving_last_answer) ... ERROR\ntest_exam_waits_for_manually_opened_paper_and_saves_without_submitting (test_answering_integration.BrowserAnswerTests.test_exam_waits_for_manually_opened_paper_and_saves_without_submitting) ... "}
