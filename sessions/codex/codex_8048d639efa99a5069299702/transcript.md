@@ -1839,3 +1839,22 @@ Output:
 回归测试通过，修复 `12cff7f` 已推送到 `origin/main`。
 
 [打开 Ragdoll 预览版](/Volumes/SamsungSSD990PRO/GitHub/Ragdoll/dist/Ragdoll.codex-model-preview.app)。原开发证书已撤销，预览包使用临时签名。本次验证了模型查询和会话创建，未发送生成请求。
+
+## user · 2026-11-19T01:52:44Z
+
+我不是让你只保留一份编译好的app包吗
+
+
+## assistant · 2026-11-19T01:52:59Z
+
+我会把 `dist` 整理为只保留一份 `Ragdoll.app`，确认它包含最新的模型修复，再把其他构建包移到废纸篓。
+
+## tool · 2026-11-19T01:53:03Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"a6ab77","wall_time_seconds":0.000011166,"exit_code":0,"original_token_count":833,"output":"## main...origin/main\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Sources/Ragdoll/Resources/\ne7869ae docs(codex): record model catalog verification\n12cff7f fix(codex): use desktop model catalog\n149fdef docs(acp): record model picker verification\ntotal 162544\ndrwxr-xr-x  11 oyamahappa  staff       352 Nov 19 09:48 .\ndrwxr-xr-x  23 oyamahappa  staff       736 Nov 17 20:07 ..\n-rw-r--r--@  1 oyamahappa  staff      8196 Nov 19 09:48 .DS_Store\n-rw-r--r--   1 oyamahappa  staff  83205390 Nov 17 20:08 Ragdoll-macos-arm64.zip\n-rw-r--r--   1 oyamahappa  staff        90 Nov 17 20:09 Ragdoll-macos-arm64.zip.sha256\ndrwxr-xr-x   3 oyamahappa  staff        96 Nov 17 21:27 Ragdoll.acp-model-preview.app\ndrwxr-xr-x@  3 oyamahappa  staff        96 Nov 17 21:10 Ragdoll.app\ndrwxr-xr-x   3 oyamahappa  staff        96 Nov 17 21:27 Ragdoll.chat-preview.app\ndrwxr-xr-x   3 oyamahappa  staff        96 Nov 17 21:27 Ragdoll.codex-model-preview.app\ndrwxr-xr-x   3 oyamahappa  staff        96 Nov 17 21:27 Ragdoll.model-preview.app\ndrwxr-xr-x   3 oyamahappa  staff        96 Nov 17 21:27 Ragdoll.preview.app\nmemory/progress.md:10:- [x] 正常退出旧预览并启动新预览（PID 69738）；原正式包 SHA-256 不变且签名完整性通过。未截图或验证窗口实际显示，未运行 Claude 接入测试；预览包不用于独立后台服务。\nmemory/progress.md:15:- [x] 确认当前预览包的 ICNS 与源资源一致、LaunchServices 登记正确；运行中应用图标与包内资源一致。\nmemory/progress.md:17:- [x] 刷新预览包的 LaunchServices 登记并正常重启，旧进程已退出，新进程 64318 完成启动，图标摘要与资源一致；正式包和预览包深度签名完整性通过。台前调度实际显示未截图验证，尚不能确认用户所见异常已消失。\nmemory/progress.md:25:- [x] 全部 46 项 Swift 测试通过（21.670 秒），release 构建通过；更新 dist/Ragdoll.preview.app，临时签名完整性及内置助手自检通过。原正式包签名完整性通过且可执行文件 SHA-256 不变。未验证实际点击或视觉效果，未运行 Claude 测试。\nmemory/progress.md:33:- [x] 全部 44 项 Swift 测试通过（24.872 秒），release 编译通过。开发证书返回 CSSMERR_TP_CERT_REVOKED；临时签名预览构建、深度签名完整性及内置助手自检通过，保存为 dist/Ragdoll.preview.app。原 dist/Ragdoll.app 已恢复，可执行文件 SHA-256 与构建前一致且签名完整性校验通过。未截图、验证实际点击或运行 Claude 测试，预览包不用于独立后台服务。\nmemory/progress.md:228:- [x] 51 项 Swift 测试、21 项常规 Node 测试、1 项真实 Codex 回归和 TypeScript 检查通过。发布编译通过，原开发证书被系统判定已撤销，单独生成临时签名预览包。包内助手查询到 10 个模型，并确认显式命令和 PATH 仍生效。\n-rwxr-xr-x  1 oyamahappa  staff  10013096 Nov 18 21:12 .build/release/Ragdoll\ndrwxr-xr-x  7 oyamahappa  staff       224 Nov 17 22:01 .build/release/Ragdoll_Ragdoll.bundle\n-rw-r--r--  1 oyamahappa  staff    106359 Nov 19 09:46 runtime/dist/main.mjs\n/usr/bin/trash\n"}
+{"chunk_id":"d2b83e","wall_time_seconds":0.021309959,"exit_code":0,"original_token_count":275,"output":"Usage: codesign -s identity [-fv*] [-o flags] [-r reqs] [-i ident] path ... # sign\n       codesign -v [-v*] [-R=<req string>|-R <req file path>] path|[+]pid ... # verify\n       codesign -d [options] path ... # display contents\n       codesign -h pid ... # display hosting paths\n       codesign --validate-constraint path ... # check the supplied constraint plist\nIdentifier=com.oyamameek.ragdoll\nCDHash=935f76909c3cc3700bb823a9c6fee3799708992f\nSigned Time=Nov 17, 2026 at 21:10:42\nTeamIdentifier=456LQ85CZH\nIdentifier=com.oyamameek.ragdoll.codex-model-preview\nSignature=adhoc\nTeamIdentifier=not set\n20:stage=\"$root/dist/Ragdoll.staging.app\"\n38:codesign --force --deep --sign \"${CODE_SIGN_IDENTITY:--}\" \"$stage\"\n41:if [ -d dist/Ragdoll.previous.app ]; then rm -rf dist/Ragdoll.previous.app; fi\n42:if [ -d dist/Ragdoll.app ]; then mv dist/Ragdoll.app dist/Ragdoll.previous.app; fi\n1\t1\tPackage.swift\n24\t4\tSources/Ragdoll/ConversationView.swift\n22\t0\tTests/RagdollTests/ConversationTests.swift\n14\t0\tdocs/CHANGELOG.md\n2\t2\tmemory/agents.md\n7\t0\tmemory/plan.md\n10\t0\tmemory/progress.md\n8\t0\tmemory/verify.md\n"}
