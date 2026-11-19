@@ -327,13 +327,76 @@
       "role" : "tool",
       "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n[{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"d87e5b\",\"wall_time_seconds\":1.002523375,\"session_id\":41427,\"original_token_count\":0,\"output\":\"\"}},{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"e44dbe\",\"wall_time_seconds\":0.000007709,\"exit_code\":0,\"original_token_count\":1337,\"output\":\"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\\nindex 47982e5..716f6de 100644\\n--- a/docs/CHANGELOG.md\\n+++ b/docs/CHANGELOG.md\\n@@ -245,3 +245,22 @@\\n - **Git 提交** `f77b0eb80223208652db8987ad35b5b10fec507b fix(release): enable UTF-8 in the packaged runtime`，已推送 `origin/main`。\\n \\n ---\\n+\\n+## [2026-11-19 16:29] 更新 Autovisor 维护者信息\\n+\\n+- **需求/问题描述**\\n+  > 移除原作者的个人信息，将项目维护者署名改为 OyamaMeek。\\n+\\n+- **实际实现的功能与改动**\\n+  - README 和启动界面显示 `OyamaMeek`。移除旧仓库链接、个人公告、博客和赞赏码，保留 MIT 许可证要求的原始版权声明。\\n+  - 删除赞赏码显示逻辑、配置模板字段、Windows 打包引用和仅用于显示赞赏码的 Pillow 依赖。旧配置仍可读取。\\n+  - 启用 Chrome 的全量测试 135 项，132 项通过、3 项跳过。更新锁文件后，独立环境的默认测试套件、CLI 启动与帮助、Python 编译、`actionlint` 和差异检查通过。本次未生成新的 Windows 发行包。\\n+\\n+- **涉及文件**\\n+  - `README.md`、`Autovisor.py`、`modules/banner.py`、`modules/configs.py`、`modules/support.py`\\n+  - `config.ini.example`、`config.macos.ini.example`、`resources/`、`.gitignore`、`build.py`、`.github/workflows/release.yml`\\n+  - `pyproject.toml`、`uv.lock`、`tests/`、`memory/`、`docs/CHANGELOG.md`\\n+\\n+- **Git 提交** 待提交。\\n+\\n+---\\ndiff --git a/memory/plan.md b/memory/plan.md\\nindex 14bf565..e3381f4 100644\\n--- a/memory/plan.md\\n+++ b/memory/plan.md\\n@@ -53,3 +53,8 @@\\n - 使用 `modules/version.py` 维护版本号。下载和更新检查指向当前仓库 `OyamaMeek/Autovisor`。\\n - 推送与代码版本相同的数字标签后，GitHub Actions 在 Windows x64 运行测试并复用 `build.py`。解压 ZIP 并运行程序帮助后，将 ZIP 和标签说明发布到 Release。\\n - 打包时在 PyInstaller 内嵌的解释器启用 UTF-8，使中文帮助可通过管道或重定向输出。\\n+\\n+## 项目维护者信息\\n+\\n+- 将 README 项目链接和启动署名统一为 `OyamaMeek`，移除原维护者的个人公告、博客、赞赏入口及旧仓库链接。保留 MIT 许可证要求的原始版权声明。\\n+- 从课程结束流程、配置模板、Windows 构建及其检查中移除赞赏码，并移除仅用于显示赞赏码的 Pillow 依赖。旧配置中的赞赏选项由配置加载器忽略。\\ndiff --git a/memory/progress.md b/memory/progress.md\\nindex ce87999..03900d2 100644\\n--- a/memory/progress.md\\n+++ b/memory/progress.md\\n@@ -79,3 +79,10 @@\\n - [x] 推送工作流提交和 `3.19.0` 标签。Windows 构建通过，中文帮助验证发现输出编码问题，Release 未创建。\\n - [x] 在打包解释器启用 UTF-8 并更新版本号至 `3.19.1`。\\n - [x] 推送 `3.19.1` 标签。Windows 工作流运行 `44485741541` 成功发布 ZIP，公开下载、SHA-256、ZIP 完整性和更新接口均已验证。\\n+\\n+## 项目维护者信息\\n+\\n+- [x] 找到旧署名、个人链接、赞赏资源及其配置和发行流程，核对许可证保留条款。\\n+- [x] 更新维护者信息，移除旧赞赏入口和构建引用。\\n+- [x] 验证 CLI、配置兼容性、仓库引用、锁定依赖和 Windows 工作流。启用 Chrome 的测试 135 项，132 项通过、3 项跳过。\\n+- [ ] 提交并推送维护者信息更新。\\ndiff --git a/memory/verify.md b/memory/verify.md\\nindex 6809a58..69ca793 100644\\n--- a/memory/verify.md\\n+++ b/memory/verify.md\\n@@ -90,3 +90,9 @@\\n - 首次 Windows 运行 135 项测试，131 项通过、4 项跳过。ZIP 构建和内容检查通过，解压后的程序在重定向标准输出时使用 CP1252，打印中文帮助时抛出 `UnicodeEncodeError`，因此未创建 Release。macOS 的 Apple Silicon 和 Intel 冒烟测试通过。\\n - `3.19.1` 的 Windows 工作流运行 `44485741541` 通过，135 项测试中 131 项通过、4 项跳过，解压后的 `Autovisor.exe --help` 成功输出中文。对应的 macOS Apple Silicon 和 Intel 冒烟测试通过。\\n - 从公开 Release 下载 ZIP，SHA-256 与 GitHub 一致，全部 ZIP 条目通过完整性检查，主程序确认为 Windows x86-64。配置模板未包含凭证，程序更新接口返回 `3.19.1`。\\n+\\n+## 维护者信息验证\\n+\\n+- 核对 CLI 署名、新旧配置读取、更新链接测试数据、赞赏资源和 Windows 打包引用。确认旧身份的文本只出现在 MIT 许可证，运行项目测试套件和差异检查。\\n+- CLI 实际启动显示 `维护者 OyamaMeek`。启用 Chrome 的全量测试 135 项，132 项通过、3 项跳过。移除 Pillow 后，锁定依赖安装和默认测试套件通过，110 项通过、25 项按条件跳过。\\n+- 原作者姓名仅出现在许可证。Python 编译、CLI 帮助、`actionlint` 和差异检查通过。本次未构建新的 Windows 发行包。\\n## main...origin/main\\n M .github/workflows/release.yml\\n M .gitignore\\n M Autovisor.py\\n M README.md\\n M build.py\\n M config.ini.example\\n M config.macos.ini.example\\n M docs/CHANGELOG.md\\n M memory/plan.md\\n M memory/progress.md\\n M memory/verify.md\\n M modules/banner.py\\n M modules/configs.py\\n D modules/support.py\\n M pyproject.toml\\n D resources/QRcode.jpg\\n D resources/markdown/donate.png\\n M tests/test_config.py\\n M tests/test_configs.py\\n M tests/test_updater.py\\n M uv.lock\\n?? .DS_Store\\n?? tests/.DS_Store\\n\"}}]",
       "time" : 1795077027763
+    },
+    {
+      "id" : "call_aa1ea17adefd4cbaab37b5798aa8f1b5",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"c1e1e5\",\"wall_time_seconds\":0.000017709,\"exit_code\":0,\"original_token_count\":45,\"output\":\"                                                            维护者 OyamaMeek\\n\\r\\u001b[31m[ERROR]\\u001b[0m 未检测到有效网址或不支持此类网页,请检查配置文件!       \\n\"}",
+      "time" : 1795077030853
+    },
+    {
+      "id" : "call_773a883e353947d092aa32b54c551a8c",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 11.9 seconds\nOutput:\n\n{\"chunk_id\":\"812b77\",\"wall_time_seconds\":1.000153708,\"session_id\":60382,\"original_token_count\":315,\"output\":\" .github/workflows/release.yml |   1 -\\n .gitignore                    |   1 -\\n Autovisor.py                  |   2 --\\n README.md                     |  22 +++--------------\\n build.py                      |   1 -\\n config.ini.example            |   2 --\\n config.macos.ini.example      |   1 -\\n docs/CHANGELOG.md             |  19 +++++++++++++++\\n memory/plan.md                |   5 ++++\\n memory/progress.md            |   7 ++++++\\n memory/verify.md              |   6 +++++\\n modules/banner.py             |   6 +----\\n modules/configs.py            |   1 -\\n modules/support.py            |  16 -------------\\n pyproject.toml                |   1 -\\n resources/QRcode.jpg          | Bin 69571 -> 0 bytes\\n resources/markdown/donate.png | Bin 223093 -> 0 bytes\\n tests/test_config.py          |   2 +-\\n tests/test_configs.py         |   6 ++---\\n tests/test_updater.py         |   4 ++--\\n uv.lock                       |  54 ------------------------------------------\\n 21 files changed, 47 insertions(+), 110 deletions(-)\\n[main 741481d] chore: update project maintainer attribution\\n 21 files changed, 47 insertions(+), 110 deletions(-)\\n delete mode 100644 modules/support.py\\n delete mode 100644 resources/QRcode.jpg\\n delete mode 100644 resources/markdown/donate.png\\n\"}",
+      "time" : 1795077048999
+    },
+    {
+      "id" : "call_028bf96ebee646da8005c631f1498671",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n[{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"b394e9\",\"wall_time_seconds\":0.000021375,\"exit_code\":0,\"original_token_count\":20,\"output\":\"To https://github.com/OyamaMeek/Autovisor.git\\n   4005b5b..741481d  main -> main\\n\"}},{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"3502d8\",\"wall_time_seconds\":0.000020375,\"exit_code\":0,\"original_token_count\":318,\"output\":\"741481d05ba6895a5b6a48a63f5e214f0798b6d1 OyamaMeek chore: update project maintainer attribution\\n## main...origin/main\\n?? .DS_Store\\n?? tests/.DS_Store\\n- **涉及文件**\\n  - `README.md`、`Autovisor.py`、`modules/banner.py`、`modules/configs.py`、`modules/support.py`\\n  - `config.ini.example`、`config.macos.ini.example`、`resources/`、`.gitignore`、`build.py`、`.github/workflows/release.yml`\\n  - `pyproject.toml`、`uv.lock`、`tests/`、`memory/`、`docs/CHANGELOG.md`\\n\\n- **Git 提交** 待提交。\\n\\n---\\n## 项目维护者信息\\n\\n- [x] 找到旧署名、个人链接、赞赏资源及其配置和发行流程，核对许可证保留条款。\\n- [x] 更新维护者信息，移除旧赞赏入口和构建引用。\\n- [x] 验证 CLI、配置兼容性、仓库引用、锁定依赖和 Windows 工作流。启用 Chrome 的测试 135 项，132 项通过、3 项跳过。\\n- [ ] 提交并推送维护者信息更新。\\nname: macOS Smoke\\n\\non:\\n  push:\\n    branches: [main]\\n  pull_request:\\n  workflow_dispatch:\\n\\npermissions:\\n  contents: read\\n\\nconcurrency:\\n  group: macos-smoke-${{ github.ref }}\\n  cancel-in-progress: true\\n\\njobs:\\n  smoke:\\n    name: smoke (${{ matrix.runner }})\\n    runs-on: ${{ matrix.runner }}\\n    timeout-minutes: 25\\n    strategy:\\n      fail-fast: false\\n\"}}]",
+      "time" : 1795077054098
+    },
+    {
+      "id" : "call_c18e1eb55009473b9479982eea15f9aa",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.1 seconds\nOutput:\n\n{}",
+      "time" : 1795077059299
+    },
+    {
+      "id" : "call_bcb833d9a5e3426ab5fbac67796157a3",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 5.0 seconds\nOutput:\n\n{\"chunk_id\":\"cb84f5\",\"wall_time_seconds\":1.002555333,\"session_id\":40763,\"original_token_count\":314,\"output\":\"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\\nindex 716f6de..b139eac 100644\\n--- a/docs/CHANGELOG.md\\n+++ b/docs/CHANGELOG.md\\n@@ -261,6 +261,6 @@\\n   - `config.ini.example`、`config.macos.ini.example`、`resources/`、`.gitignore`、`build.py`、`.github/workflows/release.yml`\\n   - `pyproject.toml`、`uv.lock`、`tests/`、`memory/`、`docs/CHANGELOG.md`\\n \\n-- **Git 提交** 待提交。\\n+- **Git 提交** `741481d05ba6895a5b6a48a63f5e214f0798b6d1 chore: update project maintainer attribution`，已推送 `origin/main`。\\n \\n ---\\ndiff --git a/memory/progress.md b/memory/progress.md\\nindex 03900d2..3aa53f4 100644\\n--- a/memory/progress.md\\n+++ b/memory/progress.md\\n@@ -85,4 +85,4 @@\\n - [x] 找到旧署名、个人链接、赞赏资源及其配置和发行流程，核对许可证保留条款。\\n - [x] 更新维护者信息，移除旧赞赏入口和构建引用。\\n - [x] 验证 CLI、配置兼容性、仓库引用、锁定依赖和 Windows 工作流。启用 Chrome 的测试 135 项，132 项通过、3 项跳过。\\n-- [ ] 提交并推送维护者信息更新。\\n+- [x] 维护者信息更新提交 `741481d` 已推送至 `origin/main`。\\n[main 936731a] docs: record maintainer attribution update\\n 2 files changed, 2 insertions(+), 2 deletions(-)\\n\"}",
+      "time" : 1795077069148
+    },
+    {
+      "id" : "call_f56c33a682c943388895ef99ebf3e97b",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"0fe18b\",\"wall_time_seconds\":0.000009375,\"exit_code\":0,\"original_token_count\":20,\"output\":\"To https://github.com/OyamaMeek/Autovisor.git\\n   741481d..936731a  main -> main\\n\"}",
+      "time" : 1795077071506
+    },
+    {
+      "id" : "call_f51168ef3e2e49669f8ed4977fecc2a6",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 1.2 seconds\nOutput:\n\n[{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"513082\",\"wall_time_seconds\":0.000011458,\"exit_code\":0,\"original_token_count\":45,\"output\":\"## main...origin/main\\n?? .DS_Store\\n?? tests/.DS_Store\\n936731a OyamaMeek docs: record maintainer attribution update\\n741481d OyamaMeek chore: update project maintainer attribution\\n\"}},{\"status\":\"fulfilled\",\"value\":{\"chunk_id\":\"cbed3d\",\"wall_time_seconds\":1.00202,\"session_id\":77599,\"original_token_count\":11,\"output\":\"936731ab20b313406e973261191895d7210ce365\\n\"}}]",
+      "time" : 1795077078467
+    },
+    {
+      "id" : "call_91890af7979a48e49b8edc3a6df34b2d",
+      "kind" : "tool",
+      "role" : "tool",
+      "text" : "\nScript completed\nWall time 0.0 seconds\nOutput:\n\n{\"chunk_id\":\"179028\",\"wall_time_seconds\":0.000012625,\"exit_code\":0,\"original_token_count\":15,\"output\":\"936731ab20b313406e973261191895d7210ce365\\trefs/heads/main\\n\"}",
+      "time" : 1795077081304
+    },
+    {
+      "id" : "312",
+      "kind" : "text",
+      "role" : "assistant",
+      "text" : "README 和程序启动署名已改为 **OyamaMeek**，并推送到 [GitHub `main`](https://github.com/OyamaMeek/Autovisor/commit/741481d05ba6895a5b6a48a63f5e214f0798b6d1)。已移除原作者的个人公告、CSDN 链接、旧仓库链接及赞赏码。\n\n当前源码中，原作者姓名仅保留在 MIT 许可证要求的版权声明中。包含真实 Chrome 的测试共 135 项，132 项通过、3 项跳过。\n\n本次未重新发布 Windows 安装包，也未改写 Git 历史。",
+      "time" : 1795077091138
     }
   ],
   "nativeID" : "01a1f2e8-64ac-7c83-8814-c1f2aa47aa59",
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
   "source" : "codex",
   "title" : "将原作者信息改为 OyamaMeek",
-  "updated" : 1795077027836,
+  "updated" : 1795077091225,
   "usage" : [
     {
       "cacheRead" : 6784,
@@ -640,6 +703,87 @@
       "model" : "gpt-6.2-sol",
       "output" : 261,
       "time" : 1795077026619
+    },
+    {
+      "cacheRead" : 93056,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb3a4853487d0a72d095f2d7cec40",
+      "input" : 2169,
+      "model" : "gpt-6.2-sol",
+      "output" : 39,
+      "time" : 1795077030852
+    },
+    {
+      "cacheRead" : 95104,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb3a78ea487d0829620fc0cf921b9",
+      "input" : 263,
+      "model" : "gpt-6.2-sol",
+      "output" : 203,
+      "time" : 1795077037149
+    },
+    {
+      "cacheRead" : 95104,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb3b9b0e487d09d3c34c78df32b4b",
+      "input" : 873,
+      "model" : "gpt-6.2-sol",
+      "output" : 115,
+      "time" : 1795077054057
+    },
+    {
+      "cacheRead" : 95872,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb3becb9c87d0adefa4a2e2221310",
+      "input" : 776,
+      "model" : "gpt-6.2-sol",
+      "output" : 149,
+      "time" : 1795077059275
+    },
+    {
+      "cacheRead" : 96384,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb3c413e087d0b09a451d600c6e87",
+      "input" : 437,
+      "model" : "gpt-6.2-sol",
+      "output" : 127,
+      "time" : 1795077064186
+    },
+    {
+      "cacheRead" : 96640,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb3cde82487d097ccb652519b5542",
+      "input" : 796,
+      "model" : "gpt-6.2-sol",
+      "output" : 39,
+      "time" : 1795077071506
+    },
+    {
+      "cacheRead" : 97408,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb3d044a887d09ed7cc01217cb720",
+      "input" : 153,
+      "model" : "gpt-6.2-sol",
+      "output" : 183,
+      "time" : 1795077077317
+    },
+    {
+      "cacheRead" : 97408,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb3d7313887d0ac97e60dffa782e3",
+      "input" : 504,
+      "model" : "gpt-6.2-sol",
+      "output" : 38,
+      "time" : 1795077081304
+    },
+    {
+      "cacheRead" : 97664,
+      "cacheWrite" : 0,
+      "id" : "resp_0bdbc0322eda5d17016afeb3da529c87d0bade8efd10b7d24c",
+      "input" : 363,
+      "model" : "gpt-6.2-sol",
+      "output" : 289,
+      "time" : 1795077091175
     }
   ],
   "warnings" : [
