@@ -2361,3 +2361,537 @@ Wall time 0.0 seconds
 Output:
 
 {}
+
+## tool · 2026-11-19T06:50:04Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"8c283a","wall_time_seconds":0,"exit_code":2,"original_token_count":42,"output":"error: Could not acquire lock\n  cause: Could not create temporary file\n  cause: Operation not permitted (os error 1) at path \"/Users/oyamahappa/.cache/uv/.tmp9kzy5R\"\n"}
+
+## tool · 2026-11-19T06:50:09Z
+
+
+Script completed
+Wall time 0.8 seconds
+Output:
+
+{"chunk_id":"5c97cc","wall_time_seconds":0,"exit_code":1,"original_token_count":1593,"output":"test_exam_refreshes_only_once_when_questions_stay_blank (test_answering_integration.BrowserAnswerTests.test_exam_refreshes_only_once_when_questions_stay_blank) ... ERROR\n\n======================================================================\nERROR: test_exam_refreshes_only_once_when_questions_stay_blank (test_answering_integration.BrowserAnswerTests.test_exam_refreshes_only_once_when_questions_stay_blank)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/runners.py\", line 119, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/base_events.py\", line 726, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/tests/test_answering_integration.py\", line 113, in asyncSetUp\n    self.browser = await self.playwright.chromium.launch(channel=\"chrome\", headless=True)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/async_api/_generated.py\", line 16546, in launch\n    await self._impl_obj.launch(\n    ...<17 lines>...\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_browser_type.py\", line 97, in launch\n    await self._channel.send(\n        \"launch\", TimeoutSettings.launch_timeout, params\n    )\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 69, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_connection.py\", line 563, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TargetClosedError: BrowserType.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/playwright_chromiumdev_profile-OMN1zs --remote-debugging-pipe --no-startup-window\n<launched> pid=78862\nCall log:\n  - <launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/playwright_chromiumdev_profile-OMN1zs --remote-debugging-pipe --no-startup-window\n  - <launched> pid=78862\n  - [pid=78862] <gracefully close start>\n  - [pid=78862] <kill>\n  - [pid=78862] <will force kill>\n  - [pid=78862] exception while trying to kill process: Error: kill EPERM\n  - [pid=78862] <process did exit: exitCode=null, signal=SIGABRT>\n  - [pid=78862] starting temporary directories cleanup\n  - [pid=78862] finished temporary directories cleanup\n  - [pid=78862] <gracefully close end>\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.564s\n\nFAILED (errors=1)\n"}
+
+## tool · 2026-11-19T06:50:24Z
+
+
+Script completed
+Wall time 10.4 seconds
+Output:
+
+{"chunk_id":"cad5c5","wall_time_seconds":1.001958917,"session_id":10169,"original_token_count":41,"output":"test_exam_refreshes_only_once_when_questions_stay_blank (test_answering_integration.BrowserAnswerTests.test_exam_refreshes_only_once_when_questions_stay_blank) ... "}
+
+## tool · 2026-11-19T06:50:27Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"3e67b4","wall_time_seconds":0.242266542,"exit_code":1,"original_token_count":473,"output":"ERROR\n\n======================================================================\nERROR: test_exam_refreshes_only_once_when_questions_stay_blank (test_answering_integration.BrowserAnswerTests.test_exam_refreshes_only_once_when_questions_stay_blank)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/runners.py\", line 119, in run\n    return self._loop.run_until_complete(task)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^\n  File \"/Users/oyamahappa/.local/share/uv/python/cpython-3.13.18-macos-aarch64-none/lib/python3.13/asyncio/base_events.py\", line 726, in run_until_complete\n    return future.result()\n           ~~~~~~~~~~~~~^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/tests/test_answering_integration.py\", line 358, in test_exam_refreshes_only_once_when_questions_stay_blank\n    async with self.page.expect_event(\"domcontentloaded\", timeout=2000):\n               ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_async_base.py\", line 60, in __aexit__\n    await self._event.value\n  File \"/Volumes/SamsungSSD990PRO/GitHub/Autovisor/.venv/lib/python3.13/site-packages/playwright/_impl/_async_base.py\", line 35, in value\n    return mapping.from_maybe_impl(await self._future)\n                                   ^^^^^^^^^^^^^^^^^^\nplaywright._impl._errors.TimeoutError: Timeout 2000ms exceeded while waiting for event \"domcontentloaded\"\n=========================== logs ===========================\nwaiting for event \"domcontentloaded\"\n============================================================\n\n----------------------------------------------------------------------\nRan 1 test in 3.825s\n\nFAILED (errors=1)\n"}
+
+## tool · 2026-11-19T06:50:43Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+import asyncio
+import json
+from collections import Counter
+from unicodedata import category
+from urllib.parse import urlsplit
+
+from playwright.async_api import CDPSession, Error as PlaywrightError, Page
+
+from modules.answering import AnswerError, ask_deepseek
+from modules.logger import Logger
+from modules.tasks import has_visible_verification
+
+logger = Logger()
+QUESTION = ".examPaper_box .examPaper_subject"
+ANCHOR = "> .subject_stem .subject_num [id^='anchor_']"
+STEM = "> .subject_stem .subject_describe"
+KIND = "> .subject_stem .subject_type > span:first-child"
+CHOICES = ".subject_node .nodeLab:visible"
+OPTION_TEXT = ".node_detail"
+CHECKED = ".subject_node input:checked"
+MEDIA = "img:visible, canvas:visible, video:visible, audio:visible"
+
+
+def is_exam_paper_url(url: str) -> bool:
+    parsed = urlsplit(url)
+    route = parsed.fragment.split("?", 1)[0].split("/")
+        occurrences[identity] += 1
+        key = (url, identity, occurrences[identity])
+        if key in attempted:
+            continue
+        button = card.locator('a[title="开始答题"] .themeBg:visible')
+        if not await button.is_visible():
+            continue
+        if page.url != url or not await unsubmitted.is_visible():
+            return False
+        attempted.add(key)
+        try:
+            async with page.expect_popup(timeout=5000) as result:
+                await button.click(timeout=2500)
+            paper = await result.value
+            await paper.wait_for_url(lambda value: value not in {"", "about:blank"}, wait_until="commit", timeout=15000)
+            if is_exam_paper_url(paper.url):
+                await paper.locator(f"{QUESTION}:visible").first.wait_for(timeout=15000)
+        except PlaywrightError as exc:
+            logger.warn(f"作业「{identity[0]}」打开或加载失败，请在浏览器检查。", shift=True)
+            logger.debug(logger.summarize_exception(exc))
+        return True
+    return False
+
+
+async def watch_exam_pages(entry_page: Page, api_key: str) -> None:
+    pages = set()
+    handled = {}
+    attempted = set()
+
+    def track(page: Page) -> None:
+        pages.add(page)
+        page.on("popup", track)
+
+    track(entry_page)
+    while pages:
+        for page in tuple(pages):
+            if page.is_closed():
+                pages.discard(page)
+                handled.pop(page, None)
+                continue
+            url = page.url
+            if not is_exam_paper_url(url):
+                handled.pop(page, None)
+                continue
+            if handled.get(page) == url:
+                continue
+            try:
+                if not await page.locator(f"{QUESTION}:visible").count() or await has_visible_verification(page):
+                    continue
+                handled[page] = url
+                filled, skipped = await fill_exam(page, api_key)
+                logger.info(f"本卷自动作答 {filled} 题，待手动处理 {skipped} 题，请检查后自行交卷。", shift=True)
+            except AnswerError as exc:
+                logger.warn(f"{exc}，请在浏览器手动处理当前试卷。", shift=True)
+            except PlaywrightError as exc:
+                if not page.is_closed():
+                    logger.warn("题目加载或保存失败，请在浏览器检查当前试卷。", shift=True)
+                    logger.debug(logger.summarize_exception(exc))
+        for page in tuple(pages):
+            if page.is_closed():
+                continue
+            try:
+                if await _open_next_homework(page, attempted):
+                    break
+            except PlaywrightError as exc:
+                if not page.is_closed():
+                    logger.debug_throttled("homework-list", logger.summarize_exception(exc))
+        if pages:
+            await asyncio.sleep(0.5)
+
+
+    async def test_unsubmitted_homework_opens_once_in_order_after_list_refresh(self):
+        self.set_answers([2])
+        first = await self._serve_exam(query="?kind=single&reload=1")
+        second = first.replace("/work/", "/work-two/").replace("&reload=1", "")
+        first_loads = []
+
+        async def serve_first_homework(route):
+            first_loads.append(route.request.url)
+            if len(first_loads) == 1:
+                await route.fulfill(content_type="text/html", body="<main>Loading</main>")
+            else:
+                await route.fallback()
+
+        await self.page.context.route(first.split("#", 1)[0], serve_first_homework)
+        list_url = "https://onlineexamh5new.zhihuishu.com/stuExamWeb.html#/webExamList?recruitId=recruit"
+        await self.page.route("**/stuExamWeb.html", lambda route: route.fulfill(
+            content_type="text/html; charset=utf-8",
+            body=f'''
+                <li id="examStateTabWsj">未提交</li>
+                <ul id="work">
+                    <li><div class="examItemWrap">
+                        <span class="percentage_number">作业</span>
+                        <div class="examTit"><span class="name">单元测试</span></div>
+                        <ul class="examInfoList"><li>对应章节 第二章</li></ul>
+                        <a title="开始答题"><span class="themeBg" onclick="openWork(1)">开始答题</span></a>
+                    </div></li>
+                    <li><div class="examItemWrap">
+                        <span class="percentage_number">作业</span>
+                        <div class="examTit"><span class="name">单元测试</span></div>
+                        <ul class="examInfoList"><li>对应章节 第三章</li></ul>
+                        <a title="开始答题"><span class="themeBg" onclick="openWork(2)">开始答题</span></a>
+                    </div></li>
+                    <li><div class="examItemWrap">
+                        <span class="percentage_number">考试</span>
+                        <a title="开始答题"><span class="themeBg" onclick="opened.push('exam')">开始答题</span></a>
+                    </div></li>
+                </ul>
+                <script>
+                    const urls = {json.dumps([first, second])};
+                    const opened = [];
+                    const stashed = [];
+                    addEventListener('message', event => {{
+                        if (event.origin === location.origin && event.data.stashed) {{
+                            stashed.push(event.data);
+                            work.innerHTML = work.innerHTML;
+                        }}
+                    }});
+                    function openWork(index) {{
+                        opened.push([index, stashed.length]);
+                        const paper = window.open();
+                        setTimeout(() => {{ paper.location.href = urls[index - 1]; }}, 200);
+                    }}
+                </script>
+            ''',
+        ))
+        await self.page.goto(list_url)
+        load_timeout = patch("modules.exam_answering.PAPER_LOAD_TIMEOUT_MS", 1000, create=True)
+        load_timeout.start()
+        self.addCleanup(load_timeout.stop)
+        task = asyncio.create_task(watch_exam_pages(self.page, "key-for-test"))
+        try:
+            await asyncio.sleep(0.6)
+            self.assertEqual(await self.page.evaluate("opened"), [])
+            await self.page.locator("#examStateTabWsj").evaluate("tab => tab.classList.add('cur')")
+            try:
+                await self.page.wait_for_function("opened.length >= 2", timeout=7000)
+            except TimeoutError:
+                self.fail("脚本没有逐份打开未提交的作业")
+            await self.page.wait_for_function("stashed.length === 2", timeout=7000)
+            self.assertEqual(await self.page.evaluate("stashed"), [
+                {"paper": "#/webExamList/dohomework/recruit/work/exam/course/school/0", "stashed": "2", "submitted": None},
+                {"paper": "#/webExamList/dohomework/recruit/work-two/exam/course/school/0", "stashed": "2", "submitted": None},
+            ])
+            await asyncio.sleep(0.6)
+            self.assertEqual(await self.page.evaluate("opened"), [[1, 0], [2, 1]])
+            self.assertEqual(len(first_loads), 2)
+        finally:
+            task.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await task
+
+    async def test_exam_refreshes_only_once_when_questions_stay_blank(self):
+        url = await self._serve_exam("doexamination")
+        loads = []
+
+        async def serve_blank_exam(route):
+            loads.append(route.request.url)
+            await route.fulfill(content_type="text/html", body="<main>Loading</main>")
+
+        await self.page.route(url.split("#", 1)[0], serve_blank_exam)
+        await self.page.goto(url)
+        with patch("modules.exam_answering.PAPER_LOAD_TIMEOUT_MS", 500, create=True):
+            task = asyncio.create_task(watch_exam_pages(self.page, "key-for-test"))
+            try:
+                async with self.page.expect_event("domcontentloaded", timeout=2000):
+                    pass
+                await asyncio.sleep(1.6)
+                self.assertEqual(len(loads), 2)
+                self.assertEqual(self.page.url, url)
+                self.assertFalse(self.server.request_received.is_set())
+            finally:
+                task.cancel()
+                with contextlib.suppress(asyncio.CancelledError):
+                    await task
+
+    async def test_exam_keeps_checked_answer_when_save_fails(self):
+        self.set_answers([2])
+        url = await self._serve_exam("doexamination", "?kind=single")
+        await self.page.goto(url)
+        await self.page.get_by_role("button", name="保存").evaluate("button => button.remove()")
+        with patch("modules.exam_answering.PAPER_LOAD_TIMEOUT_MS", 500, create=True):
+            task = asyncio.create_task(watch_exam_pages(self.page, "key-for-test"))
+            try:
+                await self.page.locator("input:checked").wait_for(state="attached", timeout=5000)
+                await asyncio.sleep(3.1)
+                self.assertEqual(await self.page.locator("input:checked").input_value(), "2")
+                self.assertEqual(await self.page.get_by_role("button", name="保存").count(), 0)
+                self.assertIsNone(await self.page.locator("body").get_attribute("data-saved0"))
+            finally:
+                task.cancel()
+                with contextlib.suppress(asyncio.CancelledError):
+                    await task
+
+    async def test_exam_waits_for_manually_opened_paper_and_saves_without_submitting(self):
+        url = await self._serve_exam()
+        statements = []
+
+        def reply(request):
+            data = json.loads(request["messages"][1]["content"])
+            statements.append(data["question"])
+            answers = [1, 3] if "质数" in data["question"] and "多选题" in data["question"] else [2]
+            return {"choices": [{"finish_reason": "stop", "message": {"content": json.dumps({"answers": answers})}}]}
+
+        self.server.reply = reply
+124:- macOS 源码运行 `./run_macos.sh --answer-exam`
+125:- Windows 发行版在 PowerShell 中运行 `./Autovisor.exe --answer-exam`
+126:- 其他源码运行方式使用 `uv run python Autovisor.py --answer-exam`
+130:程序从当前题开始填写没有选择的文本单选、多选和判断题，通过页面原有的 **下一题** 与 **保存** 逐题保存。作业页面显示完成率为 100% 时，程序会点击 **暂存作业** 并确认。遇到主观题、无法读取的内容、平台验证或作答出错时，请在浏览器处理。请核对答案后自行交卷。
+
+
+## tool · 2026-11-19T06:51:20Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T06:51:31Z
+
+
+Script completed
+Wall time 4.7 seconds
+Output:
+
+{"chunk_id":"4aa64e","wall_time_seconds":1.001405833,"session_id":28058,"original_token_count":263,"output":"test_incomplete_question_fails_before_request (test_answering.AnswerClientTests.test_incomplete_question_fails_before_request) ... ok\ntest_invalid_key_cannot_be_used_as_an_authorization_header (test_answering.AnswerClientTests.test_invalid_key_cannot_be_used_as_an_authorization_header) ... ok\ntest_live_deepseek_answers_a_text_question (test_answering.AnswerClientTests.test_live_deepseek_answers_a_text_question) ... skipped '需要显式启用 DeepSeek 服务测试'\ntest_accepts_single_multiple_and_true_false_answers (test_answering.AnswerValidationTests.test_accepts_single_multiple_and_true_false_answers) ... ok\ntest_rejects_invalid_or_ambiguous_answers (test_answering.AnswerValidationTests.test_rejects_invalid_or_ambiguous_answers) ... ok\ntest_only_matches_active_papers_on_the_supported_site (test_answering.ExamUrlTests.test_only_matches_active_papers_on_the_supported_site) ... ok\ntest_changed_question_does_not_receive_stale_answer (test_answering_integration.BrowserAnswerTests.test_changed_question_does_not_receive_stale_answer) ... "}
+{"chunk_id":"c3aac3","wall_time_seconds":0.093206916,"exit_code":0,"original_token_count":167,"output":"usage: Autovisor.py [-h] [--config CONFIG] [--check-browser]\n                    [--check-course URL] [--answer-exam]\n                    [--import-cookies PATH]\n\nAutovisor\n\noptions:\n  -h, --help            show this help message and exit\n  --config CONFIG       配置文件路径(默认使用程序目录下的 config.ini)\n  --check-browser       只检查 Chrome 启动和智慧树登录状态\n  --check-course URL    阻止进度上报和自动播放,只检查课程目录选择器\n  --answer-exam         开启智慧树作业考试答题模式\n  --import-cookies PATH\n                        从 Requests CookieJar JSON 安全导入未过期的智慧树 Cookie\n"}
+{"chunk_id":"d257ca","wall_time_seconds":0.000009333,"exit_code":0,"original_token_count":1130,"output":" README.md                           |  2 +-\n memory/plan.md                      |  4 ++\n memory/progress.md                  |  7 ++++\n memory/verify.md                    |  4 ++\n modules/exam_answering.py           | 26 +++++++++++--\n tests/test_answering_integration.py | 78 ++++++++++++++++++++++++++++++++++++-\n 6 files changed, 115 insertions(+), 6 deletions(-)\n## main...origin/main\n M README.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n M modules/exam_answering.py\n M tests/test_answering_integration.py\n?? .DS_Store\ndiff --git a/modules/exam_answering.py b/modules/exam_answering.py\nindex dcb38df..ae826ce 100644\n--- a/modules/exam_answering.py\n+++ b/modules/exam_answering.py\n@@ -5,12 +5,14 @@ from unicodedata import category\n from urllib.parse import urlsplit\n \n from playwright.async_api import CDPSession, Error as PlaywrightError, Page\n+from playwright.async_api import TimeoutError as PlaywrightTimeoutError\n \n from modules.answering import AnswerError, ask_deepseek\n from modules.logger import Logger\n from modules.tasks import has_visible_verification\n \n logger = Logger()\n+PAPER_LOAD_TIMEOUT_MS = 15000\n QUESTION = \".examPaper_box .examPaper_subject\"\n ANCHOR = \"> .subject_stem .subject_num [id^='anchor_']\"\n STEM = \"> .subject_stem .subject_describe\"\n@@ -180,8 +182,6 @@ async def _open_next_homework(page: Page, attempted: set[tuple[str, tuple[str, .\n                 await button.click(timeout=2500)\n             paper = await result.value\n             await paper.wait_for_url(lambda value: value not in {\"\", \"about:blank\"}, wait_until=\"commit\", timeout=15000)\n-            if is_exam_paper_url(paper.url):\n-                await paper.locator(f\"{QUESTION}:visible\").first.wait_for(timeout=15000)\n         except PlaywrightError as exc:\n             logger.warn(f\"作业「{identity[0]}」打开或加载失败，请在浏览器检查。\", shift=True)\n             logger.debug(logger.summarize_exception(exc))\n@@ -192,6 +192,7 @@ async def _open_next_homework(page: Page, attempted: set[tuple[str, tuple[str, .\n async def watch_exam_pages(entry_page: Page, api_key: str) -> None:\n     pages = set()\n     handled = {}\n+    reloaded = {}\n     attempted = set()\n \n     def track(page: Page) -> None:\n@@ -204,15 +205,33 @@ async def watch_exam_pages(entry_page: Page, api_key: str) -> None:\n             if page.is_closed():\n                 pages.discard(page)\n                 handled.pop(page, None)\n+                reloaded.pop(page, None)\n                 continue\n             url = page.url\n             if not is_exam_paper_url(url):\n                 handled.pop(page, None)\n+                reloaded.pop(page, None)\n                 continue\n             if handled.get(page) == url:\n                 continue\n             try:\n-                if not await page.locator(f\"{QUESTION}:visible\").count() or await has_visible_verification(page):\n+                if await has_visible_verification(page):\n+                    continue\n+                question = page.locator(f\"{QUESTION}:visible\").first\n+                try:\n+                    await question.wait_for(timeout=PAPER_LOAD_TIMEOUT_MS)\n+                except PlaywrightTimeoutError:\n+                    if await has_visible_verification(page) or page.url != url:\n+                        continue\n+                    if reloaded.get(page) == url:\n+                        raise\n+                    reloaded[page] = url\n+                    logger.info(\"等待首题加载超时，正在刷新当前试卷。\", shift=True)\n+                    await page.reload(wait_until=\"commit\", timeout=PAPER_LOAD_TIMEOUT_MS)\n+                    if page.url != url:\n+                        continue\n+                    await question.wait_for(timeout=PAPER_LOAD_TIMEOUT_MS)\n+                if await has_visible_verification(page) or page.url != url:\n                     continue\n                 handled[page] = url\n                 filled, skipped = await fill_exam(page, api_key)\n@@ -221,6 +240,7 @@ async def watch_exam_pages(entry_page: Page, api_key: str) -> None:\n                 logger.warn(f\"{exc}，请在浏览器手动处理当前试卷。\", shift=True)\n             except PlaywrightError as exc:\n                 if not page.is_closed():\n+                    handled[page] = url\n                     logger.warn(\"题目加载或保存失败，请在浏览器检查当前试卷。\", shift=True)\n                     logger.debug(logger.summarize_exception(exc))\n         for page in tuple(pages):\n"}
+
+## tool · 2026-11-19T06:51:46Z
+
+
+Script completed
+Wall time 5.0 seconds
+Output:
+
+{"chunk_id":"a88a3a","wall_time_seconds":5.002084417,"session_id":28058,"original_token_count":218,"output":"ok\ntest_completed_homework_confirms_stash_after_saving_last_answer (test_answering_integration.BrowserAnswerTests.test_completed_homework_confirms_stash_after_saving_last_answer) ... ok\ntest_exam_keeps_checked_answer_when_save_fails (test_answering_integration.BrowserAnswerTests.test_exam_keeps_checked_answer_when_save_fails) ... ok\ntest_exam_keeps_platform_verification_open_while_waiting_for_questions (test_answering_integration.BrowserAnswerTests.test_exam_keeps_platform_verification_open_while_waiting_for_questions) ... ok\ntest_exam_keeps_selection_made_by_user_during_request (test_answering_integration.BrowserAnswerTests.test_exam_keeps_selection_made_by_user_during_request) ... ok\ntest_exam_mode_tracks_paper_in_same_tab_after_campus_timeout (test_answering_integration.BrowserAnswerTests.test_exam_mode_tracks_paper_in_same_tab_after_campus_timeout) ... "}
+
+## tool · 2026-11-19T06:51:57Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+2026-11-19 14:51
+- [x] 接入暂存确认流程和使用说明。
+- [x] 用 Chrome 验证暂存、未完成作业、答题标签页关闭及考试流程，记录验证结果。
+- [x] 功能提交 `a9541f8` 已推送 `origin/main`。
+
+## 自动打开未提交作业
+
+- [x] 核对智慧树公开前端的作业类型、「未提交」控件及空白标签页跳转方式。
+- [x] 用真实 Chrome 的本地列表复现脚本等待手动打开作业的行为。
+- [x] 接入逐份打开、去重和使用说明。全量测试 128 项，125 项通过、3 项跳过，最终版本通过作业列表 Chrome 回归测试。
+- [x] 功能提交 `d38bfcf` 已推送至 `origin/main`。
+
+## DeepSeek 答案本地记录
+
+- [x] 核对课中题、融合练习和作业考试的请求入口，以及本地运行目录。
+- [x] 用本地 HTTP 回归测试复现缺少 Markdown 记录。
+- [x] 实现本地记录并更新使用说明。追加、无效答案处理和写入失败提示均通过验证。
+- [x] 启用 Chrome 的全量测试共 130 项，127 项通过、3 项跳过。最终版本的 5 项专项回归全部通过。
+- [x] 功能提交 `4e0c684` 已推送至 `origin/main`，开发记录已补记提交哈希。
+
+## 作业考试首题加载超时
+
+- [x] 从本地日志确认作业标签页已打开，首题等待超时。作答阶段另有元素等待超时。
+- [ ] 用 Chrome 复现首次加载未渲染首题及后续未触发刷新。
+- [ ] 接入单次刷新并运行回归测试。
+- [ ] 提交并推送修复及验证记录。
+- 修改前，Chrome 回归测试复现末题保存后未暂存。修改后，四项暂存回归用例通过，覆盖末题自动作答与已有选项、未答完保留页面，以及确认后关闭标签页。
+- 全量测试 127 项，124 项通过。线上 DeepSeek 与两项 Windows 专用测试跳过。Python 编译、CLI 帮助和差异检查通过。暂存行为使用本地作业页面验证。
+
+## 自动打开作业验证
+
+- 用真实 Chrome 的本地列表检验可答的未提交作业逐份打开并进入原有暂存流程，保留考试和手动打开试卷的现有行为。确认列表更新后避免重复打开，运行全量浏览器测试和差异检查。
+- 修改前复现列表需要手动打开作业。修改后用真实 Chrome 和本地页面验证空白弹窗跳转、同名作业区分、逐份暂存、列表重建去重，以及考试入口和未激活的列表均未触发自动打开。
+- 全量测试 128 项，125 项通过。线上 DeepSeek 与两项 Windows 专用用例跳过。最终版本的作业列表回归、Python 编译、CLI 帮助和差异检查通过。没有在登录后的真实作业列表中试跑。
+
+## DeepSeek 答案本地记录验证
+
+- 用本地 HTTP 服务和真实文件验证两次有效响应依次追加、中文内容与多选答案完整、API Key 未写入、无效响应不变更文件、写入失败时提示且仍返回有效选项。运行启用 Chrome 的全量测试和差异检查。
+- 启用 Chrome 的全量测试共 130 项，127 项通过，线上 DeepSeek 和两项 Windows 专用用例跳过。最终版本通过 5 项专项回归，覆盖本地 Markdown、普通课中题、融合练习和作业考试。Python 编译、CLI 帮助和差异检查通过。
+
+## 作业考试首题加载超时验证
+
+- 用真实 Chrome 验证首次加载无题目时仅刷新一次，正常加载、平台验证和作答后保存异常均保留当前页面。运行启用 Chrome 的全量测试和差异检查。
+
+- **涉及文件**
+  - `modules/exam_answering.py`、`Autovisor.py`、`README.md`、`tests/test_answering_integration.py`、`tests/fixtures/exam_paper.html`、`memory/`、`docs/CHANGELOG.md`
+
+- **Git 提交** `d38bfcf15451f05463e4a220358644bea35e8a5b feat(exam): open unsubmitted homework in order`，已推送 `origin/main`。
+
+---
+
+## [2026-11-19 14:33] 保存 DeepSeek 答案到本地 Markdown
+
+- **需求/问题描述**
+  > 把每次调用 DeepSeek 的答案保存到本地 Markdown。
+
+- **实际实现的功能与改动**
+  - 课中题、融合练习和作业考试共用的 DeepSeek 入口将每次通过校验的答案追加到 `.autovisor/deepseek-answers.md`，每条包含时间、题目、选项和答案。写入失败时提示，已校验的答案仍可用于作答。
+  - 本地 HTTP 和真实文件验证连续追加、中文及多选答案、无效答案处理和写入失败。启用 Chrome 的全量测试共 130 项，127 项通过、3 项跳过。最终版本的 5 项专项回归、Python 编译、CLI 帮助和差异检查通过。线上 DeepSeek 请求未执行。
+
+- **涉及文件**
+  - `modules/answering.py`、`tests/test_answering_integration.py`、`README.md`、`memory/`、`docs/CHANGELOG.md`
+
+- **Git 提交** `4e0c6844cdfe0be1e53cbc8f389cf0553b101c03 feat(answering): save DeepSeek answers to Markdown`，已推送 `origin/main`。
+
+---
+1	1	README.md
+4	0	memory/plan.md
+7	0	memory/progress.md
+4	0	memory/verify.md
+23	3	modules/exam_answering.py
+76	2	tests/test_answering_integration.py
+
+origin/main
+ M README.md
+ M memory/plan.md
+ M memory/progress.md
+ M memory/verify.md
+ M modules/exam_answering.py
+ M tests/test_answering_integration.py
+?? .DS_Store
+46:    def summarize_exception(exc):
+
+
+## tool · 2026-11-19T06:52:23Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+        for page in tuple(pages):
+            if page.is_closed():
+                pages.discard(page)
+                handled.pop(page, None)
+                reloaded.pop(page, None)
+                continue
+            url = page.url
+            if not is_exam_paper_url(url):
+                handled.pop(page, None)
+                reloaded.pop(page, None)
+                continue
+            if handled.get(page) == url:
+                continue
+            try:
+                if await has_visible_verification(page):
+                    continue
+                question = page.locator(f"{QUESTION}:visible").first
+                try:
+                    await question.wait_for(timeout=PAPER_LOAD_TIMEOUT_MS)
+                except PlaywrightTimeoutError:
+                    if await has_visible_verification(page) or page.url != url:
+                        continue
+                    if reloaded.get(page) == url:
+                        raise
+                    reloaded[page] = url
+                    logger.info("等待首题加载超时，正在刷新当前试卷。", shift=True)
+                    await page.reload(wait_until="commit", timeout=PAPER_LOAD_TIMEOUT_MS)
+                    if page.url != url:
+                        continue
+                    await question.wait_for(timeout=PAPER_LOAD_TIMEOUT_MS)
+                if await has_visible_verification(page) or page.url != url:
+                    continue
+                handled[page] = url
+                filled, skipped = await fill_exam(page, api_key)
+                logger.info(f"本卷自动作答 {filled} 题，待手动处理 {skipped} 题，请检查后自行交卷。", shift=True)
+            except AnswerError as exc:
+                logger.warn(f"{exc}，请在浏览器手动处理当前试卷。", shift=True)
+            except PlaywrightError as exc:
+                if not page.is_closed():
+                    handled[page] = url
+                    logger.warn("题目加载或保存失败，请在浏览器检查当前试卷。", shift=True)
+                    logger.debug(logger.summarize_exception(exc))
+        for page in tuple(pages):
+            if page.is_closed():
+                continue
+            with contextlib.suppress(asyncio.CancelledError):
+                await task
+
+    async def test_exam_refreshes_only_once_when_questions_stay_blank(self):
+        url = await self._serve_exam("doexamination")
+        loads = []
+
+        async def serve_blank_exam(route):
+            loads.append(route.request.url)
+            await route.fulfill(content_type="text/html", body="<main>Loading</main>")
+
+        await self.page.route(url.split("#", 1)[0], serve_blank_exam)
+        await self.page.goto(url)
+        with patch("modules.exam_answering.PAPER_LOAD_TIMEOUT_MS", 500):
+            task = asyncio.create_task(watch_exam_pages(self.page, "key-for-test"))
+            try:
+                async with self.page.expect_event("domcontentloaded", timeout=2000):
+                    pass
+                await asyncio.sleep(1.6)
+                self.assertEqual(len(loads), 2)
+                self.assertEqual(self.page.url, url)
+                self.assertFalse(self.server.request_received.is_set())
+            finally:
+                task.cancel()
+                with contextlib.suppress(asyncio.CancelledError):
+                    await task
+
+    async def test_exam_keeps_platform_verification_open_while_waiting_for_questions(self):
+        url = await self._serve_exam("doexamination")
+        await self.page.goto(url)
+        await self.page.set_content('<main>Loading</main>')
+        with patch("modules.exam_answering.PAPER_LOAD_TIMEOUT_MS", 500):
+
+- 其他源码运行方式使用 `uv run python Autovisor.py --answer-exam`
+
+在程序打开的在线学堂中选择课程，进入 **作业考试 → 未提交**。程序会按列表顺序逐个打开可作答的作业，同一轮运行中每份作业只自动打开一次。考试试卷仍由你手动打开。
+
+试卷首题在 15 秒内未加载时，程序会刷新当前试卷一次。程序从当前题开始填写没有选择的文本单选、多选和判断题，通过页面原有的 **下一题** 与 **保存** 逐题保存。作业页面显示完成率为 100% 时，程序会点击 **暂存作业** 并确认。遇到主观题、无法读取的内容、平台验证或作答出错时，请在浏览器处理。请核对答案后自行交卷。
+
+测试命令为 `uv run python -m unittest discover -s tests -v`。设置 `AUTOVISOR_TEST_BROWSER=1` 可运行真实 Chrome 和本地 HTTP 服务的答题测试。设置 `AUTOVISOR_TEST_DEEPSEEK=1` 和 `DEEPSEEK_API_KEY` 可另外测试一次真实 DeepSeek 请求，测试题为 `1 + 1`。
+
+
+
+## tool · 2026-11-19T06:52:42Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T06:52:47Z
+
+codex_apps_open_page
+{"page_id":null}
+
+## tool · 2026-11-19T06:52:47Z
+
+codex_apps_selected_page_part_1_of_1
+Companion Page snapshot part 1 of 1:
+{"page_id":null,"document_view":null}
+
+## user · 2026-11-19T06:52:47Z
+
+题目加载不出来的时候需要重新加载 但是保存不了我不知道是怎么回事
+
+
+## assistant · 2026-11-19T06:53:03Z
+
+刷新会限定在首题加载不出来时。我也核对了保存警告对应的日志。那几次是点击选项后，程序没等到选项变成勾选状态，流程在点击保存之前就停了。我会再核对这条判断和代码是否一致。
+
+## tool · 2026-11-19T06:53:06Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"9abdbe","wall_time_seconds":0.000361458,"exit_code":0,"original_token_count":4885,"output":"Warning: truncated output (original token count: 4885)\nTotal output lines: 200\n\nok\ntest_exam_refreshes_only_once_when_questions_stay_blank (test_answering_integration.BrowserAnswerTests.test_exam_refreshes_only_once_when_questions_stay_blank) ... ok\ntest_exam_rejects_multiple_answers_on_single_choice (test_answering_integration.BrowserAnswerTests.test_exam_rejects_multiple_answers_on_single_choice) ... ok\ntest_exam_waits_for_manually_opened_paper_and_saves_without_submitting (test_answering_integration.BrowserAnswerTests.test_exam_waits_for_manually_opened_paper_and_saves_without_submitting) ... ok\ntest_failed_authentication_keeps_fusion_question_open (test_answering_integration.BrowserAnswerTests.test_failed_authentication_keeps_fusion_question_open) ... ok\ntest_fusion_multiple_answers_are_selected_before_submit (test_answering_integration.BrowserAnswerTests.test_fusion_multiple_answers_are_selected_before_submit) ... ok\ntest_homework_saves_existing_selection_on_last_question_before_stashing (test_answering_integration.BrowserAnswerTests.test_homework_saves_existing_selection_on_last_question_before_stashing) ... ok\ntest_homework_tab_can_close_after_stash_confirmation (test_answering_integration.BrowserAnswerTests.test_homework_tab_can_close_after_stash_confirmation) ... ok\ntest_incomplete_homework_remains_open_for_manual_review (test_answering_integration.BrowserAnswerTests.test_incomplete_homework_remains_open_for_manual_review) ... ok\ntest_legacy_monitor_does_not_close_fusion_dialog (test_answering_integration.BrowserAnswerTests.test_legacy_monitor_does_not_close_fusion_dialog) ... ok\ntest_legacy_question_uses_deepseek_answer_and_closes_dialog (test_answering_integration.BrowserAnswerTests.test_legacy_question_uses_deepseek_answer_and_closes_dialog) ... ok\ntest_missing_key_keeps_fusion_question_open_without_request (test_answering_integration.BrowserAnswerTests.test_missing_key_keeps_fusion_question_open_without_request) ... ok\ntest_unfinished_response_keeps_fusion_question_open (test_answering_integration.BrowserAnswerTests.test_unfinished_response_keeps_fusion_question_open) ... ok\ntest_unsubmitted_homework_opens_once_in_order_after_list_refresh (test_answering_integration.BrowserAnswerTests.test_unsubmitted_homework_opens_once_in_order_after_list_refresh) ... ok\ntest_valid_answers_append_to_markdown (test_answering_integration.DeepSeekHistoryTests.test_valid_answers_append_to_markdown) ... ok\ntest_write_failure_warns_and_returns_valid_answer (test_answering_integration.DeepSeekHistoryTests.test_write_failure_warns_and_returns_valid_answer) ... ok\ntest_cdp_endpoint_must_be_local (test_browser.BrowserResolutionTests.test_cdp_endpoint_must_be_local) ... ok\ntest_channels (test_browser.BrowserResolutionTests.test_channels) ... ok\ntest_devtools_active_port_endpoint (test_browser.BrowserResolutionTests.test_devtools_active_port_endpoint) ... ok\ntest_driver_does_not_read_environment_variables (test_browser.BrowserResolutionTests.test_driver_does_not_read_environment_variables) ... ok\ntest_driver_is_normalized_from_config_alone (test_browser.BrowserResolutionTests.test_driver_is_normalized_from_config_alone) ... ok\ntest_macos_app_path (test_browser.BrowserResolutionTests.test_macos_app_path) ... ok\ntest_attached_session_closes_only_its_page (test_browser.BrowserSessionTests.test_attached_session_closes_only_its_page) ... ok\ntest_owned_session_closes_browser (test_browser.BrowserSessionTests.test_owned_session_closes_browser) ... ok\ntest_cookie_normalization_filters_domains_and_expiry (test_config.ConfigTests.test_cookie_normalization_filters_domains_and_expiry) ... ok\ntest_cookie_normalization_preserves_top_level_http_only (test_config.ConfigTests.test_cookie_normalization_preserves_top_level_http_only) ... ok\ntest_cookie_overwrite_tightens_existing_permissions (test_config.ConfigTests.test_cookie_overwrite_tightens_existing_permissions) ... ok\ntest_macos_browser_options (test_config.ConfigTests.test_macos_browser_options) ... ok\ntest_saved_cookies_are_owner_only (test_config.ConfigTests.test_saved_cookies_are_owner_only) ... ok\ntest_course_options_in_templates (test_configs.ConfigTests.test_course_options_in_templates) ... ok\ntest_course_options_use_defaults_and_accept_overrides (test_configs.ConfigTests.test_course_options_use_defaults_and_accept_overrides) ... ok\ntest_frozen_default_mirrors_path_is_next_to_executable (test_configs.ConfigTests.test_frozen_default_mirrors_path_is_next_to_executable) ... ok\ntest_ignores_empty_course_urls_and_reports_invalid_entries (test_configs.ConfigTests.test_ignores_empty_course_urls_and_reports_invalid_entries) ... ok\ntest_reads_config_with_utf8_bom (test_configs.ConfigTests.test_reads_config_with_utf8_bom) ... ok\ntest_reads_configured_mirrors (test_configs.ConfigTests.test_reads_configured_mirrors) ... ok\ntest_reads_mirrors_with_utf8_bom (test_configs.ConfigTests.test_reads_mirrors_with_utf8_bom) ... ok\ntest_reports_missing_config_file (test_configs.ConfigTests.test_reports_missing_config_file) ... ok\ntest_reports_missing_required_sections (test_configs.ConfigTests.test_reports_missing_required_sections) ... ok\ntest_ignores_empty_cookies (test_cookie_persistence.CookiePersistenceTests.test_ignores_empty_cookies) ... ok\ntest_remembers_loaded_cookies_without_rewrite (test_cookie_persistence.CookiePersistenceTests.test_remembers_loaded_cookies_without_rewrite) ... ok\ntest_retries_after_save_failure (test_cookie_persistence.CookiePersistenceTests.test_retries_after_save_failure) ... ok\ntest_save_failure_is_logged_and_not_raised (test_cookie_persistence.CookiePersistenceTests.test_save_failure_is_logged_and_not_raised) ... ok\ntest_saves_again_after_cookie_refresh (test_cookie_persistence.CookiePersistenceTests.test_saves_again_after_cookie_refresh) ... ok\ntest_saves_on_first_change (test_cookie_persistence.CookiePersistenceTests.test_saves_on_first_change) ... ok\ntest_skips_unchanged_cookies (test_cookie_persistence.CookiePersistenceTests.test_skips_unchanged_cookies) ... ok\ntest_invalid_metadata_fails_learning_with_three_part_result (test_course_playback.CoursePlaybackTests.test_invalid_metadata_fails_learning_with_three_part_result) ... ok\ntest_invalid_metadata_fails_review_with_three_part_result (test_course_playback.CoursePlaybackTests.test_invalid_metadata_fails_review_with_three_part_result) ... ok\ntest_accepts_opencv_abi3_wheel (test_installer.InstallerTests.test_accepts_opencv_abi3_wheel) ... ok\ntest_accepts_supported_python_versions (test_installer.InstallerTests.test_accepts_supported_python_versions) ... ok\ntest_falls_back_when_a_mirror_fails (test_installer.InstallerTests.test_falls_back_when_a_mirror_fails) ... ok\ntest_parses_wheel_tags (test_installer.InstallerTests.test_parses_wheel_tags) ... ok\ntest_progress_handles_missing_content_length (test_installer.InstallerTests.test_progress_handles_missing_content_length) ... ok\ntest_rejects_free_threaded_wheel (test_installer.InstallerTests.test_rejects_free_threaded_wheel) ... ok\ntest_rejects_unsupported_python_version (test_installer.InstallerTests.test_rejects_unsupported_python_version) ... ok\ntest_requires_matching_python_abi_and_platform (test_installer.InstallerTests.test_requires_matching_python_abi_and_platform) ... ok\ntest_resolves_relative_mirror_wheel_url (test_installer.InstallerTests.test_resolves_relative_mirror_wheel_url) ... ok\ntest_runtime_packages_match_python_version (test_installer.InstallerTests.test_runtime_packages_match_python_version) ... ok\ntest_active_class_is_token_aware (test_lesson_navigation.LessonNavigationTests.test_active_class_is_token_aware) ... ok\ntest_catalog_url_hints_only_change_detection_priority (test_lesson_navigation.LessonNavigationTests.test_catalog_url_hints_only_change_detection_priority) ... ok\ntest_current_wisdom_selectors_match_live_catalog (test_lesson_navigation.LessonNavigationTests.test_current_wisdom_selectors_match_live_catalog) ... ok\ntest_progress_parser_clamps_and_rejects_non_finite_values (test_lesson_navigation.LessonNavigationTests.test_progress_parser_clamps_and_rejects_non_finite_values) ... ok\ntest_custom_interval (test_logger.DebugThrottledTests.test_custom_interval) ... ok\ntest_first_message_is_written_immediately (test_logger.DebugThrottledTests.test_first_message_is_written_immediately) ... ok\ntest_interval_window_starts_from_last_write (test_logger.DebugThrottledTests.test_interval_window_starts_from_last_write) ... ok\ntest_keys_are_throttled_independently (test_logger.DebugThrottledTests.test_keys_are_throttled_independently) ... ok\ntest_repeats_within_interval_are_folded (test_logger.DebugThrottledTests.test_repeats_within_interval_are_folded) ... ok\ntest_context_can_be_cleared (test_logger.LogRecordTests.test_context_can_be_cleared) ... ok\ntest_context_is_attached_to_exception_log (test_logger.LogRecordTests.test_context_is_attached_to_exception_log) ... ok\ntest_error_includes_run_state (test_logger.LogRecordTests.test_error_includes_run_state) ... ok\ntest_error_without_context_has_no_state (test_logger.LogRecordTests.test_error_without_conte…385 tokens truncated…_login.LoginUrlTests.test_does_not_match_login_text_outside_the_hostname) ... ok\ntest_recognizes_current_and_legacy_login_hosts (test_login.LoginUrlTests.test_recognizes_current_and_legacy_login_hosts) ... ok\ntest_rejects_authenticated_destination_hosts (test_login.LoginUrlTests.test_rejects_authenticated_destination_hosts) ... ok\ntest_network_error_does_not_raise (test_updater.CheckForUpdateTests.test_network_error_does_not_raise) ... ok\ntest_prompts_when_release_is_newer (test_updater.CheckForUpdateTests.test_prompts_when_release_is_newer) ... ok\ntest_reports_up_to_date (test_updater.CheckForUpdateTests.test_reports_up_to_date) ... ok\ntest_silent_when_release_version_unparsable (test_updater.CheckForUpdateTests.test_silent_when_release_version_unparsable) ... ok\ntest_uses_tag_when_tag_is_a_version (test_updater.CheckForUpdateTests.test_uses_tag_when_tag_is_a_version) ... ok\ntest_windows_asset_link_is_included_on_windows (test_updater.CheckForUpdateTests.test_windows_asset_link_is_included_on_windows) ... skipped 'Windows-only asset matching'\ntest_newer_patch_and_minor (test_updater.IsNewerTests.test_newer_patch_and_minor) ... ok\ntest_same_or_older (test_updater.IsNewerTests.test_same_or_older) ... ok\ntest_unparsable_is_not_newer (test_updater.IsNewerTests.test_unparsable_is_not_newer) ... ok\ntest_extracts_version_from_release_name (test_updater.ParseVersionTests.test_extracts_version_from_release_name) ... ok\ntest_ignores_date_style_tag (test_updater.ParseVersionTests.test_ignores_date_style_tag) ... ok\ntest_ignores_empty_and_none (test_updater.ParseVersionTests.test_ignores_empty_and_none) ... ok\ntest_ssl_error_on_both_attempts_is_silent (test_updater.SslFallbackTests.test_ssl_error_on_both_attempts_is_silent) ... ok\ntest_ssl_error_retries_without_verification (test_updater.SslFallbackTests.test_ssl_error_retries_without_verification) ... ok\ntest_untrusted_asset_url_is_ignored (test_updater.SslFallbackTests.test_untrusted_asset_url_is_ignored) ... skipped 'Windows-only asset matching'\ntest_untrusted_release_page_falls_back_to_official_page (test_updater.SslFallbackTests.test_untrusted_release_page_falls_back_to_official_page) ... ok\ntest_accepts_github_hosts (test_updater.TrustedUrlTests.test_accepts_github_hosts) ... ok\ntest_rejects_other_hosts_and_schemes (test_updater.TrustedUrlTests.test_rejects_other_hosts_and_schemes) ... ok\ntest_pyproject_takes_version_from_code (test_updater.VersionSourceTests.test_pyproject_takes_version_from_code) ... ok\ntest_missing_video_after_wait_returns_none (test_utils.GetVideoAttrTests.test_missing_video_after_wait_returns_none) ... ok\ntest_reads_property_without_null_deref (test_utils.GetVideoAttrTests.test_reads_property_without_null_deref) ... ok\ntest_returns_none_when_element_not_ready (test_utils.GetVideoAttrTests.test_returns_none_when_element_not_ready) ... ok\ntest_legacy_popup_wait_is_bounded (test_utils.OptimizePageTests.test_legacy_popup_wait_is_bounded) ... ok\ntest_modern_catalog_skips_legacy_popup (test_utils.OptimizePageTests.test_modern_catalog_skips_legacy_popup) ... ok\ntest_evaluate_js_default_wait_is_bounded (test_utils.OptionalElementTests.test_evaluate_js_default_wait_is_bounded) ... ok\ntest_evaluate_js_keeps_explicit_timeout (test_utils.OptionalElementTests.test_evaluate_js_keeps_explicit_timeout) ... ok\ntest_evaluate_js_skips_quietly_when_element_absent (test_utils.OptionalElementTests.test_evaluate_js_skips_quietly_when_element_absent) ... ok\ntest_evaluate_on_element_skips_quietly_when_absent (test_utils.OptionalElementTests.test_evaluate_on_element_skips_quietly_when_absent) ... ok\ntest_optional_popup_timeout_stays_far_below_page_default (test_utils.OptionalElementTests.test_optional_popup_timeout_stays_far_below_page_default) ... ok\ntest_missing_element_returns_none_and_names_selector (test_utils.RunOnTests.test_missing_element_returns_none_and_names_selector) ... ok\ntest_returns_value_and_builds_guarded_script (test_utils.RunOnTests.test_returns_value_and_builds_guarded_script) ... ok\ntest_script_error_reports_selector_and_returns_none (test_utils.RunOnTests.test_script_error_reports_selector_and_returns_none) ... ok\ntest_target_closed_is_reraised (test_utils.RunOnTests.test_target_closed_is_reraised) ... ok\ntest_invalid_duration_is_rejected (test_video_state.VideoStateTests.test_invalid_duration_is_rejected) ... ok\ntest_platform_percent_maps_back_to_video_time (test_video_state.VideoStateTests.test_platform_percent_maps_back_to_video_time) ... ok\ntest_tail_retry_never_goes_negative (test_video_state.VideoStateTests.test_tail_retry_never_goes_negative) ... ok\ntest_video_end_uses_small_tolerance (test_video_state.VideoStateTests.test_video_end_uses_small_tolerance) ... ok\n\n----------------------------------------------------------------------\nRan 133 tests in 93.665s\n\nOK (skipped=3)\n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[33m[WARN]\u001b[0m 题目加载或保存失败，请在浏览器检查当前试卷。          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[33m[WARN]\u001b[0m 在线学堂打开超时，请在当前标签页手动打开 https://onlineweb.zhihuishu.com/onlinestuh5\n\r\n\u001b[32m[INFO]\u001b[0m 请在在线学堂选择课程并进入作业考试。未提交的作业会逐个打开，答完后自动暂存，请核对后自行交卷。\n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 本卷自动作答 1 题，待手动处理 0 题，请检查后自行交卷。  \n\r\n\u001b[32m[INFO]\u001b[0m 等待首题加载超时，正在刷新当前试卷。              \n\r\n\u001b[33m[WARN]\u001b[0m 题目加载或保存失败，请在浏览器检查当前试卷。          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 请在在线学堂选择课程并进入作业考试。未提交的作业会逐个打开，答完后自动暂存，请核对后自行交卷。\n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 本卷自动作答 2 题，待手动处理 1 题，请检查后自行交卷。  \n\r\u001b[32m[INFO]\u001b[0m 检测到 AI 随堂练习弹窗.                   \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[33m[WARN]\u001b[0m DeepSeek API Key 认证失败，请检查配置，请在浏览器中手动完成当前练习.\n\r\u001b[32m[INFO]\u001b[0m 检测到 AI 随堂练习弹窗.                   \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m AI 随堂练习已自动提交关闭.                  \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 检测到 AI 随堂练习弹窗.                   \n\r\n\u001b[33m[WARN]\u001b[0m 请在配置文件的 [deepseek] 中填写 api_key 以启用自动答题，请在浏览器中手动完成当前练习.\n\r\u001b[32m[INFO]\u001b[0m 检测到 AI 随堂练习弹窗.                   \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[33m[WARN]\u001b[0m DeepSeek 未完成答题，请在浏览器中手动完成当前练习.  \n\r\n\u001b[32m[INFO]\u001b[0m 等待首题加载超时，正在刷新当前试卷。              \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 本卷自动作答 1 题，待手动处理 0 题，请检查后自行交卷。  \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\n\u001b[32m[INFO]\u001b[0m 本卷自动作答 1 题，待手动处理 0 题，请检查后自行交卷。  \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m 正在调用 DeepSeek API 答题...          \n\r\u001b[32m[INFO]\u001b[0m numpy-1.26.4 未安装，开始下载...         \n\r\u001b[31m[ERROR]\u001b[0m numpy-1.26.4 使用 华为 镜像源失败，将尝试下一个镜像源：429 Client Error\n\r\u001b[32m[INFO]\u001b[0m numpy-1.26.4 安装完成!               \n\r\u001b[31m[ERROR]\u001b[0m 课时失败.                           \n\r\u001b[31m[ERROR]\u001b[0m 出错了                             \n\r\u001b[31m[ERROR]\u001b[0m 出错了                             \n\r\n\u001b[32m[INFO]\u001b[0m i                               \n\r\n\u001b[33m[WARN]\u001b[0m w                               \n\r\n\u001b[31m[ERROR]\u001b[0m e                              \n\r\u001b[31m[ERROR]\u001b[0m 课时失败.                           \n\n===== 运行日志 =====\n\r\n\u001b[32m[INFO]\u001b[0m hello                           \n\r\u001b[32m[INFO]\u001b[0m 已保存登录凭证到: /Volumes/SamsungSSD990PRO/GitHub/Autovisor/data/cookies.json,下次可免密登录.\n\r\u001b[32m[INFO]\u001b[0m 已保存登录凭证到: /Volumes/SamsungSSD990PRO/GitHub/Autovisor/data/cookies.json,下次可免密登录.\n"}
+{"chunk_id":"4a924c","wall_time_seconds":0.000007833,"exit_code":0,"original_token_count":972,"output":"modules/logger.py:46:    def summarize_exception(exc):\nmodules/exam_answering.py:59:    kind = (await question.locator(KIND).inner_text(timeout=2500)).strip(\"【】 \\r\\n\")\nmodules/exam_answering.py:88:        await choice.click(timeout=2500)\nmodules/exam_answering.py:89:        await choice.locator(\"input:checked\").wait_for(state=\"attached\", timeout=2500)\nmodules/exam_answering.py:128:                    await save_button.click(timeout=2500)\nmodules/exam_answering.py:129:                    await page.get_by_text(\"保存成功！\", exact=True).wait_for(timeout=10000)\nmodules/exam_answering.py:132:                    await stash_button.click(timeout=2500)\nmodules/exam_answering.py:139:                    await dialog.get_by_role(\"button\", name=\"确定\", exact=True).click(timeout=2500)\nmodules/exam_answering.py:141:            await next_button.click(timeout=2500)\nmodules/exam_answering.py:182:                await button.click(timeout=2500)\nmodules/exam_answering.py:187:            logger.debug(logger.summarize_exception(exc))\nmodules/exam_answering.py:247:                    logger.debug(logger.summarize_exception(exc))\nmodules/exam_answering.py:256:                    logger.debug_throttled(\"homework-list\", logger.summarize_exception(exc))\n        if getattr(sys, \"frozen\", False):\n            return os.path.dirname(sys.executable)\n        return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n\n    @staticmethod\n    def summarize_exception(exc):\n        first_line = str(exc).splitlines()[0].strip()\n        return f\"{type(exc).__name__}: {first_line}\"\n\n    @staticmethod\n    def _timestamp():\n        now = time.time()\n        millis = int(now % 1 * 1000)\n        return f\"{time.strftime('%H:%M:%S', time.localtime(now))}.{millis:03d}\"\n\n    @staticmethod\n    def _source_location():\n        \"\"\"返回调用日志的位置(模块.函数:行号), 跳过日志系统自身的栈帧。\"\"\"\n        try:\n            frame = sys._getframe(1)\n        except (AttributeError, ValueError):\n            return \"?\"\n        while frame is not None and os.path.basename(frame.f_code.co_filename) == _LOGGER_FILE:\n            frame = frame.f_back\n24:[14:47:08.737] [INFO] [modules.answering.ask_deepseek:62] 正在调用 DeepSeek API 答题...\n25:[14:47:13.317] [WARN] [modules.exam_answering.watch_exam_pages:224] 题目加载或保存失败，请在浏览器检查当前试卷。\n26:[14:47:13.317] [DEBUG] [modules.exam_answering.watch_exam_pages:225] TimeoutError: Locator.wait_for: Timeout 2500ms exceeded.\n27:[14:47:13.897] [INFO] [modules.answering.ask_deepseek:62] 正在调用 DeepSeek API 答题...\n28:[14:47:15.580] [INFO] [modules.answering.ask_deepseek:62] 正在调用 DeepSeek API 答题...\n29:[14:47:19.184] [WARN] [modules.exam_answering.watch_exam_pages:224] 题目加载或保存失败，请在浏览器检查当前试卷。\n30:[14:47:19.184] [DEBUG] [modules.exam_answering.watch_exam_pages:225] TimeoutError: Locator.wait_for: Timeout 2500ms exceeded.\n31:[14:47:19.769] [INFO] [modules.answering.ask_deepseek:62] 正在调用 DeepSeek API 答题...\n32:[14:47:23.652] [WARN] [modules.exam_answering.watch_exam_pages:224] 题目加载或保存失败，请在浏览器检查当前试卷。\n33:[14:47:23.653] [DEBUG] [modules.exam_answering.watch_exam_pages:225] TimeoutError: Locator.wait_for: Timeout 2500ms exceeded.\n34:[14:48:29.033] [INFO] [modules.answering.ask_deepseek:62] 正在调用 DeepSeek API 答题...\n35:[14:48:33.743] [WARN] [modules.exam_answering.watch_exam_pages:224] 题目加载或保存失败，请在浏览器检查当前试卷。\n36:[14:48:33.744] [DEBUG] [modules.exam_answering.watch_exam_pages:225] TimeoutError: Locator.wait_for: Timeout 2500ms exceeded.\nd38bfcf feat(exam): open unsubmitted homework in order\na9541f8 feat(exam): stash completed homework\necaac6c feat(answering): support Zhihuishu assignments and exams\n"}
