@@ -4223,3 +4223,80 @@ Output:
 
 {"chunk_id":"f103dd","wall_time_seconds":0.000009833,"exit_code":0,"original_token_count":315,"output":"/Users/oyamahappa/Documents/GitHub/Ragdoll_sync\ndrwxr-xr-x@ 6 oyamahappa  staff  192 Nov 19 20:05 /Users/oyamahappa/Documents/GitHub/Ragdoll_sync\n-rw-r--r--  1 oyamahappa  staff   1819 Nov 19 20:02 .agent/readme-live/preview/README.md\n-rw-r--r--  1 oyamahappa  staff  42431 Nov 19 20:02 .agent/readme-live/preview/ragdoll-token-activity.svg\n\n- [x] 确认前台与后台共用归档写入，且两条路径在写入前应用排除项目设置。\n- [x] 回归先因缺少 README 失败。完整 Swift 测试 54 项通过，覆盖真实 Git 上的 README 生成、更新、文件保护、恢复和推送。\n- [x] 重新签名构建 `dist/Ragdoll.app`。包内独立后台进程从隔离数据生成 README，把 README 与热力图推送至本地裸仓库，远端与本地提交一致。\n- [x] `51cb005 feat(archive): publish activity in repository README` 已推送至 `origin/main`。\n- [x] 核对实际归档分支尚无 README，正在运行的应用早于本轮构建。用目标分支上已归档的会话生成本地 README 和热力图，校验文件摘要和 SVG 格式。\n- [ ] 自动审批拒绝将包含实际统计和会话标题的报告发布到公开归档仓库，等待明确授权。报告位于忽略目录 `.agent/readme-live/preview/`。\n"}
 {"chunk_id":"42b8e3","wall_time_seconds":0.000013458,"exit_code":0,"original_token_count":728,"output":"## main...origin/main\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/gotchas.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Sources/Ragdoll/Resources/\n- NSTableView 的选择回调中延后更新详情和列表状态，避免同步重入其 delegate。\n- `SMAppService.status == .enabled` 仅代表注册状态；必须结合实际进程、锁和新鲜心跳判断正在运行。系统签名和受保护目录授权可阻止启动或数据访问，不把手动 helper 成功等同于 launchd 全流程成功。\n- 首页 DeepSeek 卡片的点击用于切换峰价与谷价，默认直接显示峰价。两档按「总 Token」的同一批用量计算。\n- Git 归档的活动报告固定写到根目录 `README.md`，仓库已有说明时保留原文并追加活动区块。\n- 用户要求实际生成归档报告时，检查目标归档分支是否已有 `README.md`，并核对当前运行的应用是否早于已构建的版本。\n  - 52 项 Swift 测试通过，回归覆盖两档金额和空用量。发布构建、深度签名、包内自检及隔离启动通过。尚未实测窗口点击或视觉效果。\n- **涉及文件** `Sources/Ragdoll/DashboardView.swift`、`Sources/RagdollCore/Analytics.swift`、`Tests/RagdollCoreTests/AnalyticsTests.swift`、`docs/USAGE.md`、`memory/`、`docs/CHANGELOG.md`。\n- **Git 提交** `c1d91f9 fix(dashboard): toggle DeepSeek peak and off-peak estimates`，已推送至 `origin/main`。\n\n---\n\n## [2026-11-19 19:54] 自动更新归档仓库 README\n\n- **需求/问题描述**\n  > 自动在 Git 归档仓库的 `README.md` 展示首页活动信息，省去 DeepSeek 对比估价。\n- **实际实现的功能与改动**\n  - 前台和后台归档都更新根目录 README 中的活动区块及热力图，显示美元估算成本、Token、会话总数、项目活动和可打开归档文本的最近会话。统计沿用当前价格和项目排除设置。\n  - 已有 README 的正文按原样保留，生成区块随归档提交并使用既有推送配置。暂存和未提交的人工修改受到保护。\n  - 回归先因缺少 README 失败，完整 Swift 测试 54 项通过。发布构建、Apple Development 签名校验与包内运行时自检通过。签名包内独立服务在隔离环境读取一条 Codex 测试会话，生成 README 与热力图并推送至本地裸仓库，远端与本地提交一致。\n- **涉及文件** `Sources/RagdollCore/Archive.swift`、`Sources/RagdollCore/ArchiveActivity.swift`、`Sources/RagdollCore/BackgroundService.swift`、`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/SettingsView.swift`、`Tests/RagdollCoreTests/`、`docs/USAGE.md`、`docs/CHANGELOG.md`、`memory/`。\n- **Git 提交** `51cb005 feat(archive): publish activity in repository README`，已推送至 `origin/main`。\n\n---\n"}
+
+## tool · 2026-11-19T12:24:35Z
+
+
+Script running with cell ID g10:56
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T12:24:51Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"2e99d2","wall_time_seconds":0.000008334,"exit_code":0,"original_token_count":11,"output":"?? README.md\n?? ragdoll-token-activity.svg\n"}
+
+## tool · 2026-11-19T12:25:06Z
+
+
+Script completed
+Wall time 0.4 seconds
+Output:
+
+{"chunk_id":"e2c9a1","wall_time_seconds":0.000015708,"exit_code":0,"original_token_count":612,"output":"- **Git 提交** `c1d91f9 fix(dashboard): toggle DeepSeek peak and off-peak estimates`，已推送至 `origin/main`。\n\n---\n\n## [2026-11-19 19:54] 自动更新归档仓库 README\n\n- **需求/问题描述**\n  > 自动在 Git 归档仓库的 `README.md` 展示首页活动信息，省去 DeepSeek 对比估价。\n- **实际实现的功能与改动**\n  - 前台和后台归档都更新根目录 README 中的活动区块及热力图，显示美元估算成本、Token、会话总数、项目活动和可打开归档文本的最近会话。统计沿用当前价格和项目排除设置。\n  - 已有 README 的正文按原样保留，生成区块随归档提交并使用既有推送配置。暂存和未提交的人工修改受到保护。\n  - 回归先因缺少 README 失败，完整 Swift 测试 54 项通过。发布构建、Apple Development 签名校验与包内运行时自检通过。签名包内独立服务在隔离环境读取一条 Codex 测试会话，生成 README 与热力图并推送至本地裸仓库，远端与本地提交一致。\n- **涉及文件** `Sources/RagdollCore/Archive.swift`、`Sources/RagdollCore/ArchiveActivity.swift`、`Sources/RagdollCore/BackgroundService.swift`、`Sources/Ragdoll/AppModel.swift`、`Sources/Ragdoll/SettingsView.swift`、`Tests/RagdollCoreTests/`、`docs/USAGE.md`、`docs/CHANGELOG.md`、`memory/`。\n- **Git 提交** `51cb005 feat(archive): publish activity in repository README`，已推送至 `origin/main`。\n\n---\n## Git 归档活动 README（2026-11-19）\n\n- [x] 确认前台与后台共用归档写入，且两条路径在写入前应用排除项目设置。\n- [x] 回归先因缺少 README 失败。完整 Swift 测试 54 项通过，覆盖真实 Git 上的 README 生成、更新、文件保护、恢复和推送。\n- [x] 重新签名构建 `dist/Ragdoll.app`。包内独立后台进程从隔离数据生成 README，把 README 与热力图推送至本地裸仓库，远端与本地提交一致。\n- [x] `51cb005 feat(archive): publish activity in repository README` 已推送至 `origin/main`。\n- [x] 核对实际归档分支尚无 README，正在运行的应用早于本轮构建。用目标分支上已归档的会话生成本地 README 和热力图，校验文件摘要和 SVG 格式。\n- [ ] 自动审批拒绝将包含实际统计和会话标题的报告发布到公开归档仓库，等待明确授权。报告位于忽略目录 `.agent/readme-live/preview/`。\n2026-11-19 20:25\n"}
+
+## tool · 2026-11-19T12:25:22Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{}
+
+## tool · 2026-11-19T12:25:26Z
+
+
+Script completed
+Wall time 0.1 seconds
+Output:
+
+{"chunk_id":"28ffa6","wall_time_seconds":0.000015917,"exit_code":0,"original_token_count":105,"output":"diff --git a/docs/CHANGELOG.md b/docs/CHANGELOG.md\n@@ -317,6 +317,20 @@\n+## [2026-11-17 22:04] 按会话来源显示助手品牌头像\n@@ -416,3 +430,15 @@\n+## [2026-11-19 20:25] 将活动报告放入本地归档仓库\ndiff --git a/memory/gotchas.md b/memory/gotchas.md\n@@ -24,3 +24,4 @@\ndiff --git a/memory/progress.md b/memory/progress.md\n@@ -1,5 +1,15 @@\n+## 助手品牌头像（2026-11-17）\n@@ -245,3 +255,5 @@\n"}
+
+## tool · 2026-11-19T12:25:34Z
+
+
+Script running with cell ID g10:60
+Wall time 1.0 seconds
+Output:
+
+
+## tool · 2026-11-19T12:25:41Z
+
+
+Script completed
+Wall time 0.0 seconds
+Output:
+
+{"chunk_id":"6850c0","wall_time_seconds":1.002211875,"session_id":85056,"original_token_count":56,"output":" docs/CHANGELOG.md  | 12 ++++++++++++\n memory/gotchas.md  |  1 +\n memory/progress.md |  2 ++\n 3 files changed, 15 insertions(+)\n[main 53e4a65] docs(archive): record local README placement\n 3 files changed, 15 insertions(+)\n"}
+
+## tool · 2026-11-19T12:25:46Z
+
+
+Script completed
+Wall time 0.2 seconds
+Output:
+
+{"chunk_id":"b53af6","wall_time_seconds":0.000020166,"exit_code":0,"original_token_count":20,"output":"To https://github.com/OyamaMeek/Ragdoll.git\n   2512b46..53e4a65  main -> main\n"}
+{"chunk_id":"9f0474","wall_time_seconds":0.000008458,"exit_code":0,"original_token_count":76,"output":"?? README.md\n?? ragdoll-token-activity.svg\n## main...origin/main\n M Package.swift\n M Sources/Ragdoll/ConversationView.swift\n M Tests/RagdollTests/ConversationTests.swift\n M docs/CHANGELOG.md\n M memory/agents.md\n M memory/plan.md\n M memory/progress.md\n M memory/verify.md\n?? Sources/Ragdoll/Resources/\n"}
+
+## assistant · 2026-11-19T12:25:49Z
+
+已放到本地 `Ragdoll_sync` 仓库根目录：[README.md](/Users/oyamahappa/Documents/GitHub/Ragdoll_sync/README.md) 和 [Token 热力图](/Users/oyamahappa/Documents/GitHub/Ragdoll_sync/ragdoll-token-activity.svg)。
+
+两份文件目前是未提交的本地快照，未上传到 GitHub。
