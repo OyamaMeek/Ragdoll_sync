@@ -1,0 +1,60 @@
+{
+  "created" : 1795159522140.79,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:7aea2b0042f7878959a238b9",
+  "nativeID" : "01a1f7d8-78ac-7d82-a886-f47fca9569dc",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
+  "source" : "codex",
+  "title" : "移除 VPS 真实 IP",
+  "updated" : 1795159588222,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff5eb1bd487d084cc6ce8f3b86a3b",
+      "input" : 20334,
+      "model" : "gpt-6.1-sol",
+      "output" : 193,
+      "time" : 1795159537171
+    },
+    {
+      "cacheRead" : 33664,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff5f268dc87d09c099de812f4fad7",
+      "input" : 1173,
+      "model" : "gpt-6.1-sol",
+      "output" : 433,
+      "time" : 1795159548032
+    },
+    {
+      "cacheRead" : 35072,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff5fd45e087d0a1d9c4b779e9feef",
+      "input" : 9845,
+      "model" : "gpt-6.1-sol",
+      "output" : 384,
+      "time" : 1795159557728
+    },
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff60810c487d0ab8adc20f83f5c68",
+      "input" : 32816,
+      "model" : "gpt-6.1-sol",
+      "output" : 50,
+      "time" : 1795159562174
+    },
+    {
+      "cacheRead" : 45952,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff60b5fd887d084a6ee29bd088051",
+      "input" : 369,
+      "model" : "gpt-6.1-sol",
+      "output" : 240,
+      "time" : 1795159569211
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
