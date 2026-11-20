@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "将项目改名为 HzieeVPN-easyconnect",
-  "updated" : 1795157274762,
+  "updated" : 1795157636068,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -340,6 +340,69 @@
       "model" : "gpt-6.1-sol",
       "output" : 288,
       "time" : 1795157274744
+    },
+    {
+      "cacheRead" : 156544,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affee3aa45087d08e4d169723d4e73d",
+      "input" : 966,
+      "model" : "gpt-6.1-sol",
+      "output" : 161,
+      "time" : 1795157568241
+    },
+    {
+      "cacheRead" : 157440,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affee41588c87d095e1990563f27b9f",
+      "input" : 3211,
+      "model" : "gpt-6.1-sol",
+      "output" : 581,
+      "time" : 1795157583271
+    },
+    {
+      "cacheRead" : 161024,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affee5b876487d0a2ad19b16b74ef9f",
+      "input" : 1616,
+      "model" : "gpt-6.1-sol",
+      "output" : 79,
+      "time" : 1795157601498
+    },
+    {
+      "cacheRead" : 162560,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affee628d1487d0be73a8c125a51f79",
+      "input" : 726,
+      "model" : "gpt-6.1-sol",
+      "output" : 353,
+      "time" : 1795157611211
+    },
+    {
+      "cacheRead" : 163456,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affee714cd487d0911ea7b7ae97494e",
+      "input" : 750,
+      "model" : "gpt-6.1-sol",
+      "output" : 184,
+      "time" : 1795157625307
+    },
+    {
+      "cacheRead" : 164224,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affee7a9f6c87d0a32343621878a638",
+      "input" : 309,
+      "model" : "gpt-6.1-sol",
+      "output" : 39,
+      "time" : 1795157630288
+    },
+    {
+      "cacheRead" : 164352,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affee7f5d7087d0933fcd00be8ed356",
+      "input" : 312,
+      "model" : "gpt-6.1-sol",
+      "output" : 89,
+      "time" : 1795157636054
     }
   ],
   "warnings" : [
