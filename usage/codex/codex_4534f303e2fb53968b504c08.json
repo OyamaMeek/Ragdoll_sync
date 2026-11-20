@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "添加网页验证码入口",
-  "updated" : 1795158838408,
+  "updated" : 1795158912906,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -223,6 +223,42 @@
       "model" : "gpt-6.1-sol",
       "output" : 1315,
       "time" : 1795158838408
+    },
+    {
+      "cacheRead" : 114816,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff34481c087d08f968377bac6feb0",
+      "input" : 339,
+      "model" : "gpt-6.1-sol",
+      "output" : 355,
+      "time" : 1795158863391
+    },
+    {
+      "cacheRead" : 115328,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff350b43c87d093107078ebfd280b",
+      "input" : 528,
+      "model" : "gpt-6.1-sol",
+      "output" : 749,
+      "time" : 1795158881597
+    },
+    {
+      "cacheRead" : 116480,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff36631ec87d0b43de32372642877",
+      "input" : 1239,
+      "model" : "gpt-6.1-sol",
+      "output" : 729,
+      "time" : 1795158902673
+    },
+    {
+      "cacheRead" : 118272,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff378bab087d0bc22ee3d166c81c0",
+      "input" : 434,
+      "model" : "gpt-6.1-sol",
+      "output" : 235,
+      "time" : 1795158912787
     }
   ],
   "warnings" : [
