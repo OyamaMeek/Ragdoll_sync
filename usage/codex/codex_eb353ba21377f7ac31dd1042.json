@@ -6,9 +6,53 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "增加每分钟 HTTP Ping",
-  "updated" : 1795150403908,
+  "updated" : 1795150456087,
   "usage" : [
-
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_04b3cfc91997346f016affd244ee4487d09656087fcc02a101",
+      "input" : 20279,
+      "model" : "gpt-6.1-sol",
+      "output" : 244,
+      "time" : 1795150411019
+    },
+    {
+      "cacheRead" : 33664,
+      "cacheWrite" : 0,
+      "id" : "resp_04b3cfc91997346f016affd24bf2c887d089cc4089728c382e",
+      "input" : 1507,
+      "model" : "gpt-6.1-sol",
+      "output" : 145,
+      "time" : 1795150416343
+    },
+    {
+      "cacheRead" : 35200,
+      "cacheWrite" : 0,
+      "id" : "resp_04b3cfc91997346f016affd25141d887d090ece36eca0012bb",
+      "input" : 10303,
+      "model" : "gpt-6.1-sol",
+      "output" : 303,
+      "time" : 1795150424670
+    },
+    {
+      "cacheRead" : 45568,
+      "cacheWrite" : 0,
+      "id" : "resp_04b3cfc91997346f016affd259b3b487d0bd174457e81b6f11",
+      "input" : 10678,
+      "model" : "gpt-6.1-sol",
+      "output" : 256,
+      "time" : 1795150431866
+    },
+    {
+      "cacheRead" : 56320,
+      "cacheWrite" : 0,
+      "id" : "resp_04b3cfc91997346f016affd265b91887d097a20a0f509ee21b",
+      "input" : 7924,
+      "model" : "gpt-6.1-sol",
+      "output" : 231,
+      "time" : 1795150443576
+    }
   ],
   "warnings" : [
 
