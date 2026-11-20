@@ -1,0 +1,24 @@
+{
+  "created" : 1795156548102.4927,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:e8029e02d049dda8586ecd36",
+  "nativeID" : "01a1f7ab-17a4-7a93-83da-dc6f8a8d3ad2",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
+  "source" : "codex",
+  "title" : "将项目改名为 HzieeVPN-easyconnect",
+  "updated" : 1795156561531,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affea4ac04c87d08fe62bf5b801ea5c",
+      "input" : 20244,
+      "model" : "gpt-6.1-sol",
+      "output" : 278,
+      "time" : 1795156561344
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
