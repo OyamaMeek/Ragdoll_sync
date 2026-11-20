@@ -6,7 +6,7 @@
   "project" : "/Users/oyamahappa/Documents/GitHub/HzieeOJ_tools",
   "source" : "codex",
   "title" : "Guardian review",
-  "updated" : 1795183810404,
+  "updated" : 1795184152790,
   "usage" : [
     {
       "cacheRead" : 5888,
@@ -61,6 +61,33 @@
       "model" : "codex-auto-review",
       "output" : 120,
       "time" : 1795183810400
+    },
+    {
+      "cacheRead" : 30848,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe4dd7a598836a5016b0055fc36b487d0a0eac064185953ae",
+      "input" : 12053,
+      "model" : "codex-auto-review",
+      "output" : 109,
+      "time" : 1795184126852
+    },
+    {
+      "cacheRead" : 42752,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe4dd7a598836a5016b0056003ba487d0adcbfa2348905d9c",
+      "input" : 535,
+      "model" : "codex-auto-review",
+      "output" : 101,
+      "time" : 1795184131360
+    },
+    {
+      "cacheRead" : 43136,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe4dd7a598836a5016b005615a8e887d0b2266b935b181b47",
+      "input" : 2051,
+      "model" : "codex-auto-review",
+      "output" : 104,
+      "time" : 1795184152786
     }
   ],
   "warnings" : [
