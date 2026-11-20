@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "移除 VPS 真实 IP",
-  "updated" : 1795160497835,
+  "updated" : 1795160653600,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -259,6 +259,87 @@
       "model" : "gpt-6.1-sol",
       "output" : 149,
       "time" : 1795160497835
+    },
+    {
+      "cacheRead" : 113152,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb322f28aa6d15c016afff9b7361087d0a66bfe233d05d4b9",
+      "input" : 520,
+      "model" : "gpt-6.1-sol",
+      "output" : 180,
+      "time" : 1795160510184
+    },
+    {
+      "cacheRead" : 113664,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb322f28aa6d15c016afff9bf505c87d081f8b41f93b15623",
+      "input" : 1459,
+      "model" : "gpt-6.1-sol",
+      "output" : 3045,
+      "time" : 1795160573807
+    },
+    {
+      "cacheRead" : 118016,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb322f28aa6d15c016afff9ff338087d095e343a4022ecd76",
+      "input" : 5410,
+      "model" : "gpt-6.1-sol",
+      "output" : 792,
+      "time" : 1795160593816
+    },
+    {
+      "cacheRead" : 124032,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb322f28aa6d15c016afffa1313c887d0a0e4f23fc5cd2523",
+      "input" : 384,
+      "model" : "gpt-6.1-sol",
+      "output" : 307,
+      "time" : 1795160603083
+    },
+    {
+      "cacheRead" : 124544,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb322f28aa6d15c016afffa213d3c87d0ba7dd93ae53efa14",
+      "input" : 387,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1795160612286
+    },
+    {
+      "cacheRead" : 124800,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb322f28aa6d15c016afffa255b0c87d0a2fd7c6e882a5128",
+      "input" : 265,
+      "model" : "gpt-6.1-sol",
+      "output" : 81,
+      "time" : 1795160616399
+    },
+    {
+      "cacheRead" : 124928,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb322f28aa6d15c016afffa2a863c87d0a98ad0820eeac6aa",
+      "input" : 294,
+      "model" : "gpt-6.1-sol",
+      "output" : 407,
+      "time" : 1795160628674
+    },
+    {
+      "cacheRead" : 125440,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb322f28aa6d15c016afffa3680f487d08d1db8f13d180906",
+      "input" : 1386,
+      "model" : "gpt-6.1-sol",
+      "output" : 517,
+      "time" : 1795160642677
+    },
+    {
+      "cacheRead" : 127104,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb322f28aa6d15c016afffa44976887d08a9ec5e5b2c2c5d0",
+      "input" : 296,
+      "model" : "gpt-6.1-sol",
+      "output" : 145,
+      "time" : 1795160648744
     }
   ],
   "warnings" : [
