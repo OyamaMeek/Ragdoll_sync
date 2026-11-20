@@ -1,0 +1,42 @@
+{
+  "created" : 1795184371818.3086,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:92c5bc83331e6d4eefa04fc7",
+  "nativeID" : "01a1f953-a6e5-7962-95c2-72be34be7303",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HzieeOJ_tools",
+  "source" : "codex",
+  "title" : "编写项目 About",
+  "updated" : 1795184399835,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_0ffe9d83bc6e79c4016b0056fe825887d0a3db7baf49e94c38",
+      "input" : 20448,
+      "model" : "gpt-6.1-sol",
+      "output" : 163,
+      "time" : 1795184387538
+    },
+    {
+      "cacheRead" : 33792,
+      "cacheWrite" : 0,
+      "id" : "resp_0ffe9d83bc6e79c4016b005704cfdc87d08fca605009953a1e",
+      "input" : 1053,
+      "model" : "gpt-6.1-sol",
+      "output" : 196,
+      "time" : 1795184394812
+    },
+    {
+      "cacheRead" : 34816,
+      "cacheWrite" : 0,
+      "id" : "resp_0ffe9d83bc6e79c4016b00570c1d2c87d091497976b832df87",
+      "input" : 3722,
+      "model" : "gpt-6.1-sol",
+      "output" : 110,
+      "time" : 1795184399816
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
