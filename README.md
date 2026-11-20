@@ -4,9 +4,9 @@
 
 | 指标 | 数值 | 说明 |
 | --- | ---: | --- |
-| 估算总成本 | $502.95 | 14,836/22,339 条用量已定价 |
-| 总 Token | 2,952,637,607 | 36 个会话缺少用量 |
-| 会话 | 880 | 当前归档范围 |
+| 估算总成本 | $503.18 | 14,850/22,358 条用量已定价 |
+| 总 Token | 2,953,660,892 | 36 个会话缺少用量 |
+| 会话 | 882 | 当前归档范围 |
 
 ### Token 活跃度
 
@@ -24,19 +24,19 @@
 | DSH | 277,434,181 | 54 | $15.02 |
 | Ragdoll | 240,021,781 | 55 | $32.48 |
 | PrivateWork | 189,404,570 | 52 | $33.83 |
-| docker-easyconnect | 70,144,629 | 17 | $11.08 |
+| docker-easyconnect | 71,167,914 | 19 | $11.31 |
 | Autovisor | 64,526,961 | 28 | $1.17 |
 
 ### 最近会话
 
 | 会话 | 来源 | 项目 | 更新日期 |
 | --- | --- | --- | --- |
+| [部署镜像和配置到 Hi-Al](usage/codex/codex_972b4597f202934100e7ed4b.json) | codex | docker-easyconnect | 2026-11-20 |
+| [Guardian review](usage/codex/codex_5b2338f52a496abe987ed7a1.json) | codex | docker-easyconnect | 2026-11-20 |
 | [精简为信工 VPN 登录与验证码页](usage/codex/codex_684485d4744ccd2011a2ffcb.json) | codex | docker-easyconnect | 2026-11-20 |
 | [Guardian review](usage/codex/codex_002ee58ec85490eceb1369c9.json) | codex | docker-easyconnect | 2026-11-20 |
 | [恢复可编译的源文件](usage/codex/codex_f820876c9a5206506a7b1eec.json) | codex | docker-easyconnect | 2026-11-20 |
 | [Guardian review](usage/codex/codex_5f46b4fe7c34083d4e7de12d.json) | codex | docker-easyconnect | 2026-11-20 |
-| [移除 VPS 真实 IP](usage/codex/codex_7aea2b0042f7878959a238b9.json) | codex | docker-easyconnect | 2026-11-20 |
-| [Guardian review](usage/codex/codex_4031232181a7f09616ed84a7.json) | codex | docker-easyconnect | 2026-11-20 |
 
 成本按当前价格表以美元估算，实际账单以服务商为准。
 
