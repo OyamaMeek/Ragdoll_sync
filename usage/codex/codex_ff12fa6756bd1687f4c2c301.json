@@ -6,7 +6,7 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "查找满血 Siri AI 分流域名",
-  "updated" : 1795189794763,
+  "updated" : 1795189931684,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -187,6 +187,105 @@
       "model" : "gpt-6.1-sol",
       "output" : 158,
       "time" : 1795189794760
+    },
+    {
+      "cacheRead" : 106752,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006c23db1887d0a1754f317a4441e7",
+      "input" : 1782,
+      "model" : "gpt-6.1-sol",
+      "output" : 326,
+      "time" : 1795189805361
+    },
+    {
+      "cacheRead" : 108672,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006c2eb40887d08f8f37fbc0ab0060",
+      "input" : 1178,
+      "model" : "gpt-6.1-sol",
+      "output" : 1252,
+      "time" : 1795189834232
+    },
+    {
+      "cacheRead" : 110976,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006c4b590487d0bb6517f2125eb8ce",
+      "input" : 602,
+      "model" : "gpt-6.1-sol",
+      "output" : 260,
+      "time" : 1795189842620
+    },
+    {
+      "cacheRead" : 111616,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006c53a91487d0914dcbe74a938f42",
+      "input" : 597,
+      "model" : "gpt-6.1-sol",
+      "output" : 995,
+      "time" : 1795189867892
+    },
+    {
+      "cacheRead" : 113024,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006c6ffea087d0a3acdd11528e8252",
+      "input" : 1052,
+      "model" : "gpt-6.1-sol",
+      "output" : 83,
+      "time" : 1795189878863
+    },
+    {
+      "cacheRead" : 113920,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006c7a62b487d0ac389174159cd8a8",
+      "input" : 1061,
+      "model" : "gpt-6.1-sol",
+      "output" : 116,
+      "time" : 1795189888102
+    },
+    {
+      "cacheRead" : 114944,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006c83703c87d0a3d21f9314b8501f",
+      "input" : 315,
+      "model" : "gpt-6.1-sol",
+      "output" : 224,
+      "time" : 1795189898232
+    },
+    {
+      "cacheRead" : 115328,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006c901b9887d0ae4843e119093151",
+      "input" : 832,
+      "model" : "gpt-6.1-sol",
+      "output" : 110,
+      "time" : 1795189908872
+    },
+    {
+      "cacheRead" : 116096,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006c971e6087d09c9e51cfeeb9e344",
+      "input" : 913,
+      "model" : "gpt-6.1-sol",
+      "output" : 121,
+      "time" : 1795189915885
+    },
+    {
+      "cacheRead" : 116992,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006ca035bc87d09a85d80331cbd31c",
+      "input" : 236,
+      "model" : "gpt-6.1-sol",
+      "output" : 119,
+      "time" : 1795189924240
+    },
+    {
+      "cacheRead" : 117120,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006ca69f9c87d08ffa6cf67a300ca4",
+      "input" : 370,
+      "model" : "gpt-6.1-sol",
+      "output" : 130,
+      "time" : 1795189931635
     }
   ],
   "warnings" : [
