@@ -4,9 +4,9 @@
 
 | 指标 | 数值 | 说明 |
 | --- | ---: | --- |
-| 估算总成本 | $495.67 | 14,535/21,997 条用量已定价 |
-| 总 Token | 2,910,801,590 | 36 个会话缺少用量 |
-| 会话 | 867 | 当前归档范围 |
+| 估算总成本 | $495.95 | 14,548/22,014 条用量已定价 |
+| 总 Token | 2,912,467,679 | 36 个会话缺少用量 |
+| 会话 | 868 | 当前归档范围 |
 
 ### Token 活跃度
 
@@ -32,11 +32,11 @@
 | 会话 | 来源 | 项目 | 更新日期 |
 | --- | --- | --- | --- |
 | [增加每分钟 HTTP Ping](usage/codex/codex_eb353ba21377f7ac31dd1042.json) | codex | docker-easyconnect | 2026-11-20 |
+| [Guardian review](usage/codex/codex_02f75eec9d4c4c183fad2d8c.json) | codex | docker-easyconnect | 2026-11-20 |
 | [部署项目并接入学校 VPN](usage/codex/codex_23959b685c8be26cffb360ca.json) | codex | docker-easyconnect | 2026-11-20 |
 | [Guardian review](usage/codex/codex_73b3210e4865e809151dd33b.json) | codex | docker-easyconnect | 2026-11-20 |
 | [Guardian review](usage/codex/codex_e2fa03cd7c0488a99a3cc085.json) | codex | docker-easyconnect | 2026-11-20 |
 | [评估移除对话归档功能](usage/codex/codex_4db52a1427f82c156c4b5cee.json) | codex | Ragdoll | 2026-11-20 |
-| [Guardian review](usage/codex/codex_ee49e826416d026c24b12879.json) | codex | Ragdoll | 2026-11-20 |
 
 成本按当前价格表以美元估算，实际账单以服务商为准。
 
