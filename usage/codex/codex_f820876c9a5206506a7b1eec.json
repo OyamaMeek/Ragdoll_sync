@@ -6,9 +6,35 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "恢复可编译的源文件",
-  "updated" : 1795166904862,
+  "updated" : 1795166958429,
   "usage" : [
-
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_0113028a3047b1ff016b0012b9eb5087d09d073bade3ee4f12",
+      "input" : 20316,
+      "model" : "gpt-6.1-sol",
+      "output" : 199,
+      "time" : 1795166917711
+    },
+    {
+      "cacheRead" : 33664,
+      "cacheWrite" : 0,
+      "id" : "resp_0113028a3047b1ff016b0012c70bd487d08e172d7e754e0032",
+      "input" : 1314,
+      "model" : "gpt-6.1-sol",
+      "output" : 180,
+      "time" : 1795166928051
+    },
+    {
+      "cacheRead" : 34944,
+      "cacheWrite" : 0,
+      "id" : "resp_0113028a3047b1ff016b0012d107a887d0b4262e23eb041611",
+      "input" : 11846,
+      "model" : "gpt-6.1-sol",
+      "output" : 481,
+      "time" : 1795166946964
+    }
   ],
   "warnings" : [
 
