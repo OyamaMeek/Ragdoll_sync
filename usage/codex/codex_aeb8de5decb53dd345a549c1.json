@@ -6,7 +6,7 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "将 Claude 域名加入 Claude.list",
-  "updated" : 1795189065941,
+  "updated" : 1795189101768,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -88,6 +88,24 @@
       "model" : "gpt-6.1-sol",
       "output" : 319,
       "time" : 1795189065941
+    },
+    {
+      "cacheRead" : 59008,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b006966112887d092b2e0b14735733b",
+      "input" : 1402,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1795189097462
+    },
+    {
+      "cacheRead" : 60288,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b00696a913c87d0bf7245d51a8f17d4",
+      "input" : 311,
+      "model" : "gpt-6.1-sol",
+      "output" : 77,
+      "time" : 1795189101740
     }
   ],
   "warnings" : [
