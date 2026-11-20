@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "部署镜像和配置到 Hi-Al",
-  "updated" : 1795173990754,
+  "updated" : 1795174144359,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -1186,6 +1186,33 @@
       "model" : "gpt-6.1-sol",
       "output" : 486,
       "time" : 1795173990735
+    },
+    {
+      "cacheRead" : 242944,
+      "cacheWrite" : 0,
+      "id" : "resp_0b728c1550988067016b002ed9e5b887d0bf89d518cee80dce",
+      "input" : 252,
+      "model" : "gpt-6.1-sol",
+      "output" : 83,
+      "time" : 1795174111640
+    },
+    {
+      "cacheRead" : 243072,
+      "cacheWrite" : 0,
+      "id" : "resp_0b728c1550988067016b002ee7149c87d0817882a03ab7ace2",
+      "input" : 3998,
+      "model" : "gpt-6.1-sol",
+      "output" : 340,
+      "time" : 1795174133601
+    },
+    {
+      "cacheRead" : 247168,
+      "cacheWrite" : 0,
+      "id" : "resp_0b728c1550988067016b002ef97d9887d08d6842d4a33a018a",
+      "input" : 4292,
+      "model" : "gpt-6.1-sol",
+      "output" : 203,
+      "time" : 1795174144347
     }
   ],
   "warnings" : [
