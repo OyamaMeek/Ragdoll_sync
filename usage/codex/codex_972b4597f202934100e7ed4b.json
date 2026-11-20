@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "部署镜像和配置到 Hi-Al",
-  "updated" : 1795183045968,
+  "updated" : 1795183105861,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -1816,6 +1816,51 @@
       "model" : "gpt-6.1-sol",
       "output" : 1354,
       "time" : 1795183045965
+    },
+    {
+      "cacheRead" : 359680,
+      "cacheWrite" : 0,
+      "id" : "resp_0b6cd939c606cec9016b0051c745c887d0a1508f9323a97993",
+      "input" : 1843,
+      "model" : "gpt-6.1-sol",
+      "output" : 131,
+      "time" : 1795183054693
+    },
+    {
+      "cacheRead" : 361472,
+      "cacheWrite" : 0,
+      "id" : "resp_0b6cd939c606cec9016b0051dd3dfc87d08e1c4ee4d19c3a0f",
+      "input" : 348,
+      "model" : "gpt-6.1-sol",
+      "output" : 78,
+      "time" : 1795183074157
+    },
+    {
+      "cacheRead" : 361728,
+      "cacheWrite" : 0,
+      "id" : "resp_0b6cd939c606cec9016b0051e4351087d0b0bb1a6f95c7be12",
+      "input" : 979,
+      "model" : "gpt-6.1-sol",
+      "output" : 312,
+      "time" : 1795183086862
+    },
+    {
+      "cacheRead" : 362880,
+      "cacheWrite" : 0,
+      "id" : "resp_0b6cd939c606cec9016b0051f50e2487d0a361c4ab30c661de",
+      "input" : 808,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1795183097427
+    },
+    {
+      "cacheRead" : 363520,
+      "cacheWrite" : 0,
+      "id" : "resp_0b6cd939c606cec9016b0051fab43c87d0b859281929d9f6fa",
+      "input" : 359,
+      "model" : "gpt-6.1-sol",
+      "output" : 109,
+      "time" : 1795183105774
     }
   ],
   "warnings" : [
