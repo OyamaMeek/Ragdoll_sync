@@ -6,7 +6,7 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "Find GitHub profile project in Notion",
-  "updated" : 1795186194486,
+  "updated" : 1795186276058,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -133,6 +133,51 @@
       "model" : "gpt-6.1-sol",
       "output" : 250,
       "time" : 1795186184052
+    },
+    {
+      "cacheRead" : 101504,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005e15384887d095b8cdc29efced52",
+      "input" : 6153,
+      "model" : "gpt-6.1-sol",
+      "output" : 581,
+      "time" : 1795186212566
+    },
+    {
+      "cacheRead" : 108032,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005e25e11087d09df4d58271b91252",
+      "input" : 704,
+      "model" : "gpt-6.1-sol",
+      "output" : 1512,
+      "time" : 1795186247457
+    },
+    {
+      "cacheRead" : 110080,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005e48b29087d08c2302c143cbca91",
+      "input" : 918,
+      "model" : "gpt-6.1-sol",
+      "output" : 201,
+      "time" : 1795186253865
+    },
+    {
+      "cacheRead" : 110976,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005e4f585087d08bf465435d2726dc",
+      "input" : 633,
+      "model" : "gpt-6.1-sol",
+      "output" : 82,
+      "time" : 1795186261998
+    },
+    {
+      "cacheRead" : 111488,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005e5fcb7487d08fe092e1e260bf46",
+      "input" : 260,
+      "model" : "gpt-6.1-sol",
+      "output" : 146,
+      "time" : 1795186276058
     }
   ],
   "warnings" : [
