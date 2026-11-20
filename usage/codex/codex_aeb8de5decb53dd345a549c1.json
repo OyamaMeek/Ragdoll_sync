@@ -6,9 +6,89 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "将 Claude 域名加入 Claude.list",
-  "updated" : 1795188953205,
+  "updated" : 1795189065941,
   "usage" : [
-
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b0068e00d3487d0bcd2c77232c6cd9f",
+      "input" : 25486,
+      "model" : "gpt-6.1-sol",
+      "output" : 166,
+      "time" : 1795188964608
+    },
+    {
+      "cacheRead" : 38784,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b0068e5f50c87d08e7ccca366154716",
+      "input" : 1352,
+      "model" : "gpt-6.1-sol",
+      "output" : 187,
+      "time" : 1795188971139
+    },
+    {
+      "cacheRead" : 40192,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b0068ec544887d085b289207e1b1d19",
+      "input" : 9716,
+      "model" : "gpt-6.1-sol",
+      "output" : 136,
+      "time" : 1795188975935
+    },
+    {
+      "cacheRead" : 49920,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b0068f104e887d0a9caef1c00f280c3",
+      "input" : 3915,
+      "model" : "gpt-6.1-sol",
+      "output" : 585,
+      "time" : 1795188990818
+    },
+    {
+      "cacheRead" : 54272,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b0068ffe27c87d0b7323796053b7561",
+      "input" : 720,
+      "model" : "gpt-6.1-sol",
+      "output" : 351,
+      "time" : 1795189001912
+    },
+    {
+      "cacheRead" : 55168,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b00690b0d7887d0b24cd63c84de51f3",
+      "input" : 694,
+      "model" : "gpt-6.1-sol",
+      "output" : 776,
+      "time" : 1795189020999
+    },
+    {
+      "cacheRead" : 56448,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b00691e137c87d0b871c36d281ada99",
+      "input" : 942,
+      "model" : "gpt-6.1-sol",
+      "output" : 142,
+      "time" : 1795189028188
+    },
+    {
+      "cacheRead" : 57344,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b006938f46487d08b1fcbf155274adf",
+      "input" : 1257,
+      "model" : "gpt-6.1-sol",
+      "output" : 66,
+      "time" : 1795189053555
+    },
+    {
+      "cacheRead" : 58496,
+      "cacheWrite" : 0,
+      "id" : "resp_059dfe1d3971ecb8016b0069413d1887d08b1f733781ddc8ca",
+      "input" : 291,
+      "model" : "gpt-6.1-sol",
+      "output" : 319,
+      "time" : 1795189065941
+    }
   ],
   "warnings" : [
 

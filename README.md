@@ -4,9 +4,9 @@
 
 | 指标 | 数值 | 说明 |
 | --- | ---: | --- |
-| 估算总成本 | $510.99 | 15,156/22,734 条用量已定价 |
-| 总 Token | 3,009,501,187 | 38 个会话缺少用量 |
-| 会话 | 894 | 当前归档范围 |
+| 估算总成本 | $511.15 | 15,165/22,745 条用量已定价 |
+| 总 Token | 3,010,021,280 | 37 个会话缺少用量 |
+| 会话 | 895 | 当前归档范围 |
 
 ### Token 活跃度
 
@@ -18,7 +18,7 @@
 
 | 项目 | Token | 会话 | 估算成本 |
 | --- | ---: | ---: | ---: |
-| Codex | 944,522,244 | 332 | $133.36 |
+| Codex | 945,042,337 | 333 | $133.52 |
 | codex-question-bank | 569,428,124 | 65 | $90.42 |
 | Motion | 372,419,111 | 36 | $141.94 |
 | DSH | 277,434,181 | 54 | $15.02 |
@@ -32,11 +32,11 @@
 | 会话 | 来源 | 项目 | 更新日期 |
 | --- | --- | --- | --- |
 | [将 Claude 域名加入 Claude.list](usage/codex/codex_aeb8de5decb53dd345a549c1.json) | codex | Codex | 2026-11-20 |
+| [Guardian review](usage/codex/codex_9927748229834c4459950322.json) | codex | Codex | 2026-11-20 |
 | [了解如何用 GitHub Readme Stats 装饰主页](usage/codex/codex_f79884750988cb785da363ae.json) | codex | Codex | 2026-11-20 |
 | [Guardian review](usage/codex/codex_ce0c3448b77d87b44780d3ae.json) | codex | Codex | 2026-11-20 |
 | [Find GitHub profile project in Notion](usage/codex/codex_9ab43acb57ff549f7ce39447.json) | codex | Codex | 2026-11-20 |
 | [Guardian review](usage/codex/codex_1e6bb8f02dd478cea2834850.json) | codex | Codex | 2026-11-20 |
-| [制作一键脚本](usage/codex/codex_ab183eca1373a7767abedf8f.json) | codex | HzieeOJ&#95;tools | 2026-11-20 |
 
 成本按当前价格表以美元估算，实际账单以服务商为准。
 
