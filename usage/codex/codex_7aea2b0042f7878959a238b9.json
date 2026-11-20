@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "移除 VPS 真实 IP",
-  "updated" : 1795159651628,
+  "updated" : 1795159750725,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -97,6 +97,69 @@
       "model" : "gpt-6.1-sol",
       "output" : 334,
       "time" : 1795159648589
+    },
+    {
+      "cacheRead" : 67584,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff664e11c87d0a29bf3f0c6303b85",
+      "input" : 1932,
+      "model" : "gpt-6.1-sol",
+      "output" : 72,
+      "time" : 1795159655244
+    },
+    {
+      "cacheRead" : 69376,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff66a010487d09612f36b3cc1c95a",
+      "input" : 2349,
+      "model" : "gpt-6.1-sol",
+      "output" : 642,
+      "time" : 1795159673792
+    },
+    {
+      "cacheRead" : 72192,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff67e42b087d0b712520de5f24a5a",
+      "input" : 13034,
+      "model" : "gpt-6.1-sol",
+      "output" : 797,
+      "time" : 1795159699728
+    },
+    {
+      "cacheRead" : 85888,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff6975b2087d0a81c884e50fd6361",
+      "input" : 1492,
+      "model" : "gpt-6.1-sol",
+      "output" : 1078,
+      "time" : 1795159727950
+    },
+    {
+      "cacheRead" : 88320,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff6b1aa1c87d0be55135a26491d72",
+      "input" : 860,
+      "model" : "gpt-6.1-sol",
+      "output" : 209,
+      "time" : 1795159736327
+    },
+    {
+      "cacheRead" : 89216,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff6ba0e5c87d0989edeba5f64c96b",
+      "input" : 515,
+      "model" : "gpt-6.1-sol",
+      "output" : 193,
+      "time" : 1795159743095
+    },
+    {
+      "cacheRead" : 89728,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff6c02b4887d0ba40508296ec0aab",
+      "input" : 284,
+      "model" : "gpt-6.1-sol",
+      "output" : 242,
+      "time" : 1795159750718
     }
   ],
   "warnings" : [
