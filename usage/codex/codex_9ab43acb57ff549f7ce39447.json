@@ -6,7 +6,7 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "Find GitHub profile project in Notion",
-  "updated" : 1795186062026,
+  "updated" : 1795186194486,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -70,6 +70,69 @@
       "model" : "gpt-6.1-sol",
       "output" : 563,
       "time" : 1795186053318
+    },
+    {
+      "cacheRead" : 80768,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005dcc829887d0b331ead3ad80af79",
+      "input" : 2788,
+      "model" : "gpt-6.1-sol",
+      "output" : 322,
+      "time" : 1795186133748
+    },
+    {
+      "cacheRead" : 83712,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005dda6d1087d0b13b22915921d959",
+      "input" : 1649,
+      "model" : "gpt-6.1-sol",
+      "output" : 212,
+      "time" : 1795186146082
+    },
+    {
+      "cacheRead" : 85376,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005de36c1c87d09909205af5c100f6",
+      "input" : 215,
+      "model" : "gpt-6.1-sol",
+      "output" : 144,
+      "time" : 1795186152460
+    },
+    {
+      "cacheRead" : 85504,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005de9c84487d0b33d304ed2820c33",
+      "input" : 4441,
+      "model" : "gpt-6.1-sol",
+      "output" : 163,
+      "time" : 1795186161208
+    },
+    {
+      "cacheRead" : 89984,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005df2729c87d0ba59e0ee359668cc",
+      "input" : 4829,
+      "model" : "gpt-6.1-sol",
+      "output" : 194,
+      "time" : 1795186167913
+    },
+    {
+      "cacheRead" : 94848,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005df97e9c87d092eaf2c7fe1d5827",
+      "input" : 291,
+      "model" : "gpt-6.1-sol",
+      "output" : 34,
+      "time" : 1795186172555
+    },
+    {
+      "cacheRead" : 94976,
+      "cacheWrite" : 0,
+      "id" : "resp_07b7f502c71f1c39016b005dfde66887d0a6e00321f1635ce8",
+      "input" : 6458,
+      "model" : "gpt-6.1-sol",
+      "output" : 250,
+      "time" : 1795186184052
     }
   ],
   "warnings" : [

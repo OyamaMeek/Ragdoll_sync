@@ -4,8 +4,8 @@
 
 | 指标 | 数值 | 说明 |
 | --- | ---: | --- |
-| 估算总成本 | $510.38 | 15,123/22,687 条用量已定价 |
-| 总 Token | 3,006,015,676 | 37 个会话缺少用量 |
+| 估算总成本 | $510.50 | 15,130/22,694 条用量已定价 |
+| 总 Token | 3,006,652,834 | 37 个会话缺少用量 |
 | 会话 | 890 | 当前归档范围 |
 
 ### Token 活跃度
@@ -18,7 +18,7 @@
 
 | 项目 | Token | 会话 | 估算成本 |
 | --- | ---: | ---: | ---: |
-| Codex | 941,036,733 | 328 | $132.75 |
+| Codex | 941,673,891 | 328 | $132.87 |
 | codex-question-bank | 569,428,124 | 65 | $90.42 |
 | Motion | 372,419,111 | 36 | $141.94 |
 | DSH | 277,434,181 | 54 | $15.02 |
@@ -31,8 +31,8 @@
 
 | 会话 | 来源 | 项目 | 更新日期 |
 | --- | --- | --- | --- |
-| [制作一键脚本](usage/codex/codex_ab183eca1373a7767abedf8f.json) | codex | HzieeOJ&#95;tools | 2026-11-20 |
 | [Find GitHub profile project in Notion](usage/codex/codex_9ab43acb57ff549f7ce39447.json) | codex | Codex | 2026-11-20 |
+| [制作一键脚本](usage/codex/codex_ab183eca1373a7767abedf8f.json) | codex | HzieeOJ&#95;tools | 2026-11-20 |
 | [Guardian review](usage/codex/codex_4c1c77db70394a6e092d72bb.json) | codex | HzieeOJ&#95;tools | 2026-11-20 |
 | [编写项目 About](usage/codex/codex_92c5bc83331e6d4eefa04fc7.json) | codex | HzieeOJ&#95;tools | 2026-11-20 |
 | [部署镜像和配置到 Hi-Al](usage/codex/codex_972b4597f202934100e7ed4b.json) | codex | docker-easyconnect | 2026-11-20 |
