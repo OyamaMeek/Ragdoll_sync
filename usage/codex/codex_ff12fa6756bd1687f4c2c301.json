@@ -6,7 +6,7 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "查找满血 Siri AI 分流域名",
-  "updated" : 1795189583630,
+  "updated" : 1795189638794,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -151,6 +151,33 @@
       "model" : "gpt-6.1-sol",
       "output" : 173,
       "time" : 1795189583630
+    },
+    {
+      "cacheRead" : 103808,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b5487a887d0b99ddbe17378d0a4",
+      "input" : 957,
+      "model" : "gpt-6.1-sol",
+      "output" : 128,
+      "time" : 1795189596112
+    },
+    {
+      "cacheRead" : 104704,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b618fd887d09e7cbf3aed09dea4",
+      "input" : 285,
+      "model" : "gpt-6.1-sol",
+      "output" : 557,
+      "time" : 1795189614441
+    },
+    {
+      "cacheRead" : 105344,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b6f7f7887d088217f4d67bcd01f",
+      "input" : 406,
+      "model" : "gpt-6.1-sol",
+      "output" : 940,
+      "time" : 1795189638735
     }
   ],
   "warnings" : [
