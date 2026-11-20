@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "部署项目并接入学校 VPN",
-  "updated" : 1795150266855,
+  "updated" : 1795150345632,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -1249,6 +1249,78 @@
       "model" : "gpt-6.1-sol",
       "output" : 2308,
       "time" : 1795150266852
+    },
+    {
+      "cacheRead" : 262400,
+      "cacheWrite" : 0,
+      "id" : "resp_02935bdf4002de81016affd1bbc04487d0890ed2a1a022ca28",
+      "input" : 1020,
+      "model" : "gpt-6.1-sol",
+      "output" : 226,
+      "time" : 1795150274898
+    },
+    {
+      "cacheRead" : 263552,
+      "cacheWrite" : 0,
+      "id" : "resp_02935bdf4002de81016affd1c3b3ac87d0b45406d360ff2def",
+      "input" : 2672,
+      "model" : "gpt-6.1-sol",
+      "output" : 143,
+      "time" : 1795150282049
+    },
+    {
+      "cacheRead" : 266240,
+      "cacheWrite" : 0,
+      "id" : "resp_02935bdf4002de81016affd1cd37ec87d0b965e7ae66022e64",
+      "input" : 448,
+      "model" : "gpt-6.1-sol",
+      "output" : 88,
+      "time" : 1795150290837
+    },
+    {
+      "cacheRead" : 266624,
+      "cacheWrite" : 0,
+      "id" : "resp_02935bdf4002de81016affd1e0bf1c87d0a0be015eb754fb5f",
+      "input" : 210,
+      "model" : "gpt-6.1-sol",
+      "output" : 169,
+      "time" : 1795150310626
+    },
+    {
+      "cacheRead" : 266880,
+      "cacheWrite" : 0,
+      "id" : "resp_02935bdf4002de81016affd1e7594487d08690a23ccae4ba71",
+      "input" : 1288,
+      "model" : "gpt-6.1-sol",
+      "output" : 457,
+      "time" : 1795150323261
+    },
+    {
+      "cacheRead" : 268544,
+      "cacheWrite" : 0,
+      "id" : "resp_02935bdf4002de81016affd1f3fa8887d0b4605be9a2e10231",
+      "input" : 435,
+      "model" : "gpt-6.1-sol",
+      "output" : 116,
+      "time" : 1795150328843
+    },
+    {
+      "cacheRead" : 268928,
+      "cacheWrite" : 0,
+      "id" : "resp_02935bdf4002de81016affd1fd342087d099c9e9e354e343e3",
+      "input" : 260,
+      "model" : "gpt-6.1-sol",
+      "output" : 94,
+      "time" : 1795150338692
+    },
+    {
+      "cacheRead" : 269184,
+      "cacheWrite" : 0,
+      "id" : "resp_02935bdf4002de81016affd20361e487d09a0bb84b5bbcea20",
+      "input" : 305,
+      "model" : "gpt-6.1-sol",
+      "output" : 136,
+      "time" : 1795150345600
     }
   ],
   "warnings" : [
