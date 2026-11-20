@@ -1,0 +1,33 @@
+{
+  "created" : 1795168827621.8367,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:684485d4744ccd2011a2ffcb",
+  "nativeID" : "01a1f866-76aa-75b2-8dab-e405a8b4f5b3",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
+  "source" : "codex",
+  "title" : "精简为信工 VPN 登录与验证码页",
+  "updated" : 1795168851116,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_08f4332c3ccf1671016b001a41d15487d0a7fdcbbd2f64043a",
+      "input" : 20255,
+      "model" : "gpt-6.1-sol",
+      "output" : 279,
+      "time" : 1795168840618
+    },
+    {
+      "cacheRead" : 33664,
+      "cacheWrite" : 0,
+      "id" : "resp_08f4332c3ccf1671016b001a49cfb087d08ea1242737751da8",
+      "input" : 8368,
+      "model" : "gpt-6.1-sol",
+      "output" : 201,
+      "time" : 1795168846723
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
