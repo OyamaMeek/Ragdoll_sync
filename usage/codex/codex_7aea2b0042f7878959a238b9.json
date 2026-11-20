@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "移除 VPS 真实 IP",
-  "updated" : 1795159588222,
+  "updated" : 1795159651628,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -52,6 +52,51 @@
       "model" : "gpt-6.1-sol",
       "output" : 240,
       "time" : 1795159569211
+    },
+    {
+      "cacheRead" : 46336,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff62545e487d087a8fec6d2e48bf3",
+      "input" : 311,
+      "model" : "gpt-6.1-sol",
+      "output" : 377,
+      "time" : 1795159597878
+    },
+    {
+      "cacheRead" : 46848,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff62f3ce087d09a0f3802fbf0fd93",
+      "input" : 10585,
+      "model" : "gpt-6.1-sol",
+      "output" : 629,
+      "time" : 1795159613908
+    },
+    {
+      "cacheRead" : 57856,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff63f4f6c87d0920c71aecf0acf3a",
+      "input" : 8015,
+      "model" : "gpt-6.1-sol",
+      "output" : 192,
+      "time" : 1795159621104
+    },
+    {
+      "cacheRead" : 65920,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff6463b1c87d0932da1b7e30921b5",
+      "input" : 161,
+      "model" : "gpt-6.1-sol",
+      "output" : 479,
+      "time" : 1795159634751
+    },
+    {
+      "cacheRead" : 66432,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba07d2f12f7cdf2016afff65822fc87d086086f0b9dce8f42",
+      "input" : 982,
+      "model" : "gpt-6.1-sol",
+      "output" : 334,
+      "time" : 1795159648589
     }
   ],
   "warnings" : [
