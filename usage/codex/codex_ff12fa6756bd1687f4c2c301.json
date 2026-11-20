@@ -1,0 +1,105 @@
+{
+  "created" : 1795189356866.7556,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ff12fa6756bd1687f4c2c301",
+  "nativeID" : "01a1f99f-b7c1-79c2-9990-ec626e46e659",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "帮我看一下[https://github.com/Kianuni/Erosion-CN](https://github.com/Kianuni/Erosion-CN) 我想要使用满血Siri ai 应",
+  "updated" : 1795189516831,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006a7993b087d08743a853013390bd",
+      "input" : 25443,
+      "model" : "gpt-6.1-sol",
+      "output" : 200,
+      "time" : 1795189374928
+    },
+    {
+      "cacheRead" : 38784,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006a84b61087d0a3957476f48ff060",
+      "input" : 9726,
+      "model" : "gpt-6.1-sol",
+      "output" : 285,
+      "time" : 1795189387557
+    },
+    {
+      "cacheRead" : 48640,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006a92701c87d0ab38487aa86aa3b8",
+      "input" : 12564,
+      "model" : "gpt-6.1-sol",
+      "output" : 160,
+      "time" : 1795189400780
+    },
+    {
+      "cacheRead" : 61184,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006aa4062c87d09069cc662753de62",
+      "input" : 205,
+      "model" : "gpt-6.1-sol",
+      "output" : 208,
+      "time" : 1795189416984
+    },
+    {
+      "cacheRead" : 61440,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006aafa6d487d0b6ec34d49a4dfe3e",
+      "input" : 13359,
+      "model" : "gpt-6.1-sol",
+      "output" : 332,
+      "time" : 1795189432750
+    },
+    {
+      "cacheRead" : 75008,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006abc982c87d0bb8de5dded021220",
+      "input" : 9547,
+      "model" : "gpt-6.1-sol",
+      "output" : 267,
+      "time" : 1795189444198
+    },
+    {
+      "cacheRead" : 84608,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006acbee8887d0a23df18a021c8ce7",
+      "input" : 9544,
+      "model" : "gpt-6.1-sol",
+      "output" : 414,
+      "time" : 1795189464180
+    },
+    {
+      "cacheRead" : 94336,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006adce0fc87d0ab4e481ce7975a84",
+      "input" : 242,
+      "model" : "gpt-6.1-sol",
+      "output" : 493,
+      "time" : 1795189480587
+    },
+    {
+      "cacheRead" : 94848,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006aee1bfc87d0afe61af142dbb300",
+      "input" : 2592,
+      "model" : "gpt-6.1-sol",
+      "output" : 410,
+      "time" : 1795189497591
+    },
+    {
+      "cacheRead" : 97664,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006afaa7bc87d0951e616e8f211f18",
+      "input" : 470,
+      "model" : "gpt-6.1-sol",
+      "output" : 818,
+      "time" : 1795189516829
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

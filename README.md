@@ -4,9 +4,9 @@
 
 | 指标 | 数值 | 说明 |
 | --- | ---: | --- |
-| 估算总成本 | $511.16 | 15,167/22,749 条用量已定价 |
-| 总 Token | 3,010,196,576 | 37 个会话缺少用量 |
-| 会话 | 895 | 当前归档范围 |
+| 估算总成本 | $511.43 | 15,177/22,762 条用量已定价 |
+| 总 Token | 3,011,018,841 | 37 个会话缺少用量 |
+| 会话 | 898 | 当前归档范围 |
 
 ### Token 活跃度
 
@@ -18,7 +18,7 @@
 
 | 项目 | Token | 会话 | 估算成本 |
 | --- | ---: | ---: | ---: |
-| Codex | 945,217,633 | 333 | $133.53 |
+| Codex | 946,039,898 | 336 | $133.80 |
 | codex-question-bank | 569,428,124 | 65 | $90.42 |
 | Motion | 372,419,111 | 36 | $141.94 |
 | DSH | 277,434,181 | 54 | $15.02 |
@@ -31,12 +31,12 @@
 
 | 会话 | 来源 | 项目 | 更新日期 |
 | --- | --- | --- | --- |
+| [帮我看一下&#91;https://github.com/Kianuni/Erosion-CN&#93;(https://github.com/Kianuni/Erosion-CN) 我想要使用满血Siri ai 应](usage/codex/codex_ff12fa6756bd1687f4c2c301.json) | codex | Codex | 2026-11-20 |
+| [Guardian review](usage/codex/codex_d0f3816f687ecd211953603a.json) | codex | Codex | 2026-11-20 |
+| [Guardian review](usage/codex/codex_91993f527cb8cdb0751c82e9.json) | codex | Codex | 2026-11-20 |
 | [将 Claude 域名加入 Claude.list](usage/codex/codex_aeb8de5decb53dd345a549c1.json) | codex | Codex | 2026-11-20 |
 | [Guardian review](usage/codex/codex_9927748229834c4459950322.json) | codex | Codex | 2026-11-20 |
 | [了解如何用 GitHub Readme Stats 装饰主页](usage/codex/codex_f79884750988cb785da363ae.json) | codex | Codex | 2026-11-20 |
-| [Guardian review](usage/codex/codex_ce0c3448b77d87b44780d3ae.json) | codex | Codex | 2026-11-20 |
-| [Find GitHub profile project in Notion](usage/codex/codex_9ab43acb57ff549f7ce39447.json) | codex | Codex | 2026-11-20 |
-| [Guardian review](usage/codex/codex_1e6bb8f02dd478cea2834850.json) | codex | Codex | 2026-11-20 |
 
 成本按当前价格表以美元估算，实际账单以服务商为准。
 
