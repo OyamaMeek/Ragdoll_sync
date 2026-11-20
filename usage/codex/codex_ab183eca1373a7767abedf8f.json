@@ -6,7 +6,7 @@
   "project" : "/Users/oyamahappa/Documents/GitHub/HzieeOJ_tools",
   "source" : "codex",
   "title" : "制作一键脚本",
-  "updated" : 1795183428881,
+  "updated" : 1795183517712,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -133,6 +133,51 @@
       "model" : "gpt-6.1-sol",
       "output" : 218,
       "time" : 1795183412709
+    },
+    {
+      "cacheRead" : 65792,
+      "cacheWrite" : 0,
+      "id" : "resp_007e74c683a11049016b00533ad54487d08825f99f9363f136",
+      "input" : 349,
+      "model" : "gpt-6.1-sol",
+      "output" : 478,
+      "time" : 1795183430041
+    },
+    {
+      "cacheRead" : 66432,
+      "cacheWrite" : 0,
+      "id" : "resp_007e74c683a11049016b00534c3f0887d08b4be0e136235373",
+      "input" : 288,
+      "model" : "gpt-6.1-sol",
+      "output" : 76,
+      "time" : 1795183442132
+    },
+    {
+      "cacheRead" : 66560,
+      "cacheWrite" : 0,
+      "id" : "resp_007e74c683a11049016b0053578e3087d0910b3227b4c6d048",
+      "input" : 294,
+      "model" : "gpt-6.1-sol",
+      "output" : 61,
+      "time" : 1795183451968
+    },
+    {
+      "cacheRead" : 66688,
+      "cacheWrite" : 0,
+      "id" : "resp_007e74c683a11049016b0053615b1487d09d3da5b5724cac89",
+      "input" : 283,
+      "model" : "gpt-6.1-sol",
+      "output" : 73,
+      "time" : 1795183462875
+    },
+    {
+      "cacheRead" : 66816,
+      "cacheWrite" : 0,
+      "id" : "resp_007e74c683a11049016b0053853a5087d0a39a0a5c3bf1e979",
+      "input" : 285,
+      "model" : "gpt-6.1-sol",
+      "output" : 831,
+      "time" : 1795183513441
     }
   ],
   "warnings" : [
