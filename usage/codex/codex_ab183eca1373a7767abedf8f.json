@@ -6,7 +6,7 @@
   "project" : "/Users/oyamahappa/Documents/GitHub/HzieeOJ_tools",
   "source" : "codex",
   "title" : "制作一键脚本",
-  "updated" : 1795183517712,
+  "updated" : 1795183580270,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -178,6 +178,33 @@
       "model" : "gpt-6.1-sol",
       "output" : 831,
       "time" : 1795183513441
+    },
+    {
+      "cacheRead" : 67712,
+      "cacheWrite" : 0,
+      "id" : "resp_007e74c683a11049016b00539efe4887d0bd6fde33b539b3d2",
+      "input" : 786,
+      "model" : "gpt-6.1-sol",
+      "output" : 400,
+      "time" : 1795183532056
+    },
+    {
+      "cacheRead" : 68736,
+      "cacheWrite" : 0,
+      "id" : "resp_007e74c683a11049016b0053cb21ec87d0a13d82687be56c4c",
+      "input" : 219,
+      "model" : "gpt-6.1-sol",
+      "output" : 361,
+      "time" : 1795183572997
+    },
+    {
+      "cacheRead" : 69120,
+      "cacheWrite" : 0,
+      "id" : "resp_007e74c683a11049016b0053d641e487d094da64c3cfaf5b9d",
+      "input" : 278,
+      "model" : "gpt-6.1-sol",
+      "output" : 170,
+      "time" : 1795183580270
     }
   ],
   "warnings" : [

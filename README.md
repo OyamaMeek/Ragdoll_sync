@@ -4,9 +4,9 @@
 
 | 指标 | 数值 | 说明 |
 | --- | ---: | --- |
-| 估算总成本 | $509.18 | 15,061/22,614 条用量已定价 |
-| 总 Token | 2,999,806,758 | 37 个会话缺少用量 |
-| 会话 | 887 | 当前归档范围 |
+| 估算总成本 | $509.22 | 15,064/22,617 条用量已定价 |
+| 总 Token | 3,000,014,540 | 38 个会话缺少用量 |
+| 会话 | 888 | 当前归档范围 |
 
 ### Token 活跃度
 
@@ -32,11 +32,11 @@
 | 会话 | 来源 | 项目 | 更新日期 |
 | --- | --- | --- | --- |
 | [制作一键脚本](usage/codex/codex_ab183eca1373a7767abedf8f.json) | codex | HzieeOJ&#95;tools | 2026-11-20 |
+| [Guardian review](usage/codex/codex_4c1c77db70394a6e092d72bb.json) | codex | HzieeOJ&#95;tools | 2026-11-20 |
 | [部署镜像和配置到 Hi-Al](usage/codex/codex_972b4597f202934100e7ed4b.json) | codex | docker-easyconnect | 2026-11-20 |
 | [Guardian review](usage/codex/codex_1ca2926fce164fa13b923466.json) | codex | docker-easyconnect | 2026-11-20 |
 | [Guardian review](usage/codex/codex_020fc50fa0835e74d58764f9.json) | codex | docker-easyconnect | 2026-11-20 |
 | [Guardian review](usage/codex/codex_c28ba98a3d921c9c4b67d39e.json) | codex | docker-easyconnect | 2026-11-20 |
-| [Guardian review](usage/codex/codex_834a0be69628e4d43dcd7256.json) | codex | docker-easyconnect | 2026-11-20 |
 
 成本按当前价格表以美元估算，实际账单以服务商为准。
 
