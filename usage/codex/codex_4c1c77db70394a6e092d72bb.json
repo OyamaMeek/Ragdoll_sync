@@ -6,9 +6,35 @@
   "project" : "/Users/oyamahappa/Documents/GitHub/HzieeOJ_tools",
   "source" : "codex",
   "title" : "Guardian review",
-  "updated" : 1795183579392,
+  "updated" : 1795183620284,
   "usage" : [
-
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe4dd7a598836a5016b0053e0ce6487d0ac5b857d7986b0ff",
+      "input" : 15954,
+      "model" : "codex-auto-review",
+      "output" : 183,
+      "time" : 1795183588803
+    },
+    {
+      "cacheRead" : 21632,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe4dd7a598836a5016b0053f3ee8487d0bc7f7c2a75a40358",
+      "input" : 2021,
+      "model" : "codex-auto-review",
+      "output" : 112,
+      "time" : 1795183606748
+    },
+    {
+      "cacheRead" : 23424,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe4dd7a598836a5016b0053fccfdc87d09bd51c597d9474a1",
+      "input" : 1079,
+      "model" : "codex-auto-review",
+      "output" : 345,
+      "time" : 1795183620281
+    }
   ],
   "warnings" : [
 
