@@ -1,0 +1,78 @@
+{
+  "created" : 1795158218850.1714,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:4534f303e2fb53968b504c08",
+  "nativeID" : "01a1f7c4-960c-7d41-9364-69209ab6181f",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
+  "source" : "codex",
+  "title" : "添加网页验证码入口",
+  "updated" : 1795158286772,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff0d47f8087d0bd9b0f51e152ce71",
+      "input" : 20289,
+      "model" : "gpt-6.1-sol",
+      "output" : 234,
+      "time" : 1795158234579
+    },
+    {
+      "cacheRead" : 33664,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff0dbbd4887d08879c2b6f904f123",
+      "input" : 8837,
+      "model" : "gpt-6.1-sol",
+      "output" : 103,
+      "time" : 1795158241712
+    },
+    {
+      "cacheRead" : 42368,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff0e2cf3c87d0957c85c1940f08fd",
+      "input" : 7616,
+      "model" : "gpt-6.1-sol",
+      "output" : 179,
+      "time" : 1795158249025
+    },
+    {
+      "cacheRead" : 50048,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff0ea1c1487d09076e1392d30db90",
+      "input" : 171,
+      "model" : "gpt-6.1-sol",
+      "output" : 102,
+      "time" : 1795158254382
+    },
+    {
+      "cacheRead" : 50176,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff0ef86d487d097295f0edc9e144a",
+      "input" : 990,
+      "model" : "gpt-6.1-sol",
+      "output" : 388,
+      "time" : 1795158266531
+    },
+    {
+      "cacheRead" : 51328,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff0fbad9487d0b135b2e22f8646ec",
+      "input" : 1766,
+      "model" : "gpt-6.1-sol",
+      "output" : 166,
+      "time" : 1795158274078
+    },
+    {
+      "cacheRead" : 53120,
+      "cacheWrite" : 0,
+      "id" : "resp_0c2b3ab5c284fb5b016afff1032a4087d0a2683c0912656032",
+      "input" : 1083,
+      "model" : "gpt-6.1-sol",
+      "output" : 363,
+      "time" : 1795158286749
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
