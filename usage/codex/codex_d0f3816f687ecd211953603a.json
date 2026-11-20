@@ -6,7 +6,7 @@
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
   "title" : "Guardian review",
-  "updated" : 1795189467788,
+  "updated" : 1795189587059,
   "usage" : [
     {
       "cacheRead" : 5888,
@@ -25,6 +25,42 @@
       "model" : "codex-auto-review",
       "output" : 133,
       "time" : 1795189467782
+    },
+    {
+      "cacheRead" : 24064,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b182ef087d0b879b2c94cfae2fe",
+      "input" : 4688,
+      "model" : "codex-auto-review",
+      "output" : 155,
+      "time" : 1795189531518
+    },
+    {
+      "cacheRead" : 28544,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b2237a087d0a59e0e7e2d8b4311",
+      "input" : 1232,
+      "model" : "codex-auto-review",
+      "output" : 136,
+      "time" : 1795189541871
+    },
+    {
+      "cacheRead" : 29568,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b2bf75087d084a2e28d6188bad0",
+      "input" : 1762,
+      "model" : "codex-auto-review",
+      "output" : 264,
+      "time" : 1795189554022
+    },
+    {
+      "cacheRead" : 31104,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b45a03087d0be6b101e1da52218",
+      "input" : 1592,
+      "model" : "codex-auto-review",
+      "output" : 81,
+      "time" : 1795189576200
     }
   ],
   "warnings" : [

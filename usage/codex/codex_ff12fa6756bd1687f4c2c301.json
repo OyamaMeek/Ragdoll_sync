@@ -5,8 +5,8 @@
   "nativeID" : "01a1f99f-b7c1-79c2-9990-ec626e46e659",
   "project" : "/Users/oyamahappa/Documents/Agent/Codex",
   "source" : "codex",
-  "title" : "帮我看一下[https://github.com/Kianuni/Erosion-CN](https://github.com/Kianuni/Erosion-CN) 我想要使用满血Siri ai 应",
-  "updated" : 1795189516831,
+  "title" : "查找满血 Siri AI 分流域名",
+  "updated" : 1795189583630,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -97,6 +97,60 @@
       "model" : "gpt-6.1-sol",
       "output" : 818,
       "time" : 1795189516829
+    },
+    {
+      "cacheRead" : 98816,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b0dde2087d0a42ee69362574013",
+      "input" : 1850,
+      "model" : "gpt-6.1-sol",
+      "output" : 147,
+      "time" : 1795189529015
+    },
+    {
+      "cacheRead" : 100608,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b1dc4a887d0975da74c96875258",
+      "input" : 623,
+      "model" : "gpt-6.1-sol",
+      "output" : 93,
+      "time" : 1795189539207
+    },
+    {
+      "cacheRead" : 101120,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b27269887d0bb0b659d182cd7d1",
+      "input" : 1183,
+      "model" : "gpt-6.1-sol",
+      "output" : 140,
+      "time" : 1795189547622
+    },
+    {
+      "cacheRead" : 102272,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b34394487d0802eb713afe1daf5",
+      "input" : 368,
+      "model" : "gpt-6.1-sol",
+      "output" : 92,
+      "time" : 1795189561177
+    },
+    {
+      "cacheRead" : 102528,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b3dc82c87d0806d5cf63f8bc37a",
+      "input" : 588,
+      "model" : "gpt-6.1-sol",
+      "output" : 283,
+      "time" : 1795189574371
+    },
+    {
+      "cacheRead" : 103168,
+      "cacheWrite" : 0,
+      "id" : "resp_0136f8e87fec5e69016b006b4a6b8487d0a884c6937bb88542",
+      "input" : 651,
+      "model" : "gpt-6.1-sol",
+      "output" : 173,
+      "time" : 1795189583630
     }
   ],
   "warnings" : [

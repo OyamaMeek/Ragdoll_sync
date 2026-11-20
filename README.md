@@ -4,8 +4,8 @@
 
 | 指标 | 数值 | 说明 |
 | --- | ---: | --- |
-| 估算总成本 | $511.43 | 15,177/22,762 条用量已定价 |
-| 总 Token | 3,011,018,841 | 37 个会话缺少用量 |
+| 估算总成本 | $511.51 | 15,183/22,772 条用量已定价 |
+| 总 Token | 3,011,756,734 | 37 个会话缺少用量 |
 | 会话 | 898 | 当前归档范围 |
 
 ### Token 活跃度
@@ -18,7 +18,7 @@
 
 | 项目 | Token | 会话 | 估算成本 |
 | --- | ---: | ---: | ---: |
-| Codex | 946,039,898 | 336 | $133.80 |
+| Codex | 946,777,791 | 336 | $133.88 |
 | codex-question-bank | 569,428,124 | 65 | $90.42 |
 | Motion | 372,419,111 | 36 | $141.94 |
 | DSH | 277,434,181 | 54 | $15.02 |
@@ -31,8 +31,8 @@
 
 | 会话 | 来源 | 项目 | 更新日期 |
 | --- | --- | --- | --- |
-| [帮我看一下&#91;https://github.com/Kianuni/Erosion-CN&#93;(https://github.com/Kianuni/Erosion-CN) 我想要使用满血Siri ai 应](usage/codex/codex_ff12fa6756bd1687f4c2c301.json) | codex | Codex | 2026-11-20 |
 | [Guardian review](usage/codex/codex_d0f3816f687ecd211953603a.json) | codex | Codex | 2026-11-20 |
+| [查找满血 Siri AI 分流域名](usage/codex/codex_ff12fa6756bd1687f4c2c301.json) | codex | Codex | 2026-11-20 |
 | [Guardian review](usage/codex/codex_91993f527cb8cdb0751c82e9.json) | codex | Codex | 2026-11-20 |
 | [将 Claude 域名加入 Claude.list](usage/codex/codex_aeb8de5decb53dd345a549c1.json) | codex | Codex | 2026-11-20 |
 | [Guardian review](usage/codex/codex_9927748229834c4459950322.json) | codex | Codex | 2026-11-20 |
