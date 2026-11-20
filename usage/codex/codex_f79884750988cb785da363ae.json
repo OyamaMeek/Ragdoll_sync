@@ -1,0 +1,78 @@
+{
+  "created" : 1795186526509.3855,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:f79884750988cb785da363ae",
+  "nativeID" : "01a1f974-87ab-7091-9c68-992569db6b46",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "了解如何用 GitHub Readme Stats 装饰主页",
+  "updated" : 1795186650780,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_05b1128ae44e4d96016b005f68339c87d0a0e1685e200cc73f",
+      "input" : 25435,
+      "model" : "gpt-6.1-sol",
+      "output" : 245,
+      "time" : 1795186543862
+    },
+    {
+      "cacheRead" : 38784,
+      "cacheWrite" : 0,
+      "id" : "resp_05b1128ae44e4d96016b005f764dcc87d097e1d8e9b086421d",
+      "input" : 10974,
+      "model" : "gpt-6.1-sol",
+      "output" : 496,
+      "time" : 1795186561822
+    },
+    {
+      "cacheRead" : 50048,
+      "cacheWrite" : 0,
+      "id" : "resp_05b1128ae44e4d96016b005f876d5087d0bb17a924cfe67a59",
+      "input" : 12142,
+      "model" : "gpt-6.1-sol",
+      "output" : 409,
+      "time" : 1795186578189
+    },
+    {
+      "cacheRead" : 62464,
+      "cacheWrite" : 0,
+      "id" : "resp_05b1128ae44e4d96016b005f9c39b487d0846353b11a8a04e3",
+      "input" : 8439,
+      "model" : "gpt-6.1-sol",
+      "output" : 996,
+      "time" : 1795186609593
+    },
+    {
+      "cacheRead" : 71680,
+      "cacheWrite" : 0,
+      "id" : "resp_05b1128ae44e4d96016b005fb8585087d08b7165d990869f40",
+      "input" : 9573,
+      "model" : "gpt-6.1-sol",
+      "output" : 138,
+      "time" : 1795186621713
+    },
+    {
+      "cacheRead" : 81152,
+      "cacheWrite" : 0,
+      "id" : "resp_05b1128ae44e4d96016b005fc1474087d0a0a7630247a63e78",
+      "input" : 794,
+      "model" : "gpt-6.1-sol",
+      "output" : 874,
+      "time" : 1795186644685
+    },
+    {
+      "cacheRead" : 82688,
+      "cacheWrite" : 0,
+      "id" : "resp_05b1128ae44e4d96016b005fd6526887d099ca74dd99ae6825",
+      "input" : 999,
+      "model" : "gpt-6.1-sol",
+      "output" : 91,
+      "time" : 1795186650780
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
