@@ -4,8 +4,8 @@
 
 | 指标 | 数值 | 说明 |
 | --- | ---: | --- |
-| 估算总成本 | $491.47 | 14,361/21,800 条用量已定价 |
-| 总 Token | 2,879,090,897 | 35 个会话缺少用量 |
+| 估算总成本 | $491.54 | 14,363/21,803 条用量已定价 |
+| 总 Token | 2,879,700,470 | 35 个会话缺少用量 |
 | 会话 | 863 | 当前归档范围 |
 
 ### Token 活跃度
@@ -22,7 +22,7 @@
 | codex-question-bank | 569,428,124 | 65 | $90.42 |
 | Motion | 372,419,111 | 36 | $141.94 |
 | DSH | 277,434,181 | 54 | $15.02 |
-| Ragdoll | 236,619,700 | 55 | $32.07 |
+| Ragdoll | 237,229,273 | 55 | $32.14 |
 | PrivateWork | 189,404,570 | 52 | $33.83 |
 | Autovisor | 64,526,961 | 28 | $1.17 |
 | HappaTools | 35,304,320 | 38 | $2.27 |
@@ -31,8 +31,8 @@
 
 | 会话 | 来源 | 项目 | 更新日期 |
 | --- | --- | --- | --- |
-| [Guardian review](usage/codex/codex_ee49e826416d026c24b12879.json) | codex | Ragdoll | 2026-11-20 |
 | [评估移除对话归档功能](usage/codex/codex_4db52a1427f82c156c4b5cee.json) | codex | Ragdoll | 2026-11-20 |
+| [Guardian review](usage/codex/codex_ee49e826416d026c24b12879.json) | codex | Ragdoll | 2026-11-20 |
 | [添加仓库信息 README 自动生成](usage/codex/codex_881e020946e4746dba6b97b8.json) | codex | Ragdoll | 2026-11-19 |
 | [Guardian review](usage/codex/codex_30d7fa9e0b43584217dbb0dc.json) | codex | Ragdoll | 2026-11-19 |
 | [Guardian review](usage/codex/codex_d18971acb620fb4a28e939e2.json) | codex | Ragdoll | 2026-11-19 |
