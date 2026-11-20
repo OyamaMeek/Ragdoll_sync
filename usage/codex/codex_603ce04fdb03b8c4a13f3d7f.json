@@ -6,9 +6,44 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "Guardian review",
-  "updated" : 1795156671935,
+  "updated" : 1795156749876,
   "usage" : [
-
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_00a113cd8c85032d016affeac4061487d0b1004e64ad159665",
+      "input" : 15221,
+      "model" : "codex-auto-review",
+      "output" : 139,
+      "time" : 1795156678712
+    },
+    {
+      "cacheRead" : 20992,
+      "cacheWrite" : 0,
+      "id" : "resp_00a113cd8c85032d016affeaef0bb087d0af9bbac865ad6682",
+      "input" : 4598,
+      "model" : "codex-auto-review",
+      "output" : 204,
+      "time" : 1795156723490
+    },
+    {
+      "cacheRead" : 25472,
+      "cacheWrite" : 0,
+      "id" : "resp_00a113cd8c85032d016affeaf84e2887d0927f8ba5ffcf615d",
+      "input" : 911,
+      "model" : "codex-auto-review",
+      "output" : 167,
+      "time" : 1795156731643
+    },
+    {
+      "cacheRead" : 26240,
+      "cacheWrite" : 0,
+      "id" : "resp_00a113cd8c85032d016affeb0b460487d0b2bf4d4c0feeaa12",
+      "input" : 1770,
+      "model" : "codex-auto-review",
+      "output" : 120,
+      "time" : 1795156749872
+    }
   ],
   "warnings" : [
 

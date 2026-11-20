@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "将项目改名为 HzieeVPN-easyconnect",
-  "updated" : 1795156672311,
+  "updated" : 1795156821973,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -97,6 +97,87 @@
       "model" : "gpt-6.1-sol",
       "output" : 958,
       "time" : 1795156672311
+    },
+    {
+      "cacheRead" : 63104,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeac7db6487d092146278d5395e28",
+      "input" : 227,
+      "model" : "gpt-6.1-sol",
+      "output" : 452,
+      "time" : 1795156693045
+    },
+    {
+      "cacheRead" : 63616,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affead715c087d0ae4fb4612b0f3d03",
+      "input" : 3071,
+      "model" : "gpt-6.1-sol",
+      "output" : 251,
+      "time" : 1795156701470
+    },
+    {
+      "cacheRead" : 66816,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeadeda2487d088362e1725e70d94",
+      "input" : 1870,
+      "model" : "gpt-6.1-sol",
+      "output" : 691,
+      "time" : 1795156717770
+    },
+    {
+      "cacheRead" : 69248,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeaf4f6d087d0b14693059ef43bf4",
+      "input" : 341,
+      "model" : "gpt-6.1-sol",
+      "output" : 83,
+      "time" : 1795156727605
+    },
+    {
+      "cacheRead" : 69504,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeafe5c0887d09da890208269d693",
+      "input" : 223,
+      "model" : "gpt-6.1-sol",
+      "output" : 96,
+      "time" : 1795156737692
+    },
+    {
+      "cacheRead" : 69632,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeb02e06087d08af1d3fdf97c52fb",
+      "input" : 867,
+      "model" : "gpt-6.1-sol",
+      "output" : 313,
+      "time" : 1795156746923
+    },
+    {
+      "cacheRead" : 70656,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeb102d2487d088d6eb6fb8cc315a",
+      "input" : 636,
+      "model" : "gpt-6.1-sol",
+      "output" : 169,
+      "time" : 1795156757089
+    },
+    {
+      "cacheRead" : 71296,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeb16e94087d09a678876e7345170",
+      "input" : 312,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1795156762733
+    },
+    {
+      "cacheRead" : 71424,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeb1c1f9c87d0a4834eb0e6285d5b",
+      "input" : 310,
+      "model" : "gpt-6.1-sol",
+      "output" : 78,
+      "time" : 1795156766857
     }
   ],
   "warnings" : [
