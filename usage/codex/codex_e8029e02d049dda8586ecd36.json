@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "将项目改名为 HzieeVPN-easyconnect",
-  "updated" : 1795156821973,
+  "updated" : 1795156884277,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -178,6 +178,42 @@
       "model" : "gpt-6.1-sol",
       "output" : 78,
       "time" : 1795156766857
+    },
+    {
+      "cacheRead" : 71680,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeb57021487d09604117f03aff593",
+      "input" : 282,
+      "model" : "gpt-6.1-sol",
+      "output" : 261,
+      "time" : 1795156832502
+    },
+    {
+      "cacheRead" : 72064,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeb61acfc87d0a8b410627d6bc486",
+      "input" : 8955,
+      "model" : "gpt-6.1-sol",
+      "output" : 432,
+      "time" : 1795156844071
+    },
+    {
+      "cacheRead" : 81280,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeb6d31c487d0a69470f7bab305ab",
+      "input" : 8758,
+      "model" : "gpt-6.1-sol",
+      "output" : 831,
+      "time" : 1795156864451
+    },
+    {
+      "cacheRead" : 90752,
+      "cacheWrite" : 0,
+      "id" : "resp_002b8170675e2f7a016affeb81a2f087d08aa48c134cea88e1",
+      "input" : 9288,
+      "model" : "gpt-6.1-sol",
+      "output" : 731,
+      "time" : 1795156884272
     }
   ],
   "warnings" : [
