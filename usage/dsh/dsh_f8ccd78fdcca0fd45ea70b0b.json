@@ -1,0 +1,25 @@
+{
+  "created" : 1793719512665,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:f8ccd78fdcca0fd45ea70b0b",
+  "nativeID" : "session-4266e7ed-628b-4b85-8cf2-d9a22eba2021",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "deepseek-account",
+  "source" : "dsh",
+  "title" : "Purge 注入标记原样输出",
+  "updated" : 1794128337520,
+  "usage" : [
+    {
+      "cacheRead" : 6144,
+      "cacheWrite" : 0,
+      "id" : "32",
+      "input" : 56885,
+      "model" : "deepseek-flash",
+      "output" : 31,
+      "time" : 1793841822591
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

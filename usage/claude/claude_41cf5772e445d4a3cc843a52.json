@@ -1,0 +1,249 @@
+{
+  "created" : 1793624727721,
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:41cf5772e445d4a3cc843a52",
+  "nativeID" : "7bc8ea74-e9e6-4435-bc54-90720a210038",
+  "project" : "/Users/oyamahappa/Documents/GitHub/Motion",
+  "source" : "claude",
+  "title" : "纸艺拼贴开场画面",
+  "updated" : 1793626073814,
+  "usage" : [
+    {
+      "cacheRead" : 43271,
+      "cacheWrite" : 38297,
+      "id" : "msg_011Cge9fVkcE8ExCZW7K9Z5E",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 886,
+      "time" : 1793624736862
+    },
+    {
+      "cacheRead" : 81568,
+      "cacheWrite" : 11549,
+      "id" : "msg_011Cge9gBP6BLSNRymZvbui2",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 641,
+      "time" : 1793624743024
+    },
+    {
+      "cacheRead" : 93117,
+      "cacheWrite" : 12943,
+      "id" : "msg_011Cge9gdL3ik8SJriNQSdnM",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 2044,
+      "time" : 1793624765856
+    },
+    {
+      "cacheRead" : 106060,
+      "cacheWrite" : 3204,
+      "id" : "msg_011Cge9iHzWN6pdfuxCifCXN",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 187,
+      "time" : 1793624768944
+    },
+    {
+      "cacheRead" : 109264,
+      "cacheWrite" : 18518,
+      "id" : "msg_011Cge9icjtNXdfCLLgQKKLe",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 8259,
+      "time" : 1793624871001
+    },
+    {
+      "cacheRead" : 127782,
+      "cacheWrite" : 11101,
+      "id" : "msg_011Cge9r3yspwryNPES76B1R",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 6554,
+      "time" : 1793624944144
+    },
+    {
+      "cacheRead" : 138883,
+      "cacheWrite" : 6913,
+      "id" : "msg_011Cge9wU476CQm7kWdnKpx9",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 17509,
+      "time" : 1793625079344
+    },
+    {
+      "cacheRead" : 145796,
+      "cacheWrite" : 18350,
+      "id" : "msg_011CgeA8D8UxXVZDKbKeDCvh",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 900,
+      "time" : 1793625100257
+    },
+    {
+      "cacheRead" : 164146,
+      "cacheWrite" : 1312,
+      "id" : "msg_011CgeA9ntGdh3MXtPdkF6FL",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1047,
+      "time" : 1793625121315
+    },
+    {
+      "cacheRead" : 165458,
+      "cacheWrite" : 1909,
+      "id" : "msg_011CgeABB6miTtXPjkyPwf8G",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 667,
+      "time" : 1793625137906
+    },
+    {
+      "cacheRead" : 167367,
+      "cacheWrite" : 1426,
+      "id" : "msg_011CgeACRcvnHCww4SNFDsxw",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 4631,
+      "time" : 1793625190712
+    },
+    {
+      "cacheRead" : 168793,
+      "cacheWrite" : 5780,
+      "id" : "msg_011CgeAGYJs5TRTqiPgstRhs",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1474,
+      "time" : 1793625217189
+    },
+    {
+      "cacheRead" : 174573,
+      "cacheWrite" : 2078,
+      "id" : "msg_011CgeAJjW8FFXaSFVwoiDqV",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1785,
+      "time" : 1793625249492
+    },
+    {
+      "cacheRead" : 176651,
+      "cacheWrite" : 2531,
+      "id" : "msg_011CgeALpYng2rrtAV5o9iU4",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 800,
+      "time" : 1793625269724
+    },
+    {
+      "cacheRead" : 179182,
+      "cacheWrite" : 1141,
+      "id" : "msg_011CgeAMQwFkMgb7xVptgPVB",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 3115,
+      "time" : 1793625297791
+    },
+    {
+      "cacheRead" : 180323,
+      "cacheWrite" : 4240,
+      "id" : "msg_011CgeAPZvJBAix2sTJd9qWH",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1637,
+      "time" : 1793625312096
+    },
+    {
+      "cacheRead" : 184563,
+      "cacheWrite" : 2201,
+      "id" : "msg_011CgeAR2qq5KH74jvY2aNMv",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 890,
+      "time" : 1793625326566
+    },
+    {
+      "cacheRead" : 186764,
+      "cacheWrite" : 1226,
+      "id" : "msg_011CgeARst6bE6btV7tqa3Vb",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1072,
+      "time" : 1793625341018
+    },
+    {
+      "cacheRead" : 187990,
+      "cacheWrite" : 1080,
+      "id" : "msg_011CgeBASfVQBNyNgs1ucvBh",
+      "input" : 4,
+      "model" : "claude-opus-5-5",
+      "output" : 663,
+      "time" : 1793625914374
+    },
+    {
+      "cacheRead" : 189070,
+      "cacheWrite" : 2786,
+      "id" : "msg_011CgeBB1zi3tumNH4EJoc6C",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 349,
+      "time" : 1793625919062
+    },
+    {
+      "cacheRead" : 191856,
+      "cacheWrite" : 4785,
+      "id" : "msg_011CgeBBMPGfQTxDQVksT9Jz",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1720,
+      "time" : 1793625939800
+    },
+    {
+      "cacheRead" : 196641,
+      "cacheWrite" : 3148,
+      "id" : "msg_011CgeBCoxDDkXmkkxYVXm3r",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 2106,
+      "time" : 1793625960190
+    },
+    {
+      "cacheRead" : 199789,
+      "cacheWrite" : 2599,
+      "id" : "msg_011CgeBENAVNdcAhkvj8bjZF",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 6368,
+      "time" : 1793626007948
+    },
+    {
+      "cacheRead" : 202388,
+      "cacheWrite" : 8939,
+      "id" : "msg_011CgeBJp9Y3LtSPWQJCLchy",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 3003,
+      "time" : 1793626044393
+    },
+    {
+      "cacheRead" : 211327,
+      "cacheWrite" : 3607,
+      "id" : "msg_011CgeBM59zHx7MGMLpUrF4P",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 747,
+      "time" : 1793626059549
+    },
+    {
+      "cacheRead" : 214934,
+      "cacheWrite" : 1048,
+      "id" : "msg_011CgeBMsQL5DS2qYBHJoqNT",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 516,
+      "time" : 1793626069477
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

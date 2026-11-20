@@ -1,0 +1,96 @@
+{
+  "created" : 1785721534229,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:682ed83d8dca4da52a833e3c",
+  "nativeID" : "019fc54c-3379-7c61-a3d6-c765d7a8848f",
+  "project" : "/Users/oyamahappa/Documents/Codex/2026-08-03/hatch-pet-users-oyamahappa-codex-skills",
+  "source" : "codex",
+  "title" : "Upgrade Joke Bear pet",
+  "updated" : 1785721602623,
+  "usage" : [
+    {
+      "cacheRead" : 11008,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":36461,\"cached_input_tokens\":11008,\"cache_write_input_tokens\":0,\"output_tokens\":245,\"reasoning_output_tokens\":60,\"total_tokens\":36706}",
+      "input" : 25453,
+      "model" : "gpt-5.6-terra",
+      "output" : 245,
+      "time" : 1785721543561
+    },
+    {
+      "cacheRead" : 35584,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":77036,\"cached_input_tokens\":46592,\"cache_write_input_tokens\":0,\"output_tokens\":506,\"reasoning_output_tokens\":89,\"total_tokens\":77542}",
+      "input" : 4991,
+      "model" : "gpt-5.6-terra",
+      "output" : 261,
+      "time" : 1785721549352
+    },
+    {
+      "cacheRead" : 39680,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":118389,\"cached_input_tokens\":86272,\"cache_write_input_tokens\":0,\"output_tokens\":790,\"reasoning_output_tokens\":118,\"total_tokens\":119179}",
+      "input" : 1673,
+      "model" : "gpt-5.6-terra",
+      "output" : 284,
+      "time" : 1785721558837
+    },
+    {
+      "cacheRead" : 40704,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":165620,\"cached_input_tokens\":126976,\"cache_write_input_tokens\":0,\"output_tokens\":1430,\"reasoning_output_tokens\":322,\"total_tokens\":167050}",
+      "input" : 6527,
+      "model" : "gpt-5.6-terra",
+      "output" : 640,
+      "time" : 1785721571818
+    },
+    {
+      "cacheRead" : 46848,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":215992,\"cached_input_tokens\":173824,\"cache_write_input_tokens\":0,\"output_tokens\":1545,\"reasoning_output_tokens\":394,\"total_tokens\":217537}",
+      "input" : 3524,
+      "model" : "gpt-5.6-terra",
+      "output" : 115,
+      "time" : 1785721575765
+    },
+    {
+      "cacheRead" : 49920,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":267852,\"cached_input_tokens\":223744,\"cache_write_input_tokens\":0,\"output_tokens\":1598,\"reasoning_output_tokens\":410,\"total_tokens\":269450}",
+      "input" : 1940,
+      "model" : "gpt-5.6-terra",
+      "output" : 53,
+      "time" : 1785721580081
+    },
+    {
+      "cacheRead" : 50944,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":329835,\"cached_input_tokens\":274688,\"cache_write_input_tokens\":0,\"output_tokens\":2253,\"reasoning_output_tokens\":774,\"total_tokens\":332088}",
+      "input" : 11039,
+      "model" : "gpt-5.6-terra",
+      "output" : 655,
+      "time" : 1785721594586
+    },
+    {
+      "cacheRead" : 61184,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":392596,\"cached_input_tokens\":335872,\"cache_write_input_tokens\":0,\"output_tokens\":2341,\"reasoning_output_tokens\":783,\"total_tokens\":394937}",
+      "input" : 1577,
+      "model" : "gpt-5.6-terra",
+      "output" : 88,
+      "time" : 1785721597385
+    },
+    {
+      "cacheRead" : 62208,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":456505,\"cached_input_tokens\":398080,\"cache_write_input_tokens\":0,\"output_tokens\":2526,\"reasoning_output_tokens\":870,\"total_tokens\":459031}",
+      "input" : 1701,
+      "model" : "gpt-5.6-terra",
+      "output" : 185,
+      "time" : 1785721602598
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

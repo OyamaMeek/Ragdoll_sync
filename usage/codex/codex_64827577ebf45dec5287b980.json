@@ -1,0 +1,33 @@
+{
+  "created" : 1791094384731,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:64827577ebf45dec5287b980",
+  "nativeID" : "01a1058b-67c1-71e0-a526-b24fc2327b80",
+  "project" : "/Users/oyamahappa/Documents/GitHub/YXYtools",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1791094438575,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_0d07fe52d3217627016ac1ee72d16887d0b22d417c4c93c796",
+      "input" : 20602,
+      "model" : "codex-auto-review",
+      "output" : 315,
+      "time" : 1791094395671
+    },
+    {
+      "cacheRead" : 25344,
+      "cacheWrite" : 0,
+      "id" : "resp_0d07fe52d3217627016ac1eea28f0087d08c4f6e80205dc5dc",
+      "input" : 3094,
+      "model" : "codex-auto-review",
+      "output" : 168,
+      "time" : 1791094438568
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

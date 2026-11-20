@@ -1,0 +1,88 @@
+{
+  "created" : 1792474425259,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:9dea962ce70cecc52bec4c0b",
+  "nativeID" : "session-2927a5fa-7863-4050-98f3-4206099fc8c7",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "test261020",
+  "source" : "dsh",
+  "title" : "创建一个 HTML，内容是 SVG 绘制",
+  "updated" : 1792637486933,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "56",
+      "input" : 170283,
+      "model" : "claude-opus-5-5",
+      "output" : 205,
+      "time" : 1792474566381
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 23584,
+      "id" : "63",
+      "input" : 4162,
+      "model" : "claude-opus-5-5",
+      "output" : 172,
+      "time" : 1792474575528
+    },
+    {
+      "cacheRead" : 37410,
+      "cacheWrite" : 8971,
+      "id" : "84",
+      "input" : 3793,
+      "model" : "claude-opus-5-5",
+      "output" : 166,
+      "time" : 1792474699136
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 33106,
+      "id" : "131",
+      "input" : 5843,
+      "model" : "claude-opus-5-5",
+      "output" : 3673,
+      "time" : 1792475577797
+    },
+    {
+      "cacheRead" : 33106,
+      "cacheWrite" : 28,
+      "id" : "142",
+      "input" : 5848,
+      "model" : "claude-opus-5-5",
+      "output" : 675,
+      "time" : 1792475592640
+    },
+    {
+      "cacheRead" : 159132,
+      "cacheWrite" : 87939,
+      "id" : "153",
+      "input" : 10618,
+      "model" : "claude-opus-5-5",
+      "output" : 605,
+      "time" : 1792475639435
+    },
+    {
+      "cacheRead" : 207723,
+      "cacheWrite" : 15312,
+      "id" : "166",
+      "input" : 12749,
+      "model" : "claude-opus-5-5",
+      "output" : 208,
+      "time" : 1792475649545
+    },
+    {
+      "cacheRead" : 212304,
+      "cacheWrite" : 6227,
+      "id" : "177",
+      "input" : 16798,
+      "model" : "claude-opus-5-5",
+      "output" : 292,
+      "time" : 1792475660797
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

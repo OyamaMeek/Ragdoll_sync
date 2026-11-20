@@ -1,0 +1,42 @@
+{
+  "created" : 1793325219489,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:d6f84b0067303be6b8e4e610",
+  "nativeID" : "01a18a83-3e0c-7912-b91d-4ab13ea702d0",
+  "project" : "/Users/oyamahappa/Documents/GitHub/TrendBrief",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1793325588552,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_014f61c1f0301d75016ae3f8a5a0a48191bcd6c58e076074e5",
+      "input" : 17342,
+      "model" : "codex-auto-review",
+      "output" : 311,
+      "time" : 1793325252484
+    },
+    {
+      "cacheRead" : 23168,
+      "cacheWrite" : 0,
+      "id" : "resp_014f61c1f0301d75016ae3f9a4242c8191be7ace375b564fdf",
+      "input" : 12206,
+      "model" : "codex-auto-review",
+      "output" : 268,
+      "time" : 1793325509433
+    },
+    {
+      "cacheRead" : 37376,
+      "cacheWrite" : 0,
+      "id" : "resp_014f61c1f0301d75016ae3f9d7ba6c8191a7728850041890b9",
+      "input" : 177,
+      "model" : "codex-auto-review",
+      "output" : 135,
+      "time" : 1793325588546
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

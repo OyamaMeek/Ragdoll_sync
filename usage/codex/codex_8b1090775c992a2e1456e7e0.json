@@ -1,0 +1,96 @@
+{
+  "created" : 1793708913641,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:8b1090775c992a2e1456e7e0",
+  "nativeID" : "01a1a161-36a5-79b3-8ba7-48eaaac219e7",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "编写算法时代清醒视频提示词",
+  "updated" : 1793709080044,
+  "usage" : [
+    {
+      "cacheRead" : 12928,
+      "cacheWrite" : 0,
+      "id" : "resp_090b4926e1596622016ae9d3754f9081919dbf6a43ee8abbf2",
+      "input" : 29866,
+      "model" : "gpt-6.1-sol",
+      "output" : 207,
+      "time" : 1793708925783
+    },
+    {
+      "cacheRead" : 42880,
+      "cacheWrite" : 0,
+      "id" : "resp_090b4926e1596622016ae9d37e691c819185f9eda9fa5a0782",
+      "input" : 1899,
+      "model" : "gpt-6.1-sol",
+      "output" : 381,
+      "time" : 1793708937342
+    },
+    {
+      "cacheRead" : 45056,
+      "cacheWrite" : 0,
+      "id" : "resp_090b4926e1596622016ae9d38a2f508191960bfec366b1abf3",
+      "input" : 10511,
+      "model" : "gpt-6.1-sol",
+      "output" : 407,
+      "time" : 1793708955123
+    },
+    {
+      "cacheRead" : 55808,
+      "cacheWrite" : 0,
+      "id" : "resp_090b4926e1596622016ae9d39ba084819183549c4f07d3c4f4",
+      "input" : 3430,
+      "model" : "gpt-6.1-sol",
+      "output" : 293,
+      "time" : 1793708969562
+    },
+    {
+      "cacheRead" : 59392,
+      "cacheWrite" : 0,
+      "id" : "resp_090b4926e1596622016ae9d3aa1cdc8191b593db6286dfe154",
+      "input" : 881,
+      "model" : "gpt-6.1-sol",
+      "output" : 869,
+      "time" : 1793708985441
+    },
+    {
+      "cacheRead" : 60928,
+      "cacheWrite" : 0,
+      "id" : "resp_090b4926e1596622016ae9d3b9e9d48191b676631701062e23",
+      "input" : 969,
+      "model" : "gpt-6.1-sol",
+      "output" : 143,
+      "time" : 1793708990090
+    },
+    {
+      "cacheRead" : 61824,
+      "cacheWrite" : 0,
+      "id" : "resp_090b4926e1596622016ae9d3cf2f348191b969057c547d6b41",
+      "input" : 372,
+      "model" : "gpt-6.1-sol",
+      "output" : 240,
+      "time" : 1793709014902
+    },
+    {
+      "cacheRead" : 62336,
+      "cacheWrite" : 0,
+      "id" : "resp_090b4926e1596622016ae9d3d789ec8191afe05276ffd61168",
+      "input" : 836,
+      "model" : "gpt-6.1-sol",
+      "output" : 148,
+      "time" : 1793709021398
+    },
+    {
+      "cacheRead" : 63104,
+      "cacheWrite" : 0,
+      "id" : "resp_090b4926e1596622016ae9d3e792f08191959e4d6a71b40bd9",
+      "input" : 461,
+      "model" : "gpt-6.1-sol",
+      "output" : 1179,
+      "time" : 1793709079997
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

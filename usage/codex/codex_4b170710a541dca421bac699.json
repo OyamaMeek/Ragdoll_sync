@@ -1,0 +1,51 @@
+{
+  "created" : 1792642253001,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:4b170710a541dca421bac699",
+  "nativeID" : "01a161cd-a377-7df2-88ea-4bed6b96dbcd",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "在 Chrome 中刷完所有课程",
+  "updated" : 1792642303129,
+  "usage" : [
+    {
+      "cacheRead" : 23040,
+      "cacheWrite" : 0,
+      "id" : "resp_0fd2265566a1085f016ad98cdbd8648191a2b85bf4dc5d6e2a",
+      "input" : 24992,
+      "model" : "gpt-6.1-sol",
+      "output" : 114,
+      "time" : 1792642272586
+    },
+    {
+      "cacheRead" : 47872,
+      "cacheWrite" : 0,
+      "id" : "resp_0fd2265566a1085f016ad98ce294d481918756210c268c95da",
+      "input" : 8012,
+      "model" : "gpt-6.1-sol",
+      "output" : 166,
+      "time" : 1792642278952
+    },
+    {
+      "cacheRead" : 55680,
+      "cacheWrite" : 0,
+      "id" : "resp_0fd2265566a1085f016ad98ce8a1548191ac9fce6de83d4dc0",
+      "input" : 6532,
+      "model" : "gpt-6.1-sol",
+      "output" : 34,
+      "time" : 1792642283631
+    },
+    {
+      "cacheRead" : 62080,
+      "cacheWrite" : 0,
+      "id" : "resp_0fd2265566a1085f016ad98ced74608191bfc45be72aec7c5d",
+      "input" : 12345,
+      "model" : "gpt-6.1-sol",
+      "output" : 57,
+      "time" : 1792642288277
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "created" : 1794891050751.948,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:82aeb3949183b029858f2102",
+  "nativeID" : "01a1e7d7-eeb9-7d70-b6ed-8ddf223b2664",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794891465514,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbdd2ef89087d09b0b621458861e53",
+      "input" : 21831,
+      "model" : "codex-auto-review",
+      "output" : 188,
+      "time" : 1794891058256
+    },
+    {
+      "cacheRead" : 27520,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbddb9eec487d0aef5ed12a5dbce38",
+      "input" : 5040,
+      "model" : "codex-auto-review",
+      "output" : 113,
+      "time" : 1794891196689
+    },
+    {
+      "cacheRead" : 32384,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbdde2164087d0810bb9ce08cf4363",
+      "input" : 3482,
+      "model" : "codex-auto-review",
+      "output" : 87,
+      "time" : 1794891236392
+    },
+    {
+      "cacheRead" : 35712,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbddfd341887d08e4a6160d3fd5655",
+      "input" : 3178,
+      "model" : "codex-auto-review",
+      "output" : 188,
+      "time" : 1794891264551
+    },
+    {
+      "cacheRead" : 38656,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbde02394087d0abfa5d10d80daf8a",
+      "input" : 792,
+      "model" : "codex-auto-review",
+      "output" : 94,
+      "time" : 1794891267476
+    },
+    {
+      "cacheRead" : 39296,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbde0b9dd087d0b6b16cb82a4ead64",
+      "input" : 1903,
+      "model" : "codex-auto-review",
+      "output" : 99,
+      "time" : 1794891277270
+    },
+    {
+      "cacheRead" : 40960,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbde33a60c87d0a67d0ce18b32f95d",
+      "input" : 3191,
+      "model" : "codex-auto-review",
+      "output" : 115,
+      "time" : 1794891317390
+    },
+    {
+      "cacheRead" : 44032,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbde41022087d09af4cbd33e0e1d0e",
+      "input" : 1124,
+      "model" : "codex-auto-review",
+      "output" : 117,
+      "time" : 1794891331714
+    },
+    {
+      "cacheRead" : 44928,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbde6c9e0087d0a69587f00308a9b6",
+      "input" : 1512,
+      "model" : "codex-auto-review",
+      "output" : 122,
+      "time" : 1794891375300
+    },
+    {
+      "cacheRead" : 46208,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbde7202a087d08a9b9dc78d01ae19",
+      "input" : 652,
+      "model" : "codex-auto-review",
+      "output" : 117,
+      "time" : 1794891380678
+    },
+    {
+      "cacheRead" : 46720,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbde766f9887d0a479b6c17ea21eed",
+      "input" : 598,
+      "model" : "codex-auto-review",
+      "output" : 79,
+      "time" : 1794891384240
+    },
+    {
+      "cacheRead" : 47104,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbde81968887d0a9c17de1bc006839",
+      "input" : 961,
+      "model" : "codex-auto-review",
+      "output" : 80,
+      "time" : 1794891395226
+    },
+    {
+      "cacheRead" : 47872,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbdea8da1887d080eb3921bf2328c4",
+      "input" : 4360,
+      "model" : "codex-auto-review",
+      "output" : 121,
+      "time" : 1794891435069
+    },
+    {
+      "cacheRead" : 52096,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbdeb1d08087d093d10ee3ed6b1019",
+      "input" : 926,
+      "model" : "codex-auto-review",
+      "output" : 149,
+      "time" : 1794891444773
+    },
+    {
+      "cacheRead" : 52864,
+      "cacheWrite" : 0,
+      "id" : "resp_0afe22db83f37a6e016afbdec798b887d0af3730d8f986ab0f",
+      "input" : 1972,
+      "model" : "codex-auto-review",
+      "output" : 118,
+      "time" : 1794891465501
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

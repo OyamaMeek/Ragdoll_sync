@@ -1,0 +1,69 @@
+{
+  "created" : 1792287823674,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:3069e5f570726a1dc413f229",
+  "nativeID" : "01a14cad-d686-7483-bfe4-e20843888b8f",
+  "project" : "/Users/oyamahappa/Documents/GitHub/PrivateWork",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1792287865122,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_0ab8af5e313f7d33016ad42452466881918fc82ae87f085ae8",
+      "input" : 22865,
+      "model" : "codex-auto-review",
+      "output" : 209,
+      "time" : 1792287828407
+    },
+    {
+      "cacheRead" : 28672,
+      "cacheWrite" : 0,
+      "id" : "resp_0ab8af5e313f7d33016ad424589684819183056895b54808ff",
+      "input" : 1118,
+      "model" : "codex-auto-review",
+      "output" : 169,
+      "time" : 1792287834692
+    },
+    {
+      "cacheRead" : 29568,
+      "cacheWrite" : 0,
+      "id" : "resp_0ab8af5e313f7d33016ad4245ec47c81919fbd387addd9f54a",
+      "input" : 951,
+      "model" : "codex-auto-review",
+      "output" : 398,
+      "time" : 1792287842288
+    },
+    {
+      "cacheRead" : 30336,
+      "cacheWrite" : 0,
+      "id" : "resp_0ab8af5e313f7d33016ad42471bdbc8191820680ad5f19f837",
+      "input" : 2911,
+      "model" : "codex-auto-review",
+      "output" : 88,
+      "time" : 1792287859018
+    },
+    {
+      "cacheRead" : 33024,
+      "cacheWrite" : 0,
+      "id" : "resp_0ab8af5e313f7d33016ad42473ba7c819180ff5dc8c2c2665d",
+      "input" : 604,
+      "model" : "codex-auto-review",
+      "output" : 61,
+      "time" : 1792287860896
+    },
+    {
+      "cacheRead" : 33408,
+      "cacheWrite" : 0,
+      "id" : "resp_0ab8af5e313f7d33016ad4247590a4819182aa0e200feaafc0",
+      "input" : 567,
+      "model" : "codex-auto-review",
+      "output" : 65,
+      "time" : 1792287865113
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

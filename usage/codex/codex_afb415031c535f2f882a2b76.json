@@ -1,0 +1,42 @@
+{
+  "created" : 1790259792523,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:afb415031c535f2f882a2b76",
+  "nativeID" : "01a0d3cc-8a13-7970-a571-e71248f2dda7",
+  "project" : "/Users/oyamahappa/Documents/GitHub/local-question-bank",
+  "source" : "codex",
+  "title" : "教我什么时候进行无穷小代换什么时候不进行 <image name=[Image #1] path=\"/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/c",
+  "updated" : 1790259911139,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_00a4fa4ebcb0c191016ab53254fca087d08e888119094fc41e",
+      "input" : 20790,
+      "model" : "codex-auto-review",
+      "output" : 187,
+      "time" : 1790259803265
+    },
+    {
+      "cacheRead" : 25344,
+      "cacheWrite" : 0,
+      "id" : "resp_00a4fa4ebcb0c191016ab532a1591487d0b9eda322053a59ef",
+      "input" : 3769,
+      "model" : "codex-auto-review",
+      "output" : 70,
+      "time" : 1790259875798
+    },
+    {
+      "cacheRead" : 28416,
+      "cacheWrite" : 0,
+      "id" : "resp_00a4fa4ebcb0c191016ab532c0052887d0812d9ecd5f39cd9f",
+      "input" : 4189,
+      "model" : "codex-auto-review",
+      "output" : 273,
+      "time" : 1790259911129
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "created" : 1793546429190,
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:c34672c7ed1a756486b8c03a",
+  "nativeID" : "98d8cb2d-4324-4ee8-87fc-afb3a0bdf3cb",
+  "project" : "/Users/oyamahappa/Documents/GitHub/Motion",
+  "source" : "claude",
+  "title" : "會呼吸的痛 MV 制作",
+  "updated" : 1793548380930,
+  "usage" : [
+    {
+      "cacheRead" : 52851,
+      "cacheWrite" : 24160,
+      "id" : "msg_011CgcS9yysibX8Kq9NL9QBk",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 483,
+      "time" : 1793546437203
+    },
+    {
+      "cacheRead" : 77011,
+      "cacheWrite" : 4859,
+      "id" : "msg_011CgcSANZSAWqW5Na8k3rRp",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 775,
+      "time" : 1793546444695
+    },
+    {
+      "cacheRead" : 81870,
+      "cacheWrite" : 38856,
+      "id" : "msg_011CgcSAvQ6LYuEaaUAtkcVd",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1925,
+      "time" : 1793546461982
+    },
+    {
+      "cacheRead" : 120726,
+      "cacheWrite" : 37190,
+      "id" : "msg_011CgcSCDwpBwhTWx5tJnsN1",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 7723,
+      "time" : 1793546550525
+    },
+    {
+      "cacheRead" : 157916,
+      "cacheWrite" : 17692,
+      "id" : "msg_011CgcSJroXfYsWQz7m764L7",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 2475,
+      "time" : 1793546575730
+    },
+    {
+      "cacheRead" : 175608,
+      "cacheWrite" : 3693,
+      "id" : "msg_011CgcSNJF471bacXcQ6JHAB",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1558,
+      "time" : 1793546615424
+    },
+    {
+      "cacheRead" : 179301,
+      "cacheWrite" : 6963,
+      "id" : "msg_011CgcSPufoKixdZjdwzERz9",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 3440,
+      "time" : 1793546654636
+    },
+    {
+      "cacheRead" : 186264,
+      "cacheWrite" : 4963,
+      "id" : "msg_011CgcSTWTQnuGTjPyD1tb7k",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 16006,
+      "time" : 1793546850501
+    },
+    {
+      "cacheRead" : 191227,
+      "cacheWrite" : 17036,
+      "id" : "msg_011CgcSh2KdD7BXGris6nxAX",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 34621,
+      "time" : 1793547104575
+    },
+    {
+      "cacheRead" : 208263,
+      "cacheWrite" : 36040,
+      "id" : "msg_011CgcT1u3rk7LmnpcFfgYYc",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 3444,
+      "time" : 1793547137314
+    },
+    {
+      "cacheRead" : 244303,
+      "cacheWrite" : 4185,
+      "id" : "msg_011CgcT4XSfURozUuWuPr3QJ",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 225,
+      "time" : 1793547147945
+    },
+    {
+      "cacheRead" : 248488,
+      "cacheWrite" : 7781,
+      "id" : "msg_011CgcT4sdN1eSAFiMPYudb9",
+      "input" : 4,
+      "model" : "claude-opus-5-5",
+      "output" : 4077,
+      "time" : 1793547189821
+    },
+    {
+      "cacheRead" : 256269,
+      "cacheWrite" : 7663,
+      "id" : "msg_011CgcT8KFJjD1G2wjyAKCyy",
+      "input" : 4,
+      "model" : "claude-opus-5-5",
+      "output" : 4853,
+      "time" : 1793547235675
+    },
+    {
+      "cacheRead" : 263932,
+      "cacheWrite" : 5657,
+      "id" : "msg_011CgcTBXNQJjucWGKWswtqb",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 2060,
+      "time" : 1793547260375
+    },
+    {
+      "cacheRead" : 269589,
+      "cacheWrite" : 2114,
+      "id" : "msg_011CgcTD2FFrCFJncKjPRWN4",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 126,
+      "time" : 1793547263518
+    },
+    {
+      "cacheRead" : 271703,
+      "cacheWrite" : 509,
+      "id" : "msg_011CgcTUGTBa9vq95CytFKgZ",
+      "input" : 4,
+      "model" : "claude-opus-5-5",
+      "output" : 288,
+      "time" : 1793547470590
+    },
+    {
+      "cacheRead" : 272212,
+      "cacheWrite" : 1755,
+      "id" : "msg_011CgcTgakrm8TtQDAEoPenY",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 757,
+      "time" : 1793547641609
+    },
+    {
+      "cacheRead" : 273967,
+      "cacheWrite" : 3079,
+      "id" : "msg_011CgcTvQeHc337eUZCjWkJg",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 400,
+      "time" : 1793547826940
+    },
+    {
+      "cacheRead" : 277046,
+      "cacheWrite" : 6492,
+      "id" : "msg_011CgcTw22GuN87Fp1kiTGoY",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1757,
+      "time" : 1793547848034
+    },
+    {
+      "cacheRead" : 283538,
+      "cacheWrite" : 2307,
+      "id" : "msg_011CgcUWsE8gpVFLHa1Yfrs1",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 926,
+      "time" : 1793548297743
+    },
+    {
+      "cacheRead" : 285845,
+      "cacheWrite" : 3065,
+      "id" : "msg_011CgcUXhL7HwFAkLp4RbniV",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 4627,
+      "time" : 1793548342202
+    },
+    {
+      "cacheRead" : 288910,
+      "cacheWrite" : 5846,
+      "id" : "msg_011CgcUb9M7eeWLuUo7Bioey",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1004,
+      "time" : 1793548356173
+    },
+    {
+      "cacheRead" : 294756,
+      "cacheWrite" : 1277,
+      "id" : "msg_011CgcUcW7Z7TBtV2NFfXKbM",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1253,
+      "time" : 1793548377430
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

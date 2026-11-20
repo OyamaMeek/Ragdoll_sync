@@ -1,0 +1,42 @@
+{
+  "created" : 1794625801635.261,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ccc08eb1443b2d025e70d9ef",
+  "nativeID" : "01a1d808-8d7f-7011-86aa-65bdc61fc474",
+  "project" : "/Users/oyamahappa/Documents/GitHub/blind-spots",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794625855045,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_009ea5ad9e96c584016af7d10df7cc87d0a320fcaa9d49003d",
+      "input" : 18631,
+      "model" : "codex-auto-review",
+      "output" : 163,
+      "time" : 1794625809764
+    },
+    {
+      "cacheRead" : 24320,
+      "cacheWrite" : 0,
+      "id" : "resp_009ea5ad9e96c584016af7d11732b887d0a542f274af74c737",
+      "input" : 2151,
+      "model" : "codex-auto-review",
+      "output" : 334,
+      "time" : 1794625821810
+    },
+    {
+      "cacheRead" : 26240,
+      "cacheWrite" : 0,
+      "id" : "resp_009ea5ad9e96c584016af7d13c162887d0a126fdeb097a1d29",
+      "input" : 3548,
+      "model" : "codex-auto-review",
+      "output" : 124,
+      "time" : 1794625855043
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

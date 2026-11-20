@@ -1,0 +1,51 @@
+{
+  "created" : 1790140541635,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:2f0f42648f544cf20a72f609",
+  "nativeID" : "01a0ccb0-ea2d-7451-8dc6-a5e3af48d281",
+  "project" : "/Users/oyamahappa/Documents/GitHub/local-question-bank",
+  "source" : "codex",
+  "title" : "可以把题目按照一级折叠标题是年份二级折叠标题是月份三级折叠标题是日期四级折叠标题是题干/解析上传到notion吗 <image name=[Image #1] path=\"/var/folders/k",
+  "updated" : 1790141116516,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa1aa46d3bbe46e016ab3607ff34c87d0abacf959ebc2c9f9",
+      "input" : 16856,
+      "model" : "codex-auto-review",
+      "output" : 200,
+      "time" : 1790140548622
+    },
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa1aa46d3bbe46e016ab36292e02887d0a0ece97a3d6d06a4",
+      "input" : 25414,
+      "model" : "codex-auto-review",
+      "output" : 131,
+      "time" : 1790141078330
+    },
+    {
+      "cacheRead" : 29440,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa1aa46d3bbe46e016ab362a65ee887d0865c3f9acf67a187",
+      "input" : 1563,
+      "model" : "codex-auto-review",
+      "output" : 52,
+      "time" : 1790141096838
+    },
+    {
+      "cacheRead" : 30464,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa1aa46d3bbe46e016ab362b781f087d0af1d55c75318d231",
+      "input" : 1338,
+      "model" : "codex-auto-review",
+      "output" : 213,
+      "time" : 1790141116513
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

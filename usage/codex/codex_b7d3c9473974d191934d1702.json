@@ -1,0 +1,24 @@
+{
+  "created" : 1794821090778,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:b7d3c9473974d191934d1702",
+  "nativeID" : "01a1e3ac-6d92-79e1-8a16-def54b16527b",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HzieeOJ_tools",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794821096594,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_000f064e0b2d9760016afacbe6c4ec87d0bce4167dff86fe03",
+      "input" : 18501,
+      "model" : "codex-auto-review",
+      "output" : 167,
+      "time" : 1794821096588
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

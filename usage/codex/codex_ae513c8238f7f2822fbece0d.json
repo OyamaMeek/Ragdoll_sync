@@ -1,0 +1,42 @@
+{
+  "created" : 1791985118682,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ae513c8238f7f2822fbece0d",
+  "nativeID" : "01a13aa2-ed53-7963-afe6-037b5c1bc8e4",
+  "project" : "/Users/oyamahappa/Documents/GitHub/PrivateWork",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1791985204123,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_00bd8193c2427c84016acf85e2a02881918a69968e181ce88b",
+      "input" : 21607,
+      "model" : "codex-auto-review",
+      "output" : 418,
+      "time" : 1791985127503
+    },
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_00bd8193c2427c84016acf860def6881919967d0335f018f2b",
+      "input" : 24386,
+      "model" : "codex-auto-review",
+      "output" : 332,
+      "time" : 1791985170263
+    },
+    {
+      "cacheRead" : 29440,
+      "cacheWrite" : 0,
+      "id" : "resp_00bd8193c2427c84016acf862f5cd08191a341e4dd31cf3360",
+      "input" : 2974,
+      "model" : "codex-auto-review",
+      "output" : 266,
+      "time" : 1791985204115
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

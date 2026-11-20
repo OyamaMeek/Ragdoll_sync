@@ -1,0 +1,196 @@
+{
+  "created" : 1792655998983,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:1b2f0d0a2394ee4093e981a4",
+  "nativeID" : "session-bba43e8a-371b-434d-9a90-f14159e443c7",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "test261020",
+  "source" : "dsh",
+  "title" : "为PPT添加平滑切换和缩放效果",
+  "updated" : 1793081798523,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "20",
+      "input" : 175522,
+      "model" : "claude-opus-5-5",
+      "output" : 146,
+      "time" : 1792668228066
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "34",
+      "input" : 188294,
+      "model" : "claude-opus-5-5",
+      "output" : 378,
+      "time" : 1792668241256
+    },
+    {
+      "cacheRead" : 170320,
+      "cacheWrite" : 22838,
+      "id" : "54",
+      "input" : 8769,
+      "model" : "claude-opus-5-5",
+      "output" : 281,
+      "time" : 1792668248929
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "72",
+      "input" : 21529,
+      "model" : "claude-opus-5-5",
+      "output" : 168,
+      "time" : 1792668259889
+    },
+    {
+      "cacheRead" : 170777,
+      "cacheWrite" : 68950,
+      "id" : "81",
+      "input" : 10948,
+      "model" : "claude-opus-5-5",
+      "output" : 819,
+      "time" : 1792668295874
+    },
+    {
+      "cacheRead" : 200184,
+      "cacheWrite" : 30118,
+      "id" : "90",
+      "input" : 11609,
+      "model" : "claude-opus-5-5",
+      "output" : 747,
+      "time" : 1792668375429
+    },
+    {
+      "cacheRead" : 200930,
+      "cacheWrite" : 24630,
+      "id" : "99",
+      "input" : 12258,
+      "model" : "claude-opus-5-5",
+      "output" : 217,
+      "time" : 1792668386872
+    },
+    {
+      "cacheRead" : 211238,
+      "cacheWrite" : 8863,
+      "id" : "113",
+      "input" : 15457,
+      "model" : "claude-opus-5-5",
+      "output" : 211,
+      "time" : 1792668399609
+    },
+    {
+      "cacheRead" : 215364,
+      "cacheWrite" : 45426,
+      "id" : "122",
+      "input" : 11653,
+      "model" : "claude-opus-5-5",
+      "output" : 1026,
+      "time" : 1792668443245
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "134",
+      "input" : 34710,
+      "model" : "claude-opus-5-5",
+      "output" : 3884,
+      "time" : 1792668473382
+    },
+    {
+      "cacheRead" : 187864,
+      "cacheWrite" : 102681,
+      "id" : "241",
+      "input" : 12224,
+      "model" : "claude-opus-5-5",
+      "output" : 198,
+      "time" : 1792668483739
+    },
+    {
+      "cacheRead" : 280694,
+      "cacheWrite" : 4524,
+      "id" : "248",
+      "input" : 27846,
+      "model" : "claude-opus-5-5",
+      "output" : 3158,
+      "time" : 1792668578163
+    },
+    {
+      "cacheRead" : 512,
+      "cacheWrite" : 0,
+      "id" : "261",
+      "input" : 0,
+      "model" : "claude-opus-5-5",
+      "output" : 2230,
+      "time" : 1792668597342
+    },
+    {
+      "cacheRead" : 31104,
+      "cacheWrite" : 0,
+      "id" : "274",
+      "input" : 0,
+      "model" : "claude-opus-5-5",
+      "output" : 524,
+      "time" : 1792668605697
+    },
+    {
+      "cacheRead" : 33408,
+      "cacheWrite" : 0,
+      "id" : "285",
+      "input" : 0,
+      "model" : "claude-opus-5-5",
+      "output" : 449,
+      "time" : 1792668617779
+    },
+    {
+      "cacheRead" : 214311,
+      "cacheWrite" : 110795,
+      "id" : "294",
+      "input" : 15376,
+      "model" : "claude-opus-5-5",
+      "output" : 748,
+      "time" : 1792668635502
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "305",
+      "input" : 44764,
+      "model" : "claude-opus-5-5",
+      "output" : 175,
+      "time" : 1792668652171
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 66463,
+      "id" : "312",
+      "input" : 11729,
+      "model" : "claude-opus-5-5",
+      "output" : 1613,
+      "time" : 1792668679116
+    },
+    {
+      "cacheRead" : 274973,
+      "cacheWrite" : 47685,
+      "id" : "339",
+      "input" : 8026,
+      "model" : "claude-opus-5-5",
+      "output" : 162,
+      "time" : 1792668694704
+    },
+    {
+      "cacheRead" : 34432,
+      "cacheWrite" : 0,
+      "id" : "350",
+      "input" : 0,
+      "model" : "claude-opus-5-5",
+      "output" : 343,
+      "time" : 1792668703306
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

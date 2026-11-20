@@ -1,0 +1,69 @@
+{
+  "created" : 1793796544966,
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:2e086977fc08167b543d20b1",
+  "nativeID" : "474b548c-9d8f-444a-9a52-7ed8edee5205",
+  "project" : "/Users/oyamahappa/Documents/GitHub/Motion",
+  "source" : "claude",
+  "title" : "一滴墨展开动画设计",
+  "updated" : 1793796586199,
+  "usage" : [
+    {
+      "cacheRead" : 42970,
+      "cacheWrite" : 34509,
+      "id" : "msg_011Cghv2sPpkNXjrL5iBybE7",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 473,
+      "time" : 1793796554168
+    },
+    {
+      "cacheRead" : 77479,
+      "cacheWrite" : 10393,
+      "id" : "msg_011Cghv3Z8kqfygdjbLVs9tw",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 184,
+      "time" : 1793796559396
+    },
+    {
+      "cacheRead" : 87872,
+      "cacheWrite" : 14630,
+      "id" : "msg_011Cghv3v9Yeu3FsDTdVPwmR",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 277,
+      "time" : 1793796565573
+    },
+    {
+      "cacheRead" : 102502,
+      "cacheWrite" : 2530,
+      "id" : "msg_011Cghv4RDHcrJa6u3vb4g8A",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 195,
+      "time" : 1793796569661
+    },
+    {
+      "cacheRead" : 105032,
+      "cacheWrite" : 9570,
+      "id" : "msg_011Cghv4iCjbj3MGEnmSFtyT",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 451,
+      "time" : 1793796579843
+    },
+    {
+      "cacheRead" : 114602,
+      "cacheWrite" : 9363,
+      "id" : "msg_011Cghv5UENvVvk9KFmgjDZG",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 352,
+      "time" : 1793796585855
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

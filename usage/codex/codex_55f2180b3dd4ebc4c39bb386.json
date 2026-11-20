@@ -1,0 +1,150 @@
+{
+  "created" : 1792125865387,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:55f2180b3dd4ebc4c39bb386",
+  "nativeID" : "01a14306-764e-7593-a88d-850c6f78bf59",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "安装https://github.com/leonxlnx/taste-skill",
+  "updated" : 1792126032135,
+  "usage" : [
+    {
+      "cacheRead" : 22656,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1abbdb0908191b3f034d4b9017483",
+      "input" : 23500,
+      "model" : "gpt-6.1-sol",
+      "output" : 198,
+      "time" : 1792125890475
+    },
+    {
+      "cacheRead" : 45952,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1abd01a00819190f19905b8c0195d",
+      "input" : 8898,
+      "model" : "gpt-6.1-sol",
+      "output" : 174,
+      "time" : 1792125907578
+    },
+    {
+      "cacheRead" : 54656,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1abd63a7481918064001d8cefeeb9",
+      "input" : 11858,
+      "model" : "gpt-6.1-sol",
+      "output" : 192,
+      "time" : 1792125914138
+    },
+    {
+      "cacheRead" : 66304,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1abdbade4819197dcdc2031d28e4f",
+      "input" : 3148,
+      "model" : "gpt-6.1-sol",
+      "output" : 485,
+      "time" : 1792125924612
+    },
+    {
+      "cacheRead" : 69248,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1abe54bc88191afc019e881536e57",
+      "input" : 864,
+      "model" : "gpt-6.1-sol",
+      "output" : 223,
+      "time" : 1792125929045
+    },
+    {
+      "cacheRead" : 69888,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1ac08c20081918db11bdce7302bd2",
+      "input" : 505,
+      "model" : "gpt-6.1-sol",
+      "output" : 106,
+      "time" : 1792125963525
+    },
+    {
+      "cacheRead" : 70272,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1ac103b088191bf851977d0000663",
+      "input" : 930,
+      "model" : "gpt-6.1-sol",
+      "output" : 223,
+      "time" : 1792125972651
+    },
+    {
+      "cacheRead" : 71040,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1ac154dd08191b316074c4b634bfb",
+      "input" : 611,
+      "model" : "gpt-6.1-sol",
+      "output" : 535,
+      "time" : 1792125983568
+    },
+    {
+      "cacheRead" : 71424,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1ac20328c8191b314366e00dfb86b",
+      "input" : 818,
+      "model" : "gpt-6.1-sol",
+      "output" : 68,
+      "time" : 1792125986651
+    },
+    {
+      "cacheRead" : 72064,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1ac2343608191b1c99489bb5b8622",
+      "input" : 533,
+      "model" : "gpt-6.1-sol",
+      "output" : 1101,
+      "time" : 1792126005363
+    },
+    {
+      "cacheRead" : 72448,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1ac3623008191863cc397bbd97651",
+      "input" : 1418,
+      "model" : "gpt-6.1-sol",
+      "output" : 127,
+      "time" : 1792126008870
+    },
+    {
+      "cacheRead" : 73728,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1ac40074881918731193b3b5a05f2",
+      "input" : 385,
+      "model" : "gpt-6.1-sol",
+      "output" : 70,
+      "time" : 1792126019244
+    },
+    {
+      "cacheRead" : 73984,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1ac43ebd081918edb5199bb53930c",
+      "input" : 777,
+      "model" : "gpt-6.1-sol",
+      "output" : 277,
+      "time" : 1792126024622
+    },
+    {
+      "cacheRead" : 74624,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1ac4cde5c8191a583e66af2992567",
+      "input" : 702,
+      "model" : "gpt-6.1-sol",
+      "output" : 39,
+      "time" : 1792126030208
+    },
+    {
+      "cacheRead" : 75136,
+      "cacheWrite" : 0,
+      "id" : "resp_0478e463937e80d7016ad1ac4ed2fc8191ae1ad79204010a05",
+      "input" : 316,
+      "model" : "gpt-6.1-sol",
+      "output" : 43,
+      "time" : 1792126032123
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

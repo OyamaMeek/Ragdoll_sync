@@ -1,0 +1,60 @@
+{
+  "created" : 1794922460271.741,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:c8802c4fe41cdca55ff12d55",
+  "nativeID" : "01a1e9b7-0a34-7223-9882-15da5321f7f4",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "排查打开对话卡顿",
+  "updated" : 1794922507098,
+  "usage" : [
+    {
+      "cacheRead" : 13184,
+      "cacheWrite" : 0,
+      "id" : "resp_0ec39c9aa63dda0c016afc57e3e58887d0b8feaee620a36cc4",
+      "input" : 23861,
+      "model" : "gpt-6.1-sol",
+      "output" : 116,
+      "time" : 1794922472265
+    },
+    {
+      "cacheRead" : 36992,
+      "cacheWrite" : 0,
+      "id" : "resp_0ec39c9aa63dda0c016afc57e9c54087d0ad1b945461d4e41b",
+      "input" : 302,
+      "model" : "gpt-6.1-sol",
+      "output" : 137,
+      "time" : 1794922477554
+    },
+    {
+      "cacheRead" : 37248,
+      "cacheWrite" : 0,
+      "id" : "resp_0ec39c9aa63dda0c016afc57eec8a887d0b027db0d152861da",
+      "input" : 11169,
+      "model" : "gpt-6.1-sol",
+      "output" : 303,
+      "time" : 1794922485782
+    },
+    {
+      "cacheRead" : 48512,
+      "cacheWrite" : 0,
+      "id" : "resp_0ec39c9aa63dda0c016afc57f720a887d0ada78db9ea215ced",
+      "input" : 8257,
+      "model" : "gpt-6.1-sol",
+      "output" : 284,
+      "time" : 1794922498337
+    },
+    {
+      "cacheRead" : 56832,
+      "cacheWrite" : 0,
+      "id" : "resp_0ec39c9aa63dda0c016afc58037ae087d08685c79d8dc48c14",
+      "input" : 1719,
+      "model" : "gpt-6.1-sol",
+      "output" : 284,
+      "time" : 1794922507078
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "created" : 1792392659979,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:c800604ec8e6c5c5a9f74ffa",
+  "nativeID" : "01a152ed-8387-7583-8138-69f2befaeae0",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1792410692351,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5bdd78f7c8197a05218f3d774668d",
+      "input" : 24039,
+      "model" : "codex-auto-review",
+      "output" : 150,
+      "time" : 1792392666499
+    },
+    {
+      "cacheRead" : 29824,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5be2ce568819787043b5952a58f2d",
+      "input" : 7864,
+      "model" : "codex-auto-review",
+      "output" : 179,
+      "time" : 1792392751262
+    },
+    {
+      "cacheRead" : 37504,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5be96586c819797e7226de4d8d0cc",
+      "input" : 11158,
+      "model" : "codex-auto-review",
+      "output" : 150,
+      "time" : 1792392858159
+    },
+    {
+      "cacheRead" : 48512,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5befd850c8197b0fdd20e92202dd2",
+      "input" : 11608,
+      "model" : "codex-auto-review",
+      "output" : 125,
+      "time" : 1792392959206
+    },
+    {
+      "cacheRead" : 29824,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5c36fe83c8197bcde1d6cb209e99f",
+      "input" : 42541,
+      "model" : "codex-auto-review",
+      "output" : 133,
+      "time" : 1792394097520
+    },
+    {
+      "cacheRead" : 72192,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5c406726c8197ae1a630a3191910a",
+      "input" : 12877,
+      "model" : "codex-auto-review",
+      "output" : 172,
+      "time" : 1792394248688
+    },
+    {
+      "cacheRead" : 84864,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5c42a814c8197b786043449e3334b",
+      "input" : 2766,
+      "model" : "codex-auto-review",
+      "output" : 102,
+      "time" : 1792394285439
+    },
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5c649f3fc8197818ef4ecc2bcd612",
+      "input" : 99135,
+      "model" : "codex-auto-review",
+      "output" : 136,
+      "time" : 1792394827751
+    },
+    {
+      "cacheRead" : 104960,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5c65879508197a01d4cecba163ea1",
+      "input" : 2087,
+      "model" : "codex-auto-review",
+      "output" : 88,
+      "time" : 1792394841881
+    },
+    {
+      "cacheRead" : 106880,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5c681cafc8197b0546cc8b9dceeb1",
+      "input" : 4872,
+      "model" : "codex-auto-review",
+      "output" : 224,
+      "time" : 1792394884232
+    },
+    {
+      "cacheRead" : 111616,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5c6ae2078819796565428140c014e",
+      "input" : 4197,
+      "model" : "codex-auto-review",
+      "output" : 157,
+      "time" : 1792394928532
+    },
+    {
+      "cacheRead" : 115584,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5c6c3293481979fc8d11711da6086",
+      "input" : 2115,
+      "model" : "codex-auto-review",
+      "output" : 96,
+      "time" : 1792394949139
+    },
+    {
+      "cacheRead" : 117504,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad5c72887848197874aefd865850102",
+      "input" : 5751,
+      "model" : "codex-auto-review",
+      "output" : 121,
+      "time" : 1792395050402
+    },
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_0a55cf8dafb98cd4016ad60442608c819795b53e8eac9ab20e",
+      "input" : 137055,
+      "model" : "codex-auto-review",
+      "output" : 135,
+      "time" : 1792410692346
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

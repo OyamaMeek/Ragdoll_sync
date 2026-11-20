@@ -1,0 +1,672 @@
+{
+  "created" : 1794316775331,
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:355d16ac8dd8fdf9c4d73d2e",
+  "nativeID" : "5892aa51-009a-4220-a9d2-b4a0e4a1d8d0",
+  "project" : "/Users/oyamahappa/Documents/GitHub/Motion",
+  "source" : "claude",
+  "title" : "蒋葆增纪录短片制作",
+  "updated" : 1794410276340,
+  "usage" : [
+    {
+      "cacheRead" : 43167,
+      "cacheWrite" : 37024,
+      "id" : "msg_011CguKDMr6smgcrR2KjrVmu",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 510,
+      "time" : 1794316781743
+    },
+    {
+      "cacheRead" : 80191,
+      "cacheWrite" : 3964,
+      "id" : "msg_011CguKDn2eQhJSQvWR5q9PB",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 570,
+      "time" : 1794316787547
+    },
+    {
+      "cacheRead" : 84155,
+      "cacheWrite" : 27088,
+      "id" : "msg_011CguKEAR3JSnG8CHrM8Qsz",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 897,
+      "time" : 1794316797687
+    },
+    {
+      "cacheRead" : 111243,
+      "cacheWrite" : 15324,
+      "id" : "msg_011CguKEvjJ2wnYHnxgJgXq2",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 982,
+      "time" : 1794316808321
+    },
+    {
+      "cacheRead" : 126567,
+      "cacheWrite" : 8551,
+      "id" : "msg_011CguKFhdXZaDhbw8nQpn5r",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 627,
+      "time" : 1794316814797
+    },
+    {
+      "cacheRead" : 135118,
+      "cacheWrite" : 8764,
+      "id" : "msg_011CguKGicMQDCQ1FfbAdEm5",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1060,
+      "time" : 1794316832539
+    },
+    {
+      "cacheRead" : 143882,
+      "cacheWrite" : 5029,
+      "id" : "msg_011CguKNyzyPiVEAQRHfmLpi",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1048,
+      "time" : 1794316917408
+    },
+    {
+      "cacheRead" : 148911,
+      "cacheWrite" : 3659,
+      "id" : "msg_011CguKZCkig26Xq3tBpwx1v",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1158,
+      "time" : 1794317057086
+    },
+    {
+      "cacheRead" : 152570,
+      "cacheWrite" : 1613,
+      "id" : "msg_011CguKiuom8WJ7Zyw7sxHW8",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 14722,
+      "time" : 1794317352803
+    },
+    {
+      "cacheRead" : 154183,
+      "cacheWrite" : 15234,
+      "id" : "msg_011CguKwu4UqnxuoCTRsMQAC",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 373,
+      "time" : 1794317358178
+    },
+    {
+      "cacheRead" : 169417,
+      "cacheWrite" : 5999,
+      "id" : "msg_011CguKxEHsdZt3U6UGcQL9v",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 37501,
+      "time" : 1794317788303
+    },
+    {
+      "cacheRead" : 175416,
+      "cacheWrite" : 37788,
+      "id" : "msg_011CguLW1QNsUgvEMBG1SUyR",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 6669,
+      "time" : 1794317839952
+    },
+    {
+      "cacheRead" : 213204,
+      "cacheWrite" : 6747,
+      "id" : "msg_011CguLZjfBwdpk4y1n8UTRC",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 5948,
+      "time" : 1794317886812
+    },
+    {
+      "cacheRead" : 219951,
+      "cacheWrite" : 6025,
+      "id" : "msg_011CguLdDQdp7KZrrFmeHyYb",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 664,
+      "time" : 1794317894926
+    },
+    {
+      "cacheRead" : 225976,
+      "cacheWrite" : 745,
+      "id" : "msg_011CguLdqBguKUoshTD2Nns7",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 6067,
+      "time" : 1794317943861
+    },
+    {
+      "cacheRead" : 226721,
+      "cacheWrite" : 6178,
+      "id" : "msg_011CguLhQPY6Lj4BGqivPAX4",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 6691,
+      "time" : 1794317998911
+    },
+    {
+      "cacheRead" : 232899,
+      "cacheWrite" : 6771,
+      "id" : "msg_011CguLmTHmnEALVZ9gq1JWy",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 6687,
+      "time" : 1794318060881
+    },
+    {
+      "cacheRead" : 239670,
+      "cacheWrite" : 6798,
+      "id" : "msg_011CguLr7FQgm2A9GyYCjbp9",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 12387,
+      "time" : 1794318173415
+    },
+    {
+      "cacheRead" : 246468,
+      "cacheWrite" : 12861,
+      "id" : "msg_011CguLzLTNnDZ55k3f2jBGC",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 4718,
+      "time" : 1794318211861
+    },
+    {
+      "cacheRead" : 259329,
+      "cacheWrite" : 4797,
+      "id" : "msg_011CguM39fpSv65T6Kn8c1hy",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1385,
+      "time" : 1794318224395
+    },
+    {
+      "cacheRead" : 264126,
+      "cacheWrite" : 2004,
+      "id" : "msg_011CguM4jbHKJBsyu8gTWgBv",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1028,
+      "time" : 1794318243983
+    },
+    {
+      "cacheRead" : 266130,
+      "cacheWrite" : 4874,
+      "id" : "msg_011CguM6CdFLTiCaRHHsLU8T",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 771,
+      "time" : 1794318264339
+    },
+    {
+      "cacheRead" : 271004,
+      "cacheWrite" : 4447,
+      "id" : "msg_011CguM724nB1CCmDNeX4ZmG",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 2422,
+      "time" : 1794318294455
+    },
+    {
+      "cacheRead" : 275451,
+      "cacheWrite" : 9924,
+      "id" : "msg_011CguM9X6aoYeqAXh4CPHSR",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 2567,
+      "time" : 1794318332454
+    },
+    {
+      "cacheRead" : 285375,
+      "cacheWrite" : 2867,
+      "id" : "msg_011CguMC9GWvEAuLTzG59ydP",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 5235,
+      "time" : 1794318376912
+    },
+    {
+      "cacheRead" : 288242,
+      "cacheWrite" : 7193,
+      "id" : "msg_011CguMFLwa491GpcP3ZYYsz",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 3504,
+      "time" : 1794318406561
+    },
+    {
+      "cacheRead" : 295435,
+      "cacheWrite" : 11070,
+      "id" : "msg_011CguMHnkQ3Bqesdn1b3m47",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 2560,
+      "time" : 1794318444211
+    },
+    {
+      "cacheRead" : 306505,
+      "cacheWrite" : 3040,
+      "id" : "msg_011CguMLJh1wutMQTj8LG8FY",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 3137,
+      "time" : 1794318470649
+    },
+    {
+      "cacheRead" : 309545,
+      "cacheWrite" : 4276,
+      "id" : "msg_011CguMNFsuWjg7feaGhAHCm",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 13196,
+      "time" : 1794318589260
+    },
+    {
+      "cacheRead" : 313821,
+      "cacheWrite" : 13307,
+      "id" : "msg_011CguMWyuDmNg8nmWrqfRbM",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 3128,
+      "time" : 1794318618634
+    },
+    {
+      "cacheRead" : 327128,
+      "cacheWrite" : 4253,
+      "id" : "msg_011CguMZE2M9VNsbPo3MaFXR",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1786,
+      "time" : 1794318636022
+    },
+    {
+      "cacheRead" : 331381,
+      "cacheWrite" : 2779,
+      "id" : "msg_011CguMacTkHMBwGheEJijeD",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 868,
+      "time" : 1794318647751
+    },
+    {
+      "cacheRead" : 334160,
+      "cacheWrite" : 3902,
+      "id" : "msg_011CguMcD4PQkfRZ84NS78Ho",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1317,
+      "time" : 1794318676805
+    },
+    {
+      "cacheRead" : 338062,
+      "cacheWrite" : 1781,
+      "id" : "msg_011CguMdS4kGN6b7xULiRTkX",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 2681,
+      "time" : 1794318697556
+    },
+    {
+      "cacheRead" : 339843,
+      "cacheWrite" : 3743,
+      "id" : "msg_011CguMf9rVAHEneo1nyXyEA",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 725,
+      "time" : 1794318707716
+    },
+    {
+      "cacheRead" : 343586,
+      "cacheWrite" : 1216,
+      "id" : "msg_011CguMg5Kus3NEgPp33ELyn",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 718,
+      "time" : 1794318720595
+    },
+    {
+      "cacheRead" : 344802,
+      "cacheWrite" : 1427,
+      "id" : "msg_011CguMh7PU5sh3kojtdN4r8",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 715,
+      "time" : 1794318734560
+    },
+    {
+      "cacheRead" : 346229,
+      "cacheWrite" : 1724,
+      "id" : "msg_011CguMhgne9dnTvq7aTF8Ut",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 474,
+      "time" : 1794318740283
+    },
+    {
+      "cacheRead" : 347953,
+      "cacheWrite" : 818,
+      "id" : "msg_011CguMpzQzXDCFt5DspDxEW",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 5923,
+      "time" : 1794318881488
+    },
+    {
+      "cacheRead" : 348771,
+      "cacheWrite" : 6916,
+      "id" : "msg_011CguN4zHgMLTuojzvLWd3m",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 2914,
+      "time" : 1794319060497
+    },
+    {
+      "cacheRead" : 355687,
+      "cacheWrite" : 3161,
+      "id" : "msg_011CguN7iDdaxTE7wn9nk5Gf",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 4827,
+      "time" : 1794319097126
+    },
+    {
+      "cacheRead" : 358848,
+      "cacheWrite" : 6173,
+      "id" : "msg_011CguNARY7qRyH8sZ1SYWAN",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 447,
+      "time" : 1794319102398
+    },
+    {
+      "cacheRead" : 365021,
+      "cacheWrite" : 1112,
+      "id" : "msg_011CguNNav1VH3X2HV3AqScN",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1006,
+      "time" : 1794319272473
+    },
+    {
+      "cacheRead" : 366133,
+      "cacheWrite" : 1237,
+      "id" : "msg_011CguNPT5kGnCjB1Dj5FiL6",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 719,
+      "time" : 1794319280135
+    },
+    {
+      "cacheRead" : 367370,
+      "cacheWrite" : 6354,
+      "id" : "msg_011CguNQ1tiGo7G8pLmQqQcF",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1018,
+      "time" : 1794319294111
+    },
+    {
+      "cacheRead" : 373724,
+      "cacheWrite" : 8290,
+      "id" : "msg_011CguNQxnT3EMd525J9v1cE",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 836,
+      "time" : 1794319306023
+    },
+    {
+      "cacheRead" : 382014,
+      "cacheWrite" : 1398,
+      "id" : "msg_011CguNRpK1DCD7HaiEnUSbJ",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 2296,
+      "time" : 1794319324654
+    },
+    {
+      "cacheRead" : 383412,
+      "cacheWrite" : 3579,
+      "id" : "msg_011CguNTDMrLLGM9ZZ8PNpYh",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 663,
+      "time" : 1794319332001
+    },
+    {
+      "cacheRead" : 386991,
+      "cacheWrite" : 902,
+      "id" : "msg_011CguNfFLGDHEwLrL2obpTQ",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 241,
+      "time" : 1794319491104
+    },
+    {
+      "cacheRead" : 387893,
+      "cacheWrite" : 5413,
+      "id" : "msg_011CguNfUosfeYt4CfZJy75T",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 2675,
+      "time" : 1794319519849
+    },
+    {
+      "cacheRead" : 393306,
+      "cacheWrite" : 5889,
+      "id" : "msg_011CguNhn5keFmmqQp9X41sy",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 691,
+      "time" : 1794319529666
+    },
+    {
+      "cacheRead" : 399195,
+      "cacheWrite" : 4302,
+      "id" : "msg_011CguNvoMFrCjSjSeyT2KKq",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1773,
+      "time" : 1794319719131
+    },
+    {
+      "cacheRead" : 403497,
+      "cacheWrite" : 3068,
+      "id" : "msg_011CguNzBc4T88iCsULitUgv",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 807,
+      "time" : 1794319753938
+    },
+    {
+      "cacheRead" : 406565,
+      "cacheWrite" : 5199,
+      "id" : "msg_011CguNzqW7AfPmEFy8ujy7H",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 671,
+      "time" : 1794319760983
+    },
+    {
+      "cacheRead" : 411764,
+      "cacheWrite" : 7094,
+      "id" : "msg_011CguP1P9rZsRRce8zwBYta",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1101,
+      "time" : 1794319773122
+    },
+    {
+      "cacheRead" : 418858,
+      "cacheWrite" : 2310,
+      "id" : "msg_011CguPDqvmLcpmPaoWT9j7C",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 14168,
+      "time" : 1794320052162
+    },
+    {
+      "cacheRead" : 421168,
+      "cacheWrite" : 14442,
+      "id" : "msg_011CguPNuDDDFYXUrfDPHy46",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 2065,
+      "time" : 1794320071206
+    },
+    {
+      "cacheRead" : 435610,
+      "cacheWrite" : 3272,
+      "id" : "msg_011CguPQFKTV6pUjseLZZUpc",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 4968,
+      "time" : 1794320111008
+    },
+    {
+      "cacheRead" : 438882,
+      "cacheWrite" : 5048,
+      "id" : "msg_011CguPTBDEh2FvZr8w8mCAZ",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1895,
+      "time" : 1794320130722
+    },
+    {
+      "cacheRead" : 443930,
+      "cacheWrite" : 2010,
+      "id" : "msg_011CguPUcDBSLgCmYWmYs9u9",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 253,
+      "time" : 1794320134245
+    },
+    {
+      "cacheRead" : 445940,
+      "cacheWrite" : 347,
+      "id" : "msg_011CguPUtM2u579kwBLnircz",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1286,
+      "time" : 1794320147335
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "797d33c0-aea7-486e-a56d-1bf4da6e4f08",
+      "input" : 0,
+      "model" : "<synthetic>",
+      "output" : 0,
+      "time" : 1794320164398
+    },
+    {
+      "cacheRead" : 43167,
+      "cacheWrite" : 404978,
+      "id" : "msg_011CgwMpotjPjFQzVDfAinbr",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 608,
+      "time" : 1794410111134
+    },
+    {
+      "cacheRead" : 448145,
+      "cacheWrite" : 6715,
+      "id" : "msg_011CgwMqYkBCah8KfyavPPtb",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1688,
+      "time" : 1794410129104
+    },
+    {
+      "cacheRead" : 454860,
+      "cacheWrite" : 3596,
+      "id" : "msg_011CgwMrs4HncV3Vne5ciNRm",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 2010,
+      "time" : 1794410147672
+    },
+    {
+      "cacheRead" : 458456,
+      "cacheWrite" : 3757,
+      "id" : "msg_011CgwMtD8oqpz4oQUVu438w",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 1958,
+      "time" : 1794410165744
+    },
+    {
+      "cacheRead" : 462213,
+      "cacheWrite" : 2689,
+      "id" : "msg_011CgwMuXoz9nC4wq2XPgZdV",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 3360,
+      "time" : 1794410196205
+    },
+    {
+      "cacheRead" : 464902,
+      "cacheWrite" : 3869,
+      "id" : "msg_011CgwMwqpWfPtfNE7ycwz3H",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 503,
+      "time" : 1794410204441
+    },
+    {
+      "cacheRead" : 468771,
+      "cacheWrite" : 730,
+      "id" : "msg_011CgwMxPQJGkiR8kZCjPJsJ",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 2656,
+      "time" : 1794410229045
+    },
+    {
+      "cacheRead" : 469501,
+      "cacheWrite" : 2958,
+      "id" : "msg_011CgwMzRAX6R82Gkp4ZRFyc",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 308,
+      "time" : 1794410236036
+    },
+    {
+      "cacheRead" : 472459,
+      "cacheWrite" : 391,
+      "id" : "msg_011CgwN1UHZsV3KRUkanAHgN",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 489,
+      "time" : 1794410251617
+    },
+    {
+      "cacheRead" : 472850,
+      "cacheWrite" : 934,
+      "id" : "msg_011CgwN2XJAZupDFK569yx1o",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 165,
+      "time" : 1794410263643
+    },
+    {
+      "cacheRead" : 473784,
+      "cacheWrite" : 223,
+      "id" : "msg_011CgwN2sKSLoW7KjMFKWEbR",
+      "input" : 2,
+      "model" : "claude-fable-5-2",
+      "output" : 641,
+      "time" : 1794410272708
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

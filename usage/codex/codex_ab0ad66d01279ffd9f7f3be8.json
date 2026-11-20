@@ -1,0 +1,78 @@
+{
+  "created" : 1795077911822.81,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ab0ad66d01279ffd9f7f3be8",
+  "nativeID" : "01a1f2ef-ea4d-74f0-9f11-d7e7f02e937d",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
+  "source" : "codex",
+  "title" : "突出新增特性并发布",
+  "updated" : 1795077977864,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb71e267487d080f83e5367419266",
+      "input" : 62036,
+      "model" : "gpt-6.2-sol",
+      "output" : 629,
+      "time" : 1795077937132
+    },
+    {
+      "cacheRead" : 61696,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb7337e4087d09023fa3f31a53fbe",
+      "input" : 1347,
+      "model" : "gpt-6.2-sol",
+      "output" : 39,
+      "time" : 1795077941369
+    },
+    {
+      "cacheRead" : 62720,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb73616cc87d0a13f542d722a6582",
+      "input" : 456,
+      "model" : "gpt-6.2-sol",
+      "output" : 397,
+      "time" : 1795077953153
+    },
+    {
+      "cacheRead" : 62976,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb74a7fcc87d086aa8f999203a279",
+      "input" : 656,
+      "model" : "gpt-6.2-sol",
+      "output" : 39,
+      "time" : 1795077964664
+    },
+    {
+      "cacheRead" : 63488,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb74d347887d0a8a8c23f08856217",
+      "input" : 290,
+      "model" : "gpt-6.2-sol",
+      "output" : 145,
+      "time" : 1795077969417
+    },
+    {
+      "cacheRead" : 63488,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb7531c6087d09ff61f9f246e7093",
+      "input" : 631,
+      "model" : "gpt-6.2-sol",
+      "output" : 39,
+      "time" : 1795077973731
+    },
+    {
+      "cacheRead" : 64000,
+      "cacheWrite" : 0,
+      "id" : "resp_0fa18b7ddd13b193016afeb7565a7487d0a83719b5902c618d",
+      "input" : 235,
+      "model" : "gpt-6.2-sol",
+      "output" : 113,
+      "time" : 1795077977828
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

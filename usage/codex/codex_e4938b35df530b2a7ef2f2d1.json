@@ -1,0 +1,42 @@
+{
+  "created" : 1793806491021,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:e4938b35df530b2a7ef2f2d1",
+  "nativeID" : "01a1a732-ccad-70b2-b356-8a1e2e64ad5f",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
+  "source" : "codex",
+  "title" : "理解 Python 排序表达式",
+  "updated" : 1793851157915,
+  "usage" : [
+    {
+      "cacheRead" : 13440,
+      "cacheWrite" : 0,
+      "id" : "resp_0785fdaca518ab66016aeb509ee51887d097bd749785f53bc8",
+      "input" : 18046,
+      "model" : "gpt-6.1-sol",
+      "output" : 148,
+      "time" : 1793806500045
+    },
+    {
+      "cacheRead" : 31488,
+      "cacheWrite" : 0,
+      "id" : "resp_0785fdaca518ab66016aeb50a57f2087d0977796ad3c210139",
+      "input" : 1401,
+      "model" : "gpt-6.1-sol",
+      "output" : 155,
+      "time" : 1793806511604
+    },
+    {
+      "cacheRead" : 32896,
+      "cacheWrite" : 0,
+      "id" : "resp_0785fdaca518ab66016aeb50b0292c87d097f90938b75e78de",
+      "input" : 1417,
+      "model" : "gpt-6.1-sol",
+      "output" : 544,
+      "time" : 1793806524171
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

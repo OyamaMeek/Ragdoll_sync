@@ -1,0 +1,170 @@
+{
+  "created" : 1791201137169,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:4a902589be129fbbcdb1b13b",
+  "nativeID" : "315def67-c878-4613-8616-5ebaf4e0e3b2",
+  "parentID" : "session-0de88cee-855e-47e3-a7d8-5cedfd0973a3",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "deepseek-official",
+  "source" : "dsh",
+  "title" : "工作目录：/Users/oyamahappa/Documen",
+  "updated" : 1791201260481,
+  "usage" : [
+    {
+      "cacheRead" : 7168,
+      "cacheWrite" : 0,
+      "id" : "16",
+      "input" : 6272,
+      "model" : "deepseek-flash",
+      "output" : 278,
+      "time" : 1791201139799
+    },
+    {
+      "cacheRead" : 13696,
+      "cacheWrite" : 0,
+      "id" : "24",
+      "input" : 1809,
+      "model" : "deepseek-flash",
+      "output" : 214,
+      "time" : 1791201142443
+    },
+    {
+      "cacheRead" : 15616,
+      "cacheWrite" : 0,
+      "id" : "32",
+      "input" : 225,
+      "model" : "deepseek-flash",
+      "output" : 120,
+      "time" : 1791201144830
+    },
+    {
+      "cacheRead" : 15872,
+      "cacheWrite" : 0,
+      "id" : "40",
+      "input" : 2274,
+      "model" : "deepseek-flash",
+      "output" : 553,
+      "time" : 1791201148074
+    },
+    {
+      "cacheRead" : 18688,
+      "cacheWrite" : 0,
+      "id" : "60",
+      "input" : 12395,
+      "model" : "deepseek-flash",
+      "output" : 381,
+      "time" : 1791201152480
+    },
+    {
+      "cacheRead" : 31360,
+      "cacheWrite" : 0,
+      "id" : "76",
+      "input" : 5391,
+      "model" : "deepseek-flash",
+      "output" : 595,
+      "time" : 1791201156815
+    },
+    {
+      "cacheRead" : 37248,
+      "cacheWrite" : 0,
+      "id" : "92",
+      "input" : 4556,
+      "model" : "deepseek-flash",
+      "output" : 238,
+      "time" : 1791201159122
+    },
+    {
+      "cacheRead" : 41984,
+      "cacheWrite" : 0,
+      "id" : "108",
+      "input" : 4133,
+      "model" : "deepseek-flash",
+      "output" : 244,
+      "time" : 1791201161332
+    },
+    {
+      "cacheRead" : 46336,
+      "cacheWrite" : 0,
+      "id" : "124",
+      "input" : 4773,
+      "model" : "deepseek-flash",
+      "output" : 226,
+      "time" : 1791201163398
+    },
+    {
+      "cacheRead" : 51328,
+      "cacheWrite" : 0,
+      "id" : "138",
+      "input" : 4166,
+      "model" : "deepseek-flash",
+      "output" : 213,
+      "time" : 1791201165457
+    },
+    {
+      "cacheRead" : 55680,
+      "cacheWrite" : 0,
+      "id" : "152",
+      "input" : 2439,
+      "model" : "deepseek-flash",
+      "output" : 202,
+      "time" : 1791201167266
+    },
+    {
+      "cacheRead" : 58240,
+      "cacheWrite" : 0,
+      "id" : "166",
+      "input" : 3890,
+      "model" : "deepseek-flash",
+      "output" : 17269,
+      "time" : 1791201222815
+    },
+    {
+      "cacheRead" : 79360,
+      "cacheWrite" : 0,
+      "id" : "172",
+      "input" : 367,
+      "model" : "deepseek-flash",
+      "output" : 5247,
+      "time" : 1791201238640
+    },
+    {
+      "cacheRead" : 84864,
+      "cacheWrite" : 0,
+      "id" : "186",
+      "input" : 277,
+      "model" : "deepseek-flash",
+      "output" : 3858,
+      "time" : 1791201250052
+    },
+    {
+      "cacheRead" : 88960,
+      "cacheWrite" : 0,
+      "id" : "198",
+      "input" : 167,
+      "model" : "deepseek-flash",
+      "output" : 553,
+      "time" : 1791201253455
+    },
+    {
+      "cacheRead" : 89600,
+      "cacheWrite" : 0,
+      "id" : "218",
+      "input" : 578,
+      "model" : "deepseek-flash",
+      "output" : 660,
+      "time" : 1791201256963
+    },
+    {
+      "cacheRead" : 90624,
+      "cacheWrite" : 0,
+      "id" : "226",
+      "input" : 255,
+      "model" : "deepseek-flash",
+      "output" : 590,
+      "time" : 1791201260480
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

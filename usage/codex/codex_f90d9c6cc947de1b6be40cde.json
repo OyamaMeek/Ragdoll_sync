@@ -1,0 +1,42 @@
+{
+  "created" : 1791444949564,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:f90d9c6cc947de1b6be40cde",
+  "nativeID" : "01a11a70-99a8-7822-b15e-46f289b3e792",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/java-labs",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1791444994219,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_083e09e3122de0e0016ac747d98bc08191a29bbc56b9194479",
+      "input" : 16800,
+      "model" : "codex-auto-review",
+      "output" : 212,
+      "time" : 1791444956839
+    },
+    {
+      "cacheRead" : 21248,
+      "cacheWrite" : 0,
+      "id" : "resp_083e09e3122de0e0016ac747e7b0748191b72cfb14fc42bcee",
+      "input" : 2613,
+      "model" : "codex-auto-review",
+      "output" : 234,
+      "time" : 1791444970176
+    },
+    {
+      "cacheRead" : 23296,
+      "cacheWrite" : 0,
+      "id" : "resp_083e09e3122de0e0016ac747ffead881919c03102345ed0875",
+      "input" : 2608,
+      "model" : "codex-auto-review",
+      "output" : 123,
+      "time" : 1791444994217
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

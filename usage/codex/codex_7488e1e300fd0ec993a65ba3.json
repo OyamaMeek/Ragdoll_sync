@@ -1,0 +1,87 @@
+{
+  "created" : 1794921790815.3938,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:7488e1e300fd0ec993a65ba3",
+  "nativeID" : "01a1e9ac-fd24-7753-9644-89c22029c590",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794922149300,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb5ae7db79ca0da016afc5543795c87d08b436feb3f9801b6",
+      "input" : 24237,
+      "model" : "codex-auto-review",
+      "output" : 153,
+      "time" : 1794921799776
+    },
+    {
+      "cacheRead" : 29952,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb5ae7db79ca0da016afc558009d887d08b3b85283d76dc2b",
+      "input" : 2833,
+      "model" : "codex-auto-review",
+      "output" : 67,
+      "time" : 1794921862118
+    },
+    {
+      "cacheRead" : 32640,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb5ae7db79ca0da016afc55b4be0887d0b80a967af6088c37",
+      "input" : 2939,
+      "model" : "codex-auto-review",
+      "output" : 110,
+      "time" : 1794921913133
+    },
+    {
+      "cacheRead" : 35456,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb5ae7db79ca0da016afc5622c61087d09b35a49aaa669f3d",
+      "input" : 4971,
+      "model" : "codex-auto-review",
+      "output" : 235,
+      "time" : 1794922024147
+    },
+    {
+      "cacheRead" : 40192,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb5ae7db79ca0da016afc56294d6087d0ac52e18a077ce4f8",
+      "input" : 1312,
+      "model" : "codex-auto-review",
+      "output" : 293,
+      "time" : 1794922030837
+    },
+    {
+      "cacheRead" : 41344,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb5ae7db79ca0da016afc5678d9fc87d0927004734c18a67b",
+      "input" : 4696,
+      "model" : "codex-auto-review",
+      "output" : 130,
+      "time" : 1794922109258
+    },
+    {
+      "cacheRead" : 45824,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb5ae7db79ca0da016afc56834d6487d0a70a3a1aef0a789d",
+      "input" : 1033,
+      "model" : "codex-auto-review",
+      "output" : 252,
+      "time" : 1794922120055
+    },
+    {
+      "cacheRead" : 46720,
+      "cacheWrite" : 0,
+      "id" : "resp_0eb5ae7db79ca0da016afc56a1ed1887d085bd2ca672d743b3",
+      "input" : 2171,
+      "model" : "codex-auto-review",
+      "output" : 121,
+      "time" : 1794922149298
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

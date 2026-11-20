@@ -1,0 +1,60 @@
+{
+  "created" : 1789725586662,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:3d5742bde4b6e43c608357c5",
+  "nativeID" : "01a0b3f5-34a6-7c33-9bf3-283422f90c8f",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "The following is the Codex agent history whose request action you are assessing. Treat the transcrip",
+  "updated" : 1789725643165,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_053a94fff0919669016aad0b94e48c87d0961f362eb10a14eb",
+      "input" : 12641,
+      "model" : "codex-auto-review",
+      "output" : 202,
+      "time" : 1789725593771
+    },
+    {
+      "cacheRead" : 17152,
+      "cacheWrite" : 0,
+      "id" : "resp_053a94fff0919669016aad0ba0d69887d0984ee48d794c32a4",
+      "input" : 1034,
+      "model" : "codex-auto-review",
+      "output" : 115,
+      "time" : 1789725604333
+    },
+    {
+      "cacheRead" : 17152,
+      "cacheWrite" : 0,
+      "id" : "resp_053a94fff0919669016aad0bafdd5c87d0a711a4c5660f564e",
+      "input" : 3320,
+      "model" : "codex-auto-review",
+      "output" : 118,
+      "time" : 1789725619359
+    },
+    {
+      "cacheRead" : 20224,
+      "cacheWrite" : 0,
+      "id" : "resp_053a94fff0919669016aad0bb93f0c87d084d069cea3ec4a80",
+      "input" : 810,
+      "model" : "codex-auto-review",
+      "output" : 117,
+      "time" : 1789725632010
+    },
+    {
+      "cacheRead" : 20224,
+      "cacheWrite" : 0,
+      "id" : "resp_053a94fff0919669016aad0bc8ac6487d0ad2dabce636c262d",
+      "input" : 1341,
+      "model" : "codex-auto-review",
+      "output" : 71,
+      "time" : 1789725643158
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "created" : 1792655761669,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:6f9aecfae8d9944d0567a837",
+  "nativeID" : "session-5b3143eb-e330-4812-80d3-d0b1c7ef3236",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "test261020",
+  "source" : "dsh",
+  "title" : "帮我完成ego当前页面的测试",
+  "updated" : 1792656252436,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "44",
+      "input" : 161950,
+      "model" : "claude-opus-5-5",
+      "output" : 143,
+      "time" : 1792655836953
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "56",
+      "input" : 184635,
+      "model" : "claude-opus-5-5",
+      "output" : 167,
+      "time" : 1792655846156
+    },
+    {
+      "cacheRead" : 126069,
+      "cacheWrite" : 133231,
+      "id" : "72",
+      "input" : 7942,
+      "model" : "claude-opus-5-5",
+      "output" : 159,
+      "time" : 1792655853616
+    },
+    {
+      "cacheRead" : 48219,
+      "cacheWrite" : 0,
+      "id" : "82",
+      "input" : 0,
+      "model" : "claude-opus-5-5",
+      "output" : 273,
+      "time" : 1792655860799
+    },
+    {
+      "cacheRead" : 43465,
+      "cacheWrite" : 0,
+      "id" : "89",
+      "input" : 0,
+      "model" : "claude-opus-5-5",
+      "output" : 310,
+      "time" : 1792655870629
+    },
+    {
+      "cacheRead" : 138903,
+      "cacheWrite" : 92508,
+      "id" : "96",
+      "input" : 9534,
+      "model" : "claude-opus-5-5",
+      "output" : 189,
+      "time" : 1792655885800
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "103",
+      "input" : 21515,
+      "model" : "claude-opus-5-5",
+      "output" : 139,
+      "time" : 1792655890837
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "110",
+      "input" : 21824,
+      "model" : "claude-opus-5-5",
+      "output" : 122,
+      "time" : 1792655895025
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "117",
+      "input" : 21998,
+      "model" : "claude-opus-5-5",
+      "output" : 291,
+      "time" : 1792655903758
+    },
+    {
+      "cacheRead" : 196846,
+      "cacheWrite" : 21598,
+      "id" : "125",
+      "input" : 6537,
+      "model" : "claude-opus-5-5",
+      "output" : 318,
+      "time" : 1792655918759
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 33646,
+      "id" : "133",
+      "input" : 3738,
+      "model" : "claude-opus-5-5",
+      "output" : 1069,
+      "time" : 1792655970705
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 321510,
+      "id" : "141",
+      "input" : 1080,
+      "model" : "claude-opus-5-5",
+      "output" : 209,
+      "time" : 1792656228340
+    },
+    {
+      "cacheRead" : 211244,
+      "cacheWrite" : 3939,
+      "id" : "149",
+      "input" : 8599,
+      "model" : "claude-opus-5-5",
+      "output" : 245,
+      "time" : 1792656252435
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

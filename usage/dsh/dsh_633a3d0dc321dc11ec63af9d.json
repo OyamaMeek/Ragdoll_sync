@@ -1,0 +1,106 @@
+{
+  "created" : 1793195835984,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:633a3d0dc321dc11ec63af9d",
+  "nativeID" : "session-5b483146-8b0f-4814-9aa5-1efee10501a0",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "deepseek-account",
+  "source" : "dsh",
+  "title" : "大学生心理状态评估",
+  "updated" : 1793447489547,
+  "usage" : [
+    {
+      "cacheRead" : 18226,
+      "cacheWrite" : 0,
+      "id" : "18",
+      "input" : 3694,
+      "model" : "claude-opus-5-5",
+      "output" : 3593,
+      "time" : 1793336424388
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "39",
+      "input" : 22247,
+      "model" : "deepseek-flash",
+      "output" : 2567,
+      "time" : 1793336658588
+    },
+    {
+      "cacheRead" : 23168,
+      "cacheWrite" : 0,
+      "id" : "47",
+      "input" : 1678,
+      "model" : "deepseek-flash",
+      "output" : 1160,
+      "time" : 1793336737496
+    },
+    {
+      "cacheRead" : 25984,
+      "cacheWrite" : 0,
+      "id" : "54",
+      "input" : 205,
+      "model" : "deepseek-flash",
+      "output" : 6349,
+      "time" : 1793336778065
+    },
+    {
+      "cacheRead" : 32512,
+      "cacheWrite" : 0,
+      "id" : "65",
+      "input" : 6956,
+      "model" : "deepseek-flash",
+      "output" : 350,
+      "time" : 1793336780641
+    },
+    {
+      "cacheRead" : 39808,
+      "cacheWrite" : 0,
+      "id" : "76",
+      "input" : 2288,
+      "model" : "deepseek-flash",
+      "output" : 306,
+      "time" : 1793336783690
+    },
+    {
+      "cacheRead" : 42240,
+      "cacheWrite" : 0,
+      "id" : "83",
+      "input" : 198,
+      "model" : "deepseek-flash",
+      "output" : 3264,
+      "time" : 1793336798886
+    },
+    {
+      "cacheRead" : 45568,
+      "cacheWrite" : 0,
+      "id" : "92",
+      "input" : 165,
+      "model" : "deepseek-flash",
+      "output" : 410,
+      "time" : 1793336801620
+    },
+    {
+      "cacheRead" : 46080,
+      "cacheWrite" : 0,
+      "id" : "101",
+      "input" : 877,
+      "model" : "deepseek-flash",
+      "output" : 292,
+      "time" : 1793336805996
+    },
+    {
+      "cacheRead" : 47232,
+      "cacheWrite" : 0,
+      "id" : "110",
+      "input" : 154,
+      "model" : "deepseek-flash",
+      "output" : 567,
+      "time" : 1793336812249
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

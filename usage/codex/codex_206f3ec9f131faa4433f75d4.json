@@ -1,0 +1,78 @@
+{
+  "created" : 1792413053483,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:206f3ec9f131faa4433f75d4",
+  "nativeID" : "01a15424-b1ac-7372-9e0e-29e8b3b6fb3f",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/WebDesignCourse",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1792413104774,
+  "usage" : [
+    {
+      "cacheRead" : 5504,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb52d8052b17843016ad60d80939c8191842e7de5fc56a611",
+      "input" : 17108,
+      "model" : "codex-auto-review",
+      "output" : 198,
+      "time" : 1792413059340
+    },
+    {
+      "cacheRead" : 22400,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb52d8052b17843016ad60d8812f88191876be099d23adcab",
+      "input" : 1069,
+      "model" : "codex-auto-review",
+      "output" : 108,
+      "time" : 1792413066369
+    },
+    {
+      "cacheRead" : 23296,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb52d8052b17843016ad60d9137fc81919f8a92ce27a20d8d",
+      "input" : 862,
+      "model" : "codex-auto-review",
+      "output" : 360,
+      "time" : 1792413076845
+    },
+    {
+      "cacheRead" : 5504,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb52d8052b17843016ad60d9a2ccc8191a858e878e6ddac42",
+      "input" : 20116,
+      "model" : "codex-auto-review",
+      "output" : 227,
+      "time" : 1792413084967
+    },
+    {
+      "cacheRead" : 25472,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb52d8052b17843016ad60daa6a208191aa283986da4c8416",
+      "input" : 1678,
+      "model" : "codex-auto-review",
+      "output" : 79,
+      "time" : 1792413100377
+    },
+    {
+      "cacheRead" : 27008,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb52d8052b17843016ad60dacfe58819196845d70329f37ae",
+      "input" : 520,
+      "model" : "codex-auto-review",
+      "output" : 67,
+      "time" : 1792413102824
+    },
+    {
+      "cacheRead" : 27392,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb52d8052b17843016ad60daf5ff48191828322dfaf7dad69",
+      "input" : 493,
+      "model" : "codex-auto-review",
+      "output" : 79,
+      "time" : 1792413104771
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

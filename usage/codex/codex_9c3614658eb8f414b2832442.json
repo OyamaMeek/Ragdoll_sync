@@ -1,0 +1,42 @@
+{
+  "created" : 1793017467797,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:9c3614658eb8f414b2832442",
+  "nativeID" : "01a17829-add0-7961-bd1c-42ba7990e7e4",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/WebDesignCourse",
+  "source" : "codex",
+  "title" : "dt 和 dd 标签用途",
+  "updated" : 1793017492845,
+  "usage" : [
+    {
+      "cacheRead" : 13184,
+      "cacheWrite" : 0,
+      "id" : "resp_006fbbf662c86e7d016adf467f166881918f9650c2ac934aed",
+      "input" : 17835,
+      "model" : "gpt-6.1-sol",
+      "output" : 248,
+      "time" : 1793017479664
+    },
+    {
+      "cacheRead" : 31104,
+      "cacheWrite" : 0,
+      "id" : "resp_006fbbf662c86e7d016adf46889fd881919ebb96e480ac15b3",
+      "input" : 2395,
+      "model" : "gpt-6.1-sol",
+      "output" : 126,
+      "time" : 1793017484327
+    },
+    {
+      "cacheRead" : 33408,
+      "cacheWrite" : 0,
+      "id" : "resp_006fbbf662c86e7d016adf468d42d48191a2dc27f5136bde71",
+      "input" : 1486,
+      "model" : "gpt-6.1-sol",
+      "output" : 250,
+      "time" : 1793017492815
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

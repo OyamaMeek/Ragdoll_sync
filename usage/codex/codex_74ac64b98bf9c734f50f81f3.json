@@ -1,0 +1,51 @@
+{
+  "created" : 1794790848034.9224,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:74ac64b98bf9c734f50f81f3",
+  "nativeID" : "01a1e1de-f5e1-7ab1-88e3-0b3708f86912",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/cpp-labs",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794790895535,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_0815196c082d01a5016afa55c31b0487d08a883a921b3a27a5",
+      "input" : 18594,
+      "model" : "codex-auto-review",
+      "output" : 256,
+      "time" : 1794790855187
+    },
+    {
+      "cacheRead" : 24448,
+      "cacheWrite" : 0,
+      "id" : "resp_0815196c082d01a5016afa55d062c087d09dc77dbfb920e478",
+      "input" : 1193,
+      "model" : "codex-auto-review",
+      "output" : 188,
+      "time" : 1794790867160
+    },
+    {
+      "cacheRead" : 25472,
+      "cacheWrite" : 0,
+      "id" : "resp_0815196c082d01a5016afa55da461887d09ad1f7e029cb6322",
+      "input" : 1807,
+      "model" : "codex-auto-review",
+      "output" : 183,
+      "time" : 1794790876240
+    },
+    {
+      "cacheRead" : 27136,
+      "cacheWrite" : 0,
+      "id" : "resp_0815196c082d01a5016afa55ee98ac87d0be7a7b80b765d2ac",
+      "input" : 1529,
+      "model" : "codex-auto-review",
+      "output" : 115,
+      "time" : 1794790895529
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

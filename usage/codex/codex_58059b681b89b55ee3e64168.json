@@ -1,0 +1,24 @@
+{
+  "created" : 1791764209005,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:58059b681b89b55ee3e64168",
+  "nativeID" : "01a12d78-1cb7-7941-9033-a329012b05a9",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1791764212252,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0ee709d75aedcea2016acc26f2d1008191ac2937ba9719409f",
+      "input" : 14814,
+      "model" : "codex-auto-review",
+      "output" : 143,
+      "time" : 1791764212243
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

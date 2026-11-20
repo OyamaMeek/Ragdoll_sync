@@ -1,0 +1,105 @@
+{
+  "created" : 1793154343154,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:3a4f9b8e5e4f37b58ce571ad",
+  "nativeID" : "01a18053-9122-79b1-a011-58f39c8e8781",
+  "project" : "/Users/oyamahappa/Documents/GitHub/blind-spots",
+  "source" : "codex",
+  "title" : "讲解内容并给出示例",
+  "updated" : 1793155448520,
+  "usage" : [
+    {
+      "cacheRead" : 23424,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe76daa81057acd016ae15d2b95c4819189b35829b99d30a5",
+      "input" : 25334,
+      "model" : "gpt-6.1-sol",
+      "output" : 236,
+      "time" : 1793154353421
+    },
+    {
+      "cacheRead" : 48896,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe76daa81057acd016ae15d3291a881918a57a85bb7a200b8",
+      "input" : 1203,
+      "model" : "gpt-6.1-sol",
+      "output" : 279,
+      "time" : 1793154367567
+    },
+    {
+      "cacheRead" : 50304,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe76daa81057acd016ae15d409b1c81919f76c6f34d6ae990",
+      "input" : 92,
+      "model" : "gpt-6.1-sol",
+      "output" : 160,
+      "time" : 1793154371498
+    },
+    {
+      "cacheRead" : 50432,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe76daa81057acd016ae15d448b8081919d1d56af816e281c",
+      "input" : 3449,
+      "model" : "gpt-6.1-sol",
+      "output" : 678,
+      "time" : 1793154399594
+    },
+    {
+      "cacheRead" : 53760,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe76daa81057acd016ae15d60bb6c8191a73b8d2027d83b39",
+      "input" : 730,
+      "model" : "gpt-6.1-sol",
+      "output" : 1069,
+      "time" : 1793154430892
+    },
+    {
+      "cacheRead" : 55424,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe76daa81057acd016ae15d801eb08191a177b01d1c24d6c6",
+      "input" : 501,
+      "model" : "gpt-6.1-sol",
+      "output" : 615,
+      "time" : 1793154441394
+    },
+    {
+      "cacheRead" : 56448,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe76daa81057acd016ae15d8a5d308191ad3041de82ef50f4",
+      "input" : 250,
+      "model" : "gpt-6.1-sol",
+      "output" : 720,
+      "time" : 1793154456307
+    },
+    {
+      "cacheRead" : 57344,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe76daa81057acd016ae15d9952988191bce6819e59b3b6b5",
+      "input" : 280,
+      "model" : "gpt-6.1-sol",
+      "output" : 1758,
+      "time" : 1793154505823
+    },
+    {
+      "cacheRead" : 59264,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe76daa81057acd016ae1611f3a2c8191acf157a3593b96cd",
+      "input" : 323,
+      "model" : "gpt-6.1-sol",
+      "output" : 1086,
+      "time" : 1793155391424
+    },
+    {
+      "cacheRead" : 60544,
+      "cacheWrite" : 0,
+      "id" : "resp_0fe76daa81057acd016ae16140a9a08191b69210a763a15441",
+      "input" : 320,
+      "model" : "gpt-6.1-sol",
+      "output" : 1993,
+      "time" : 1793155448388
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

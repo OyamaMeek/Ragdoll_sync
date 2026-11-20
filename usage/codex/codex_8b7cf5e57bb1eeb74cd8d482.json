@@ -1,0 +1,114 @@
+{
+  "created" : 1794904109845.6968,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:8b7cf5e57bb1eeb74cd8d482",
+  "nativeID" : "01a1e89f-2662-7e50-b588-01983089ed5d",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
+  "source" : "codex",
+  "title" : "是否应该填写 key",
+  "updated" : 1795004290163,
+  "usage" : [
+    {
+      "cacheRead" : 13440,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc10323ffc87d0bdb353f5db15de1f",
+      "input" : 18388,
+      "model" : "gpt-6.1-sol",
+      "output" : 110,
+      "time" : 1794904118797
+    },
+    {
+      "cacheRead" : 31744,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc10383f1c87d08a6acb719c87efed",
+      "input" : 1287,
+      "model" : "gpt-6.1-sol",
+      "output" : 164,
+      "time" : 1794904132083
+    },
+    {
+      "cacheRead" : 33024,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc1044da2887d0ac2225fddc5f08f9",
+      "input" : 230,
+      "model" : "gpt-6.1-sol",
+      "output" : 251,
+      "time" : 1794904146683
+    },
+    {
+      "cacheRead" : 33408,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc10acf8a887d0ad2cf8ce43e024d7",
+      "input" : 179,
+      "model" : "gpt-6.1-sol",
+      "output" : 219,
+      "time" : 1794904243595
+    },
+    {
+      "cacheRead" : 33664,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc10b5e05087d0bbb701ccecf46593",
+      "input" : 9298,
+      "model" : "gpt-6.1-sol",
+      "output" : 262,
+      "time" : 1794904256027
+    },
+    {
+      "cacheRead" : 43008,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc10c0d91c87d0afe8538de7ca9a64",
+      "input" : 3655,
+      "model" : "gpt-6.1-sol",
+      "output" : 280,
+      "time" : 1794904274743
+    },
+    {
+      "cacheRead" : 47104,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc10f6d73487d0984b57cab325594b",
+      "input" : 291,
+      "model" : "gpt-6.1-sol",
+      "output" : 1065,
+      "time" : 1794904335441
+    },
+    {
+      "cacheRead" : 48256,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc1110380887d093f3759924f2036e",
+      "input" : 817,
+      "model" : "gpt-6.1-sol",
+      "output" : 77,
+      "time" : 1794904344783
+    },
+    {
+      "cacheRead" : 49024,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc111f59ac87d0a3fc933bf9b67699",
+      "input" : 239,
+      "model" : "gpt-6.1-sol",
+      "output" : 282,
+      "time" : 1794904359825
+    },
+    {
+      "cacheRead" : 49408,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc1128902087d09e666886d6db44f0",
+      "input" : 656,
+      "model" : "gpt-6.1-sol",
+      "output" : 589,
+      "time" : 1794904376911
+    },
+    {
+      "cacheRead" : 50432,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0aea601aafd68d016afc1139916c87d091dd9f4b5c7cb3eb",
+      "input" : 921,
+      "model" : "gpt-6.1-sol",
+      "output" : 74,
+      "time" : 1794904380924
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

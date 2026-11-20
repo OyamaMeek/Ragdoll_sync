@@ -1,0 +1,78 @@
+{
+  "created" : 1793845072843,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:86a7f8bafc55044972f39663",
+  "nativeID" : "01a1a97f-938a-7a33-b610-407445c2c6be",
+  "project" : "/Users/oyamahappa/Documents/GitHub/blind-spots",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1793845192923,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_00ac4a7e4fe5e982016aebe7542c8487d0aab636d50ac85e8d",
+      "input" : 22159,
+      "model" : "codex-auto-review",
+      "output" : 135,
+      "time" : 1793845079354
+    },
+    {
+      "cacheRead" : 27904,
+      "cacheWrite" : 0,
+      "id" : "resp_00ac4a7e4fe5e982016aebe75dfdd487d090ce7c73d3ee1105",
+      "input" : 2067,
+      "model" : "codex-auto-review",
+      "output" : 123,
+      "time" : 1793845088869
+    },
+    {
+      "cacheRead" : 29824,
+      "cacheWrite" : 0,
+      "id" : "resp_00ac4a7e4fe5e982016aebe761c17887d0866eb6bae692c17d",
+      "input" : 571,
+      "model" : "codex-auto-review",
+      "output" : 455,
+      "time" : 1793845099040
+    },
+    {
+      "cacheRead" : 30208,
+      "cacheWrite" : 0,
+      "id" : "resp_00ac4a7e4fe5e982016aebe7822bdc87d0b872d785f877a159",
+      "input" : 3846,
+      "model" : "codex-auto-review",
+      "output" : 264,
+      "time" : 1793845127673
+    },
+    {
+      "cacheRead" : 33920,
+      "cacheWrite" : 0,
+      "id" : "resp_00ac4a7e4fe5e982016aebe7a2229c87d0b5157c6f0ca46d05",
+      "input" : 1428,
+      "model" : "codex-auto-review",
+      "output" : 201,
+      "time" : 1793845158611
+    },
+    {
+      "cacheRead" : 35200,
+      "cacheWrite" : 0,
+      "id" : "resp_00ac4a7e4fe5e982016aebe7bedcac87d0b1a3b60fbcb60cd9",
+      "input" : 2508,
+      "model" : "codex-auto-review",
+      "output" : 53,
+      "time" : 1793845186574
+    },
+    {
+      "cacheRead" : 37504,
+      "cacheWrite" : 0,
+      "id" : "resp_00ac4a7e4fe5e982016aebe7c348c887d0b567095f6f624263",
+      "input" : 584,
+      "model" : "codex-auto-review",
+      "output" : 184,
+      "time" : 1793845192919
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

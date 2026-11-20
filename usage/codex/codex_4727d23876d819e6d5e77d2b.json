@@ -1,0 +1,42 @@
+{
+  "created" : 1791778824361,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:4727d23876d819e6d5e77d2b",
+  "nativeID" : "01a12e57-118c-7d31-8801-23cf5a7da47e",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/cpp-labs",
+  "source" : "codex",
+  "title" : "题目错误原因分析",
+  "updated" : 1792206031678,
+  "usage" : [
+    {
+      "cacheRead" : 13184,
+      "cacheWrite" : 0,
+      "id" : "resp_0546c387d7282178016acc600c239c8191a162d53e486da5c6",
+      "input" : 12824,
+      "model" : "gpt-6.1-sol",
+      "output" : 257,
+      "time" : 1791778835372
+    },
+    {
+      "cacheRead" : 25856,
+      "cacheWrite" : 0,
+      "id" : "resp_0546c387d7282178016acc6015df708191bd925edffab6320f",
+      "input" : 3195,
+      "model" : "gpt-6.1-sol",
+      "output" : 258,
+      "time" : 1791778847165
+    },
+    {
+      "cacheRead" : 28928,
+      "cacheWrite" : 0,
+      "id" : "resp_0546c387d7282178016acc602018a48191b2cf453a3efa9019",
+      "input" : 3407,
+      "model" : "gpt-6.1-sol",
+      "output" : 341,
+      "time" : 1791778859471
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

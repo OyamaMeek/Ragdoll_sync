@@ -1,0 +1,51 @@
+{
+  "created" : 1790130476871,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:04a2f6a278ace4d539be9dcc",
+  "nativeID" : "01a0cc17-56c8-7aa0-a043-d98f5d3e0b70",
+  "project" : "/Users/oyamahappa/Documents/GitHub/local-question-bank",
+  "source" : "codex",
+  "title" : "<image name=[Image #1] path=\"/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/codex-clipboard-b4027e",
+  "updated" : 1790130531847,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_0b174c1a4f4e7330016ab3392faad487d29810875e11bf148e",
+      "input" : 14742,
+      "model" : "codex-auto-review",
+      "output" : 166,
+      "time" : 1790130484863
+    },
+    {
+      "cacheRead" : 19200,
+      "cacheWrite" : 0,
+      "id" : "resp_0b174c1a4f4e7330016ab3393a528887d281425c03477b1166",
+      "input" : 2631,
+      "model" : "codex-auto-review",
+      "output" : 99,
+      "time" : 1790130494455
+    },
+    {
+      "cacheRead" : 21248,
+      "cacheWrite" : 0,
+      "id" : "resp_0b174c1a4f4e7330016ab3394e3d4487d2b4ccae1c9ea0093e",
+      "input" : 1617,
+      "model" : "codex-auto-review",
+      "output" : 90,
+      "time" : 1790130515436
+    },
+    {
+      "cacheRead" : 22272,
+      "cacheWrite" : 0,
+      "id" : "resp_0b174c1a4f4e7330016ab33959e7b487d285b6adb86021f2d5",
+      "input" : 1090,
+      "model" : "codex-auto-review",
+      "output" : 312,
+      "time" : 1790130531839
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "created" : 1789876134691,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:83db289e725ee7a58d99fb5c",
+  "nativeID" : "01a0bcee-62a7-7262-8cbb-7ad53c04127e",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "1.增加一个在dock栏不显示app开关2.输入commit的时候自动删除日期（默认选中文字效果类似如图）3.README功能不显示的问题需要修复可以放在提交并推送下面 <image name=[Im",
+  "updated" : 1789876240045,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba361a38cccc7e1016aaf57ab328087d084cadc7f79bbcec0",
+      "input" : 13609,
+      "model" : "codex-auto-review",
+      "output" : 152,
+      "time" : 1789876142473
+    },
+    {
+      "cacheRead" : 18176,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba361a38cccc7e1016aaf57b88d2087d0b4e4817fe15a360d",
+      "input" : 1614,
+      "model" : "codex-auto-review",
+      "output" : 494,
+      "time" : 1789876166277
+    },
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_0ba361a38cccc7e1016aaf580313ac87d0837e390b3c04e504",
+      "input" : 17466,
+      "model" : "codex-auto-review",
+      "output" : 460,
+      "time" : 1789876240036
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

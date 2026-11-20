@@ -1,0 +1,51 @@
+{
+  "created" : 1794710571985.0044,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:9c9d2ba6566dcea303f5e744",
+  "nativeID" : "01a1dcf1-9e8d-7782-af73-a905227ce5e1",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/cpp-labs",
+  "source" : "codex",
+  "title" : "解释为什么会这样",
+  "updated" : 1795004294633,
+  "usage" : [
+    {
+      "cacheRead" : 13440,
+      "cacheWrite" : 0,
+      "id" : "resp_02eb7da96c3003ad016af91c31d7fc87d09d3360076a6368ee",
+      "input" : 17990,
+      "model" : "gpt-6.1-sol",
+      "output" : 135,
+      "time" : 1794710584427
+    },
+    {
+      "cacheRead" : 31360,
+      "cacheWrite" : 0,
+      "id" : "resp_02eb7da96c3003ad016af91c39719087d095ebb87b07390d4f",
+      "input" : 315,
+      "model" : "gpt-6.1-sol",
+      "output" : 373,
+      "time" : 1794710594488
+    },
+    {
+      "cacheRead" : 31872,
+      "cacheWrite" : 0,
+      "id" : "resp_02eb7da96c3003ad016af91c6519cc87d0b2af54051a0b115d",
+      "input" : 14105,
+      "model" : "gpt-6.1-sol",
+      "output" : 186,
+      "time" : 1794710637519
+    },
+    {
+      "cacheRead" : 46080,
+      "cacheWrite" : 0,
+      "id" : "resp_02eb7da96c3003ad016af91c6e2b5c87d08320cbd701f48299",
+      "input" : 213,
+      "model" : "gpt-6.1-sol",
+      "output" : 259,
+      "time" : 1794710646863
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

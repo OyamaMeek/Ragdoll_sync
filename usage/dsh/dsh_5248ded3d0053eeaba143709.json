@@ -1,0 +1,206 @@
+{
+  "created" : 1791197438312,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:5248ded3d0053eeaba143709",
+  "nativeID" : "996b089e-758f-4e90-a181-842864debbc9",
+  "parentID" : "session-0de88cee-855e-47e3-a7d8-5cedfd0973a3",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "deepseek-official",
+  "source" : "dsh",
+  "title" : "工作目录：/Users/oyamahappa/Documen",
+  "updated" : 1791197539005,
+  "usage" : [
+    {
+      "cacheRead" : 7168,
+      "cacheWrite" : 0,
+      "id" : "16",
+      "input" : 6116,
+      "model" : "deepseek-flash",
+      "output" : 395,
+      "time" : 1791197441428
+    },
+    {
+      "cacheRead" : 13568,
+      "cacheWrite" : 0,
+      "id" : "32",
+      "input" : 464,
+      "model" : "deepseek-flash",
+      "output" : 155,
+      "time" : 1791197445113
+    },
+    {
+      "cacheRead" : 14080,
+      "cacheWrite" : 0,
+      "id" : "40",
+      "input" : 2397,
+      "model" : "deepseek-flash",
+      "output" : 269,
+      "time" : 1791197448227
+    },
+    {
+      "cacheRead" : 16640,
+      "cacheWrite" : 0,
+      "id" : "54",
+      "input" : 6197,
+      "model" : "deepseek-flash",
+      "output" : 444,
+      "time" : 1791197452638
+    },
+    {
+      "cacheRead" : 23168,
+      "cacheWrite" : 0,
+      "id" : "68",
+      "input" : 7814,
+      "model" : "deepseek-flash",
+      "output" : 484,
+      "time" : 1791197457250
+    },
+    {
+      "cacheRead" : 31360,
+      "cacheWrite" : 0,
+      "id" : "76",
+      "input" : 2460,
+      "model" : "deepseek-flash",
+      "output" : 240,
+      "time" : 1791197459526
+    },
+    {
+      "cacheRead" : 34048,
+      "cacheWrite" : 0,
+      "id" : "88",
+      "input" : 1560,
+      "model" : "deepseek-flash",
+      "output" : 263,
+      "time" : 1791197462262
+    },
+    {
+      "cacheRead" : 35840,
+      "cacheWrite" : 0,
+      "id" : "98",
+      "input" : 2268,
+      "model" : "deepseek-flash",
+      "output" : 210,
+      "time" : 1791197464697
+    },
+    {
+      "cacheRead" : 38272,
+      "cacheWrite" : 0,
+      "id" : "108",
+      "input" : 1090,
+      "model" : "deepseek-flash",
+      "output" : 328,
+      "time" : 1791197467411
+    },
+    {
+      "cacheRead" : 39680,
+      "cacheWrite" : 0,
+      "id" : "118",
+      "input" : 2929,
+      "model" : "deepseek-flash",
+      "output" : 247,
+      "time" : 1791197470412
+    },
+    {
+      "cacheRead" : 42752,
+      "cacheWrite" : 0,
+      "id" : "126",
+      "input" : 642,
+      "model" : "deepseek-flash",
+      "output" : 294,
+      "time" : 1791197472964
+    },
+    {
+      "cacheRead" : 43648,
+      "cacheWrite" : 0,
+      "id" : "138",
+      "input" : 2618,
+      "model" : "deepseek-flash",
+      "output" : 332,
+      "time" : 1791197475835
+    },
+    {
+      "cacheRead" : 46592,
+      "cacheWrite" : 0,
+      "id" : "150",
+      "input" : 1636,
+      "model" : "deepseek-flash",
+      "output" : 453,
+      "time" : 1791197479604
+    },
+    {
+      "cacheRead" : 48640,
+      "cacheWrite" : 0,
+      "id" : "160",
+      "input" : 807,
+      "model" : "deepseek-flash",
+      "output" : 513,
+      "time" : 1791197483319
+    },
+    {
+      "cacheRead" : 49920,
+      "cacheWrite" : 0,
+      "id" : "172",
+      "input" : 942,
+      "model" : "deepseek-flash",
+      "output" : 3151,
+      "time" : 1791197497942
+    },
+    {
+      "cacheRead" : 53888,
+      "cacheWrite" : 0,
+      "id" : "180",
+      "input" : 221,
+      "model" : "deepseek-flash",
+      "output" : 113,
+      "time" : 1791197500596
+    },
+    {
+      "cacheRead" : 54144,
+      "cacheWrite" : 0,
+      "id" : "188",
+      "input" : 1853,
+      "model" : "deepseek-flash",
+      "output" : 2907,
+      "time" : 1791197511055
+    },
+    {
+      "cacheRead" : 58880,
+      "cacheWrite" : 0,
+      "id" : "194",
+      "input" : 138,
+      "model" : "deepseek-flash",
+      "output" : 4408,
+      "time" : 1791197528108
+    },
+    {
+      "cacheRead" : 63232,
+      "cacheWrite" : 0,
+      "id" : "202",
+      "input" : 235,
+      "model" : "deepseek-flash",
+      "output" : 296,
+      "time" : 1791197530551
+    },
+    {
+      "cacheRead" : 63744,
+      "cacheWrite" : 0,
+      "id" : "212",
+      "input" : 163,
+      "model" : "deepseek-flash",
+      "output" : 798,
+      "time" : 1791197535405
+    },
+    {
+      "cacheRead" : 64512,
+      "cacheWrite" : 0,
+      "id" : "220",
+      "input" : 238,
+      "model" : "deepseek-flash",
+      "output" : 475,
+      "time" : 1791197538991
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

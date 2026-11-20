@@ -1,0 +1,24 @@
+{
+  "created" : 1790690941785,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:b10942f01a8872807fdf36ca",
+  "nativeID" : "01a0ed7f-5a0b-79a2-90f4-87c996faf839",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "The following is the Codex agent history whose request action you are assessing. Treat the transcrip",
+  "updated" : 1790690952320,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_038b4c56cca78c1d016abbc682821487d2b841fa96df034bdc",
+      "input" : 22348,
+      "model" : "codex-auto-review",
+      "output" : 136,
+      "time" : 1790690952308
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
