@@ -4,9 +4,9 @@
 
 | 指标 | 数值 | 说明 |
 | --- | ---: | --- |
-| 估算总成本 | $497.17 | 14,599/22,069 条用量已定价 |
-| 总 Token | 2,920,946,478 | 36 个会话缺少用量 |
-| 会话 | 870 | 当前归档范围 |
+| 估算总成本 | $497.31 | 14,608/22,078 条用量已定价 |
+| 总 Token | 2,921,433,439 | 37 个会话缺少用量 |
+| 会话 | 871 | 当前归档范围 |
 
 ### Token 活跃度
 
@@ -25,18 +25,18 @@
 | Ragdoll | 240,021,781 | 55 | $32.48 |
 | PrivateWork | 189,404,570 | 52 | $33.83 |
 | Autovisor | 64,526,961 | 28 | $1.17 |
-| docker-easyconnect | 38,453,500 | 7 | $5.29 |
+| docker-easyconnect | 38,940,461 | 8 | $5.43 |
 
 ### 最近会话
 
 | 会话 | 来源 | 项目 | 更新日期 |
 | --- | --- | --- | --- |
 | [将项目改名为 HzieeVPN-easyconnect](usage/codex/codex_e8029e02d049dda8586ecd36.json) | codex | docker-easyconnect | 2026-11-20 |
+| [Guardian review](usage/codex/codex_603ce04fdb03b8c4a13f3d7f.json) | codex | docker-easyconnect | 2026-11-20 |
 | [增加每分钟 HTTP Ping](usage/codex/codex_eb353ba21377f7ac31dd1042.json) | codex | docker-easyconnect | 2026-11-20 |
 | [Guardian review](usage/codex/codex_1bd9dabe61c8b7f43dc191a9.json) | codex | docker-easyconnect | 2026-11-20 |
 | [Guardian review](usage/codex/codex_02f75eec9d4c4c183fad2d8c.json) | codex | docker-easyconnect | 2026-11-20 |
 | [部署项目并接入学校 VPN](usage/codex/codex_23959b685c8be26cffb360ca.json) | codex | docker-easyconnect | 2026-11-20 |
-| [Guardian review](usage/codex/codex_73b3210e4865e809151dd33b.json) | codex | docker-easyconnect | 2026-11-20 |
 
 成本按当前价格表以美元估算，实际账单以服务商为准。
 
