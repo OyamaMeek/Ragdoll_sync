@@ -1,0 +1,42 @@
+{
+  "created" : 1795267792393.2334,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:cbbd95b48315941dce7efe49",
+  "nativeID" : "01a1fe4c-8c70-7651-9b02-6336fadb8c6f",
+  "project" : "/Users/oyamahappa/Documents/GitHub/blind-spots",
+  "source" : "codex",
+  "title" : "解释矩阵交换两行的影响",
+  "updated" : 1795268340980,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_04f3266b21926c8c016b019cd95e2487d083cf59bae59ac28c",
+      "input" : 22792,
+      "model" : "gpt-6.1-sol",
+      "output" : 408,
+      "time" : 1795267812771
+    },
+    {
+      "cacheRead" : 36352,
+      "cacheWrite" : 0,
+      "id" : "resp_04f3266b21926c8c016b019d23744c87d09f15d79c770b6e0e",
+      "input" : 6758,
+      "model" : "gpt-6.1-sol",
+      "output" : 447,
+      "time" : 1795267888812
+    },
+    {
+      "cacheRead" : 43520,
+      "cacheWrite" : 0,
+      "id" : "resp_04f3266b21926c8c016b019ee84f7487d0860ff2ec450bd1a0",
+      "input" : 57,
+      "model" : "gpt-6.1-sol",
+      "output" : 261,
+      "time" : 1795268340963
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
