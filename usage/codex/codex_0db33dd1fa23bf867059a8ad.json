@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "核查钉钉扫码登录首次使用记录",
-  "updated" : 1795272944503,
+  "updated" : 1795272976892,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -133,6 +133,33 @@
       "model" : "gpt-6.1-sol",
       "output" : 46,
       "time" : 1795272944047
+    },
+    {
+      "cacheRead" : 78208,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b0f10dfc87d0898b65c43ff1d48b",
+      "input" : 1040,
+      "model" : "gpt-6.1-sol",
+      "output" : 173,
+      "time" : 1795272953724
+    },
+    {
+      "cacheRead" : 79232,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b0fadb0087d0b801bf373b47e665",
+      "input" : 281,
+      "model" : "gpt-6.1-sol",
+      "output" : 77,
+      "time" : 1795272962430
+    },
+    {
+      "cacheRead" : 79360,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b104786487d0a864c0cbeaae10bf",
+      "input" : 285,
+      "model" : "gpt-6.1-sol",
+      "output" : 261,
+      "time" : 1795272972972
     }
   ],
   "warnings" : [
