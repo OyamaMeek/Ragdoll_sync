@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "核查钉钉扫码登录首次使用记录",
-  "updated" : 1795274428820,
+  "updated" : 1795274573175,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -1150,6 +1150,114 @@
       "model" : "gpt-6.1-sol",
       "output" : 794,
       "time" : 1795274428820
+    },
+    {
+      "cacheRead" : 200704,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b6bf360487d093d7a88c37d2556e",
+      "input" : 353,
+      "model" : "gpt-6.1-sol",
+      "output" : 73,
+      "time" : 1795274436611
+    },
+    {
+      "cacheRead" : 200960,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b6c5298c87d0a8449f8950a1f050",
+      "input" : 1774,
+      "model" : "gpt-6.1-sol",
+      "output" : 154,
+      "time" : 1795274443327
+    },
+    {
+      "cacheRead" : 202752,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b6ccd03487d0a2b9d013cc73167f",
+      "input" : 571,
+      "model" : "gpt-6.1-sol",
+      "output" : 682,
+      "time" : 1795274463170
+    },
+    {
+      "cacheRead" : 203776,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b6e0dd0c87d0a901fe8f25f41f1b",
+      "input" : 327,
+      "model" : "gpt-6.1-sol",
+      "output" : 190,
+      "time" : 1795274473183
+    },
+    {
+      "cacheRead" : 204160,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b6ea6b0887d0869c1e068432e785",
+      "input" : 2678,
+      "model" : "gpt-6.1-sol",
+      "output" : 510,
+      "time" : 1795274487767
+    },
+    {
+      "cacheRead" : 207232,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b6fa78b487d0b133ba128d058e21",
+      "input" : 236,
+      "model" : "gpt-6.1-sol",
+      "output" : 191,
+      "time" : 1795274497463
+    },
+    {
+      "cacheRead" : 207488,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b701edd087d09f7c4f699393ce8f",
+      "input" : 2415,
+      "model" : "gpt-6.1-sol",
+      "output" : 716,
+      "time" : 1795274516747
+    },
+    {
+      "cacheRead" : 210432,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b717f4bc87d0ab6194500211c2c6",
+      "input" : 285,
+      "model" : "gpt-6.1-sol",
+      "output" : 287,
+      "time" : 1795274529921
+    },
+    {
+      "cacheRead" : 210816,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b727a74487d084eb76d285abede9",
+      "input" : 211,
+      "model" : "gpt-6.1-sol",
+      "output" : 183,
+      "time" : 1795274544512
+    },
+    {
+      "cacheRead" : 211072,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b73138f487d0b5487eddeed33658",
+      "input" : 1953,
+      "model" : "gpt-6.1-sol",
+      "output" : 374,
+      "time" : 1795274556069
+    },
+    {
+      "cacheRead" : 213248,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b73f5d5087d08af582e9679c37dd",
+      "input" : 179,
+      "model" : "gpt-6.1-sol",
+      "output" : 83,
+      "time" : 1795274564278
+    },
+    {
+      "cacheRead" : 213376,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b744cfa887d0bda6ed4a71f850bd",
+      "input" : 192,
+      "model" : "gpt-6.1-sol",
+      "output" : 199,
+      "time" : 1795274573155
     }
   ],
   "warnings" : [
