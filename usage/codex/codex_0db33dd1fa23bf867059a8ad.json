@@ -6,7 +6,7 @@
   "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
   "source" : "codex",
   "title" : "核查钉钉扫码登录首次使用记录",
-  "updated" : 1795273440643,
+  "updated" : 1795273599787,
   "usage" : [
     {
       "cacheRead" : 13312,
@@ -421,6 +421,141 @@
       "model" : "gpt-6.1-sol",
       "output" : 44,
       "time" : 1795273440641
+    },
+    {
+      "cacheRead" : 114688,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b2e1231087d081b8b628b8618c34",
+      "input" : 592,
+      "model" : "gpt-6.1-sol",
+      "output" : 202,
+      "time" : 1795273455692
+    },
+    {
+      "cacheRead" : 115328,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b2f0335c87d083bd478cfb9eec8e",
+      "input" : 2640,
+      "model" : "gpt-6.1-sol",
+      "output" : 36,
+      "time" : 1795273459914
+    },
+    {
+      "cacheRead" : 117888,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b2f635c887d0af74a3fab72dba01",
+      "input" : 473,
+      "model" : "gpt-6.1-sol",
+      "output" : 188,
+      "time" : 1795273470841
+    },
+    {
+      "cacheRead" : 118400,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b2ff6bf087d0a8291f31e869df86",
+      "input" : 212,
+      "model" : "gpt-6.1-sol",
+      "output" : 123,
+      "time" : 1795273477179
+    },
+    {
+      "cacheRead" : 118528,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b30696d887d0a9d948b134367aed",
+      "input" : 6906,
+      "model" : "gpt-6.1-sol",
+      "output" : 219,
+      "time" : 1795273487269
+    },
+    {
+      "cacheRead" : 125440,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b30fc66487d08c622abcd0ca8972",
+      "input" : 1443,
+      "model" : "gpt-6.1-sol",
+      "output" : 201,
+      "time" : 1795273496001
+    },
+    {
+      "cacheRead" : 126848,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b31a6f8087d080004b947b8d19c3",
+      "input" : 299,
+      "model" : "gpt-6.1-sol",
+      "output" : 197,
+      "time" : 1795273505234
+    },
+    {
+      "cacheRead" : 127104,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b32260d887d08041b8d9b5dd1b51",
+      "input" : 2748,
+      "model" : "gpt-6.1-sol",
+      "output" : 204,
+      "time" : 1795273515103
+    },
+    {
+      "cacheRead" : 129920,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b32c492087d0bc8da6483c7e4d2b",
+      "input" : 234,
+      "model" : "gpt-6.1-sol",
+      "output" : 489,
+      "time" : 1795273530101
+    },
+    {
+      "cacheRead" : 130432,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b33aa47c87d086606faba1159e28",
+      "input" : 235,
+      "model" : "gpt-6.1-sol",
+      "output" : 121,
+      "time" : 1795273535214
+    },
+    {
+      "cacheRead" : 130560,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b344ac8487d09f9b2fc4e6278700",
+      "input" : 291,
+      "model" : "gpt-6.1-sol",
+      "output" : 215,
+      "time" : 1795273547938
+    },
+    {
+      "cacheRead" : 130944,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b34d8c6487d08caee1f8f890ef33",
+      "input" : 198,
+      "model" : "gpt-6.1-sol",
+      "output" : 116,
+      "time" : 1795273557297
+    },
+    {
+      "cacheRead" : 131072,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b355d4bc87d0bd78933dde754876",
+      "input" : 1610,
+      "model" : "gpt-6.1-sol",
+      "output" : 154,
+      "time" : 1795273565033
+    },
+    {
+      "cacheRead" : 132608,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b35ecc1087d08fedea1423f42164",
+      "input" : 912,
+      "model" : "gpt-6.1-sol",
+      "output" : 126,
+      "time" : 1795273573772
+    },
+    {
+      "cacheRead" : 133504,
+      "cacheWrite" : 0,
+      "id" : "resp_013e67cca33f1819016b01b366dddc87d0a3a85c6188fa691d",
+      "input" : 526,
+      "model" : "gpt-6.1-sol",
+      "output" : 741,
+      "time" : 1795273597181
     }
   ],
   "warnings" : [
