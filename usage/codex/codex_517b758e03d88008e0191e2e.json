@@ -1,0 +1,33 @@
+{
+  "created" : 1794929648974,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:517b758e03d88008e0191e2e",
+  "nativeID" : "01a1ea22-3bf0-75f2-aca1-359f9ca40776",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/cpp-labs",
+  "source" : "codex",
+  "title" : "解释 C/C++ 输入校验代码",
+  "updated" : 1795004288405,
+  "usage" : [
+    {
+      "cacheRead" : 13440,
+      "cacheWrite" : 0,
+      "id" : "resp_08c311715fd2a418016afc73fc6e2887d0915449caafcc3342",
+      "input" : 14336,
+      "model" : "gpt-6.1-sol",
+      "output" : 539,
+      "time" : 1794929680952
+    },
+    {
+      "cacheRead" : 28160,
+      "cacheWrite" : 0,
+      "id" : "resp_08c311715fd2a418016afc745ba95487d0b5ba9ffea0590f1a",
+      "input" : 202,
+      "model" : "gpt-6.1-sol",
+      "output" : 130,
+      "time" : 1794929761227
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

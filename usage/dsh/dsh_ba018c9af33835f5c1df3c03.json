@@ -1,0 +1,116 @@
+{
+  "created" : 1795690387539,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:ba018c9af33835f5c1df3c03",
+  "nativeID" : "session-8b98a8b4-c40a-497e-8983-1da229e66e52",
+  "parentID" : "session-8d52e75d-d8e1-44e3-b79e-2b16a1cb6a72",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/miaomiaoX",
+  "provider" : "deepseek-account",
+  "source" : "dsh",
+  "title" : "移除授权管理并默认PRO (1)",
+  "updated" : 1795695317207,
+  "usage" : [
+    {
+      "cacheRead" : 57728,
+      "cacheWrite" : 0,
+      "id" : "4010",
+      "input" : 93891,
+      "model" : "deepseek-flash",
+      "output" : 678,
+      "time" : 1795695135528
+    },
+    {
+      "cacheRead" : 152192,
+      "cacheWrite" : 0,
+      "id" : "4020",
+      "input" : 1120,
+      "model" : "deepseek-flash",
+      "output" : 384,
+      "time" : 1795695140376
+    },
+    {
+      "cacheRead" : 153600,
+      "cacheWrite" : 0,
+      "id" : "4030",
+      "input" : 324,
+      "model" : "deepseek-flash",
+      "output" : 745,
+      "time" : 1795695153638
+    },
+    {
+      "cacheRead" : 154496,
+      "cacheWrite" : 0,
+      "id" : "4040",
+      "input" : 241,
+      "model" : "deepseek-flash",
+      "output" : 658,
+      "time" : 1795695159524
+    },
+    {
+      "cacheRead" : 155392,
+      "cacheWrite" : 0,
+      "id" : "4050",
+      "input" : 891,
+      "model" : "deepseek-flash",
+      "output" : 1966,
+      "time" : 1795695171742
+    },
+    {
+      "cacheRead" : 156800,
+      "cacheWrite" : 0,
+      "id" : "4059",
+      "input" : 1497,
+      "model" : "deepseek-flash",
+      "output" : 584,
+      "time" : 1795695213723
+    },
+    {
+      "cacheRead" : 158848,
+      "cacheWrite" : 0,
+      "id" : "4069",
+      "input" : 563,
+      "model" : "deepseek-flash",
+      "output" : 771,
+      "time" : 1795695220455
+    },
+    {
+      "cacheRead" : 160128,
+      "cacheWrite" : 0,
+      "id" : "4079",
+      "input" : 139,
+      "model" : "deepseek-flash",
+      "output" : 844,
+      "time" : 1795695241272
+    },
+    {
+      "cacheRead" : 160384,
+      "cacheWrite" : 0,
+      "id" : "4088",
+      "input" : 786,
+      "model" : "deepseek-flash",
+      "output" : 252,
+      "time" : 1795695310236
+    },
+    {
+      "cacheRead" : 161408,
+      "cacheWrite" : 0,
+      "id" : "4098",
+      "input" : 154,
+      "model" : "deepseek-flash",
+      "output" : 199,
+      "time" : 1795695314381
+    },
+    {
+      "cacheRead" : 161664,
+      "cacheWrite" : 0,
+      "id" : "4108",
+      "input" : 146,
+      "model" : "deepseek-flash",
+      "output" : 174,
+      "time" : 1795695317174
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

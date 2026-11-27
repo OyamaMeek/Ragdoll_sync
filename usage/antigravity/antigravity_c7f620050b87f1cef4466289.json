@@ -1,0 +1,132 @@
+{
+  "created" : 1795745486000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:c7f620050b87f1cef4466289",
+  "nativeID" : "7d87f84c-a6e8-4441-8e8b-bc0dc4aee126",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/miaomiaoX",
+  "source" : "antigravity",
+  "title" : "Remove Specific Brand From README",
+  "updated" : 1795745771088,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "0eYIa-aHKd3T2roP9bes8QY",
+      "input" : 20264,
+      "model" : "gemini-4-neon",
+      "output" : 296,
+      "time" : 1795745486840.396
+    },
+    {
+      "cacheRead" : 20265,
+      "cacheWrite" : 0,
+      "id" : "3OYIa9a0Grq30-kPsIOt2Q4",
+      "input" : 5778,
+      "model" : "gemini-4-neon",
+      "output" : 261,
+      "time" : 1795745499103.396
+    },
+    {
+      "cacheRead" : 26044,
+      "cacheWrite" : 0,
+      "id" : "5OYIa_KkH8L81e8Pm77F6Qg",
+      "input" : 10647,
+      "model" : "gemini-4-neon",
+      "output" : 425,
+      "time" : 1795745507101.094
+    },
+    {
+      "cacheRead" : 34642,
+      "cacheWrite" : 0,
+      "id" : "8eYIa7DNE6L62roPg-m5KQ",
+      "input" : 3662,
+      "model" : "gemini-4-neon",
+      "output" : 152,
+      "time" : 1795745520046.795
+    },
+    {
+      "cacheRead" : 38305,
+      "cacheWrite" : 0,
+      "id" : "9uYIa8qBGbi30-kPtIHD-QU",
+      "input" : 3668,
+      "model" : "gemini-4-neon",
+      "output" : 7468,
+      "time" : 1795745525107.247
+    },
+    {
+      "cacheRead" : 41974,
+      "cacheWrite" : 0,
+      "id" : "M-cIa_DAE4ud0-kPxP_egA8",
+      "input" : 7550,
+      "model" : "gemini-4-neon",
+      "output" : 262,
+      "time" : 1795745586000.366
+    },
+    {
+      "cacheRead" : 49525,
+      "cacheWrite" : 0,
+      "id" : "P-cIa_nAELbv2roPosLQmAE",
+      "input" : 4680,
+      "model" : "gemini-4-neon",
+      "output" : 678,
+      "time" : 1795745597862.35
+    },
+    {
+      "cacheRead" : 52156,
+      "cacheWrite" : 0,
+      "id" : "SucIa6iBAqPV9tMPtbHy0QE",
+      "input" : 2847,
+      "model" : "gemini-4-neon",
+      "output" : 120,
+      "time" : 1795745608671.168
+    },
+    {
+      "cacheRead" : 52954,
+      "cacheWrite" : 0,
+      "id" : "V-cIa73WN_DN0-kPgN3s4Qc",
+      "input" : 2471,
+      "model" : "gemini-4-neon",
+      "output" : 134,
+      "time" : 1795745622577.967
+    },
+    {
+      "cacheRead" : 53376,
+      "cacheWrite" : 0,
+      "id" : "becIa-GODufD0-kP3I7u0Q8",
+      "input" : 2318,
+      "model" : "gemini-4-neon",
+      "output" : 149,
+      "time" : 1795745643878.278
+    },
+    {
+      "cacheRead" : 53645,
+      "cacheWrite" : 0,
+      "id" : "dOcIa5bxMpvp2roPy9fB2AQ",
+      "input" : 2444,
+      "model" : "gemini-4-neon",
+      "output" : 628,
+      "time" : 1795745651507.967
+    },
+    {
+      "cacheRead" : 54040,
+      "cacheWrite" : 0,
+      "id" : "iOcIa8WsAsP11e8PoJvQkAs",
+      "input" : 2804,
+      "model" : "gemini-4-neon",
+      "output" : 124,
+      "time" : 1795745670680.425
+    },
+    {
+      "cacheRead" : 54795,
+      "cacheWrite" : 0,
+      "id" : "3ucIa9uGAoPRosUPk8C7iAc",
+      "input" : 3103,
+      "model" : "gemini-4-neon",
+      "output" : 831,
+      "time" : 1795745755982.588
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

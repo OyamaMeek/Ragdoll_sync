@@ -1,0 +1,87 @@
+{
+  "created" : 1795746800739.8245,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:344b7bcb7fa68a854a4b3bde",
+  "nativeID" : "01a21ad9-a43d-73d0-91e3-04d1462ec276",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1795747185425,
+  "usage" : [
+    {
+      "cacheRead" : 55680,
+      "cacheWrite" : 0,
+      "id" : "resp_028fb2a94e51a296016b08ebf52f7087d09aefb6375d0e14c8",
+      "input" : 13810,
+      "model" : "codex-auto-review",
+      "output" : 186,
+      "time" : 1795746809547
+    },
+    {
+      "cacheRead" : 69248,
+      "cacheWrite" : 0,
+      "id" : "resp_028fb2a94e51a296016b08ec3235bc87d09d4fa6544cbf8091",
+      "input" : 3734,
+      "model" : "codex-auto-review",
+      "output" : 170,
+      "time" : 1795746869981
+    },
+    {
+      "cacheRead" : 72832,
+      "cacheWrite" : 0,
+      "id" : "resp_028fb2a94e51a296016b08ec4b872c87d0b2ea683f2f24f6cf",
+      "input" : 2750,
+      "model" : "codex-auto-review",
+      "output" : 133,
+      "time" : 1795746894628
+    },
+    {
+      "cacheRead" : 75392,
+      "cacheWrite" : 0,
+      "id" : "resp_028fb2a94e51a296016b08ec55c56c87d0bc281101bac9c7bf",
+      "input" : 1660,
+      "model" : "codex-auto-review",
+      "output" : 145,
+      "time" : 1795746908726
+    },
+    {
+      "cacheRead" : 76928,
+      "cacheWrite" : 0,
+      "id" : "resp_028fb2a94e51a296016b08ecfa784087d09200dc89e6525b44",
+      "input" : 3537,
+      "model" : "codex-auto-review",
+      "output" : 137,
+      "time" : 1795747069613
+    },
+    {
+      "cacheRead" : 80256,
+      "cacheWrite" : 0,
+      "id" : "resp_028fb2a94e51a296016b08ed322c2887d0ba83bba92d0b6e48",
+      "input" : 5893,
+      "model" : "codex-auto-review",
+      "output" : 155,
+      "time" : 1795747125639
+    },
+    {
+      "cacheRead" : 86016,
+      "cacheWrite" : 0,
+      "id" : "resp_028fb2a94e51a296016b08ed3d2f9087d08f7eb3e2274b3905",
+      "input" : 1943,
+      "model" : "codex-auto-review",
+      "output" : 175,
+      "time" : 1795747138375
+    },
+    {
+      "cacheRead" : 87808,
+      "cacheWrite" : 0,
+      "id" : "resp_028fb2a94e51a296016b08ed494fb487d0be1b69947c5ddf27",
+      "input" : 1000,
+      "model" : "codex-auto-review",
+      "output" : 139,
+      "time" : 1795747148541
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

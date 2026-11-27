@@ -1,0 +1,33 @@
+{
+  "created" : 1794904274951,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:089a78b45ff1200a93cd853f",
+  "nativeID" : "01a1e8a1-b788-7bb1-9cd3-099501357c1d",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794904350519,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_02c357e10815fc99016afc10d64d5087d0af5e85534447bcbe",
+      "input" : 10012,
+      "model" : "codex-auto-review",
+      "output" : 145,
+      "time" : 1794904282142
+    },
+    {
+      "cacheRead" : 15872,
+      "cacheWrite" : 0,
+      "id" : "resp_02c357e10815fc99016afc111b726887d0abe080312285d96a",
+      "input" : 2721,
+      "model" : "codex-auto-review",
+      "output" : 103,
+      "time" : 1794904350514
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

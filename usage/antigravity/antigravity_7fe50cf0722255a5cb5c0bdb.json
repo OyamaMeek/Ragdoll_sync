@@ -1,0 +1,42 @@
+{
+  "created" : 1795583324000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:7fe50cf0722255a5cb5c0bdb",
+  "nativeID" : "4427cca8-7a3d-4d6d-ae8f-aac9f748ae73",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
+  "source" : "antigravity",
+  "title" : "Twitter Release Notes Draft",
+  "updated" : 1795583379404,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "Xm0Ga7vfEuSi9tMPyMqU0QE",
+      "input" : 14665,
+      "model" : "gemini-4-neon",
+      "output" : 226,
+      "time" : 1795583324281.16
+    },
+    {
+      "cacheRead" : 12608,
+      "cacheWrite" : 0,
+      "id" : "Zm0Ga5eAK6Ks1e8Pqa3tiQU",
+      "input" : 3880,
+      "model" : "gemini-4-neon",
+      "output" : 238,
+      "time" : 1795583333014.307
+    },
+    {
+      "cacheRead" : 16489,
+      "cacheWrite" : 0,
+      "id" : "bm0Ga_ySPOzN2roPgZPwgAY",
+      "input" : 9088,
+      "model" : "gemini-4-neon",
+      "output" : 3606,
+      "time" : 1795583341257.406
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "created" : 1793696888780,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:6e90a34de8345052a8d96873",
+  "nativeID" : "01a1a0aa-2677-7540-83a1-4e71ec178540",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
+  "source" : "codex",
+  "title" : "Python f-string 对齐符号含义",
+  "updated" : 1793807119373,
+  "usage" : [
+    {
+      "cacheRead" : 13184,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a47c284081919ffe2cfff5488b91",
+      "input" : 18044,
+      "model" : "gpt-6.1-sol",
+      "output" : 354,
+      "time" : 1793696906084
+    },
+    {
+      "cacheRead" : 31360,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a4bccf388191b215dfd6f63186a3",
+      "input" : 390,
+      "model" : "gpt-6.1-sol",
+      "output" : 236,
+      "time" : 1793696962853
+    },
+    {
+      "cacheRead" : 31744,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a4c3b8008191b2ea66da69631fe2",
+      "input" : 1348,
+      "model" : "gpt-6.1-sol",
+      "output" : 404,
+      "time" : 1793696973108
+    },
+    {
+      "cacheRead" : 33280,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a4cdc33c819188381932a5e4d5df",
+      "input" : 7030,
+      "model" : "gpt-6.1-sol",
+      "output" : 180,
+      "time" : 1793696979463
+    },
+    {
+      "cacheRead" : 40320,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a4d6d8548191926649a8f6274afa",
+      "input" : 8841,
+      "model" : "gpt-6.1-sol",
+      "output" : 267,
+      "time" : 1793696992449
+    },
+    {
+      "cacheRead" : 49280,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a4e8d4bc81918a565f76dd97eb78",
+      "input" : 8426,
+      "model" : "gpt-6.1-sol",
+      "output" : 7956,
+      "time" : 1793697176022
+    },
+    {
+      "cacheRead" : 65536,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a598f094819198bc9fdb454c4325",
+      "input" : 150,
+      "model" : "gpt-6.1-sol",
+      "output" : 683,
+      "time" : 1793697198174
+    },
+    {
+      "cacheRead" : 66176,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a5af18d4819186d303e9ca2b2a21",
+      "input" : 6554,
+      "model" : "gpt-6.1-sol",
+      "output" : 386,
+      "time" : 1793697212052
+    },
+    {
+      "cacheRead" : 72960,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a5bc8a74819181563e94d3a4fb98",
+      "input" : 2846,
+      "model" : "gpt-6.1-sol",
+      "output" : 711,
+      "time" : 1793697228573
+    },
+    {
+      "cacheRead" : 76288,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a5cd2fbc8191af0909bbf4d63327",
+      "input" : 1921,
+      "model" : "gpt-6.1-sol",
+      "output" : 220,
+      "time" : 1793697237648
+    },
+    {
+      "cacheRead" : 78208,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a5d8c82c81918e48906bdf5dc04a",
+      "input" : 444,
+      "model" : "gpt-6.1-sol",
+      "output" : 214,
+      "time" : 1793697251902
+    },
+    {
+      "cacheRead" : 78720,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a5e9c7c48191beb8484b99c7d04f",
+      "input" : 834,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1793697260911
+    },
+    {
+      "cacheRead" : 79360,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a5ed59448191829c1376713ba0d0",
+      "input" : 321,
+      "model" : "gpt-6.1-sol",
+      "output" : 318,
+      "time" : 1793697268766
+    },
+    {
+      "cacheRead" : 79872,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a5f9dbc48191ae8398f4891d1709",
+      "input" : 638,
+      "model" : "gpt-6.1-sol",
+      "output" : 79,
+      "time" : 1793697276623
+    },
+    {
+      "cacheRead" : 80384,
+      "cacheWrite" : 0,
+      "id" : "resp_09b1af925d4cefd0016ae9a5fd0bb08191914bb1cfce05823f",
+      "input" : 431,
+      "model" : "gpt-6.1-sol",
+      "output" : 125,
+      "time" : 1793697282184
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

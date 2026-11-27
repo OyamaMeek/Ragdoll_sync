@@ -1,0 +1,340 @@
+{
+  "created" : 1790663949007,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:9fa3c17fca24f673b20cb9ca",
+  "nativeID" : "session-42f20de1-dfc9-4117-9389-18524f87c1be",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "openai",
+  "source" : "dsh",
+  "title" : "为扫描教材添加OCR书签压缩",
+  "updated" : 1790664847724,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "17",
+      "input" : 12954,
+      "model" : "gpt-5.6-terra",
+      "output" : 233,
+      "time" : 1790663958061
+    },
+    {
+      "cacheRead" : 12800,
+      "cacheWrite" : 0,
+      "id" : "30",
+      "input" : 1123,
+      "model" : "gpt-5.6-terra",
+      "output" : 429,
+      "time" : 1790663969523
+    },
+    {
+      "cacheRead" : 13824,
+      "cacheWrite" : 0,
+      "id" : "60",
+      "input" : 2786,
+      "model" : "gpt-5.6-terra",
+      "output" : 457,
+      "time" : 1790663981081
+    },
+    {
+      "cacheRead" : 15872,
+      "cacheWrite" : 0,
+      "id" : "81",
+      "input" : 16294,
+      "model" : "gpt-5.6-terra",
+      "output" : 691,
+      "time" : 1790664000828
+    },
+    {
+      "cacheRead" : 31232,
+      "cacheWrite" : 0,
+      "id" : "96",
+      "input" : 7705,
+      "model" : "gpt-5.6-terra",
+      "output" : 291,
+      "time" : 1790664010709
+    },
+    {
+      "cacheRead" : 38400,
+      "cacheWrite" : 0,
+      "id" : "103",
+      "input" : 1109,
+      "model" : "gpt-5.6-terra",
+      "output" : 420,
+      "time" : 1790664024277
+    },
+    {
+      "cacheRead" : 39424,
+      "cacheWrite" : 0,
+      "id" : "110",
+      "input" : 530,
+      "model" : "gpt-5.6-terra",
+      "output" : 128,
+      "time" : 1790664032797
+    },
+    {
+      "cacheRead" : 39424,
+      "cacheWrite" : 0,
+      "id" : "117",
+      "input" : 975,
+      "model" : "gpt-5.6-terra",
+      "output" : 147,
+      "time" : 1790664039278
+    },
+    {
+      "cacheRead" : 39424,
+      "cacheWrite" : 0,
+      "id" : "124",
+      "input" : 1251,
+      "model" : "gpt-5.6-terra",
+      "output" : 107,
+      "time" : 1790664044854
+    },
+    {
+      "cacheRead" : 40448,
+      "cacheWrite" : 0,
+      "id" : "131",
+      "input" : 476,
+      "model" : "gpt-5.6-terra",
+      "output" : 248,
+      "time" : 1790664052653
+    },
+    {
+      "cacheRead" : 40448,
+      "cacheWrite" : 0,
+      "id" : "138",
+      "input" : 1588,
+      "model" : "gpt-5.6-terra",
+      "output" : 1504,
+      "time" : 1790664082814
+    },
+    {
+      "cacheRead" : 41472,
+      "cacheWrite" : 0,
+      "id" : "145",
+      "input" : 3280,
+      "model" : "gpt-5.6-terra",
+      "output" : 203,
+      "time" : 1790664091192
+    },
+    {
+      "cacheRead" : 44544,
+      "cacheWrite" : 0,
+      "id" : "154",
+      "input" : 3497,
+      "model" : "gpt-5.6-terra",
+      "output" : 89,
+      "time" : 1790664097181
+    },
+    {
+      "cacheRead" : 47616,
+      "cacheWrite" : 0,
+      "id" : "161",
+      "input" : 852,
+      "model" : "gpt-5.6-terra",
+      "output" : 153,
+      "time" : 1790664129888
+    },
+    {
+      "cacheRead" : 47616,
+      "cacheWrite" : 0,
+      "id" : "168",
+      "input" : 1171,
+      "model" : "gpt-5.6-terra",
+      "output" : 320,
+      "time" : 1790664142345
+    },
+    {
+      "cacheRead" : 48640,
+      "cacheWrite" : 0,
+      "id" : "175",
+      "input" : 603,
+      "model" : "gpt-5.6-terra",
+      "output" : 391,
+      "time" : 1790664153499
+    },
+    {
+      "cacheRead" : 48640,
+      "cacheWrite" : 0,
+      "id" : "188",
+      "input" : 7993,
+      "model" : "gpt-5.6-terra",
+      "output" : 201,
+      "time" : 1790664162962
+    },
+    {
+      "cacheRead" : 55808,
+      "cacheWrite" : 0,
+      "id" : "199",
+      "input" : 4201,
+      "model" : "gpt-5.6-terra",
+      "output" : 88,
+      "time" : 1790664169198
+    },
+    {
+      "cacheRead" : 59904,
+      "cacheWrite" : 0,
+      "id" : "206",
+      "input" : 223,
+      "model" : "gpt-5.6-terra",
+      "output" : 176,
+      "time" : 1790664175417
+    },
+    {
+      "cacheRead" : 59904,
+      "cacheWrite" : 0,
+      "id" : "217",
+      "input" : 651,
+      "model" : "gpt-5.6-terra",
+      "output" : 778,
+      "time" : 1790664192683
+    },
+    {
+      "cacheRead" : 59904,
+      "cacheWrite" : 0,
+      "id" : "222",
+      "input" : 1459,
+      "model" : "gpt-5.6-terra",
+      "output" : 796,
+      "time" : 1790664210318
+    },
+    {
+      "cacheRead" : 60928,
+      "cacheWrite" : 0,
+      "id" : "242",
+      "input" : 2493,
+      "model" : "gpt-5.6-terra",
+      "output" : 84,
+      "time" : 1790664218024
+    },
+    {
+      "cacheRead" : 62976,
+      "cacheWrite" : 0,
+      "id" : "249",
+      "input" : 690,
+      "model" : "gpt-5.6-terra",
+      "output" : 557,
+      "time" : 1790664354375
+    },
+    {
+      "cacheRead" : 62976,
+      "cacheWrite" : 0,
+      "id" : "260",
+      "input" : 5002,
+      "model" : "gpt-5.6-terra",
+      "output" : 172,
+      "time" : 1790664361326
+    },
+    {
+      "cacheRead" : 67072,
+      "cacheWrite" : 0,
+      "id" : "267",
+      "input" : 1108,
+      "model" : "gpt-5.6-terra",
+      "output" : 74,
+      "time" : 1790664365306
+    },
+    {
+      "cacheRead" : 68096,
+      "cacheWrite" : 0,
+      "id" : "274",
+      "input" : 371,
+      "model" : "gpt-5.6-terra",
+      "output" : 948,
+      "time" : 1790664498857
+    },
+    {
+      "cacheRead" : 68096,
+      "cacheWrite" : 0,
+      "id" : "281",
+      "input" : 2885,
+      "model" : "gpt-5.6-terra",
+      "output" : 811,
+      "time" : 1790664522822
+    },
+    {
+      "cacheRead" : 70144,
+      "cacheWrite" : 0,
+      "id" : "290",
+      "input" : 2109,
+      "model" : "gpt-5.6-terra",
+      "output" : 87,
+      "time" : 1790664527665
+    },
+    {
+      "cacheRead" : 71168,
+      "cacheWrite" : 0,
+      "id" : "297",
+      "input" : 1298,
+      "model" : "gpt-5.6-terra",
+      "output" : 216,
+      "time" : 1790664563009
+    },
+    {
+      "cacheRead" : 72192,
+      "cacheWrite" : 0,
+      "id" : "304",
+      "input" : 773,
+      "model" : "gpt-5.6-terra",
+      "output" : 810,
+      "time" : 1790664584868
+    },
+    {
+      "cacheRead" : 72192,
+      "cacheWrite" : 0,
+      "id" : "311",
+      "input" : 2272,
+      "model" : "gpt-5.6-terra",
+      "output" : 116,
+      "time" : 1790664598033
+    },
+    {
+      "cacheRead" : 74240,
+      "cacheWrite" : 0,
+      "id" : "318",
+      "input" : 498,
+      "model" : "gpt-5.6-terra",
+      "output" : 1148,
+      "time" : 1790664623122
+    },
+    {
+      "cacheRead" : 74240,
+      "cacheWrite" : 0,
+      "id" : "327",
+      "input" : 2505,
+      "model" : "gpt-5.6-terra",
+      "output" : 444,
+      "time" : 1790664636026
+    },
+    {
+      "cacheRead" : 76288,
+      "cacheWrite" : 0,
+      "id" : "350",
+      "input" : 1989,
+      "model" : "gpt-5.6-terra",
+      "output" : 340,
+      "time" : 1790664648879
+    },
+    {
+      "cacheRead" : 15872,
+      "cacheWrite" : 0,
+      "id" : "377",
+      "input" : 34948,
+      "model" : "gpt-5.6-terra",
+      "output" : 213,
+      "time" : 1790664656709
+    },
+    {
+      "cacheRead" : 50688,
+      "cacheWrite" : 0,
+      "id" : "386",
+      "input" : 362,
+      "model" : "gpt-5.6-terra",
+      "output" : 477,
+      "time" : 1790664847722
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

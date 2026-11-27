@@ -1,0 +1,51 @@
+{
+  "created" : 1795506453037.3484,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:8835062326887b68551c0295",
+  "nativeID" : "01a20c86-39ea-7760-a777-f808a9368eae",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1795508012999,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0a9fe93e7a0f9b02016b054119900087d0b6217a3b9b601ba5",
+      "input" : 16953,
+      "model" : "codex-auto-review",
+      "output" : 269,
+      "time" : 1795506463142
+    },
+    {
+      "cacheRead" : 22656,
+      "cacheWrite" : 0,
+      "id" : "resp_0a9fe93e7a0f9b02016b054189143c87d095f9008c536d703c",
+      "input" : 3168,
+      "model" : "codex-auto-review",
+      "output" : 118,
+      "time" : 1795506571815
+    },
+    {
+      "cacheRead" : 25600,
+      "cacheWrite" : 0,
+      "id" : "resp_0a9fe93e7a0f9b02016b0543f0012087d09df5f912c291370d",
+      "input" : 7692,
+      "model" : "codex-auto-review",
+      "output" : 222,
+      "time" : 1795507188909
+    },
+    {
+      "cacheRead" : 33152,
+      "cacheWrite" : 0,
+      "id" : "resp_0a9fe93e7a0f9b02016b054729f2ec87d0aad51226988bbb0a",
+      "input" : 12974,
+      "model" : "codex-auto-review",
+      "output" : 124,
+      "time" : 1795508012990
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

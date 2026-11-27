@@ -1,0 +1,42 @@
+{
+  "created" : 1790737272161,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:417f4f614ccae7f3322433c5",
+  "nativeID" : "01a0f042-4c2d-7a10-9aa2-dcaf98921060",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "我点过保存配置了 <image name=[Image #1] path=\"/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/codex-clipboa",
+  "updated" : 1790737358465,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_026b62dfe72169c3016abc7b7aa74c87d18019b34b1608fdaf",
+      "input" : 23189,
+      "model" : "codex-auto-review",
+      "output" : 149,
+      "time" : 1790737279124
+    },
+    {
+      "cacheRead" : 27392,
+      "cacheWrite" : 0,
+      "id" : "resp_026b62dfe72169c3016abc7b80aee887d1937a889e8e05ae7e",
+      "input" : 1440,
+      "model" : "codex-auto-review",
+      "output" : 121,
+      "time" : 1790737286514
+    },
+    {
+      "cacheRead" : 28416,
+      "cacheWrite" : 0,
+      "id" : "resp_026b62dfe72169c3016abc7bc92bc487d192c214454dc19525",
+      "input" : 2166,
+      "model" : "codex-auto-review",
+      "output" : 133,
+      "time" : 1790737358458
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

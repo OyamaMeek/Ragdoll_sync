@@ -1,0 +1,51 @@
+{
+  "created" : 1792654204629,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:f67bc6c1c2578569b7ce3d8d",
+  "nativeID" : "01a16284-4626-73b3-88c1-6506390fc722",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "在 ego 中打开问卷列表",
+  "updated" : 1792654241037,
+  "usage" : [
+    {
+      "cacheRead" : 18944,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb896807c2ae9e9016ad9bb88c8b48191b3e56ef94ab10d01",
+      "input" : 24726,
+      "model" : "gpt-6-luna",
+      "output" : 131,
+      "time" : 1792654218762
+    },
+    {
+      "cacheRead" : 43520,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb896807c2ae9e9016ad9bb8cf6448191ac9d569e5c751ed7",
+      "input" : 681,
+      "model" : "gpt-6-luna",
+      "output" : 48,
+      "time" : 1792654222173
+    },
+    {
+      "cacheRead" : 44032,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb896807c2ae9e9016ad9bb9058d48191b8034ca8e2be81e7",
+      "input" : 5052,
+      "model" : "gpt-6-luna",
+      "output" : 183,
+      "time" : 1792654227695
+    },
+    {
+      "cacheRead" : 48896,
+      "cacheWrite" : 0,
+      "id" : "resp_0fb896807c2ae9e9016ad9bb9f65a88191b2c52d0af8e45920",
+      "input" : 860,
+      "model" : "gpt-6-luna",
+      "output" : 99,
+      "time" : 1792654241022
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

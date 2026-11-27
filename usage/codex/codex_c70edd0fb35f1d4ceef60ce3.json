@@ -1,0 +1,42 @@
+{
+  "created" : 1793192788878,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:c70edd0fb35f1d4ceef60ce3",
+  "nativeID" : "01a1829e-67fa-7d22-ab2f-002d6ffd6641",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "了解 Slack 的用途",
+  "updated" : 1794052921709,
+  "usage" : [
+    {
+      "cacheRead" : 23552,
+      "cacheWrite" : 0,
+      "id" : "resp_07c7f43e5eb0c9e3016ae1f35857bc8191a9cf7add87ad3461",
+      "input" : 24995,
+      "model" : "gpt-6.1-sol",
+      "output" : 260,
+      "time" : 1793192803941
+    },
+    {
+      "cacheRead" : 48640,
+      "cacheWrite" : 0,
+      "id" : "resp_07c7f43e5eb0c9e3016ae1f391f9b08191a7ce530ad657b2e0",
+      "input" : 179,
+      "model" : "gpt-6.1-sol",
+      "output" : 80,
+      "time" : 1793192853365
+    },
+    {
+      "cacheRead" : 48768,
+      "cacheWrite" : 0,
+      "id" : "resp_07c7f43e5eb0c9e3016ae1f3990d648191b5417a5a092e51a1",
+      "input" : 4095,
+      "model" : "gpt-6.1-sol",
+      "output" : 279,
+      "time" : 1793192869293
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

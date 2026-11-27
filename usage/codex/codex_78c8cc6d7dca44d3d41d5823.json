@@ -1,0 +1,60 @@
+{
+  "created" : 1793608210127,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:78c8cc6d7dca44d3d41d5823",
+  "nativeID" : "01a19b60-c14e-7a60-9cbc-1b606498d550",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "查询 Chrome 标签页实时同步",
+  "updated" : 1793608489105,
+  "usage" : [
+    {
+      "cacheRead" : 12928,
+      "cacheWrite" : 0,
+      "id" : "resp_078cd7ced1fbe7ab016ae84a15c88081919e6017b22473bb68",
+      "input" : 25156,
+      "model" : "gpt-6.1-sol",
+      "output" : 127,
+      "time" : 1793608221831
+    },
+    {
+      "cacheRead" : 38016,
+      "cacheWrite" : 0,
+      "id" : "resp_078cd7ced1fbe7ab016ae84a1e966881919690964fe687d85b",
+      "input" : 5834,
+      "model" : "gpt-6.1-sol",
+      "output" : 84,
+      "time" : 1793608231077
+    },
+    {
+      "cacheRead" : 43776,
+      "cacheWrite" : 0,
+      "id" : "resp_078cd7ced1fbe7ab016ae84a2ac98881918a9ffafcc07c5622",
+      "input" : 8202,
+      "model" : "gpt-6.1-sol",
+      "output" : 124,
+      "time" : 1793608239448
+    },
+    {
+      "cacheRead" : 51968,
+      "cacheWrite" : 0,
+      "id" : "resp_078cd7ced1fbe7ab016ae84a32dc488191a924accaf7b6be7b",
+      "input" : 8342,
+      "model" : "gpt-6.1-sol",
+      "output" : 376,
+      "time" : 1793608252041
+    },
+    {
+      "cacheRead" : 60544,
+      "cacheWrite" : 0,
+      "id" : "resp_078cd7ced1fbe7ab016ae84b1cfb308191ad05ad00aa8bf7ec",
+      "input" : 155,
+      "model" : "gpt-6.1-sol",
+      "output" : 237,
+      "time" : 1793608489068
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

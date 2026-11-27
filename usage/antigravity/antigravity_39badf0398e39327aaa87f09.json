@@ -1,0 +1,24 @@
+{
+  "created" : 1795690016000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:39badf0398e39327aaa87f09",
+  "nativeID" : "705cd7f0-5c0a-4ab6-9e31-43f344d325b1",
+  "project" : "/Users/oyamahappa/Documents/Agent/Antigravity-Work",
+  "source" : "antigravity",
+  "title" : "Cloudflare Trace Information Analysis",
+  "updated" : 1795690053114,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "Ig4Ia7rZJuCx2roPh6fmUA",
+      "input" : 20472,
+      "model" : "gemini-4-neon",
+      "output" : 3435,
+      "time" : 1795690016336.075
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

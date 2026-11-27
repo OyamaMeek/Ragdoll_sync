@@ -1,0 +1,150 @@
+{
+  "created" : 1794326342777,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:91ec1202ca018e79b09bad7d",
+  "nativeID" : "01a1c62e-404e-7e71-bb86-58366f0ea389",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank",
+  "source" : "codex",
+  "title" : "调整 README 题库结构说明",
+  "updated" : 1794326437366,
+  "usage" : [
+    {
+      "cacheRead" : 13568,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f4a95f087d0bfe0cc5c100c904b",
+      "input" : 24767,
+      "model" : "gpt-6.1-sol",
+      "output" : 188,
+      "time" : 1794326352103
+    },
+    {
+      "cacheRead" : 38144,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f50d83c87d0abea04648db2e32b",
+      "input" : 724,
+      "model" : "gpt-6.1-sol",
+      "output" : 226,
+      "time" : 1794326358941
+    },
+    {
+      "cacheRead" : 38656,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f57903887d08794a5305f595477",
+      "input" : 8815,
+      "model" : "gpt-6.1-sol",
+      "output" : 277,
+      "time" : 1794326366266
+    },
+    {
+      "cacheRead" : 47104,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f5ebf5487d0a4d5d8ac2b89b82a",
+      "input" : 3628,
+      "model" : "gpt-6.1-sol",
+      "output" : 398,
+      "time" : 1794326377094
+    },
+    {
+      "cacheRead" : 50432,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f69fe5887d0b7ce3e2e25d9e067",
+      "input" : 2057,
+      "model" : "gpt-6.1-sol",
+      "output" : 261,
+      "time" : 1794326384812
+    },
+    {
+      "cacheRead" : 52224,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f71584087d0b2c6190ca3a3988c",
+      "input" : 550,
+      "model" : "gpt-6.1-sol",
+      "output" : 385,
+      "time" : 1794326394281
+    },
+    {
+      "cacheRead" : 52480,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f7ab8a487d0969fbe1b7b076834",
+      "input" : 1838,
+      "model" : "gpt-6.1-sol",
+      "output" : 279,
+      "time" : 1794326402068
+    },
+    {
+      "cacheRead" : 54016,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f827e5c87d08d1d7cbbc5ab204f",
+      "input" : 928,
+      "model" : "gpt-6.1-sol",
+      "output" : 127,
+      "time" : 1794326407189
+    },
+    {
+      "cacheRead" : 54784,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f87a86487d0b78ba665d7c97751",
+      "input" : 459,
+      "model" : "gpt-6.1-sol",
+      "output" : 78,
+      "time" : 1794326411127
+    },
+    {
+      "cacheRead" : 55040,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f8bb82c87d0a90d02a388117091",
+      "input" : 591,
+      "model" : "gpt-6.1-sol",
+      "output" : 87,
+      "time" : 1794326415032
+    },
+    {
+      "cacheRead" : 55296,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f8f7a3887d0afcc078042012986",
+      "input" : 446,
+      "model" : "gpt-6.1-sol",
+      "output" : 115,
+      "time" : 1794326419690
+    },
+    {
+      "cacheRead" : 55552,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f95282087d087643707fdd33d26",
+      "input" : 533,
+      "model" : "gpt-6.1-sol",
+      "output" : 39,
+      "time" : 1794326423481
+    },
+    {
+      "cacheRead" : 55808,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f991dfc87d096496ec404f7da17",
+      "input" : 405,
+      "model" : "gpt-6.1-sol",
+      "output" : 163,
+      "time" : 1794326429773
+    },
+    {
+      "cacheRead" : 56064,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33f9f203887d098f57d22f1bc4a1f",
+      "input" : 471,
+      "model" : "gpt-6.1-sol",
+      "output" : 38,
+      "time" : 1794326433111
+    },
+    {
+      "cacheRead" : 56320,
+      "cacheWrite" : 0,
+      "id" : "resp_0078d724bbdab7cb016af33fa18e3087d0b812e597486aad21",
+      "input" : 338,
+      "model" : "gpt-6.1-sol",
+      "output" : 117,
+      "time" : 1794326437350
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

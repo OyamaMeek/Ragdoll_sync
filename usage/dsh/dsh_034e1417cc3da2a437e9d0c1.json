@@ -1,0 +1,188 @@
+{
+  "created" : 1790607563655,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:034e1417cc3da2a437e9d0c1",
+  "nativeID" : "a63b387f-d37c-4cfb-b8d6-ca5630aaeb72",
+  "parentID" : "session-88ca4baa-20d9-4b1d-88e8-4aa30e374492",
+  "project" : "/Users/oyamahappa/Documents/Obsidian/Happa",
+  "provider" : "openai",
+  "source" : "dsh",
+  "title" : "你在 Obsidian 工作区 /Users/oyamaha",
+  "updated" : 1790608224122,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "14",
+      "input" : 8419,
+      "model" : "gpt-5.6-luna",
+      "output" : 432,
+      "time" : 1790607579968
+    },
+    {
+      "cacheRead" : 7680,
+      "cacheWrite" : 0,
+      "id" : "26",
+      "input" : 5826,
+      "model" : "gpt-5.6-luna",
+      "output" : 168,
+      "time" : 1790607585784
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "33",
+      "input" : 35623,
+      "model" : "gpt-5.6-luna",
+      "output" : 666,
+      "time" : 1790607605177
+    },
+    {
+      "cacheRead" : 35328,
+      "cacheWrite" : 0,
+      "id" : "40",
+      "input" : 5830,
+      "model" : "gpt-5.6-luna",
+      "output" : 92,
+      "time" : 1790607609891
+    },
+    {
+      "cacheRead" : 40448,
+      "cacheWrite" : 0,
+      "id" : "47",
+      "input" : 6217,
+      "model" : "gpt-5.6-luna",
+      "output" : 89,
+      "time" : 1790607614624
+    },
+    {
+      "cacheRead" : 45568,
+      "cacheWrite" : 0,
+      "id" : "54",
+      "input" : 7228,
+      "model" : "gpt-5.6-luna",
+      "output" : 89,
+      "time" : 1790607621263
+    },
+    {
+      "cacheRead" : 51712,
+      "cacheWrite" : 0,
+      "id" : "61",
+      "input" : 6871,
+      "model" : "gpt-5.6-luna",
+      "output" : 89,
+      "time" : 1790607626322
+    },
+    {
+      "cacheRead" : 57856,
+      "cacheWrite" : 0,
+      "id" : "68",
+      "input" : 3071,
+      "model" : "gpt-5.6-luna",
+      "output" : 7439,
+      "time" : 1790607764324
+    },
+    {
+      "cacheRead" : 59904,
+      "cacheWrite" : 0,
+      "id" : "101",
+      "input" : 27895,
+      "model" : "gpt-5.6-luna",
+      "output" : 507,
+      "time" : 1790607779646
+    },
+    {
+      "cacheRead" : 6656,
+      "cacheWrite" : 0,
+      "id" : "139",
+      "input" : 35843,
+      "model" : "gpt-5.6-luna",
+      "output" : 145,
+      "time" : 1790607785370
+    },
+    {
+      "cacheRead" : 41472,
+      "cacheWrite" : 0,
+      "id" : "146",
+      "input" : 3724,
+      "model" : "gpt-5.6-luna",
+      "output" : 113,
+      "time" : 1790607791744
+    },
+    {
+      "cacheRead" : 44544,
+      "cacheWrite" : 0,
+      "id" : "153",
+      "input" : 3561,
+      "model" : "gpt-5.6-luna",
+      "output" : 97,
+      "time" : 1790607796570
+    },
+    {
+      "cacheRead" : 47616,
+      "cacheWrite" : 0,
+      "id" : "160",
+      "input" : 4559,
+      "model" : "gpt-5.6-luna",
+      "output" : 94,
+      "time" : 1790607801216
+    },
+    {
+      "cacheRead" : 51712,
+      "cacheWrite" : 0,
+      "id" : "167",
+      "input" : 4221,
+      "model" : "gpt-5.6-luna",
+      "output" : 359,
+      "time" : 1790607811821
+    },
+    {
+      "cacheRead" : 55808,
+      "cacheWrite" : 0,
+      "id" : "172",
+      "input" : 529,
+      "model" : "gpt-5.6-luna",
+      "output" : 184,
+      "time" : 1790607817560
+    },
+    {
+      "cacheRead" : 55808,
+      "cacheWrite" : 0,
+      "id" : "199",
+      "input" : 3092,
+      "model" : "gpt-5.6-luna",
+      "output" : 347,
+      "time" : 1790607826647
+    },
+    {
+      "cacheRead" : 57856,
+      "cacheWrite" : 0,
+      "id" : "222",
+      "input" : 11782,
+      "model" : "gpt-5.6-luna",
+      "output" : 294,
+      "time" : 1790607834561
+    },
+    {
+      "cacheRead" : 69120,
+      "cacheWrite" : 0,
+      "id" : "230",
+      "input" : 855,
+      "model" : "gpt-5.6-luna",
+      "output" : 3438,
+      "time" : 1790607901332
+    },
+    {
+      "cacheRead" : 69120,
+      "cacheWrite" : 0,
+      "id" : "246",
+      "input" : 6091,
+      "model" : "gpt-5.6-luna",
+      "output" : 15368,
+      "time" : 1790608183016
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

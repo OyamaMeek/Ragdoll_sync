@@ -1,0 +1,213 @@
+{
+  "created" : 1793688110360,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:826f89ab2387ad9c8a94d8c5",
+  "nativeID" : "01a1a024-8277-7be0-86c1-0c61775a7a64",
+  "project" : "/Users/oyamahappa/Documents/GitHub/PrivateWork",
+  "source" : "codex",
+  "title" : "补充实践报告网络数据",
+  "updated" : 1793688315761,
+  "usage" : [
+    {
+      "cacheRead" : 12928,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982333eac81919c56ecdd095cd06d",
+      "input" : 25686,
+      "model" : "gpt-6-astra",
+      "output" : 134,
+      "time" : 1793688119256
+    },
+    {
+      "cacheRead" : 38400,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae98237e8788191a242382f6163471c",
+      "input" : 1149,
+      "model" : "gpt-6-astra",
+      "output" : 299,
+      "time" : 1793688124190
+    },
+    {
+      "cacheRead" : 39424,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae9823cfe5481918121d79e28904700",
+      "input" : 10204,
+      "model" : "gpt-6-astra",
+      "output" : 267,
+      "time" : 1793688135121
+    },
+    {
+      "cacheRead" : 49408,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae9824b295c819195dd59abf25b6c65",
+      "input" : 7361,
+      "model" : "gpt-6-astra",
+      "output" : 177,
+      "time" : 1793688143737
+    },
+    {
+      "cacheRead" : 56576,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae9825353748191870e85cb6272876a",
+      "input" : 3005,
+      "model" : "gpt-6-astra",
+      "output" : 85,
+      "time" : 1793688150939
+    },
+    {
+      "cacheRead" : 59392,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982578e908191b71e9da65dba5604",
+      "input" : 4367,
+      "model" : "gpt-6-astra",
+      "output" : 137,
+      "time" : 1793688155080
+    },
+    {
+      "cacheRead" : 63616,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae9825e81d08191b026151d01ddf908",
+      "input" : 6357,
+      "model" : "gpt-6-astra",
+      "output" : 95,
+      "time" : 1793688161954
+    },
+    {
+      "cacheRead" : 69760,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae98265bb348191aeeb3bbe3c6d69df",
+      "input" : 4130,
+      "model" : "gpt-6-astra",
+      "output" : 162,
+      "time" : 1793688170054
+    },
+    {
+      "cacheRead" : 73728,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae9826dca1881918ec31e6a46ab27a8",
+      "input" : 5276,
+      "model" : "gpt-6-astra",
+      "output" : 190,
+      "time" : 1793688179047
+    },
+    {
+      "cacheRead" : 78848,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982763c9881918e11d244d093643e",
+      "input" : 5098,
+      "model" : "gpt-6-astra",
+      "output" : 251,
+      "time" : 1793688187205
+    },
+    {
+      "cacheRead" : 83712,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae9827bba588191b9cc1104837042bb",
+      "input" : 509,
+      "model" : "gpt-6-astra",
+      "output" : 1764,
+      "time" : 1793688218340
+    },
+    {
+      "cacheRead" : 84096,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae9829b0dec8191b03d1fd5644605d0",
+      "input" : 1913,
+      "model" : "gpt-6-astra",
+      "output" : 173,
+      "time" : 1793688225250
+    },
+    {
+      "cacheRead" : 85888,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982a1d1a4819197b361a0e94fc44a",
+      "input" : 2757,
+      "model" : "gpt-6-astra",
+      "output" : 493,
+      "time" : 1793688232325
+    },
+    {
+      "cacheRead" : 88448,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982a986c08191b31578cac43899a1",
+      "input" : 1061,
+      "model" : "gpt-6-astra",
+      "output" : 119,
+      "time" : 1793688236326
+    },
+    {
+      "cacheRead" : 89344,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982acebfc81918dc8e9329e636bbf",
+      "input" : 807,
+      "model" : "gpt-6-astra",
+      "output" : 264,
+      "time" : 1793688245600
+    },
+    {
+      "cacheRead" : 89984,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982b65b808191b490433b23d3ba9b",
+      "input" : 854,
+      "model" : "gpt-6-astra",
+      "output" : 798,
+      "time" : 1793688257064
+    },
+    {
+      "cacheRead" : 90624,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982c1d54c8191b9c69e165cb147d7",
+      "input" : 1921,
+      "model" : "gpt-6-astra",
+      "output" : 184,
+      "time" : 1793688262722
+    },
+    {
+      "cacheRead" : 92416,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982cbf18c8191a7beb1f8de6b4135",
+      "input" : 615,
+      "model" : "gpt-6-astra",
+      "output" : 34,
+      "time" : 1793688269748
+    },
+    {
+      "cacheRead" : 92800,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982ce59108191b8efd0a887406ede",
+      "input" : 451,
+      "model" : "gpt-6-astra",
+      "output" : 227,
+      "time" : 1793688273740
+    },
+    {
+      "cacheRead" : 93056,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982d8b9bc8191bf18e2790e1d80b5",
+      "input" : 592,
+      "model" : "gpt-6-astra",
+      "output" : 93,
+      "time" : 1793688283286
+    },
+    {
+      "cacheRead" : 93440,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982ddf0888191b7d7e3b9b6d37589",
+      "input" : 633,
+      "model" : "gpt-6-astra",
+      "output" : 507,
+      "time" : 1793688294822
+    },
+    {
+      "cacheRead" : 93952,
+      "cacheWrite" : 0,
+      "id" : "resp_082a82864d02bbbf016ae982f6b35c8191b67ac0fea3a66c8f",
+      "input" : 638,
+      "model" : "gpt-6-astra",
+      "output" : 180,
+      "time" : 1793688315755
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

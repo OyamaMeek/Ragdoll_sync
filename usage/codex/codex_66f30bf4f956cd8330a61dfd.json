@@ -1,0 +1,78 @@
+{
+  "created" : 1795061806523,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:66f30bf4f956cd8330a61dfd",
+  "nativeID" : "01a1f205-751e-7ba1-ae88-3fa15945bd8b",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Autovisor",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1795061946606,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_0355368a7846038a016afe7830f4fc87d08b9a640f005ac15a",
+      "input" : 16531,
+      "model" : "codex-auto-review",
+      "output" : 195,
+      "time" : 1795061812965
+    },
+    {
+      "cacheRead" : 22272,
+      "cacheWrite" : 0,
+      "id" : "resp_0355368a7846038a016afe784ba36c87d0818e5e8bdeec1c5d",
+      "input" : 2518,
+      "model" : "codex-auto-review",
+      "output" : 301,
+      "time" : 1795061841820
+    },
+    {
+      "cacheRead" : 24576,
+      "cacheWrite" : 0,
+      "id" : "resp_0355368a7846038a016afe78903a0887d096759e42d1a8fac2",
+      "input" : 6288,
+      "model" : "codex-auto-review",
+      "output" : 131,
+      "time" : 1795061907222
+    },
+    {
+      "cacheRead" : 30720,
+      "cacheWrite" : 0,
+      "id" : "resp_0355368a7846038a016afe7899e4a887d0bfbaface3645c5e7",
+      "input" : 2018,
+      "model" : "codex-auto-review",
+      "output" : 109,
+      "time" : 1795061916687
+    },
+    {
+      "cacheRead" : 32512,
+      "cacheWrite" : 0,
+      "id" : "resp_0355368a7846038a016afe78a0705487d0a114ee860c1bca30",
+      "input" : 776,
+      "model" : "codex-auto-review",
+      "output" : 196,
+      "time" : 1795061924431
+    },
+    {
+      "cacheRead" : 33152,
+      "cacheWrite" : 0,
+      "id" : "resp_0355368a7846038a016afe78b3272087d0a643e3dce41308e7",
+      "input" : 1660,
+      "model" : "codex-auto-review",
+      "output" : 100,
+      "time" : 1795061941338
+    },
+    {
+      "cacheRead" : 34688,
+      "cacheWrite" : 0,
+      "id" : "resp_0355368a7846038a016afe78b89d0087d08882525d5d98816a",
+      "input" : 1022,
+      "model" : "codex-auto-review",
+      "output" : 83,
+      "time" : 1795061946600
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

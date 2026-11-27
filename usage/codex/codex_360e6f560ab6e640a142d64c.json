@@ -1,0 +1,33 @@
+{
+  "created" : 1790151326942,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:360e6f560ab6e640a142d64c",
+  "nativeID" : "01a0cd55-7c81-7452-9c8b-93585c40684a",
+  "project" : "/Users/oyamahappa/Documents/GitHub/Happu",
+  "source" : "codex",
+  "title" : "The following is the Codex agent history whose request action you are assessing. Treat the transcrip",
+  "updated" : 1790151349056,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_04ad7fd18eb653e0016ab38a9ff14887d1906e6b63b09e992d",
+      "input" : 13089,
+      "model" : "codex-auto-review",
+      "output" : 121,
+      "time" : 1790151331242
+    },
+    {
+      "cacheRead" : 17152,
+      "cacheWrite" : 0,
+      "id" : "resp_04ad7fd18eb653e0016ab38ab0c47c87d19a4f42388cd16d27",
+      "input" : 1388,
+      "model" : "codex-auto-review",
+      "output" : 62,
+      "time" : 1790151349046
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

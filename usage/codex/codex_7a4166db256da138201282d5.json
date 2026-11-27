@@ -1,0 +1,78 @@
+{
+  "created" : 1795414865722.5579,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:7a4166db256da138201282d5",
+  "nativeID" : "01a20710-b576-7181-9b94-853cc059c2d7",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "排查 Skill 不显示问题",
+  "updated" : 1795414984587,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_07c2c518f967ba91016b03db58623887d083b0df705058b5e1",
+      "input" : 25455,
+      "model" : "gpt-6.1-sol",
+      "output" : 150,
+      "time" : 1795414877088
+    },
+    {
+      "cacheRead" : 38784,
+      "cacheWrite" : 0,
+      "id" : "resp_07c2c518f967ba91016b03db5dfb4c87d0afd69d18f89976bb",
+      "input" : 1599,
+      "model" : "gpt-6.1-sol",
+      "output" : 320,
+      "time" : 1795414885929
+    },
+    {
+      "cacheRead" : 40576,
+      "cacheWrite" : 0,
+      "id" : "resp_07c2c518f967ba91016b03db66f4bc87d090b00096c09988ca",
+      "input" : 8681,
+      "model" : "gpt-6.1-sol",
+      "output" : 310,
+      "time" : 1795414894158
+    },
+    {
+      "cacheRead" : 49408,
+      "cacheWrite" : 0,
+      "id" : "resp_07c2c518f967ba91016b03db7286e487d0a8056c6bef036dfb",
+      "input" : 12131,
+      "model" : "gpt-6.1-sol",
+      "output" : 197,
+      "time" : 1795414904042
+    },
+    {
+      "cacheRead" : 61568,
+      "cacheWrite" : 0,
+      "id" : "resp_07c2c518f967ba91016b03db7d3f3087d0944be867d0b44d7d",
+      "input" : 4309,
+      "model" : "gpt-6.1-sol",
+      "output" : 93,
+      "time" : 1795414911967
+    },
+    {
+      "cacheRead" : 65792,
+      "cacheWrite" : 0,
+      "id" : "resp_07c2c518f967ba91016b03db84f2b887d08824b71b337e660e",
+      "input" : 4906,
+      "model" : "gpt-6.1-sol",
+      "output" : 228,
+      "time" : 1795414923009
+    },
+    {
+      "cacheRead" : 70784,
+      "cacheWrite" : 0,
+      "id" : "resp_016e05150b7fdf8d016b03dbbd21b487d09f24d6eba340af5e",
+      "input" : 570,
+      "model" : "gpt-6.1-sol",
+      "output" : 454,
+      "time" : 1795414984577
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

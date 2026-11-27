@@ -1,0 +1,132 @@
+{
+  "created" : 1795403209550.131,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:976f5c3363dc24490a2a9ffe",
+  "nativeID" : "01a2065e-d9e0-7c01-bb21-b81b29c12321",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "查找 Debian 13 DD 脚本",
+  "updated" : 1795414875166,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03adcf061887d0974559ef186dc272",
+      "input" : 29709,
+      "model" : "gpt-6.1-sol",
+      "output" : 151,
+      "time" : 1795403219350
+    },
+    {
+      "cacheRead" : 43136,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03add7e36087d09657c21798bc1675",
+      "input" : 8747,
+      "model" : "gpt-6.1-sol",
+      "output" : 263,
+      "time" : 1795403230657
+    },
+    {
+      "cacheRead" : 52096,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03ade29a6c87d085da91074a22d246",
+      "input" : 12170,
+      "model" : "gpt-6.1-sol",
+      "output" : 305,
+      "time" : 1795403242612
+    },
+    {
+      "cacheRead" : 64512,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03adee730487d09c1ed171dfaa0f95",
+      "input" : 8975,
+      "model" : "gpt-6.1-sol",
+      "output" : 497,
+      "time" : 1795403259274
+    },
+    {
+      "cacheRead" : 73856,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03adff63dc87d0a5a301ce80eabc57",
+      "input" : 6660,
+      "model" : "gpt-6.1-sol",
+      "output" : 988,
+      "time" : 1795403285094
+    },
+    {
+      "cacheRead" : 81408,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03ae16122c87d08cc6fce67974ac3d",
+      "input" : 950,
+      "model" : "gpt-6.1-sol",
+      "output" : 137,
+      "time" : 1795403291138
+    },
+    {
+      "cacheRead" : 82432,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03ae2383e887d09d1840af2a2eb205",
+      "input" : 483,
+      "model" : "gpt-6.1-sol",
+      "output" : 46,
+      "time" : 1795403302669
+    },
+    {
+      "cacheRead" : 82816,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03ae2b723087d0bed886e593788e7c",
+      "input" : 1313,
+      "model" : "gpt-6.1-sol",
+      "output" : 160,
+      "time" : 1795403311740
+    },
+    {
+      "cacheRead" : 84224,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03ae34d61087d0be91b3dcb96043fd",
+      "input" : 632,
+      "model" : "gpt-6.1-sol",
+      "output" : 210,
+      "time" : 1795403322943
+    },
+    {
+      "cacheRead" : 84992,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03ae3f83b887d0b9f5fcfa0c90088b",
+      "input" : 959,
+      "model" : "gpt-6.1-sol",
+      "output" : 144,
+      "time" : 1795403331991
+    },
+    {
+      "cacheRead" : 86016,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03ae4a693c87d0a80e1c1336cf882f",
+      "input" : 1028,
+      "model" : "gpt-6.1-sol",
+      "output" : 94,
+      "time" : 1795403341404
+    },
+    {
+      "cacheRead" : 87040,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03ae54aae887d0b3336eec40b97a0b",
+      "input" : 155,
+      "model" : "gpt-6.1-sol",
+      "output" : 52,
+      "time" : 1795403351356
+    },
+    {
+      "cacheRead" : 87168,
+      "cacheWrite" : 0,
+      "id" : "resp_0355e8309afd4dea016b03ae58385c87d08307e3321178c3ea",
+      "input" : 276,
+      "model" : "gpt-6.1-sol",
+      "output" : 322,
+      "time" : 1795403362743
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "created" : 1795590222000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:d2c61772203e7cf76ec92297",
+  "nativeID" : "dbda0132-db06-4f3b-b05a-36c3eb0a227a",
+  "project" : "/Users/oyamahappa/Documents/Agent/Antigravity-Work",
+  "source" : "antigravity",
+  "title" : "检测端口连通性",
+  "updated" : 1795601287479,
+  "usage" : [
+    {
+      "cacheRead" : 12616,
+      "cacheWrite" : 0,
+      "id" : "UYgGa6KONvOZvr0PvMX1-AY",
+      "input" : 6664,
+      "model" : "gemini-4-neon",
+      "output" : 277,
+      "time" : 1795590222258.537
+    },
+    {
+      "cacheRead" : 17223,
+      "cacheWrite" : 0,
+      "id" : "XogGa6nhJZGj9tMPmtrywQw",
+      "input" : 2554,
+      "model" : "gemini-4-neon",
+      "output" : 988,
+      "time" : 1795590236650.242
+    },
+    {
+      "cacheRead" : 17728,
+      "cacheWrite" : 0,
+      "id" : "gIgGa43SC7v72roPlMyiyAE",
+      "input" : 3109,
+      "model" : "gemini-4-neon",
+      "output" : 508,
+      "time" : 1795590269822.308
+    },
+    {
+      "cacheRead" : 19135,
+      "cacheWrite" : 0,
+      "id" : "m4gGa5-vPNGN1e8PwsGckA4",
+      "input" : 2393,
+      "model" : "gemini-4-neon",
+      "output" : 1379,
+      "time" : 1795590297680.227
+    },
+    {
+      "cacheRead" : 20830,
+      "cacheWrite" : 0,
+      "id" : "s4gGa-6oGLOZvr0Pi6ewoAw",
+      "input" : 2634,
+      "model" : "gemini-4-neon",
+      "output" : 1575,
+      "time" : 1795590321246.364
+    },
+    {
+      "cacheRead" : 22908,
+      "cacheWrite" : 0,
+      "id" : "zIgGa8TQO5Tb9tMP0uD4mAY",
+      "input" : 2214,
+      "model" : "gemini-4-neon",
+      "output" : 826,
+      "time" : 1795590345836.726
+    },
+    {
+      "cacheRead" : 23073,
+      "cacheWrite" : 0,
+      "id" : "24gGa7zEFty02roPhvTJgQg",
+      "input" : 3291,
+      "model" : "gemini-4-neon",
+      "output" : 302,
+      "time" : 1795590361822.733
+    },
+    {
+      "cacheRead" : 24315,
+      "cacheWrite" : 0,
+      "id" : "5ogGa_j_NbPN2roPoYiviQg",
+      "input" : 2480,
+      "model" : "gemini-4-neon",
+      "output" : 1147,
+      "time" : 1795590372956.571
+    },
+    {
+      "cacheRead" : 25949,
+      "cacheWrite" : 0,
+      "id" : "CYkGa73ZKNvs2roP5rPT2Qk",
+      "input" : 2340,
+      "model" : "gemini-4-neon",
+      "output" : 1962,
+      "time" : 1795590407792.721
+    },
+    {
+      "cacheRead" : 27534,
+      "cacheWrite" : 0,
+      "id" : "H4kGa9_4JJCYvr0P4-q4-Ag",
+      "input" : 2800,
+      "model" : "gemini-4-neon",
+      "output" : 672,
+      "time" : 1795590429691.076
+    },
+    {
+      "cacheRead" : 28285,
+      "cacheWrite" : 0,
+      "id" : "PYkGa_mGDs-t1e8PjdSwEQ",
+      "input" : 3160,
+      "model" : "gemini-4-neon",
+      "output" : 584,
+      "time" : 1795590459452.127
+    },
+    {
+      "cacheRead" : 30610,
+      "cacheWrite" : 0,
+      "id" : "S4kGa_zqFsXZ9tMPhtTwoQc",
+      "input" : 2448,
+      "model" : "gemini-4-neon",
+      "output" : 1888,
+      "time" : 1795590470490.989
+    },
+    {
+      "cacheRead" : 33059,
+      "cacheWrite" : 0,
+      "id" : "ZYkGa_GaDKKs1e8Pqa3tiQU",
+      "input" : 2050,
+      "model" : "gemini-4-neon",
+      "output" : 267,
+      "time" : 1795590498864.128
+    },
+    {
+      "cacheRead" : 33060,
+      "cacheWrite" : 0,
+      "id" : "cokGa_eyEuns2roP-PvzqAU",
+      "input" : 2485,
+      "model" : "gemini-4-neon",
+      "output" : 355,
+      "time" : 1795590512121.981
+    },
+    {
+      "cacheRead" : 33496,
+      "cacheWrite" : 0,
+      "id" : "e4kGa5jUJJjA0-kPxpTjoAI",
+      "input" : 2649,
+      "model" : "gemini-4-neon",
+      "output" : 207,
+      "time" : 1795590521657.817
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "5acGa_PCDIaz1e8P37qy-AY",
+      "input" : 36620,
+      "model" : "gemini-4-neon",
+      "output" : 249,
+      "time" : 1795598306851.599
+    },
+    {
+      "cacheRead" : 34571,
+      "cacheWrite" : 0,
+      "id" : "7acGa9nTJce31e8PkfuIoA8",
+      "input" : 2543,
+      "model" : "gemini-4-neon",
+      "output" : 579,
+      "time" : 1795598315706.595
+    },
+    {
+      "cacheRead" : 36353,
+      "cacheWrite" : 0,
+      "id" : "DqgGa4vmIb-Zvr0P4qbyGA",
+      "input" : 2481,
+      "model" : "gemini-4-neon",
+      "output" : 1004,
+      "time" : 1795598348657.34
+    },
+    {
+      "cacheRead" : 38835,
+      "cacheWrite" : 0,
+      "id" : "E6sGa56AJeWt1e8P_dODoQo",
+      "input" : 2289,
+      "model" : "gemini-4-neon",
+      "output" : 1183,
+      "time" : 1795599120658.632
+    },
+    {
+      "cacheRead" : 40330,
+      "cacheWrite" : 0,
+      "id" : "RqsGa-6bHMmw0-kP9uTVuQQ",
+      "input" : 2053,
+      "model" : "gemini-4-neon",
+      "output" : 592,
+      "time" : 1795599172551.752
+    },
+    {
+      "cacheRead" : 41117,
+      "cacheWrite" : 0,
+      "id" : "dbMGa-u3GL-30-kPxai_mAM",
+      "input" : 3135,
+      "model" : "gemini-4-neon",
+      "output" : 1153,
+      "time" : 1795601267327.418
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

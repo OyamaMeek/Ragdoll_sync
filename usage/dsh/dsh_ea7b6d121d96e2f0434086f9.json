@@ -1,0 +1,52 @@
+{
+  "created" : 1790740415431,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:ea7b6d121d96e2f0434086f9",
+  "nativeID" : "session-ade61021-1024-40c1-9432-aff01fe47500",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "happa",
+  "source" : "dsh",
+  "title" : "你好",
+  "updated" : 1790762126007,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "47",
+      "input" : 13021,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 44,
+      "time" : 1790762112081
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "54",
+      "input" : 36426,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 51,
+      "time" : 1790762117284
+    },
+    {
+      "cacheRead" : 32714,
+      "cacheWrite" : 0,
+      "id" : "64",
+      "input" : 4375,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 52,
+      "time" : 1790762121186
+    },
+    {
+      "cacheRead" : 32705,
+      "cacheWrite" : 0,
+      "id" : "71",
+      "input" : 4631,
+      "model" : "gemini-3.8-flash-high",
+      "output" : 10,
+      "time" : 1790762126006
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "created" : 1794035995565,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ad91021ea591433708be9b28",
+  "nativeID" : "01a1b4e0-d326-7cb0-98f3-bbeac7d16673",
+  "project" : "/Users/oyamahappa/Documents/Codex/2026-11-07/referenced-chatgpt-conversation-this-is-an",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1794036003045,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_0f0d397b86f68391016aeed11e6d6087d0b6d859b51cf29410",
+      "input" : 21393,
+      "model" : "codex-auto-review",
+      "output" : 210,
+      "time" : 1794036003044
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

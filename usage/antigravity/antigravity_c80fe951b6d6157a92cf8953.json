@@ -1,0 +1,51 @@
+{
+  "created" : 1795581577000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:c80fe951b6d6157a92cf8953",
+  "nativeID" : "860d8c19-6078-4ef0-a9e4-acf2d1b27b0b",
+  "project" : "/Users/oyamahappa/Documents/Agent/Antigravity-Work",
+  "source" : "antigravity",
+  "title" : "SSH Connection Password Login Error",
+  "updated" : 1795581771371,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "jWYGa-yXHIqT9tMPv-O90QQ",
+      "input" : 20493,
+      "model" : "gemini-4-neon",
+      "output" : 2130,
+      "time" : 1795581577789.901
+    },
+    {
+      "cacheRead" : 20494,
+      "cacheWrite" : 0,
+      "id" : "_GYGa_vXDeqS0-kPpPOnyQ8",
+      "input" : 3383,
+      "model" : "gemini-4-neon",
+      "output" : 531,
+      "time" : 1795581688299.196
+    },
+    {
+      "cacheRead" : 21828,
+      "cacheWrite" : 0,
+      "id" : "FGcGa82fNPux2roP0ofDkQI",
+      "input" : 2676,
+      "model" : "gemini-4-neon",
+      "output" : 1435,
+      "time" : 1795581714959.192
+    },
+    {
+      "cacheRead" : 23870,
+      "cacheWrite" : 0,
+      "id" : "MmcGa8vpNvOyvr0P4I6E6Ag",
+      "input" : 2145,
+      "model" : "gemini-4-neon",
+      "output" : 2652,
+      "time" : 1795581745303.318
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

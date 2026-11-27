@@ -1,0 +1,24 @@
+{
+  "created" : 1795360135322.8167,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ddc7749d9854aee933bc2279",
+  "nativeID" : "01a203cd-96be-7951-a249-cf67333aff88",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "Respond to greeting",
+  "updated" : 1795360146151,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_0a42166f52745663016b03058ec4ac87d0bac28754f146d271",
+      "input" : 24743,
+      "model" : "gpt-6.1-sol",
+      "output" : 60,
+      "time" : 1795360146070
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

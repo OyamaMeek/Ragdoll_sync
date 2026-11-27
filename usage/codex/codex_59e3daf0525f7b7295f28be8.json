@@ -1,0 +1,141 @@
+{
+  "created" : 1793114582088,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:59e3daf0525f7b7295f28be8",
+  "nativeID" : "01a17df4-b686-7bf2-9fc6-e1557f43b13f",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
+  "source" : "codex",
+  "title" : "使用 map 和 split 处理输入",
+  "updated" : 1793806446053,
+  "usage" : [
+    {
+      "cacheRead" : 13184,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c1da917881919994f686a3117ab8",
+      "input" : 17722,
+      "model" : "gpt-6.1-sol",
+      "output" : 262,
+      "time" : 1793114591951
+    },
+    {
+      "cacheRead" : 30976,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c1e0d63881919a45a7050d97f582",
+      "input" : 4041,
+      "model" : "gpt-6.1-sol",
+      "output" : 388,
+      "time" : 1793114601381
+    },
+    {
+      "cacheRead" : 35200,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c1ea00a481919c901e5fe0e7cc71",
+      "input" : 5047,
+      "model" : "gpt-6.1-sol",
+      "output" : 168,
+      "time" : 1793114608142
+    },
+    {
+      "cacheRead" : 40192,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c1f71e68819196797153a6682a32",
+      "input" : 475,
+      "model" : "gpt-6.1-sol",
+      "output" : 68,
+      "time" : 1793114617772
+    },
+    {
+      "cacheRead" : 40576,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c1fa513c8191911986cd9eb545b2",
+      "input" : 291,
+      "model" : "gpt-6.1-sol",
+      "output" : 908,
+      "time" : 1793114631579
+    },
+    {
+      "cacheRead" : 41600,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c20aa0308191bbe906d88a9bfe4b",
+      "input" : 289,
+      "model" : "gpt-6.1-sol",
+      "output" : 316,
+      "time" : 1793114639786
+    },
+    {
+      "cacheRead" : 41984,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c210553c8191bff9d1bed48de295",
+      "input" : 1652,
+      "model" : "gpt-6.1-sol",
+      "output" : 560,
+      "time" : 1793114650317
+    },
+    {
+      "cacheRead" : 44032,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c21b07fc819196be2d7d8917df42",
+      "input" : 2011,
+      "model" : "gpt-6.1-sol",
+      "output" : 80,
+      "time" : 1793114653327
+    },
+    {
+      "cacheRead" : 45952,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c21df03c81919299e723ac9ed5d1",
+      "input" : 252,
+      "model" : "gpt-6.1-sol",
+      "output" : 115,
+      "time" : 1793114657419
+    },
+    {
+      "cacheRead" : 46080,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c224f0d88191bb87229d9d4c3eb2",
+      "input" : 332,
+      "model" : "gpt-6.1-sol",
+      "output" : 93,
+      "time" : 1793114664665
+    },
+    {
+      "cacheRead" : 46336,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c22945048191a8f57e9bcd28582d",
+      "input" : 754,
+      "model" : "gpt-6.1-sol",
+      "output" : 114,
+      "time" : 1793114672237
+    },
+    {
+      "cacheRead" : 46976,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c238850081918c55bc3acc12de55",
+      "input" : 315,
+      "model" : "gpt-6.1-sol",
+      "output" : 202,
+      "time" : 1793114685896
+    },
+    {
+      "cacheRead" : 47360,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c23e81e08191af7210aace1f10d9",
+      "input" : 551,
+      "model" : "gpt-6.1-sol",
+      "output" : 141,
+      "time" : 1793114691362
+    },
+    {
+      "cacheRead" : 47872,
+      "cacheWrite" : 0,
+      "id" : "resp_065b86092ffd34ed016ae0c24d7aec8191bc3879d5ee66bf8f",
+      "input" : 370,
+      "model" : "gpt-6.1-sol",
+      "output" : 135,
+      "time" : 1793114704619
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

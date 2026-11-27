@@ -1,0 +1,87 @@
+{
+  "created" : 1793524327789,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:618669dff8010004ddd13b13",
+  "nativeID" : "01a19634-3bec-7763-997b-ec657a4371da",
+  "project" : "/Users/oyamahappa/Documents/GitHub/Motion",
+  "source" : "codex",
+  "title" : "分析《會呼吸的痛》歌曲结构",
+  "updated" : 1793539836760,
+  "usage" : [
+    {
+      "cacheRead" : 133504,
+      "cacheWrite" : 0,
+      "id" : "resp_036e95e5efa53d40016ae7026c6b0c81918c36d53e434c5591",
+      "input" : 1024,
+      "model" : "gpt-6.1-sol",
+      "output" : 126,
+      "time" : 1793524336215
+    },
+    {
+      "cacheRead" : 134528,
+      "cacheWrite" : 0,
+      "id" : "resp_036e95e5efa53d40016ae70270e980819192961596a2a8f251",
+      "input" : 7946,
+      "model" : "gpt-6.1-sol",
+      "output" : 1398,
+      "time" : 1793524390988
+    },
+    {
+      "cacheRead" : 143744,
+      "cacheWrite" : 0,
+      "id" : "resp_036e95e5efa53d40016ae702a78a4c81918b69f2b32cef170b",
+      "input" : 1098,
+      "model" : "gpt-6.1-sol",
+      "output" : 4143,
+      "time" : 1793524451891
+    },
+    {
+      "cacheRead" : 148864,
+      "cacheWrite" : 0,
+      "id" : "resp_036e95e5efa53d40016ae702e4c4248191a69cead6e53dda05",
+      "input" : 2371,
+      "model" : "gpt-6.1-sol",
+      "output" : 740,
+      "time" : 1793524474730
+    },
+    {
+      "cacheRead" : 151808,
+      "cacheWrite" : 0,
+      "id" : "resp_036e95e5efa53d40016ae702fb73348191b619a2b172d8b469",
+      "input" : 1088,
+      "model" : "gpt-6.1-sol",
+      "output" : 897,
+      "time" : 1793524490873
+    },
+    {
+      "cacheRead" : 153600,
+      "cacheWrite" : 0,
+      "id" : "resp_036e95e5efa53d40016ae7031385848191a11fa1a9b26365f1",
+      "input" : 1190,
+      "model" : "gpt-6.1-sol",
+      "output" : 102,
+      "time" : 1793524503188
+    },
+    {
+      "cacheRead" : 154752,
+      "cacheWrite" : 0,
+      "id" : "resp_036e95e5efa53d40016ae70317a7fc81919c0304e81ffd2f8f",
+      "input" : 650,
+      "model" : "gpt-6.1-sol",
+      "output" : 438,
+      "time" : 1793524511731
+    },
+    {
+      "cacheRead" : 155648,
+      "cacheWrite" : 0,
+      "id" : "resp_036e95e5efa53d40016ae70324aebc819191453c0844ffdc92",
+      "input" : 748,
+      "model" : "gpt-6.1-sol",
+      "output" : 99,
+      "time" : 1793524521053
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

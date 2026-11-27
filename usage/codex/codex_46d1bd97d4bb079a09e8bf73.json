@@ -1,0 +1,51 @@
+{
+  "created" : 1790690254256,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:46d1bd97d4bb079a09e8bf73",
+  "nativeID" : "01a0ed74-dc4d-7bc1-abe9-e34c0bac04ac",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "这个位置增加光标 <image name=[Image #1] path=\"/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/codex-clipboa",
+  "updated" : 1790690445299,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_03f759a73385e6cc016abbc3d1016487d2a93ee0ad0e4a6aaa",
+      "input" : 21322,
+      "model" : "codex-auto-review",
+      "output" : 210,
+      "time" : 1790690262646
+    },
+    {
+      "cacheRead" : 25344,
+      "cacheWrite" : 0,
+      "id" : "resp_03f759a73385e6cc016abbc402678c87d29d51a97cafd26444",
+      "input" : 3844,
+      "model" : "codex-auto-review",
+      "output" : 309,
+      "time" : 1790690313617
+    },
+    {
+      "cacheRead" : 28416,
+      "cacheWrite" : 0,
+      "id" : "resp_03f759a73385e6cc016abbc467d43887d2af4a984e5a69e439",
+      "input" : 5265,
+      "model" : "codex-auto-review",
+      "output" : 318,
+      "time" : 1790690415568
+    },
+    {
+      "cacheRead" : 33536,
+      "cacheWrite" : 0,
+      "id" : "resp_03f759a73385e6cc016abbc487fa6487d29fd8169161587365",
+      "input" : 2739,
+      "model" : "codex-auto-review",
+      "output" : 110,
+      "time" : 1790690445290
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "created" : 1793882612190,
+  "home" : "/Users/oyamahappa/.claude",
+  "id" : "claude:0cd0f87e556ff8ff3441e018",
+  "nativeID" : "c0974660-5bfa-439a-bf48-a29a28270196",
+  "project" : "/Users/oyamahappa/Documents/Agent/Claude",
+  "source" : "claude",
+  "title" : "Claude API prompt audit",
+  "updated" : 1793883174256,
+  "usage" : [
+    {
+      "cacheRead" : 42970,
+      "cacheWrite" : 77266,
+      "id" : "msg_011CgjoRM5WrMPC5rN14r8Wi",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 632,
+      "time" : 1793882622384
+    },
+    {
+      "cacheRead" : 120236,
+      "cacheWrite" : 26015,
+      "id" : "msg_011CgjoS2vuCSb4DZdiAvFF3",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 969,
+      "time" : 1793882634177
+    },
+    {
+      "cacheRead" : 146251,
+      "cacheWrite" : 10867,
+      "id" : "msg_011CgjoSxuZyr3NVXu3PEWUX",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 316,
+      "time" : 1793882640745
+    },
+    {
+      "cacheRead" : 157118,
+      "cacheWrite" : 1041,
+      "id" : "msg_011CgjoTPTTK2adsQVaoxPBF",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 9843,
+      "time" : 1793882743758
+    },
+    {
+      "cacheRead" : 158159,
+      "cacheWrite" : 9920,
+      "id" : "msg_011CgjoaxSWw9HLGAAmSgWcQ",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 291,
+      "time" : 1793882748276
+    },
+    {
+      "cacheRead" : 168079,
+      "cacheWrite" : 404,
+      "id" : "msg_011CgjobUEen48nXYGtGizVS",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 130,
+      "time" : 1793882753986
+    },
+    {
+      "cacheRead" : 168483,
+      "cacheWrite" : 7992,
+      "id" : "msg_011CgjobhSekF4JPG8t7APZZ",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1156,
+      "time" : 1793882763970
+    },
+    {
+      "cacheRead" : 176475,
+      "cacheWrite" : 3395,
+      "id" : "msg_011CgjocRu36ZYBmrDtk8m4t",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 319,
+      "time" : 1793882769229
+    },
+    {
+      "cacheRead" : 179870,
+      "cacheWrite" : 1641,
+      "id" : "msg_011CgjoctnJuQB2WwrwJzVbT",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 503,
+      "time" : 1793882776379
+    },
+    {
+      "cacheRead" : 181511,
+      "cacheWrite" : 1625,
+      "id" : "msg_011CgjodPtH5pS4WmaPm1Nju",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 340,
+      "time" : 1793882782759
+    },
+    {
+      "cacheRead" : 183136,
+      "cacheWrite" : 1350,
+      "id" : "msg_011CgjodpqDEstr3vPCc9Y5p",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 3971,
+      "time" : 1793882819898
+    },
+    {
+      "cacheRead" : 184486,
+      "cacheWrite" : 4041,
+      "id" : "msg_011CgjogYQKNjPeJAH2Xi7mV",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 830,
+      "time" : 1793882831316
+    },
+    {
+      "cacheRead" : 188527,
+      "cacheWrite" : 901,
+      "id" : "msg_011CgjohPAiz1VYLS6qXtGSk",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1997,
+      "time" : 1793882849182
+    },
+    {
+      "cacheRead" : 189428,
+      "cacheWrite" : 2219,
+      "id" : "msg_011CgjoihNNn6NWv3sfGsth7",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 243,
+      "time" : 1793882856009
+    },
+    {
+      "cacheRead" : 191647,
+      "cacheWrite" : 389,
+      "id" : "msg_011CgjojJs4z69Yvb2Vipjzo",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 266,
+      "time" : 1793882862920
+    },
+    {
+      "cacheRead" : 192036,
+      "cacheWrite" : 316,
+      "id" : "msg_011Cgjoji1cKdDgpScysK17m",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 247,
+      "time" : 1793882866615
+    },
+    {
+      "cacheRead" : 192352,
+      "cacheWrite" : 441,
+      "id" : "msg_011CgjokRet7ewZfhA4Aaivb",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 282,
+      "time" : 1793882876935
+    },
+    {
+      "cacheRead" : 192793,
+      "cacheWrite" : 343,
+      "id" : "msg_011Cgjokw2itnYVtvgput4DB",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 993,
+      "time" : 1793882890043
+    },
+    {
+      "cacheRead" : 193136,
+      "cacheWrite" : 1005,
+      "id" : "msg_011CgjozeuEtXAJraqAouofN",
+      "input" : 4,
+      "model" : "claude-opus-5-5",
+      "output" : 1023,
+      "time" : 1793883077283
+    },
+    {
+      "cacheRead" : 194141,
+      "cacheWrite" : 2171,
+      "id" : "msg_011Cgjp1erYnQfdCzpYP2GCU",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 289,
+      "time" : 1793883084045
+    },
+    {
+      "cacheRead" : 196312,
+      "cacheWrite" : 436,
+      "id" : "msg_011Cgjp23mwK1yyHCrqFBwAd",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 530,
+      "time" : 1793883090648
+    },
+    {
+      "cacheRead" : 196748,
+      "cacheWrite" : 1094,
+      "id" : "msg_011Cgjp2WAgqZzF9ZZADD5YK",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 588,
+      "time" : 1793883096965
+    },
+    {
+      "cacheRead" : 197842,
+      "cacheWrite" : 1691,
+      "id" : "msg_011Cgjp31K8v7b1vSdiskn92",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 263,
+      "time" : 1793883102584
+    },
+    {
+      "cacheRead" : 199533,
+      "cacheWrite" : 421,
+      "id" : "msg_011Cgjp3SGZpLiKGBDAygnDQ",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 943,
+      "time" : 1793883115501
+    },
+    {
+      "cacheRead" : 199954,
+      "cacheWrite" : 1054,
+      "id" : "msg_011Cgjp4LybankCrS2XezaKF",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 211,
+      "time" : 1793883120431
+    },
+    {
+      "cacheRead" : 201008,
+      "cacheWrite" : 245,
+      "id" : "msg_011Cgjp4gzsGmTXn1N1xiQwJ",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 1526,
+      "time" : 1793883135099
+    },
+    {
+      "cacheRead" : 201253,
+      "cacheWrite" : 1600,
+      "id" : "msg_011Cgjp5mkQ96DoBjteBJ22g",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 235,
+      "time" : 1793883138808
+    },
+    {
+      "cacheRead" : 202853,
+      "cacheWrite" : 389,
+      "id" : "msg_011Cgjp6Ghw2RCR8jKrsU15n",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 256,
+      "time" : 1793883147058
+    },
+    {
+      "cacheRead" : 203242,
+      "cacheWrite" : 306,
+      "id" : "msg_011Cgjp6eyNxfmcWhMjBsudc",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 230,
+      "time" : 1793883152524
+    },
+    {
+      "cacheRead" : 203548,
+      "cacheWrite" : 358,
+      "id" : "msg_011Cgjp7bwMBG5uCL8TT7KqU",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 133,
+      "time" : 1793883163086
+    },
+    {
+      "cacheRead" : 203906,
+      "cacheWrite" : 191,
+      "id" : "msg_011Cgjp876n6sGL1WhqN2hNv",
+      "input" : 2,
+      "model" : "claude-opus-5-5",
+      "output" : 297,
+      "time" : 1793883171270
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "created" : 1788145664817,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:c45b5a4a788a05ef442265c1",
+  "nativeID" : "01a055c8-fe50-7f33-ba38-fc2f1e049863",
+  "project" : "/Users/oyamahappa/Documents/Codex/2026-08-31/new-chat",
+  "source" : "codex",
+  "title" : "撰写团员自我鉴定",
+  "updated" : 1788145693380,
+  "usage" : [
+    {
+      "cacheRead" : 16128,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":29892,\"cached_input_tokens\":16128,\"cache_write_input_tokens\":0,\"output_tokens\":271,\"reasoning_output_tokens\":146,\"total_tokens\":30163}",
+      "input" : 13764,
+      "model" : "gpt-5.6-terra",
+      "output" : 271,
+      "time" : 1788145674870
+    },
+    {
+      "cacheRead" : 29440,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":61257,\"cached_input_tokens\":45568,\"cache_write_input_tokens\":0,\"output_tokens\":361,\"reasoning_output_tokens\":146,\"total_tokens\":61618}",
+      "input" : 1925,
+      "model" : "gpt-5.6-terra",
+      "output" : 90,
+      "time" : 1788145679400
+    },
+    {
+      "cacheRead" : 30464,
+      "cacheWrite" : 0,
+      "id" : "{\"input_tokens\":96184,\"cached_input_tokens\":76032,\"cache_write_input_tokens\":0,\"output_tokens\":868,\"reasoning_output_tokens\":354,\"total_tokens\":97052}",
+      "input" : 4463,
+      "model" : "gpt-5.6-terra",
+      "output" : 507,
+      "time" : 1788145693362
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

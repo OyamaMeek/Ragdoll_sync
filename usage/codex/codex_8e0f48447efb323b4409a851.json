@@ -1,0 +1,25 @@
+{
+  "created" : 1795685230672.3835,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:8e0f48447efb323b4409a851",
+  "nativeID" : "01a2172e-2822-77f1-afb4-8d4577f9eddd",
+  "parentID" : "01a21720-a43a-7841-b594-fd2fbeb22ea8",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "判断这个东西的用途",
+  "updated" : 1795685257727,
+  "usage" : [
+    {
+      "cacheRead" : 13568,
+      "cacheWrite" : 0,
+      "id" : "resp_0db236f2393eb88b016b07fb7c522087d09450df0e3e3caef5",
+      "input" : 138807,
+      "model" : "gpt-6.1-sol",
+      "output" : 254,
+      "time" : 1795685257702
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

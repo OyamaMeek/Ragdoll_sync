@@ -1,0 +1,51 @@
+{
+  "created" : 1795691805000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:caef9de51bff9b601a5f1d05",
+  "nativeID" : "7165a97a-9a29-48ee-a26b-728af2041948",
+  "project" : "/Users/oyamahappa/Documents/Agent/Antigravity-Work",
+  "source" : "antigravity",
+  "title" : "Komari Telegram Notification Setup",
+  "updated" : 1795691872663,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "HxUIa9j5K47J0-kP_ZXNiAc",
+      "input" : 20477,
+      "model" : "gemini-4-neon",
+      "output" : 520,
+      "time" : 1795691805466.555
+    },
+    {
+      "cacheRead" : 20478,
+      "cacheWrite" : 0,
+      "id" : "MxUIa5Vzs4Daug-n3o34Dg",
+      "input" : 4295,
+      "model" : "gemini-4-neon",
+      "output" : 322,
+      "time" : 1795691825128.824
+    },
+    {
+      "cacheRead" : 24774,
+      "cacheWrite" : 0,
+      "id" : "QxUIa_KlKbn92roP2LeboQE",
+      "input" : 3288,
+      "model" : "gemini-4-neon",
+      "output" : 177,
+      "time" : 1795691842333.643
+    },
+    {
+      "cacheRead" : 28063,
+      "cacheWrite" : 0,
+      "id" : "URUIa9WwLaf91e8PwZDvKQ",
+      "input" : 2844,
+      "model" : "gemini-4-neon",
+      "output" : 1387,
+      "time" : 1795691856387.178
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

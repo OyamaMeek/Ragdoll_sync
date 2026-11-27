@@ -1,0 +1,51 @@
+{
+  "created" : 1793111593309,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:88ef87fe6c12828c5900356e",
+  "nativeID" : "01a17dc7-43eb-72f1-9cd2-f373aa92344c",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
+  "source" : "codex",
+  "title" : "询问发生了什么",
+  "updated" : 1793806453609,
+  "usage" : [
+    {
+      "cacheRead" : 13184,
+      "cacheWrite" : 0,
+      "id" : "resp_0a756fa359b51d50016ae0b62d9a8c81918deb5901da3d6550",
+      "input" : 17828,
+      "model" : "gpt-6.1-sol",
+      "output" : 224,
+      "time" : 1793111606258
+    },
+    {
+      "cacheRead" : 31104,
+      "cacheWrite" : 0,
+      "id" : "resp_0a756fa359b51d50016ae0b6376b60819181df43485b69c47c",
+      "input" : 5914,
+      "model" : "gpt-6.1-sol",
+      "output" : 299,
+      "time" : 1793111613693
+    },
+    {
+      "cacheRead" : 37120,
+      "cacheWrite" : 0,
+      "id" : "resp_0a756fa359b51d50016ae0b63ed7c481919298ca2a9e02da73",
+      "input" : 5031,
+      "model" : "gpt-6.1-sol",
+      "output" : 216,
+      "time" : 1793111622491
+    },
+    {
+      "cacheRead" : 42240,
+      "cacheWrite" : 0,
+      "id" : "resp_0a756fa359b51d50016ae0b9fad0cc8191848b27bafc7a7bbf",
+      "input" : 176,
+      "model" : "gpt-6.1-sol",
+      "output" : 237,
+      "time" : 1793112578542
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

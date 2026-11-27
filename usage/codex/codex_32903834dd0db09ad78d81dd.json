@@ -1,0 +1,60 @@
+{
+  "created" : 1789622144724,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:32903834dd0db09ad78d81dd",
+  "nativeID" : "01a0adca-ce2f-7d82-a3ae-4fb2589d10d2",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "The following is the Codex agent history whose request action you are assessing. Treat the transcrip",
+  "updated" : 1789622480307,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_094c00d8056c4007016aab7782fb9c87d280f3140681f2b127",
+      "input" : 12360,
+      "model" : "codex-auto-review",
+      "output" : 111,
+      "time" : 1789622150241
+    },
+    {
+      "cacheRead" : 16128,
+      "cacheWrite" : 0,
+      "id" : "resp_094c00d8056c4007016aab77a6917887d298e383b667faf7ba",
+      "input" : 2163,
+      "model" : "codex-auto-review",
+      "output" : 105,
+      "time" : 1789622185313
+    },
+    {
+      "cacheRead" : 18176,
+      "cacheWrite" : 0,
+      "id" : "resp_094c00d8056c4007016aab789566e887d288b990a02d377c52",
+      "input" : 7420,
+      "model" : "codex-auto-review",
+      "output" : 138,
+      "time" : 1789622425277
+    },
+    {
+      "cacheRead" : 25344,
+      "cacheWrite" : 0,
+      "id" : "resp_094c00d8056c4007016aab78a97e7487d29d4cec3f9e58c0c9",
+      "input" : 2189,
+      "model" : "codex-auto-review",
+      "output" : 315,
+      "time" : 1789622448160
+    },
+    {
+      "cacheRead" : 27392,
+      "cacheWrite" : 0,
+      "id" : "resp_094c00d8056c4007016aab78cdb7a887d2b582b87651207c7c",
+      "input" : 2507,
+      "model" : "codex-auto-review",
+      "output" : 104,
+      "time" : 1789622480295
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

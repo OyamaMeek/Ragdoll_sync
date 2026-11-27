@@ -1,0 +1,33 @@
+{
+  "created" : 1795434205368.3872,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:cc473d290ec6b9d50af0e0d9",
+  "nativeID" : "01a20837-ce59-7840-9863-d4479519514e",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "ciallo",
+  "updated" : 1795434315139,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_2c60784b85324c2c8872f1de",
+      "input" : 32655,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 549,
+      "time" : 1795434242748
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_ddda8dec163644aa9c388392",
+      "input" : 33410,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 345,
+      "time" : 1795434315047
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

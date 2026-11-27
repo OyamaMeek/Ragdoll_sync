@@ -1,0 +1,60 @@
+{
+  "created" : 1795221525619.9648,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:43bab70021c63788417efb08",
+  "nativeID" : "01a1fb6c-2c39-7c52-9bb8-bd4f30f0d116",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/cpp-labs",
+  "source" : "codex",
+  "title" : "检查项目状态",
+  "updated" : 1795267588371,
+  "usage" : [
+    {
+      "cacheRead" : 13440,
+      "cacheWrite" : 0,
+      "id" : "resp_00bb5930d27d6877016b00e81bba7487d0afeefddc962b3ee3",
+      "input" : 18014,
+      "model" : "gpt-6.1-sol",
+      "output" : 206,
+      "time" : 1795221536893
+    },
+    {
+      "cacheRead" : 31488,
+      "cacheWrite" : 0,
+      "id" : "resp_00bb5930d27d6877016b00e824151c87d0997c078762d648bb",
+      "input" : 3989,
+      "model" : "gpt-6.1-sol",
+      "output" : 310,
+      "time" : 1795221548018
+    },
+    {
+      "cacheRead" : 35584,
+      "cacheWrite" : 0,
+      "id" : "resp_00bb5930d27d6877016b00e841dbf087d0ba96acd1920d0b36",
+      "input" : 10828,
+      "model" : "gpt-6.1-sol",
+      "output" : 342,
+      "time" : 1795221583889
+    },
+    {
+      "cacheRead" : 46592,
+      "cacheWrite" : 0,
+      "id" : "resp_00bb5930d27d6877016b00e8512b7087d0beb0c1ac83f722a8",
+      "input" : 2100,
+      "model" : "gpt-6.1-sol",
+      "output" : 55,
+      "time" : 1795221587066
+    },
+    {
+      "cacheRead" : 48512,
+      "cacheWrite" : 0,
+      "id" : "resp_00bb5930d27d6877016b00e854519487d0887dd04eeef84a4f",
+      "input" : 351,
+      "model" : "gpt-6.1-sol",
+      "output" : 333,
+      "time" : 1795221595838
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

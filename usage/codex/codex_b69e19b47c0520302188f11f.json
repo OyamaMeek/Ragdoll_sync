@@ -1,0 +1,150 @@
+{
+  "created" : 1792124438426,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:b69e19b47c0520302188f11f",
+  "nativeID" : "01a142f0-c71e-7c10-84c3-8f6743d99b1b",
+  "project" : "/Users/oyamahappa/Documents/GitHub/PrivateWork",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1792126948487,
+  "usage" : [
+    {
+      "cacheRead" : 6016,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1a6173fb88191962164fd6da8c3fc",
+      "input" : 22340,
+      "model" : "codex-auto-review",
+      "output" : 189,
+      "time" : 1792124441500
+    },
+    {
+      "cacheRead" : 28160,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1a61a9610819198dec3496ba81f22",
+      "input" : 736,
+      "model" : "codex-auto-review",
+      "output" : 221,
+      "time" : 1792124445112
+    },
+    {
+      "cacheRead" : 28672,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1a6215f408191a93463e4e6060d11",
+      "input" : 1433,
+      "model" : "codex-auto-review",
+      "output" : 89,
+      "time" : 1792124450614
+    },
+    {
+      "cacheRead" : 29952,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1a629b930819197329c2e57803eab",
+      "input" : 1077,
+      "model" : "codex-auto-review",
+      "output" : 122,
+      "time" : 1792124459337
+    },
+    {
+      "cacheRead" : 30848,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1a63033108191a734e1e5f410762b",
+      "input" : 1512,
+      "model" : "codex-auto-review",
+      "output" : 273,
+      "time" : 1792124467219
+    },
+    {
+      "cacheRead" : 32128,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1a64207088191b66087b04fe40b30",
+      "input" : 1725,
+      "model" : "codex-auto-review",
+      "output" : 87,
+      "time" : 1792124483765
+    },
+    {
+      "cacheRead" : 33664,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1a644a5cc8191aeb2cc4399bcd6b6",
+      "input" : 567,
+      "model" : "codex-auto-review",
+      "output" : 61,
+      "time" : 1792124486038
+    },
+    {
+      "cacheRead" : 34048,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1a64716c481919d840f97f97633ca",
+      "input" : 527,
+      "model" : "codex-auto-review",
+      "output" : 66,
+      "time" : 1792124488686
+    },
+    {
+      "cacheRead" : 34432,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1af24c8fc81919e33849a1a1178ca",
+      "input" : 13964,
+      "model" : "codex-auto-review",
+      "output" : 150,
+      "time" : 1792126758669
+    },
+    {
+      "cacheRead" : 48256,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1af2810908191b80a4cf947e67710",
+      "input" : 585,
+      "model" : "codex-auto-review",
+      "output" : 88,
+      "time" : 1792126761546
+    },
+    {
+      "cacheRead" : 48640,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1af31ba208191a0173c26b2bfed1a",
+      "input" : 2045,
+      "model" : "codex-auto-review",
+      "output" : 114,
+      "time" : 1792126771615
+    },
+    {
+      "cacheRead" : 50560,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1af8d73a08191bda527904baa2e58",
+      "input" : 1499,
+      "model" : "codex-auto-review",
+      "output" : 87,
+      "time" : 1792126863218
+    },
+    {
+      "cacheRead" : 51840,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1afc396fc819186f3e15b1caa2b7b",
+      "input" : 1940,
+      "model" : "codex-auto-review",
+      "output" : 74,
+      "time" : 1792126916936
+    },
+    {
+      "cacheRead" : 53632,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1afde0fdc8191b25357fe5b5e8546",
+      "input" : 518,
+      "model" : "codex-auto-review",
+      "output" : 64,
+      "time" : 1792126944292
+    },
+    {
+      "cacheRead" : 54016,
+      "cacheWrite" : 0,
+      "id" : "resp_040c2eb346aa71fb016ad1afe2609881918a0c0be86ab2c175",
+      "input" : 1281,
+      "model" : "codex-auto-review",
+      "output" : 167,
+      "time" : 1792126948479
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

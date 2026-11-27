@@ -1,0 +1,150 @@
+{
+  "created" : 1795775840573.6921,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ed3eda2a041d4a90581fec21",
+  "nativeID" : "01a21c94-bfe6-7ef1-8d74-1b3b02a22ff4",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Ragdoll",
+  "source" : "codex",
+  "title" : "保留数据并删除全部提交",
+  "updated" : 1795776049001,
+  "usage" : [
+    {
+      "cacheRead" : 14976,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095d657d8c87d0b746aba7ac8b0a72",
+      "input" : 27002,
+      "model" : "gpt-6.2-sol",
+      "output" : 207,
+      "time" : 1795775850779
+    },
+    {
+      "cacheRead" : 41856,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095d6bc89c87d0819065c7912a0215",
+      "input" : 726,
+      "model" : "gpt-6.2-sol",
+      "output" : 148,
+      "time" : 1795775855869
+    },
+    {
+      "cacheRead" : 42368,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095d71abb887d08771fa7e19008baa",
+      "input" : 2949,
+      "model" : "gpt-6.2-sol",
+      "output" : 121,
+      "time" : 1795775861133
+    },
+    {
+      "cacheRead" : 45184,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095d75ccac87d08ab9ec1fc9fa729e",
+      "input" : 2802,
+      "model" : "gpt-6.2-sol",
+      "output" : 212,
+      "time" : 1795775867713
+    },
+    {
+      "cacheRead" : 47744,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095d7d771c87d0b12a5cf0008c0e08",
+      "input" : 633,
+      "model" : "gpt-6.2-sol",
+      "output" : 134,
+      "time" : 1795775873495
+    },
+    {
+      "cacheRead" : 48256,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095d82418887d08a8da427ecbdbdf5",
+      "input" : 465,
+      "model" : "gpt-6.2-sol",
+      "output" : 119,
+      "time" : 1795775877631
+    },
+    {
+      "cacheRead" : 48512,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095d9b57e087d092561479294c0d5c",
+      "input" : 448,
+      "model" : "gpt-6.2-sol",
+      "output" : 627,
+      "time" : 1795775912889
+    },
+    {
+      "cacheRead" : 48768,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095daaa4d487d0a3fcfe1d571c7e37",
+      "input" : 1341,
+      "model" : "gpt-6.2-sol",
+      "output" : 412,
+      "time" : 1795775923754
+    },
+    {
+      "cacheRead" : 50048,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095db4d8cc87d08857be7db7337671",
+      "input" : 713,
+      "model" : "gpt-6.2-sol",
+      "output" : 325,
+      "time" : 1795775932594
+    },
+    {
+      "cacheRead" : 50560,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095dbd433487d09c5b30dc7a8c0b6b",
+      "input" : 730,
+      "model" : "gpt-6.2-sol",
+      "output" : 285,
+      "time" : 1795775940599
+    },
+    {
+      "cacheRead" : 51072,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095dc55cbc87d0bda1fc2f96a62d88",
+      "input" : 719,
+      "model" : "gpt-6.2-sol",
+      "output" : 166,
+      "time" : 1795775946245
+    },
+    {
+      "cacheRead" : 51584,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095df833a087d0b06d3966ca950520",
+      "input" : 436,
+      "model" : "gpt-6.2-sol",
+      "output" : 845,
+      "time" : 1795776010512
+    },
+    {
+      "cacheRead" : 51840,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095e0c4c4887d08188450f93153300",
+      "input" : 1561,
+      "model" : "gpt-6.2-sol",
+      "output" : 654,
+      "time" : 1795776026097
+    },
+    {
+      "cacheRead" : 53376,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095e1ae41487d0bde5df68c9c57003",
+      "input" : 1686,
+      "model" : "gpt-6.2-sol",
+      "output" : 210,
+      "time" : 1795776031886
+    },
+    {
+      "cacheRead" : 54912,
+      "cacheWrite" : 0,
+      "id" : "resp_080f4aaa68d67bc9016b095e20a45087d09532bde7456fd05a",
+      "input" : 804,
+      "model" : "gpt-6.2-sol",
+      "output" : 129,
+      "time" : 1795776036164
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

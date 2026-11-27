@@ -1,0 +1,321 @@
+{
+  "created" : 1793845807343,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:57af7abc0235a341d544d07c",
+  "nativeID" : "01a1a98a-a0cc-7323-88ab-4ca906a9e549",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "撰写全面从严治党意义分析",
+  "updated" : 1793846215877,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea32bf4487d09c30ad949b39affb",
+      "input" : 25460,
+      "model" : "gpt-6.1-sol",
+      "output" : 307,
+      "time" : 1793845819195
+    },
+    {
+      "cacheRead" : 38656,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea3c06fc87d0b1446ca72d6cefa4",
+      "input" : 9494,
+      "model" : "gpt-6.1-sol",
+      "output" : 237,
+      "time" : 1793845825954
+    },
+    {
+      "cacheRead" : 48256,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea42b75887d09d6c44f188cdc099",
+      "input" : 10540,
+      "model" : "gpt-6.1-sol",
+      "output" : 360,
+      "time" : 1793845836123
+    },
+    {
+      "cacheRead" : 59008,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea4fc3dc87d0afaf5974733b25f6",
+      "input" : 11457,
+      "model" : "gpt-6.1-sol",
+      "output" : 144,
+      "time" : 1793845845258
+    },
+    {
+      "cacheRead" : 70400,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea55eb2487d0a045cd21571abb5e",
+      "input" : 3170,
+      "model" : "gpt-6.1-sol",
+      "output" : 77,
+      "time" : 1793845848855
+    },
+    {
+      "cacheRead" : 73472,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea5c305487d0aa5a45bd3810525a",
+      "input" : 619,
+      "model" : "gpt-6.1-sol",
+      "output" : 136,
+      "time" : 1793845856216
+    },
+    {
+      "cacheRead" : 74112,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea62d95087d080da3cdcb233ac21",
+      "input" : 520,
+      "model" : "gpt-6.1-sol",
+      "output" : 237,
+      "time" : 1793845866008
+    },
+    {
+      "cacheRead" : 74752,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea6dd00087d086f5b3eaa5941539",
+      "input" : 8407,
+      "model" : "gpt-6.1-sol",
+      "output" : 250,
+      "time" : 1793845878218
+    },
+    {
+      "cacheRead" : 83200,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea76f25487d09a650e098619516c",
+      "input" : 2253,
+      "model" : "gpt-6.1-sol",
+      "output" : 298,
+      "time" : 1793845888307
+    },
+    {
+      "cacheRead" : 85632,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea8455e487d0a0641c71d83317bc",
+      "input" : 1333,
+      "model" : "gpt-6.1-sol",
+      "output" : 757,
+      "time" : 1793845909331
+    },
+    {
+      "cacheRead" : 87552,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebea96081c87d0a86deb2d2a5430b3",
+      "input" : 194,
+      "model" : "gpt-6.1-sol",
+      "output" : 960,
+      "time" : 1793845936492
+    },
+    {
+      "cacheRead" : 88576,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeab14a7c87d09792994506688d45",
+      "input" : 4276,
+      "model" : "gpt-6.1-sol",
+      "output" : 420,
+      "time" : 1793845951497
+    },
+    {
+      "cacheRead" : 93056,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeac01d9487d09c1b4b9702f7232a",
+      "input" : 2511,
+      "model" : "gpt-6.1-sol",
+      "output" : 546,
+      "time" : 1793845965309
+    },
+    {
+      "cacheRead" : 95872,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeace0ffc87d09800ad492fca728b",
+      "input" : 1000,
+      "model" : "gpt-6.1-sol",
+      "output" : 365,
+      "time" : 1793845977484
+    },
+    {
+      "cacheRead" : 97024,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeada199487d0933916b8708eae80",
+      "input" : 1324,
+      "model" : "gpt-6.1-sol",
+      "output" : 1238,
+      "time" : 1793846006989
+    },
+    {
+      "cacheRead" : 99456,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeaf7e74887d0892ec94000ebc4ff",
+      "input" : 2986,
+      "model" : "gpt-6.1-sol",
+      "output" : 90,
+      "time" : 1793846010840
+    },
+    {
+      "cacheRead" : 102400,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeafb7ef487d0bcfb91072dc4b974",
+      "input" : 211,
+      "model" : "gpt-6.1-sol",
+      "output" : 120,
+      "time" : 1793846015281
+    },
+    {
+      "cacheRead" : 102528,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb0fce4087d0893b69bc8147ba83",
+      "input" : 553,
+      "model" : "gpt-6.1-sol",
+      "output" : 52,
+      "time" : 1793846036266
+    },
+    {
+      "cacheRead" : 102912,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb19ae6887d08b482072e61685db",
+      "input" : 1957,
+      "model" : "gpt-6.1-sol",
+      "output" : 75,
+      "time" : 1793846045088
+    },
+    {
+      "cacheRead" : 104704,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb1dcf2887d0b7d5b4f2e3f808a0",
+      "input" : 1387,
+      "model" : "gpt-6.1-sol",
+      "output" : 76,
+      "time" : 1793846049188
+    },
+    {
+      "cacheRead" : 105984,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb25294487d08d478f8bfbd0541b",
+      "input" : 303,
+      "model" : "gpt-6.1-sol",
+      "output" : 207,
+      "time" : 1793846060203
+    },
+    {
+      "cacheRead" : 106368,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb324d5087d0ba000976554ba75a",
+      "input" : 265,
+      "model" : "gpt-6.1-sol",
+      "output" : 70,
+      "time" : 1793846069116
+    },
+    {
+      "cacheRead" : 106496,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb35b61887d0aff21fdb1d0e6c0c",
+      "input" : 913,
+      "model" : "gpt-6.1-sol",
+      "output" : 274,
+      "time" : 1793846076835
+    },
+    {
+      "cacheRead" : 107520,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb3dfc1487d09f22f5eb1d37b347",
+      "input" : 1033,
+      "model" : "gpt-6.1-sol",
+      "output" : 76,
+      "time" : 1793846081240
+    },
+    {
+      "cacheRead" : 108416,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb4fac1c87d09cb557dde59755ae",
+      "input" : 605,
+      "model" : "gpt-6.1-sol",
+      "output" : 79,
+      "time" : 1793846098733
+    },
+    {
+      "cacheRead" : 108928,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb562a3487d0be93c4d4d882c85e",
+      "input" : 577,
+      "model" : "gpt-6.1-sol",
+      "output" : 124,
+      "time" : 1793846108059
+    },
+    {
+      "cacheRead" : 109440,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb60f0c087d08ca12dbd33bf0e6e",
+      "input" : 309,
+      "model" : "gpt-6.1-sol",
+      "output" : 182,
+      "time" : 1793846118884
+    },
+    {
+      "cacheRead" : 109696,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb67866887d0a6198b6e36b1767e",
+      "input" : 417,
+      "model" : "gpt-6.1-sol",
+      "output" : 97,
+      "time" : 1793846123573
+    },
+    {
+      "cacheRead" : 110080,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb84065887d0b2f91a4023841d98",
+      "input" : 7267,
+      "model" : "gpt-6.1-sol",
+      "output" : 102,
+      "time" : 1793846152820
+    },
+    {
+      "cacheRead" : 117248,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb897c5087d0a4cee8751767d4e2",
+      "input" : 1306,
+      "model" : "gpt-6.1-sol",
+      "output" : 1003,
+      "time" : 1793846174950
+    },
+    {
+      "cacheRead" : 119424,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebeb9f9e7c87d094233f7dcfa70f2a",
+      "input" : 206,
+      "model" : "gpt-6.1-sol",
+      "output" : 765,
+      "time" : 1793846192374
+    },
+    {
+      "cacheRead" : 120192,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebebb72e6487d0b8f0ffe6a5aa9341",
+      "input" : 1449,
+      "model" : "gpt-6.1-sol",
+      "output" : 184,
+      "time" : 1793846204877
+    },
+    {
+      "cacheRead" : 121728,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebebc1d23c87d0a37f59e27f19364c",
+      "input" : 227,
+      "model" : "gpt-6.1-sol",
+      "output" : 38,
+      "time" : 1793846211899
+    },
+    {
+      "cacheRead" : 121856,
+      "cacheWrite" : 0,
+      "id" : "resp_0fecd955ac2426b7016aebebc4827087d0bc704fc3ea70c729",
+      "input" : 227,
+      "model" : "gpt-6.1-sol",
+      "output" : 91,
+      "time" : 1793846215872
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

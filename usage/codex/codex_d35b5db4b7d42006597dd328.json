@@ -1,0 +1,150 @@
+{
+  "created" : 1794839170411.2576,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:d35b5db4b7d42006597dd328",
+  "nativeID" : "01a1e4c0-48a0-7462-8507-4622f7b150c2",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HzieeOJ_tools",
+  "source" : "codex",
+  "title" : "修复一行超长自动换行",
+  "updated" : 1794880891908,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb1286f0c487d0b3b625a998bf3099",
+      "input" : 27129,
+      "model" : "gpt-6.1-sol",
+      "output" : 246,
+      "time" : 1794839180145
+    },
+    {
+      "cacheRead" : 40320,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb128eba3487d0871a2e3ce8a598dd",
+      "input" : 507,
+      "model" : "gpt-6.1-sol",
+      "output" : 303,
+      "time" : 1794839188761
+    },
+    {
+      "cacheRead" : 40960,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb1296f93487d0844c02e00415b046",
+      "input" : 6450,
+      "model" : "gpt-6.1-sol",
+      "output" : 1159,
+      "time" : 1794839214335
+    },
+    {
+      "cacheRead" : 48384,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb12b0c3a487d095204e838882f5dc",
+      "input" : 505,
+      "model" : "gpt-6.1-sol",
+      "output" : 492,
+      "time" : 1794839227274
+    },
+    {
+      "cacheRead" : 49280,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb12bda18c87d0b51f98a87d5f8cda",
+      "input" : 2213,
+      "model" : "gpt-6.1-sol",
+      "output" : 765,
+      "time" : 1794839244385
+    },
+    {
+      "cacheRead" : 52096,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb12ceab1087d0b1ad16645ce4dd84",
+      "input" : 1685,
+      "model" : "gpt-6.1-sol",
+      "output" : 110,
+      "time" : 1794839250704
+    },
+    {
+      "cacheRead" : 53760,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb12df95c487d0966729b8bb28d2af",
+      "input" : 298,
+      "model" : "gpt-6.1-sol",
+      "output" : 141,
+      "time" : 1794839266042
+    },
+    {
+      "cacheRead" : 54016,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb12e426b487d092da4fb3ef32a0e8",
+      "input" : 201,
+      "model" : "gpt-6.1-sol",
+      "output" : 188,
+      "time" : 1794839271638
+    },
+    {
+      "cacheRead" : 54272,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb12ee038887d0a4966a0638a170cc",
+      "input" : 249,
+      "model" : "gpt-6.1-sol",
+      "output" : 459,
+      "time" : 1794839287480
+    },
+    {
+      "cacheRead" : 54784,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb12fc77ac87d0b8e3c59f2b9812d5",
+      "input" : 962,
+      "model" : "gpt-6.1-sol",
+      "output" : 271,
+      "time" : 1794839298867
+    },
+    {
+      "cacheRead" : 55936,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb130aee3087d0abe1cb1a6b17538b",
+      "input" : 791,
+      "model" : "gpt-6.1-sol",
+      "output" : 192,
+      "time" : 1794839311266
+    },
+    {
+      "cacheRead" : 56832,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb13197ed087d0bec335365e73f850",
+      "input" : 797,
+      "model" : "gpt-6.1-sol",
+      "output" : 49,
+      "time" : 1794839322495
+    },
+    {
+      "cacheRead" : 57600,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb131c999087d09d8b84e3d0adea1f",
+      "input" : 222,
+      "model" : "gpt-6.1-sol",
+      "output" : 466,
+      "time" : 1794839335533
+    },
+    {
+      "cacheRead" : 58112,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb13316ce487d0b971720e0969a261",
+      "input" : 654,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1794839346902
+    },
+    {
+      "cacheRead" : 58624,
+      "cacheWrite" : 0,
+      "id" : "resp_0d34f0d52ecc02a2016afb133508dc87d0b7463b89b5bda068",
+      "input" : 322,
+      "model" : "gpt-6.1-sol",
+      "output" : 61,
+      "time" : 1794839350224
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

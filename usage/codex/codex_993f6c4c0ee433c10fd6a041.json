@@ -1,0 +1,51 @@
+{
+  "created" : 1795003149990,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:993f6c4c0ee433c10fd6a041",
+  "nativeID" : "01a1ee86-6e5a-7d83-b888-c18d410b5be0",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/codex-question-bank",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1795004580275,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_026aa2f4b6e2da4f016afd9310c3e887d08a40abea3b651144",
+      "input" : 24238,
+      "model" : "codex-auto-review",
+      "output" : 188,
+      "time" : 1795003157181
+    },
+    {
+      "cacheRead" : 29952,
+      "cacheWrite" : 0,
+      "id" : "resp_026aa2f4b6e2da4f016afd9323f00c87d09f5670b82070e6df",
+      "input" : 2437,
+      "model" : "codex-auto-review",
+      "output" : 408,
+      "time" : 1795003182870
+    },
+    {
+      "cacheRead" : 32256,
+      "cacheWrite" : 0,
+      "id" : "resp_026aa2f4b6e2da4f016afd988cd56487d0b20b72990a3312d6",
+      "input" : 16460,
+      "model" : "codex-auto-review",
+      "output" : 123,
+      "time" : 1795004559825
+    },
+    {
+      "cacheRead" : 48512,
+      "cacheWrite" : 0,
+      "id" : "resp_026aa2f4b6e2da4f016afd98a209c087d09a63bab738861d20",
+      "input" : 1557,
+      "model" : "codex-auto-review",
+      "output" : 100,
+      "time" : 1795004580269
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

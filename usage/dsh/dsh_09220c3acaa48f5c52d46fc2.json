@@ -1,0 +1,556 @@
+{
+  "created" : 1793585550995,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:09220c3acaa48f5c52d46fc2",
+  "nativeID" : "session-f61f8095-b1e0-4bcb-be2f-056319012996",
+  "project" : "/Users/oyamahappa/Documents/Agent/DSH",
+  "provider" : "deepseek-account",
+  "source" : "dsh",
+  "title" : "安装 morluto/rea 项目",
+  "updated" : 1793586181990,
+  "usage" : [
+    {
+      "cacheRead" : 14720,
+      "cacheWrite" : 0,
+      "id" : "17",
+      "input" : 5394,
+      "model" : "deepseek-flash",
+      "output" : 387,
+      "time" : 1793585558261
+    },
+    {
+      "cacheRead" : 20480,
+      "cacheWrite" : 0,
+      "id" : "26",
+      "input" : 416,
+      "model" : "deepseek-flash",
+      "output" : 249,
+      "time" : 1793585560431
+    },
+    {
+      "cacheRead" : 21120,
+      "cacheWrite" : 0,
+      "id" : "33",
+      "input" : 1902,
+      "model" : "deepseek-flash",
+      "output" : 261,
+      "time" : 1793585569655
+    },
+    {
+      "cacheRead" : 23168,
+      "cacheWrite" : 0,
+      "id" : "40",
+      "input" : 3474,
+      "model" : "deepseek-flash",
+      "output" : 596,
+      "time" : 1793585607644
+    },
+    {
+      "cacheRead" : 27136,
+      "cacheWrite" : 0,
+      "id" : "47",
+      "input" : 2551,
+      "model" : "deepseek-flash",
+      "output" : 772,
+      "time" : 1793585613027
+    },
+    {
+      "cacheRead" : 30336,
+      "cacheWrite" : 0,
+      "id" : "54",
+      "input" : 378,
+      "model" : "deepseek-flash",
+      "output" : 776,
+      "time" : 1793585618515
+    },
+    {
+      "cacheRead" : 31360,
+      "cacheWrite" : 0,
+      "id" : "61",
+      "input" : 249,
+      "model" : "deepseek-flash",
+      "output" : 371,
+      "time" : 1793585624178
+    },
+    {
+      "cacheRead" : 31872,
+      "cacheWrite" : 0,
+      "id" : "68",
+      "input" : 241,
+      "model" : "deepseek-flash",
+      "output" : 1005,
+      "time" : 1793585634186
+    },
+    {
+      "cacheRead" : 33024,
+      "cacheWrite" : 0,
+      "id" : "75",
+      "input" : 223,
+      "model" : "deepseek-flash",
+      "output" : 859,
+      "time" : 1793585640396
+    },
+    {
+      "cacheRead" : 33920,
+      "cacheWrite" : 0,
+      "id" : "82",
+      "input" : 222,
+      "model" : "deepseek-flash",
+      "output" : 325,
+      "time" : 1793585763382
+    },
+    {
+      "cacheRead" : 34432,
+      "cacheWrite" : 0,
+      "id" : "91",
+      "input" : 697,
+      "model" : "deepseek-flash",
+      "output" : 413,
+      "time" : 1793585766016
+    },
+    {
+      "cacheRead" : 35456,
+      "cacheWrite" : 0,
+      "id" : "98",
+      "input" : 461,
+      "model" : "deepseek-flash",
+      "output" : 294,
+      "time" : 1793585769592
+    },
+    {
+      "cacheRead" : 36096,
+      "cacheWrite" : 0,
+      "id" : "105",
+      "input" : 415,
+      "model" : "deepseek-flash",
+      "output" : 349,
+      "time" : 1793585797508
+    },
+    {
+      "cacheRead" : 36736,
+      "cacheWrite" : 0,
+      "id" : "112",
+      "input" : 148,
+      "model" : "deepseek-flash",
+      "output" : 162,
+      "time" : 1793585800308
+    },
+    {
+      "cacheRead" : 36992,
+      "cacheWrite" : 0,
+      "id" : "122",
+      "input" : 4647,
+      "model" : "deepseek-flash",
+      "output" : 113,
+      "time" : 1793585802734
+    },
+    {
+      "cacheRead" : 41728,
+      "cacheWrite" : 0,
+      "id" : "129",
+      "input" : 201,
+      "model" : "deepseek-flash",
+      "output" : 322,
+      "time" : 1793585858807
+    },
+    {
+      "cacheRead" : 42240,
+      "cacheWrite" : 0,
+      "id" : "136",
+      "input" : 959,
+      "model" : "deepseek-flash",
+      "output" : 657,
+      "time" : 1793585864979
+    },
+    {
+      "cacheRead" : 43776,
+      "cacheWrite" : 0,
+      "id" : "143",
+      "input" : 1653,
+      "model" : "deepseek-flash",
+      "output" : 436,
+      "time" : 1793585869347
+    },
+    {
+      "cacheRead" : 45696,
+      "cacheWrite" : 0,
+      "id" : "150",
+      "input" : 193,
+      "model" : "deepseek-flash",
+      "output" : 296,
+      "time" : 1793585872392
+    },
+    {
+      "cacheRead" : 46080,
+      "cacheWrite" : 0,
+      "id" : "159",
+      "input" : 617,
+      "model" : "deepseek-flash",
+      "output" : 366,
+      "time" : 1793585875506
+    },
+    {
+      "cacheRead" : 46976,
+      "cacheWrite" : 0,
+      "id" : "166",
+      "input" : 515,
+      "model" : "deepseek-flash",
+      "output" : 371,
+      "time" : 1793585934454
+    },
+    {
+      "cacheRead" : 47744,
+      "cacheWrite" : 0,
+      "id" : "173",
+      "input" : 168,
+      "model" : "deepseek-flash",
+      "output" : 286,
+      "time" : 1793585938877
+    },
+    {
+      "cacheRead" : 48000,
+      "cacheWrite" : 0,
+      "id" : "181",
+      "input" : 222,
+      "model" : "deepseek-flash",
+      "output" : 315,
+      "time" : 1793585941347
+    },
+    {
+      "cacheRead" : 48512,
+      "cacheWrite" : 0,
+      "id" : "192",
+      "input" : 267,
+      "model" : "deepseek-flash",
+      "output" : 369,
+      "time" : 1793585943975
+    },
+    {
+      "cacheRead" : 49024,
+      "cacheWrite" : 0,
+      "id" : "199",
+      "input" : 2106,
+      "model" : "deepseek-flash",
+      "output" : 445,
+      "time" : 1793585947621
+    },
+    {
+      "cacheRead" : 51456,
+      "cacheWrite" : 0,
+      "id" : "207",
+      "input" : 143,
+      "model" : "deepseek-flash",
+      "output" : 105,
+      "time" : 1793585949354
+    },
+    {
+      "cacheRead" : 51584,
+      "cacheWrite" : 0,
+      "id" : "216",
+      "input" : 966,
+      "model" : "deepseek-flash",
+      "output" : 291,
+      "time" : 1793585952148
+    },
+    {
+      "cacheRead" : 52736,
+      "cacheWrite" : 0,
+      "id" : "223",
+      "input" : 691,
+      "model" : "deepseek-flash",
+      "output" : 294,
+      "time" : 1793585955223
+    },
+    {
+      "cacheRead" : 53504,
+      "cacheWrite" : 0,
+      "id" : "231",
+      "input" : 241,
+      "model" : "deepseek-flash",
+      "output" : 103,
+      "time" : 1793585957077
+    },
+    {
+      "cacheRead" : 53760,
+      "cacheWrite" : 0,
+      "id" : "241",
+      "input" : 1240,
+      "model" : "deepseek-flash",
+      "output" : 400,
+      "time" : 1793585959886
+    },
+    {
+      "cacheRead" : 7040,
+      "cacheWrite" : 0,
+      "id" : "250",
+      "input" : 84538,
+      "model" : "deepseek-flash",
+      "output" : 276,
+      "time" : 1793585963575
+    },
+    {
+      "cacheRead" : 91776,
+      "cacheWrite" : 0,
+      "id" : "257",
+      "input" : 776,
+      "model" : "deepseek-flash",
+      "output" : 704,
+      "time" : 1793585968058
+    },
+    {
+      "cacheRead" : 93056,
+      "cacheWrite" : 0,
+      "id" : "267",
+      "input" : 236,
+      "model" : "deepseek-flash",
+      "output" : 151,
+      "time" : 1793585970701
+    },
+    {
+      "cacheRead" : 93312,
+      "cacheWrite" : 0,
+      "id" : "278",
+      "input" : 241,
+      "model" : "deepseek-flash",
+      "output" : 450,
+      "time" : 1793585997387
+    },
+    {
+      "cacheRead" : 93952,
+      "cacheWrite" : 0,
+      "id" : "285",
+      "input" : 277,
+      "model" : "deepseek-flash",
+      "output" : 615,
+      "time" : 1793586001219
+    },
+    {
+      "cacheRead" : 94720,
+      "cacheWrite" : 0,
+      "id" : "292",
+      "input" : 279,
+      "model" : "deepseek-flash",
+      "output" : 498,
+      "time" : 1793586025388
+    },
+    {
+      "cacheRead" : 95488,
+      "cacheWrite" : 0,
+      "id" : "299",
+      "input" : 521,
+      "model" : "deepseek-flash",
+      "output" : 595,
+      "time" : 1793586029951
+    },
+    {
+      "cacheRead" : 96384,
+      "cacheWrite" : 0,
+      "id" : "306",
+      "input" : 248,
+      "model" : "deepseek-flash",
+      "output" : 1416,
+      "time" : 1793586039432
+    },
+    {
+      "cacheRead" : 98048,
+      "cacheWrite" : 0,
+      "id" : "313",
+      "input" : 149,
+      "model" : "deepseek-flash",
+      "output" : 362,
+      "time" : 1793586044987
+    },
+    {
+      "cacheRead" : 98432,
+      "cacheWrite" : 0,
+      "id" : "328",
+      "input" : 1782,
+      "model" : "deepseek-flash",
+      "output" : 144,
+      "time" : 1793586047081
+    },
+    {
+      "cacheRead" : 100352,
+      "cacheWrite" : 0,
+      "id" : "339",
+      "input" : 220,
+      "model" : "deepseek-flash",
+      "output" : 313,
+      "time" : 1793586049945
+    },
+    {
+      "cacheRead" : 100864,
+      "cacheWrite" : 0,
+      "id" : "346",
+      "input" : 329,
+      "model" : "deepseek-flash",
+      "output" : 505,
+      "time" : 1793586053950
+    },
+    {
+      "cacheRead" : 101632,
+      "cacheWrite" : 0,
+      "id" : "353",
+      "input" : 435,
+      "model" : "deepseek-flash",
+      "output" : 124,
+      "time" : 1793586056116
+    },
+    {
+      "cacheRead" : 102144,
+      "cacheWrite" : 0,
+      "id" : "360",
+      "input" : 910,
+      "model" : "deepseek-flash",
+      "output" : 696,
+      "time" : 1793586061549
+    },
+    {
+      "cacheRead" : 103680,
+      "cacheWrite" : 0,
+      "id" : "367",
+      "input" : 172,
+      "model" : "deepseek-flash",
+      "output" : 535,
+      "time" : 1793586067188
+    },
+    {
+      "cacheRead" : 104192,
+      "cacheWrite" : 0,
+      "id" : "374",
+      "input" : 215,
+      "model" : "deepseek-flash",
+      "output" : 532,
+      "time" : 1793586097086
+    },
+    {
+      "cacheRead" : 104832,
+      "cacheWrite" : 0,
+      "id" : "381",
+      "input" : 387,
+      "model" : "deepseek-flash",
+      "output" : 607,
+      "time" : 1793586111469
+    },
+    {
+      "cacheRead" : 105728,
+      "cacheWrite" : 0,
+      "id" : "388",
+      "input" : 316,
+      "model" : "deepseek-flash",
+      "output" : 656,
+      "time" : 1793586116718
+    },
+    {
+      "cacheRead" : 106496,
+      "cacheWrite" : 0,
+      "id" : "395",
+      "input" : 241,
+      "model" : "deepseek-flash",
+      "output" : 585,
+      "time" : 1793586121587
+    },
+    {
+      "cacheRead" : 107264,
+      "cacheWrite" : 0,
+      "id" : "405",
+      "input" : 339,
+      "model" : "deepseek-flash",
+      "output" : 1591,
+      "time" : 1793586130565
+    },
+    {
+      "cacheRead" : 109056,
+      "cacheWrite" : 0,
+      "id" : "412",
+      "input" : 157,
+      "model" : "deepseek-flash",
+      "output" : 1110,
+      "time" : 1793586135860
+    },
+    {
+      "cacheRead" : 110208,
+      "cacheWrite" : 0,
+      "id" : "423",
+      "input" : 164,
+      "model" : "deepseek-flash",
+      "output" : 591,
+      "time" : 1793586140125
+    },
+    {
+      "cacheRead" : 110848,
+      "cacheWrite" : 0,
+      "id" : "430",
+      "input" : 187,
+      "model" : "deepseek-flash",
+      "output" : 1113,
+      "time" : 1793586150794
+    },
+    {
+      "cacheRead" : 112000,
+      "cacheWrite" : 0,
+      "id" : "435",
+      "input" : 181,
+      "model" : "deepseek-flash",
+      "output" : 1142,
+      "time" : 1793586156313
+    },
+    {
+      "cacheRead" : 113152,
+      "cacheWrite" : 0,
+      "id" : "444",
+      "input" : 199,
+      "model" : "deepseek-flash",
+      "output" : 363,
+      "time" : 1793586159033
+    },
+    {
+      "cacheRead" : 113664,
+      "cacheWrite" : 0,
+      "id" : "451",
+      "input" : 458,
+      "model" : "deepseek-flash",
+      "output" : 241,
+      "time" : 1793586161557
+    },
+    {
+      "cacheRead" : 114304,
+      "cacheWrite" : 0,
+      "id" : "458",
+      "input" : 1491,
+      "model" : "deepseek-flash",
+      "output" : 324,
+      "time" : 1793586164661
+    },
+    {
+      "cacheRead" : 115968,
+      "cacheWrite" : 0,
+      "id" : "467",
+      "input" : 220,
+      "model" : "deepseek-flash",
+      "output" : 398,
+      "time" : 1793586172342
+    },
+    {
+      "cacheRead" : 116480,
+      "cacheWrite" : 0,
+      "id" : "474",
+      "input" : 972,
+      "model" : "deepseek-flash",
+      "output" : 303,
+      "time" : 1793586175559
+    },
+    {
+      "cacheRead" : 117632,
+      "cacheWrite" : 0,
+      "id" : "481",
+      "input" : 315,
+      "model" : "deepseek-flash",
+      "output" : 1124,
+      "time" : 1793586181766
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

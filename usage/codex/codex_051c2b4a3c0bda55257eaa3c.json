@@ -1,0 +1,51 @@
+{
+  "created" : 1794707934846,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:051c2b4a3c0bda55257eaa3c",
+  "nativeID" : "01a1dcdb-9cc0-7e72-89a2-82795c8b2544",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/cpp-labs",
+  "source" : "codex",
+  "title" : "奇怪的我",
+  "updated" : 1794707976730,
+  "usage" : [
+    {
+      "cacheRead" : 13440,
+      "cacheWrite" : 0,
+      "id" : "resp_073482cf9a8a9923016af911e37a2887d0929c69021623de0a",
+      "input" : 17931,
+      "model" : "gpt-6.1-sol",
+      "output" : 279,
+      "time" : 1794707944647
+    },
+    {
+      "cacheRead" : 31488,
+      "cacheWrite" : 0,
+      "id" : "resp_073482cf9a8a9923016af911eab5b087d0a4fcf23a949e4817",
+      "input" : 3841,
+      "model" : "gpt-6.1-sol",
+      "output" : 345,
+      "time" : 1794707953466
+    },
+    {
+      "cacheRead" : 35584,
+      "cacheWrite" : 0,
+      "id" : "resp_073482cf9a8a9923016af911f1d96487d0a28e4ef9544457e2",
+      "input" : 8802,
+      "model" : "gpt-6.1-sol",
+      "output" : 307,
+      "time" : 1794707963383
+    },
+    {
+      "cacheRead" : 44544,
+      "cacheWrite" : 0,
+      "id" : "resp_073482cf9a8a9923016af911fbf76c87d0a1840dfea17db1d6",
+      "input" : 4446,
+      "model" : "gpt-6.1-sol",
+      "output" : 541,
+      "time" : 1794707976695
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

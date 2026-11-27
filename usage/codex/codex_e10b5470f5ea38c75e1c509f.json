@@ -1,0 +1,33 @@
+{
+  "created" : 1795406389762.161,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:e10b5470f5ea38c75e1c509f",
+  "nativeID" : "01a2068f-600c-7142-b868-137a35534745",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "<image name=[Image #1] path=\"/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/codex-clipboard-e61256",
+  "updated" : 1795413802896,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_068a3b9f820577e9016b03ba3d8cd087d09bc753e4fbe1325a",
+      "input" : 29688,
+      "model" : "gpt-6.1-sol",
+      "output" : 513,
+      "time" : 1795406409022
+    },
+    {
+      "cacheRead" : 43392,
+      "cacheWrite" : 0,
+      "id" : "resp_068a3b9f820577e9016b03ba61861087d091c06de241f417ba",
+      "input" : 5278,
+      "model" : "gpt-6.1-sol",
+      "output" : 104,
+      "time" : 1795406436691
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

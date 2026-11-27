@@ -1,0 +1,51 @@
+{
+  "created" : 1791904344340,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:ac57edd4e512cf4f028b8fce",
+  "nativeID" : "01a135d2-1b7c-73e3-a52e-7bc0cf9ab52f",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "整合 China.list 到 ini",
+  "updated" : 1791904428547,
+  "usage" : [
+    {
+      "cacheRead" : 22656,
+      "cacheWrite" : 0,
+      "id" : "resp_0948d577922804f8016ace4a5cc79887d29e279a7dd3213029",
+      "input" : 19378,
+      "model" : "gpt-6.1-sol",
+      "output" : 342,
+      "time" : 1791904361422
+    },
+    {
+      "cacheRead" : 22656,
+      "cacheWrite" : 0,
+      "id" : "resp_0948d577922804f8016ace4a6f1de487d2a4cfe0ab6eb238c2",
+      "input" : 28742,
+      "model" : "gpt-6.1-sol",
+      "output" : 463,
+      "time" : 1791904383496
+    },
+    {
+      "cacheRead" : 41856,
+      "cacheWrite" : 0,
+      "id" : "resp_0948d577922804f8016ace4a8a8b9887d28641855cfc106427",
+      "input" : 20765,
+      "model" : "gpt-6.1-sol",
+      "output" : 447,
+      "time" : 1791904411756
+    },
+    {
+      "cacheRead" : 62464,
+      "cacheWrite" : 0,
+      "id" : "resp_0948d577922804f8016ace4a9e941c87d29b8408f34b2ff54b",
+      "input" : 13410,
+      "model" : "gpt-6.1-sol",
+      "output" : 153,
+      "time" : 1791904424162
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

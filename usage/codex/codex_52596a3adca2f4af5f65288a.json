@@ -1,0 +1,123 @@
+{
+  "created" : 1795416958471.26,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:52596a3adca2f4af5f65288a",
+  "nativeID" : "01a20730-a4d1-7ce3-bd52-18165096b6b0",
+  "project" : "/Users/oyamahappa/Documents/GitHub/Other_Assignments",
+  "source" : "codex",
+  "title" : "设置网站和 iOS 主屏幕图标",
+  "updated" : 1795417081267,
+  "usage" : [
+    {
+      "cacheRead" : 13312,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e385825887d0a25edb870a956428",
+      "input" : 23913,
+      "model" : "gpt-6.1-sol",
+      "output" : 188,
+      "time" : 1795416970433
+    },
+    {
+      "cacheRead" : 37248,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e38b8ce087d0abf167d435150fe6",
+      "input" : 1276,
+      "model" : "gpt-6.1-sol",
+      "output" : 285,
+      "time" : 1795416978739
+    },
+    {
+      "cacheRead" : 38656,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e393c6d087d0a2cf8af9ffc07374",
+      "input" : 11459,
+      "model" : "gpt-6.1-sol",
+      "output" : 177,
+      "time" : 1795416985212
+    },
+    {
+      "cacheRead" : 50176,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e39a4e2c87d0a5e22086f178a0b5",
+      "input" : 5071,
+      "model" : "gpt-6.1-sol",
+      "output" : 355,
+      "time" : 1795416994852
+    },
+    {
+      "cacheRead" : 55424,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e3a3cf1887d0b4dca06e7f3a40dd",
+      "input" : 796,
+      "model" : "gpt-6.1-sol",
+      "output" : 423,
+      "time" : 1795417005763
+    },
+    {
+      "cacheRead" : 56448,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e3afd39c87d09d2b6202c799f7bf",
+      "input" : 625,
+      "model" : "gpt-6.1-sol",
+      "output" : 366,
+      "time" : 1795417018036
+    },
+    {
+      "cacheRead" : 57216,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e3bb3d5887d099165abb5b30981d",
+      "input" : 717,
+      "model" : "gpt-6.1-sol",
+      "output" : 631,
+      "time" : 1795417034140
+    },
+    {
+      "cacheRead" : 58368,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e3cb276487d0bc1226f4d4da39e3",
+      "input" : 1004,
+      "model" : "gpt-6.1-sol",
+      "output" : 184,
+      "time" : 1795417040603
+    },
+    {
+      "cacheRead" : 59392,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e3df53f087d083ab3b28afa2bc27",
+      "input" : 370,
+      "model" : "gpt-6.1-sol",
+      "output" : 76,
+      "time" : 1795417057880
+    },
+    {
+      "cacheRead" : 59648,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e3e302a887d082cc2829c11afa8f",
+      "input" : 503,
+      "model" : "gpt-6.1-sol",
+      "output" : 352,
+      "time" : 1795417067057
+    },
+    {
+      "cacheRead" : 60288,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e3f16a1487d0ba4623314529347f",
+      "input" : 719,
+      "model" : "gpt-6.1-sol",
+      "output" : 40,
+      "time" : 1795417078289
+    },
+    {
+      "cacheRead" : 60928,
+      "cacheWrite" : 0,
+      "id" : "resp_0d4fa9a63ae89a1b016b03e3f743a087d0b431e11b3bfd66c1",
+      "input" : 414,
+      "model" : "gpt-6.1-sol",
+      "output" : 59,
+      "time" : 1795417081255
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

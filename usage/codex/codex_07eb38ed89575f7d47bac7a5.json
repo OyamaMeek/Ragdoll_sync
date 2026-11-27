@@ -1,0 +1,78 @@
+{
+  "created" : 1794044320296,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:07eb38ed89575f7d47bac7a5",
+  "nativeID" : "01a1b55f-d914-7be2-89b0-e2616a2df875",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "01a1b55f-d914-7be2-89b0-e2616a2df875",
+  "updated" : 1794044402416,
+  "usage" : [
+    {
+      "cacheRead" : 12288,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3734016bdb7a19016aeef1a505ac87d0887f7ec72414592d",
+      "input" : 21775,
+      "model" : "gpt-6-luna",
+      "output" : 212,
+      "time" : 1794044329658
+    },
+    {
+      "cacheRead" : 33920,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3734016bdb7a19016aeef1aa603487d0b64646dfd9d61d6f",
+      "input" : 9521,
+      "model" : "gpt-6-luna",
+      "output" : 272,
+      "time" : 1794044335948
+    },
+    {
+      "cacheRead" : 43264,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3734016bdb7a19016aeef1b0b00487d088b08e4dc78dc2c3",
+      "input" : 996,
+      "model" : "gpt-6-luna",
+      "output" : 102,
+      "time" : 1794044339383
+    },
+    {
+      "cacheRead" : 44032,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3734016bdb7a19016aeef1b4152487d0a5654539a424067e",
+      "input" : 4596,
+      "model" : "gpt-6-luna",
+      "output" : 159,
+      "time" : 1794044343669
+    },
+    {
+      "cacheRead" : 48512,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3734016bdb7a19016aeef1bb074c87d0a9aee5affb24b005",
+      "input" : 5564,
+      "model" : "gpt-6-luna",
+      "output" : 842,
+      "time" : 1794044364191
+    },
+    {
+      "cacheRead" : 53632,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3734016bdb7a19016aeef1e2585487d0ab3396c38c6a8ee4",
+      "input" : 1544,
+      "model" : "gpt-6-luna",
+      "output" : 232,
+      "time" : 1794044391499
+    },
+    {
+      "cacheRead" : 55040,
+      "cacheWrite" : 0,
+      "id" : "resp_0f3734016bdb7a19016aeef1e8a5ac87d085548d9c28a7bc2f",
+      "input" : 2122,
+      "model" : "gpt-6-luna",
+      "output" : 421,
+      "time" : 1794044401914
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

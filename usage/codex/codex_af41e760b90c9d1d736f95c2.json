@@ -1,0 +1,42 @@
+{
+  "created" : 1794826392652,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:af41e760b90c9d1d736f95c2",
+  "nativeID" : "01a1e3dd-7cb9-7810-8ff2-bc0c305a5490",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/WebDesignCourse",
+  "source" : "codex",
+  "title" : "排查内容不显示问题",
+  "updated" : 1795004292246,
+  "usage" : [
+    {
+      "cacheRead" : 13440,
+      "cacheWrite" : 0,
+      "id" : "resp_04add847ea339ec5016afae09f8af887d09790f15944522065",
+      "input" : 17982,
+      "model" : "gpt-6.1-sol",
+      "output" : 322,
+      "time" : 1794826403608
+    },
+    {
+      "cacheRead" : 31616,
+      "cacheWrite" : 0,
+      "id" : "resp_04add847ea339ec5016afae0b10c7c87d0a7214d3f156dff4d",
+      "input" : 2933,
+      "model" : "gpt-6.1-sol",
+      "output" : 238,
+      "time" : 1794826420065
+    },
+    {
+      "cacheRead" : 34688,
+      "cacheWrite" : 0,
+      "id" : "resp_04add847ea339ec5016afae0b6944c87d0891acb3c8e3852e7",
+      "input" : 5128,
+      "model" : "gpt-6.1-sol",
+      "output" : 298,
+      "time" : 1794826425940
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

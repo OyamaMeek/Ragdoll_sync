@@ -1,0 +1,78 @@
+{
+  "created" : 1795401881933.5076,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:e3193580987faf7c83d349e6",
+  "nativeID" : "01a2064a-9920-7b80-b94d-34f595b50d3e",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1795401955068,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_037200f724169e78016b03a89d3d4c87d0b6017e7e88c49402",
+      "input" : 22746,
+      "model" : "codex-auto-review",
+      "output" : 218,
+      "time" : 1795401889820
+    },
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_037200f724169e78016b03a8a77fe487d090170098c08ef51a",
+      "input" : 23501,
+      "model" : "codex-auto-review",
+      "output" : 110,
+      "time" : 1795401898281
+    },
+    {
+      "cacheRead" : 28416,
+      "cacheWrite" : 0,
+      "id" : "resp_037200f724169e78016b03a8b7be3487d0a45e57ab0bc293f8",
+      "input" : 2740,
+      "model" : "codex-auto-review",
+      "output" : 133,
+      "time" : 1795401914451
+    },
+    {
+      "cacheRead" : 30976,
+      "cacheWrite" : 0,
+      "id" : "resp_037200f724169e78016b03a8c0810887d0b639ba8c0c7bc11e",
+      "input" : 935,
+      "model" : "codex-auto-review",
+      "output" : 153,
+      "time" : 1795401923507
+    },
+    {
+      "cacheRead" : 31744,
+      "cacheWrite" : 0,
+      "id" : "resp_037200f724169e78016b03a8d4c5bc87d0aae0feba5cac6e9d",
+      "input" : 1777,
+      "model" : "codex-auto-review",
+      "output" : 107,
+      "time" : 1795401942771
+    },
+    {
+      "cacheRead" : 29184,
+      "cacheWrite" : 0,
+      "id" : "resp_037200f724169e78016b03a8de3d6087d0a049a0b72d22c9f7",
+      "input" : 5828,
+      "model" : "codex-auto-review",
+      "output" : 84,
+      "time" : 1795401952110
+    },
+    {
+      "cacheRead" : 34816,
+      "cacheWrite" : 0,
+      "id" : "resp_037200f724169e78016b03a8e128bc87d09a5a86c9fcbc3551",
+      "input" : 558,
+      "model" : "codex-auto-review",
+      "output" : 64,
+      "time" : 1795401955063
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

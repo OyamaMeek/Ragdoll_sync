@@ -1,0 +1,42 @@
+{
+  "created" : 1795582820000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:d82e8b6172fa332e1579bc5f",
+  "nativeID" : "875176e8-b1c7-4210-8803-e59b02c74975",
+  "project" : "/Users/oyamahappa/Documents/Agent/Antigravity-Work",
+  "source" : "antigravity",
+  "title" : "X-UI 端口转发选项丢失",
+  "updated" : 1795582870529,
+  "usage" : [
+    {
+      "cacheRead" : 17077,
+      "cacheWrite" : 0,
+      "id" : "aGsGa8r7E5ru2roP9afz6AQ",
+      "input" : 3392,
+      "model" : "gemini-4-neon",
+      "output" : 643,
+      "time" : 1795582820620.548
+    },
+    {
+      "cacheRead" : 20470,
+      "cacheWrite" : 0,
+      "id" : "eWsGa5-HMJG31e8P6cGfWQ",
+      "input" : 2688,
+      "model" : "gemini-4-neon",
+      "output" : 74,
+      "time" : 1795582838296.984
+    },
+    {
+      "cacheRead" : 21109,
+      "cacheWrite" : 0,
+      "id" : "i2sGa6e5HYv62roPptfHiAk",
+      "input" : 2741,
+      "model" : "gemini-4-neon",
+      "output" : 744,
+      "time" : 1795582857020.877
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

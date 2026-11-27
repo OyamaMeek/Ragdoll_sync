@@ -1,0 +1,33 @@
+{
+  "created" : 1793457069469,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:87d07e606996d3e400202b1e",
+  "nativeID" : "01a1925e-f5f8-7b21-b182-5f8a846b0a07",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "为仓库取名",
+  "updated" : 1793457128409,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0545810e742c87e9016ae5fbb146d88191866cbf940da555a7",
+      "input" : 28336,
+      "model" : "gpt-6.1-sol",
+      "output" : 356,
+      "time" : 1793457089472
+    },
+    {
+      "cacheRead" : 41600,
+      "cacheWrite" : 0,
+      "id" : "resp_0545810e742c87e9016ae5fbde906c81919c1ce676290ff8d2",
+      "input" : 166,
+      "model" : "gpt-6.1-sol",
+      "output" : 205,
+      "time" : 1793457128393
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

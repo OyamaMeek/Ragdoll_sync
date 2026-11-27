@@ -1,0 +1,150 @@
+{
+  "created" : 1791984858058,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:759778f79eb2aafa038e5d51",
+  "nativeID" : "01a13a9d-9a84-7f20-8619-1359b1a5b4f3",
+  "project" : "/Users/oyamahappa/Documents/GitHub/PrivateWork",
+  "source" : "codex",
+  "title" : "撰写四年大学职业规划",
+  "updated" : 1791985228808,
+  "usage" : [
+    {
+      "cacheRead" : 22656,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf84de2b4c8191b423c661c3cf7344",
+      "input" : 27635,
+      "model" : "gpt-6.1-sol",
+      "output" : 291,
+      "time" : 1791984875077
+    },
+    {
+      "cacheRead" : 50176,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf84ec79888191a781cdbe04df72f1",
+      "input" : 9622,
+      "model" : "gpt-6.1-sol",
+      "output" : 555,
+      "time" : 1791984898261
+    },
+    {
+      "cacheRead" : 59648,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf85031c5c81919ce5843a00a77d93",
+      "input" : 5672,
+      "model" : "gpt-6.1-sol",
+      "output" : 589,
+      "time" : 1791984920999
+    },
+    {
+      "cacheRead" : 65152,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf8519a7908191b30d8bfd6ecf3b3a",
+      "input" : 11577,
+      "model" : "gpt-6.1-sol",
+      "output" : 542,
+      "time" : 1791984943659
+    },
+    {
+      "cacheRead" : 76544,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf85304bc881918781f28fa66f973d",
+      "input" : 5900,
+      "model" : "gpt-6.1-sol",
+      "output" : 2756,
+      "time" : 1791985028529
+    },
+    {
+      "cacheRead" : 82304,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf8585a9a48191acc87b94a3cd27d3",
+      "input" : 2920,
+      "model" : "gpt-6.1-sol",
+      "output" : 169,
+      "time" : 1791985042240
+    },
+    {
+      "cacheRead" : 84992,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf8592f0e88191a80bd867ac155480",
+      "input" : 2394,
+      "model" : "gpt-6.1-sol",
+      "output" : 208,
+      "time" : 1791985053466
+    },
+    {
+      "cacheRead" : 87168,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf859e92548191ac2e2364393a7754",
+      "input" : 705,
+      "model" : "gpt-6.1-sol",
+      "output" : 376,
+      "time" : 1791985074770
+    },
+    {
+      "cacheRead" : 87680,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf85b375f48191b520b6dae2b34bba",
+      "input" : 856,
+      "model" : "gpt-6.1-sol",
+      "output" : 1153,
+      "time" : 1791985108445
+    },
+    {
+      "cacheRead" : 88320,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf85d528008191a359286cd77d458f",
+      "input" : 2326,
+      "model" : "gpt-6.1-sol",
+      "output" : 168,
+      "time" : 1791985118520
+    },
+    {
+      "cacheRead" : 90496,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf85e968048191bc57b53c47265ebe",
+      "input" : 689,
+      "model" : "gpt-6.1-sol",
+      "output" : 335,
+      "time" : 1791985146536
+    },
+    {
+      "cacheRead" : 91008,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf85fb33c48191aa04f9357404c2c7",
+      "input" : 1457,
+      "model" : "gpt-6.1-sol",
+      "output" : 570,
+      "time" : 1791985164967
+    },
+    {
+      "cacheRead" : 92288,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf86137d4c81918fc32572426885d6",
+      "input" : 1589,
+      "model" : "gpt-6.1-sol",
+      "output" : 752,
+      "time" : 1791985198737
+    },
+    {
+      "cacheRead" : 93696,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf86363b74819184b8d75f7c2e72cc",
+      "input" : 1986,
+      "model" : "gpt-6.1-sol",
+      "output" : 136,
+      "time" : 1791985216646
+    },
+    {
+      "cacheRead" : 95488,
+      "cacheWrite" : 0,
+      "id" : "resp_032d1499d206a4b9016acf86419210819187124f94b55bbe10",
+      "input" : 525,
+      "model" : "gpt-6.1-sol",
+      "output" : 84,
+      "time" : 1791985228740
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

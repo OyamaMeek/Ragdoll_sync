@@ -1,0 +1,60 @@
+{
+  "created" : 1794043432855,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:6ad37d849fa5b855259c8137",
+  "nativeID" : "01a1b552-4e85-7510-8a7d-92e1a89fd100",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "01a1b552-4e85-7510-8a7d-92e1a89fd100",
+  "updated" : 1794043505990,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0523282116c6c8cd016aeeee2d8e1487d0be38d519b20cdf75",
+      "input" : 25262,
+      "model" : "gpt-6.1-sol",
+      "output" : 54,
+      "time" : 1794043440811
+    },
+    {
+      "cacheRead" : 38144,
+      "cacheWrite" : 0,
+      "id" : "resp_0523282116c6c8cd016aeeee31f8bc87d091cdb88c60a097f5",
+      "input" : 907,
+      "model" : "gpt-6.1-sol",
+      "output" : 89,
+      "time" : 1794043445144
+    },
+    {
+      "cacheRead" : 39040,
+      "cacheWrite" : 0,
+      "id" : "resp_0523282116c6c8cd016aeeee366b5887d0a0367ee9ecb27f55",
+      "input" : 1621,
+      "model" : "gpt-6.1-sol",
+      "output" : 1097,
+      "time" : 1794043470839
+    },
+    {
+      "cacheRead" : 41600,
+      "cacheWrite" : 0,
+      "id" : "resp_0523282116c6c8cd016aeeee5c820087d0ae38e8193158158e",
+      "input" : 253,
+      "model" : "gpt-6.1-sol",
+      "output" : 908,
+      "time" : 1794043503608
+    },
+    {
+      "cacheRead" : 42624,
+      "cacheWrite" : 0,
+      "id" : "resp_0523282116c6c8cd016aeeee70644c87d083447ad203e02f5c",
+      "input" : 161,
+      "model" : "gpt-6.1-sol",
+      "output" : 34,
+      "time" : 1794043505979
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

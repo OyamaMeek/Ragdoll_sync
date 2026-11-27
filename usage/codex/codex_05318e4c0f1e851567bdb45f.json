@@ -1,0 +1,78 @@
+{
+  "created" : 1793408619913,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:05318e4c0f1e851567bdb45f",
+  "nativeID" : "01a18f7b-b258-7cd0-9fe4-a8a323734ff2",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "查看硬盘信息",
+  "updated" : 1793410180503,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_00930f072093c577016ae53e6e6a788191be305c40936dfaf8",
+      "input" : 28155,
+      "model" : "gpt-6.1-sol",
+      "output" : 241,
+      "time" : 1793408628456
+    },
+    {
+      "cacheRead" : 41344,
+      "cacheWrite" : 0,
+      "id" : "resp_00930f072093c577016ae543d03abc8191bb6f866e66a0ee7d",
+      "input" : 6485,
+      "model" : "gpt-6.1-sol",
+      "output" : 371,
+      "time" : 1793410010507
+    },
+    {
+      "cacheRead" : 48128,
+      "cacheWrite" : 0,
+      "id" : "resp_00930f072093c577016ae543e906748191a7591171783afeb8",
+      "input" : 82,
+      "model" : "gpt-6.1-sol",
+      "output" : 90,
+      "time" : 1793410028531
+    },
+    {
+      "cacheRead" : 48128,
+      "cacheWrite" : 0,
+      "id" : "resp_00930f072093c577016ae543ef90a48191b260db235abf02dc",
+      "input" : 4113,
+      "model" : "gpt-6.1-sol",
+      "output" : 816,
+      "time" : 1793410050067
+    },
+    {
+      "cacheRead" : 52992,
+      "cacheWrite" : 0,
+      "id" : "resp_00930f072093c577016ae5440fb8ec8191a2bce07598d8d187",
+      "input" : 119,
+      "model" : "gpt-6.1-sol",
+      "output" : 408,
+      "time" : 1793410075283
+    },
+    {
+      "cacheRead" : 53376,
+      "cacheWrite" : 0,
+      "id" : "resp_00930f072093c577016ae54438cce0819184ab277b9320862a",
+      "input" : 3328,
+      "model" : "gpt-6.1-sol",
+      "output" : 552,
+      "time" : 1793410117106
+    },
+    {
+      "cacheRead" : 57216,
+      "cacheWrite" : 0,
+      "id" : "resp_00930f072093c577016ae5447f162c8191955eb10894b37d7c",
+      "input" : 3272,
+      "model" : "gpt-6.1-sol",
+      "output" : 165,
+      "time" : 1793410180469
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

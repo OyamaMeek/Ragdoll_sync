@@ -1,0 +1,870 @@
+{
+  "created" : 1795498092242.8213,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:afc53fdc45ce10f7a657dc9f",
+  "nativeID" : "01a20c06-a4ae-7002-86ec-5be8a29fe69b",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/docker-easyconnect",
+  "source" : "codex",
+  "title" : "说明访问令牌的功能",
+  "updated" : 1795505385921,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_b4d3ae80fc4e4d35a69252a7",
+      "input" : 34002,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 379,
+      "time" : 1795498120220
+    },
+    {
+      "cacheRead" : 34003,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_5b2ff1ca170e49a18bad796e",
+      "input" : 3733,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 153,
+      "time" : 1795498129207
+    },
+    {
+      "cacheRead" : 35687,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_245f4c164026402980198b75",
+      "input" : 4000,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 148,
+      "time" : 1795498141435
+    },
+    {
+      "cacheRead" : 37638,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_dcf8625208de44e396fdebd1",
+      "input" : 3575,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 1502,
+      "time" : 1795498163288
+    },
+    {
+      "cacheRead" : 39836,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_57b7ab8d38a045aeacbe51a3",
+      "input" : 2998,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 345,
+      "time" : 1795498277028
+    },
+    {
+      "cacheRead" : 42835,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_8899d3c8b787424789a36dd9",
+      "input" : 4063,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 148,
+      "time" : 1795498286529
+    },
+    {
+      "cacheRead" : 46899,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_72e4ae0e5e054a899763ce38",
+      "input" : 2308,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 131,
+      "time" : 1795498293998
+    },
+    {
+      "cacheRead" : 47158,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_f3c47ccbc1f9481b9b746bbb",
+      "input" : 3153,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 140,
+      "time" : 1795498305236
+    },
+    {
+      "cacheRead" : 50312,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_9970092003d8405fa6a93918",
+      "input" : 2776,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 1752,
+      "time" : 1795498331124
+    },
+    {
+      "cacheRead" : 51039,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_fab8a6fedb504b86873b233e",
+      "input" : 3873,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 272,
+      "time" : 1795498437216
+    },
+    {
+      "cacheRead" : 52863,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_a7a21380a01041d6a0a0c849",
+      "input" : 3420,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 158,
+      "time" : 1795498448971
+    },
+    {
+      "cacheRead" : 56284,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_78cb2cd936ca4fd79218cb56",
+      "input" : 4098,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 149,
+      "time" : 1795498460513
+    },
+    {
+      "cacheRead" : 60383,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_23850a82b3a24805b36e1d50",
+      "input" : 2993,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 196,
+      "time" : 1795498468764
+    },
+    {
+      "cacheRead" : 63377,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_18bf4ff9bba645bb96dbb27d",
+      "input" : 4090,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 127,
+      "time" : 1795498476692
+    },
+    {
+      "cacheRead" : 67468,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_25b39ccae7a1457bb128913b",
+      "input" : 2631,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 140,
+      "time" : 1795498484254
+    },
+    {
+      "cacheRead" : 70100,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_7c219305406748fea3097bbe",
+      "input" : 2340,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 2116,
+      "time" : 1795498514821
+    },
+    {
+      "cacheRead" : 72441,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_58527771608b4c6a9bb72c1a",
+      "input" : 3936,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 92,
+      "time" : 1795498522537
+    },
+    {
+      "cacheRead" : 76378,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_2c440923dbb44c5590b5d637",
+      "input" : 2066,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 422,
+      "time" : 1795498533718
+    },
+    {
+      "cacheRead" : 78445,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_df0f8578aaff463ea4f3589b",
+      "input" : 3716,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 126,
+      "time" : 1795498541182
+    },
+    {
+      "cacheRead" : 82162,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_1358b6ae2fa84adbb7c52429",
+      "input" : 2114,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 3830,
+      "time" : 1795498584927
+    },
+    {
+      "cacheRead" : 84277,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_8e158078d6fc44c3bd161b01",
+      "input" : 3960,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 621,
+      "time" : 1795498595043
+    },
+    {
+      "cacheRead" : 86188,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_49874bd5bc7245b1b5f68ae1",
+      "input" : 2796,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 3501,
+      "time" : 1795498631626
+    },
+    {
+      "cacheRead" : 88985,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_e40f4de1c8ef4b0f85988804",
+      "input" : 3626,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 150,
+      "time" : 1795498639235
+    },
+    {
+      "cacheRead" : 90562,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_7e7423193961493381725b43",
+      "input" : 2630,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 118,
+      "time" : 1795498658438
+    },
+    {
+      "cacheRead" : 93193,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_0a1f1fcb670a4cb19a238b3d",
+      "input" : 3718,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 10901,
+      "time" : 1795498746000
+    },
+    {
+      "cacheRead" : 96912,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_f75ba98626f74631a9003c38",
+      "input" : 11057,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 164,
+      "time" : 1795498759004
+    },
+    {
+      "cacheRead" : 105920,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_93aa5cd6861a4be78624788e",
+      "input" : 2755,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 539,
+      "time" : 1795498772813
+    },
+    {
+      "cacheRead" : 106626,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_60b191d5c0fb42d090300423",
+      "input" : 3062,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 138,
+      "time" : 1795498787820
+    },
+    {
+      "cacheRead" : 107639,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_70e0eed45c6f4f059151e145",
+      "input" : 2449,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 2018,
+      "time" : 1795498816387
+    },
+    {
+      "cacheRead" : 110089,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_d56e183c631a4dcba85e315f",
+      "input" : 2150,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 161,
+      "time" : 1795498824296
+    },
+    {
+      "cacheRead" : 110190,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_9ded1d2b9db54989a9044cd2",
+      "input" : 2507,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 366,
+      "time" : 1795498833216
+    },
+    {
+      "cacheRead" : 110648,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_de0298f510284fd8a2422b12",
+      "input" : 2534,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 296,
+      "time" : 1795498844912
+    },
+    {
+      "cacheRead" : 111133,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_4f0318ac2f474f0dba0d33cf",
+      "input" : 2472,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 368,
+      "time" : 1795498857061
+    },
+    {
+      "cacheRead" : 111556,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_9066e01ae21f4a9da817bf3d",
+      "input" : 2586,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 236,
+      "time" : 1795498875298
+    },
+    {
+      "cacheRead" : 112093,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_f806f389281e4605a41c3128",
+      "input" : 2411,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 151,
+      "time" : 1795498889697
+    },
+    {
+      "cacheRead" : 112455,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_7f5a95b30b3b4376aedb1edc",
+      "input" : 2397,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 83,
+      "time" : 1795498923543
+    },
+    {
+      "cacheRead" : 112803,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_e3e685e0853b4b078bebd1ab",
+      "input" : 2317,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 890,
+      "time" : 1795498936699
+    },
+    {
+      "cacheRead" : 113071,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_38756b06a63845fa93723b21",
+      "input" : 3027,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 817,
+      "time" : 1795499454848
+    },
+    {
+      "cacheRead" : 116099,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_cf494e7bc91942de9cdafdae",
+      "input" : 2097,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 381,
+      "time" : 1795499468409
+    },
+    {
+      "cacheRead" : 116147,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_0e0c595059fe4487adcde6db",
+      "input" : 2630,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 248,
+      "time" : 1795499480397
+    },
+    {
+      "cacheRead" : 116728,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_783a5e4e420e4dde96fa3292",
+      "input" : 2478,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 798,
+      "time" : 1795499516330
+    },
+    {
+      "cacheRead" : 119207,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_abe1567702e7432983b79c4d",
+      "input" : 3732,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 641,
+      "time" : 1795499540532
+    },
+    {
+      "cacheRead" : 120890,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_d4d852c0d935468f8c427d64",
+      "input" : 2831,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 95,
+      "time" : 1795499550267
+    },
+    {
+      "cacheRead" : 123722,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_43e6997c6c7144bd8109e3a2",
+      "input" : 2852,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 423,
+      "time" : 1795499571831
+    },
+    {
+      "cacheRead" : 125473,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_bc53438bba76466ab5ec2209",
+      "input" : 3028,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 839,
+      "time" : 1795499607819
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_6c21fdb3a3154f4d8912a429",
+      "input" : 46407,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 3258,
+      "time" : 1795499675868
+    },
+    {
+      "cacheRead" : 46408,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_a4e353e6734843779ba74cd1",
+      "input" : 4760,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 1361,
+      "time" : 1795499704561
+    },
+    {
+      "cacheRead" : 50067,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_3456a8cc959f42aa924f8866",
+      "input" : 3108,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 474,
+      "time" : 1795499716163
+    },
+    {
+      "cacheRead" : 52530,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_4b667db76aea4205b97c9dad",
+      "input" : 2499,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 511,
+      "time" : 1795499730919
+    },
+    {
+      "cacheRead" : 53650,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_94d18a474dd94dd499782394",
+      "input" : 2443,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 1378,
+      "time" : 1795499749072
+    },
+    {
+      "cacheRead" : 55541,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_5b3b768b15864f0290fa58f4",
+      "input" : 2056,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 216,
+      "time" : 1795499759268
+    },
+    {
+      "cacheRead" : 55548,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_005a9c6010e14ca1a726ff4c",
+      "input" : 2391,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 185,
+      "time" : 1795499781240
+    },
+    {
+      "cacheRead" : 55890,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_aea2af71fec64167b311ee37",
+      "input" : 2434,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 1582,
+      "time" : 1795499813741
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_872dd803a4d148e4b52dae45",
+      "input" : 60985,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 503,
+      "time" : 1795499995350
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_ca722b2a93054d61b5183da3",
+      "input" : 62046,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 347,
+      "time" : 1795500112336
+    },
+    {
+      "cacheRead" : 62047,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_e434650343274891a59f95cc",
+      "input" : 3243,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 148,
+      "time" : 1795500126899
+    },
+    {
+      "cacheRead" : 65291,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_58be39b94a5b4202b05e8db6",
+      "input" : 2170,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 331,
+      "time" : 1795500143597
+    },
+    {
+      "cacheRead" : 65412,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_86e7bbde66c245dbb38ef6db",
+      "input" : 2547,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 281,
+      "time" : 1795500155096
+    },
+    {
+      "cacheRead" : 65910,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_52254ad59366453eb6b887ae",
+      "input" : 3493,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 175,
+      "time" : 1795500165666
+    },
+    {
+      "cacheRead" : 67354,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_75207eca3dd34ebebd8dd64f",
+      "input" : 2365,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 85,
+      "time" : 1795500173921
+    },
+    {
+      "cacheRead" : 67670,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_45979963354a4f0fb304c1a1",
+      "input" : 2239,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 135,
+      "time" : 1795500183186
+    },
+    {
+      "cacheRead" : 67860,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_c9468da2202644f69da2e393",
+      "input" : 2360,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 218,
+      "time" : 1795500193376
+    },
+    {
+      "cacheRead" : 69579,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_f24b32b5b1b8490ebb9886f5",
+      "input" : 2360,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 838,
+      "time" : 1795500221194
+    },
+    {
+      "cacheRead" : 71940,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_67a6b1ac6eab4bd9805c9378",
+      "input" : 4240,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 1231,
+      "time" : 1795500242255
+    },
+    {
+      "cacheRead" : 76181,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_0007d20f416f4b8e9c6bbd18",
+      "input" : 2730,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 435,
+      "time" : 1795500264005
+    },
+    {
+      "cacheRead" : 77810,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_29734697696d48279da4a812",
+      "input" : 3038,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 496,
+      "time" : 1795500291648
+    },
+    {
+      "cacheRead" : 79747,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_b0938167e7644d31b3161ae1",
+      "input" : 3101,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 671,
+      "time" : 1795500326867
+    },
+    {
+      "cacheRead" : 82849,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_f4ee7af3e0764223a3eba078",
+      "input" : 2174,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 2266,
+      "time" : 1795500365955
+    },
+    {
+      "cacheRead" : 85024,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_871519c7dca144d5bf7c85f0",
+      "input" : 4688,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 2309,
+      "time" : 1795500400186
+    },
+    {
+      "cacheRead" : 89713,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_e38d81c1939244f6ab7178a5",
+      "input" : 2878,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 1629,
+      "time" : 1795500422099
+    },
+    {
+      "cacheRead" : 92022,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_9c1f0970b65448418821fcd8",
+      "input" : 2326,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 113,
+      "time" : 1795500433225
+    },
+    {
+      "cacheRead" : 92592,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_6aa9ec86ac03459a9aaf86fb",
+      "input" : 3718,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 3191,
+      "time" : 1795500465185
+    },
+    {
+      "cacheRead" : 96311,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_0c32a269e2504e5ab6ce019d",
+      "input" : 3316,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 226,
+      "time" : 1795500476772
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_a90829c33dab406d862f5257",
+      "input" : 100837,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 278,
+      "time" : 1795500496222
+    },
+    {
+      "cacheRead" : 98788,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_9e61a33035af414cbc164eac",
+      "input" : 2497,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 257,
+      "time" : 1795500521727
+    },
+    {
+      "cacheRead" : 99236,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_761dfa09d8e44d7390cab04e",
+      "input" : 2549,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 427,
+      "time" : 1795500562174
+    },
+    {
+      "cacheRead" : 99736,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_8a5feb3652f54dbc95b6faab",
+      "input" : 2667,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 109,
+      "time" : 1795500619986
+    },
+    {
+      "cacheRead" : 100354,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_01fe6f4a98b949f5b8020151",
+      "input" : 2390,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 68,
+      "time" : 1795500665832
+    },
+    {
+      "cacheRead" : 100695,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_26edd40bf83a478c9752cc45",
+      "input" : 2269,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 100,
+      "time" : 1795500731277
+    },
+    {
+      "cacheRead" : 100915,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_fe070e6b8c734deeb7747934",
+      "input" : 2614,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 299,
+      "time" : 1795500768791
+    },
+    {
+      "cacheRead" : 101480,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_4ca7e7e37d6e42dba9c50c4c",
+      "input" : 2496,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 615,
+      "time" : 1795500800298
+    },
+    {
+      "cacheRead" : 103977,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_76d9caf3f4404aae9f8efd22",
+      "input" : 2117,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 2305,
+      "time" : 1795500852900
+    },
+    {
+      "cacheRead" : 106095,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_049b6c0165a54fc9b36855d1",
+      "input" : 2437,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 197,
+      "time" : 1795500871458
+    },
+    {
+      "cacheRead" : 106483,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_fceb259a3f3d4eec946d993e",
+      "input" : 2452,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 839,
+      "time" : 1795500901347
+    },
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_cfa1f82b96fd46238d103b31",
+      "input" : 109980,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 182,
+      "time" : 1795505072588
+    },
+    {
+      "cacheRead" : 107931,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_60f3b9ba1c5c45f2880050da",
+      "input" : 2363,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 89,
+      "time" : 1795505093810
+    },
+    {
+      "cacheRead" : 110295,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_f430f9b75ff34ea5b6e52424",
+      "input" : 2997,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 368,
+      "time" : 1795505130447
+    },
+    {
+      "cacheRead" : 111243,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_1a1d3b7407c3462a8697a78a",
+      "input" : 3920,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 419,
+      "time" : 1795505166292
+    },
+    {
+      "cacheRead" : 113114,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_8ef490fe7605463b9b09c944",
+      "input" : 2573,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 315,
+      "time" : 1795505277743
+    },
+    {
+      "cacheRead" : 114062,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_66483f3ae75f45a1be0ebfd0",
+      "input" : 2469,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 218,
+      "time" : 1795505290461
+    },
+    {
+      "cacheRead" : 115688,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_8ed19ee4de004340b1732014",
+      "input" : 2194,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 431,
+      "time" : 1795505305395
+    },
+    {
+      "cacheRead" : 115833,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_d816926e36d44c49a0b27475",
+      "input" : 2647,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 92,
+      "time" : 1795505321290
+    },
+    {
+      "cacheRead" : 116431,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_ae4752f16405482fbb8cf365",
+      "input" : 3188,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 275,
+      "time" : 1795505340500
+    },
+    {
+      "cacheRead" : 118573,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_e51dd649e42f4bdf935fbd6a",
+      "input" : 2824,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 324,
+      "time" : 1795505364668
+    },
+    {
+      "cacheRead" : 120296,
+      "cacheWrite" : 0,
+      "id" : "resp_msg_8ae39b4ef3944cd080c73345",
+      "input" : 2924,
+      "model" : "agy-cli/gemini-4-neon",
+      "output" : 834,
+      "time" : 1795505385855
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

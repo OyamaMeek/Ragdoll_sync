@@ -1,0 +1,123 @@
+{
+  "created" : 1789818472013,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:82f146db507234b63d040a47",
+  "nativeID" : "01a0b97e-85c4-7890-ab6e-00bea42bf866",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "1.增加一个在dock栏不显示app开关2.输入commit的时候自动删除日期（默认选中文字效果类似如图）3.README功能不显示的问题需要修复可以放在提交并推送下面 <image name=[Im",
+  "updated" : 1789819078077,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae766ad3bc87d0904958d2506330d6",
+      "input" : 14204,
+      "model" : "codex-auto-review",
+      "output" : 205,
+      "time" : 1789818479571
+    },
+    {
+      "cacheRead" : 18176,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae76cb4d4c87d0852b1b38745f114b",
+      "input" : 9810,
+      "model" : "codex-auto-review",
+      "output" : 92,
+      "time" : 1789818575353
+    },
+    {
+      "cacheRead" : 27392,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae76f3e5a087d09fec785430291a7c",
+      "input" : 1651,
+      "model" : "codex-auto-review",
+      "output" : 198,
+      "time" : 1789818616535
+    },
+    {
+      "cacheRead" : 28416,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae7706f26c87d0b288e5c2ffb0244c",
+      "input" : 2640,
+      "model" : "codex-auto-review",
+      "output" : 131,
+      "time" : 1789818635081
+    },
+    {
+      "cacheRead" : 30464,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae772b190087d0a7ee14e7bd873622",
+      "input" : 1331,
+      "model" : "codex-auto-review",
+      "output" : 98,
+      "time" : 1789818669829
+    },
+    {
+      "cacheRead" : 31488,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae772faa0087d0a8bc2a28a1e23bbd",
+      "input" : 701,
+      "model" : "codex-auto-review",
+      "output" : 80,
+      "time" : 1789818673804
+    },
+    {
+      "cacheRead" : 31488,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae77a58e4c87d0b23a9deaf0793019",
+      "input" : 12975,
+      "model" : "codex-auto-review",
+      "output" : 97,
+      "time" : 1789818792268
+    },
+    {
+      "cacheRead" : 43776,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae77e2c5a887d08ca670881e060e86",
+      "input" : 6555,
+      "model" : "codex-auto-review",
+      "output" : 109,
+      "time" : 1789818854258
+    },
+    {
+      "cacheRead" : 49920,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae780f51b087d08acdab8079edf01c",
+      "input" : 3153,
+      "model" : "codex-auto-review",
+      "output" : 76,
+      "time" : 1789818897568
+    },
+    {
+      "cacheRead" : 51968,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae7886dfa887d094c02cb0ec1cf011",
+      "input" : 10999,
+      "model" : "codex-auto-review",
+      "output" : 134,
+      "time" : 1789819019358
+    },
+    {
+      "cacheRead" : 62208,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae789f199c87d0af71e99e086a3ca3",
+      "input" : 2446,
+      "model" : "codex-auto-review",
+      "output" : 79,
+      "time" : 1789819041950
+    },
+    {
+      "cacheRead" : 64256,
+      "cacheWrite" : 0,
+      "id" : "resp_05190916262aac98016aae78c299ec87d0aa9adf140dcf12a6",
+      "input" : 1898,
+      "model" : "codex-auto-review",
+      "output" : 77,
+      "time" : 1789819078068
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

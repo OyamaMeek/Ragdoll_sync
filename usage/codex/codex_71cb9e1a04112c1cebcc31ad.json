@@ -1,0 +1,51 @@
+{
+  "created" : 1793458702477,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:71cb9e1a04112c1cebcc31ad",
+  "nativeID" : "01a19277-cebf-7f83-be4f-88a10812dc8c",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "表达改用 Claude 小螃蟹",
+  "updated" : 1793458796125,
+  "usage" : [
+    {
+      "cacheRead" : 13056,
+      "cacheWrite" : 0,
+      "id" : "resp_0d5c771230bdc57d016ae6021553a8819196c8182c22330e72",
+      "input" : 28329,
+      "model" : "gpt-6.1-sol",
+      "output" : 438,
+      "time" : 1793458726160
+    },
+    {
+      "cacheRead" : 41728,
+      "cacheWrite" : 0,
+      "id" : "resp_0d5c771230bdc57d016ae60240ec188191a4e9e0a5e2aa5393",
+      "input" : 107,
+      "model" : "gpt-6.1-sol",
+      "output" : 67,
+      "time" : 1793458755347
+    },
+    {
+      "cacheRead" : 41728,
+      "cacheWrite" : 0,
+      "id" : "resp_0d5c771230bdc57d016ae6024800fc819197f59e89bb83b607",
+      "input" : 4015,
+      "model" : "gpt-6.1-sol",
+      "output" : 173,
+      "time" : 1793458768005
+    },
+    {
+      "cacheRead" : 45824,
+      "cacheWrite" : 0,
+      "id" : "resp_0d5c771230bdc57d016ae60266dc3481918a5b328cac2e1a52",
+      "input" : 315,
+      "model" : "gpt-6.1-sol",
+      "output" : 127,
+      "time" : 1793458796076
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

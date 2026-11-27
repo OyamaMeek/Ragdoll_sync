@@ -1,0 +1,69 @@
+{
+  "created" : 1790737489947,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:06854a84a90af9f585dfeb43",
+  "nativeID" : "01a0f045-9f40-7063-906e-327833098073",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HappaTools",
+  "source" : "codex",
+  "title" : "我点过保存配置了 <image name=[Image #1] path=\"/var/folders/kp/qw0z4ngs34jczdk8ln3v3gk40000gn/T/codex-clipboa",
+  "updated" : 1790737766870,
+  "usage" : [
+    {
+      "cacheRead" : 4864,
+      "cacheWrite" : 0,
+      "id" : "resp_08edf1e4a18d5764016abc7c5471b487d1b8714bcae647fb99",
+      "input" : 17382,
+      "model" : "codex-auto-review",
+      "output" : 199,
+      "time" : 1790737496946
+    },
+    {
+      "cacheRead" : 21248,
+      "cacheWrite" : 0,
+      "id" : "resp_08edf1e4a18d5764016abc7c8f4bc487d19abf025b68286d25",
+      "input" : 4982,
+      "model" : "codex-auto-review",
+      "output" : 221,
+      "time" : 1790737556176
+    },
+    {
+      "cacheRead" : 25344,
+      "cacheWrite" : 0,
+      "id" : "resp_08edf1e4a18d5764016abc7cb4ade087d1812f05b13c3c7a37",
+      "input" : 4425,
+      "model" : "codex-auto-review",
+      "output" : 120,
+      "time" : 1790737591688
+    },
+    {
+      "cacheRead" : 29440,
+      "cacheWrite" : 0,
+      "id" : "resp_08edf1e4a18d5764016abc7cd6d72887d1b12819da707f4b01",
+      "input" : 3139,
+      "model" : "codex-auto-review",
+      "output" : 132,
+      "time" : 1790737627104
+    },
+    {
+      "cacheRead" : 31488,
+      "cacheWrite" : 0,
+      "id" : "resp_08edf1e4a18d5764016abc7d47326487d19e239962470ab5d3",
+      "input" : 6527,
+      "model" : "codex-auto-review",
+      "output" : 147,
+      "time" : 1790737739463
+    },
+    {
+      "cacheRead" : 37632,
+      "cacheWrite" : 0,
+      "id" : "resp_08edf1e4a18d5764016abc7d63e2a887d1a6f1a95c9352c17f",
+      "input" : 2162,
+      "model" : "codex-auto-review",
+      "output" : 93,
+      "time" : 1790737766863
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

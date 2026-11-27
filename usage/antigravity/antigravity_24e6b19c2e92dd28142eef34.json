@@ -1,0 +1,42 @@
+{
+  "created" : 1795661907000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:24e6b19c2e92dd28142eef34",
+  "nativeID" : "2ab11b44-1b1d-4a62-b569-f7035aed218e",
+  "project" : "/Users/oyamahappa/Documents/GitHub/HzieeOJ_tools",
+  "source" : "antigravity",
+  "title" : "Twitter Release Notes Draft",
+  "updated" : 1795661949491,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "VKAHa-CiKPax2roP1PbqqQw",
+      "input" : 14671,
+      "model" : "gemini-4-neon",
+      "output" : 201,
+      "time" : 1795661907269.696
+    },
+    {
+      "cacheRead" : 12614,
+      "cacheWrite" : 0,
+      "id" : "W6AHa4mJNPOw0-kPw-XAuQI",
+      "input" : 2989,
+      "model" : "gemini-4-neon",
+      "output" : 223,
+      "time" : 1795661914755.96
+    },
+    {
+      "cacheRead" : 15604,
+      "cacheWrite" : 0,
+      "id" : "Y6AHa5zqI_ON1e8Pt8aMsQk",
+      "input" : 4137,
+      "model" : "gemini-4-neon",
+      "output" : 1994,
+      "time" : 1795661922413.963
+    }
+  ],
+  "warnings" : [
+
+  ]
+}
