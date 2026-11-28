@@ -1,0 +1,151 @@
+{
+  "created" : 1795792419099,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:bc758968faf5720facd8f9c2",
+  "nativeID" : "session-3c6af9ac-b227-4718-8e0b-a14904865c46",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Hziee-SSS",
+  "provider" : "deepseek-account",
+  "source" : "dsh",
+  "title" : "269050433底库照片",
+  "updated" : 1795792469884,
+  "usage" : [
+    {
+      "cacheRead" : 57728,
+      "cacheWrite" : 0,
+      "id" : "23",
+      "input" : 8461,
+      "model" : "deepseek-flash",
+      "output" : 332,
+      "time" : 1795792429679
+    },
+    {
+      "cacheRead" : 66432,
+      "cacheWrite" : 0,
+      "id" : "35",
+      "input" : 460,
+      "model" : "deepseek-flash",
+      "output" : 163,
+      "time" : 1795792431140
+    },
+    {
+      "cacheRead" : 66944,
+      "cacheWrite" : 0,
+      "id" : "47",
+      "input" : 1707,
+      "model" : "deepseek-flash",
+      "output" : 337,
+      "time" : 1795792434003
+    },
+    {
+      "cacheRead" : 68864,
+      "cacheWrite" : 0,
+      "id" : "59",
+      "input" : 2413,
+      "model" : "deepseek-flash",
+      "output" : 353,
+      "time" : 1795792437172
+    },
+    {
+      "cacheRead" : 71552,
+      "cacheWrite" : 0,
+      "id" : "71",
+      "input" : 1371,
+      "model" : "deepseek-flash",
+      "output" : 181,
+      "time" : 1795792438898
+    },
+    {
+      "cacheRead" : 73088,
+      "cacheWrite" : 0,
+      "id" : "79",
+      "input" : 608,
+      "model" : "deepseek-flash",
+      "output" : 242,
+      "time" : 1795792441037
+    },
+    {
+      "cacheRead" : 73856,
+      "cacheWrite" : 0,
+      "id" : "89",
+      "input" : 320,
+      "model" : "deepseek-flash",
+      "output" : 363,
+      "time" : 1795792445666
+    },
+    {
+      "cacheRead" : 74496,
+      "cacheWrite" : 0,
+      "id" : "104",
+      "input" : 2348,
+      "model" : "deepseek-flash",
+      "output" : 290,
+      "time" : 1795792449137
+    },
+    {
+      "cacheRead" : 77056,
+      "cacheWrite" : 0,
+      "id" : "116",
+      "input" : 2786,
+      "model" : "deepseek-flash",
+      "output" : 331,
+      "time" : 1795792452321
+    },
+    {
+      "cacheRead" : 80128,
+      "cacheWrite" : 0,
+      "id" : "126",
+      "input" : 1032,
+      "model" : "deepseek-flash",
+      "output" : 793,
+      "time" : 1795792456456
+    },
+    {
+      "cacheRead" : 81920,
+      "cacheWrite" : 0,
+      "id" : "134",
+      "input" : 460,
+      "model" : "deepseek-flash",
+      "output" : 753,
+      "time" : 1795792459352
+    },
+    {
+      "cacheRead" : 83072,
+      "cacheWrite" : 0,
+      "id" : "148",
+      "input" : 668,
+      "model" : "deepseek-flash",
+      "output" : 154,
+      "time" : 1795792461093
+    },
+    {
+      "cacheRead" : 83840,
+      "cacheWrite" : 0,
+      "id" : "156",
+      "input" : 959,
+      "model" : "deepseek-flash",
+      "output" : 246,
+      "time" : 1795792463972
+    },
+    {
+      "cacheRead" : 84992,
+      "cacheWrite" : 0,
+      "id" : "166",
+      "input" : 415,
+      "model" : "deepseek-flash",
+      "output" : 264,
+      "time" : 1795792466850
+    },
+    {
+      "cacheRead" : 85504,
+      "cacheWrite" : 0,
+      "id" : "175",
+      "input" : 247,
+      "model" : "deepseek-flash",
+      "output" : 507,
+      "time" : 1795792469827
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

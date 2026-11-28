@@ -1,0 +1,96 @@
+{
+  "created" : 1795827329910.5867,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:a8b466a7d660f310200bb558",
+  "nativeID" : "01a21fa6-6b54-7150-a8e0-1c0fb660ede9",
+  "project" : "/Users/oyamahappa/Documents/GitHub/blind-spots",
+  "source" : "codex",
+  "title" : "Guardian review",
+  "updated" : 1795827449577,
+  "usage" : [
+    {
+      "cacheRead" : 5888,
+      "cacheWrite" : 0,
+      "id" : "resp_01fd0850144759ac016b0a2684b0f887d09d7b9074267b408b",
+      "input" : 20359,
+      "model" : "codex-auto-review",
+      "output" : 218,
+      "time" : 1795827337393
+    },
+    {
+      "cacheRead" : 26112,
+      "cacheWrite" : 0,
+      "id" : "resp_01fd0850144759ac016b0a269020c487d0a5a59e0471460864",
+      "input" : 1100,
+      "model" : "codex-auto-review",
+      "output" : 146,
+      "time" : 1795827348301
+    },
+    {
+      "cacheRead" : 27008,
+      "cacheWrite" : 0,
+      "id" : "resp_01fd0850144759ac016b0a2698b0ac87d090c55846f19e22ed",
+      "input" : 849,
+      "model" : "codex-auto-review",
+      "output" : 282,
+      "time" : 1795827359152
+    },
+    {
+      "cacheRead" : 27648,
+      "cacheWrite" : 0,
+      "id" : "resp_01fd0850144759ac016b0a26a5186087d0a9b85d3cb6a583f6",
+      "input" : 1617,
+      "model" : "codex-auto-review",
+      "output" : 254,
+      "time" : 1795827371273
+    },
+    {
+      "cacheRead" : 29056,
+      "cacheWrite" : 0,
+      "id" : "resp_01fd0850144759ac016b0a26b5f6c487d09018bc8c378b117c",
+      "input" : 1857,
+      "model" : "codex-auto-review",
+      "output" : 109,
+      "time" : 1795827385109
+    },
+    {
+      "cacheRead" : 30720,
+      "cacheWrite" : 0,
+      "id" : "resp_01fd0850144759ac016b0a26c8897c87d08df76ae6bc475508",
+      "input" : 2268,
+      "model" : "codex-auto-review",
+      "output" : 274,
+      "time" : 1795827406900
+    },
+    {
+      "cacheRead" : 32768,
+      "cacheWrite" : 0,
+      "id" : "resp_01fd0850144759ac016b0a26da340487d0a30abb492704ed49",
+      "input" : 2634,
+      "model" : "codex-auto-review",
+      "output" : 131,
+      "time" : 1795827421634
+    },
+    {
+      "cacheRead" : 35200,
+      "cacheWrite" : 0,
+      "id" : "resp_01fd0850144759ac016b0a26edfd0c87d0a8d44fe0975f9fa2",
+      "input" : 2029,
+      "model" : "codex-auto-review",
+      "output" : 138,
+      "time" : 1795827442794
+    },
+    {
+      "cacheRead" : 36992,
+      "cacheWrite" : 0,
+      "id" : "resp_01fd0850144759ac016b0a26f70d8c87d0b9797ba348c5f8c9",
+      "input" : 806,
+      "model" : "codex-auto-review",
+      "output" : 99,
+      "time" : 1795827449574
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

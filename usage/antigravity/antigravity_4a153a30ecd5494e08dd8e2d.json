@@ -1,0 +1,24 @@
+{
+  "created" : 1795778707000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:4a153a30ecd5494e08dd8e2d",
+  "nativeID" : "f243802f-ccfc-4ec2-89ac-8100c8f11379",
+  "project" : "/Users/oyamahappa/Documents/Agent/Antigravity-Work",
+  "source" : "antigravity",
+  "title" : "Campus Run Facial Recognition Data Leak",
+  "updated" : 1795778724878,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "lWgJa8nfIcy32roP7J69gAI",
+      "input" : 25416,
+      "model" : "gemini-4-neon",
+      "output" : 831,
+      "time" : 1795778707197.288
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

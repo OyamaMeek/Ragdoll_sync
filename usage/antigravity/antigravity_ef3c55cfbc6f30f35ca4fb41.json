@@ -1,0 +1,105 @@
+{
+  "created" : 1795826465000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:ef3c55cfbc6f30f35ca4fb41",
+  "nativeID" : "fca1ae14-228e-4f5c-9832-46500d6e8909",
+  "project" : "/Users/oyamahappa/Documents/Agent/Antigravity-Work",
+  "source" : "antigravity",
+  "title" : "Luogu P5729 题解求助",
+  "updated" : 1795826649432,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "JCMKa_v4C8-e0-kP06GZuAo",
+      "input" : 20623,
+      "model" : "gemini-4-neon",
+      "output" : 1197,
+      "time" : 1795826465166.246
+    },
+    {
+      "cacheRead" : 19294,
+      "cacheWrite" : 0,
+      "id" : "MyMKa_KpAsLi2roPiY_syQw",
+      "input" : 3025,
+      "model" : "gemini-4-neon",
+      "output" : 130,
+      "time" : 1795826481150.665
+    },
+    {
+      "cacheRead" : 20270,
+      "cacheWrite" : 0,
+      "id" : "OiMKa-arNML92roPnovpoAY",
+      "input" : 3443,
+      "model" : "gemini-4-neon",
+      "output" : 204,
+      "time" : 1795826489115.09
+    },
+    {
+      "cacheRead" : 22450,
+      "cacheWrite" : 0,
+      "id" : "QSMKa4DGD-791e8PpYyo0Qg",
+      "input" : 3228,
+      "model" : "gemini-4-neon",
+      "output" : 3688,
+      "time" : 1795826495429.479
+    },
+    {
+      "cacheRead" : 25679,
+      "cacheWrite" : 0,
+      "id" : "ZiMKa92WGY791e8PprP80As",
+      "input" : 3942,
+      "model" : "gemini-4-neon",
+      "output" : 3579,
+      "time" : 1795826532721.02
+    },
+    {
+      "cacheRead" : 29622,
+      "cacheWrite" : 0,
+      "id" : "gyMKa8OcCsnZ9tMPvYfngAk",
+      "input" : 3778,
+      "model" : "gemini-4-neon",
+      "output" : 218,
+      "time" : 1795826561148.816
+    },
+    {
+      "cacheRead" : 31351,
+      "cacheWrite" : 0,
+      "id" : "kSMKa5KCMdjY9tMPl5nY-QU",
+      "input" : 2471,
+      "model" : "gemini-4-neon",
+      "output" : 242,
+      "time" : 1795826575958.217
+    },
+    {
+      "cacheRead" : 31773,
+      "cacheWrite" : 0,
+      "id" : "pCMKa63lDuLT2roPmIOv4Aw",
+      "input" : 2688,
+      "model" : "gemini-4-neon",
+      "output" : 138,
+      "time" : 1795826594257.044
+    },
+    {
+      "cacheRead" : 32412,
+      "cacheWrite" : 0,
+      "id" : "qyMKa677BaK02roP3LOiUQ",
+      "input" : 2306,
+      "model" : "gemini-4-neon",
+      "output" : 594,
+      "time" : 1795826601180.69
+    },
+    {
+      "cacheRead" : 34065,
+      "cacheWrite" : 0,
+      "id" : "zyMKa_F849Haug_H8YqIAg",
+      "input" : 2611,
+      "model" : "gemini-4-neon",
+      "output" : 1099,
+      "time" : 1795826637202.9
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

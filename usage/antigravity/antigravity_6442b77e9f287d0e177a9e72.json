@@ -1,0 +1,24 @@
+{
+  "created" : 1795783938000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:6442b77e9f287d0e177a9e72",
+  "nativeID" : "a8771ff1-0248-48f5-8658-3e724400ca80",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Hziee-SSS",
+  "source" : "antigravity",
+  "title" : "Campus Run Photo Data Leak",
+  "updated" : 1795784030371,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "BX0Ja_XrC7Pdvr0P-ebo0Ac",
+      "input" : 24715,
+      "model" : "gemini-4-neon",
+      "output" : 1809,
+      "time" : 1795783939098.381
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

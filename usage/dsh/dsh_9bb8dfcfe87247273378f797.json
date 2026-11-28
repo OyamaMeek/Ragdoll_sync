@@ -1,0 +1,88 @@
+{
+  "created" : 1795792196498,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:9bb8dfcfe87247273378f797",
+  "nativeID" : "session-77d5be44-e6ff-4846-8dc8-b0dda9dbdd86",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Hziee-SSS",
+  "provider" : "deepseek-account",
+  "source" : "dsh",
+  "title" : "底库照 269490229",
+  "updated" : 1795792233483,
+  "usage" : [
+    {
+      "cacheRead" : 57728,
+      "cacheWrite" : 0,
+      "id" : "23",
+      "input" : 8461,
+      "model" : "deepseek-flash",
+      "output" : 313,
+      "time" : 1795792207127
+    },
+    {
+      "cacheRead" : 66432,
+      "cacheWrite" : 0,
+      "id" : "35",
+      "input" : 441,
+      "model" : "deepseek-flash",
+      "output" : 293,
+      "time" : 1795792209052
+    },
+    {
+      "cacheRead" : 67072,
+      "cacheWrite" : 0,
+      "id" : "55",
+      "input" : 1524,
+      "model" : "deepseek-flash",
+      "output" : 338,
+      "time" : 1795792211085
+    },
+    {
+      "cacheRead" : 68864,
+      "cacheWrite" : 0,
+      "id" : "67",
+      "input" : 6394,
+      "model" : "deepseek-flash",
+      "output" : 707,
+      "time" : 1795792214971
+    },
+    {
+      "cacheRead" : 75264,
+      "cacheWrite" : 0,
+      "id" : "89",
+      "input" : 956,
+      "model" : "deepseek-flash",
+      "output" : 617,
+      "time" : 1795792218968
+    },
+    {
+      "cacheRead" : 76800,
+      "cacheWrite" : 0,
+      "id" : "99",
+      "input" : 190,
+      "model" : "deepseek-flash",
+      "output" : 931,
+      "time" : 1795792223851
+    },
+    {
+      "cacheRead" : 77824,
+      "cacheWrite" : 0,
+      "id" : "109",
+      "input" : 329,
+      "model" : "deepseek-flash",
+      "output" : 424,
+      "time" : 1795792228938
+    },
+    {
+      "cacheRead" : 78464,
+      "cacheWrite" : 0,
+      "id" : "124",
+      "input" : 1885,
+      "model" : "deepseek-flash",
+      "output" : 590,
+      "time" : 1795792233440
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

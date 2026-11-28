@@ -1,0 +1,42 @@
+{
+  "created" : 1795792757000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:d4a9c85da87bde3cbcc544ea",
+  "nativeID" : "3e774c7f-a84a-45cb-8158-2d97b2699a59",
+  "project" : "/Users/oyamahappa/Documents/Agent/Antigravity-Work",
+  "source" : "antigravity",
+  "title" : "DSH如何删除对话",
+  "updated" : 1795792823604,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "eJ8Ja4eKKrLD0-kP8vLhuQg",
+      "input" : 19444,
+      "model" : "gemini-4-neon",
+      "output" : 461,
+      "time" : 1795792757813.504
+    },
+    {
+      "cacheRead" : 19445,
+      "cacheWrite" : 0,
+      "id" : "j58Ja6DXGJn-1e8PpI69oAo",
+      "input" : 3558,
+      "model" : "gemini-4-neon",
+      "output" : 143,
+      "time" : 1795792780243.533
+    },
+    {
+      "cacheRead" : 23001,
+      "cacheWrite" : 0,
+      "id" : "op8Ja9DqL7Sz2roP15eCmAE",
+      "input" : 3917,
+      "model" : "gemini-4-neon",
+      "output" : 1609,
+      "time" : 1795792799519.277
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

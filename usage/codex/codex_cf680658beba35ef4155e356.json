@@ -1,0 +1,51 @@
+{
+  "created" : 1795786646476.9285,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:cf680658beba35ef4155e356",
+  "nativeID" : "01a21d39-a24d-7901-ac42-34c01e2cd41e",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Hziee-SSS",
+  "source" : "codex",
+  "title" : "根据脚本保存服务器上的照片",
+  "updated" : 1795786694505,
+  "usage" : [
+    {
+      "cacheRead" : 14976,
+      "cacheWrite" : 0,
+      "id" : "resp_0c4aec693448c36c016b09879e00f887d090dda229141a55cb",
+      "input" : 32838,
+      "model" : "gpt-6.2-sol",
+      "output" : 295,
+      "time" : 1795786662052
+    },
+    {
+      "cacheRead" : 46720,
+      "cacheWrite" : 0,
+      "id" : "resp_0c4aec693448c36c016b0987a6db3487d0acaec9600fe2e6bb",
+      "input" : 2960,
+      "model" : "gpt-6.2-sol",
+      "output" : 113,
+      "time" : 1795786666836
+    },
+    {
+      "cacheRead" : 49536,
+      "cacheWrite" : 0,
+      "id" : "resp_0c4aec693448c36c016b0987ab742487d09cb63681fe345094",
+      "input" : 2018,
+      "model" : "gpt-6.2-sol",
+      "output" : 203,
+      "time" : 1795786673688
+    },
+    {
+      "cacheRead" : 51328,
+      "cacheWrite" : 0,
+      "id" : "resp_0c4aec693448c36c016b0987c1572487d083107d07fd0b87b5",
+      "input" : 548,
+      "model" : "gpt-6.2-sol",
+      "output" : 152,
+      "time" : 1795786694492
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

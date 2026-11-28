@@ -1,0 +1,51 @@
+{
+  "created" : 1795777907375.375,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:f1340f8aa7f7df6ca869f532",
+  "nativeID" : "01a21c74-bc6d-7c91-91da-af43e7ba025e",
+  "project" : "/Users/oyamahappa/Documents/GitHub/labs/py-labs",
+  "source" : "codex",
+  "title" : "逐行解释",
+  "updated" : 1795786550468,
+  "usage" : [
+    {
+      "cacheRead" : 8320,
+      "cacheWrite" : 0,
+      "id" : "resp_0036e2a7441c52cc016b0965796e0887d090a3cb05c03ee97f",
+      "input" : 24144,
+      "model" : "gpt-6.2-sol",
+      "output" : 149,
+      "time" : 1795777916725
+    },
+    {
+      "cacheRead" : 32384,
+      "cacheWrite" : 0,
+      "id" : "resp_0036e2a7441c52cc016b09657de1ac87d0b9a0ca899eac7c7b",
+      "input" : 738,
+      "model" : "gpt-6.2-sol",
+      "output" : 298,
+      "time" : 1795777923681
+    },
+    {
+      "cacheRead" : 32768,
+      "cacheWrite" : 0,
+      "id" : "resp_0036e2a7441c52cc016b096584701487d0b2ac63c7e4837a23",
+      "input" : 1142,
+      "model" : "gpt-6.2-sol",
+      "output" : 1129,
+      "time" : 1795777941261
+    },
+    {
+      "cacheRead" : 33792,
+      "cacheWrite" : 0,
+      "id" : "resp_0036e2a7441c52cc016b0969c040a487d0bee2e09e5c7f9da9",
+      "input" : 1466,
+      "model" : "gpt-6.2-sol",
+      "output" : 227,
+      "time" : 1795779014312
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "created" : 1795783383579.682,
+  "home" : "/Users/oyamahappa/.codex",
+  "id" : "codex:32a70f2c1daf7a45279cc12c",
+  "nativeID" : "01a21d07-d772-7313-9465-91b681145af6",
+  "project" : "/Users/oyamahappa/Documents/Agent/Codex",
+  "source" : "codex",
+  "title" : "说明如何控制 Termius",
+  "updated" : 1795783395669,
+  "usage" : [
+    {
+      "cacheRead" : 14976,
+      "cacheWrite" : 0,
+      "id" : "resp_0329a7f7d95fb66c016b097add071c87d0bd5550e4602b27b5",
+      "input" : 24716,
+      "model" : "gpt-6.2-sol",
+      "output" : 247,
+      "time" : 1795783395648
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

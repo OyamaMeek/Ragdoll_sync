@@ -1,0 +1,115 @@
+{
+  "created" : 1795791457041,
+  "home" : "/Users/oyamahappa/.dsh",
+  "id" : "dsh:8c33339eeb269143c965b47d",
+  "nativeID" : "session-99eb0ebb-6d08-4277-8e55-8e91f10edea6",
+  "project" : "/Volumes/SamsungSSD990PRO/GitHub/Hziee-SSS",
+  "provider" : "deepseek-account",
+  "source" : "dsh",
+  "title" : "删除269050342的照片",
+  "updated" : 1795791533442,
+  "usage" : [
+    {
+      "cacheRead" : 57728,
+      "cacheWrite" : 0,
+      "id" : "23",
+      "input" : 8462,
+      "model" : "deepseek-flash",
+      "output" : 244,
+      "time" : 1795791488903
+    },
+    {
+      "cacheRead" : 66432,
+      "cacheWrite" : 0,
+      "id" : "33",
+      "input" : 373,
+      "model" : "deepseek-flash",
+      "output" : 230,
+      "time" : 1795791490887
+    },
+    {
+      "cacheRead" : 66944,
+      "cacheWrite" : 0,
+      "id" : "45",
+      "input" : 798,
+      "model" : "deepseek-flash",
+      "output" : 410,
+      "time" : 1795791494101
+    },
+    {
+      "cacheRead" : 68096,
+      "cacheWrite" : 0,
+      "id" : "55",
+      "input" : 2194,
+      "model" : "deepseek-flash",
+      "output" : 713,
+      "time" : 1795791498372
+    },
+    {
+      "cacheRead" : 70912,
+      "cacheWrite" : 0,
+      "id" : "65",
+      "input" : 515,
+      "model" : "deepseek-flash",
+      "output" : 779,
+      "time" : 1795791503550
+    },
+    {
+      "cacheRead" : 72192,
+      "cacheWrite" : 0,
+      "id" : "75",
+      "input" : 1036,
+      "model" : "deepseek-flash",
+      "output" : 762,
+      "time" : 1795791508061
+    },
+    {
+      "cacheRead" : 73984,
+      "cacheWrite" : 0,
+      "id" : "85",
+      "input" : 663,
+      "model" : "deepseek-flash",
+      "output" : 1141,
+      "time" : 1795791515093
+    },
+    {
+      "cacheRead" : 75776,
+      "cacheWrite" : 0,
+      "id" : "95",
+      "input" : 1042,
+      "model" : "deepseek-flash",
+      "output" : 729,
+      "time" : 1795791520570
+    },
+    {
+      "cacheRead" : 77440,
+      "cacheWrite" : 0,
+      "id" : "105",
+      "input" : 1521,
+      "model" : "deepseek-flash",
+      "output" : 780,
+      "time" : 1795791525465
+    },
+    {
+      "cacheRead" : 79616,
+      "cacheWrite" : 0,
+      "id" : "113",
+      "input" : 231,
+      "model" : "deepseek-flash",
+      "output" : 829,
+      "time" : 1795791529459
+    },
+    {
+      "cacheRead" : 80640,
+      "cacheWrite" : 0,
+      "id" : "125",
+      "input" : 562,
+      "model" : "deepseek-flash",
+      "output" : 600,
+      "time" : 1795791533392
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "created" : 1795782674000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:e5e090e8025d0777ba5f3a28",
+  "nativeID" : "b175b42a-53be-4cc3-bce4-2239301d01af",
+  "project" : "/Users/oyamahappa/Documents/Agent/Antigravity-Work",
+  "source" : "antigravity",
+  "title" : "Vibe Learning GitHub Repository Usage",
+  "updated" : 1795782834743,
+  "usage" : [
+    {
+      "cacheRead" : 0,
+      "cacheWrite" : 0,
+      "id" : "FHgJa57CBcPd2roP-b7dgQE",
+      "input" : 19448,
+      "model" : "gemini-4-neon",
+      "output" : 973,
+      "time" : 1795782674981.388
+    },
+    {
+      "cacheRead" : 17399,
+      "cacheWrite" : 0,
+      "id" : "J3gJa6zeLbOv2roPld69uQk",
+      "input" : 4046,
+      "model" : "gemini-4-neon",
+      "output" : 308,
+      "time" : 1795782694716.967
+    },
+    {
+      "cacheRead" : 21443,
+      "cacheWrite" : 0,
+      "id" : "N3gJa_O4EZn-1e8P94SbMA",
+      "input" : 3440,
+      "model" : "gemini-4-neon",
+      "output" : 405,
+      "time" : 1795782710094.093
+    },
+    {
+      "cacheRead" : 22834,
+      "cacheWrite" : 0,
+      "id" : "TngJa__PKMaXosUP4NHQ4Ao",
+      "input" : 3942,
+      "model" : "gemini-4-neon",
+      "output" : 594,
+      "time" : 1795782733266.649
+    },
+    {
+      "cacheRead" : 26774,
+      "cacheWrite" : 0,
+      "id" : "angJa7rjJ57p1e8Pr7eikQo",
+      "input" : 9128,
+      "model" : "gemini-4-neon",
+      "output" : 1046,
+      "time" : 1795782761124.254
+    },
+    {
+      "cacheRead" : 35900,
+      "cacheWrite" : 0,
+      "id" : "jXgJa8jFEuKK2roP6vvKiQY",
+      "input" : 7110,
+      "model" : "gemini-4-neon",
+      "output" : 379,
+      "time" : 1795782795838.422
+    },
+    {
+      "cacheRead" : 43008,
+      "cacheWrite" : 0,
+      "id" : "k3gJa4XhIIyD2roPg6SPkAE",
+      "input" : 6702,
+      "model" : "gemini-4-neon",
+      "output" : 2699,
+      "time" : 1795782802647.695
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

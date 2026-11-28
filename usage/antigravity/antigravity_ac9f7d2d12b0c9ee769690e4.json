@@ -1,0 +1,24 @@
+{
+  "created" : 1795783182000,
+  "home" : "/Users/oyamahappa/.gemini/antigravity",
+  "id" : "antigravity:ac9f7d2d12b0c9ee769690e4",
+  "nativeID" : "b9c9bae1-2c88-456a-87d4-5b415cb8d037",
+  "project" : "/Users/oyamahappa/Documents/Agent/Antigravity-Work",
+  "source" : "antigravity",
+  "title" : "Linux文件删除命令指南",
+  "updated" : 1795783203177,
+  "usage" : [
+    {
+      "cacheRead" : 17241,
+      "cacheWrite" : 0,
+      "id" : "EHoJa4ibGoud0-kPxP_egA8",
+      "input" : 3433,
+      "model" : "gemini-4-neon",
+      "output" : 1904,
+      "time" : 1795783182180.201
+    }
+  ],
+  "warnings" : [
+
+  ]
+}

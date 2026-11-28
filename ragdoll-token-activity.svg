@@ -3,7 +3,6 @@
 <text x="0" y="45">周一</text>
 <text x="0" y="73">周三</text>
 <text x="0" y="101">周五</text>
-<rect x="30" y="94" width="11" height="11" rx="2" fill="#7d859055"><title>2025-11-28 · 0 Token</title></rect>
 <rect x="30" y="108" width="11" height="11" rx="2" fill="#7d859055"><title>2025-11-29 · 0 Token</title></rect>
 <text x="44" y="14">12月</text>
 <rect x="44" y="24" width="11" height="11" rx="2" fill="#7d859055"><title>2025-11-30 · 0 Token</title></rect>
@@ -379,7 +378,8 @@
 <rect x="758" y="52" width="11" height="11" rx="2" fill="#216e39"><title>2026-11-24 · 47,646,146 Token</title></rect>
 <rect x="758" y="66" width="11" height="11" rx="2" fill="#216e39"><title>2026-11-25 · 20,585,107 Token</title></rect>
 <rect x="758" y="80" width="11" height="11" rx="2" fill="#38964b"><title>2026-11-26 · 112,428,942 Token</title></rect>
-<rect x="758" y="94" width="11" height="11" rx="2" fill="#216e39"><title>2026-11-27 · 29,699,930 Token</title></rect>
+<rect x="758" y="94" width="11" height="11" rx="2" fill="#38964b"><title>2026-11-27 · 83,886,463 Token</title></rect>
+<rect x="758" y="108" width="11" height="11" rx="2" fill="#216e39"><title>2026-11-28 · 2,492,104 Token</title></rect>
 <text x="666" y="141">少</text>
 <rect x="680" y="132" width="11" height="11" rx="2" fill="#7d859055"/>
 <rect x="694" y="132" width="11" height="11" rx="2" fill="#216e39"/>
